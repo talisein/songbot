@@ -1,0 +1,9 @@
+[wrap-file]
+source_url = https://github.com/uni-algo/uni-algo/archive/refs/tags/v1.2.0.tar.gz
+source_filename = uni-algo-v1.2.0.tar.gz
+source_hash = f2a1539cd8635bc6088d05144a73ecfe7b4d74ee0361fabed6f87f9f19e74ca9
+directory = uni-algo-1.2.0
+patch_directory = uni-algo-patch
+
+[provide]
+dependency_names = uni-algo

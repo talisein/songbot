@@ -1,0 +1,1 @@
+#define UNI_ALGO_STATIC_DATA
