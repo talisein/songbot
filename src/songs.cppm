@@ -5,6 +5,7 @@ export module songs;
 import std;
 import uni_algo;
 import magic_enum;
+using namespace std::literals;
 
 export enum Singer : std::uint32_t {
     Miku  = 1 << 1,
@@ -35,6 +36,7 @@ export struct Song
     std::string_view songname; // en
     Singer singer;
     std::string_view producer;
+    std::chrono::year_month_day published;
 };
 
 template<auto Proj>
@@ -71,66 +73,41 @@ consteval auto get_sorted_songs(const std::array<T, N>& arr, Proj&& proj) -> std
 }
 
 export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
-        {"千本桜", "Senbonzakura", "Thousand Cherry Blossoms",
-         Miku, "Kurousa-P"},
-        {"こっち向いて Baby", "Kocchi Muite Baby", "Look This Way, Baby",
-         Miku, "ryo"},
-        {"マージナル", "Marginal", "Marginal",
-         Miku, "OSTER project"},
-        {"恋色病棟", "Koi Iro Byoutou", "Love Ward",
-         Miku, "OSTER project"},
-        {"カラフル×メロディ", "Colorful × Melody", "Colorful × Melody",
-         duet(Miku, Rin), "Team MOER"},
-        {std::nullopt, std::nullopt, "Fire◎Flower",
-         Len, "halyosy, absorb"},
-        {"右肩の蝶", "Migikata no Chou", "Butterfly on Your Right Shoulder",
-         Len, "Nori-P"},
-        {"メランコリック", "Melancholic", "Melancholic",
-         Rin, "Junky"},
-        {"ココロ", "Kokoro", "Heart",
-         Rin, "Toraboruta-P"},
-        {"トリノコシティ", "Torinoko City", "Left-Behind City (Urbandonment)",
-         Miku, "40mP"},
-        {"結ンデ開イテ羅刹ト骸", "Musunde Hiraite Rasetsu to Mukuro", "Close and Open, Demons and The Dead",
-         Miku, "Hachi"},
-        {"ロミオとシンデレラ", "Romeo to Cinderella", "Romeo and Cinderella",
-         Miku, "doriko"},
-        {"ピアノ×フォルテ×スキャンダル", "Piano × Forte × Scandal", "Piano × Forte × Scandal",
-         MEIKO, "OSTER project"},
-        {std::nullopt, std::nullopt, "Pane dhiria",
-         KAITO, "Shinjou-P"},
-        {"千年の独奏歌", "Sennen no Dokusou Ka", "Thousand Year Solo",
-         KAITO, "yanagi-P"},
-        {"ぽっぴっぽー", "PoPiPo", "PoPiPo",
-         Miku, "Lamaze-P"},
-        {"白い雪のプリンセスは", "Shiroi Yuki no Princess wa", "The Snow White Princess is",
-         Miku, "Noboru↑-P"},
-        {std::nullopt, "Venus di Ujung Jari", "Venus at The Fingertips",
-         Miku, "Mohax-2000"},
-        {"ダブルラリアット", "Double Lariat", "Double Lariat",
-         Luka, "Agoaniki-P"},
-        {"ルカルカ★ナイトフィーバー", "Luka Luka★Night Fever", "Luka Luka★Night Fever",
-         Luka, "samfree"},
-        {"秘密警察", "Himitsu Keisatsu", "Secret Police",
-         Miku, "Buriru-P"},
-        {std::nullopt, std::nullopt, "Yellow",
-         Miku, "kz"},
-        {"初音ミクの激唱", "Hatsune Miku no Gekishou", "The Intense Voice of Hatsune Miku",
-         Miku, "cosMo"},
-        {"メルト", "Melt", "Melt",
-         Miku, "ryo"},
-        {std::nullopt, std::nullopt, "Tell Your World",
-         Miku, "kz"},
-        {"みくみくにしてあげる♪", "Miku Miku ni Shite Ageru♪", "I'll Miku-Miku You♪ (For Reals)",
-         Miku, "ika"},
-        {std::nullopt, std::nullopt, "letter song",
-         Miku, "doriko"},
-        }), make_casefold_proj<&Song::songname>());
+  {"千本桜", "Senbonzakura", "Thousand Cherry Blossoms", Miku, "Kurousa-P", 2011y/9/17},
+  {"こっち向いて Baby", "Kocchi Muite Baby", "Look This Way, Baby", Miku, "ryo", 2010y/7/2},
+  {"マージナル", "Marginal", "Marginal", Miku, "OSTER project", 2008y/12/15},
+  {"恋色病棟", "Koi Iro Byoutou", "Love Ward", Miku, "OSTER project", 2009y/6/16},
+  {"カラフル×メロディ", "Colorful × Melody", "Colorful × Melody", duet(Miku, Rin), "Team MOER", 2010y/7/2},
+  {std::nullopt, std::nullopt, "Fire◎Flower", Len, "halyosy", 2008y/8/2},
+  {"右肩の蝶", "Migikata no Chou", "Butterfly on Your Right Shoulder", Len, "Nori-P", 2009y/3/31},
+  {"メランコリック", "Melancholic", "Melancholic", Rin, "Junky", 2010y/4/2010},
+  {"ココロ", "Kokoro", "Heart", Rin, "Toraboruta-P", 2008y/3/2},
+  {"トリノコシティ", "Torinoko City", "Left-Behind City (Urbandonment)", Miku, "40mP", 2010y/7/29},
+  {"結ンデ開イテ羅刹ト骸", "Musunde Hiraite Rasetsu to Mukuro", "Close and Open, Demons and The Dead", Miku, "Hachi", 2009y/7/5},
+  {"ロミオとシンデレラ", "Romeo to Cinderella", "Romeo and Cinderella", Miku, "doriko", 2009y/4/5},
+  {"ピアノ×フォルテ×スキャンダル", "Piano × Forte × Scandal", "Piano × Forte × Scandal", MEIKO, "OSTER project", 2008y/12/19},
+  {std::nullopt, std::nullopt, "Pane dhiria", KAITO, "Shinjou-P", 2010y/1/19},
+  {"千年の独奏歌", "Sennen no Dokusou Ka", "Thousand Year Solo", KAITO, "yanagi-P", 2008y/4/27},
+  {"ぽっぴっぽー", "PoPiPo", "Vegetable Juice", Miku, "Lamaze-P", 2008y/12/11},
+  {"白い雪のプリンセスは", "Shiroi Yuki no Princess wa", "The Snow White Princess is", Miku, "Noboru↑-P", 2010y/2/21},
+  {std::nullopt, "Venus di Ujung Jari", "Venus at The Fingertips", Miku, "Mohax-2000", 2011y/6/6},
+  {"ダブルラリアット", "Double Lariat", "Double Lariat", Luka, "Agoaniki-P", 2009y/2/4},
+  {"ルカルカ★ナイトフィーバー", "Luka Luka★Night Fever", "Luka Luka★Night Fever", Luka, "samfree", 2009y/2/12},
+  {"秘密警察", "Himitsu Keisatsu", "Secret Police", Miku, "Buriru-P", 2010y/11/9},
+  {std::nullopt, std::nullopt, "Yellow", Miku, "kz", 2010y/7/2},
+  {"初音ミクの激唱", "Hatsune Miku no Gekishou", "The Intense Voice of Hatsune Miku", Miku, "cosMo", 2010y/7/9},
+  {"メルト", "Melt", "Melt", Miku, "ryo", 2007y/12/7},
+  {std::nullopt, std::nullopt, "Tell Your World", Miku, "kz", 2012y/3/12},
+  {"みくみくにしてあげる♪", "Miku Miku ni Shite Ageru♪", "I'll Miku-Miku You♪ (For Reals)", Miku, "ika", 2007y/9/19},
+  {std::nullopt, std::nullopt, "letter song", Miku, "doriko", 2008y/6/26},
+}), make_casefold_proj<&Song::songname>());
 
-static_assert(std::ranges::size(songs) > 10);
-/* There must not be any duplicate songnames in songs */
+/* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
 static_assert(std::ranges::adjacent_find(songs, {}, &Song::songname) == std::ranges::end(songs),
               std::ranges::adjacent_find(songs, {}, &Song::songname)->songname);
+/* Everything needs a date. Sometimes. */
+static_assert(std::ranges::none_of(songs, [](auto date) { return date == 0y/0/0; }, &Song::published),
+              std::ranges::find_if(songs, [](auto song) { return song.published == 0y/0/0;})->songname);
 /* jp_songname shouldn't equal songname */
 static_assert(std::ranges::none_of(songs, [](const Song& song) constexpr {
     return song.jp_songname.transform([sn = song.songname](auto &jp_songname) constexpr -> bool { return jp_songname == sn; }).value_or(false);
