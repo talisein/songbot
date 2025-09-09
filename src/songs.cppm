@@ -33,105 +33,200 @@ export struct Song
     std::optional<std::string_view> jp_songname;
     std::optional<std::string_view> romanji_songname;
     std::string_view songname; // en
-    std::optional<std::string_view> shortname;
     Singer singer;
     std::string_view producer;
 };
 
-template<std::size_t N>
-consteval auto get_sorted_songs(const std::array<Song, N>& arr) -> std::array<Song, N>
+template<auto Proj>
+constexpr auto make_casefold_proj()
 {
-    std::array<Song, N> sorted_arr = arr;
-    std::ranges::stable_sort(sorted_arr, {}, &Song::songname);
+    return [](const auto& obj) constexpr {
+        return una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::invoke(Proj, obj)));
+    };
+}
+
+template<auto Proj>
+constexpr auto make_opt_casefold_proj()
+{
+    return [](const auto& obj) constexpr {
+        return una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::invoke(Proj, obj).value()));
+    };
+}
+
+template<auto Proj>
+constexpr auto make_opt_filter()
+{
+    return std::views::filter([](const auto& obj) constexpr -> bool {
+        return std::invoke(Proj, obj).has_value();
+    });
+}
+
+
+template<typename T, typename Proj, std::size_t N>
+consteval auto get_sorted_songs(const std::array<T, N>& arr, Proj&& proj) -> std::array<T, N>
+{
+    std::array<T, N> sorted_arr = arr;
+    std::ranges::stable_sort(sorted_arr, std::ranges::less{}, std::forward<Proj>(proj));
     return sorted_arr;
 }
 
-constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
+export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
         {"千本桜", "Senbonzakura", "Thousand Cherry Blossoms",
-         std::nullopt, Miku, "Kurousa-P"},
+         Miku, "Kurousa-P"},
         {"こっち向いて Baby", "Kocchi Muite Baby", "Look This Way, Baby",
-         std::nullopt, Miku, "ryo"},
+         Miku, "ryo"},
         {"マージナル", "Marginal", "Marginal",
-         std::nullopt, Miku, "OSTER project"},
+         Miku, "OSTER project"},
         {"恋色病棟", "Koi Iro Byoutou", "Love Ward",
-         std::nullopt, Miku, "OSTER project"},
+         Miku, "OSTER project"},
         {"カラフル×メロディ", "Colorful × Melody", "Colorful × Melody",
-         "Colorful Melody", duet(Miku, Rin), "Team MOER"},
-        {"Fire◎Flower", "Fire◎Flower", "Fire◎Flower",
-         "Fire Flower", Len, "halyosy, absorb"},
+         duet(Miku, Rin), "Team MOER"},
+        {std::nullopt, std::nullopt, "Fire◎Flower",
+         Len, "halyosy, absorb"},
         {"右肩の蝶", "Migikata no Chou", "Butterfly on Your Right Shoulder",
-         std::nullopt, Len, "Nori-P"},
+         Len, "Nori-P"},
         {"メランコリック", "Melancholic", "Melancholic",
-         std::nullopt, Rin, "Junky"},
+         Rin, "Junky"},
         {"ココロ", "Kokoro", "Heart",
-         std::nullopt, Rin, "Toraboruta-P"},
+         Rin, "Toraboruta-P"},
         {"トリノコシティ", "Torinoko City", "Left-Behind City (Urbandonment)",
-         std::nullopt, Miku, "40mP"},
+         Miku, "40mP"},
         {"結ンデ開イテ羅刹ト骸", "Musunde Hiraite Rasetsu to Mukuro", "Close and Open, Demons and The Dead",
-         std::nullopt, Miku, "Hachi"},
+         Miku, "Hachi"},
         {"ロミオとシンデレラ", "Romeo to Cinderella", "Romeo and Cinderella",
-         std::nullopt, Miku, "doriko"},
+         Miku, "doriko"},
         {"ピアノ×フォルテ×スキャンダル", "Piano × Forte × Scandal", "Piano × Forte × Scandal",
-         std::nullopt, MEIKO, "OSTER project"},
-        {"Pane dhiria", "Pane dhiria", "Pane dhiria",
-         std::nullopt, KAITO, "Shinjou-P"},
+         MEIKO, "OSTER project"},
+        {std::nullopt, std::nullopt, "Pane dhiria",
+         KAITO, "Shinjou-P"},
         {"千年の独奏歌", "Sennen no Dokusou Ka", "Thousand Year Solo",
-         std::nullopt, KAITO, "yanagi-P"},
+         KAITO, "yanagi-P"},
         {"ぽっぴっぽー", "PoPiPo", "PoPiPo",
-         std::nullopt, Miku, "Lamaze-P"},
+         Miku, "Lamaze-P"},
         {"白い雪のプリンセスは", "Shiroi Yuki no Princess wa", "The Snow White Princess is",
-         std::nullopt, Miku, "Noboru↑-P"},
-        {"Venus di Ujung Jari", "Venus di Ujung Jari", "Venus at The Fingertips",
-         std::nullopt, Miku, "Mohax-2000"},
+         Miku, "Noboru↑-P"},
+        {std::nullopt, "Venus di Ujung Jari", "Venus at The Fingertips",
+         Miku, "Mohax-2000"},
         {"ダブルラリアット", "Double Lariat", "Double Lariat",
-         std::nullopt, Luka, "Agoaniki-P"},
+         Luka, "Agoaniki-P"},
         {"ルカルカ★ナイトフィーバー", "Luka Luka★Night Fever", "Luka Luka★Night Fever",
-         std::nullopt, Luka, "samfree"},
+         Luka, "samfree"},
         {"秘密警察", "Himitsu Keisatsu", "Secret Police",
-         std::nullopt, Miku, "Buriru-P"},
-        {"Yellow", "Yellow", "Yellow",
-         std::nullopt, Miku, "kz"},
+         Miku, "Buriru-P"},
+        {std::nullopt, std::nullopt, "Yellow",
+         Miku, "kz"},
         {"初音ミクの激唱", "Hatsune Miku no Gekishou", "The Intense Voice of Hatsune Miku",
-         std::nullopt, Miku, "cosMo"},
+         Miku, "cosMo"},
         {"メルト", "Melt", "Melt",
-         std::nullopt, Miku, "ryo"},
-        {"Tell Your World", "Tell Your World", "Tell Your World",
-         std::nullopt, Miku, "kz"},
+         Miku, "ryo"},
+        {std::nullopt, std::nullopt, "Tell Your World",
+         Miku, "kz"},
         {"みくみくにしてあげる♪", "Miku Miku ni Shite Ageru♪", "I'll Miku-Miku You♪ (For Reals)",
-         std::nullopt, Miku, "ika"},
-        {"letter song", "letter song", "letter song",
-         std::nullopt, Miku, "doriko"},
-        }));
+         Miku, "ika"},
+        {std::nullopt, std::nullopt, "letter song",
+         Miku, "doriko"},
+        }), make_casefold_proj<&Song::songname>());
 
 static_assert(std::ranges::size(songs) > 10);
+/* There must not be any duplicate songnames in songs */
 static_assert(std::ranges::adjacent_find(songs, {}, &Song::songname) == std::ranges::end(songs),
               std::ranges::adjacent_find(songs, {}, &Song::songname)->songname);
+/* jp_songname shouldn't equal songname */
+static_assert(std::ranges::none_of(songs, [](const Song& song) constexpr {
+    return song.jp_songname.transform([sn = song.songname](auto &jp_songname) constexpr -> bool { return jp_songname == sn; }).value_or(false);
+}),
+    std::ranges::find_if(songs, [](const Song& song) constexpr -> bool { return song.jp_songname.transform([sn = song.songname](auto &jp_songname){ return jp_songname == sn; }).value_or(false);  })->songname);
+/* romanji shouldn't equal jp_songname */
+static_assert(std::ranges::none_of(songs, [](const Song& song) constexpr {
+    return song.romanji_songname.transform([jp_sn = song.jp_songname](auto &romanji_songname) constexpr -> bool { return romanji_songname == jp_sn; }).value_or(false);
+}),
+    std::ranges::find_if(songs, [](const Song& song) constexpr -> bool { return song.romanji_songname.transform([jp_sn = song.jp_songname](auto &romanji_songname){ return romanji_songname == jp_sn; }).value_or(false);  })->songname);
 
-export consteval const Song& lookup(std::string_view name)
+struct AltName
 {
-    if (auto it =std::ranges::find(songs, una::cases::to_casefold_utf8(name),
-                                   [](auto &song) constexpr {return una::cases::to_casefold_utf8(song.songname);});
-        it != std::ranges::end(songs))
+    std::string_view alt_name;
+    std::string_view name;
+};
+
+constexpr std::array alt_names = get_sorted_songs(std::to_array<AltName>({
+            { "Colorful Melody", "Colorful × Melody"},
+            { "Colorful x Melody", "Colorful × Melody"},
+            { "Fire Flower", "Fire◎Flower"},
+            { "FireFlower", "Fire◎Flower"},
+            { "Piano Forte Scandal", "Piano × Forte × Scandal"},
+            { "Piano x Forte x Scandal", "Piano × Forte × Scandal"},
+        }), &AltName::alt_name);
+
+/* Every AltName::name must exist in songs */
+static_assert(std::ranges::all_of(alt_names,
+                                  [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::songname); },
+                                  &AltName::name),
+              std::ranges::find_if_not(alt_names,
+                                       [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::songname); },
+                                       &AltName::name)->name);
+
+template <>
+struct std::formatter<Song> {
+    constexpr auto parse(std::format_parse_context& ctx) {
+        return ctx.begin();
+    }
+
+    auto format(const Song& song, std::format_context& ctx) const {
+        std::ostringstream out;
+        if (song.jp_songname) {
+            out << una::norm::to_nfc_utf8(*song.jp_songname) << ' ';
+            if (song.romanji_songname) {
+                out << "(" << una::norm::to_nfc_utf8(*song.romanji_songname) << ") ";
+            }
+            out << "/ ";
+        } else {
+            // romanji but no jp could be other languages (Venus at the fingertips)
+            if (song.romanji_songname) {
+                out << una::norm::to_nfc_utf8(*song.romanji_songname) << " / ";
+            }
+
+        }
+        out << song.songname << " feat. " << magic_enum::enum_flags_name(song.singer) << " by " << song.producer;
+        return std::ranges::copy(std::move(out).str(), ctx.out()).out;
+    }
+};
+
+export consteval const Song& lookup(std::string_view needle)
+{
+    auto casefolded_needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle));
+    if (auto it = std::ranges::lower_bound(songs, casefolded_needle, std::ranges::less{}, make_casefold_proj<&Song::songname>());
+        it != std::ranges::end(songs) && una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(it->songname)) == casefolded_needle)
     {
         return *it;
     }
 
     /* Romanji */
-    auto romanji_view = songs | std::views::filter([](auto &song) constexpr { return song.romanji_songname.has_value(); });
+    auto romanji_view = songs | make_opt_filter<&Song::romanji_songname>();
     if (auto it = std::ranges::find(romanji_view,
-                                    una::cases::to_casefold_utf8(name),
-                                    [](auto &song) constexpr {return una::cases::to_casefold_utf8(*song.romanji_songname);});
+                                    casefolded_needle,
+                                    make_opt_casefold_proj<&Song::romanji_songname>());
         it != std::ranges::end(romanji_view))
     {
         return *it;
     }
 
-    /* Short name */
-    auto shortname_view = songs | std::views::filter([](auto &song) constexpr { return song.shortname.has_value(); });
-    if (auto it = std::ranges::find(shortname_view,
-                                     una::cases::to_casefold_utf8(name),
-                                     [](auto &song) constexpr { return una::cases::to_casefold_utf8(*song.shortname); });
-        it != std::ranges::end(shortname_view))
+    /* Alt name */
+    if (auto alt_it = std::ranges::find(alt_names,
+                                        casefolded_needle,
+                                        make_casefold_proj<&AltName::alt_name>());
+        alt_it != std::ranges::end(alt_names))
+    {
+        // No need to casefold
+        auto it = std::ranges::find(songs, alt_it->name, &Song::songname);
+        return *it;
+    }
+
+    /* Try japanese */
+    auto jp_view = songs | make_opt_filter<&Song::jp_songname>();
+    if (auto it = std::ranges::find(jp_view,
+                                    casefolded_needle,
+                                    make_opt_casefold_proj<&Song::jp_songname>());
+        it != std::ranges::end(jp_view))
     {
         return *it;
     }
