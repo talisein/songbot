@@ -10,7 +10,7 @@ int main()
     std::println("Song is {}", lookup("senbonzakura"));
     std::println("Song is {}", lookup("Colorful x Melody"));
     std::println("Song is {}", lookup("恋色病棟"));
-    std::println("Song is {}", lookup("Love Ward"));
+    std::println("Song is {}", lookup("LLNF"));
 
     return 0;
 }

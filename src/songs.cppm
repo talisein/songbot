@@ -155,6 +155,8 @@ constexpr std::array alt_names = get_sorted_songs(std::to_array<AltName>({
             { "FireFlower", "Fire◎Flower"},
             { "Piano Forte Scandal", "Piano × Forte × Scandal"},
             { "Piano x Forte x Scandal", "Piano × Forte × Scandal"},
+            { "LLNF", "Luka Luka★Night Fever"},
+            { "Luka Luka Night Fever", "Luka Luka★Night Fever"},
         }), &AltName::alt_name);
 
 /* Every AltName::name must exist in songs */
@@ -171,7 +173,7 @@ struct std::formatter<Song> {
         return ctx.begin();
     }
 
-    auto format(const Song& song, std::format_context& ctx) const {
+    constexpr auto format(const Song& song, std::format_context& ctx) const {
         std::ostringstream out;
         if (song.jp_songname) {
             out << una::norm::to_nfc_utf8(*song.jp_songname) << ' ';
