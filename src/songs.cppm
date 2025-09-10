@@ -31,9 +31,9 @@ struct magic_enum::customize::enum_range<Singer> {
 
 export struct Song
 {
-    std::optional<std::string_view> jp_songname;
-    std::optional<std::string_view> romanji_songname;
-    std::string_view songname; // en
+    std::optional<std::string_view> jp_name;
+    std::optional<std::string_view> romanji_name;
+    std::string_view name; // en
     Singer singer;
     std::string_view producer;
     std::chrono::year_month_day published;
@@ -104,24 +104,31 @@ export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
   {std::nullopt, std::nullopt, "Miku", Miku, "Anamanaguchi", 2016y/5/27, "Anamanaguchi"},
   {std::nullopt, std::nullopt, "METEOR", Miku, "DIVELA", 2018y/3/28, "Mirai Meteor"},
   {"メテオ", "Meteor", "Meteor", Miku, "John Zeroness", 2011y/3/20, "OG Meteor"},
-}), make_casefold_proj<&Song::songname>());
+}), make_casefold_proj<&Song::name>());
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
-static_assert(std::ranges::adjacent_find(songs, [](auto l, auto r) { return l.songname == r.songname && l.disambiguation == r.disambiguation; }) == std::ranges::end(songs),
-              std::ranges::adjacent_find(songs, [](auto l, auto r) { return l.songname == r.songname && l.disambiguation == r.disambiguation; })->songname);
+constexpr auto songs_have_same_names = [](auto l, auto r) constexpr {
+    return l.name == r.name && l.disambiguation == r.disambiguation;
+};
+static_assert(std::ranges::adjacent_find(songs, songs_have_same_names) == std::ranges::end(songs),
+              std::ranges::adjacent_find(songs, songs_have_same_names)->name);
+
 /* Everything needs a date. Sometimes. */
-static_assert(std::ranges::none_of(songs, [](auto date) { return date == 0y/0/0; }, &Song::published),
-              std::ranges::find_if(songs, [](auto song) { return song.published == 0y/0/0;})->songname);
-/* jp_songname shouldn't equal songname */
-static_assert(std::ranges::none_of(songs, [](const Song& song) constexpr {
-    return song.jp_songname.transform([sn = song.songname](auto &jp_songname) constexpr -> bool { return jp_songname == sn; }).value_or(false);
-}),
-    std::ranges::find_if(songs, [](const Song& song) constexpr -> bool { return song.jp_songname.transform([sn = song.songname](auto &jp_songname){ return jp_songname == sn; }).value_or(false);  })->songname);
-/* romanji shouldn't equal jp_songname */
-static_assert(std::ranges::none_of(songs, [](const Song& song) constexpr {
-    return song.romanji_songname.transform([jp_sn = song.jp_songname](auto &romanji_songname) constexpr -> bool { return romanji_songname == jp_sn; }).value_or(false);
-}),
-    std::ranges::find_if(songs, [](const Song& song) constexpr -> bool { return song.romanji_songname.transform([jp_sn = song.jp_songname](auto &romanji_songname){ return romanji_songname == jp_sn; }).value_or(false);  })->songname);
+constexpr auto song_has_no_date = [](const auto& song) constexpr { return song.published == 0y/0/0;};
+static_assert(std::ranges::none_of(songs, song_has_no_date),
+              std::ranges::find_if(songs, song_has_no_date)->name);
+
+/* jp_name shouldn't equal name */
+constexpr auto song_has_same_jp_en_name = [](const auto& song) constexpr { return song.jp_name.transform([sn = song.name](auto &jp_name) constexpr -> bool { return jp_name == sn; }).value_or(false); };
+static_assert(std::ranges::none_of(songs, song_has_same_jp_en_name),
+              std::ranges::find_if(songs, song_has_same_jp_en_name)->name);
+
+/* romanji shouldn't equal jp_name */
+constexpr auto song_has_same_jp_romanji_name = [](const auto& song) constexpr {
+    return song.romanji_name.transform([jp_sn = song.jp_name](auto &romanji_name) constexpr -> bool { return romanji_name == jp_sn; }).value_or(false);
+};
+static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
+              std::ranges::find_if(songs, song_has_same_jp_romanji_name)->name);
 
 struct AltName
 {
@@ -142,10 +149,10 @@ constexpr std::array alt_names = get_sorted_songs(std::to_array<AltName>({
 
 /* Every AltName::name must exist in songs */
 static_assert(std::ranges::all_of(alt_names,
-                                  [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::songname); },
+                                  [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::name); },
                                   &AltName::name),
               std::ranges::find_if_not(alt_names,
-                                       [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::songname); },
+                                       [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::name); },
                                        &AltName::name)->name);
 
 template <>
@@ -156,32 +163,32 @@ struct std::formatter<Song> {
 
     constexpr auto format(const Song& song, std::format_context& ctx) const {
         std::ostringstream out;
-        if (song.jp_songname) {
-            out << una::norm::to_nfc_utf8(*song.jp_songname) << ' ';
-            if (song.romanji_songname) {
-                out << "(" << una::norm::to_nfc_utf8(*song.romanji_songname) << ") ";
+        if (song.jp_name) {
+            out << una::norm::to_nfc_utf8(*song.jp_name) << ' ';
+            if (song.romanji_name) {
+                out << "(" << una::norm::to_nfc_utf8(*song.romanji_name) << ") ";
             }
             out << "/ ";
         } else {
             // romanji but no jp could be other languages (Venus at the fingertips)
-            if (song.romanji_songname) {
-                out << una::norm::to_nfc_utf8(*song.romanji_songname) << " / ";
+            if (song.romanji_name) {
+                out << una::norm::to_nfc_utf8(*song.romanji_name) << " / ";
             }
 
         }
-        out << song.songname << " feat. " << magic_enum::enum_flags_name(song.singer) << " by " << song.producer;
+        out << song.name << " feat. " << magic_enum::enum_flags_name(song.singer) << " by " << song.producer;
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
     }
 };
 
 [[nodiscard]] constexpr
-const Song&
+std::optional<Song>
 lookup1(auto&& rng, std::optional<std::string_view> producer = std::nullopt)
 {
     if (std::ranges::distance(rng) == 1)
         return *std::ranges::begin(rng);
 
-    if (!producer) throw std::exception();
+    if (!producer) return std::nullopt;
 
     auto producer_rng = std::ranges::equal_range(rng,
                                                  una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(*producer)),
@@ -191,7 +198,7 @@ lookup1(auto&& rng, std::optional<std::string_view> producer = std::nullopt)
     if (std::ranges::distance(producer_rng) == 1)
         return *std::ranges::begin(producer_rng);
 
-    throw std::exception();
+    return std::nullopt;
 }
 
 template<auto Proj, typename T>
@@ -211,18 +218,18 @@ constexpr auto make_needle_filter(T&& casefolded_needle)
 }
 
 export [[nodiscard]] constexpr
-const Song& lookup(std::string_view needle, std::optional<std::string_view> producer = std::nullopt)
+std::optional<Song> lookup_song(std::string_view needle, std::optional<std::string_view> producer = std::nullopt)
 {
     const auto casefolded_needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle));
-    if (auto rng = std::ranges::equal_range(songs, casefolded_needle, std::ranges::less{}, make_casefold_proj<&Song::songname>());
+    if (auto rng = std::ranges::equal_range(songs, casefolded_needle, std::ranges::less{}, make_casefold_proj<&Song::name>());
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);
     }
 
     /* Romanji */
-    auto romanji_view = songs | make_opt_filter<&Song::romanji_songname>();
-    if (auto rng = songs | make_needle_filter<&Song::romanji_songname>(casefolded_needle);
+    auto romanji_view = songs | make_opt_filter<&Song::romanji_name>();
+    if (auto rng = songs | make_needle_filter<&Song::romanji_name>(casefolded_needle);
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);
@@ -232,18 +239,24 @@ const Song& lookup(std::string_view needle, std::optional<std::string_view> prod
     if (auto alt_rng = alt_names | make_needle_filter<&AltName::alt_name>(casefolded_needle);
         !std::ranges::empty(alt_rng))
     {
-        if (std::ranges::distance(alt_rng) != 1) throw std::exception();
+        if (std::ranges::distance(alt_rng) != 1) return std::nullopt;
 
-        auto rng = songs | make_needle_filter<&Song::songname>(una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::ranges::begin(alt_rng)->name)));
+        auto rng = songs | make_needle_filter<&Song::name>(una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::ranges::begin(alt_rng)->name)));
         return lookup1(std::move(rng), producer);
     }
 
     /* Try japanese */
-    if (auto rng = songs | make_needle_filter<&Song::jp_songname>(casefolded_needle);
+    if (auto rng = songs | make_needle_filter<&Song::jp_name>(casefolded_needle);
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);
     }
 
-    throw std::exception();
+    return std::nullopt;
+}
+
+export consteval
+Song operator ""_song(const char* short_name, std::size_t len)
+{
+    return *lookup_song({short_name, len});
 }

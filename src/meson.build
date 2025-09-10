@@ -74,9 +74,8 @@ uni_algo_module = custom_target('uni_algo_module',
     depends: [uni_algo_all_module]
 )
 
-songs_module_src = 'songs.cppm'
 songs_module = custom_target('songs_module',
-    input: songs_module_src,
+    input: 'songs.cppm',
     output: ['songs.o', 'songs.gcm'],
     command: [
         cxx_compiler.cmd_array(),
@@ -89,9 +88,23 @@ songs_module = custom_target('songs_module',
     depends: [std_module, uni_algo_module, magic_enum_module]
 )
 
+concerts_module = custom_target('concerts_module',
+    input: 'concerts.cppm',
+    output: ['concerts.o', 'concerts.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module]
+)
+
+
 src = ['main.cpp']
 
-exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module,
+exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module,
                  dependencies: magic_enum_dep,
-                 sources: [std_module, songs_module]
                 )

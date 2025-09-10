@@ -1,5 +1,6 @@
 std  @BUILD_DIR@/src/std.gcm
 songs  @BUILD_DIR@/src/songs.gcm
+concerts  @BUILD_DIR@/src/conerts.gcm
 @UNI_ALGO_INCLUDEDIR@/uni_algo/all.h @BUILD_DIR@/src/uni_algo_all.gcm
 @MAGIC_ENUM_INCLUDEDIR@/magic_enum/magic_enum_all.hpp @BUILD_DIR@/src/magic_enum_all.gcm
 uni_algo @BUILD_DIR@/src/uni_algo.gcm
