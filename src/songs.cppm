@@ -37,6 +37,7 @@ export struct Song
     Singer singer;
     std::string_view producer;
     std::chrono::year_month_day published;
+    std::optional<std::string_view> disambiguation; // keep last
 };
 
 template<auto Proj>
@@ -100,11 +101,14 @@ export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
   {std::nullopt, std::nullopt, "Tell Your World", Miku, "kz", 2012y/3/12},
   {"みくみくにしてあげる♪", "Miku Miku ni Shite Ageru♪", "I'll Miku-Miku You♪ (For Reals)", Miku, "ika", 2007y/9/19},
   {std::nullopt, std::nullopt, "letter song", Miku, "doriko", 2008y/6/26},
+  {std::nullopt, std::nullopt, "Miku", Miku, "Anamanaguchi", 2016y/5/27, "Anamanaguchi"},
+  {std::nullopt, std::nullopt, "METEOR", Miku, "DIVELA", 2018y/3/28, "Mirai Meteor"},
+  {"メテオ", "Meteor", "Meteor", Miku, "John Zeroness", 2011y/3/20, "OG Meteor"},
 }), make_casefold_proj<&Song::songname>());
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
-static_assert(std::ranges::adjacent_find(songs, {}, &Song::songname) == std::ranges::end(songs),
-              std::ranges::adjacent_find(songs, {}, &Song::songname)->songname);
+static_assert(std::ranges::adjacent_find(songs, [](auto l, auto r) { return l.songname == r.songname && l.disambiguation == r.disambiguation; }) == std::ranges::end(songs),
+              std::ranges::adjacent_find(songs, [](auto l, auto r) { return l.songname == r.songname && l.disambiguation == r.disambiguation; })->songname);
 /* Everything needs a date. Sometimes. */
 static_assert(std::ranges::none_of(songs, [](auto date) { return date == 0y/0/0; }, &Song::published),
               std::ranges::find_if(songs, [](auto song) { return song.published == 0y/0/0;})->songname);
@@ -170,44 +174,75 @@ struct std::formatter<Song> {
     }
 };
 
-export consteval const Song& lookup(std::string_view needle)
+[[nodiscard]] constexpr
+const Song&
+lookup1(auto&& rng, std::optional<std::string_view> producer = std::nullopt)
 {
-    auto casefolded_needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle));
-    if (auto it = std::ranges::lower_bound(songs, casefolded_needle, std::ranges::less{}, make_casefold_proj<&Song::songname>());
-        it != std::ranges::end(songs) && una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(it->songname)) == casefolded_needle)
+    if (std::ranges::distance(rng) == 1)
+        return *std::ranges::begin(rng);
+
+    if (!producer) throw std::exception();
+
+    auto producer_rng = std::ranges::equal_range(rng,
+                                                 una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(*producer)),
+                                                 std::ranges::less{},
+                                                 make_casefold_proj<&Song::producer>());
+
+    if (std::ranges::distance(producer_rng) == 1)
+        return *std::ranges::begin(producer_rng);
+
+    throw std::exception();
+}
+
+template<auto Proj, typename T>
+constexpr auto make_needle_filter(T&& casefolded_needle)
+{
+    return std::views::filter([needle = std::forward<T>(casefolded_needle)](const auto& obj) constexpr -> bool {
+        auto &val = std::invoke(Proj, obj);
+        if constexpr (std::is_same_v<std::remove_cvref_t<decltype(val)>, std::optional<std::string_view>>) {
+            if (val.has_value()) {
+                return needle == una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(*val));
+            }
+            return false;
+        } else {
+            return needle == una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(val));
+        }
+    });
+}
+
+export [[nodiscard]] constexpr
+const Song& lookup(std::string_view needle, std::optional<std::string_view> producer = std::nullopt)
+{
+    const auto casefolded_needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle));
+    if (auto rng = std::ranges::equal_range(songs, casefolded_needle, std::ranges::less{}, make_casefold_proj<&Song::songname>());
+        !std::ranges::empty(rng))
     {
-        return *it;
+        return lookup1(std::move(rng), producer);
     }
 
     /* Romanji */
     auto romanji_view = songs | make_opt_filter<&Song::romanji_songname>();
-    if (auto it = std::ranges::find(romanji_view,
-                                    casefolded_needle,
-                                    make_opt_casefold_proj<&Song::romanji_songname>());
-        it != std::ranges::end(romanji_view))
+    if (auto rng = songs | make_needle_filter<&Song::romanji_songname>(casefolded_needle);
+        !std::ranges::empty(rng))
     {
-        return *it;
+        return lookup1(std::move(rng), producer);
     }
 
     /* Alt name */
-    if (auto alt_it = std::ranges::find(alt_names,
-                                        casefolded_needle,
-                                        make_casefold_proj<&AltName::alt_name>());
-        alt_it != std::ranges::end(alt_names))
+    if (auto alt_rng = alt_names | make_needle_filter<&AltName::alt_name>(casefolded_needle);
+        !std::ranges::empty(alt_rng))
     {
-        // No need to casefold
-        auto it = std::ranges::find(songs, alt_it->name, &Song::songname);
-        return *it;
+        if (std::ranges::distance(alt_rng) != 1) throw std::exception();
+
+        auto rng = songs | make_needle_filter<&Song::songname>(una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::ranges::begin(alt_rng)->name)));
+        return lookup1(std::move(rng), producer);
     }
 
     /* Try japanese */
-    auto jp_view = songs | make_opt_filter<&Song::jp_songname>();
-    if (auto it = std::ranges::find(jp_view,
-                                    casefolded_needle,
-                                    make_opt_casefold_proj<&Song::jp_songname>());
-        it != std::ranges::end(jp_view))
+    if (auto rng = songs | make_needle_filter<&Song::jp_songname>(casefolded_needle);
+        !std::ranges::empty(rng))
     {
-        return *it;
+        return lookup1(std::move(rng), producer);
     }
 
     throw std::exception();

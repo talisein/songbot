@@ -32,5 +32,16 @@ int main()
         expect(eq(std::format("{:%B %e, %Y}", song.published), "August  2, 2008"sv));
     };
 
+    "disambiguate"_test = [] {
+        constexpr static auto mirai = lookup("meteor", "divela");
+        expect(eq("DIVELA"sv, mirai.producer));
+        constexpr static auto good = lookup("meteor", "john zeroness");
+        expect(eq("John Zeroness"sv, good.producer));
+    };
+
+    "Not found"_test = [] {
+        expect(throws([] { (void)lookup("this song does not exist yet"); }));
+    };
+
     return 0;
 }
