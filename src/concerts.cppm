@@ -39,17 +39,29 @@ export constexpr std::array concerts = std::to_array<Concert>({
     });
 
 export [[nodiscard]] constexpr
-const Concert& lookup_concert(std::string_view short_name)
+std::optional<Concert> lookup_concert(std::string_view short_name)
 {
-    auto it = std::ranges::find(concerts, short_name, &Concert::short_name);
-    if (it == std::ranges::end(concerts)) throw std::exception();
+    auto needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(short_name));
+
+    auto it = std::ranges::find(concerts, needle, [](const auto& c) constexpr { return una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(c.short_name)); });
+    if (it == std::ranges::end(concerts)) return std::nullopt;
     return *it;
+}
+
+export [[nodiscard]]
+std::vector<Concert> match_concerts(std::string_view needle)
+{
+    const auto name_matches_needle = [needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle))]
+        (const Concert& concert) constexpr {
+        return std::ranges::contains_subrange(una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(concert.short_name)), needle);
+    };
+    return concerts | std::views::filter(name_matches_needle) | std::ranges::to<std::vector>();
 }
 
 export consteval
 const Concert& operator ""_live(const char* short_name, std::size_t len)
 {
-    return lookup_concert({short_name, len});
+    return *lookup_concert({short_name, len});
 }
 
 export struct SetlistTrack

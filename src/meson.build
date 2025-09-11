@@ -11,6 +11,37 @@ std_module = custom_target('std_module',
              ],
  )
 
+dpp_h_module = custom_target('dpp_h_module',
+    input: 'dpp.cppm', # Fake input. The input is dpp.h from the subproject.
+    output: ['dpp_h.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-only',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-x', 'c++-user-header',
+        '-I', dpp_includedir,
+        '-c', 'dpp/dpp.h',
+    ],
+                            )
+
+dpp_module = custom_target('dpp_module',
+    input: 'dpp.cppm',
+    output: ['dpp.o', 'dpp.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-I', dpp_includedir,
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+    ],
+    depends: [dpp_h_module],
+)
+
+
 magic_enum_all_module = custom_target('magic_enum_all_module',
     input: 'magic_enum.cppm', # Fake input. The input is all.h from the subproject.
     output: ['magic_enum_all.gcm'],
@@ -103,8 +134,14 @@ concerts_module = custom_target('concerts_module',
 )
 
 
-src = ['main.cpp']
+src = ['main.cpp', 'sd_notify.cpp']
 
-exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module,
-                 dependencies: magic_enum_dep,
+token_data = configuration_data()
+token_data.set_quoted('API_TOKEN', get_option('api_token'))
+token_src = configure_file(output: 'token.hpp',
+                           configuration: token_data)
+
+exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module,
+                 dependencies: [magic_enum_dep, dpp_dep, systemd_dep],
+                 sources: token_src,
                 )

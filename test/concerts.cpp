@@ -25,5 +25,22 @@ int main()
         expect(eq("Senbonzakura"sv, lookup_song(std::ranges::begin(rng)->song)->romanji_name.value()));
     };
 
+    "match concerts"_test = [] {
+        auto vec = match_concerts("2014");
+        expect(eq(1UZ, vec.size()));
+        expect(eq("ME2014IN"sv, vec[0].short_name));
+    };
+
+    "no match concert"_test = [] {
+        auto resp = lookup_concert("this does not exist");
+        expect(not(resp));
+    };
+
+    "casefold concert"_test = [] {
+        auto resp = lookup_concert("me2014in");
+        expect(resp.has_value());
+        resp = lookup_concert("ME2014IN");
+        expect(resp.has_value());
+    };
     return 0;
 }
