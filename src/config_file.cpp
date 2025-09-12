@@ -12,17 +12,17 @@ trim(const std::string& str)
     return str.substr(first, (last - first + 1));
 }
 
-std::expected<config, std::exception_ptr>
-get_config(std::string_view filename)
+
+using IniData = std::map<std::string, std::map<std::string, std::string>>;
+std::expected<IniData, std::exception_ptr>
+get_config_ini(std::string_view filename)
 {
     using namespace std::literals;
     using IniData = std::map<std::string, std::map<std::string, std::string>>;
     IniData data;
-    config res;
     std::ifstream file(std::filesystem::path{filename});
     if (!file.is_open()) {
-        std::println(std::cerr, "Error: Could not open config file {}", filename);
-        return std::unexpected(std::make_exception_ptr(std::runtime_error("config file couldn't be opened")));
+        return std::unexpected(std::make_exception_ptr(std::runtime_error(std::format("config file '{}' couldn't be opened", filename))));
     }
 
     std::string currentSection;
@@ -51,30 +51,48 @@ get_config(std::string_view filename)
         }
     }
 
+    return data;
+}
+
+std::expected<config, std::exception_ptr>
+get_config(std::string_view filename)
+{
+    config res;
+    auto ini = get_config_ini(filename);
+
     /* Transform from ini map to config struct */
-    if (data.contains("discord") && data["discord"].contains("api_token_file"))
-    {
-        auto path = std::filesystem::path(data["discord"]["api_token_file"]);
-        if (!std::filesystem::exists(path)) {
-            std::println(std::cerr, "Error: Given api_token_file '{}' doesn't exist", path.string());
-            return std::unexpected(std::make_exception_ptr(std::runtime_error("Couldn't open api_token_file")));
+    if (ini) {
+        auto &data = ini.value();
+        if (data.contains("discord") && data["discord"].contains("api_token_file"))
+        {
+            auto path = std::filesystem::path(data["discord"]["api_token_file"]);
+            if (!std::filesystem::exists(path)) {
+                std::println(std::cerr, "Error: Given api_token_file '{}' doesn't exist", path.string());
+                return std::unexpected(std::make_exception_ptr(std::runtime_error("Couldn't open api_token_file")));
+            }
+            std::ifstream token_file(path);
+            if (!token_file.is_open()) {
+                std::println(std::cerr, "Error: Couldn't open api_token_file '{}'", path.string());
+                return std::unexpected(std::make_exception_ptr(std::runtime_error("Couldn't open api_token_file")));
+            }
+            std::getline(token_file, res.api_token);
+        } else if (data.contains("discord") && data["discord"].contains("api_token")) {
+            res.api_token = data["discord"]["api_token"];
         }
-        std::ifstream token_file(path);
-        if (!token_file.is_open()) {
-            std::println(std::cerr, "Error: Couldn't open api_token_file '{}'", path.string());
-            return std::unexpected(std::make_exception_ptr(std::runtime_error("Couldn't open api_token_file")));
-        }
-        std::getline(token_file, res.api_token);
-    } else if (data.contains("discord") && data["discord"].contains("api_token")) {
-        res.api_token = data["discord"]["api_token"];
     }
 
     /* Default to $CREDENTIALS_DIRECTORY/api_token if no api_token */
     if (res.api_token.size() == 0) {
         do {
+            std::filesystem::path path;
             const char* creds_dir_cstr = std::getenv("CREDENTIALS_DIRECTORY");
-            if (!creds_dir_cstr) break;
-            std::filesystem::path path {creds_dir_cstr};
+            if (creds_dir_cstr) {
+                path = creds_dir_cstr;
+            } else if (std::filesystem::exists("/run/secrets")) {
+                path = "/run/secrets";
+            } else if (std::filesystem::exists("/var/run/secrets")) {
+                path = "/var/run/secrets";
+            }
             path /= "api_token";
             if (!std::filesystem::exists(path)) break;
             std::ifstream api_token_file(path);
@@ -82,6 +100,10 @@ get_config(std::string_view filename)
             std::println("INFO: Reading Discord API Token from {}", path.native());
             std::getline(api_token_file, res.api_token);
         } while (0);
+    }
+
+    if (res.api_token.size() == 0 && !ini) {
+        return std::unexpected(ini.error());
     }
 
     if (res.api_token.size() < 10) {

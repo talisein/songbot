@@ -206,4 +206,5 @@ src = ['main.cpp', 'sd_notify.cpp', 'config_file.cpp']
 
 exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
+                 install: true
                 )
