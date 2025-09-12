@@ -1,5 +1,5 @@
+#include "config_file.hpp"
 #include "sd_notify.hpp"
-#include "token.hpp"
 #include "commands.hpp"
 
 
@@ -16,8 +16,15 @@ on_healthcheck_timer(dpp::timer timer)
 int
 main()
 {
-    systemd::notify(0, "STATUS=Starting Mikumiku Setlists prometheus endpoint");
+    /* Read config file */
+    auto config = get_config("config.ini");
+    if (!config) {
+        std::rethrow_exception(config.error());
+        return 1;
+    }
+
     /* Create metrics */
+    systemd::notify(0, "STATUS=Starting Mikumiku Setlists prometheus endpoint");
     prometheus::Exposer exposer{"127.0.0.1:3927"};
     auto registry = std::make_shared<prometheus::Registry>();
     /* Metric: compile-time known data */
@@ -52,7 +59,7 @@ main()
 
     /* Create Discord Bot */
     systemd::notify(0, "STATUS=Starting Mikumiku Setlists discord bot");
-    dpp::cluster bot(API_TOKEN);
+    dpp::cluster bot(config->api_token);
 
     bot.on_log(dpp::utility::cout_logger());
 
