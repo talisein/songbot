@@ -11,6 +11,74 @@ std_module = custom_target('std_module',
              ],
  )
 
+prometheus_counter_h_module = custom_target('prometheus_counter_h_module',
+    input: 'prometheus.cppm', # Fake input. The input is prometheus.h from the subproject.
+    output: ['counter_h.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-only',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-x', 'c++-user-header',
+        '-I', prometheus_core_build_inc,
+        '-I', prometheus_core_inc,
+        '-c', 'prometheus/counter.h',
+    ],
+)
+
+prometheus_registry_h_module = custom_target('prometheus_registry_h_module',
+    input: 'prometheus.cppm', # Fake input. The input is prometheus.h from the subproject.
+    output: ['registry_h.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-only',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-x', 'c++-user-header',
+        '-I', prometheus_core_build_inc,
+        '-I', prometheus_core_inc,
+        '-c', 'prometheus/registry.h',
+    ],
+)
+
+prometheus_exposer_h_module = custom_target('prometheus_exposer_h_module',
+    input: 'prometheus.cppm', # Fake input. The input is prometheus.h from the subproject.
+    output: ['exposer_h.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-only',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-x', 'c++-user-header',
+        '-I', prometheus_core_build_inc,
+        '-I', prometheus_core_inc,
+        '-I', prometheus_pull_build_inc,
+        '-I', prometheus_pull_inc,
+        '-c', 'prometheus/exposer.h',
+    ],
+)
+
+prometheus_module = custom_target('prometheus_module',
+    input: 'prometheus.cppm',
+    output: ['prometheus.o', 'prometheus.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-I', prometheus_core_build_inc,
+        '-I', prometheus_core_inc,
+        '-I', prometheus_pull_build_inc,
+        '-I', prometheus_pull_inc,
+    ],
+    depends: [prometheus_counter_h_module, prometheus_registry_h_module, prometheus_exposer_h_module],
+)
+
 dpp_h_module = custom_target('dpp_h_module',
     input: 'dpp.cppm', # Fake input. The input is dpp.h from the subproject.
     output: ['dpp_h.gcm'],
@@ -141,7 +209,7 @@ token_data.set_quoted('API_TOKEN', get_option('api_token'))
 token_src = configure_file(output: 'token.hpp',
                            configuration: token_data)
 
-exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module,
-                 dependencies: [magic_enum_dep, dpp_dep, systemd_dep],
+exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module,
+                 dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
                  sources: token_src,
                 )

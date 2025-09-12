@@ -8,6 +8,9 @@ namespace systemd {
 
     int watchdog_enabled(int unset_environment, long unsigned *usec)
     {
-        return sd_watchdog_enabled(unset_environment, usec);
+        uint64_t sd_usec = 0;
+        auto res = sd_watchdog_enabled(unset_environment, &sd_usec);
+        *usec = sd_usec;
+        return res;
     }
 }

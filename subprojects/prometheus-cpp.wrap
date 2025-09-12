@@ -1,0 +1,6 @@
+[wrap-file]
+source_url = https://github.com/jupp0r/prometheus-cpp/releases/download/v1.3.0/prometheus-cpp-with-submodules.tar.gz
+source_filename = prometheus-cpp-v1.3.0.tar.gz
+source_hash = 62bc2cc9772db2314dbaae506ae2a75c8ee897dab053d8729e86a637b018fdb6
+method = cmake
+directory = prometheus-cpp-with-submodules

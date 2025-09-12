@@ -3,6 +3,7 @@
 import dpp;
 import concerts;
 import songs;
+import std;
 
 /*
 class template_command
@@ -33,7 +34,7 @@ public:
         return setlist_cmd;
     }
 
-    static void on_slashcommand(const dpp::slashcommand_t& event)
+    static std::expected<void, std::exception_ptr> on_slashcommand(const dpp::slashcommand_t& event)
     {
         try {
             auto param = std::get<std::string>(event.get_parameter("event"));
@@ -49,11 +50,10 @@ public:
                 }
                 event.reply(reply.str());
             }
-        } catch (std::runtime_error& e) {
-            event.reply(std::format("Oops, I messed up: {}", e.what()));
-        } catch (std::exception& e) {
-            event.reply(std::format("Oops, I really messed up: {}", e.what()));
+        } catch (...) {
+            return std::unexpected(std::current_exception());
         }
+        return {};
     }
 
     static std::optional<dpp::interaction_response> on_autocomplete(const dpp::autocomplete_t& event)
