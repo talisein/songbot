@@ -22,6 +22,35 @@ public:
 };
 */
 
+std::generator<char> escape_markdown_gen(std::string_view input) {
+    for (char c : input) {
+        switch (c) {
+            case '*':
+/*            case '_':
+            case '~':
+            case '[':
+            case ']':
+            case '(':
+            case ')':
+            case '#':
+            case '+':
+            case '-':
+            case '.':
+            case '!':*/
+            case '`':
+                co_yield '\\'; // Yield the escape character
+                break;
+            default:
+                break;
+        }
+        co_yield c; // Yield the original character
+    }
+}
+
+std::string escape_markdown(std::string_view input) {
+    return escape_markdown_gen(input) | std::ranges::to<std::string>();
+}
+
 class setlist_command
 {
 public:
@@ -56,7 +85,7 @@ public:
                     reply << "Setlist for " << concert->short_name << ":\n";
                     for (auto track : setlist) {
                         auto song = *lookup_song(track.song);
-                        reply << std::format("`{:2}` {} feat. {} by {}\n", track.pos, song.name, magic_enum::enum_flags_name(song.singer), song.producer);
+                        reply << std::format("`{:2}` {} feat. {} by {}\n", track.pos, song.name, magic_enum::enum_flags_name(song.singer), escape_markdown(producer));
                     }
                 }
                 event.reply(reply.str());
