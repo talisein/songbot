@@ -4,6 +4,7 @@ import dpp;
 import concerts;
 import songs;
 import std;
+import magic_enum;
 
 /*
 class template_command
@@ -47,6 +48,16 @@ public:
                 reply << "Setlist for " << concert->name << ":\n";
                 for (auto track : setlist) {
                     reply << std::format("`{:2}` {}\n", track.pos, *lookup_song(track.song));
+                }
+
+                // Check for size
+                if (reply.view().size() > 1900) {
+                    reply.str(std::string());
+                    reply << "Setlist for " << concert->short_name << ":\n";
+                    for (auto track : setlist) {
+                        auto song = *lookup_song(track.song);
+                        reply << std::format("`{:2}` {} feat. {} by {}\n", track.pos, song.name, magic_enum::enum_flags_name(song.singer), song.producer);
+                    }
                 }
                 event.reply(reply.str());
             }

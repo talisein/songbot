@@ -14,7 +14,7 @@ trim(const std::string& str)
 
 
 using IniData = std::map<std::string, std::map<std::string, std::string>>;
-std::expected<IniData, std::exception_ptr>
+static std::expected<IniData, std::exception_ptr>
 get_config_ini(std::string_view filename)
 {
     using namespace std::literals;

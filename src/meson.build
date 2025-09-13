@@ -183,6 +183,7 @@ songs_module = custom_target('songs_module',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
         '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
     ],
     depends: [std_module, uni_algo_module, magic_enum_module]
 )
@@ -197,6 +198,7 @@ concerts_module = custom_target('concerts_module',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
         '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
     ],
     depends: [std_module, uni_algo_module, magic_enum_module, songs_module]
 )

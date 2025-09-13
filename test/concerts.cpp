@@ -27,7 +27,7 @@ int main()
 
     "match concerts"_test = [] {
         auto vec = match_concerts("2014");
-        expect(eq(1UZ, vec.size()));
+        expect(eq(2UZ, vec.size()));
         expect(eq("ME2014IN"sv, vec[0].short_name));
     };
 
@@ -42,5 +42,15 @@ int main()
         resp = lookup_concert("ME2014IN");
         expect(resp.has_value());
     };
+
+    "all"_test = [] {
+        for (auto track : setlists) {
+            auto song = lookup_song(track.song);
+            if (!song.has_value()) {
+                expect(eq(""sv, track.song));
+            }
+        }
+    };
+
     return 0;
 }

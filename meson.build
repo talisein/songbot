@@ -71,6 +71,7 @@ add_project_arguments( '-fmodules',
                        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
                        '-Mno-modules',
                        '-fcoroutines',
+                       '-fconstexpr-ops-limit=3355443200',
                        language: ['cpp'])
 
 subdir('src')

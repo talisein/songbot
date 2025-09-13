@@ -85,9 +85,9 @@ main()
     });
 
     bot.on_ready([&bot](const dpp::ready_t& event) {
-//        if (dpp::run_once<struct clear_bot_commands>()) {
-//            bot.global_bulk_command_delete();
-//        }
+        /* if (dpp::run_once<struct clear_bot_commands>()) {
+            bot.global_bulk_command_delete();
+        } */
 
         if (dpp::run_once<struct register_healthcheck_timer>()) {
             systemd::notify(0, "READY=1");
