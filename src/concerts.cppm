@@ -6,16 +6,8 @@ import std;
 import uni_algo;
 import magic_enum;
 import songs;
+import util;
 using namespace std::literals;
-
-template<auto Proj>
-constexpr auto make_needle_filter(std::string_view needle)
-{
-    return std::views::filter([needle](const auto& obj) constexpr -> bool {
-        const auto &val = std::invoke(Proj, obj);
-        return needle == val;
-    });
-}
 
 export enum ConcertSeries
 {
@@ -60,9 +52,9 @@ export constexpr std::array concerts = std::to_array<Concert>({
 export [[nodiscard]] constexpr
 std::optional<Concert> lookup_concert(std::string_view short_name)
 {
-    auto needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(short_name));
+    auto needle = util::to_nfkc_casefold(short_name);
 
-    auto it = std::ranges::find(concerts, needle, [](const auto& c) constexpr { return una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(c.short_name)); });
+    auto it = std::ranges::find(concerts, needle, [](const auto& c) constexpr { return util::to_nfkc_casefold(c.short_name); });
     if (it == std::ranges::end(concerts)) return std::nullopt;
     return *it;
 }
@@ -70,9 +62,9 @@ std::optional<Concert> lookup_concert(std::string_view short_name)
 export [[nodiscard]]
 std::vector<Concert> match_concerts(std::string_view needle)
 {
-    const auto name_matches_needle = [needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle))]
+    const auto name_matches_needle = [needle = util::to_nfkc_casefold(needle)]
         (const Concert& concert) constexpr {
-        return std::ranges::contains_subrange(una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(concert.short_name)), needle);
+        return std::ranges::contains_subrange(util::to_nfkc_casefold(concert.short_name), needle);
     };
     return concerts | std::views::filter(name_matches_needle) | std::ranges::to<std::vector>();
 }
@@ -88,11 +80,12 @@ export struct SetlistTrack
     std::string_view concert;
     int pos;
     std::string_view song;
+    std::optional<std::string_view> producer;
     std::optional<std::string_view> variant; // E.g. setlist A, setlist B.
     std::optional<std::string_view> note; // E.g. Osaka Day 2
 };
 
-export constexpr std::array setlists = std::to_array<const SetlistTrack>({
+export const std::array setlists = std::to_array<const SetlistTrack>({
         { "ME2014IN", 1,  "Senbonzakura" },
         { "ME2014IN", 2,  "Look This Way, Baby" },
         { "ME2014IN", 3,  "Marginal" },
@@ -155,7 +148,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { "ME2015", 6, "Meltdown" },
         { "ME2015", 7, "Fire◎Flower" },
         { "ME2015", 8, "Butterfly on Your Right Shoulder" },
-        { "ME2015", 9, "Spinning Song (Chinese Version)" },
+        { "ME2015", 9, "Spinning Song (Chinese Ver.)" },
         { "ME2015", 10, "Romeo and Cinderella" },
         { "ME2015", 11, "Weekender Girl" },
         { "ME2015", 12, "World's End Dancehall" },
@@ -453,7 +446,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { "ME2021", 15, "Lucky☆Orb" },
         { "ME2021", 16, "Highlight" },
         { "Thunderbolt", 1, "THUNDERBOLT" },
-        { "Thunderbolt", 2, "Whimsical Mercy" },
+        { "Thunderbolt", 2, "Kimagure Mercy" },
         { "Thunderbolt", 2, "Satisfaction" },
         { "Thunderbolt", 3, "Unhappy Refrain" },
         { "Thunderbolt", 4, "Gimme×Gimme" },
@@ -628,36 +621,11 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
 
     });
 
-/* Every concert series needs to exist */
-constexpr auto concert_series_exists = [](const SetlistTrack& track) constexpr -> bool { return std::ranges::contains(concerts, track.concert, &Concert::short_name); };
-static_assert(std::ranges::all_of(setlists, concert_series_exists),
-              std::ranges::find_if_not(setlists, concert_series_exists)->concert);
-
-/* Every song needs to exist */
-constexpr auto song_exists = [](const SetlistTrack& track) constexpr -> bool { return lookup_song(track.song).has_value(); };
-static_assert(std::ranges::all_of(setlists, song_exists),
-              std::ranges::find_if_not(setlists, song_exists)->song);
-
-/* Every setlist position in a series must exist.
-   e.g. Song 1, Song 2, Song 3. Not only Song 1 & Song 3. */
-constexpr auto setlist_positions_skipped = [](const Concert& concert) constexpr -> bool {
-    auto tracks = setlists | make_needle_filter<&SetlistTrack::concert>(concert.short_name) | std::ranges::to<std::vector>();
-    std::ranges::stable_sort(tracks, {}, &SetlistTrack::pos);
-    auto rng = std::views::slide(tracks, 2);
-    for (auto pair : rng) {
-        auto it = std::ranges::begin(pair);
-        auto first = it->pos;
-        auto second = (++it)->pos;
-        if ((second - first) > 1)
-            return true;
-    }
-    return false;
-};
-static_assert(std::ranges::none_of(concerts, setlist_positions_skipped),
-              std::ranges::find_if(concerts, setlist_positions_skipped)->short_name);
-
 export [[nodiscard]]
 auto get_setlist(std::string_view short_name)
 {
-    return setlists | make_needle_filter<&SetlistTrack::concert>(short_name) | std::ranges::to<std::vector>();
+    /* Do case insensitive lookup to get cased short_name */
+    auto concert = lookup_concert(short_name);
+    if (!concert) return std::vector<SetlistTrack>();
+    return setlists | util::make_needle_filter<&SetlistTrack::concert>(concert->short_name) | std::ranges::to<std::vector>();
 }

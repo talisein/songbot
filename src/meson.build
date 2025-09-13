@@ -173,6 +173,21 @@ uni_algo_module = custom_target('uni_algo_module',
     depends: [uni_algo_all_module]
 )
 
+util_module = custom_target('util_module',
+    input: 'util.cppm',
+    output: ['util.o', 'util.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module]
+)
+
 songs_module = custom_target('songs_module',
     input: 'songs.cppm',
     output: ['songs.o', 'songs.gcm'],
@@ -185,7 +200,7 @@ songs_module = custom_target('songs_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, uni_algo_module, magic_enum_module]
+    depends: [std_module, uni_algo_module, magic_enum_module, util_module]
 )
 
 concerts_module = custom_target('concerts_module',
@@ -200,13 +215,13 @@ concerts_module = custom_target('concerts_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, uni_algo_module, magic_enum_module, songs_module]
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module]
 )
 
 
 src = ['main.cpp', 'sd_notify.cpp', 'config_file.cpp']
 
-exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module,
+exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module, util_module,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
                  install: true
                 )

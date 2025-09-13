@@ -26,18 +26,21 @@ std::generator<char> escape_markdown_gen(std::string_view input) {
     for (char c : input) {
         switch (c) {
             case '*':
-/*            case '_':
+            case '`':
+            case '_':
             case '~':
+            case '#':
+            case '-':
             case '[':
             case ']':
             case '(':
             case ')':
-            case '#':
-            case '+':
-            case '-':
-            case '.':
-            case '!':*/
-            case '`':
+            case '|':
+            case '>':
+            case '\\':
+//            case '+':
+//            case '.':
+//            case '!':*/
                 co_yield '\\'; // Yield the escape character
                 break;
             default:
@@ -76,7 +79,12 @@ public:
                 std::ostringstream reply;
                 reply << "Setlist for " << concert->name << ":\n";
                 for (auto track : setlist) {
-                    reply << std::format("`{:2}` {}\n", track.pos, *lookup_song(track.song));
+                    auto song = lookup_song(track.song, track.producer);
+                    if (!song) {
+                        reply << "I messed up! I can't produce this song. I'm sorry. This is a bug.\n";
+                    } else {
+                        reply << std::format("`{:2}` {}\n", track.pos, *song);
+                    }
                 }
 
                 // Check for size
@@ -84,8 +92,12 @@ public:
                     reply.str(std::string());
                     reply << "Setlist for " << concert->short_name << ":\n";
                     for (auto track : setlist) {
-                        auto song = *lookup_song(track.song);
-                        reply << std::format("`{:2}` {} feat. {} by {}\n", track.pos, song.name, magic_enum::enum_flags_name(song.singer), escape_markdown(producer));
+                        auto song = lookup_song(track.song, track.producer);
+                        if (!song) {
+                            reply << "I messed up! I can't produce this song. I'm sorry. This is a bug.\n";
+                        } else {
+                            reply << std::format("`{:2}` {} feat. {} by {}\n", track.pos, song->name, magic_enum::enum_flags_name(song->singer), escape_markdown(song->producer));
+                        }
                     }
                 }
                 event.reply(reply.str());

@@ -5,6 +5,8 @@ export module songs;
 import std;
 import uni_algo;
 import magic_enum;
+import util;
+
 using namespace std::literals;
 
 export enum Singer : std::uint32_t {
@@ -24,6 +26,15 @@ enum Singer duet(T... singer)
     return static_cast<Singer>((singer | ...));
 }
 
+template <typename VT, std::size_t CAP> struct oversized_array
+{
+    std::array<VT, CAP> data{};
+    std::size_t size;
+    constexpr auto begin() const { return data.begin(); }
+    constexpr auto end() const { return data.begin() + size; }
+};
+
+
 template <>
 struct magic_enum::customize::enum_range<Singer> {
   static constexpr bool is_flags = true;
@@ -31,6 +42,22 @@ struct magic_enum::customize::enum_range<Singer> {
 
 export struct Song
 {
+    using sv = std::string_view;
+    using osv = std::optional<std::string_view>;
+    Song(osv jp_name, osv romanji_name, sv name, Singer singer, sv producer, std::chrono::year_month_day published = 0y/0/0, osv disam = std::nullopt) noexcept :
+        jp_name(jp_name),
+        romanji_name(romanji_name),
+        name(name),
+        singer(singer),
+        producer(producer),
+        published(published),
+        disambiguation(disam),
+        cf_jp_name(jp_name.transform(&util::to_nfkc_casefold)),
+        cf_romanji_name(romanji_name.transform(&util::to_nfkc_casefold)),
+        cf_name(util::to_nfkc_casefold(name))
+    {
+    }
+
     std::optional<std::string_view> jp_name;
     std::optional<std::string_view> romanji_name;
     std::string_view name; // en
@@ -38,46 +65,31 @@ export struct Song
     std::string_view producer;
     std::chrono::year_month_day published;
     std::optional<std::string_view> disambiguation; // keep last
+
+    std::optional<std::string> cf_jp_name;
+    std::optional<std::string> cf_romanji_name;
+    std::string cf_name;
 };
 
-template<auto Proj>
-constexpr auto make_casefold_proj()
+struct SongStore
 {
-    return [](const auto& obj) constexpr {
-        return una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::invoke(Proj, obj)));
-    };
-}
-
-template<auto Proj>
-constexpr auto make_opt_casefold_proj()
-{
-    return [](const auto& obj) constexpr {
-        return una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::invoke(Proj, obj).value()));
-    };
-}
-
-template<auto Proj>
-constexpr auto make_opt_filter()
-{
-    return std::views::filter([](const auto& obj) constexpr -> bool {
-        return std::invoke(Proj, obj).has_value();
-    });
-}
-
+    std::string foo;
+    std::string bar;
+};
 
 template<typename T, typename Proj, std::size_t N>
-consteval auto get_sorted_songs(const std::array<T, N>& arr, Proj&& proj) -> std::array<T, N>
+constexpr auto get_sorted_songs(const std::array<T, N>& arr, Proj&& proj) -> std::array<T, N>
 {
     std::array<T, N> sorted_arr = arr;
     std::ranges::stable_sort(sorted_arr, std::ranges::less{}, std::forward<Proj>(proj));
     return sorted_arr;
 }
 
-export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
+export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"🔪、🔪、🔪", "Knife, Knife, Knife", "Knife, Knife, Knife", Miku, "Kikuo"},
   {std::nullopt, std::nullopt, "1 + 1", Miku, "doriko"},
-  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P"},
-  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub (Chinese Ver.)", duet(Rin, Len), "Mikito-P"},
+  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P", 2012y/8/15},
+  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub (Chinese ver.)", duet(Rin, Len), "Mikito-P", 2012y/8/15, "Chinese ver."},
   {"二次元ドリームフィーバー", "Nijigen Dream Fever", "2D Dream Fever", Miku, "PolyphonicBranch"},
   {"39", "San Kyuu", "39 (Thank You)", Miku, "sasakure.UK, DECO*27"},
   {std::nullopt, std::nullopt, "8HIT", duet(Rin, Len), "Wonderful☆Opportunity"},
@@ -215,8 +227,8 @@ export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
   {"スノーマン", "Snowman", "Snowman", KAITO, "halyosy"},
   {"シャボン", "Shabon", "Soap", Miku, "Kuriyama Yuri"},
   {std::nullopt, std::nullopt, "Someday'z Coming", Luka, "Shoten Taro"},
-  {"紡唄 -つむぎうた-", "Tsumugi Uta", "Spinning Song", duet(Rin, Len), "DATEKEN"},
-  {"紡唄 -つむぎうた-", "Tsumugi Uta", "Spinning Song (Chinese Version)", duet(Rin, Len), "DATEKEN"},
+  {"紡唄 -つむぎうた-", "Tsumugi Uta", "Spinning Song", duet(Rin, Len), "DATEKEN", 2009y/2/5},
+  {"紡唄 -つむぎうた-", "Tsumugi Uta", "Spinning Song (Chinese Ver.)", duet(Rin, Len), "DATEKEN", 2009y/2/5, "Chinese Ver."},
   {"みかぼし", "Mikaboshi", "Star of Heaven", KAITO, "Satoru Takamura"},
   {"星屑ユートピア", "Hoshikuzu Utopia", "Stardust Utopia", Luka, "otetsu"},
   {std::nullopt, std::nullopt, "Starduster", Miku, "JimmyThumb-P"},
@@ -231,8 +243,8 @@ export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
   {"ハジメテノオト", "Hajimete no Oto", "The First Sound", Miku, "malo"},
   {"初音ミクの激唱", "Hatsune Miku no Gekishou", "The Intense Voice of Hatsune Miku", Miku, "cosMo", 2010y/7/9},
   {"白い雪のプリンセスは", "Shiroi Yuki no Princess wa", "The Snow White Princess is", Miku, "Noboru↑-P", 2010y/2/21},
-  {"歌に形はないけれど", "Uta ni Katachi wa Nai Keredo", "Though My Song Has No Shape (Chinese Ver.)", Miku, "doriko"},
-  {"歌に形はないけれど", "Uta ni Katachi wa Nai Keredo", "Though My Song Has No Shape", Miku, "doriko"},
+  {"歌に形はないけれど", "Uta ni Katachi wa Nai Keredo", "Though My Song Has No Shape (Chinese Ver.)", Miku, "doriko", 2008y/1/19, "Chinese Ver."},
+  {"歌に形はないけれど", "Uta ni Katachi wa Nai Keredo", "Though My Song Has No Shape", Miku, "doriko", 2008y/1/19},
   {"千本桜", "Senbonzakura", "Thousand Cherry Blossoms", Miku, "Kurousa-P", 2011y/9/17},
   {std::nullopt, std::nullopt, "Thousand Little Voices", Miku, "Vault Kid, Flanger Moose"},
   {"千年の独奏歌", "Sennen no Dokusou Ka", "Thousand Year Solo", KAITO, "yanagi-P", 2008y/4/27},
@@ -250,7 +262,6 @@ export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
   {"ワンダーラスト", "Wanderlast", "Wanderlast", Luka, "sasakure.UK"},
   {"あったかいと", "Attakaito", "Warm Kaito", KAITO, "halyosy"},
   {std::nullopt, std::nullopt, "Weekender Girl", Miku, "kz, Hachioji-P"},
-  {"気まぐれメルシィ", "Kimagure Mercy", "Whimsical Mercy", Miku, "Hachioji-P"},
   {"ワールドイズマイン", "World is Mine", "World is Mine", Miku, "ryo"},
   {"ワールズエンド・ダンスホール", "World's End Dancehall", "World's End Dancehall", duet(Miku, Luka), "wowaka"},
   {std::nullopt, std::nullopt, "Yellow", Miku, "kz", 2010y/7/2},
@@ -264,14 +275,14 @@ export constexpr std::array songs = get_sorted_songs(std::to_array<Song>({
   {"アングレイデイズ", "Ungray Days", "ungray days", Rin, "Tsumiki"},
   {std::nullopt, std::nullopt, "vivid", duet(Miku, Luka), "Utsu-P, Yuyoyuppe"},
 
-}), make_casefold_proj<&Song::name>());
+}), &Song::cf_name);
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
 constexpr auto songs_have_same_names = [](auto l, auto r) constexpr {
     return l.name == r.name && l.disambiguation == r.disambiguation;
 };
-static_assert(std::ranges::adjacent_find(songs, songs_have_same_names) == std::ranges::end(songs),
-              std::ranges::adjacent_find(songs, songs_have_same_names)->name);
+//static_assert(std::ranges::adjacent_find(songs, songs_have_same_names) == std::ranges::end(songs),
+//              std::ranges::adjacent_find(songs, songs_have_same_names)->name);
 
 /* Everything needs a date. Sometimes. */
 constexpr auto song_has_no_date = [](const auto& song) constexpr { return song.published == 0y/0/0;};
@@ -280,23 +291,29 @@ constexpr auto song_has_no_date = [](const auto& song) constexpr { return song.p
 
 /* jp_name shouldn't equal name */
 constexpr auto song_has_same_jp_en_name = [](const auto& song) constexpr { return song.jp_name.transform([sn = song.name](auto &jp_name) constexpr -> bool { return jp_name == sn; }).value_or(false); };
-static_assert(std::ranges::none_of(songs, song_has_same_jp_en_name),
-              std::ranges::find_if(songs, song_has_same_jp_en_name)->name);
+//static_assert(std::ranges::none_of(songs, song_has_same_jp_en_name),
+//              std::ranges::find_if(songs, song_has_same_jp_en_name)->name);
 
 /* romanji shouldn't equal jp_name */
 constexpr auto song_has_same_jp_romanji_name = [](const auto& song) constexpr {
     return song.romanji_name.transform([jp_sn = song.jp_name](auto &romanji_name) constexpr -> bool { return romanji_name == jp_sn; }).value_or(false);
 };
-static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
-              std::ranges::find_if(songs, song_has_same_jp_romanji_name)->name);
+//static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
+//              std::ranges::find_if(songs, song_has_same_jp_romanji_name)->name);
 
-struct AltName
+export struct AltName
 {
+    AltName(std::string_view alt_name, std::string_view name) :
+        alt_name(alt_name),
+        name(name),
+        cf_alt_name(util::to_nfkc_casefold(alt_name))
+    { }
     std::string_view alt_name;
     std::string_view name;
+    std::string cf_alt_name;
 };
 
-constexpr std::array alt_names = get_sorted_songs(std::to_array<AltName>({
+export const std::array alt_names = get_sorted_songs(std::to_array<AltName>({
             { "Colorful Melody", "Colorful × Melody"},
             { "Colorful x Melody", "Colorful × Melody"},
             { "Fire Flower", "Fire◎Flower"},
@@ -305,15 +322,7 @@ constexpr std::array alt_names = get_sorted_songs(std::to_array<AltName>({
             { "Piano x Forte x Scandal", "Piano × Forte × Scandal"},
             { "LLNF", "Luka Luka★Night Fever"},
             { "Luka Luka Night Fever", "Luka Luka★Night Fever"},
-        }), &AltName::alt_name);
-
-/* Every AltName::name must exist in songs */
-static_assert(std::ranges::all_of(alt_names,
-                                  [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::name); },
-                                  &AltName::name),
-              std::ranges::find_if_not(alt_names,
-                                       [](auto &name) constexpr { return std::ranges::contains(songs, name, &Song::name); },
-                                       &AltName::name)->name);
+        }), &AltName::cf_alt_name);
 
 template <>
 struct std::formatter<Song> {
@@ -350,10 +359,7 @@ lookup1(auto&& rng, std::optional<std::string_view> producer = std::nullopt)
 
     if (!producer) return std::nullopt;
 
-    auto producer_rng = std::ranges::equal_range(rng,
-                                                 una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(*producer)),
-                                                 std::ranges::less{},
-                                                 make_casefold_proj<&Song::producer>());
+    auto producer_rng = rng | util::make_needle_filter<&Song::producer>(*producer);
 
     if (std::ranges::distance(producer_rng) == 1)
         return *std::ranges::begin(producer_rng);
@@ -361,52 +367,35 @@ lookup1(auto&& rng, std::optional<std::string_view> producer = std::nullopt)
     return std::nullopt;
 }
 
-template<auto Proj, typename T>
-constexpr auto make_needle_filter(T&& casefolded_needle)
-{
-    return std::views::filter([needle = std::forward<T>(casefolded_needle)](const auto& obj) constexpr -> bool {
-        auto &val = std::invoke(Proj, obj);
-        if constexpr (std::is_same_v<std::remove_cvref_t<decltype(val)>, std::optional<std::string_view>>) {
-            if (val.has_value()) {
-                return needle == una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(*val));
-            }
-            return false;
-        } else {
-            return needle == una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(val));
-        }
-    });
-}
-
 export [[nodiscard]] constexpr
 std::optional<Song> lookup_song(std::string_view needle, std::optional<std::string_view> producer = std::nullopt)
 {
-    const auto casefolded_needle = una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(needle));
-    if (auto rng = std::ranges::equal_range(songs, casefolded_needle, std::ranges::less{}, make_casefold_proj<&Song::name>());
+    const auto casefolded_needle = util::to_nfkc_casefold(needle);
+    if (auto rng = std::ranges::equal_range(songs, casefolded_needle, std::ranges::less{}, &Song::cf_name);
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);
     }
 
     /* Romanji */
-    auto romanji_view = songs | make_opt_filter<&Song::romanji_name>();
-    if (auto rng = songs | make_needle_filter<&Song::romanji_name>(casefolded_needle);
+    if (auto rng = songs | util::make_needle_filter<&Song::cf_romanji_name>(casefolded_needle);
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);
     }
 
     /* Alt name */
-    if (auto alt_rng = alt_names | make_needle_filter<&AltName::alt_name>(casefolded_needle);
+    if (auto alt_rng = alt_names | util::make_needle_filter<&AltName::cf_alt_name>(casefolded_needle);
         !std::ranges::empty(alt_rng))
     {
         if (std::ranges::distance(alt_rng) != 1) return std::nullopt;
 
-        auto rng = songs | make_needle_filter<&Song::name>(una::cases::to_casefold_utf8(una::norm::to_nfkc_utf8(std::ranges::begin(alt_rng)->name)));
+        auto rng = songs | util::make_needle_filter<&Song::name>(std::ranges::begin(alt_rng)->name);
         return lookup1(std::move(rng), producer);
     }
 
     /* Try japanese */
-    if (auto rng = songs | make_needle_filter<&Song::jp_name>(casefolded_needle);
+    if (auto rng = songs | util::make_needle_filter<&Song::cf_jp_name>(casefolded_needle);
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);

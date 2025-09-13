@@ -13,3 +13,4 @@ magic_enum @BUILD_DIR@/src/magic_enum.gcm
 boost.ut @BUILD_DIR@/test/ut.gcm
 dpp @BUILD_DIR@/src/dpp.gcm
 prometheus @BUILD_DIR@/src/prometheus.gcm
+util @BUILD_DIR@/src/util.gcm
