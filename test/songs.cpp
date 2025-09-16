@@ -111,5 +111,20 @@ int main()
         expect(not(lookup_song("this song does not exist yet").has_value()));
     };
 
+    "match"_test = [] {
+        auto songs = match_songs("senbon");
+
+        expect(eq(1UZ, songs.size()));
+
+        songs = match_songs("roki");
+        expect(eq(1UZ, songs.size()));
+
+        songs = match_songs("LLNF");
+        expect(eq(1UZ, songs.size()));
+
+    };
+
+
     return 0;
+
 }
