@@ -334,7 +334,7 @@ struct std::formatter<Song> {
         std::ostringstream out;
         if (song.jp_name) {
             out << una::norm::to_nfc_utf8(*song.jp_name) << ' ';
-            if (song.romanji_name) {
+            if (song.romanji_name && *song.cf_romanji_name != song.cf_name) {
                 out << "(" << una::norm::to_nfc_utf8(*song.romanji_name) << ") ";
             }
             out << "/ ";
@@ -408,4 +408,14 @@ export consteval
 Song operator ""_song(const char* short_name, std::size_t len)
 {
     return *lookup_song({short_name, len});
+}
+
+export [[nodiscard]]
+std::vector<Song> match_songs(std::string_view needle)
+{
+    const auto name_matches_needle = [needle = util::to_nfkc_casefold(needle)]
+        (const Song& song) constexpr {
+        return std::ranges::contains_subrange(song.cf_name, needle);
+    };
+    return songs | std::views::filter(name_matches_needle) | std::ranges::to<std::vector>();
 }

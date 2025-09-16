@@ -54,10 +54,10 @@ get_config_ini(std::string_view filename)
     return data;
 }
 
-std::expected<config, std::exception_ptr>
+std::expected<bot_config, std::exception_ptr>
 get_config(std::string_view filename)
 {
-    config res;
+    bot_config res;
     auto ini = get_config_ini(filename);
 
     /* Transform from ini map to config struct */

@@ -1,0 +1,98 @@
+import util;
+import concerts;
+import songs;
+
+#include "song_command.hpp"
+#include "context.hpp"
+
+song_command::song_command(context &ctx) noexcept :
+    iface_command(ctx, "song", "Song details")
+{
+    /* Metric: song command */
+    song_success_counter = &ctx.slashcommand_counter->Add({{"command", "song"}, {"result", "success"}});
+    song_failure_counter = &ctx.slashcommand_counter->Add({{"command", "song"}, {"result", "failure"}});
+
+    /* Metric: Autocompletions */
+    ac_song_success_counter = &ctx.autocompletion_counter->Add({{"event", "song"}, {"result", "success"}});
+    ac_song_no_match_counter = &ctx.autocompletion_counter->Add({{"event", "song"}, {"result", "no-match"}});
+    ac_song_failure_counter = &ctx.autocompletion_counter->Add({{"event", "song"}, {"result", "failure"}});
+}
+
+dpp::slashcommand
+song_command::get_command()
+{
+    auto song_cmd = iface_command::get_command();
+    auto event_opt = dpp::command_option(dpp::command_option_type::co_string, "song", "Name of song, e.g. Melt", true);
+    event_opt.set_auto_complete(true);
+
+    song_cmd.add_option(std::move(event_opt));
+    return song_cmd;
+}
+
+std::expected<void, std::error_code>
+song_command::on_slashcommand(const dpp::slashcommand_t& event)
+{
+    auto param = std::get<std::string>(event.get_parameter("song"));
+    auto song = lookup_song(param);
+    if (!song) {
+        auto songs = match_songs(param);
+        if (songs.size() == 1) {
+            song = songs.front();
+        }
+    }
+    if (!song) {
+        event.reply(std::format("I'm sorry, I don't know about the song '{}'", param));
+        song_failure_counter->Increment();
+        return {};
+    }
+
+    event.reply(std::format("Full Name: {}\ncf_romanji: {}\ncf_name: {}", *song, song->cf_romanji_name.value_or("(none)"), song->cf_name));
+    song_success_counter->Increment();
+    return {};
+}
+
+std::expected<dpp::interaction_response, std::error_code>
+song_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
+{
+    for (auto & opt : event.options | std::views::filter(&dpp::command_option::focused)) {
+        try {
+            std::string uservalue = std::get<std::string>(opt.value);
+
+            auto matches = match_songs(uservalue);
+            if (matches.empty()) {
+                return std::unexpected(songbot_error::autocomplete_no_match);
+            }
+
+            auto resp = dpp::interaction_response(dpp::ir_autocomplete_reply);
+            for (const auto& song : matches | std::views::take(AUTOCOMPLETE_MAX_CHOICES) ) {
+                resp.add_autocomplete_choice(dpp::command_option_choice(std::string(song.name), std::string(song.name)));
+            }
+
+            return resp;
+        } catch (std::bad_variant_access &e) {
+            ctx->bot->log(dpp::ll_error, std::format("/song: autocomplete error: {}", e.what()));
+            return std::unexpected(std::make_error_code(std::errc::invalid_argument));
+        }
+    }
+
+    return std::unexpected(songbot_error::autocomplete_no_focused_option);
+}
+
+std::expected<dpp::interaction_response, std::error_code>
+song_command::on_autocomplete(const dpp::autocomplete_t& event)
+{
+    auto res = on_autocomplete_impl(event);
+    if (res) {
+        ac_song_success_counter->Increment();
+    } else {
+        bool is_no_match = res.error().category() == get_songbot_error_category() &&
+            res.error().value() == std::to_underlying(songbot_error::autocomplete_no_match);
+        if (is_no_match) {
+            ac_song_no_match_counter->Increment();
+        } else {
+            ac_song_failure_counter->Increment();
+        }
+    }
+
+    return res;
+}

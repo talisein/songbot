@@ -70,10 +70,10 @@ int main()
 
     "altname"_test = [] {
         auto str = std::format("{}", *lookup_song("LLNF"));
-        expect(eq(str, "ルカルカ★ナイトフィーバー (Luka Luka★Night Fever) / Luka Luka★Night Fever feat. Luka by samfree"sv));
+        expect(eq(str, "ルカルカ★ナイトフィーバー / Luka Luka★Night Fever feat. Luka by samfree"sv));
 
         auto str2 = std::format("{}", *lookup_song("llnf"));
-        expect(eq(str2, "ルカルカ★ナイトフィーバー (Luka Luka★Night Fever) / Luka Luka★Night Fever feat. Luka by samfree"sv));
+        expect(eq(str2, "ルカルカ★ナイトフィーバー / Luka Luka★Night Fever feat. Luka by samfree"sv));
     };
 
     "Every AltName::name must exist in songs"_test = [] {

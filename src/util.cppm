@@ -7,8 +7,43 @@ import uni_algo;
 import magic_enum;
 using namespace std::literals;
 
+namespace {
+    std::generator<char> escape_markdown_gen(std::string_view input) {
+        for (char c : input) {
+            switch (c) {
+                case '*':
+                case '`':
+                case '_':
+                case '~':
+                case '#':
+                case '-':
+                case '[':
+                case ']':
+                case '(':
+                case ')':
+                case '|':
+                case '>':
+                case '\\':
+//            case '+':
+//            case '.':
+//            case '!':*/
+                    co_yield '\\'; // Yield the escape character
+                    break;
+                default:
+                    break;
+            }
+            co_yield c; // Yield the original character
+        }
+    }
+
+}
+
 export namespace util
 {
+    std::string escape_markdown(std::string_view input) {
+        return escape_markdown_gen(input) | std::ranges::to<std::string>();
+    }
+
     constexpr auto
     to_nfkc_casefold(std::string_view s) noexcept
     {
