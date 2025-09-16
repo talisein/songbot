@@ -86,7 +86,7 @@ export struct SetlistTrack
 };
 
 export const std::array setlists = std::to_array<const SetlistTrack>({
-        { "ME2014IN", 1,  "Senbonzakura" },
+        { "ME2014IN", 1,  "Thousand Cherry Blossoms" },
         { "ME2014IN", 2,  "Look This Way, Baby" },
         { "ME2014IN", 3,  "Marginal" },
         { "ME2014IN", 4,  "Love Ward" },
@@ -369,7 +369,7 @@ export const std::array setlists = std::to_array<const SetlistTrack>({
         { "ME2018EU", 26, "Tell Your World" },
         { "ME2019TWHK", 1, "I'll Miku-Miku You♪ (For Reals)" },
         { "ME2019TWHK", 2, "Viva Happy" },
-        { "ME2019TWHK", 3, "Unknown Mother Goose" },
+        { "ME2019TWHK", 3, "Unknown Mother-Goose" },
         { "ME2019TWHK", 4, "Kill Carry On" },
         { "ME2019TWHK", 5, "Sharing The World" },
         { "ME2019TWHK", 6, "Pane dhiria" },
@@ -595,7 +595,7 @@ export const std::array setlists = std::to_array<const SetlistTrack>({
         { "Blooming", 8, "Two Breaths Walking" },
         { "Blooming", 8, "Brain Revolution Girl" },
         { "Blooming", 8, "Melancholic" },
-        { "Blooming", 8, "PoPiPo" },
+        { "Blooming", 8, "Vegetable Juice" },
         { "Blooming", 8, "Dreamless Dreams" },
         { "Blooming", 8, "Two-Sided Lovers" },
         { "Blooming", 9, "Tokyo Teddy Bear" },

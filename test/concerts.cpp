@@ -19,7 +19,7 @@ int main()
     };
 
     "Every song needs to exist"_test = [] {
-        constexpr auto song_exists = [](const SetlistTrack& track) constexpr -> bool { return lookup_song(track.song, track.producer).has_value(); };
+        constexpr auto song_exists = [](const SetlistTrack& track) constexpr -> bool { return lookup_song_strict(track.song, track.producer).has_value(); };
         expect(std::ranges::all_of(setlists, song_exists)) << [&] {
             return std::ranges::find_if_not(setlists, song_exists)->song; };
     };

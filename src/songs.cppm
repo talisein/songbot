@@ -253,7 +253,7 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"二息歩行", "Nisoku Hokou", "Two Breaths Walking", Miku, "DECO*27"},
   {"裏表ラバーズ", "Ura-omote Lovers", "Two-Sided Lovers", Miku, "wowaka"},
   {"アンハッピーリフレイン", "Unhappy Refrain", "Unhappy Refrain", Miku, "wowaka"},
-  {"アンノウン・マザーグース", "Unknown Mother-Goose", "Unknown Mother Goose", Miku, "wowaka"},
+  {"アンノウン・マザーグース", "Unknown Mother-Goose", "Unknown Mother-Goose", Miku, "wowaka"},
   {"ヴァンパイア", "Vampire", "Vampire", Miku, "DECO*27"},
   {"ぽっぴっぽー", "PoPiPo", "Vegetable Juice", Miku, "Lamaze-P", 2008y/12/11},
   {std::nullopt, "Venus di Ujung Jari", "Venus at The Fingertips", Miku, "Mohax-2000", 2011y/6/6},
@@ -396,6 +396,19 @@ std::optional<Song> lookup_song(std::string_view needle, std::optional<std::stri
 
     /* Try japanese */
     if (auto rng = songs | util::make_needle_filter<&Song::cf_jp_name>(casefolded_needle);
+        !std::ranges::empty(rng))
+    {
+        return lookup1(std::move(rng), producer);
+    }
+
+    return std::nullopt;
+}
+
+export [[nodiscard]] constexpr
+std::optional<Song> lookup_song_strict(std::string_view needle, std::optional<std::string_view> producer = std::nullopt)
+{
+    const auto casefolded_needle = util::to_nfkc_casefold(needle);
+    if (auto rng = std::ranges::equal_range(songs, casefolded_needle, std::ranges::less{}, &Song::cf_name);
         !std::ranges::empty(rng))
     {
         return lookup1(std::move(rng), producer);
