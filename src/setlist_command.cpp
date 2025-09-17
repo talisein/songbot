@@ -85,7 +85,6 @@ namespace {
                 return dpp::utility::log_error()(confirmation);
             }
 
-            ctx->bot->log(dpp::ll_debug, std::format("/setlist: Follow up, {} of {}", sequence, sequence + msgs.size() - 1));
             if (msgs.size() == 1) {
                 return my_follow_up(event, msgs.front());
             } else {
@@ -121,7 +120,6 @@ setlist_command::on_slashcommand(const dpp::slashcommand_t& event)
         }
 
         /* Ok, we have a list of messages to send. */
-        ctx->bot->log(dpp::ll_debug, std::format("/setlist: Reply 1 of {}", messages.size()));
         if (messages.size() == 1) {
             event.reply(messages.front());
         } else {
