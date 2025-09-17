@@ -46,9 +46,9 @@ int main()
     "concert"_test = [] {
         auto c = setlists[0];
         expect(eq(1, c.pos));
-        expect(eq("ME2014IN"sv, c.concert));
+        expect(eq("MM2013"sv, c.concert));
         auto song = lookup_song(c.song);
-        expect(eq("Kurousa-P"sv, song->producer));
+        expect(eq("Hachioji-P"sv, song->producer));
     };
 
     "setlist"_test = [] {
@@ -65,7 +65,7 @@ int main()
 
     "match concerts"_test = [] {
         auto vec = match_concerts("2014");
-        expect(eq(2UZ, vec.size()));
+        expect(eq(3UZ, vec.size()));
         expect(eq("ME2014IN"sv, vec[0].short_name));
     };
 
