@@ -14,6 +14,20 @@ namespace
     {
         systemd::notify(0, "WATCHDOG=1");
     }
+
+    struct cerr_logger
+    {
+        void operator()(const dpp::log_t& log) const
+        {
+            if (log.severity > dpp::ll_error) {
+                std::println(std::cerr, "{}: {}", dpp::utility::loglevel(log.severity), log.message);
+            } else if (log.severity > dpp::ll_trace) {
+                std::println("{}: {}", dpp::utility::loglevel(log.severity), log.message);
+                std::cout.flush();
+            }
+        }
+    };
+
 }
 
 context::context(std::string_view config_filename) :
@@ -95,21 +109,6 @@ void context::on_autocomplete(const dpp::autocomplete_t& event)
     } else {
         event.success();
     }
-}
-
-namespace {
-    struct cerr_logger
-    {
-        void operator()(const dpp::log_t& log) const
-        {
-            if (log.severity > dpp::ll_error) {
-                std::println(std::cerr, "[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
-            } else if (log.severity > dpp::ll_trace) {
-                std::println("[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
-                std::cout.flush();
-            }
-        }
-    };
 }
 
 void

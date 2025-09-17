@@ -20,6 +20,9 @@ public:
 
     std::map<std::string_view, std::unique_ptr<iface_command>> commands;
 
+    template<typename... Args>
+    void log(dpp::loglevel, std::format_string<Args...> fmt, Args&&... args);
+
 private:
     void setup_metrics();
     void setup_bot();
@@ -34,3 +37,10 @@ public:
     prometheus::Family<prometheus::Counter>* autocompletion_counter;
     prometheus::Counter* ac_unknown_counter;
 };
+
+template<typename... Args>
+void
+context::log(dpp::loglevel severity, std::format_string<Args...> fmt, Args&&... args)
+{
+    bot->log(severity, std::format(fmt, std::forward<Args>(args)...));
+}

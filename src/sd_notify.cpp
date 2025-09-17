@@ -19,9 +19,9 @@ namespace systemd {
     {
         auto res = sd_notify(unset_environment, state);
         if (0 == res) {
-            std::println(std::cerr, "Error: NOTIFY_SOCKET is not set, can't notify");
+            std::println(std::cerr, "NOTICE: NOTIFY_SOCKET is not set, can't notify");
         } else if (0 > res) {
-            std::println(std::cerr, "Error: sd_notify(), errno={}", res);
+            std::println(std::cerr, "ERROR: sd_notify(), errno={}", res);
         }
         return res;
     }
