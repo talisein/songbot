@@ -42,12 +42,12 @@ void context::on_ready(const dpp::ready_t& event)
         systemd::notify(0, "READY=1");
         systemd::notify(0, "STATUS=Mikumiku Setlists is ready for interaction");
         if (uint64_t usec = 0; systemd::watchdog_enabled(0, &usec) > 0) {
-            uint64_t sec = usec / 1000 / 2;
+            uint64_t sec = usec / 1000 / 1000 / 2;
             if (sec > 5) {
-                bot->log(dpp::ll_info, std::format("Setting up watchdog timer with interval {}", sec));
+                bot->log(dpp::ll_info, std::format("Setting up watchdog timer with interval {}s", sec));
                 bot->start_timer(on_healthcheck_timer, sec /* Seconds */);
             } else {
-                bot->log(dpp::ll_error, std::format("Watchdog timer ignored for interval {}", sec));
+                bot->log(dpp::ll_error, std::format("Watchdog timer ignored for interval {}s", sec));
             }
         }
     }
