@@ -15,10 +15,10 @@ RUN meson compile -C build && meson test -C build && meson install -C build
 
 FROM fedora:42
 
-RUN dnf -y install libcurl zlib-ng openssl tini && dnf clean all
+RUN dnf -y install libcurl zlib-ng openssl && dnf clean all
 
 COPY --from=builder /app /app
 
 RUN echo "/app/lib64" > /etc/ld.so.conf.d/app.conf && ldconfig
 
-ENTRYPOINT ["/usr/bin/tini", "--", "/app/bin/songbot"]
+ENTRYPOINT ["/app/bin/songbot"]

@@ -124,7 +124,7 @@ context::setup_metrics()
 {
     /* TODO: Add prometeus bind address & port to config */
     systemd::notify(0, "STATUS=Starting Mikumiku Setlists prometheus endpoint");
-    metric_exposer = std::make_unique<prometheus::Exposer>("127.0.0.1:3927");
+    metric_exposer = std::make_unique<prometheus::Exposer>("0.0.0.0:3927");
     metric_exposer->RegisterCollectable(metric_registry);
 
     /* Compile-time static metrics */
