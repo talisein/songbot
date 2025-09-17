@@ -20,6 +20,8 @@ public:
 
     std::map<std::string_view, std::unique_ptr<iface_command>> commands;
 
+    std::default_random_engine rng_engine;
+
     template<typename... Args>
     void log(dpp::loglevel, std::format_string<Args...> fmt, Args&&... args);
 

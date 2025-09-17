@@ -483,3 +483,13 @@ std::vector<Song> match_songs(std::string_view needle)
 
     return res | std::ranges::to<std::vector>();
 }
+
+export [[nodiscard]]
+std::string
+get_random_songname(auto &&rng_engine)
+{
+    std::uniform_int_distribution<size_t> dist(0, songs.size() - 1);
+    const auto& song = songs[dist(rng_engine)];
+
+    return std::format("{} by {}", song.name, song.producer);
+}

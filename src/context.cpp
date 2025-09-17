@@ -28,10 +28,16 @@ namespace
         }
     };
 
+
 }
 
 context::context(std::string_view config_filename) :
-    metric_registry(std::make_shared<prometheus::Registry>())
+    metric_registry(std::make_shared<prometheus::Registry>()),
+    rng_engine([] {
+        std::random_device rd;
+        std::seed_seq seq {rd(), rd(), rd(), rd()};
+        return std::default_random_engine{seq};
+    }())
 {
     auto res = get_config(config_filename);
 
@@ -67,6 +73,14 @@ void context::on_ready(const dpp::ready_t& event)
             bot->log(dpp::ll_info, std::format("Starting default watchdog timer for 15s"));
             bot->start_timer(on_healthcheck_timer, 15 /* Seconds */);
         }
+
+        bot->set_presence(dpp::presence(dpp::presence_status::ps_online,
+                                        dpp::activity_type::at_listening, get_random_songname(rng_engine)));
+
+        bot->start_timer([this](const dpp::timer& timer) {
+            bot->set_presence(dpp::presence(dpp::presence_status::ps_online,
+                                            dpp::activity_type::at_listening, get_random_songname(rng_engine)));
+        }, 60 * 5 /* Seconds */);
     }
 
     /* Register Commands */
