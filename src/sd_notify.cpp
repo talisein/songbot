@@ -32,11 +32,11 @@ namespace systemd {
     {
         switch (log.severity) {
             case dpp::ll_trace:
-                sd_journal_print(LOG_DEBUG, "%s", log.message.c_str());
+                //sd_journal_print(LOG_DEBUG, "%s", log.message.c_str());
 	            break;
             case dpp::ll_debug:
                 sd_journal_print(LOG_DEBUG, "%s", log.message.c_str());
-	            break;
+                break;
             case dpp::ll_info:
                 sd_journal_print(LOG_INFO, "%s", log.message.c_str());
 	            break;

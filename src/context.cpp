@@ -94,13 +94,25 @@ void context::on_autocomplete(const dpp::autocomplete_t& event)
     }
 }
 
+namespace {
+    struct cerr_logger
+    {
+        void operator()(const dpp::log_t& log) const
+        {
+            if (log.severity > dpp::ll_trace) {
+                std::println(std::cerr, "[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
+            }
+        }
+    };
+}
+
 void
 context::setup_bot()
 {
     systemd::notify(0, "STATUS=Starting Mikumiku Setlists discord bot");
     bot = std::make_unique<dpp::cluster>(config.api_token);
 
-    bot->on_log(&systemd::sd_logger);
+    bot->on_log(cerr_logger{});
 
     commands.emplace("setlist", std::make_unique<setlist_command>(*this));
 //    commands.emplace("song", std::make_unique<song_command>(*this));
