@@ -100,7 +100,7 @@ context::setup_bot()
     systemd::notify(0, "STATUS=Starting Mikumiku Setlists discord bot");
     bot = std::make_unique<dpp::cluster>(config.api_token);
 
-    bot->on_log(dpp::utility::cout_logger());
+    bot->on_log(&systemd::sd_logger);
 
     commands.emplace("setlist", std::make_unique<setlist_command>(*this));
 //    commands.emplace("song", std::make_unique<song_command>(*this));
