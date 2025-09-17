@@ -1,4 +1,5 @@
 #include <systemd/sd-daemon.h>
+#include <systemd/sd-journal.h>
 
 #include "sd_notify.hpp"
 
@@ -31,25 +32,23 @@ namespace systemd {
     {
         switch (log.severity) {
             case dpp::ll_trace:
-                std::println(std::cerr, "{} {}", debug, log.message);
+                sd_journal_print(LOG_DEBUG, "%s", log.message.c_str());
 	            break;
             case dpp::ll_debug:
-                std::println(std::cerr, "{} {}", debug, log.message);
+                sd_journal_print(LOG_DEBUG, "%s", log.message.c_str());
 	            break;
             case dpp::ll_info:
-                std::println(std::cerr, "{} {}", info, log.message);
+                sd_journal_print(LOG_INFO, "%s", log.message.c_str());
 	            break;
             case dpp::ll_warning:
-                std::println(std::cerr, "{} {}", warning, log.message);
-
+                sd_journal_print(LOG_WARNING, "%s", log.message.c_str());
 	            break;
             case dpp::ll_error:
-                std::println(std::cerr, "{} {}", err, log.message);
-
+                sd_journal_print(LOG_ERR, "%s", log.message.c_str());
 	            break;
             case dpp::ll_critical:
             default:
-                std::println(std::cerr, "{} {}", crit, log.message);
+                sd_journal_print(LOG_CRIT, "%s", log.message.c_str());
 	            break;
         }
     }
