@@ -10,16 +10,9 @@ import std;
 int
 main()
 {
-    std::println(std::cerr, "Environment report:");
-    for (char** env = ::environ; *env != nullptr; ++env) {
-        std::println(std::cerr, "{}", *env);
-    }
-    std::println(std::cerr, "Environment report finished. Now trying cout");
-    std::println(std::cout, "Do you see cout?");
-
-
     context ctx("config.ini");
 
+    /* Setup SIGTERM signalfd */
     sigset_t mask;
     sigemptyset(&mask);
     sigaddset(&mask, SIGTERM);
@@ -32,14 +25,22 @@ main()
     } else {
         dpp::socket_events ev { sfd, dpp::socket_event_flags::WANT_READ, [bot = ctx.bot.get()](dpp::socket fd, const struct dpp::socket_events&) -> void
         {
-            bot->log(dpp::ll_info, std::format("Received SIGTERM, exiting."));
-            systemd::notify(0, "STOPPING=1");
-            bot->shutdown();
+            signalfd_siginfo fdsi {};
+            auto res = read(fd, &fdsi, sizeof(fdsi));
+            if (res == sizeof(fdsi) && fdsi.ssi_signo == SIGTERM) {
+                bot->log(dpp::ll_info, std::format("Received SIGTERM, exiting."));
+                systemd::notify(0, "STOPPING=1");
+                bot->shutdown();
+            } else if (res == sizeof(fdsi)) {
+                bot->log(dpp::ll_info, std::format("Received {}?", strsignal(fdsi.ssi_signo)));
+            }
+
         } };
         ctx.bot->socketengine->register_socket(ev);
     }
 
     ctx.bot->start(dpp::st_wait);
+    ctx.bot->log(dpp::ll_info, std::format("Stopped."));
 
     return 0;
 }

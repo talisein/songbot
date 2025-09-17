@@ -47,8 +47,11 @@ void context::on_ready(const dpp::ready_t& event)
                 bot->log(dpp::ll_info, std::format("Setting up watchdog timer with interval {}s", sec));
                 bot->start_timer(on_healthcheck_timer, sec /* Seconds */);
             } else {
-                bot->log(dpp::ll_error, std::format("Watchdog timer ignored for interval {}s", sec));
+                bot->log(dpp::ll_info, std::format("Watchdog timer ignored for interval {}s", sec));
             }
+        } else {
+            bot->log(dpp::ll_info, std::format("Starting default watchdog timer for 15s"));
+            bot->start_timer(on_healthcheck_timer, 15 /* Seconds */);
         }
     }
 
@@ -99,8 +102,10 @@ namespace {
     {
         void operator()(const dpp::log_t& log) const
         {
-            if (log.severity > dpp::ll_trace) {
+            if (log.severity > dpp::ll_error) {
                 std::println(std::cerr, "[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
+            } else if (log.severity > dpp::ll_trace) {
+                std::println("[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
             }
         }
     };
