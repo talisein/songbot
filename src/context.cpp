@@ -106,6 +106,7 @@ namespace {
                 std::println(std::cerr, "[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
             } else if (log.severity > dpp::ll_trace) {
                 std::println("[{}] {}: {}", dpp::utility::current_date_time(), dpp::utility::loglevel(log.severity), log.message);
+                std::cout.flush();
             }
         }
     };
