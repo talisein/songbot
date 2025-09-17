@@ -74,6 +74,10 @@ void context::on_ready(const dpp::ready_t& event)
             bot->start_timer(on_healthcheck_timer, 15 /* Seconds */);
         }
 
+        if (config.public_key) {
+            bot->enable_webhook_server(config.public_key.value(), "0.0.0.0", 3939);
+        }
+
         bot->set_presence(dpp::presence(dpp::presence_status::ps_online,
                                         dpp::activity_type::at_listening, get_random_songname(rng_engine)));
 
@@ -129,7 +133,12 @@ void
 context::setup_bot()
 {
     systemd::notify(0, "STATUS=Starting Mikumiku Setlists discord bot");
-    bot = std::make_unique<dpp::cluster>(config.api_token);
+
+    if (config.public_key) {
+        bot = std::make_unique<dpp::cluster>(config.api_token, 0, dpp::NO_SHARDS);
+    } else {
+        bot = std::make_unique<dpp::cluster>(config.api_token);
+    }
 
     bot->on_log(cerr_logger{});
 

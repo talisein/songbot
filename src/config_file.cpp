@@ -79,6 +79,26 @@ get_config(std::string_view filename)
         } else if (data.contains("discord") && data["discord"].contains("api_token")) {
             res.api_token = data["discord"]["api_token"];
         }
+
+        if (data.contains("discord") && data["discord"].contains("public_key_file"))
+        {
+            auto path = std::filesystem::path(data["discord"]["public_key_file"]);
+            if (!std::filesystem::exists(path)) {
+                std::println(std::cerr, "Error: Given public_key_file '{}' doesn't exist", path.string());
+                return std::unexpected(std::make_exception_ptr(std::runtime_error("Couldn't open public_key_file")));
+            }
+            std::ifstream token_file(path);
+            if (!token_file.is_open()) {
+                std::println(std::cerr, "Error: Couldn't open public_key_file '{}'", path.string());
+                return std::unexpected(std::make_exception_ptr(std::runtime_error("Couldn't open public_key_file")));
+            }
+            std::string public_key;
+            std::getline(token_file, public_key);
+            res.public_key = public_key;
+        } else if (data.contains("discord") && data["discord"].contains("public_key")) {
+            res.public_key = data["discord"]["public_key"];
+        }
+
     }
 
     /* Default to $CREDENTIALS_DIRECTORY/api_token if no api_token */
@@ -93,12 +113,22 @@ get_config(std::string_view filename)
             } else if (std::filesystem::exists("/var/run/secrets")) {
                 path = "/var/run/secrets";
             }
-            path /= "api_token";
-            if (!std::filesystem::exists(path)) break;
-            std::ifstream api_token_file(path);
+
+            auto token_path = path / "api_token";
+            if (!std::filesystem::exists(token_path)) break;
+            std::ifstream api_token_file(token_path);
             if (!api_token_file.is_open()) break;
-            std::println("INFO: Reading Discord API Token from {}", path.native());
+            std::println("INFO: Reading Discord API Token from {}", token_path.native());
             std::getline(api_token_file, res.api_token);
+
+            auto public_key_path = path / "public_key";
+            if (!std::filesystem::exists(public_key_path)) break;
+            std::ifstream public_key_file(public_key_path);
+            if (!public_key_file.is_open()) break;
+            std::println("INFO: Reading Discord Public Key from {}", public_key_path.native());
+            std::string public_key;
+            std::getline(public_key_file, public_key);
+            res.public_key = public_key;
         } while (0);
     }
 
