@@ -83,7 +83,7 @@ int main()
 
     "all"_test = [] {
         for (auto track : setlists) {
-            auto song = lookup_song(track.song);
+            auto song = lookup_song(track.song, track.producer);
             if (!song.has_value()) {
                 expect(eq(""sv, track.song));
             }

@@ -101,15 +101,13 @@ setlist_command::on_slashcommand(const dpp::slashcommand_t& event)
     try {
         /* Some setlists are more than 2000 characters. So we need to split up
          * our reply into a reply and some number of follow ups. */
-
-        auto lines = get_setlist_lines(std::get<std::string>(event.get_parameter("event")));
         std::ostringstream reply;
         std::vector<dpp::message> messages;
-
-        for (const auto& line : lines) {
+        for (const auto& line : get_setlist_lines(std::get<std::string>(event.get_parameter("event")))) {
             if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
                 messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral);
-                reply.str(line);
+                reply.str(std::string());
+                reply << line;
             } else {
                 reply << line;
             }
