@@ -378,7 +378,9 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"黙ってロックをやれって言ってんの！", "Damatte Rock o Yare tte Itten no!", "DO THE ROCK!", duet(MEIKO,Miku,Rin,Luka), "Nekotachi Kotatsu"},
   {"ストリートライト", std::nullopt, "Street Light", duet(Miku,Luka,Rin,Len,MEIKO,KAITO), "Negi Shower P"},
   {"ラストラス", std::nullopt, "Lustrous", Miku, "*Luna"},
-
+  {"ステラ", "Stella", "Stella", Miku, "Kotsuban-P"},
+  {"雪がとける前に", "Yuki ga Tokeru Mae ni", "Before the Snow Melts", Miku, "doriko"},
+  {"スターナイトスノウ", "Star Night Snow", "Star Night Snow", Miku, "n-buna×Orangestar"},
 }), &Song::cf_name);
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
