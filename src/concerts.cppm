@@ -172,7 +172,7 @@ export const std::array setlists = std::to_array<const SetlistTrack>({
         { "ME2014LANY", 16, "Parades" },
         { "ME2014LANY", 17, "Vegetable Juice" },
         { "ME2014LANY", 18, "The Snow White Princess is" },
-        { "ME2014LANY", 19, "Just Be Friends" },
+        { "ME2014LANY", 19, "Just Be Friends (Eng ver.)" },
         { "ME2014LANY", 20, "Luka Luka★Night Fever" },
         { "ME2014LANY", 21, "Secret Police" },
         { "ME2014LANY", 22, "Yellow" },
