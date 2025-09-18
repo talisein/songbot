@@ -6,6 +6,7 @@ import std;
 
 #include "context.hpp"
 #include "sd_notify.hpp"
+#include "version.hpp"
 
 namespace
 {
@@ -48,6 +49,7 @@ main()
         ctx.bot->socketengine->register_socket(ev);
     }
 
+    ctx.log(dpp::ll_info, "songbot version {} starting now", BUILD_GIT_COMMIT);
     ctx.bot->start(dpp::st_wait);
     ctx.log(dpp::ll_info, "Stopped.");
 

@@ -218,10 +218,15 @@ concerts_module = custom_target('concerts_module',
     depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module]
 )
 
+project_version = vcs_tag(input: 'version.hpp.in',
+                          output: 'version.hpp',
+                          replace_string: 'PROJ_VERSION',
+                          fallback: meson.project_version())
 
 src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'commands.cpp', 'errors.cpp', 'setlist_command.cpp', 'song_command.cpp', 'last_command.cpp']
 
 exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module, util_module,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
-                 install: true
+                 install: true,
+                 sources: project_version
                 )
