@@ -28,6 +28,7 @@ import util;
 using namespace std::literals;
 
 export enum Singer : std::uint32_t {
+    NO_VIRTUAL_SINGER = 0,
     Miku  = 1 << 1,
     Rin   = 1 << 2,
     Len   = 1 << 3,
@@ -151,7 +152,7 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"エンヴィキャットウォーク", "Envy Cat Walk", "Envy Cat Walk", Miku, "Tohma"},
   {"それがあなたの幸せとしても", "Sore ga Anata no Shiawase to Shite mo", "Even If It's Your Happiness", Luka, "Heavenz"},
   {nullopt, nullopt, "Fire◎Flower", Len, "halyosy", 2008y/8/2},
-  {"星のかけら", "Hoshi no Kakera", "Fragments of a Star", Miku, "Eiji Hirasawa"},
+  {"星のかけら", "Hoshi no Kakera", "Fragments of a Star", Miku, "Eiji Hirasawa", 2007y/12/29}, //https://vocadb.net/S/293725
   {"フロイライン＝ビブリォチカ", "Fräulein=Biblioteca", "Fräulein=Biblioteca", MEIKO, "nyanyannya"},
   {nullopt, nullopt, "GEDO", Len, "daraku"},
   {"ジェミニ", "Gemini", "Gemini", duet(Rin, Len), "Dixie Flatline"},
@@ -448,6 +449,35 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"ブラック★ロックシューター", "Black★Rock Shooter", "Black★Rock Shooter", Miku, "ryo"},
   {"＊ハロー、プラネット。", "*Hello, Planet.", "*Hello, Planet.", Miku, "sasakure.UK"},
   {"番凩", "Tsugai Kogarashi", "Wintry Winds", duet(MEIKO, KAITO), "hinayukki@sigotositeP"},
+  {"タイムリミット", "Time Limit", "Time Limit", Miku, "Tatami-P"},
+  {nullopt, nullopt, "Ievan Polkka", Miku, "Otomania", 2007y/2/21},/* Mikupa */
+  {"崩壊歌姫 -disruptive diva-", "Houkai Utahime", "Disruptive Diva", Miku, "Machigerita-P", 2009y/10/28},
+  {nullopt, nullopt, "RIP=RELEASE", Luka, "minato", 2009y/1/30},
+  {nullopt, nullopt, "Japanese Ninja No.1", Luka, "Deadball-P", 2009y/2/2},
+  {nullopt, nullopt, "trick and treat",  duet(Rin, Len), "OSTER project", 2008y/10/30},
+  {"悪ノ娘", "Aku no Musume", "Daughter of Evil (The Princess of Lucifer)", Rin, "mothy", 2008y/4/4},
+  {"悪ノ召使", "Aku no Meshitsukai", "Servant of Evil (His Significance of Existence)", duet(Rin, Len), "mothy", 2008y/4/16},
+  {"いろは唄", "Iroha Uta", "Iroha Song", Rin, "Ginsaku", 2009y/2/11},
+  {"リンリンシグナル", "Rin Rin Signal", "Rin Rin Signal", duet(Rin, Len), "Signal-P", 2008y/1/7},
+  {nullopt, nullopt, "SPICE!", Len, "minato", 2008y/3/3},
+  {nullopt, nullopt, "ARiA", Miku, "Toku-P", 2010y/4/29},
+  {nullopt, nullopt, "01_ballade", Miku, "Eiji Hirasawa", 2007y/7/29}, // https://vocadb.net/S/2241
+  {"私の時間", "Watashi no Jikan", "My Time", Miku, "Kuchibashi-P", 2007y/10/22},
+  {nullopt, nullopt, "BURNING", NO_VIRTUAL_SINGER, "Kodo"},
+  {nullopt, nullopt, "SHAKE", Miku, "Kodo"},
+  {"巴", "Tomoe", "Tomoe", NO_VIRTUAL_SINGER, "Kodo"},
+  {"峰の風", "Mine no Kaze", "Peak of the Wind", Miku, "Kodo"},
+  {"紅一葉", "Akahitoha", "A Single Red Leaf", Miku, "Kurousa-P"},
+  {"能管＋平胴", "Nokan＋hirado", "Flute＋Flat Frame", NO_VIRTUAL_SINGER, "Kodo"},
+  {"三宅", "Miyake", "Miyake", NO_VIRTUAL_SINGER, "Kodo"},
+  {"巡", "Meguru", "Patrol", NO_VIRTUAL_SINGER, "Kodo"},
+  {"族", "Zoku", "Tribe", Miku, "Kodo"},
+  {"南部牛追歌", "Nanbu Ushioi Uta", "Southern Cattle-Chasing Song", Miku, "Kodo"},
+  {"韋駄天", "Idaten", "Idaten", NO_VIRTUAL_SINGER, "Kodo"},
+  {"NEPPUU〜熱風〜", "Neppuu〜Neppuu〜", "NEPPUU ~Blistering Wind~", Miku, "Mikito-P"},
+  {"いのちもやしてたたけよ", "Inochi Moyashite Tatake yo", "Let Your Life Be Vigorous and Open Your Mouth", Miku, "Kodo"},
+  {"祭りだヘイカモン", "Matsuri da Hey Come On", "It's a Festival, Hey, C'mon", Miku, "Pinocchio-P"},
+  {nullopt, nullopt, "LION", NO_VIRTUAL_SINGER, "Kodo"},
 
 //meow
 }), &Song::cf_name);
@@ -500,6 +530,8 @@ export const std::array alt_names = get_sorted_songs(std::to_array<AltName>({
             { "Sand Planet", "DUNE"},
             { "Pigeon", "White Dove"},
             { "Beware of the Miku Miku Bacteria", "Beware of the Miku Miku Germs♪"},
+            { "01_ballade", "Fragments of a Star"},
+            { "01 ballade", "Fragments of a Star"},
         }), &AltName::cf_alt_name);
 
 template <>
@@ -523,7 +555,11 @@ struct std::formatter<Song> {
             }
 
         }
-        out << song.name << " feat. " << magic_enum::enum_flags_name(song.singer) << " by " << song.producer;
+        out << song.name;
+        if (song.singer != NO_VIRTUAL_SINGER) {
+            out << " feat. " << magic_enum::enum_flags_name(song.singer);
+        }
+        out << " by " << song.producer;
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
     }
 };

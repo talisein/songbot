@@ -56,16 +56,40 @@ namespace {
                 return track.song == song->name;
             });
 
+            std::ostringstream ss;
+            ss << std::format("`{:2}` {}", track.pos, util::escape_markdown(song->name));
+            if (song->singer != NO_VIRTUAL_SINGER) {
+                ss << " feat. " << magic_enum::enum_flags_name(song->singer);
+            }
+            ss << " by " << util::escape_markdown(song->producer);
+
             if (std::ranges::empty(rng)) {
-                co_yield std::format("`{:2}` {} feat. {} by {} **LIVE DEBUT**\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer));
+                ss << " **LIVE DEBUT**";
+//                co_yield std::format("`{:2}` {} feat. {} by {} **LIVE DEBUT**\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer));
             } else {
                 auto count = std::ranges::distance(rng);
+                ss << " *Previously@" << std::ranges::begin(rng)->concert;
                 if (count > 1) {
-                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}, {} more*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert, count - 1);
+                    ss << ", " << count - 1 << " more*";
+//                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}, {} more*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert, count - 1);
                 } else {
-                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert);
+                    ss << "*";
+                        //co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert);
                 }
             }
+            auto after_rng = std::views::take_while(std::views::reverse(setlists), [&](const auto &track)
+            {
+                return track.concert != concert->short_name;
+            }) | std::views::filter([&](const auto &track)
+            {
+                return track.song == song->name;
+            });
+            const auto after_count = std::ranges::distance(after_rng);
+            if (after_count > 0) {
+                ss << "*, " << after_count << " after*";
+            }
+            ss << "\n";
+            co_yield ss.str();
         }
     }
 
