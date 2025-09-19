@@ -28,7 +28,7 @@ namespace {
     static
     std::generator<std::string> get_setlistlast_lines(std::string_view concert_name)
     {
-        auto concert = lookup_concert(concert_name);
+        const auto concert = lookup_concert(concert_name);
         if (!concert) {
             co_yield std::format("I don't know about '{}'", concert_name);
             co_return;
@@ -42,27 +42,29 @@ namespace {
                 co_yield std::format("`{:2}` 🫠 '{}' I guess? This is a bug...\n", track.pos, track.song);
                 continue;
             }
-            auto rng = std::views::filter(std::views::reverse(setlists),
-                                          [&name = song->name, this_concert = concert->short_name, seen_this = false](const auto& track) mutable
-                                          {
-                                              if (name != track.song) {
-                                                  return false;
-                                              }
-                                              if (this_concert == track.concert) {
-                                                  seen_this = true;
-                                                  return false;
-                                              } else {
-                                                  if (seen_this) {
-                                                      return true;
-                                                  } else {
-                                                      return false;
-                                                  }
-                                              }
-                                          });
+            /* Drop the concerts that occurred after the requested concert... */
+            auto rng = std::views::drop_while(std::views::reverse(setlists), [&](const auto &track)
+            {
+                return track.concert != concert->short_name;
+            /* Drop the tracks for the requested concert... */
+            }) | std::views::drop_while([&](const auto &track)
+            {
+                return track.concert == concert->short_name;
+            /* Match the remaining cases where the song name matches */
+            }) | std::views::filter([&](const auto &track)
+            {
+                return track.song == song->name;
+            });
+
             if (std::ranges::empty(rng)) {
                 co_yield std::format("`{:2}` {} feat. {} by {} **LIVE DEBUT**\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer));
             } else {
-                co_yield std::format("`{:2}` {} feat. {} by {} *Previous: {}*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert);
+                auto count = std::ranges::distance(rng);
+                if (count > 1) {
+                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}, {} more*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert, count - 1);
+                } else {
+                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert);
+                }
             }
         }
     }

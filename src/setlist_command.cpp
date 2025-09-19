@@ -34,7 +34,7 @@ namespace {
         }
 
         auto setlist = get_setlist(concert->short_name);
-        co_yield std::format("Setlist for {}:\n", concert->name);
+        co_yield std::format("## Setlist for {}:\n", concert->name);
         for (auto &track : setlist) {
             auto song = lookup_song(track.song, track.producer);
             if (!song) {
