@@ -90,5 +90,14 @@ int main()
         }
     };
 
+    "Check the case!"_test = [] {
+        for (auto track : setlists) {
+            auto song = lookup_song(track.song, track.producer);
+            if (song) {
+                expect(eq(song->name, track.song));
+            }
+        }
+    };
+
     return 0;
 }
