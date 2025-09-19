@@ -46,9 +46,9 @@ int main()
     "concert"_test = [] {
         auto c = setlists[0];
         expect(eq(1, c.pos));
-        expect(eq("MM2013"sv, c.concert));
+        expect(eq("MIKUFES09"sv, c.concert));
         auto song = lookup_song(c.song);
-        expect(eq("Hachioji-P"sv, song->producer));
+        expect(eq("MOSAIC.WAV×ika"sv, song->producer));
     };
 
     "setlist"_test = [] {

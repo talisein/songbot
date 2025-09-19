@@ -35,6 +35,7 @@ export enum Singer : std::uint32_t {
     MEIKO = 1 << 5,
     KAITO = 1 << 6,
     Teto  = 1 << 7,
+    Gumi  = 1 << 8,
 };
 
 template<typename... T> requires (std::is_same_v<T, Singer> && ...)
@@ -225,7 +226,7 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"プシ", "Psi", "Psi", Miku, "r-906"},
   {nullopt, nullopt, "REALITY", duet(MEIKO, KAITO), "Minus-P"},
   {"ロキ", "Roki", "ROKI", duet(Rin, Len), "Mikito-P"},
-  {"桜ノ雨", "Sakura no Ame", "Rain of Cherry Blossom Petals", Miku, "halyosy, absorb"},
+  {"桜ノ雨", "Sakura no Ame", "Sakura Rain", Miku, "halyosy, absorb"},
   {"ラズベリー＊モンスター", "Raspberry＊Monster", "Raspberry＊Monster", Miku, "Honeyworks"},
   {"レッドランドマーカー", "Red Land Marker", "Red Land Marker", MEIKO, "Twinfield"},
   {nullopt, nullopt, "Reload Words", KAITO, "Sat"},
@@ -348,7 +349,7 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"愛されなくても君がいる", "Aisarenakute mo Kimi ga Iru", "Because You're Here", Miku, "Pinocchio-P"},
   {"え？あぁ、そう。", "E? Aa, Sou.", "Hm? Ah, Yes.", Miku, "Chouchou-P"},
   {"ぽかぽかの星", "Pokapoka no Hoshi", "Poka Poka Planet", Miku, "Harumaki Gohan"},
-  {"アルビノ -revive-", nullopt, "Albino -revive-", Miku, "buzzG"},
+  {"アルビノ -revive-", nullopt, "Albino", Miku, "buzzG"},
   {"テルミーアンサー", nullopt, "Tell Me Answer", Rin, "kinoshita"},
   {"星空クロノグラフ", "Hoshizora Chronograph", "Chronograph in the Starry Sky", MEIKO, "MINO-U"},
   {nullopt, nullopt, "First Note", Miku, "blues"},
@@ -410,8 +411,45 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {nullopt, nullopt, "My Stage With You", Miku, "cannibaltim"},
   {"梦色星球", "Mèngsè Xīngqiú", "Dream Color Planet", Miku, "AzureHead"},
   {"跨时空日记", "Kuà Shíkōng Rìjì", "Diary Across Time And Space", Miku, "Siren"},
+  {nullopt, "Project DIVA desu.", "It's Project DIVA.", Miku, "UtataP"},
+  {"サウンド", "Sound", "sound", Miku, "baker"},
+  {"恋スルVOC@LOID", "Koisuru VOC@LOID", "VOC@LOID in Love", Miku, "OSTER project"},
+  {nullopt, nullopt, "Dear cocoa girls", Miku, "Hata Aki, Kosaku Satoru"},
+  {nullopt, nullopt, "The secret garden", Miku, "Hata Aki, Kosaki Satoru"},
+  {"ミラクルペイント", "Miracle Paint", "Miracle Paint", Miku, "OSTER project"},
+  {nullopt, nullopt, "Innocence", Miku, "KazuP"},
+  {"ハト", "Hato", "White Dove", Miku, "Hadano-P"},
+  {"みくみく菌にご注意♪", "Miku Miku-kin ni Gochuui♪", "Beware of the Miku Miku Germs♪", Miku, "Hayaya-P"},
+  {"サヨナラ・グッバイ", "Sayonara·Goodbye", "Farewell Goodbye", Miku, "Noboru↑-P"},
+  {nullopt, nullopt, "Dear", Miku, "19's Sound Factory"},
+  {"教えて!! 魔法のLyric", "Oshiete!! Mahou no Lyric", "Tell Me!! The Magical Lyric", duet(Miku, MEIKO), "Chom-P"},
+  {"パズル", "Puzzle", "Puzzle", Miku, "Kuwagata-P"},
+  {nullopt, nullopt, "VOiCE", Miku, "Lovely-P"},
+  {nullopt, nullopt, "Alice", Miku, "Furukawa-P"},
+  {"あなたの歌姫", "Anata no Utahime", "Your Diva", Miku, "azuma"},
+  {nullopt, nullopt, "moon", Miku, "iroha(sasaki)"},
+  {nullopt, nullopt, "Promise", duet(Miku, Rin), "samfree"},
+  {nullopt, nullopt, "from Y to Y", duet(Miku, Luka), "JimmyThumb-P"},
+  {"ストロボナイツ", "Strobe Nights", "Strobe Nights", Miku, "kz"},
+  {"ファインダー", "Finder", "finder", Miku, "kz"},
+  {"クローバー♣クラブ", "Clover♣Club", "Clover♣Club", Miku, "Yuuyu-P"},
+  {nullopt, nullopt, "World's End Dancehall (English ver.)", duet(Miku, Luka), "wowaka"},
+  {"電気の恋人 -Programmer’s Song-", "Denki no Koibito -Programmer's Song-", "Electric Lovers - I am Programmer's Song", Miku, "MOSAIC.WAV×ika"},
+  {nullopt, nullopt, "HATSUNEtive", Miku, "MOSAIC.WAV×ika"},
+  {"私は人間じゃないから.", "Watashi wa Ningen ja Nai kara.", "Maybe I'm not a human.", Miku, "Deadball-P"},
+  {"とある娼婦の恋", "Toaru Shoufu no Koi", "A Certain Prostitute's Love", duet(Miku, Rin), "Deadball-P"},
+  {"牛乳飲め！", "Gyuunyuu Nome!", "You Should Drink Milk!", Miku, "Deadball-P"},
+  {"木枯らしの朝", "Kogarashi no Asa", "Anyway the Wind Blows", Miku, "Deadball-P"},
+  {"筆おろし", "Fude Oroshi", "First Time", Miku, "Deadball-P"},
+  {"既成事実", "Kisei Jijitsu", "I Remember About You Forever", Miku, "Deadball-P"},
+  {nullopt, nullopt, "Far Away", Miku, "kz"},
+  {nullopt, nullopt, "Heart Beat", Miku, "kz"}, //https://vocadb.net/S/5232
+  {nullopt, nullopt, "Crosslight", duet(Miku, Gumi), "kz"},
+  {"ブラック★ロックシューター", "Black★Rock Shooter", "Black★Rock Shooter", Miku, "ryo"},
+  {"＊ハロー、プラネット。", "*Hello, Planet.", "*Hello, Planet.", Miku, "sasakure.UK"},
+  {"番凩", "Tsugai Kogarashi", "Wintry Winds", duet(MEIKO, KAITO), "hinayukki@sigotositeP"},
 
-
+//meow
 }), &Song::cf_name);
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
@@ -460,6 +498,8 @@ export const std::array alt_names = get_sorted_songs(std::to_array<AltName>({
             { "LLNF", "Luka Luka★Night Fever"},
             { "Luka Luka Night Fever", "Luka Luka★Night Fever"},
             { "Sand Planet", "DUNE"},
+            { "Pigeon", "White Dove"},
+            { "Beware of the Miku Miku Bacteria", "Beware of the Miku Miku Germs♪"},
         }), &AltName::cf_alt_name);
 
 template <>
