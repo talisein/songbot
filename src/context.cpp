@@ -22,6 +22,7 @@ import concerts;
 #include "sd_notify.hpp"
 #include "context.hpp"
 #include "setlist_command.hpp"
+#include "setlistlast_command.hpp"
 #include "song_command.hpp"
 #include "last_command.hpp"
 
@@ -163,6 +164,7 @@ context::setup_bot()
     commands.emplace("setlist", std::make_unique<setlist_command>(*this));
 //    commands.emplace("song", std::make_unique<song_command>(*this));
     commands.emplace("last", std::make_unique<last_command>(*this));
+    commands.emplace("setlistlast", std::make_unique<setlistlast_command>(*this));
 
     bot->on_slashcommand([this](const dpp::slashcommand_t& event) {
         return on_slashcommand(event);
