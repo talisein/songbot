@@ -127,7 +127,8 @@ std::vector<Concert> match_concerts(std::string_view needle)
 {
     const auto name_matches_needle = [needle = util::to_nfkc_casefold(needle)]
         (const Concert& concert) constexpr {
-        return std::ranges::contains_subrange(util::to_nfkc_casefold(concert.short_name), needle);
+        return std::ranges::contains_subrange(util::to_nfkc_casefold(concert.short_name), needle) ||
+               std::ranges::contains_subrange(util::to_nfkc_casefold(concert.name), needle);
     };
     return concerts | std::views::filter(name_matches_needle) | std::ranges::to<std::vector>();
 }
