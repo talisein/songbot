@@ -70,7 +70,7 @@ namespace {
                 auto count = std::ranges::distance(rng);
                 ss << " *Previously@" << std::ranges::begin(rng)->concert;
                 if (count > 1) {
-                    ss << ", " << count - 1 << " more*";
+                    ss << ", " << count - 1 << " more before*";
 //                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}, {} more*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert, count - 1);
                 } else {
                     ss << "*";
@@ -86,7 +86,7 @@ namespace {
             });
             const auto after_count = std::ranges::distance(after_rng);
             if (after_count > 0) {
-                ss << "*, " << after_count << " after*";
+                ss << " *and " << after_count << " after*";
             }
             ss << "\n";
             co_yield ss.str();
