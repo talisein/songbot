@@ -99,8 +99,10 @@ setlistlast_command::setlistlast_command(context &ctx) noexcept :
     iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance")
 {
     /* Metric: setlistlast */
-    setlistlast_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}});
-    setlistlast_failure_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "failure"}});
+    setlistlast_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}, {"visibility", "ephemeral"}});
+    setlistlast_failure_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "failure"}, {"visibility", "ephemeral"}});
+    setlistlast_reveal_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}, {"visibility", "public"}});
+    setlistlast_reveal_failure_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "failure"}, {"visibility", "public"}});
 
     /* Metric: Autocompletions */
     ac_setlistlast_success_counter = &ctx.autocompletion_counter->Add({{"event", "setlistlast"}, {"result", "success"}});
@@ -133,19 +135,47 @@ namespace {
         event.owner->interaction_followup_create(event.command.token, msg, std::move(cb));
     }
 
+    [[nodiscard]] dpp::message
+    make_reveal_gui(const auto &messages, bool use_ephemeral, std::optional<std::string> button_id)
+    {
+        const auto flags    = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
+        auto real_msg       = dpp::message().set_flags(flags);
+        auto container      = dpp::component().set_type(dpp::cot_container);
+        if (button_id.has_value()) {
+            auto action_row = dpp::component().set_type(dpp::cot_action_row);
+            auto button     = dpp::component().set_type(dpp::cot_button)
+                              .set_style(dpp::cos_primary)
+                              .set_label("Post Publicly")
+                              .set_id(button_id.value());
+            action_row.add_component_v2(button);
+            container.add_component_v2(action_row);
+        }
+        auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
+                                              .set_content(messages[0]);
+        container.add_component_v2(text_display_1);
+        if (messages.size() > 1) {
+            auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1]);
+            container.add_component_v2(text_display_2);
+        }
+        real_msg.add_component_v2(container);
+        return real_msg;
+    }
+
     /* DPP makes confirmation_callback_t const, so we need to create a new closure for each successive followup. */
     template <typename T>
     struct recursive_follow_upper
     {
         T event;
         context * const ctx;
-        std::vector<dpp::message> msgs;
+        bool use_ephemeral;
+        std::vector<std::string> messages;
         int sequence;
 
-        recursive_follow_upper(const T& event, context * const ctx, auto &&rng, int sequence = 2) noexcept :
+        recursive_follow_upper(const T& event, context * const ctx, bool use_ephemeral, auto &&rng, int sequence = 2) noexcept :
             event(event),
             ctx(ctx),
-            msgs(std::views::drop(rng, 1) | std::ranges::to<std::vector>()),
+            use_ephemeral(use_ephemeral),
+            messages(std::ranges::to<std::vector>(rng)),
             sequence(sequence)
         { }
 
@@ -156,29 +186,32 @@ namespace {
                 dpp::utility::log_error()(confirmation);
             }
 
-            if (msgs.size() == 1) {
-                my_follow_up(event, msgs.front());
+            auto real_msg = make_reveal_gui(messages, use_ephemeral, std::nullopt);
+            if (messages.size() < 3) {
+                my_follow_up(event, real_msg);
             } else {
-                my_follow_up(event, msgs.front(), recursive_follow_upper(event, ctx, msgs, sequence + 1));
+                my_follow_up(event, real_msg,
+                             recursive_follow_upper(event, ctx, use_ephemeral, std::views::drop(messages, 2)));
             }
         }
 
     };
 
-
     /* Takes a generator that produces multiple lines. It constructs a sequence
-     * dpp::messages, each less than the reply limit and sends it off. */
-    template <typename EventType, typename GeneratorCallable, typename GeneratorInput, typename Context>
-    void reply_multimessage(const EventType& event, GeneratorCallable &&line_generator, GeneratorInput&& generator_input, bool use_ephemeral, std::string_view button_id_prefix, Context&& ctx)
+     * dpp::messages, each less than the reply limit and sends it off using the make_reveal_gui() */
+    template <typename EventType, typename GeneratorCallable, typename GeneratorInput>
+    void reply_multimessage(const EventType& event,
+                            context * const ctx,
+                            GeneratorCallable &&line_generator,
+                            GeneratorInput&& generator_input,
+                            bool use_ephemeral,
+                            std::string_view button_id_prefix)
     {
         std::ostringstream reply;
-        std::vector<dpp::message> messages;
+        std::vector<std::string> messages;
         for (const auto& line : line_generator(std::forward<GeneratorInput>(generator_input))) {
             if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
                 messages.emplace_back(reply.view());
-                if (use_ephemeral) {
-                    messages.back().set_flags(dpp::message_flags::m_ephemeral);
-                }
                 reply.str(std::string());
                 reply << line;
             } else {
@@ -188,28 +221,15 @@ namespace {
 
         if (reply.view().size() > 0) {
             messages.emplace_back(reply.view());
-            if (use_ephemeral) {
-                messages.back().set_flags(dpp::message_flags::m_ephemeral);
-            }
         }
 
         /* Ok, we have a list of messages to send. */
-        if (use_ephemeral) {
-            messages.front().set_flags(dpp::m_using_components_v2).add_component_v2(
-                dpp::component().set_type(dpp::cot_container).add_component(
-                    dpp::component().set_type(dpp::cot_button)
-                    .set_style(dpp::cos_primary)
-                    .set_label("Post Publicly")
-                    .set_id(std::format("{}{}", button_id_prefix, generator_input))
-                    )
-                );
-        }
+        auto real_msg = make_reveal_gui(messages, use_ephemeral, std::make_optional<std::string>(std::format("{}{}", button_id_prefix, generator_input)));
         if (messages.size() < 3) {
-            event.reply(messages.front());
+            event.reply(real_msg);
         } else {
-            event.reply(messages.front(), recursive_follow_upper(event, std::forward<Context>(ctx), std::views::drop(messages, 1)));
+            event.reply(real_msg, recursive_follow_upper(event, ctx, use_ephemeral, std::views::drop(messages, 2)));
         }
-
     }
 }
 
@@ -218,31 +238,10 @@ setlistlast_command::on_button_click(const dpp::button_click_t& event)
 {
     if (!event.custom_id.starts_with(SETLISTLAST_BUTTON_ID_PREFIX))
         return;
-    std::string concert = event.custom_id.substr(SETLISTLAST_BUTTON_ID_PREFIX.size());
+    const auto concert = event.custom_id.substr(SETLISTLAST_BUTTON_ID_PREFIX.size());
 
-    std::ostringstream reply;
-    std::vector<dpp::message> messages;
-    for (const auto& line : get_setlistlast_lines(concert)) {
-        if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
-            messages.emplace_back(reply.view());
-            reply.str(std::string());
-            reply << line;
-        } else {
-            reply << line;
-        }
-    }
-
-    if (reply.view().size() > 0) {
-        messages.emplace_back(reply.view());
-    }
-
-    /* Ok, we have a list of messages to send. */
-    if (messages.size() == 1) {
-        event.reply(messages.front());
-    } else {
-        event.reply(messages.front(), recursive_follow_upper(event, ctx, messages));
-    }
-
+    reply_multimessage(event, ctx, &get_setlistlast_lines, concert, false, SETLISTLAST_BUTTON_ID_PREFIX);
+    setlistlast_reveal_success_counter->Increment();
 }
 
 std::expected<void, std::error_code>
@@ -250,58 +249,15 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
         const auto concert = std::get<std::string>(event.get_parameter("event"));
-        /* Some setlists are more than 2000 characters. So we need to split up
-         * our reply into a reply and some number of follow ups. */
-        std::ostringstream reply;
-        std::vector<dpp::message> messages;
-        for (const auto& line : get_setlistlast_lines(concert)) {
-            if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
-                messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral);
-                reply.str(std::string());
-                reply << line;
-            } else {
-                reply << line;
-            }
-        }
-
-        if (reply.view().size() > 0) {
-            messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral);
-        }
-
-        /* Ok, we have a list of messages to send. */
-        auto real_msg       = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
-        auto container      = dpp::component().set_type(dpp::cot_container);
-        auto action_row     = dpp::component().set_type(dpp::cot_action_row);
-        auto button         = dpp::component().set_type(dpp::cot_button)
-                                              .set_style(dpp::cos_primary)
-                                              .set_label("Post Publicly")
-                                              .set_id(std::format("{}{}", SETLISTLAST_BUTTON_ID_PREFIX, concert));
-        auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
-                                              .set_content(messages[0].content);
-        action_row.add_component_v2(button);
-        container.add_component_v2(action_row);
-        container.add_component_v2(text_display_1);
-        if (messages.size() > 1) {
-            auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1].content);
-            container.add_component_v2(text_display_2);
-        }
-        real_msg.add_component_v2(container);
-        event.reply(real_msg);
-
-        if (messages.size() < 3) {
-            event.reply(real_msg);
-        } else {
-            event.reply(messages.front(), recursive_follow_upper(event, ctx, messages));
-        }
-
+        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, SETLISTLAST_BUTTON_ID_PREFIX);
     } catch(std::system_error &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
-        ctx->bot->log(dpp::ll_error, std::format("/setlistlast: System Error {}", e.what()));
+        ctx->log(dpp::ll_error, "/setlistlast: System Error {}", e.what());
         setlistlast_failure_counter->Increment();
         return std::unexpected(e.code());
-    } catch (...) {
+    } catch (std::bad_variant_access &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
-        ctx->bot->log(dpp::ll_error, "/setlistlast: Unhandled exception");
+        ctx->log(dpp::ll_error, "/setlistlast: std::get() {}", e.what());
         setlistlast_failure_counter->Increment();
         return std::unexpected(songbot_error::explosion);
     }

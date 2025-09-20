@@ -41,6 +41,8 @@ private:
 
     prometheus::Counter* setlistlast_success_counter;
     prometheus::Counter* setlistlast_failure_counter;
+    prometheus::Counter* setlistlast_reveal_success_counter;
+    prometheus::Counter* setlistlast_reveal_failure_counter;
 
     prometheus::Counter* ac_setlistlast_success_counter;
     prometheus::Counter* ac_setlistlast_no_match_counter;
