@@ -116,13 +116,17 @@ setlistlast_command::get_command()
     event_opt.set_auto_complete(true);
 
     setlistlast_cmd.add_option(std::move(event_opt));
+
+    ctx->bot->on_button_click([this](const dpp::button_click_t& event) { return on_button_click(event); });
+
     return setlistlast_cmd;
 }
 
 namespace {
     constexpr size_t DISCORD_REPLY_LIMIT = 2000UZ;
-
-    void my_follow_up(const dpp::slashcommand_t event,
+    constexpr std::string_view SETLISTLAST_BUTTON_ID_PREFIX { "setlistlast:" };
+    template <typename EventType>
+    void my_follow_up(const EventType& event,
                       const dpp::message& msg,
                       dpp::command_completion_event_t cb = dpp::utility::log_error())
     {
@@ -130,14 +134,15 @@ namespace {
     }
 
     /* DPP makes confirmation_callback_t const, so we need to create a new closure for each successive followup. */
+    template <typename T>
     struct recursive_follow_upper
     {
-        dpp::slashcommand_t event;
+        T event;
         context * const ctx;
         std::vector<dpp::message> msgs;
         int sequence;
 
-        recursive_follow_upper(const dpp::slashcommand_t& event, context * const ctx, auto &&rng, int sequence = 2) noexcept :
+        recursive_follow_upper(const T& event, context * const ctx, auto &&rng, int sequence = 2) noexcept :
             event(event),
             ctx(ctx),
             msgs(std::views::drop(rng, 1) | std::ranges::to<std::vector>()),
@@ -145,31 +150,111 @@ namespace {
         { }
 
 
-        auto operator()(const dpp::confirmation_callback_t& confirmation) const
+        void operator()(const dpp::confirmation_callback_t& confirmation) const
         {
             if (confirmation.is_error()) {
-                return dpp::utility::log_error()(confirmation);
+                dpp::utility::log_error()(confirmation);
             }
 
             if (msgs.size() == 1) {
-                return my_follow_up(event, msgs.front());
+                my_follow_up(event, msgs.front());
             } else {
-                return my_follow_up(event, msgs.front(), recursive_follow_upper(event, ctx, msgs, sequence + 1));
+                my_follow_up(event, msgs.front(), recursive_follow_upper(event, ctx, msgs, sequence + 1));
             }
         }
 
     };
+
+
+    /* Takes a generator that produces multiple lines. It constructs a sequence
+     * dpp::messages, each less than the reply limit and sends it off. */
+    template <typename EventType, typename GeneratorCallable, typename GeneratorInput, typename Context>
+    void reply_multimessage(const EventType& event, GeneratorCallable &&line_generator, GeneratorInput&& generator_input, bool use_ephemeral, std::string_view button_id_prefix, Context&& ctx)
+    {
+        std::ostringstream reply;
+        std::vector<dpp::message> messages;
+        for (const auto& line : line_generator(std::forward<GeneratorInput>(generator_input))) {
+            if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
+                messages.emplace_back(reply.view());
+                if (use_ephemeral) {
+                    messages.back().set_flags(dpp::message_flags::m_ephemeral);
+                }
+                reply.str(std::string());
+                reply << line;
+            } else {
+                reply << line;
+            }
+        }
+
+        if (reply.view().size() > 0) {
+            messages.emplace_back(reply.view());
+            if (use_ephemeral) {
+                messages.back().set_flags(dpp::message_flags::m_ephemeral);
+            }
+        }
+
+        /* Ok, we have a list of messages to send. */
+        if (use_ephemeral) {
+            messages.front().set_flags(dpp::m_using_components_v2).add_component_v2(
+                dpp::component().set_type(dpp::cot_container).add_component(
+                    dpp::component().set_type(dpp::cot_button)
+                    .set_style(dpp::cos_primary)
+                    .set_label("Post Publicly")
+                    .set_id(std::format("{}{}", button_id_prefix, generator_input))
+                    )
+                );
+        }
+        if (messages.size() < 3) {
+            event.reply(messages.front());
+        } else {
+            event.reply(messages.front(), recursive_follow_upper(event, std::forward<Context>(ctx), std::views::drop(messages, 1)));
+        }
+
+    }
+}
+
+void
+setlistlast_command::on_button_click(const dpp::button_click_t& event)
+{
+    if (!event.custom_id.starts_with(SETLISTLAST_BUTTON_ID_PREFIX))
+        return;
+    std::string concert = event.custom_id.substr(SETLISTLAST_BUTTON_ID_PREFIX.size());
+
+    std::ostringstream reply;
+    std::vector<dpp::message> messages;
+    for (const auto& line : get_setlistlast_lines(concert)) {
+        if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
+            messages.emplace_back(reply.view());
+            reply.str(std::string());
+            reply << line;
+        } else {
+            reply << line;
+        }
+    }
+
+    if (reply.view().size() > 0) {
+        messages.emplace_back(reply.view());
+    }
+
+    /* Ok, we have a list of messages to send. */
+    if (messages.size() == 1) {
+        event.reply(messages.front());
+    } else {
+        event.reply(messages.front(), recursive_follow_upper(event, ctx, messages));
+    }
+
 }
 
 std::expected<void, std::error_code>
 setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
+        const auto concert = std::get<std::string>(event.get_parameter("event"));
         /* Some setlists are more than 2000 characters. So we need to split up
          * our reply into a reply and some number of follow ups. */
         std::ostringstream reply;
         std::vector<dpp::message> messages;
-        for (const auto& line : get_setlistlast_lines(std::get<std::string>(event.get_parameter("event")))) {
+        for (const auto& line : get_setlistlast_lines(concert)) {
             if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
                 messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral);
                 reply.str(std::string());
@@ -184,8 +269,27 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
         }
 
         /* Ok, we have a list of messages to send. */
-        if (messages.size() == 1) {
-            event.reply(messages.front());
+        auto real_msg       = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
+        auto container      = dpp::component().set_type(dpp::cot_container);
+        auto action_row     = dpp::component().set_type(dpp::cot_action_row);
+        auto button         = dpp::component().set_type(dpp::cot_button)
+                                              .set_style(dpp::cos_primary)
+                                              .set_label("Post Publicly")
+                                              .set_id(std::format("{}{}", SETLISTLAST_BUTTON_ID_PREFIX, concert));
+        auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
+                                              .set_content(messages[0].content);
+        action_row.add_component_v2(button);
+        container.add_component_v2(action_row);
+        container.add_component_v2(text_display_1);
+        if (messages.size() > 1) {
+            auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1].content);
+            container.add_component_v2(text_display_2);
+        }
+        real_msg.add_component_v2(container);
+        event.reply(real_msg);
+
+        if (messages.size() < 3) {
+            event.reply(real_msg);
         } else {
             event.reply(messages.front(), recursive_follow_upper(event, ctx, messages));
         }

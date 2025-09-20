@@ -34,6 +34,8 @@ public:
 
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) override;
 
+    void on_button_click(const dpp::button_click_t& event);
+
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
 
