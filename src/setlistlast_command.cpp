@@ -96,7 +96,8 @@ namespace {
 }
 
 setlistlast_command::setlistlast_command(context &ctx) noexcept :
-    iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance")
+    iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance"),
+    storage(ctx)
 {
     /* Metric: setlistlast */
     setlistlast_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}, {"visibility", "ephemeral"}});
@@ -170,7 +171,12 @@ namespace {
         dpp::command_completion_event_t final_callback;
         int sequence;
 
-        recursive_follow_upper(const T& event, context * const ctx, bool use_ephemeral, auto &&rng, dpp::command_completion_event_t final_callback = dpp::utility::log_error(), int sequence = 2) noexcept :
+        recursive_follow_upper(const T& event,
+                               context * const ctx,
+                               bool use_ephemeral,
+                               auto &&rng,
+                               dpp::command_completion_event_t final_callback = dpp::utility::log_error(),
+                               int sequence = 2) noexcept :
             event(event),
             ctx(ctx),
             use_ephemeral(use_ephemeral),
@@ -206,7 +212,7 @@ namespace {
                             GeneratorCallable &&line_generator,
                             GeneratorInput&& generator_input,
                             bool use_ephemeral,
-                            std::optional<std::string_view> button_id_prefix,
+                            std::optional<std::string> button_callback_key,
                             dpp::command_completion_event_t final_callback = dpp::utility::log_error())
     {
         std::ostringstream reply;
@@ -227,8 +233,8 @@ namespace {
 
         /* Ok, we have a list of messages to send. */
         dpp::message msg;
-        if (button_id_prefix) {
-            msg = make_reveal_gui(messages, use_ephemeral, std::make_optional<std::string>(std::format("{}{}", button_id_prefix.value(), generator_input)));
+        if (button_callback_key) {
+            msg = make_reveal_gui(messages, use_ephemeral, button_callback_key);
         } else {
             msg = make_reveal_gui(messages, use_ephemeral, std::nullopt);
         }
@@ -244,11 +250,14 @@ namespace {
 void
 setlistlast_command::on_button_click(const dpp::button_click_t& event)
 {
-    if (!event.custom_id.starts_with(SETLISTLAST_BUTTON_ID_PREFIX))
+    auto args = storage.get(event.custom_id);
+    if (!args) {
+        // Could be a button click for another handler? So just ignore.
         return;
-    const auto concert = event.custom_id.substr(SETLISTLAST_BUTTON_ID_PREFIX.size());
+    }
 
-    auto on_completion = [event = event](const dpp::confirmation_callback_t &c) {
+    const auto concert = args.value().concert;
+    auto on_completion = [event = args.value().event](const dpp::confirmation_callback_t &c) {
         auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
         if (c.is_error()) {
             dpp::utility::log_error()(c);
@@ -268,7 +277,8 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
         const auto concert = std::get<std::string>(event.get_parameter("event"));
-        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, SETLISTLAST_BUTTON_ID_PREFIX);
+        auto key = storage.insert({concert, event});
+        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, key);
     } catch(std::system_error &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->log(dpp::ll_error, "/setlistlast: System Error {}", e.what());

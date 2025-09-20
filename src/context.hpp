@@ -23,7 +23,7 @@ import prometheus;
 import dpp;
 
 #include "config_file.hpp"
-#include "setlist_command.hpp"
+#include "commands.hpp"
 
 class context
 {

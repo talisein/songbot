@@ -20,8 +20,11 @@
 
 import prometheus;
 import std;
+import util;
+import dpp;
 
 #include "commands.hpp"
+#include "state_storage.hpp"
 
 class setlistlast_command : public iface_command
 {
@@ -38,6 +41,12 @@ public:
 
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
+
+    struct reveal_args {
+        std::string concert;
+        dpp::slashcommand_t event;
+    };
+    state_storage<reveal_args> storage;
 
     prometheus::Counter* setlistlast_success_counter;
     prometheus::Counter* setlistlast_failure_counter;
