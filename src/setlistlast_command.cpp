@@ -140,7 +140,6 @@ namespace {
     {
         const auto flags    = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
         auto real_msg       = dpp::message().set_flags(flags);
-        auto container      = dpp::component().set_type(dpp::cot_container);
         if (button_id.has_value()) {
             auto action_row = dpp::component().set_type(dpp::cot_action_row);
             auto button     = dpp::component().set_type(dpp::cot_button)
@@ -148,16 +147,15 @@ namespace {
                               .set_label("Post Publicly")
                               .set_id(button_id.value());
             action_row.add_component_v2(button);
-            container.add_component_v2(action_row);
+            real_msg.add_component_v2(action_row);
         }
         auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
                                               .set_content(messages[0]);
-        container.add_component_v2(text_display_1);
+        real_msg.add_component_v2(text_display_1);
         if (messages.size() > 1) {
             auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1]);
-            container.add_component_v2(text_display_2);
+            real_msg.add_component_v2(text_display_2);
         }
-        real_msg.add_component_v2(container);
         return real_msg;
     }
 
@@ -169,13 +167,15 @@ namespace {
         context * const ctx;
         bool use_ephemeral;
         std::vector<std::string> messages;
+        dpp::command_completion_event_t final_callback;
         int sequence;
 
-        recursive_follow_upper(const T& event, context * const ctx, bool use_ephemeral, auto &&rng, int sequence = 2) noexcept :
+        recursive_follow_upper(const T& event, context * const ctx, bool use_ephemeral, auto &&rng, dpp::command_completion_event_t final_callback = dpp::utility::log_error(), int sequence = 2) noexcept :
             event(event),
             ctx(ctx),
             use_ephemeral(use_ephemeral),
             messages(std::ranges::to<std::vector>(rng)),
+            final_callback(final_callback),
             sequence(sequence)
         { }
 
@@ -183,15 +183,16 @@ namespace {
         void operator()(const dpp::confirmation_callback_t& confirmation) const
         {
             if (confirmation.is_error()) {
-                dpp::utility::log_error()(confirmation);
+                final_callback(confirmation);
+                return;
             }
 
             auto real_msg = make_reveal_gui(messages, use_ephemeral, std::nullopt);
             if (messages.size() < 3) {
-                my_follow_up(event, real_msg);
+                my_follow_up(event, real_msg, final_callback);
             } else {
                 my_follow_up(event, real_msg,
-                             recursive_follow_upper(event, ctx, use_ephemeral, std::views::drop(messages, 2)));
+                             recursive_follow_upper(event, ctx, use_ephemeral, std::views::drop(messages, 2), final_callback));
             }
         }
 
@@ -205,7 +206,8 @@ namespace {
                             GeneratorCallable &&line_generator,
                             GeneratorInput&& generator_input,
                             bool use_ephemeral,
-                            std::string_view button_id_prefix)
+                            std::optional<std::string_view> button_id_prefix,
+                            dpp::command_completion_event_t final_callback = dpp::utility::log_error())
     {
         std::ostringstream reply;
         std::vector<std::string> messages;
@@ -224,11 +226,17 @@ namespace {
         }
 
         /* Ok, we have a list of messages to send. */
-        auto real_msg = make_reveal_gui(messages, use_ephemeral, std::make_optional<std::string>(std::format("{}{}", button_id_prefix, generator_input)));
-        if (messages.size() < 3) {
-            event.reply(real_msg);
+        dpp::message msg;
+        if (button_id_prefix) {
+            msg = make_reveal_gui(messages, use_ephemeral, std::make_optional<std::string>(std::format("{}{}", button_id_prefix.value(), generator_input)));
         } else {
-            event.reply(real_msg, recursive_follow_upper(event, ctx, use_ephemeral, std::views::drop(messages, 2)));
+            msg = make_reveal_gui(messages, use_ephemeral, std::nullopt);
+        }
+
+        if (messages.size() < 3) {
+            event.reply(msg, final_callback);
+        } else {
+            event.reply(msg, recursive_follow_upper(event, ctx, use_ephemeral, std::views::drop(messages, 2)));
         }
     }
 }
@@ -240,7 +248,18 @@ setlistlast_command::on_button_click(const dpp::button_click_t& event)
         return;
     const auto concert = event.custom_id.substr(SETLISTLAST_BUTTON_ID_PREFIX.size());
 
-    reply_multimessage(event, ctx, &get_setlistlast_lines, concert, false, SETLISTLAST_BUTTON_ID_PREFIX);
+    auto on_completion = [event = event](const dpp::confirmation_callback_t &c) {
+        auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
+        if (c.is_error()) {
+            dpp::utility::log_error()(c);
+            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Sorry, I made a mistake and can't this setlist publically."));
+        } else {
+            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
+        }
+        event.edit_original_response(msg);
+    };
+
+    reply_multimessage(event, ctx, &get_setlistlast_lines, concert, false, std::nullopt, on_completion);
     setlistlast_reveal_success_counter->Increment();
 }
 
