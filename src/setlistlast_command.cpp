@@ -39,7 +39,7 @@ namespace {
         for (auto &track : setlistlast) {
             auto song = lookup_song(track.song, track.producer);
             if (!song) {
-                co_yield std::format("`{:2}` 🫠 '{}' I guess? This is a bug...\n", track.pos, track.song);
+                co_yield std::format("{}. 🫠 '{}' I guess? This is a bug...\n", track.pos, track.song);
                 continue;
             }
             /* Drop the concerts that occurred after the requested concert... */
@@ -57,7 +57,7 @@ namespace {
             });
 
             std::ostringstream ss;
-            ss << std::format("`{:2}` {}", track.pos, util::escape_markdown(song->name));
+            ss << std::format("{}. {}", track.pos, util::escape_markdown(song->name));
             if (song->singer != NO_VIRTUAL_SINGER) {
                 ss << " feat. " << magic_enum::enum_flags_name(song->singer);
             }
@@ -65,16 +65,13 @@ namespace {
 
             if (std::ranges::empty(rng)) {
                 ss << " **LIVE DEBUT**";
-//                co_yield std::format("`{:2}` {} feat. {} by {} **LIVE DEBUT**\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer));
             } else {
                 auto count = std::ranges::distance(rng);
                 ss << " *Previously@" << std::ranges::begin(rng)->concert;
                 if (count > 1) {
                     ss << ", " << count - 1 << " more before*";
-//                    co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}, {} more*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert, count - 1);
                 } else {
                     ss << "*";
-                        //co_yield std::format("`{:2}` {} feat. {} by {} *Previously@{}*\n", track.pos, util::escape_markdown(song->name), magic_enum::enum_flags_name(song->singer), util::escape_markdown(song->producer), std::ranges::begin(rng)->concert);
                 }
             }
             auto after_rng = std::views::take_while(std::views::reverse(setlists), [&](const auto &track)
@@ -174,7 +171,7 @@ namespace {
         recursive_follow_upper(const T& event,
                                context * const ctx,
                                bool use_ephemeral,
-                               auto &&rng,
+                               std::ranges::input_range auto&& rng,
                                dpp::command_completion_event_t final_callback = dpp::utility::log_error(),
                                int sequence = 2) noexcept :
             event(event),
@@ -209,7 +206,7 @@ namespace {
     template <typename EventType, typename GeneratorCallable, typename GeneratorInput>
     void reply_multimessage(const EventType& event,
                             context * const ctx,
-                            GeneratorCallable &&line_generator,
+                            GeneratorCallable&& line_generator,
                             GeneratorInput&& generator_input,
                             bool use_ephemeral,
                             std::optional<std::string> button_callback_key,
@@ -217,7 +214,9 @@ namespace {
     {
         std::ostringstream reply;
         std::vector<std::string> messages;
-        for (const auto& line : line_generator(std::forward<GeneratorInput>(generator_input))) {
+        for (const auto& line : std::invoke(std::forward<GeneratorCallable>(line_generator),
+                                            std::forward<GeneratorInput>(generator_input)))
+        {
             if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
                 messages.emplace_back(reply.view());
                 reply.str(std::string());
@@ -298,7 +297,7 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 std::expected<dpp::interaction_response, std::error_code>
 setlistlast_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
 {
-    for (auto & opt : event.options | std::views::filter(&dpp::command_option::focused)) {
+    for (const auto& opt : std::views::all(event.options) | std::views::filter(&dpp::command_option::focused)) {
         try {
             std::string uservalue = std::get<std::string>(opt.value);
 
