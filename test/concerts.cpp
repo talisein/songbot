@@ -103,5 +103,14 @@ int main()
         }
     };
 
+    "every song should have a frequency"_test = [] {
+        // Actually, some songs are defined but not in a setlist yet.
+        /*
+        auto song_has_frequency = [&](const auto& song) { return std::ranges::find(song_frequencies, song.name, &song_frequency::song_name) != std::ranges::end(song_frequencies); };
+        expect(std::ranges::all_of(songs, song_has_frequency)) << [&] {
+            return std::ranges::find_if_not(songs, song_has_frequency)->name; };
+        */
+    };
+
     return 0;
 }

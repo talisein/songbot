@@ -94,9 +94,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
         ss << ". " << count << " times total.";
     }
 
-    auto it = std::ranges::find_if(song_frequencies | std::views::enumerate,
-                                   [&](const auto& tuple) { return std::get<1>(tuple).song_name == song->name; });
-    ss << " Frequency Rank " << std::get<0>(*it) + 1;
+    ss << " Frequency Rank " << get_song_frequency_rank(song->name);
     event.reply(ss.view());
     last_success_counter->Increment();
     return {};

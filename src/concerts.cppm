@@ -1899,45 +1899,72 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
     });
 
 
-struct song_frequency
+export struct song_frequency
 {
     std::string_view song_name;
     size_t count;
 };
 
-/*
-constexpr
-std::vector<song_frequency> get_freqs() {
-    std::map<std::string_view, size_t> map;
-    for (const auto& track : setlists) {
-        if (auto it = map.find(track.song); it != std::end(map)) {
-            ++it->second;
-        } else {
-            map.insert({track.song, 1UZ});
-        }
-    }
-    auto vec = std::views::all(map) | std::views::transform([](const auto& pair) -> song_frequency { return {pair.first, pair.second}; }) | std::ranges::to<std::vector>();
-    std::ranges::stable_sort(vec, std::ranges::greater{}, &song_frequency::count);
-    return vec;
-}
-*/
 namespace {
-    // TODO: This makes the compile slow. There should be a way to use a map that's discarded at compile time...
     consteval auto generate_song_frequency()
     {
         std::array<song_frequency, songs.size()> freqs = {};
-        std::ranges::unique_copy(setlists | std::views::transform([](const auto &track) constexpr -> song_frequency { return song_frequency{track.song, 0UZ}; }),
-                                 std::ranges::begin(freqs),
-                                 [](const auto& l, const auto& r) constexpr { return l.song_name < r.song_name; });
-        for (auto& freq : freqs) {
-            freq.count = std::ranges::count(setlists, freq.song_name, &SetlistTrack::song);
+        std::vector<std::string_view> names = std::views::transform(setlists, &SetlistTrack::song) | std::ranges::to<std::vector>();
+        std::ranges::sort(names);
+        std::string_view prev_name;
+        size_t count = 0;
+        auto out = std::begin(freqs);
+        for (auto name : names) {
+            if (name == prev_name) {
+                ++count;
+            } else { /* name != prev_name */
+                if (count != 0) {
+                    out->song_name = prev_name;
+                    out->count = count;
+                    prev_name = name;
+                    count = 1;
+                    ++out;
+                    // If new songs are being added to the setlists, they might not be in songs array yet.
+                    if (out == std::end(freqs)) break;
+                } else {
+                    prev_name = name;
+                    count = 1;
+                }
+            }
         }
+        out->song_name = prev_name;
+        out->count = count;
+
         std::ranges::stable_sort(freqs, std::ranges::greater{}, &song_frequency::count);
         return freqs;
     }
 }
 
 export constexpr std::array song_frequencies = generate_song_frequency();
+
+export constexpr size_t get_song_frequency_rank(std::string_view song_name)
+{
+    auto rng = song_frequencies | std::views::enumerate;
+    auto it = std::ranges::find_if(rng,
+                                   [&](const auto& tuple) { return std::get<1>(tuple).song_name == song_name; });
+    if (it == std::ranges::end(rng)) {
+        return songs.size();
+    } else {
+        return std::get<0>(*it) + 1;
+    }
+}
+
+export constexpr size_t get_song_frequency(std::string_view song_name)
+{
+    auto rng = song_frequencies;
+    auto it = std::ranges::find_if(rng,
+                                   [&](const auto& frequency) { return frequency.song_name == song_name; });
+    if (it == std::ranges::end(rng)) {
+        return 0;
+    } else {
+        return it->count;
+    }
+}
 
 /* Check that all concerts are ordered chronologically */
 constexpr auto get_track_date = [](const auto& track) constexpr {
