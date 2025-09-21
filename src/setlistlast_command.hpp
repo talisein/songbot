@@ -23,7 +23,7 @@ import std;
 import util;
 import dpp;
 
-#include "commands.hpp"
+#include "iface_command.hpp"
 #include "state_storage.hpp"
 
 class setlistlast_command : public iface_command

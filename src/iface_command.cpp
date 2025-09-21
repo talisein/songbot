@@ -16,7 +16,7 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-#include "commands.hpp"
+#include "iface_command.hpp"
 #include "context.hpp"
 
 iface_command::iface_command(context& ctx, std::string_view cmd_name, std::string_view cmd_description) noexcept :

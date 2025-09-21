@@ -21,7 +21,7 @@
 import prometheus;
 import std;
 
-#include "commands.hpp"
+#include "iface_command.hpp"
 
 class last_command : public iface_command
 {

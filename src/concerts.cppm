@@ -1910,7 +1910,7 @@ namespace {
     {
         std::array<song_frequency, songs.size()> freqs = {};
         std::vector<std::string_view> names = std::views::transform(setlists, &SetlistTrack::song) | std::ranges::to<std::vector>();
-        std::ranges::sort(names);
+        std::ranges::stable_sort(names);
         std::string_view prev_name;
         size_t count = 0;
         auto out = std::begin(freqs);

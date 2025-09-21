@@ -92,9 +92,9 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
             ss << ", " << tour_to_string(track.concert_short_name);
         }
         ss << ". " << count << " times total.";
+        ss << " Frequency Rank " << get_song_frequency_rank(song->name);
     }
 
-    ss << " Frequency Rank " << get_song_frequency_rank(song->name);
     event.reply(ss.view());
     last_success_counter->Increment();
     return {};
