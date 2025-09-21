@@ -89,7 +89,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
         ss << "Prior to that: ";
         ss << tour_to_string(std::ranges::begin(remaining)->concert_short_name);
         for (auto track : std::views::drop(remaining, 1)) {
-            ss << ", " << track.concert_short_name;
+            ss << ", " << tour_to_string(track.concert_short_name);
         }
         ss << ". " << count << " times total.";
     }
