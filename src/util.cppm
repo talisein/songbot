@@ -18,6 +18,8 @@
 
 module;
 
+#include <cassert>
+
 export module util;
 
 import std;

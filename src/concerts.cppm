@@ -1908,39 +1908,34 @@ export struct song_frequency
 namespace {
     consteval auto generate_song_frequency()
     {
-        std::array<song_frequency, songs.size()> freqs = {};
+        std::vector<song_frequency> freqs;
         std::vector<std::string_view> names = std::views::transform(setlists, &SetlistTrack::song) | std::ranges::to<std::vector>();
-        std::ranges::stable_sort(names);
+        std::ranges::sort(names);
         std::string_view prev_name;
         size_t count = 0;
-        auto out = std::begin(freqs);
+        auto out = std::back_inserter(freqs);
         for (auto name : names) {
             if (name == prev_name) {
                 ++count;
             } else { /* name != prev_name */
                 if (count != 0) {
-                    out->song_name = prev_name;
-                    out->count = count;
+                    out = song_frequency{prev_name, count};
                     prev_name = name;
                     count = 1;
-                    ++out;
-                    // If new songs are being added to the setlists, they might not be in songs array yet.
-                    if (out == std::end(freqs)) break;
                 } else {
                     prev_name = name;
                     count = 1;
                 }
             }
         }
-        out->song_name = prev_name;
-        out->count = count;
+        out = song_frequency{prev_name, count};
 
         std::ranges::stable_sort(freqs, std::ranges::greater{}, &song_frequency::count);
         return freqs;
     }
 }
 
-export constexpr std::array song_frequencies = generate_song_frequency();
+export constexpr std::array song_frequencies = util::materialize<generate_song_frequency>();
 
 export constexpr size_t get_song_frequency_rank(std::string_view song_name)
 {
