@@ -45,11 +45,11 @@ namespace {
             /* Drop the concerts that occurred after the requested concert... */
             auto rng = std::views::drop_while(std::views::reverse(setlists), [&](const auto &track)
             {
-                return track.concert != concert->short_name;
+                return track.concert_short_name != concert->short_name;
             /* Drop the tracks for the requested concert... */
             }) | std::views::drop_while([&](const auto &track)
             {
-                return track.concert == concert->short_name;
+                return track.concert_short_name == concert->short_name;
             /* Match the remaining cases where the song name matches */
             }) | std::views::filter([&](const auto &track)
             {
@@ -67,7 +67,7 @@ namespace {
                 ss << " **LIVE DEBUT**";
             } else {
                 auto count = std::ranges::distance(rng);
-                ss << " *Previously@" << std::ranges::begin(rng)->concert;
+                ss << " *Previously@" << tour_to_string(std::ranges::begin(rng)->concert_short_name);
                 if (count > 1) {
                     ss << ", " << count - 1 << " more before*";
                 } else {
@@ -76,7 +76,7 @@ namespace {
             }
             auto after_rng = std::views::take_while(std::views::reverse(setlists), [&](const auto &track)
             {
-                return track.concert != concert->short_name;
+                return track.concert_short_name != concert->short_name;
             }) | std::views::filter([&](const auto &track)
             {
                 return track.song == song->name;
@@ -308,7 +308,7 @@ setlistlast_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
 
             auto resp = dpp::interaction_response(dpp::ir_autocomplete_reply);
             for (const auto& concert : matches | std::views::take(AUTOCOMPLETE_MAX_CHOICES) ) {
-                resp.add_autocomplete_choice(dpp::command_option_choice(std::string(concert.short_name), std::string(concert.short_name)));
+                resp.add_autocomplete_choice(dpp::command_option_choice(std::string(tour_to_string(concert.short_name)), std::string(tour_to_string(concert.short_name))));
             }
 
             return resp;

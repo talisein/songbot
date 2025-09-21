@@ -172,7 +172,7 @@ setlist_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
 
             auto resp = dpp::interaction_response(dpp::ir_autocomplete_reply);
             for (const auto& concert : matches | std::views::take(AUTOCOMPLETE_MAX_CHOICES) ) {
-                resp.add_autocomplete_choice(dpp::command_option_choice(std::string(concert.short_name), std::string(concert.short_name)));
+                resp.add_autocomplete_choice(dpp::command_option_choice(std::string(tour_to_string(concert.short_name)), std::string(tour_to_string(concert.short_name))));
             }
 
             return resp;

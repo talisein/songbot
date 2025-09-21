@@ -97,4 +97,27 @@ export namespace util
             }
         });
     }
+
+
+    template <std::size_t Extent, typename Range>
+    consteval auto to_array(const Range & range) {
+        using value_type = std::ranges::range_value_t<Range>;
+        static_assert(std::default_initializable<value_type>);
+        assert(range.size() == Extent);
+
+        // I can't use std::copy / std::ranges::copy as the result can have const (like pair from map)
+        return [&]<std::size_t... Idx>(std::index_sequence<Idx...>) {
+            auto it = range.begin();
+            return std::array<value_type, Extent>{((void)Idx, *it++)...};
+        }(std::make_index_sequence<Extent>());
+    }
+
+    template <auto callback>
+    requires (std::invocable<decltype(callback)>) consteval auto materialize() {
+        constexpr std::size_t extent = callback().size();
+        return to_array<extent>(callback());
+    }
+
+
+
 }

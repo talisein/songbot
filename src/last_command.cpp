@@ -77,7 +77,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
 
     std::ostringstream ss;
     using namespace std::literals;
-    ss << std::format("{} last played at {}. ", *song, lookup_concert(std::ranges::begin(rng)->concert)->name);
+    ss << std::format("{} last played at {}. ", *song, lookup_concert(std::ranges::begin(rng)->concert_short_name)->name);
     if (song->published != 0y/0/0) {
         ss << std::format("It was published {}. ", song->published);
     }
@@ -87,13 +87,16 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
         ss << "That's the only time its played!";
     } else {
         ss << "Prior to that: ";
-        ss << std::ranges::begin(remaining)->concert;
+        ss << tour_to_string(std::ranges::begin(remaining)->concert_short_name);
         for (auto track : std::views::drop(remaining, 1)) {
-            ss << ", " << track.concert;
+            ss << ", " << track.concert_short_name;
         }
         ss << ". " << count << " times total.";
     }
 
+    auto it = std::ranges::find_if(song_frequencies | std::views::enumerate,
+                                   [&](const auto& tuple) { return std::get<1>(tuple).song_name == song->name; });
+    ss << " Frequency Rank " << std::get<0>(*it) + 1;
     event.reply(ss.view());
     last_success_counter->Increment();
     return {};
