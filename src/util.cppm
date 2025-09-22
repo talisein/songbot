@@ -100,7 +100,10 @@ export namespace util
         });
     }
 
-
+    /* hanickadot's constexpr materialization
+     * https://www.reddit.com/r/cpp/comments/1ideht3/comment/m9yz1x8/?utm_source=share&utm_medium=web3x&utm_name=web3xcss&utm_term=1&utm_content=share_button
+     * https://compiler-explorer.com/z/55MxnGcPa
+     */
     template <std::size_t Extent, typename Range>
     consteval auto to_array(const Range & range) {
         using value_type = std::ranges::range_value_t<Range>;
@@ -119,7 +122,4 @@ export namespace util
         constexpr std::size_t extent = callback().size();
         return to_array<extent>(callback());
     }
-
-
-
 }

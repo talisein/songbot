@@ -64,20 +64,17 @@ export struct Song
 {
     using sv = std::string_view;
     using osv = std::optional<std::string_view>;
-    Song(osv jp_name, osv romanji_name, sv name, Singer singer, sv producer, std::chrono::year_month_day published = 0y/0/0, osv disam = std::nullopt) noexcept :
+    constexpr Song(osv jp_name, osv romanji_name, sv name, Singer singer, sv producer, std::chrono::year_month_day published = 0y/0/0, osv disam = std::nullopt) noexcept :
         jp_name(jp_name),
         romanji_name(romanji_name),
         name(name),
         singer(singer),
         producer(producer),
         published(published),
-        disambiguation(disam),
-        cf_jp_name(jp_name.transform(&util::to_nfkc_casefold)),
-        cf_romanji_name(romanji_name.transform(&util::to_nfkc_casefold)),
-        cf_name(util::to_nfkc_casefold(name))
+        disambiguation(disam)
     {
     }
-
+    constexpr Song() noexcept = default; // Needed for util::materialize
     std::optional<std::string_view> jp_name;
     std::optional<std::string_view> romanji_name;
     std::string_view name; // en
@@ -86,16 +83,11 @@ export struct Song
     std::chrono::year_month_day published;
     std::optional<std::string_view> disambiguation; // keep last
 
-    std::optional<std::string> cf_jp_name;
-    std::optional<std::string> cf_romanji_name;
-    std::string cf_name;
+    std::optional<std::string_view> cf_jp_name;
+    std::optional<std::string_view> cf_romanji_name;
+    std::string_view cf_name;
 };
 
-struct SongStore
-{
-    std::string foo;
-    std::string bar;
-};
 
 template<typename T, typename Proj, std::size_t N>
 constexpr auto get_sorted_songs(const std::array<T, N>& arr, Proj&& proj) -> std::array<T, N>
@@ -106,7 +98,10 @@ constexpr auto get_sorted_songs(const std::array<T, N>& arr, Proj&& proj) -> std
 }
 
 using std::nullopt;
-export const std::array songs = get_sorted_songs(std::to_array<Song>({
+/* Creates songs without casefolded fields */
+constexpr std::vector<Song> generate_songs_incomplete()
+{
+    std::vector<Song> res = {
   {"🔪、🔪、🔪", "Knife, Knife, Knife", "Knife, Knife, Knife", Miku, "Kikuo"},
   {nullopt, nullopt, "1 + 1", Miku, "doriko"},
   {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P", 2012y/8/15},
@@ -478,16 +473,105 @@ export const std::array songs = get_sorted_songs(std::to_array<Song>({
   {"いのちもやしてたたけよ", "Inochi Moyashite Tatake yo", "Let Your Life Be Vigorous and Open Your Mouth", Miku, "Kodo"},
   {"祭りだヘイカモン", "Matsuri da Hey Come On", "It's a Festival, Hey, C'mon", Miku, "Pinocchio-P"},
   {nullopt, nullopt, "LION", NO_VIRTUAL_SINGER, "Kodo"},
+    };
 
-//meow
-}), &Song::cf_name);
+    return res;
+}
+
+struct SongElements
+{
+    std::optional<std::string> cf_jp_name;
+    std::optional<std::string> cf_romanji_name;
+    std::string cf_name;
+};
+
+constexpr std::vector<SongElements> generate_song_elements()
+{
+    return std::views::transform(generate_songs_incomplete(), [] (const Song& song) {
+        return SongElements{ song.jp_name.transform(&util::to_nfkc_casefold),
+                             song.romanji_name.transform(&util::to_nfkc_casefold),
+                             util::to_nfkc_casefold(song.name) };
+    } ) | std::ranges::to<std::vector>();
+}
+
+/* This function generates a static constexpr array<char> that holds the
+ * casefolded version of all the Song names. Then then string_views are assigned
+ * in the returned vector pointing into that array.
+ *
+ * https://compiler-explorer.com/z/E7n1T357T
+ * https://youtu.be/_AefJX66io8
+ */
+consteval std::vector<Song> generate_songs_complete()
+{
+    constexpr auto over_sized = [] {
+        const std::vector elems = generate_song_elements();
+        std::array<char, 4096 * 4096> allchars;
+        std::array<std::size_t, 4096> string_lengths;
+        auto current = allchars.begin();
+        for (std::size_t index = 0; const auto& elem : elems) {
+            if (elem.cf_jp_name) {
+                current = std::ranges::copy(elem.cf_jp_name.value(), current).out;
+                string_lengths[index++] = elem.cf_jp_name->size();
+            } else {
+                string_lengths[index++] = 0UZ;
+            }
+            if (elem.cf_romanji_name) {
+                current = std::ranges::copy(elem.cf_romanji_name.value(), current).out;
+                string_lengths[index++] = elem.cf_romanji_name->size();
+            } else {
+                string_lengths[index++] = 0UZ;
+            }
+            current = std::ranges::copy(elem.cf_name, current).out;
+            string_lengths[index++] = elem.cf_name.size();
+        }
+        const auto total_chars = std::distance(allchars.begin(), current);
+        return std::tuple{elems.size(), total_chars, allchars, string_lengths};
+    }();
+
+    constexpr auto total_chars = std::get<1>(over_sized);
+    static constexpr auto right_sized_chars = [&]{
+        std::array<char, total_chars> result;
+        const auto &allchars = std::get<2>(over_sized);
+        std::ranges::copy(allchars | std::views::take(total_chars), result.begin());
+        return result;
+    }();
+
+    std::vector<Song> res = generate_songs_incomplete();
+    const auto& string_lengths = std::get<3>(over_sized);
+    std::size_t start = 0;
+    for (std::size_t index = 0; auto& song : res) {
+        if (const auto cf_jp_size = string_lengths[index++]; cf_jp_size > 0) {
+            song.cf_jp_name = std::string_view{right_sized_chars.begin() + start,
+                                               right_sized_chars.begin() + start + cf_jp_size};
+            start += cf_jp_size;
+        } else {
+            song.cf_jp_name = std::nullopt;
+        }
+        if (const auto cf_romanji_size = string_lengths[index++]; cf_romanji_size > 0) {
+            song.cf_romanji_name = std::string_view{right_sized_chars.begin() + start,
+                                               right_sized_chars.begin() + start + cf_romanji_size};
+            start += cf_romanji_size;
+        } else {
+            song.cf_romanji_name = std::nullopt;
+        }
+
+        const auto cf_name_size = string_lengths[index++];
+        song.cf_name = std::string_view{right_sized_chars.begin() + start,
+                                        right_sized_chars.begin() + start + cf_name_size};
+        start += cf_name_size;
+    }
+
+    std::ranges::stable_sort(res, {}, &Song::cf_name);
+    return res;
+}
+export constexpr std::array songs = util::materialize<generate_songs_complete>();
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
 constexpr auto songs_have_same_names = [](auto l, auto r) constexpr {
-    return l.name == r.name && l.disambiguation == r.disambiguation;
+    return l.cf_name == r.cf_name && l.disambiguation == r.disambiguation;
 };
-//static_assert(std::ranges::adjacent_find(songs, songs_have_same_names) == std::ranges::end(songs),
-//              std::ranges::adjacent_find(songs, songs_have_same_names)->name);
+static_assert(std::ranges::adjacent_find(songs, songs_have_same_names) == std::ranges::end(songs),
+              std::ranges::adjacent_find(songs, songs_have_same_names)->cf_name);
 
 /* Everything needs a date. Sometimes. */
 constexpr auto song_has_no_date = [](const auto& song) constexpr { return song.published == 0y/0/0;};
@@ -496,15 +580,15 @@ constexpr auto song_has_no_date = [](const auto& song) constexpr { return song.p
 
 /* jp_name shouldn't equal name */
 constexpr auto song_has_same_jp_en_name = [](const auto& song) constexpr { return song.jp_name.transform([sn = song.name](auto &jp_name) constexpr -> bool { return jp_name == sn; }).value_or(false); };
-//static_assert(std::ranges::none_of(songs, song_has_same_jp_en_name),
-//              std::ranges::find_if(songs, song_has_same_jp_en_name)->name);
+static_assert(std::ranges::none_of(songs, song_has_same_jp_en_name),
+              std::ranges::find_if(songs, song_has_same_jp_en_name)->name);
 
 /* romanji shouldn't equal jp_name */
 constexpr auto song_has_same_jp_romanji_name = [](const auto& song) constexpr {
     return song.romanji_name.transform([jp_sn = song.jp_name](auto &romanji_name) constexpr -> bool { return romanji_name == jp_sn; }).value_or(false);
 };
-//static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
-//              std::ranges::find_if(songs, song_has_same_jp_romanji_name)->name);
+static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
+              std::ranges::find_if(songs, song_has_same_jp_romanji_name)->name);
 
 export struct AltName
 {
