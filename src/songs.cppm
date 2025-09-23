@@ -478,93 +478,34 @@ constexpr std::vector<Song> generate_songs_incomplete()
     return res;
 }
 
-struct SongElements
+constexpr auto casefolded_song_names_tuple = [] {
+    constexpr auto all_chars_data = util::generate_casefolded_fields<generate_songs_incomplete, 2, 3,
+                                                                     &Song::jp_name, &Song::romanji_name, &Song::name>();
+
+    constexpr auto total_chars = std::get<2>(all_chars_data);
+    std::array<char, total_chars> result_chars;
+    const auto& allchars = std::get<0>(all_chars_data);
+    std::ranges::copy(allchars | std::views::take(total_chars), result_chars.begin());
+
+    const auto& string_lengths = std::get<1>(all_chars_data);
+    constexpr auto total_string_lengths = std::get<3>(all_chars_data);
+    std::array<std::size_t, total_string_lengths> result_string_lengths;
+    std::ranges::copy(string_lengths | std::views::take(total_string_lengths), result_string_lengths.begin());
+    return std::tuple{result_chars, result_string_lengths};
+}();
+
+consteval std::vector<Song> generate_songs()
 {
-    std::optional<std::string> cf_jp_name;
-    std::optional<std::string> cf_romanji_name;
-    std::string cf_name;
-};
-
-constexpr std::vector<SongElements> generate_song_elements()
-{
-    return std::views::transform(generate_songs_incomplete(), [] (const Song& song) {
-        return SongElements{ song.jp_name.transform(&util::to_nfkc_casefold),
-                             song.romanji_name.transform(&util::to_nfkc_casefold),
-                             util::to_nfkc_casefold(song.name) };
-    } ) | std::ranges::to<std::vector>();
-}
-
-/* This function generates a static constexpr array<char> that holds the
- * casefolded version of all the Song names. Then then string_views are assigned
- * in the returned vector pointing into that array.
- *
- * https://compiler-explorer.com/z/E7n1T357T
- * https://youtu.be/_AefJX66io8
- */
-consteval std::vector<Song> generate_songs_complete()
-{
-    constexpr auto over_sized = [] {
-        const std::vector elems = generate_song_elements();
-        std::array<char, 4096 * 4096> allchars;
-        std::array<std::size_t, 4096> string_lengths;
-        auto current = allchars.begin();
-        for (std::size_t index = 0; const auto& elem : elems) {
-            if (elem.cf_jp_name) {
-                current = std::ranges::copy(elem.cf_jp_name.value(), current).out;
-                string_lengths[index++] = elem.cf_jp_name->size();
-            } else {
-                string_lengths[index++] = 0UZ;
-            }
-            if (elem.cf_romanji_name) {
-                current = std::ranges::copy(elem.cf_romanji_name.value(), current).out;
-                string_lengths[index++] = elem.cf_romanji_name->size();
-            } else {
-                string_lengths[index++] = 0UZ;
-            }
-            current = std::ranges::copy(elem.cf_name, current).out;
-            string_lengths[index++] = elem.cf_name.size();
-        }
-        const auto total_chars = std::distance(allchars.begin(), current);
-        return std::tuple{elems.size(), total_chars, allchars, string_lengths};
-    }();
-
-    constexpr auto total_chars = std::get<1>(over_sized);
-    static constexpr auto right_sized_chars = [&]{
-        std::array<char, total_chars> result;
-        const auto &allchars = std::get<2>(over_sized);
-        std::ranges::copy(allchars | std::views::take(total_chars), result.begin());
-        return result;
-    }();
-
-    std::vector<Song> res = generate_songs_incomplete();
-    const auto& string_lengths = std::get<3>(over_sized);
-    std::size_t start = 0;
-    for (std::size_t index = 0; auto& song : res) {
-        if (const auto cf_jp_size = string_lengths[index++]; cf_jp_size > 0) {
-            song.cf_jp_name = std::string_view{right_sized_chars.begin() + start,
-                                               right_sized_chars.begin() + start + cf_jp_size};
-            start += cf_jp_size;
-        } else {
-            song.cf_jp_name = std::nullopt;
-        }
-        if (const auto cf_romanji_size = string_lengths[index++]; cf_romanji_size > 0) {
-            song.cf_romanji_name = std::string_view{right_sized_chars.begin() + start,
-                                               right_sized_chars.begin() + start + cf_romanji_size};
-            start += cf_romanji_size;
-        } else {
-            song.cf_romanji_name = std::nullopt;
-        }
-
-        const auto cf_name_size = string_lengths[index++];
-        song.cf_name = std::string_view{right_sized_chars.begin() + start,
-                                        right_sized_chars.begin() + start + cf_name_size};
-        start += cf_name_size;
-    }
-
+    auto res = util::merge_casefolded_fields_from_tuple<Song, generate_songs_incomplete,
+                                                        2, 3,
+                                                        &Song::cf_jp_name,
+                                                        &Song::cf_romanji_name,
+                                                        &Song::cf_name>(casefolded_song_names_tuple);
     std::ranges::stable_sort(res, {}, &Song::cf_name);
     return res;
 }
-export constexpr std::array songs = util::materialize<generate_songs_complete>();
+
+export constexpr std::array songs = util::materialize<generate_songs>();
 
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
 constexpr auto songs_have_same_names = [](auto l, auto r) constexpr {
@@ -592,17 +533,19 @@ static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
 
 export struct AltName
 {
-    AltName(std::string_view alt_name, std::string_view name) :
+    constexpr AltName(std::string_view alt_name, std::string_view name) noexcept :
         alt_name(alt_name),
-        name(name),
-        cf_alt_name(util::to_nfkc_casefold(alt_name))
+        name(name)
     { }
+    constexpr AltName() noexcept = default; // Needed for util::materialize
     std::string_view alt_name;
     std::string_view name;
-    std::string cf_alt_name;
+    std::string_view cf_alt_name;
 };
 
-export const std::array alt_names = get_sorted_songs(std::to_array<AltName>({
+constexpr std::vector<AltName> generate_altnames_incomplete()
+{
+    std::vector<AltName> res = {
             { "Colorful Melody", "Colorful × Melody"},
             { "Colorful x Melody", "Colorful × Melody"},
             { "Fire Flower", "Fire◎Flower"},
@@ -616,7 +559,36 @@ export const std::array alt_names = get_sorted_songs(std::to_array<AltName>({
             { "Beware of the Miku Miku Bacteria", "Beware of the Miku Miku Germs♪"},
             { "01_ballade", "Fragments of a Star"},
             { "01 ballade", "Fragments of a Star"},
-        }), &AltName::cf_alt_name);
+    };
+    return res;
+}
+
+constexpr auto casefolded_altnames_tuple = [] {
+    constexpr auto all_chars_data = util::generate_casefolded_fields<generate_altnames_incomplete, 0, 1,
+                                                                     &AltName::alt_name>();
+
+    constexpr auto total_chars = std::get<2>(all_chars_data);
+    std::array<char, total_chars> result_chars;
+    const auto& allchars = std::get<0>(all_chars_data);
+    std::ranges::copy(allchars | std::views::take(total_chars), result_chars.begin());
+
+    const auto& string_lengths = std::get<1>(all_chars_data);
+    constexpr auto total_string_lengths = std::get<3>(all_chars_data);
+    std::array<std::size_t, total_string_lengths> result_string_lengths;
+    std::ranges::copy(string_lengths | std::views::take(total_string_lengths), result_string_lengths.begin());
+    return std::tuple{result_chars, result_string_lengths};
+}();
+
+consteval std::vector<AltName> generate_altnames()
+{
+    auto res = util::merge_casefolded_fields_from_tuple<AltName, generate_altnames_incomplete,
+                                                        0, 1,
+                                                        &AltName::cf_alt_name>(casefolded_altnames_tuple);
+    std::ranges::stable_sort(res, {}, &AltName::cf_alt_name);
+    return res;
+}
+
+export constexpr std::array alt_names = util::materialize<generate_altnames>();
 
 template <>
 struct std::formatter<Song> {

@@ -122,4 +122,112 @@ export namespace util
         constexpr std::size_t extent = callback().size();
         return to_array<extent>(callback());
     }
+
+
+/*************************** HERE BE DRAGONS ***********************************/
+/* This function generates a static constexpr array<char> that holds the
+ * casefolded version of all the Song names. Then then string_views are assigned
+ * in the returned vector pointing into that array.
+ *
+ * https://compiler-explorer.com/z/E7n1T357T
+ * https://youtu.be/_AefJX66io8
+ *
+ * Except we don't need to do this for only Songs, so its templated on fields...
+ */
+    template <std::invocable auto SourceBuilder,
+              std::size_t NumOptionalSource,
+              std::size_t NumSource,
+              auto... SourceMembers>
+    consteval auto generate_casefolded_fields() {
+        constexpr auto source_members_tuple = std::tuple{SourceMembers...};
+
+        const std::vector elems = std::invoke(SourceBuilder);
+        std::array<char, 4096 * 4096> allchars; // Start with a sufficiently large array
+        std::array<std::size_t, 4096> string_lengths;
+        auto current = allchars.begin();
+        std::size_t index = 0;
+
+        for (const auto& elem : elems) {
+            // Process optional source members
+            [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+                ((
+                    [&] {
+                        if (const auto& str_opt = std::invoke(std::get<Is>(source_members_tuple), elem); str_opt) {
+                            const auto casefolded = util::to_nfkc_casefold(*str_opt);
+                            current = std::ranges::copy(casefolded, current).out;
+                            string_lengths[index++] = casefolded.size();
+                        } else {
+                            string_lengths[index++] = 0UZ;
+                        }
+                    }()
+                    ), ...);
+            }(std::make_index_sequence<NumOptionalSource>{});
+
+            // Process non-optional source members
+            [&]<std::size_t... Js>(std::index_sequence<Js...>) {
+                ((
+                    [&] {
+                        const auto casefolded = util::to_nfkc_casefold(std::invoke(std::get<Js + NumOptionalSource>(source_members_tuple), elem));
+                        current = std::ranges::copy(casefolded, current).out;
+                        string_lengths[index++] = casefolded.size();
+                    }()
+                    ), ...);
+            }(std::make_index_sequence<NumSource - NumOptionalSource>{});
+        }
+        const auto total_chars = std::distance(allchars.begin(), current);
+
+        // Return a tuple containing the over-sized array and the lengths.
+        return std::tuple{allchars, string_lengths, total_chars, index};
+    }
+
+    template <typename Dest,
+              std::invocable auto IncompleteDestBuilder,
+              std::size_t NumOptionalDest,
+              std::size_t NumDest,
+              auto... Members>
+    constexpr std::vector<Dest> merge_casefolded_fields_from_tuple(const auto& casefolded_tuple)
+    {
+        constexpr auto all_members_tuple = std::tuple{Members...};
+        constexpr auto dest_members_tuple = [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+            return std::tuple{std::get<Is>(all_members_tuple)...};
+        }(std::make_index_sequence<NumDest>{});
+
+        const auto& right_sized_chars = std::get<0>(casefolded_tuple);
+        const auto& string_lengths = std::get<1>(casefolded_tuple);
+
+        std::vector<Dest> res = IncompleteDestBuilder();
+        std::size_t start = 0;
+        std::size_t index = 0;
+
+        for (auto& dest_elem : res) {
+            // Process optional destination members
+            [&]<std::size_t... Is>(std::index_sequence<Is...>) {
+                ((
+                    [&] {
+                        if (const auto size = string_lengths[index++]; size > 0) {
+                            std::invoke(std::get<Is>(dest_members_tuple), dest_elem) = std::string_view{right_sized_chars.begin() + start, size};
+                            start += size;
+                        } else {
+                            std::invoke(std::get<Is>(dest_members_tuple), dest_elem) = std::nullopt;
+                        }
+                    }()
+                    ), ...);
+            }(std::make_index_sequence<NumOptionalDest>{});
+
+            // Process non-optional destination members
+            [&]<std::size_t... Js>(std::index_sequence<Js...>) {
+                ((
+                    [&] {
+                        const auto size = string_lengths[index++];
+                        std::invoke(std::get<Js + NumOptionalDest>(dest_members_tuple), dest_elem) = std::string_view{right_sized_chars.begin() + start, size};
+                        start += size;
+                    }()
+                    ), ...);
+            }(std::make_index_sequence<NumDest - NumOptionalDest>{});
+        }
+
+        return res;
+    }
+
+
 }
