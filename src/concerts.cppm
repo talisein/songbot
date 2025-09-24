@@ -39,6 +39,7 @@ export enum ConcertSeries
     MIKU_WITH_YOU,
     JAPAN_TOUR,
     KODO,
+    ANNIVERSARY,
 };
 
 export enum ConcertTour
@@ -100,6 +101,8 @@ export enum ConcertTour
     ME2024NZAU,
     Blooming,
     MM2025,
+    KAGA14,
+    MK15,
 };
 
 export constexpr std::string_view
@@ -122,6 +125,7 @@ tour_to_string(ConcertTour tour)
             case MP2013Sapporo: return "MikuPa 2013 Sapporo"sv;
             case MP2013Kansai:  return "MikuPa 2013 Kansai"sv;
             case MM10Sapporo:   return "MM10th Sapporo"sv;
+            case KAGA14:   return "Kagamine 14th"sv;
             default:
                 return magic_enum::enum_name(tour);
         }
@@ -147,6 +151,7 @@ export struct Concert
     std::string_view name;
     ConcertTour short_name;
     std::chrono::year_month_day date; // first day in series
+    std::optional<int64_t> vocadb_event_id; // "ReleaseEvent"
 };
 
 export constexpr std::array concerts = std::to_array<Concert>({
@@ -193,12 +198,14 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2021 Online",                                    ME2021,      2021y/6/6 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2021",                                  MM2021,      2021y/10/22 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2021",                                       MWY2021,     2021y/12/25 },
+        { ANNIVERSARY,      "Kagamine Rin・Len Happy 14th Birthday Party 「Two You☆★」",         KAGA14,      2022y/7/7, 4161 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 10th Anniversary",                      MM2022,      2022y/8/12 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 10th Anniversary",                      MM10Sapporo, 2023y/2/4 },
         { JAPAN_TOUR,       "Hatsune Miku JAPAN TOUR 2023 ~THUNDERBOLT~",                       Thunderbolt, 2023y/2/23 },
         { KODO,             "Hatsune Miku × Kodo Taiko Special Live 2023",                      KODO2023,    2023y/6/3 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2023",                                  MM2023,      2023y/8/11 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2023 VR",                                        ME2023VR,    2023y/11/11 },
+        { ANNIVERSARY,      "MK15th project MEIKO＆KAITO Online Concert",                       MK15,        2024y/2/24, 6539 },
         { MIKUFES,          "Miku FES'24 (Spring) ~Happy 16th Birthday~",                       MIKUFES24,   2024y/3/31 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2024 North America",                             ME2024NA,    2024y/4/4 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2024",                                       MWY2024,     2024y/7/13 },
@@ -1484,6 +1491,28 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { MWY2021, 15, "Hand in Hand" },
         { MWY2021, 16, "The First Sound" },
         { MWY2021, 17, "My Stage With You" },
+        { KAGA14, 1, "Kiddie War" },
+        { KAGA14, 2, "ROKI" },
+        { KAGA14, 3, "Tokyo Teddy Bear" },
+        { KAGA14, 4, "Melancholic" },
+        { KAGA14, 5, "Telecaster B Boy" },
+        { KAGA14, 6, "Embarrassment-Hiding Adolescence" },
+        { KAGA14, 7, "Gemini" },
+        { KAGA14, 8, "Meltdown" },
+        { KAGA14, 9, "Law-evading Rock" },
+        { KAGA14, 10, "Solitude's End" },
+        { KAGA14, 11, "Tell Me Answer", nullopt, "Rin Party" },
+        { KAGA14, 12, "Sweet Magic", nullopt, "Rin Party" },
+        { KAGA14, 13, "Holy Lance Explosion Boy", nullopt, "Len Party" },
+        { KAGA14, 14, "Butterfly on Your Right Shoulder", nullopt, "Len Party" },
+        { KAGA14, 15, "Main Character" },
+        { KAGA14, 16, "Love-Hate" },
+        { KAGA14, 17, "I Couldn't Become a Super Cat After All" },
+        { KAGA14, 18, "Heart" },
+        { KAGA14, 19, "Fire◎Flower" },
+        { KAGA14, 20, "Remote Controller" },
+        { KAGA14, 21, "BRING IT ON!" },
+        { KAGA14, 22, "Good is YEAH!" },
         { MM2022, 1, "Next Nest" },
         { MM2022, 2, "Vampire" },
         { MM2022, 3, "Bless Your Breath" },
@@ -1657,6 +1686,19 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2023VR, 12, "Plaything" },
         { ME2023VR, 13, "Tell Your World" },
         { ME2023VR, 14, "imaginary love story" },
+        { MK15, 1, "Red Land Marker"},
+        { MK15, 2, "Star of Heaven"},
+        { MK15, 3, "Change me"},
+        { MK15, 4, "Literacy"},
+        { MK15, 5, "on the rocks"},
+        { MK15, 6, "My Love is Hellfire"},
+        { MK15, 7, "Lover's Suicide Oblivion"},
+        { MK15, 8, "Doctor=Funk Beat"},
+        { MK15, 9, "Warm Kaito"},
+        { MK15, 10, "Midnight Surf"},
+        { MK15, 11, "Resonance Between You and Me"},
+        { MK15, 12, "Rainy Snowdrop"},
+        { MK15, 13, "Wintry Winds"},
         { MIKUFES24, 1, "I'll Miku-Miku You♪ (For Reals)" },
         { MIKUFES24, 2, "Raspberry＊Monster" },
         { MIKUFES24, 3, "Heart Democracy" },
@@ -1940,8 +1982,8 @@ export constexpr std::array song_frequencies = util::materialize<generate_song_f
 export constexpr size_t get_song_frequency_rank(std::string_view song_name)
 {
     auto rng = song_frequencies | std::views::enumerate;
-    auto it = std::ranges::find_if(rng,
-                                   [&](const auto& tuple) { return std::get<1>(tuple).song_name == song_name; });
+    auto it = std::ranges::find(rng, song_name,
+                                [&](const auto& tuple) { return std::get<1>(tuple).song_name; });
     if (it == std::ranges::end(rng)) {
         return songs.size();
     } else {
@@ -1952,8 +1994,7 @@ export constexpr size_t get_song_frequency_rank(std::string_view song_name)
 export constexpr size_t get_song_frequency(std::string_view song_name)
 {
     auto rng = song_frequencies;
-    auto it = std::ranges::find_if(rng,
-                                   [&](const auto& frequency) { return frequency.song_name == song_name; });
+    auto it = std::ranges::find(rng, song_name, &song_frequency::song_name);
     if (it == std::ranges::end(rng)) {
         return 0;
     } else {
