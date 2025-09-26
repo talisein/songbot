@@ -223,6 +223,9 @@ project_version = vcs_tag(input: 'version.hpp.in',
                           replace_string: 'PROJ_VERSION',
                           fallback: meson.project_version())
 
+
+subdir('vocadb')
+
 src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'errors.cpp', 'setlist_command.cpp', 'song_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp']
 
 exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module, util_module,

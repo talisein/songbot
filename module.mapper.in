@@ -7,6 +7,7 @@ concerts  @BUILD_DIR@/src/concerts.gcm
 @PROMETHEUS_CORE_INCLUDEDIR@/prometheus/counter.h @BUILD_DIR@/src/counter_h.gcm
 @PROMETHEUS_PULL_INCLUDEDIR@/prometheus/exposer.h @BUILD_DIR@/src/exposer_h.gcm
 @PROMETHEUS_CORE_INCLUDEDIR@/prometheus/registry.h @BUILD_DIR@/src/registry_h.gcm
+/usr/include/cpr/cpr.h @BUILD_DIR@/src/vocadb/cpr_h.gcm
 
 uni_algo @BUILD_DIR@/src/uni_algo.gcm
 magic_enum @BUILD_DIR@/src/magic_enum.gcm
@@ -14,3 +15,5 @@ boost.ut @BUILD_DIR@/test/ut.gcm
 dpp @BUILD_DIR@/src/dpp.gcm
 prometheus @BUILD_DIR@/src/prometheus.gcm
 util @BUILD_DIR@/src/util.gcm
+cpr @BUILD_DIR@/src/vocadb/cpr.gcm
+nlohmann.json @BUILD_DIR@/src/vocadb/json.gcm

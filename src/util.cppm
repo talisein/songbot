@@ -123,7 +123,6 @@ export namespace util
         return to_array<extent>(callback());
     }
 
-
 /*************************** HERE BE DRAGONS ***********************************/
 /* This function generates a static constexpr array<char> that holds the
  * casefolded version of all the Song names. Then then string_views are assigned
