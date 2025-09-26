@@ -1,0 +1,18 @@
+[wrap-git]
+# The official GitHub URL for the nlohmann/json repository
+url = https://github.com/nlohmann/json.git
+
+# The specific Git commit hash you requested
+revision = 9810c394086722f46208db947dee0df21c67bd18
+
+directory = json-9810c39
+patch_directory = json-patch
+
+# A shallow clone is highly recommended for speed and disk space
+# It fetches only the files for this specific commit.
+depth = 1
+
+# [provide] section is optional for wraps named after the project
+# but it's good practice. It tells Meson the dependency name to look for.
+[provide]
+json = nlohmann_json

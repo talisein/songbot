@@ -72,6 +72,7 @@ add_project_arguments( '-fmodules',
                        '-Mno-modules',
                        '-fcoroutines',
                        '-fconstexpr-ops-limit=3355443200',
+                       '--embed-dir=@0@'.format(meson.project_source_root() / 'res'),
                        language: ['cpp'])
 
 subdir('src')

@@ -1,1 +1,4 @@
-
+option('build_anidb_sourcegen', type : 'boolean', value : false, description:
+'''Queries vocadb for song data and generates constexpr source code
+representation. Only intended for developer, this data will just be checked in
+(otherwise github action will scrape on every build).''')

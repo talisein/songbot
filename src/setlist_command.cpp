@@ -19,9 +19,11 @@
 import util;
 import concerts;
 import songs;
+import vocadb.events;
 
 #include "setlist_command.hpp"
 #include "context.hpp"
+#include "vocadb-api.hpp"
 
 namespace {
     static

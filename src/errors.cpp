@@ -38,6 +38,10 @@ songbot_error_category::message(int ev) const
             return "Autocompletion requested but no passed option was focused";
         case songbot_error::explosion:
             return "💥💥💥";
+        case songbot_error::http_error_400:
+            return "HTTP Error > 400";
+        case songbot_error::http_error_404:
+            return "HTTP Error 404 Not Found";
     }
 
     return std::format("Unknown songbot error code {}", ev);
