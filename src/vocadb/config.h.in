@@ -1,0 +1,4 @@
+import std;
+
+constexpr std::string_view RES_DIR { "@RES_DIR@" };
+constexpr std::string_view GEN_DIR { "@GEN_DIR@" };

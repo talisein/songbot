@@ -17,17 +17,15 @@
 */
 
 import std;
-import cpr;
 
-#include "vocadb-api.hpp"
+#include "scraper.hpp"
+#include "config.h"
 
 int main(int argc, char *argv[])
 {
-    cpr::Session session;
-    session.SetHeader(cpr::Header{{"User-Agent", "github/talisein/songbot"}});
-    vocadb::scraper scraper { "../../../res/" } ;
-
-    auto res = scraper.scrape_events("gen/release_events.cppm");
+    scraper scraper { RES_DIR } ;
+    const std::filesystem::path gen_dir { GEN_DIR };
+    auto res = scraper.scrape_events(gen_dir / "release_events.cppm");
 
     return 0;
 }

@@ -15,10 +15,9 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
+#pragma once
 
 import std;
-import util;
-import cpr;
 
 namespace vocadb
 {
@@ -30,15 +29,15 @@ namespace vocadb
     struct release_event_picture
     {
         std::string_view mime;
-        std::string_view name;
+        std::optional<std::string_view> name;
         std::string_view url_original;
-        std::optional<std::span<std::byte>> original;
+        std::span<const std::uint8_t> original;
         std::string_view url_small_thumb;
-        std::optional<std::span<std::byte>> small_thumb;
+        std::span<const std::uint8_t> small_thumb;
         std::string_view url_thumb;
-        std::optional<std::span<std::byte>> thumb;
+        std::span<const std::uint8_t> thumb;
         std::string_view url_tiny_thumb;
-        std::optional<std::span<std::byte>> tiny_thumb;
+        std::span<const std::uint8_t> tiny_thumb;
     };
 
     struct additional_name
@@ -51,9 +50,8 @@ namespace vocadb
     {
         std::string_view category;
         std::string_view description;
-        std::string_view description_or_url;
         std::string_view url;
-        uint64_t id;
+        std::uint64_t id;
     };
 
     struct release_event
@@ -63,20 +61,20 @@ namespace vocadb
         std::string_view category;
         std::chrono::year_month_day date;
         // Description
-        std::string_view description;
-        std::chrono::year_month_day end_date;
-        uint64_t id;
+        std::optional<std::string_view> description;
+        std::optional<std::chrono::year_month_day> end_date;
+        std::uint64_t id;
         // Main Picture
         release_event_picture picture;
         std::string_view name;
         // Names
         std::span<additional_name> names;
         // Series
-        std::optional<uint64_t> series_id;
-        std::optional<uint64_t> series_number; // e.g. 2018 for snow miku 2018
+        std::optional<std::uint64_t> series_id;
+        std::optional<std::uint64_t> series_number; // e.g. 2018 for snow miku 2018
         std::optional<std::string_view> series_suffix;
         // SongList
-        std::optional<uint64_t> song_list_id;
+        std::optional<std::uint64_t> song_list_id;
         std::optional<std::string_view> song_list_name;
 
         std::string_view status;
@@ -89,20 +87,6 @@ namespace vocadb
 
         // WebLinks
         std::span<web_link> web_links;
-    };
-
-    class scraper
-    {
-    public:
-        scraper(std::filesystem::path res_directory) noexcept;
-
-        std::expected<void, std::error_code> scrape_events(const std::filesystem::path& generated_src); // gen/release_events.cppm
-
-        private:
-        cpr::Session session;
-        std::filesystem::path res_dir;
-
-        std::expected<cpr::Response, std::error_code> get(const cpr::Url& url, const cpr::Parameters& params);
     };
 
 } // namespace vocadb
