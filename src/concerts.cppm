@@ -40,6 +40,7 @@ export enum ConcertSeries
     JAPAN_TOUR,
     KODO, // 255
     ANNIVERSARY,
+    NICONICO,
 };
 
 export enum ConcertTour
@@ -82,6 +83,7 @@ export enum ConcertTour
     MM2019,
     MWY2019,
     ME2020EU,
+    ZERO,
     MM2020,
     MWY2020,
     ME2021,
@@ -103,6 +105,7 @@ export enum ConcertTour
     MM2025,
     KAGA14,
     MK15,
+    ME2025,
 };
 
 export constexpr std::string_view
@@ -126,6 +129,7 @@ tour_to_string(ConcertTour tour)
             case MP2013Kansai:  return "MikuPa 2013 Kansai"sv;
             case MM10Sapporo:   return "MM10th Sapporo"sv;
             case KAGA14:        return "Kagamine 14th"sv;
+            case ZERO:          return "Untitled 0"sv;
             default:
                 return magic_enum::enum_name(tour);
         }
@@ -193,6 +197,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2019",                                  MM2019,      2019y/8/9, 2515 },
         { MIKU_WITH_YOU,    "MIKU WITH YOU 2019",                                               MWY2019,     2019y/11/1, 3752 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2020 EUROPE",                                    ME2020EU,    2020y/1/11, 2786 },
+        { NICONICO,         "Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 -", ZERO,    2020y/8/9, 2939 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2020",                                  MM2020,      2020y/11/28, 2758 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2020",                                       MWY2020,     2020y/12/25, 3250 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2021 Online",                                    ME2021,      2021y/6/6, 3224 },
@@ -214,6 +219,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2024 New Zealand & Australia",                   ME2024NZAU,  2024y/11/15, 7765 },
         { JAPAN_TOUR,       "Hatsune Miku JAPAN LIVE TOUR 2025 ~BLOOMING~",                     Blooming,    2025y/4/19, 8380 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2025",                                  MM2025,      2025y/8/1, 8768 },
+        { MIKU_EXPO,        "HATSUNE MIKU EXPO 2025 ASIA",                                      ME2025,      2025y/11/5, 9341 },
     });
 
 static_assert(std::ranges::is_sorted(concerts, {}, &Concert::date),
@@ -1378,6 +1384,23 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2020EU, 23, "Sharing The World" },
         { ME2020EU, 24, "BRING IT ON!" },
         { ME2020EU, 25, "Lucky☆Orb" },
+        { ZERO, 1, "HIBANA"},
+        { ZERO, 2, "Hyper Reality Show"},
+        { ZERO, 3, "Love Song"},
+        { ZERO, 4, "Rolling Girl"},
+        { ZERO, 5, "Love Trial"},
+        { ZERO, 6, "Remade Blue Longing"},
+        { ZERO, 7, "Doctor=Funk Beat"},
+        { ZERO, 8, "Music Like Magic!"},
+        { ZERO, 9, "Lucky☆Orb"},
+        { ZERO, 10, "Even If It's Your Happiness"},
+        { ZERO, 11, "Love! Snow! Really Magic"},
+        { ZERO, 12, "Love"},
+        { ZERO, 13, "ROKI"},
+        { ZERO, 14, "BRING IT ON!"},
+        { ZERO, 15, "DECORATOR"},
+        { ZERO, 16, "Greenlights Serenade"},
+        { ZERO, 17, "Hand in Hand"},
         { MM2020, 1, "Solar System Disco" },
         { MM2020, 2, "Hyper Reality Show" },
         { MM2020, 3, "YY" },
@@ -2014,8 +2037,9 @@ static_assert(std::ranges::is_sorted(setlists, {}, get_track_date),
 
 /* Check that every concert has a setlist defined */
 constexpr auto concert_has_setlist = [](const auto &concert) constexpr {
-    return std::ranges::contains(setlists, concert.short_name, &SetlistTrack::concert_short_name);
+    return std::ranges::contains(setlists, concert.short_name, &SetlistTrack::concert_short_name) || concert.date >= util::get_build_date();
 };
+
 static_assert(std::ranges::all_of(concerts, concert_has_setlist),
               magic_enum::enum_name(std::ranges::find_if_not(concerts, concert_has_setlist)->short_name));
 

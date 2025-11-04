@@ -228,5 +228,53 @@ export namespace util
         return res;
     }
 
+    consteval std::chrono::year_month_day
+    get_build_date()
+    {
+        namespace ch = std::chrono;
+        constexpr std::string_view date_str = __DATE__;
 
-}
+        constexpr auto day_lambda = [](auto date_str) constexpr -> ch::day {
+            auto day_start_idx = 4;
+            if (date_str[day_start_idx] == ' ')
+                day_start_idx = 5;
+            auto day_str = date_str.substr(day_start_idx, 2);
+            unsigned int day;
+            auto res = std::from_chars(day_str.begin(), day_str.end(), day);
+            return ch::day{day};
+        };
+        constexpr ch::day day_value {day_lambda(date_str)};
+
+        constexpr auto month_lambda = [](auto month_name) constexpr -> ch::month {
+            struct {
+                std::string_view name;
+                ch::month month_enum;
+            } constexpr month_table_def[] = {
+                {"Jan", ch::January}, {"Feb", ch::February}, {"Mar", ch::March},
+                {"Apr", ch::April}, {"May", ch::May}, {"Jun", ch::June},
+                {"Jul", ch::July}, {"Aug", ch::August}, {"Sep", ch::September},
+                {"Oct", ch::October}, {"Nov", ch::November}, {"Dec", ch::December}
+            };
+            constexpr std::array month_table = std::to_array(month_table_def);
+
+            for (const auto mapping : month_table) {
+                if (mapping.name == month_name) {
+                    return mapping.month_enum;
+                }
+            }
+        };
+        constexpr ch::month month_value = month_lambda(date_str.substr(0, 3));
+
+        constexpr auto year_str = date_str.substr(date_str.rfind(' ') + 1);
+        constexpr auto year_lambda = [](auto year_str) constexpr -> ch::year {
+            unsigned int year;
+            auto res = std::from_chars(year_str.begin(), year_str.end(), year);
+            return ch::year(year);
+        };
+        constexpr ch::year year_value{year_lambda(year_str)};
+
+        return year_value / month_value / day_value;
+    }
+
+
+} // namespace util

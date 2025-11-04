@@ -34,6 +34,11 @@ namespace {
             co_yield std::format("I don't know about '{}'", concert_name);
             co_return;
         }
+        if (concert->date > util::get_build_date()) {
+            co_yield std::format("{} will first play on {}. I won't know the setlist until after that.",
+                                 concert->name, concert->date);
+            co_return;
+        }
 
         auto setlist = get_setlist(concert->short_name);
         co_yield std::format("## Setlist for {}:\n", concert->name);
