@@ -177,7 +177,14 @@ constexpr std::array event_pic_small_thumb_2523 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2523;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2523.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2523 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2523.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2523;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2523.png") == __STDC_EMBED_FOUND__
@@ -223,7 +230,14 @@ constexpr std::array event_pic_small_thumb_2521 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2521;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2521.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2521 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2521.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2521;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2521.png") == __STDC_EMBED_FOUND__
@@ -271,7 +285,14 @@ constexpr std::array event_pic_small_thumb_2526 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2526;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2526.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2526 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2526.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2526;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2526.png") == __STDC_EMBED_FOUND__
@@ -319,7 +340,14 @@ constexpr std::array event_pic_small_thumb_2527 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2527;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2527.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2527 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2527.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2527;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2527.png") == __STDC_EMBED_FOUND__
@@ -368,7 +396,14 @@ constexpr std::array event_pic_small_thumb_4056 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_4056;
 #endif
 
+
+#if __has_embed("event_pic_thumb_4056.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_4056 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_4056.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_4056;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_4056.png") == __STDC_EMBED_FOUND__
@@ -415,7 +450,14 @@ constexpr std::array event_pic_small_thumb_1413 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1413;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1413.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1413 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1413.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1413;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1413.jpeg") == __STDC_EMBED_FOUND__
@@ -463,7 +505,14 @@ constexpr std::array event_pic_small_thumb_2524 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2524;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2524.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2524 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2524.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2524;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2524.jpeg") == __STDC_EMBED_FOUND__
@@ -511,7 +560,14 @@ constexpr std::array event_pic_small_thumb_2510 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2510;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2510.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2510 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2510.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2510;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2510.jpeg") == __STDC_EMBED_FOUND__
@@ -558,7 +614,14 @@ constexpr std::array event_pic_small_thumb_2511 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2511;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2511.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2511 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2511.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2511;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2511.jpeg") == __STDC_EMBED_FOUND__
@@ -603,7 +666,14 @@ constexpr std::array event_pic_small_thumb_2519 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2519;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2519.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2519 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2519.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2519;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2519.jpeg") == __STDC_EMBED_FOUND__
@@ -651,7 +721,14 @@ constexpr std::array event_pic_small_thumb_1939 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1939;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1939.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1939 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1939.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1939;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1939.png") == __STDC_EMBED_FOUND__
@@ -699,7 +776,14 @@ constexpr std::array event_pic_small_thumb_2517 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2517;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2517.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2517 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2517.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2517;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2517.jpeg") == __STDC_EMBED_FOUND__
@@ -741,7 +825,14 @@ constexpr std::array event_pic_small_thumb_1937 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1937;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1937.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1937 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1937.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1937;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1937.png") == __STDC_EMBED_FOUND__
@@ -784,7 +875,14 @@ constexpr std::array event_pic_small_thumb_3792 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_3792;
 #endif
 
+
+#if __has_embed("event_pic_thumb_3792.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_3792 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_3792.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_3792;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_3792.jpeg") == __STDC_EMBED_FOUND__
@@ -826,7 +924,14 @@ constexpr std::array event_pic_small_thumb_1940 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1940;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1940.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1940 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1940.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1940;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1940.png") == __STDC_EMBED_FOUND__
@@ -872,7 +977,14 @@ constexpr std::array event_pic_small_thumb_2514 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2514;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2514.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2514 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2514.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2514;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2514.jpeg") == __STDC_EMBED_FOUND__
@@ -913,7 +1025,14 @@ constexpr std::array event_pic_small_thumb_1399 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1399;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1399.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1399 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1399.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1399;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1399.jpeg") == __STDC_EMBED_FOUND__
@@ -956,7 +1075,14 @@ constexpr std::array event_pic_small_thumb_1859 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1859;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1859.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1859 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1859.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1859;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1859.jpeg") == __STDC_EMBED_FOUND__
@@ -1001,7 +1127,14 @@ constexpr std::array event_pic_small_thumb_1941 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1941;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1941.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1941 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1941.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1941;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1941.jpeg") == __STDC_EMBED_FOUND__
@@ -1047,7 +1180,14 @@ constexpr std::array event_pic_small_thumb_1398 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1398;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1398.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1398 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1398.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1398;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1398.jpeg") == __STDC_EMBED_FOUND__
@@ -1088,7 +1228,14 @@ constexpr std::array event_pic_small_thumb_1943 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1943;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1943.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1943 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1943.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1943;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1943.jpeg") == __STDC_EMBED_FOUND__
@@ -1133,7 +1280,14 @@ constexpr std::array event_pic_small_thumb_2947 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2947;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2947.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2947 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2947.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2947;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2947.jpeg") == __STDC_EMBED_FOUND__
@@ -1180,7 +1334,14 @@ constexpr std::array event_pic_small_thumb_1397 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1397;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1397.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1397 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1397.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1397;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1397.jpeg") == __STDC_EMBED_FOUND__
@@ -1227,7 +1388,14 @@ constexpr std::array event_pic_small_thumb_1619 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1619;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1619.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1619 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1619.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1619;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1619.jpeg") == __STDC_EMBED_FOUND__
@@ -1270,7 +1438,14 @@ constexpr std::array event_pic_small_thumb_1584 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1584;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1584.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1584 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1584.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1584;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1584.png") == __STDC_EMBED_FOUND__
@@ -1312,7 +1487,14 @@ constexpr std::array event_pic_small_thumb_1618 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1618;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1618.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1618 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1618.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1618;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1618.jpeg") == __STDC_EMBED_FOUND__
@@ -1355,7 +1537,14 @@ constexpr std::array event_pic_small_thumb_2948 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2948;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2948.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2948 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2948.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2948;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2948.jpeg") == __STDC_EMBED_FOUND__
@@ -1396,7 +1585,14 @@ constexpr std::array event_pic_small_thumb_1673 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1673;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1673.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1673 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1673.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1673;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1673.jpeg") == __STDC_EMBED_FOUND__
@@ -1444,7 +1640,14 @@ constexpr std::array event_pic_small_thumb_1561 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1561;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1561.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1561 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1561.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1561;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1561.jpeg") == __STDC_EMBED_FOUND__
@@ -1490,7 +1693,14 @@ constexpr std::array event_pic_small_thumb_2085 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2085;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2085.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2085 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2085.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2085;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2085.jpeg") == __STDC_EMBED_FOUND__
@@ -1534,7 +1744,14 @@ constexpr std::array event_pic_small_thumb_1854 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_1854;
 #endif
 
+
+#if __has_embed("event_pic_thumb_1854.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_1854 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_1854.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_1854;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_1854.png") == __STDC_EMBED_FOUND__
@@ -1577,7 +1794,14 @@ constexpr std::array event_pic_small_thumb_2422 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2422;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2422.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2422 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2422.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2422;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2422.jpeg") == __STDC_EMBED_FOUND__
@@ -1619,7 +1843,14 @@ constexpr std::array event_pic_small_thumb_2489 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2489;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2489.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2489 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2489.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2489;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2489.jpeg") == __STDC_EMBED_FOUND__
@@ -1667,7 +1898,14 @@ constexpr std::array event_pic_small_thumb_2515 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2515;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2515.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2515 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2515.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2515;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2515.jpeg") == __STDC_EMBED_FOUND__
@@ -1712,7 +1950,14 @@ constexpr std::array event_pic_small_thumb_3752 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_3752;
 #endif
 
+
+#if __has_embed("event_pic_thumb_3752.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_3752 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_3752.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_3752;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_3752.jpeg") == __STDC_EMBED_FOUND__
@@ -1754,7 +1999,14 @@ constexpr std::array event_pic_small_thumb_2786 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2786;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2786.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2786 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2786.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2786;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2786.jpeg") == __STDC_EMBED_FOUND__
@@ -1766,6 +2018,50 @@ constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2786;
 #endif
 
 constexpr release_event_picture event_picture_2786 = { "image/jpeg", std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2786.jpg?v=7)XYX"sv, event_pic_orig_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2786.jpg?v=7)XYX"sv, event_pic_small_thumb_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2786.jpg?v=7)XYX"sv, event_pic_thumb_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2786.jpg?v=7)XYX"sv, event_pic_tiny_thumb_2786  };
+
+/* Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 - */
+constexpr std::array<additional_name, 2> names_2939 {{
+  {"Japanese"sv, R"XYX(ニコニコネット超会議2020夏✕HATSUNE MIKU LIVE - UNTITLED 0 -)XYX"sv},
+  {"Romaji"sv, R"XYX(Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 -)XYX"sv},
+}};
+
+/* Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 - */
+constexpr std::array<web_link, 2> web_links_2939 {{
+  {"Other"sv, "Piapro Blog Post"sv, "https://blog.piapro.net/2020/07/mo202004061-1.html"sv, 1476 },
+  {"Other"sv, "Website"sv, "https://chokaigi.jp/2020summer/plan/mikulive.html"sv, 1477 },
+}};
+
+/* Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 - */
+
+#if __has_embed("event_pic_orig_2939.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_orig_2939 = std::to_array<std::uint8_t>({
+    #embed "event_pic_orig_2939.png"
+});
+#else
+constexpr std::array<std::uint8_t, 0> event_pic_orig_2939;
+#endif
+
+
+#if __has_embed("event_pic_small_thumb_2939.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_small_thumb_2939 = std::to_array<std::uint8_t>({
+    #embed "event_pic_small_thumb_2939.png"
+});
+#else
+constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2939;
+#endif
+
+constexpr std::array<std::uint8_t, 0> event_pic_thumb_2939;
+
+
+#if __has_embed("event_pic_tiny_thumb_2939.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_tiny_thumb_2939 = std::to_array<std::uint8_t>({
+    #embed "event_pic_tiny_thumb_2939.png"
+});
+#else
+constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2939;
+#endif
+
+constexpr release_event_picture event_picture_2939 = { "image/png", std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2939.png?v=4)XYX"sv, event_pic_orig_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2939.png?v=4)XYX"sv, event_pic_small_thumb_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2939.png?v=4)XYX"sv, event_pic_thumb_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2939.png?v=4)XYX"sv, event_pic_tiny_thumb_2939  };
 
 /* Hatsune Miku Magical Mirai 2020 in OSAKA */
 constexpr std::array<additional_name, 4> names_2758 {{
@@ -1806,7 +2102,14 @@ constexpr std::array event_pic_small_thumb_2758 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_2758;
 #endif
 
+
+#if __has_embed("event_pic_thumb_2758.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_2758 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_2758.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_2758;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_2758.jpeg") == __STDC_EMBED_FOUND__
@@ -1851,7 +2154,14 @@ constexpr std::array event_pic_small_thumb_3250 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_3250;
 #endif
 
+
+#if __has_embed("event_pic_thumb_3250.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_3250 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_3250.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_3250;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_3250.jpeg") == __STDC_EMBED_FOUND__
@@ -1903,7 +2213,14 @@ constexpr std::array event_pic_small_thumb_3224 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_3224;
 #endif
 
+
+#if __has_embed("event_pic_thumb_3224.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_3224 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_3224.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_3224;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_3224.jpeg") == __STDC_EMBED_FOUND__
@@ -1948,7 +2265,14 @@ constexpr std::array event_pic_small_thumb_3305 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_3305;
 #endif
 
+
+#if __has_embed("event_pic_thumb_3305.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_3305 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_3305.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_3305;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_3305.jpeg") == __STDC_EMBED_FOUND__
@@ -1992,7 +2316,14 @@ constexpr std::array event_pic_small_thumb_4058 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_4058;
 #endif
 
+
+#if __has_embed("event_pic_thumb_4058.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_4058 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_4058.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_4058;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_4058.jpeg") == __STDC_EMBED_FOUND__
@@ -2037,7 +2368,14 @@ constexpr std::array event_pic_small_thumb_4161 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_4161;
 #endif
 
+
+#if __has_embed("event_pic_thumb_4161.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_4161 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_4161.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_4161;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_4161.jpeg") == __STDC_EMBED_FOUND__
@@ -2084,7 +2422,14 @@ constexpr std::array event_pic_small_thumb_4233 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_4233;
 #endif
 
+
+#if __has_embed("event_pic_thumb_4233.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_4233 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_4233.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_4233;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_4233.jpeg") == __STDC_EMBED_FOUND__
@@ -2132,7 +2477,14 @@ constexpr std::array event_pic_small_thumb_4235 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_4235;
 #endif
 
+
+#if __has_embed("event_pic_thumb_4235.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_4235 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_4235.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_4235;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_4235.jpeg") == __STDC_EMBED_FOUND__
@@ -2174,7 +2526,14 @@ constexpr std::array event_pic_small_thumb_4765 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_4765;
 #endif
 
+
+#if __has_embed("event_pic_thumb_4765.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_4765 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_4765.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_4765;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_4765.jpeg") == __STDC_EMBED_FOUND__
@@ -2221,7 +2580,14 @@ constexpr std::array event_pic_small_thumb_5910 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_5910;
 #endif
 
+
+#if __has_embed("event_pic_thumb_5910.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_5910 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_5910.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_5910;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_5910.jpeg") == __STDC_EMBED_FOUND__
@@ -2271,7 +2637,14 @@ constexpr std::array event_pic_small_thumb_6045 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_6045;
 #endif
 
+
+#if __has_embed("event_pic_thumb_6045.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_6045 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_6045.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_6045;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_6045.jpeg") == __STDC_EMBED_FOUND__
@@ -2324,7 +2697,14 @@ constexpr std::array event_pic_small_thumb_5751 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_5751;
 #endif
 
+
+#if __has_embed("event_pic_thumb_5751.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_5751 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_5751.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_5751;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_5751.jpeg") == __STDC_EMBED_FOUND__
@@ -2367,7 +2747,14 @@ constexpr std::array event_pic_small_thumb_6539 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_6539;
 #endif
 
+
+#if __has_embed("event_pic_thumb_6539.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_6539 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_6539.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_6539;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_6539.jpeg") == __STDC_EMBED_FOUND__
@@ -2412,7 +2799,14 @@ constexpr std::array event_pic_small_thumb_6986 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_6986;
 #endif
 
+
+#if __has_embed("event_pic_thumb_6986.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_6986 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_6986.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_6986;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_6986.jpeg") == __STDC_EMBED_FOUND__
@@ -2454,7 +2848,14 @@ constexpr std::array event_pic_small_thumb_6516 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_6516;
 #endif
 
+
+#if __has_embed("event_pic_thumb_6516.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_6516 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_6516.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_6516;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_6516.jpeg") == __STDC_EMBED_FOUND__
@@ -2497,7 +2898,14 @@ constexpr std::array event_pic_small_thumb_7673 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_7673;
 #endif
 
+
+#if __has_embed("event_pic_thumb_7673.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_7673 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_7673.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_7673;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_7673.jpeg") == __STDC_EMBED_FOUND__
@@ -2540,7 +2948,14 @@ constexpr std::array event_pic_small_thumb_7214 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_7214;
 #endif
 
+
+#if __has_embed("event_pic_thumb_7214.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_7214 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_7214.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_7214;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_7214.jpeg") == __STDC_EMBED_FOUND__
@@ -2582,7 +2997,14 @@ constexpr std::array event_pic_small_thumb_7266 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_7266;
 #endif
 
+
+#if __has_embed("event_pic_thumb_7266.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_7266 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_7266.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_7266;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_7266.jpeg") == __STDC_EMBED_FOUND__
@@ -2624,7 +3046,14 @@ constexpr std::array event_pic_small_thumb_7765 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_7765;
 #endif
 
+
+#if __has_embed("event_pic_thumb_7765.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_7765 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_7765.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_7765;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_7765.jpeg") == __STDC_EMBED_FOUND__
@@ -2666,7 +3095,14 @@ constexpr std::array event_pic_small_thumb_8380 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_8380;
 #endif
 
+
+#if __has_embed("event_pic_thumb_8380.png") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_8380 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_8380.png"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_8380;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_8380.png") == __STDC_EMBED_FOUND__
@@ -2709,7 +3145,14 @@ constexpr std::array event_pic_small_thumb_8768 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_8768;
 #endif
 
+
+#if __has_embed("event_pic_thumb_8768.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_thumb_8768 = std::to_array<std::uint8_t>({
+    #embed "event_pic_thumb_8768.jpeg"
+});
+#else
 constexpr std::array<std::uint8_t, 0> event_pic_thumb_8768;
+#endif
 
 
 #if __has_embed("event_pic_tiny_thumb_8768.jpeg") == __STDC_EMBED_FOUND__
@@ -2722,7 +3165,49 @@ constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_8768;
 
 constexpr release_event_picture event_picture_8768 = { "image/jpeg", std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/8768.jpg?v=9)XYX"sv, event_pic_orig_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/8768.jpg?v=9)XYX"sv, event_pic_small_thumb_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/8768.jpg?v=9)XYX"sv, event_pic_thumb_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/8768.jpg?v=9)XYX"sv, event_pic_tiny_thumb_8768  };
 
-export constexpr std::array<release_event, 59> events {{
+/* Miku Expo 2025 Bangkok */
+constexpr std::array<additional_name, 1> names_9341 {{
+  {"English"sv, R"XYX(Miku Expo 2025 Bangkok)XYX"sv},
+}};
+
+/* Miku Expo 2025 Bangkok */
+constexpr std::array<web_link, 1> web_links_9341 {{
+  {"Other"sv, "Website"sv, "https://mikuexpo.com/asia2025/"sv, 12284 },
+}};
+
+/* Miku Expo 2025 Bangkok */
+
+#if __has_embed("event_pic_orig_9341.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_orig_9341 = std::to_array<std::uint8_t>({
+    #embed "event_pic_orig_9341.jpeg"
+});
+#else
+constexpr std::array<std::uint8_t, 0> event_pic_orig_9341;
+#endif
+
+
+#if __has_embed("event_pic_small_thumb_9341.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_small_thumb_9341 = std::to_array<std::uint8_t>({
+    #embed "event_pic_small_thumb_9341.jpeg"
+});
+#else
+constexpr std::array<std::uint8_t, 0> event_pic_small_thumb_9341;
+#endif
+
+constexpr std::array<std::uint8_t, 0> event_pic_thumb_9341;
+
+
+#if __has_embed("event_pic_tiny_thumb_9341.jpeg") == __STDC_EMBED_FOUND__
+constexpr std::array event_pic_tiny_thumb_9341 = std::to_array<std::uint8_t>({
+    #embed "event_pic_tiny_thumb_9341.jpeg"
+});
+#else
+constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_9341;
+#endif
+
+constexpr release_event_picture event_picture_9341 = { "image/jpeg", std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9341.jpg?v=2)XYX"sv, event_pic_orig_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9341.jpg?v=2)XYX"sv, event_pic_small_thumb_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9341.jpg?v=2)XYX"sv, event_pic_thumb_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9341.jpg?v=2)XYX"sv, event_pic_tiny_thumb_9341  };
+
+export constexpr std::array<release_event, 61> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
 
 **Concert Schedule**:
@@ -2939,6 +3424,13 @@ August 9th(Fri.) - 11th(Sun.)
 Art by [ni02](https://vocadb.net/Ar/74337))XYX"sv, 2019y/8/11, 2515, event_picture_2515, R"XYX(Hatsune Miku Magical Mirai 2019 in OSAKA)XYX"sv, names_2515, 81, 2019, R"XYX(Osaka)XYX"sv, 8102, R"(Hatsune Miku Magical Mirai 2019 in OSAKA)", "Approved"sv, R"XYX(hatsune-miku-magical-mirai-201)XYX"sv, R"XYX(インテックス大阪)XYX"sv, web_links_2515 },
   {R"XYX(未来有你 2019 in Shanghai, HATSUNE MIKU WITH YOU 2019 in Shanghai)XYX"sv, "Unspecified"sv, 2019y/11/2, std::nullopt, 2019y/11/3, 3752, event_picture_3752, R"XYX(MIKU WITH YOU 2019 in Shanghai)XYX"sv, names_3752, 173, 2019, R"XYX(in Shanghai)XYX"sv, 9359, R"(MIKU WITH YOU 2019)", "Finished"sv, R"XYX(miku-with-you-2019-in-shanghai)XYX"sv, R"XYX(1862 Theater)XYX"sv, web_links_3752 },
   {R"XYX()XYX"sv, "Unspecified"sv, 2020y/1/11, R"XYX(17:00 to 22:00)XYX"sv, std::nullopt, 2786, event_picture_2786, R"XYX(Miku Expo 2020 London)XYX"sv, names_2786, 82, 2020, std::nullopt, 8631, R"(Miku Expo 2020 London/Berlin)", "Draft"sv, R"XYX(miku-expo-2020-london)XYX"sv, R"XYX(O2 Academy Brixton)XYX"sv, web_links_2786 },
+  {R"XYX(ニコニコネット超会議2020夏✕HATSUNE MIKU LIVE - UNTITLED 0 -)XYX"sv, "Concert"sv, 2020y/8/9, R"XYX(A live performance at the opening of the Nico Nico Net Chokaigi 2020 Summer event.
+
+Date & Starting time: August 9th, 2020, 7pm JST
+Time Shift Deadline: September 8th, 2020, 11:59pm JST
+Net Ticket: [Purchase link](https://secure.live.nicovideo.jp/event/lv327105822)
+Price: 4,800 Nico Nico Points (4,800 yen including tax)
+Purchase Deadline: September 7th, 2020, 11:59pm JST)XYX"sv, std::nullopt, 2939, event_picture_2939, R"XYX(Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 -)XYX"sv, names_2939, std::nullopt, 0, std::nullopt, 8940, R"(HATSUNE MIKU LIVE - UNTITLED 0 - )", "Finished"sv, R"XYX(nico-nico-net-chokaigi-2020-na)XYX"sv, std::nullopt, web_links_2939 },
   {R"XYX(初音ミク「マジカルミライ 2020」in OSAKA, マジカルミライ 2020 Osaka, Magical Mirai 2020 Osaka)XYX"sv, "Unspecified"sv, 2020y/11/27, R"XYX(Magical Mirai 2020’s theme is “MATSURI”.
 
 **Live Show**:
@@ -3124,6 +3616,7 @@ Near Sendai Station
 August 1st(Fri.) - 3rd(Sun.)
 
 Art by [Tiv](https://vocadb.net/Ar/161497))XYX"sv, 2025y/8/3, 8768, event_picture_8768, R"XYX(Hatsune Miku "Magical Mirai 2025" in SENDAI)XYX"sv, names_8768, 81, 2025, std::nullopt, 20912, R"(Hatsune Miku "Magical Mirai" 2025)", "Finished"sv, R"XYX(hatsune-miku-magical-mirai-202)XYX"sv, std::nullopt, web_links_8768 },
+  {R"XYX()XYX"sv, "Unspecified"sv, 2025y/11/5, std::nullopt, std::nullopt, 9341, event_picture_9341, R"XYX(Miku Expo 2025 Bangkok)XYX"sv, names_9341, 82, 2025, R"XYX(Bangkok)XYX"sv, std::nullopt, std::nullopt, "Draft"sv, R"XYX(miku-expo-2025-bangkok)XYX"sv, R"XYX(UOB LIVE)XYX"sv, web_links_9341 },
 }};
 
 
