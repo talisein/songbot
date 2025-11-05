@@ -71,7 +71,7 @@ namespace {
             if (std::ranges::empty(rng)) {
                 ss << " **LIVE DEBUT**";
             } else {
-                auto count = std::ranges::distance(rng);
+//                auto count = std::ranges::distance(rng);
                 ss << " *Previous: " << tour_to_string(std::ranges::begin(rng)->concert_short_name);
                 ss << "*";
                 /*
@@ -82,6 +82,7 @@ namespace {
                 }
                 */
             }
+            /*
             auto after_rng = std::views::take_while(std::views::reverse(setlists), [&](const auto &track)
             {
                 return track.concert_short_name != concert->short_name;
@@ -93,6 +94,7 @@ namespace {
             if (after_count > 0) {
                 ss << " *and " << after_count << " after*";
             }
+            */
             ss << "\n";
             co_yield ss.str();
         }
