@@ -62,7 +62,12 @@ namespace {
             });
 
             std::ostringstream ss;
-            ss << std::format("{}. {}", track.pos, util::escape_markdown(song->name));
+
+            using namespace std::literals;
+            ss << std::format("{}. {}{}",
+                              track.pos,
+                              track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s),
+                              util::escape_markdown(song->name));
             if (song->singer != NO_VIRTUAL_SINGER) {
                 ss << " feat. " << magic_enum::enum_flags_name(song->singer);
             }
