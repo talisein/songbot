@@ -473,6 +473,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"いのちもやしてたたけよ", "Inochi Moyashite Tatake yo", "Let Your Life Be Vigorous and Open Your Mouth", Miku, "Kodo"},
   {"祭りだヘイカモン", "Matsuri da Hey Come On", "It's a Festival, Hey, C'mon", Miku, "Pinocchio-P"},
   {nullopt, nullopt, "LION", NO_VIRTUAL_SINGER, "Kodo"},
+  {nullopt, nullopt, "Artifact", Miku, "buzzG"},
     };
 
     return res;

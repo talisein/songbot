@@ -65,7 +65,13 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
         return {};
     }
 
-    auto rng = std::views::filter(std::views::reverse(setlists), [&name = song->name](const auto& track) { return name == track.song;});
+
+    auto rng = std::views::filter(std::views::reverse(setlists), [&name = song->name](const auto& track) { return name == track.song;}) |
+        std::views::filter([](const auto& track) {
+            auto concert = lookup_concert(track.concert_short_name);
+            using namespace std::literals;
+            return (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert->date)) > (24h * 30);
+        });
     if (std::ranges::empty(rng)) {
         auto msg = dpp::message(std::format("I'm sorry, '{}' isn't in a concert I know about yet.", param)).set_flags(dpp::message_flags::m_ephemeral);
         event.reply(msg);

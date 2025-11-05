@@ -72,12 +72,15 @@ namespace {
                 ss << " **LIVE DEBUT**";
             } else {
                 auto count = std::ranges::distance(rng);
-                ss << " *Previously@" << tour_to_string(std::ranges::begin(rng)->concert_short_name);
+                ss << " *Previous: " << tour_to_string(std::ranges::begin(rng)->concert_short_name);
+                ss << "*";
+                /*
                 if (count > 1) {
                     ss << ", " << count - 1 << " more before*";
                 } else {
                     ss << "*";
                 }
+                */
             }
             auto after_rng = std::views::take_while(std::views::reverse(setlists), [&](const auto &track)
             {
