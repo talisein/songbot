@@ -64,7 +64,7 @@ namespace {
             std::ostringstream ss;
 
             using namespace std::literals;
-            ss << std::format("{}. {}{}",
+            ss << std::format("- {}. {}{}",
                               track.pos,
                               track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s),
                               util::escape_markdown(song->name));
