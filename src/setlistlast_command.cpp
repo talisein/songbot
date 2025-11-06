@@ -138,7 +138,7 @@ setlistlast_command::get_command()
 }
 
 namespace {
-    constexpr size_t DISCORD_REPLY_LIMIT = 2000UZ;
+    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
     constexpr std::string_view SETLISTLAST_BUTTON_ID_PREFIX { "setlistlast:" };
     template <typename EventType>
     void my_follow_up(const EventType& event,
