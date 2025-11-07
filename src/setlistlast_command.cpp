@@ -230,7 +230,7 @@ namespace {
         std::ostringstream reply;
         std::vector<std::string> messages;
         for (const auto& line : std::invoke(std::forward<GeneratorCallable>(line_generator),
-                                            std::forward<GeneratorInput>(generator_input)))
+                                             std::forward<GeneratorInput>(generator_input)))
         {
             if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
                 messages.emplace_back(reply.view());
@@ -295,12 +295,12 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
         reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, key);
     } catch(std::system_error &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
-        ctx->log(dpp::ll_error, "/setlistlast: System Error {}", e.what());
+        ctx->log_error("/setlistlast: System Error {}", e.what());
         setlistlast_failure_counter->Increment();
         return std::unexpected(e.code());
     } catch (std::bad_variant_access &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
-        ctx->log(dpp::ll_error, "/setlistlast: std::get() {}", e.what());
+        ctx->log_error("/setlistlast: std::get() {}", e.what());
         setlistlast_failure_counter->Increment();
         return std::unexpected(songbot_error::explosion);
     }
@@ -328,7 +328,7 @@ setlistlast_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
 
             return resp;
         } catch (std::bad_variant_access &e) {
-            ctx->bot->log(dpp::ll_error, std::format("/setlistlast: autocomplete error: {}", e.what()));
+            ctx->log_error("/setlistlast: autocomplete error: {}", e.what());
             return std::unexpected(std::make_error_code(std::errc::invalid_argument));
         }
     }

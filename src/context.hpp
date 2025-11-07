@@ -43,6 +43,9 @@ public:
     template<typename... Args>
     void log(dpp::loglevel, std::format_string<Args...> fmt, Args&&... args);
 
+    template<typename... Args>
+    void log_error(std::format_string<Args...> fmt, Args&&... args);
+
 private:
     void setup_metrics();
     void setup_bot();
@@ -62,5 +65,12 @@ template<typename... Args>
 void
 context::log(dpp::loglevel severity, std::format_string<Args...> fmt, Args&&... args)
 {
-    bot->log(severity, std::format(fmt, std::forward<Args>(args)...));
+    bot->log(severity, std::format(std::move(fmt), std::forward<Args>(args)...));
+}
+
+template<typename... Args>
+void
+context::log_error(std::format_string<Args...> fmt, Args&&... args)
+{
+    log(dpp::ll_error, std::move(fmt), std::forward<Args>(args)...);
 }

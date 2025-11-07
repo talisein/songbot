@@ -1914,7 +1914,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { Blooming, 12, "Daybreak Arrival", nullopt, "A" },
         { Blooming, 12, "magnet", nullopt, "B" },
         { Blooming, 13, "ROKI", nullopt, "A" },
-        { Blooming, 13, "1 2 FanClub" },
+        { Blooming, 13, "1 2 FanClub", nullopt, "B" },
         { Blooming, 14, "Mesmerizer" },
         { Blooming, 15, "Catch the Wave", nullopt, "A" },
         { Blooming, 15, "Sekai", nullopt, "B" },
