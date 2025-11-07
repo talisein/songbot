@@ -42,11 +42,14 @@ public:
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
 
-    struct reveal_args {
+    struct event_state {
         std::string concert;
         dpp::slashcommand_t event;
     };
-    state_storage<reveal_args> storage;
+    state_storage<event_state> cmd_state_store;
+    state_storage<decltype(cmd_state_store)::key_t> btn_reveal_state_store; // map to cmd_state_store
+
+    void on_reveal_button_click(const dpp::button_click_t& event, const event_state& state);
 
     prometheus::Counter* setlistlast_success_counter;
     prometheus::Counter* setlistlast_failure_counter;

@@ -109,7 +109,8 @@ namespace {
 
 setlistlast_command::setlistlast_command(context &ctx) noexcept :
     iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance"),
-    storage(ctx)
+    cmd_state_store(ctx),
+    btn_reveal_state_store(ctx)
 {
     /* Metric: setlistlast */
     setlistlast_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}, {"visibility", "ephemeral"}});
@@ -262,16 +263,10 @@ namespace {
 }
 
 void
-setlistlast_command::on_button_click(const dpp::button_click_t& event)
+setlistlast_command::on_reveal_button_click(const dpp::button_click_t& event, const event_state& state)
 {
-    auto args = storage.get(event.custom_id);
-    if (!args) {
-        // Could be a button click for another handler? So just ignore.
-        return;
-    }
-
-    const auto concert = args.value().concert;
-    auto on_completion = [event = args.value().event](const dpp::confirmation_callback_t &c) {
+    const auto concert = state.concert;
+    auto on_completion = [event = state.event](const dpp::confirmation_callback_t &c) {
         auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
         if (c.is_error()) {
             dpp::utility::log_error()(c);
@@ -284,6 +279,17 @@ setlistlast_command::on_button_click(const dpp::button_click_t& event)
 
     reply_multimessage(event, ctx, &get_setlistlast_lines, concert, false, std::nullopt, on_completion);
     setlistlast_reveal_success_counter->Increment();
+
+}
+
+void
+setlistlast_command::on_button_click(const dpp::button_click_t& event)
+{
+    auto cmd_key = btn_reveal_state_store.get(event.custom_id);
+    if (!cmd_key) return;
+    auto args = cmd_state_store.get(*cmd_key);
+    if (!args) return;
+    on_reveal_button_click(event, *args);
 }
 
 std::expected<void, std::error_code>
@@ -291,8 +297,10 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
         const auto concert = std::get<std::string>(event.get_parameter("event"));
-        auto key = storage.insert({concert, event});
-        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, key);
+        auto cmd_key = cmd_state_store.insert(concert, event);
+        auto reveal_btn_key = btn_reveal_state_store.insert(cmd_key);
+
+        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, reveal_btn_key);
     } catch(std::system_error &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->log_error("/setlistlast: System Error {}", e.what());

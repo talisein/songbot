@@ -35,13 +35,15 @@ public:
         ctx.bot->start_timer([this](const auto& timer) { clean(); }, 5 * 60 /* Seconds */);
     }
 
-    key_t insert(StoredArguments&& args) {
+
+    template<typename... Args>
+    key_t insert(Args&&... args) {
         auto k = dist(rng.get());
         key_t key = std::to_string(k);
 
         store.emplace(std::piecewise_construct,
                       std::forward_as_tuple(key),
-                      std::forward_as_tuple(std::forward<StoredArguments>(args), std::chrono::steady_clock::now()));
+                      std::forward_as_tuple(std::forward<Args>(args)...));
 
         return key;
     }
@@ -55,6 +57,14 @@ public:
         }
     };
 
+    template<typename T>
+    void set(const key_t& key, T&& args) {
+        auto it = store.find(key);
+        if (it != std::cend(store)) {
+            it->second = std::forward<T>(args);
+        }
+    }
+
 private:
     void clean() {
         const auto now = std::chrono::steady_clock::now();
@@ -64,11 +74,15 @@ private:
         });
     }
 
-    struct args {
+    struct args_t {
         StoredArguments stored_args;
         std::chrono::steady_clock::time_point timestamp;
+
+        template<typename... Args>
+        args_t(Args&&... args)
+            : stored_args(std::forward<Args>(args)...), timestamp(std::chrono::steady_clock::now()) {}
     };
-    std::map<key_t, args> store;
+    std::map<key_t, args_t> store;
 
     std::reference_wrapper<decltype(std::declval<context>().rng_engine)> rng;
     std::uniform_int_distribution<keyspace_t> dist;
