@@ -95,8 +95,15 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
     } else {
         ss << "Prior to that: ";
         ss << tour_to_string(std::ranges::begin(remaining)->concert_short_name);
+        if (auto it = std::ranges::begin(remaining); it->variant.has_value()) {
+            ss << " `" << it->variant.value() << "`";
+        }
+
         for (auto track : std::views::drop(remaining, 1)) {
             ss << ", " << tour_to_string(track.concert_short_name);
+            if (track.variant.has_value()) {
+                ss << " `" << track.variant.value() << "`";
+            }
         }
         ss << ". " << count << " times total.";
         ss << " Frequency Rank " << get_song_frequency_rank(song->name);
