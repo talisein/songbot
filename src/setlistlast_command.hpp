@@ -42,12 +42,16 @@ public:
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
 
+    using key_t = std::string;
     struct event_state {
         std::string concert;
         dpp::slashcommand_t event;
+        key_t reveal_key;
+        key_t lang_key;
     };
     state_storage<event_state> cmd_state_store;
     state_storage<decltype(cmd_state_store)::key_t> btn_reveal_state_store; // map to cmd_state_store
+    state_storage<decltype(cmd_state_store)::key_t> btn_lang_state_store; // map to cmd_state_store
 
     void on_reveal_button_click(const dpp::button_click_t& event, const event_state& state);
 

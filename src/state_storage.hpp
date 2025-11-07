@@ -36,22 +36,23 @@ public:
     }
 
 
-    template<typename... Args>
-    key_t insert(Args&&... args) {
-        auto k = dist(rng.get());
-        key_t key = std::to_string(k);
-
-        store.emplace(std::piecewise_construct,
-                      std::forward_as_tuple(key),
-                      std::forward_as_tuple(std::forward<Args>(args)...));
-
-        return key;
+    key_t keygen() {
+        return std::to_string(dist(rng.get()));
     }
 
-    std::optional<StoredArguments> get(const key_t& key) const {
+    template<typename... Args>
+    auto insert(Args&&... args) {
+        auto [it, inserted] = store.emplace(std::piecewise_construct,
+                                            std::forward_as_tuple(keygen()),
+                                            std::forward_as_tuple(std::forward<Args>(args)...));
+
+        return std::make_pair(it->first, std::ref(it->second.stored_args));
+    }
+
+    std::optional<std::reference_wrapper<StoredArguments>> get(const key_t& key) {
         auto it = store.find(key);
         if (it != std::cend(store)) {
-            return std::make_optional<StoredArguments>(it->second.stored_args);
+            return std::make_optional<std::reference_wrapper<StoredArguments>>(std::ref(it->second.stored_args));
         } else {
             return std::nullopt;
         }

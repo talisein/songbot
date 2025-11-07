@@ -110,7 +110,8 @@ namespace {
 setlistlast_command::setlistlast_command(context &ctx) noexcept :
     iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance"),
     cmd_state_store(ctx),
-    btn_reveal_state_store(ctx)
+    btn_reveal_state_store(ctx),
+    btn_lang_state_store(ctx)
 {
     /* Metric: setlistlast */
     setlistlast_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}, {"visibility", "ephemeral"}});
@@ -140,7 +141,7 @@ setlistlast_command::get_command()
 
 namespace {
     constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
-    constexpr std::string_view SETLISTLAST_BUTTON_ID_PREFIX { "setlistlast:" };
+
     template <typename EventType>
     void my_follow_up(const EventType& event,
                       const dpp::message& msg,
@@ -150,26 +151,29 @@ namespace {
     }
 
     [[nodiscard]] dpp::message
-    make_reveal_gui(const auto &messages, bool use_ephemeral, std::optional<std::string> button_id)
+    make_reveal_gui(const auto &messages, bool use_ephemeral, std::optional<std::string> reveal_button_id)
     {
         const auto flags    = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
         auto real_msg       = dpp::message().set_flags(flags);
-        if (button_id.has_value()) {
+        auto container      = dpp::component().set_type(dpp::cot_container);
+        container.set_accent(dpp::utility::rgb(134,206,203));
+        if (reveal_button_id.has_value()) {
             auto action_row = dpp::component().set_type(dpp::cot_action_row);
             auto button     = dpp::component().set_type(dpp::cot_button)
                               .set_style(dpp::cos_primary)
                               .set_label("Post Publicly")
-                              .set_id(button_id.value());
+                              .set_id(reveal_button_id.value());
             action_row.add_component_v2(button);
             real_msg.add_component_v2(action_row);
         }
         auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
                                               .set_content(messages[0]);
-        real_msg.add_component_v2(text_display_1);
+        container.add_component_v2(text_display_1);
         if (messages.size() > 1) {
             auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1]);
-            real_msg.add_component_v2(text_display_2);
+            container.add_component_v2(text_display_2);
         }
+        real_msg.add_component_v2(container);
         return real_msg;
     }
 
@@ -225,7 +229,7 @@ namespace {
                             GeneratorCallable&& line_generator,
                             GeneratorInput&& generator_input,
                             bool use_ephemeral,
-                            std::optional<std::string> button_callback_key,
+                            std::optional<std::string> reveal_button_callback_key,
                             dpp::command_completion_event_t final_callback = dpp::utility::log_error())
     {
         std::ostringstream reply;
@@ -248,8 +252,8 @@ namespace {
 
         /* Ok, we have a list of messages to send. */
         dpp::message msg;
-        if (button_callback_key) {
-            msg = make_reveal_gui(messages, use_ephemeral, button_callback_key);
+        if (reveal_button_callback_key) {
+            msg = make_reveal_gui(messages, use_ephemeral, reveal_button_callback_key);
         } else {
             msg = make_reveal_gui(messages, use_ephemeral, std::nullopt);
         }
@@ -297,10 +301,13 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
         const auto concert = std::get<std::string>(event.get_parameter("event"));
-        auto cmd_key = cmd_state_store.insert(concert, event);
-        auto reveal_btn_key = btn_reveal_state_store.insert(cmd_key);
+        auto cmd_pair = cmd_state_store.insert(concert, event);
+        auto reveal_btn_pair = btn_reveal_state_store.insert(cmd_pair.first);
+        auto lang_btn_pair = btn_lang_state_store.insert(cmd_pair.first);
+        cmd_pair.second.reveal_key = reveal_btn_pair.first;
+        cmd_pair.second.lang_key = lang_btn_pair.first;
 
-        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, reveal_btn_key);
+        reply_multimessage(event, ctx, &get_setlistlast_lines, concert, true, reveal_btn_pair.first);
     } catch(std::system_error &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->log_error("/setlistlast: System Error {}", e.what());
