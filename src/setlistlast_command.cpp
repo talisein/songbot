@@ -173,7 +173,7 @@ namespace {
         auto c = lookup_concert(state.concert);
         auto section = dpp::component().set_type(dpp::cot_section);
         auto header  = dpp::component().set_type(dpp::cot_text_display)
-                       .set_content(std::format("## Setlist for {}", c->name));
+                       .set_content(std::format("## {}", c->name));
         section.add_component_v2(header);
         if (c && c->vocadb_event_id) {
             auto it = std::ranges::find_if(vocadb::events, [id = *c->vocadb_event_id](const auto &event) {
