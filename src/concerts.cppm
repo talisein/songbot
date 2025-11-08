@@ -1983,10 +1983,10 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2025, 16, "Ai Dee"},
         { ME2025, 17, "M@GICAL☆CURE! LOVE ♥ SHOT!"},
         { ME2025, 18, "Satisfaction"},
-        { ME2025, 19, "Rolling Girl"},
-        { ME2025, 20, "shake it!"},
+        { ME2025, 19, "shake it!"},
+        { ME2025, 20, "39 (Thank You)"},
         { ME2025, 21, "Intergalactic Bound"},
-        { ME2025, 22, "39 (Thank You)"},
+        { ME2025, 22, "Rolling Girl"},
         { ME2025, 23, "DECORATOR"},
         { ME2025, 24, "Melt"},
     });
