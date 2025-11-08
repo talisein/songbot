@@ -155,7 +155,6 @@ namespace {
     {
         const auto flags    = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
         auto real_msg       = dpp::message().set_flags(flags);
-        auto section        = dpp::component().set_type(dpp::cot_section);
         auto container      = dpp::component().set_type(dpp::cot_container);
         container.set_accent(dpp::utility::rgb(134,206,203));
         if (reveal_button_id.has_value()) {
@@ -169,17 +168,13 @@ namespace {
         }
 
 
-        auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
-                                              .set_content(messages[0]);
-        container.add_component_v2(text_display_1);
-        if (messages.size() > 1) {
-            auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1]);
-            container.add_component_v2(text_display_2);
-        }
-
 
         /* thumbnail */
         auto c = lookup_concert(state.concert);
+        auto section = dpp::component().set_type(dpp::cot_section);
+        auto header  = dpp::component().set_type(dpp::cot_text_display)
+                       .set_content(std::format("## Setlist for {}", c->name));
+        section.add_component_v2(header);
         if (c && c->vocadb_event_id) {
             auto it = std::ranges::find_if(vocadb::events, [id = *c->vocadb_event_id](const auto &event) {
                 return event.id == id;
@@ -188,15 +183,20 @@ namespace {
                 it->picture.original.size() > 0)
             {
                 std::string_view data{reinterpret_cast<const char *>(it->picture.original.data()), it->picture.original.size_bytes()};
-                real_msg.add_file("thumb", data, it->picture.mime);
-                section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail("attachment://thumb"));
+                real_msg.add_file("thumb.jpg", data, it->picture.mime);
+                section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail("attachment://thumb.jpg"));
             }
         }
-        auto header = dpp::component().set_type(dpp::cot_text_display)
-                      .set_content(std::format("## Setlist for {}", c->name));
-        section.add_component_v2(header);
+        container.add_component_v2(section);
 
-        real_msg.add_component_v2(section);
+        auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
+                                              .set_content(messages[0]);
+        container.add_component_v2(text_display_1);
+        if (messages.size() > 1) {
+            auto text_display_2 = dpp::component().set_type(dpp::cot_text_display).set_content(messages[1]);
+            container.add_component_v2(text_display_2);
+        }
+
         real_msg.add_component_v2(container);
         return real_msg;
     }
