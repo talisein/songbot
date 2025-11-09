@@ -30,5 +30,11 @@ dpp::slashcommand
 iface_command::get_command()
 {
     auto cmd = dpp::slashcommand(std::string(cmd_name), std::string(cmd_description), ctx->bot->me.id);
+    std::vector<dpp::interaction_context_type> contexts {
+        dpp::interaction_context_type::itc_guild,
+        dpp::interaction_context_type::itc_bot_dm,
+        dpp::interaction_context_type::itc_private_channel
+    };
+    cmd.set_interaction_contexts(contexts);
     return cmd;
 }
