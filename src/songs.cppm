@@ -60,6 +60,36 @@ struct magic_enum::customize::enum_range<Singer> {
   static constexpr bool is_flags = true;
 };
 
+std::string singer_to_emoji(Singer s)
+{
+    std::ostringstream ss;
+    if (magic_enum::enum_flags_test(s, Miku)) {
+        ss << "<:miku:235217471982927874:>";
+    }
+    if (magic_enum::enum_flags_test(s, Rin)) {
+        ss << "<:rin:235215581278633984:>";
+    }
+    if (magic_enum::enum_flags_test(s, Len)) {
+        ss << "<:len:235217877446295553:>";
+    }
+    if (magic_enum::enum_flags_test(s, Luka)) {
+        ss << "<:luka:235216119403773952:>";
+    }
+    if (magic_enum::enum_flags_test(s, MEIKO)) {
+        ss << "<:meikolove:314486872317493260>";
+    }
+    if (magic_enum::enum_flags_test(s, KAITO)) {
+        ss << "<:kaito:254038928921722880:>";
+    }
+    if (magic_enum::enum_flags_test(s, Teto)) {
+        ss << "<:tetolove:519149276907962388>";
+    }
+    if (magic_enum::enum_flags_test(s, Gumi)) {
+       ss << "<:gumiblush:602030455671488522>";
+    }
+    return ss.str();
+}
+
 export struct Song
 {
     using sv = std::string_view;
@@ -70,7 +100,6 @@ export struct Song
         name(name),
         singer(singer),
         producer(producer),
-//        published(published),
         disambiguation(disam),
         minor_roles(minor_roles),
         emoji_override(emoji_override)
@@ -142,7 +171,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"深海少女", "Shinkai Shoujo", "Deep-Sea Girl", Miku, "Yuuyu-P"},
   {"ドクター＝ファンクビート", "Doctor=Funk Beat", "Doctor=Funk Beat", KAITO, "nyanyannya"},
   {"ダブルラリアット", "Double Lariat", "Double Lariat", Luka, "Agoaniki-P"},
-  {nullopt, nullopt, "Drag the ground", Miku, "Camellia"},
+  {nullopt, nullopt, "Drag the ground", Miku, "Camellia", nullopt, nullopt, "<:racingmikuhappy:805737573653544972>"},
   {"ゆめゆめ", "Yumeyume", "Dream Dream", Miku, "DECO*27"},
   {"ドリームレス・ドリームス", "Dreamless Dreams", "Dreamless Dreams", Miku, "Harumaki Gohan"},
   {"エゴロック", "Ego Rock", "Ego Rock", Len, "Surii"},
@@ -191,7 +220,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"恋は戦争", "Koi wa Sensou", "Love is War", Miku, "ryo"},
   {"好き！雪！本気マジック", "Suki! Yuki! Maji Magic", "Love! Snow! Really Magic", Miku, "Mitchie M"},
   {"忘却心中", "Boukyaku Shinjuu", "Lover's Suicide Oblivion", MEIKO, "OPA"},
-  {"ラッキー☆オーブ", "Lucky☆Orb", "Lucky☆Orb", Miku, "emon(Tes.)"},
+  {"ラッキー☆オーブ", "Lucky☆Orb", "Lucky☆Orb", Miku, "emon(Tes.)", nullopt, nullopt, "<:mikuwink:607623904797786152>"},
   {"ルカルカ★ナイトフィーバー", "Luka Luka★Night Fever", "Luka Luka★Night Fever", Luka, "samfree"},
   {nullopt, nullopt, "M@GICAL☆CURE! LOVE ♥ SHOT!", Miku, "SAWTOWNE"},
   {nullopt, nullopt, "METEOR", Miku, "DIVELA", "Mirai Meteor"},
@@ -203,7 +232,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"メテオ", "Meteor", "Meteor", Miku, "John Zeroness", "OG Meteor"},
   {nullopt, nullopt, "Midnight Surf", duet(MEIKO, KAITO), "asicamo"},
   {nullopt, nullopt, "Miku", Miku, "Anamanaguchi", "Anamanaguchi"},
-  {nullopt, nullopt, "MikuFiesta", Miku, "AlexTrip Sands"},
+  {nullopt, nullopt, "MikuFiesta", Miku, "AlexTrip Sands", nullopt, nullopt, "<:mikufiesta:1404333620377817088>"},
   {"月西江", "Yuè Xī Jiāng", "Moon West River", Miku, "SolPie"},
   {"魔法みたいなミュージック！", "Mahou Mitaina Music!", "Music Like Magic!", Miku, "OSTER project"},
   {"Chentaku (Miku Cover)", nullopt, "My Love", Miku, "Zizan Razak"},
@@ -281,14 +310,14 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ワンダーラスト", "Wanderlast", "Wanderlast", Luka, "sasakure.UK"},
   {"あったかいと", "Attakaito", "Warm Kaito", KAITO, "halyosy"},
   {nullopt, nullopt, "Weekender Girl", Miku, "kz, Hachioji-P"},
-  {"ワールドイズマイン", "World is Mine", "World is Mine", Miku, "ryo"},
+  {"ワールドイズマイン", "World is Mine", "World is Mine", Miku, "ryo", nullopt, nullopt, "<:mikutriumph:510922356739276800>"},
   {"ワールズエンド・ダンスホール", "World's End Dancehall", "World's End Dancehall", duet(Miku, Luka), "wowaka"},
   {nullopt, nullopt, "Yellow", Miku, "kz"},
   {nullopt, nullopt, "celluloid", Miku, "baker"},
   {nullopt, nullopt, "glow", Miku, "keeno"},
   {nullopt, nullopt, "imaginary love story", Miku, "Synthion"},
   {nullopt, nullopt, "letter song", Miku, "doriko"},
-  {nullopt, nullopt, "lost and found", Luka, "ashcolor"},
+  {nullopt, nullopt, "lost and found", Luka, "ashcolor", nullopt, Miku},
   {nullopt, nullopt, "magnet", duet(Miku, Luka), "minato"},
   {nullopt, nullopt, "on the rocks", duet(MEIKO, KAITO), "OSTER Project"},
   {"アングレイデイズ", "Ungray Days", "ungray days", Rin, "Tsumiki"},
@@ -312,11 +341,11 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"愛Dee", nullopt, "Ai Dee", duet(Miku,Luka), "Mitchie M"},
   {nullopt, nullopt, "Packaged", Miku, "livetune"},
   {nullopt, nullopt, "Hand in Hand", Miku, "livetune"},
-  {"39みゅーじっく！", "39みゅーじっく", "39 Music!", Miku, "Mikito-P"},
+  {"39みゅーじっく！", "39みゅーじっく", "39 Music!", Miku, "Mikito-P", nullopt, nullopt , "<:makuharichan:630043704501075968>"},
   {nullopt, nullopt, "Strangers", Miku, "Heavenz"},
   {"すろぉもぉしょん", nullopt, "SLoWMoTIoN", Miku, "Pinocchio-P"},
   {"タイムマシン", nullopt, "Time Machine", Miku, "40mP"},
-  {"どりーみんチュチュ", nullopt, "Dreamin Chuchu", Luka, "emon(Tes.)"},
+  {"どりーみんチュチュ", nullopt, "Dreamin Chuchu", Luka, "emon(Tes.)", nullopt, duet(Miku,Rin)},
   {nullopt, nullopt, "Calc.", Miku, "JimmyThumb-P"},
   {"ウミユリ海底譚", "Umiyuri Kaiteitan", "Tale of the Deep-sea Lily", Miku, "n-buna"},
   {"テレカクシ思春期", "Terekakushi Shishunki", "Embarrassment-Hiding Adolescence", Len, "HoneyWorks"},
@@ -327,10 +356,10 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ツギハギスタッカート", "Tsugihagi Staccato", "Patchwork Staccato", Miku, "toa"},
   {"サイハテ", "Saihate", "The Farthest Ends", Miku, "Kobayashi Onyx"},
   {nullopt, nullopt, "TODAY THE FUTURE", Miku, "HarryP"},
-  {nullopt, nullopt, "DECORATOR", Miku, "livetune"},
+  {nullopt, nullopt, "DECORATOR", Miku, "livetune", nullopt, duet(Rin,Len,Luka,MEIKO,KAITO)},
   {"孤独の果て", "Kodoku no Hate", "Solitude's End", Rin, "Hikarisyuyo"},
   {"リバースユニバース", nullopt, "Reverse Universe", Miku, "NayutalieN"},
-  {"グリーンライツ・セレナーデ", nullopt, "Greenlights Serenade", Miku, "Omoi"},
+  {"グリーンライツ・セレナーデ", nullopt, "Greenlights Serenade", Miku, "Omoi", nullopt, nullopt, "<a:mikuhyperwota:696421739298816020>"},
   {"愛の詩", "Ai no Uta", "Love Song", Miku, "LamazeP"},
   {"快晴", "Kaisei", "Kaisei", Miku, "Orangestar"},
   {"深海シティアンダーグラウンド", "Shinkai City Underground", "Deep Sea City Underground", Rin, "TanakaB"},
@@ -340,14 +369,14 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"僕が夢を捨てて大人になるまで", "Boku ga Yume o Sutete Otona ni Naru made", "Until I throw away my dreams and become an adult", Miku, "Kasamura Tota"},
   {"ブレス・ユア・ブレス", nullopt, "Bless Your Breath", Miku, "Takeaki Wada"},
   {"太陽系デスコ", "Taiyoukei Desuko", "Solar System Disco", Miku, "NayutalieN"},
-  {nullopt, nullopt, "YY", Miku, "23.exe"},
+  {nullopt, nullopt, "YY", Miku, "23.exe", nullopt, nullopt, "<a:mikupolydab:729383800525815888>"},
   {"まるいうなばら", "Marui Unabara", "Spheric Ocean", Miku, "GoBS"},
   {nullopt, nullopt, "Amazing Dolce", duet(MEIKO,Rin,Len), "Hitoshizuku-P×Yama△"},
   {"きみとぼくのレゾナンス", "Kimi to Boku no Rezonansu", "Resonance Between You and Me", MEIKO, "Nanameue-P"},
   {"キミペディア", nullopt, "Kimipedia", duet(Rin,Len), "Junky"},
   {"愛されなくても君がいる", "Aisarenakute mo Kimi ga Iru", "Because You're Here", Miku, "Pinocchio-P"},
   {"え？あぁ、そう。", "E? Aa, Sou.", "Hm? Ah, Yes.", Miku, "Chouchou-P"},
-  {"ぽかぽかの星", "Pokapoka no Hoshi", "Poka Poka Planet", Miku, "Harumaki Gohan"},
+  {"ぽかぽかの星", "Pokapoka no Hoshi", "Poka Poka Planet", Miku, "Harumaki Gohan", nullopt, nullopt, "<:mikusip:657898170411515904>"},
   {"アルビノ -revive-", nullopt, "Albino", Miku, "buzzG"},
   {"テルミーアンサー", nullopt, "Tell Me Answer", Rin, "kinoshita"},
   {"星空クロノグラフ", "Hoshizora Chronograph", "Chronograph in the Starry Sky", MEIKO, "MINO-U"},
@@ -362,7 +391,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "Loading Memories", Miku, "Sekikomi Gohan"},
   {"フューチャー・イヴ", nullopt, "FUTURE EVE", Miku, "sasakure.UK"},
   {nullopt, nullopt, "Blessing", duet(Miku,Luka,Rin,Len,KAITO,MEIKO), "halyosy"},
-  {"すーぱーぬこになれんかった", "Suupaa Nuko ni Narenkatta", "I Couldn't Become a Super Cat After All", Len, "Mafumafu"},
+  {"すーぱーぬこになれんかった", "Suupaa Nuko ni Narenkatta", "I Couldn't Become a Super Cat After All", Len, "Mafumafu", nullopt, Rin},
   {nullopt, nullopt, "Snowmix♪", Miku, "marasy"},
   {"神っぽいな", "Kamippoi na", "God-ish", Miku, "Pinocchio-P"},
   {"ヘッジホッグ", nullopt, "Hedgehog", Rin, "Noz."},
@@ -617,7 +646,15 @@ struct std::formatter<Song> {
         }
         out << song.name;
         if (song.singer != NO_VIRTUAL_SINGER) {
-            out << " feat. " << magic_enum::enum_flags_name(song.singer);
+            out << " feat. ";
+            if (song.emoji_override) {
+                out << *song.emoji_override;
+            } else {
+                out << singer_to_emoji(song.singer);
+            }
+        }
+        if (song.minor_roles) {
+            out << "(" << singer_to_emoji(*song.minor_roles) << ")";
         }
         out << " by " << song.producer;
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
