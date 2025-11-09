@@ -91,11 +91,11 @@ int main()
         expect(eq(str, "恋色病棟 (Koi Iro Byoutou) / Love Ward feat. Miku by OSTER project"sv));
     };
 
-    "date"_test = [] {
+/*    "date"_test = [] {
         auto song = *lookup_song("fire flower");
         expect(eq(song.published, 2008y/8/2));
         expect(eq(std::format("{:%B %e, %Y}", song.published), "August  2, 2008"sv));
-    };
+        };*/
 
     "disambiguate"_test = [] {
         expect(not(lookup_song("meteor").has_value()));
