@@ -15,10 +15,10 @@ ut_module = custom_target('ut_module',
 )
 
 ut_args = ['-r', 'junit', '-o']
-songs_test =  executable('songs_test', 'songs.cpp', ut_module, songs_module,
+songs_test =  executable('songs_test', 'songs.cpp', ut_module, songs_module, util_module,
                          dependencies: [boostut_dep])
 test('songs', songs_test, args: [ut_args])
 
-concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, songs_module, concerts_module,
+concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, songs_module, concerts_module, util_module,
                          dependencies: [boostut_dep])
 test('concerts', concerts_test, args: [ut_args])

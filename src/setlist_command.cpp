@@ -48,7 +48,7 @@ namespace {
                 co_yield std::format("`{:2}` 🫠 '{}' I guess? This is a bug...\n", track.pos, track.song);
                 continue;
             }
-            co_yield std::format("`{:2}` {}\n", track.pos, util::escape_markdown(std::format("{}", *song)));
+            co_yield std::format("`{:2}` {}\n", track.pos, *song);
         }
     }
 

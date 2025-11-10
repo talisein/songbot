@@ -139,7 +139,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P"},
   {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub (Chinese ver.)", duet(Rin, Len), "Mikito-P", "Chinese ver."},
   {"二次元ドリームフィーバー", "Nijigen Dream Fever", "2D Dream Fever", Miku, "PolyphonicBranch"},
-  {"39", "San Kyuu", "39 (Thank You)", Miku, "sasakure.UK, DECO*27"},
+  {"39", "San Kyuu", "39 (Thank You)", Miku, "sasakure.UK, DECO*27", nullopt, nullopt, "<a:mikuarigathanks:941692452794933248>"},
   {nullopt, nullopt, "8HIT", duet(Rin, Len), "Wonderful☆Opportunity"},
   {nullopt, nullopt, "ANIMAL", Len, "oQ"},
   {nullopt, nullopt, "Acceleration (Breeze Remix)", Miku, "Clean Tears, T-ism"},
@@ -623,40 +623,63 @@ consteval std::vector<AltName> generate_altnames()
 
 export constexpr std::array alt_names = util::materialize<generate_altnames>();
 
+export void
+song_singer_emoji(std::ostream& os, const Song& song)
+{
+    if (song.emoji_override) {
+        os << *song.emoji_override;
+    } else {
+        os << singer_to_emoji(song.singer);
+    }
+    if (song.minor_roles) {
+        os << " with " << singer_to_emoji(*song.minor_roles);
+    }
+}
+
 template <>
 struct std::formatter<Song> {
+private:
+    bool no_emoji = false;
+public:
+    using context_type = std::format_context;
+
     constexpr auto parse(std::format_parse_context& ctx) {
-        return ctx.begin();
+        auto it = ctx.begin();
+        if (it != ctx.end() && *it == 'e') {
+            no_emoji = true;
+            ++it;
+        }
+        return it;
     }
 
     constexpr auto format(const Song& song, std::format_context& ctx) const {
         std::ostringstream out;
         if (song.jp_name) {
-            out << una::norm::to_nfc_utf8(*song.jp_name) << ' ';
+            out << util::escape_markdown(una::norm::to_nfc_utf8(*song.jp_name)) << ' ';
             if (song.romanji_name && *song.cf_romanji_name != song.cf_name) {
-                out << "(" << una::norm::to_nfc_utf8(*song.romanji_name) << ") ";
+                out << "(" << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << ") ";
             }
             out << "/ ";
         } else {
             // romanji but no jp could be other languages (Venus at the fingertips)
             if (song.romanji_name) {
-                out << una::norm::to_nfc_utf8(*song.romanji_name) << " / ";
+                out << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << " / ";
             }
 
         }
         out << song.name;
         if (song.singer != NO_VIRTUAL_SINGER) {
             out << " feat. ";
-            if (song.emoji_override) {
-                out << *song.emoji_override;
+            if (!no_emoji) {
+                song_singer_emoji(out, song);
             } else {
-                out << singer_to_emoji(song.singer);
+                out << magic_enum::enum_flags_name(song.singer);
+                if (song.minor_roles) {
+                    out << " with " << magic_enum::enum_flags_name(*song.minor_roles);
+                }
             }
         }
-        if (song.minor_roles) {
-            out << " (" << singer_to_emoji(*song.minor_roles) << ")";
-        }
-        out << " by " << song.producer;
+        out << " by " << util::escape_markdown(song.producer);
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
     }
 };

@@ -16,9 +16,9 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+import songs;
 import util;
 import concerts;
-import songs;
 import vocadb.events;
 
 #include "setlistlast_command.hpp"
@@ -69,7 +69,8 @@ namespace {
                               track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s),
                               util::escape_markdown(song->name));
             if (song->singer != NO_VIRTUAL_SINGER) {
-                ss << " feat. " << magic_enum::enum_flags_name(song->singer);
+                ss << " feat. ";
+                song_singer_emoji(ss, *song);
             }
             ss << " by " << util::escape_markdown(song->producer);
 
