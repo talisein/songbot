@@ -84,7 +84,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
     std::ostringstream ss;
     using namespace std::literals;
     ss << std::format("{} last played at {}", *song, lookup_concert(std::ranges::begin(rng)->concert_short_name)->name);
-    ss << std::ranges::begin(rng)->variant.transform([](const auto &v) { return std::format(" `{}`.", v); }).value_or(". ");
+    ss << std::ranges::begin(rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(". ");
 
     auto remaining = std::views::drop(rng, 1);
     if (std::ranges::empty(remaining)) {

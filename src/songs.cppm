@@ -64,22 +64,22 @@ std::string singer_to_emoji(Singer s)
 {
     std::ostringstream ss;
     if (magic_enum::enum_flags_test(s, Miku)) {
-        ss << "<:miku:235217471982927874:>";
+        ss << "<:miku:235217471982927874>";
     }
     if (magic_enum::enum_flags_test(s, Rin)) {
-        ss << "<:rin:235215581278633984:>";
+        ss << "<:rin:235215581278633984>";
     }
     if (magic_enum::enum_flags_test(s, Len)) {
-        ss << "<:len:235217877446295553:>";
+        ss << "<:len:235217877446295553>";
     }
     if (magic_enum::enum_flags_test(s, Luka)) {
-        ss << "<:luka:235216119403773952:>";
+        ss << "<:luka:235216119403773952>";
     }
     if (magic_enum::enum_flags_test(s, MEIKO)) {
         ss << "<:meikolove:314486872317493260>";
     }
     if (magic_enum::enum_flags_test(s, KAITO)) {
-        ss << "<:kaito:254038928921722880:>";
+        ss << "<:kaito:254038928921722880>";
     }
     if (magic_enum::enum_flags_test(s, Teto)) {
         ss << "<:tetolove:519149276907962388>";
@@ -298,7 +298,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"千年の独奏歌", "Sennen no Dokusou Ka", "Thousand Year Solo", KAITO, "yanagi-P"},
   {nullopt, nullopt, "Through The Night", Miku, "Slushii"},
   {"東京テディベア", "Tokyo Teddy Bear", "Tokyo Teddy Bear", Rin, "Neru"},
-  {"二息歩行", "Nisoku Hokou", "Two Breaths Walking", Miku, "DECO*27"},
+  {"二息歩行", "Nisoku Hokou", "Two Breaths Walking", Miku, "DECO*27", nullopt, nullopt, "<a:TwoBreathHeart:841007262964121630>"},
   {"裏表ラバーズ", "Ura-omote Lovers", "Two-Sided Lovers", Miku, "wowaka"},
   {"アンハッピーリフレイン", "Unhappy Refrain", "Unhappy Refrain", Miku, "wowaka"},
   {"アンノウン・マザーグース", "Unknown Mother-Goose", "Unknown Mother-Goose", Miku, "wowaka"},
@@ -654,7 +654,7 @@ struct std::formatter<Song> {
             }
         }
         if (song.minor_roles) {
-            out << "(" << singer_to_emoji(*song.minor_roles) << ")";
+            out << " (" << singer_to_emoji(*song.minor_roles) << ")";
         }
         out << " by " << song.producer;
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
