@@ -41,6 +41,8 @@ export enum ConcertSeries
     KODO, // 255
     ANNIVERSARY,
     NICONICO,
+    GALAXY,
+    NO_SERIES,
 };
 
 export enum ConcertTour
@@ -106,6 +108,8 @@ export enum ConcertTour
     KAGA14,
     MK15,
     ME2025,
+    GALAXY2020,
+    GALAXY2021,
 };
 
 export constexpr std::string_view
@@ -127,9 +131,12 @@ tour_to_string(ConcertTour tour)
             case MP2012HKTW:    return "MikuPa 2012 HKTW"sv;
             case MP2013Sapporo: return "MikuPa 2013 Sapporo"sv;
             case MP2013Kansai:  return "MikuPa 2013 Kansai"sv;
+            case MM2022:        return "MM10th"sv;
             case MM10Sapporo:   return "MM10th Sapporo"sv;
             case KAGA14:        return "Kagamine 14th"sv;
             case ZERO:          return "Untitled 0"sv;
+            case GALAXY2020:    return "Galaxy 2020"sv;
+            case GALAXY2021:    return "Galaxy 2021"sv;
             default:
                 return magic_enum::enum_name(tour);
         }
@@ -198,10 +205,12 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { MIKU_WITH_YOU,    "MIKU WITH YOU 2019",                                               MWY2019,     2019y/11/1, 3752 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2020 EUROPE",                                    ME2020EU,    2020y/1/11, 2786 },
         { NICONICO,         "Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 -", ZERO,    2020y/8/9, 2939 },
+        { GALAXY,           "Hatsune Miku GALAXY LIVE 2020",                                    GALAXY2020,  2020y/9/26, 2952 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2020",                                  MM2020,      2020y/11/28, 2758 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2020",                                       MWY2020,     2020y/12/25, 3250 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2021 Online",                                    ME2021,      2021y/6/6, 3224 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2021",                                  MM2021,      2021y/10/22, 3305 },
+        { GALAXY,           "Hatsune Miku GALAXY LIVE 2021",                                    GALAXY2021,  2021y/12/18, 3979 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2021",                                       MWY2021,     2021y/12/25, 4058 },
         { ANNIVERSARY,      "Kagamine Rin・Len Happy 14th Birthday Party 「Two You☆★」",         KAGA14,      2022y/7/7, 4161 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 10th Anniversary",                      MM2022,      2022y/8/12, 4233 },
@@ -1401,6 +1410,14 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ZERO, 15, "DECORATOR"},
         { ZERO, 16, "Greenlights Serenade"},
         { ZERO, 17, "Hand in Hand"},
+        { GALAXY2020, 1, "Light Blue Invasion"},
+        { GALAXY2020, 2, "World is Mine"},
+        { GALAXY2020, 3, "Violence Trigger"},
+        { GALAXY2020, 4, "MACARON"},
+        { GALAXY2020, 5, "Bitter Chocolate Decoration"},
+        { GALAXY2020, 6, "HIBANA"},
+        { GALAXY2020, 7, "Walking in the Center of the World"},
+        { GALAXY2020, 8, "Tell Your World"},
         { MM2020, 1, "Solar System Disco" },
         { MM2020, 2, "Hyper Reality Show" },
         { MM2020, 3, "YY" },
@@ -1497,6 +1514,18 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { MM2021, 23, "Because You're Here" },
         { MM2021, 24, "Hand in Hand" },
         { MM2021, 25, "Hatsune Creation Myth" },
+        { GALAXY2021, 1, "Light Blue Invasion" },
+        { GALAXY2021, 2, "DUNE" },
+        { GALAXY2021, 3, "Walking in the Center of the World" },
+        { GALAXY2021, 4, "Violence Trigger" },
+        { GALAXY2021, 5, "MACARON" },
+        { GALAXY2021, 6, "Whipstitching Person" },
+        { GALAXY2021, 7, "HIBANA" },
+        { GALAXY2021, 8, "Bitter Chocolate Decoration" },
+        { GALAXY2021, 9, "World is Mine" },
+        { GALAXY2021, 10, "Future Final Wars" },
+        { GALAXY2021, 11, "Lonely Universe" },
+        { GALAXY2021, 12, "Nova" },
         { MWY2021, 1, "Ghost Rule" },
         { MWY2021, 2, "Solar System Disco" },
         { MWY2021, 3, "Pick Me Up" },

@@ -506,6 +506,14 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"祭りだヘイカモン", "Matsuri da Hey Come On", "It's a Festival, Hey, C'mon", Miku, "Pinocchio-P"},
   {nullopt, nullopt, "LION", NO_VIRTUAL_SINGER, "Kodo"},
   {nullopt, nullopt, "Artifact", Miku, "buzzG"},
+  {"水色侵略", "Mizuiro Shinryaku", "Light Blue Invasion", Miku, "NayutalieN"},//https://vocadb.net/S/294036
+  {"世界の真ん中を歩く", "Sekai no Mannaka o Aruku", "Walking in the Center of the World", Miku, "natsushiro"},//https://vocadb.net/S/152288
+  {"バイオレンストリガー", "Violence Trigger", "Violence Trigger", Miku, "Hachioji-P"},//https://vocadb.net/S/219144
+  {"マカロン", "MACARON", "MACARON", Miku, "ATOLS"}, //https://vocadb.net/S/15565
+  {"カガリビト", "Kagaribito", "Whipstitching Person", Miku, "millstones"},//https://vocadb.net/S/298
+  {"ビターチョコデコレーション", "Bitter Choco Decoration", "Bitter Chocolate Decoration", Miku, "syudou"}, //https://vocadb.net/S/221277
+  {"未来最終戦争", "Mirai Saishuu Sensou", "Future Final Wars", Miku, "DIVELA"},//https://vocadb.net/S/271920
+  {"ロンリーユニバース", "Lonely Universe", "Lonely Universe", Miku, "Aqu3ra"},//https://vocadb.net/S/232181
     };
 
     return res;
@@ -592,6 +600,7 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "Beware of the Miku Miku Bacteria", "Beware of the Miku Miku Germs♪"},
             { "01_ballade", "Fragments of a Star"},
             { "01 ballade", "Fragments of a Star"},
+            { "Repairers of the Deceptive World", "Whipstitching Person"},
     };
     return res;
 }
