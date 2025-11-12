@@ -170,7 +170,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "Decade", Miku, "Dixie Flatline"},
   {"深海少女", "Shinkai Shoujo", "Deep-Sea Girl", Miku, "Yuuyu-P"},
   {"ドクター＝ファンクビート", "Doctor=Funk Beat", "Doctor=Funk Beat", KAITO, "nyanyannya"},
-  {"ダブルラリアット", "Double Lariat", "Double Lariat", Luka, "Agoaniki-P"},
+  {"ダブルラリアット", "Double Lariat", "Double Lariat", Luka, "Agoaniki-P", nullopt, nullopt, "<a:doublelariat:394562140096167937>"},
   {nullopt, nullopt, "Drag the ground", Miku, "Camellia", nullopt, nullopt, "<:racingmikuhappy:805737573653544972>"},
   {"ゆめゆめ", "Yumeyume", "Dream Dream", Miku, "DECO*27"},
   {"ドリームレス・ドリームス", "Dreamless Dreams", "Dreamless Dreams", Miku, "Harumaki Gohan"},
