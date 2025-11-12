@@ -214,11 +214,11 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"トリノコシティ", "Torinoko City", "Left-Behind City (Urbandonment)", Miku, "40mP"},
   {"リテラシー", "Literacy", "Literacy", KAITO, "wotaku"},
   {"こっち向いて Baby", "Kocchi Muite Baby", "Look This Way, Baby", Miku, "ryo"},
-  {"アイ", "Ai", "Love", Miku, "DECO*27"},
+  {"アイ", "Ai", "Love", Miku, "DECO*27", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
   {"恋色病棟", "Koi Iro Byoutou", "Love Ward", Miku, "OSTER project"},
   {"愛言葉", "Ai Kotoba", "Love Words", Miku, "DECO*27"},
   {"恋は戦争", "Koi wa Sensou", "Love is War", Miku, "ryo"},
-  {"好き！雪！本気マジック", "Suki! Yuki! Maji Magic", "Love! Snow! Really Magic", Miku, "Mitchie M"},
+  {"好き！雪！本気マジック", "Suki! Yuki! Maji Magic", "Love! Snow! Really Magic", Miku, "Mitchie M", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
   {"忘却心中", "Boukyaku Shinjuu", "Lover's Suicide Oblivion", MEIKO, "OPA"},
   {"ラッキー☆オーブ", "Lucky☆Orb", "Lucky☆Orb", Miku, "emon(Tes.)", nullopt, nullopt, "<:mikuwink:607623904797786152>"},
   {"ルカルカ★ナイトフィーバー", "Luka Luka★Night Fever", "Luka Luka★Night Fever", Luka, "samfree"},
@@ -263,7 +263,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ヒビカセ", "Hibikase", "Resonate", Miku, "Giga-P"},
   {"ローリンガール", "Rolling Girl", "Rolling Girl", Miku, "wowaka"},
   {"ロミオとシンデレラ", "Romeo to Cinderella", "Romeo and Cinderella", Miku, "doriko"},
-  {"四角い地球を丸くする", "Shikakui Chikyuu wo Maruku Suru", "Round Off the Square Earth", Miku, "TOKOTOKO"},
+  {"四角い地球を丸くする", "Shikakui Chikyuu wo Maruku Suru", "Round Off the Square Earth", Miku, "TOKOTOKO", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
   {nullopt, nullopt, "SPiCa", Miku, "Toku-P"},
   {nullopt, nullopt, "Satisfaction", Miku, "kz"},
   {"秘密警察", "Himitsu Keisatsu", "Secret Police", Miku, "Buriru-P"},
@@ -271,7 +271,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "Sharing The World", Miku, "BIGHEAD"},
   {nullopt, nullopt, "Sharing The World (Spanish ver.)", Miku, "BIGHEAD, Maubox"},
   {"夜舞うシルエット", "Yomau Silhouette", "Silhouette Dancing in the Night", MEIKO, "Miyamori Bungaku"},
-  {nullopt, nullopt, "Snow Fairy Story", Miku, "40mP"},
+  {nullopt, nullopt, "Snow Fairy Story", Miku, "40mP", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
   {"スノーマン", "Snowman", "Snowman", KAITO, "halyosy"},
   {"シャボン", "Shabon", "Soap", Miku, "Kuriyama Yuri"},
   {nullopt, nullopt, "Someday'z Coming", Luka, "Shoten Taro"},
@@ -305,7 +305,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ヴァンパイア", "Vampire", "Vampire", Miku, "DECO*27"},
   {"ぽっぴっぽー", "PoPiPo", "Vegetable Juice", Miku, "Lamaze-P"},
   {nullopt, "Venus di Ujung Jari", "Venus at The Fingertips", Miku, "Mohax-2000"},
-  {"ビバハピ", "Viva Happy", "Viva Happy", Miku, "Mitchie M"},
+  {"ビバハピ", "Viva Happy", "Viva Happy", Miku, "Mitchie M", nullopt, nullopt, "<:mikuhappy:658349436375793670>"},
   {"ぼかろころしあむ ", nullopt, "Vocalo-Colosseum", Rin, "DIVELA"},
   {"ワンダーラスト", "Wanderlast", "Wanderlast", Luka, "sasakure.UK"},
   {"あったかいと", "Attakaito", "Warm Kaito", KAITO, "halyosy"},
@@ -345,7 +345,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "Strangers", Miku, "Heavenz"},
   {"すろぉもぉしょん", nullopt, "SLoWMoTIoN", Miku, "Pinocchio-P"},
   {"タイムマシン", nullopt, "Time Machine", Miku, "40mP"},
-  {"どりーみんチュチュ", nullopt, "Dreamin Chuchu", Luka, "emon(Tes.)", nullopt, duet(Miku,Rin)},
+  {"どりーみんチュチュ", nullopt, "Dreamin Chuchu", Luka, "emon(Tes.)", nullopt, duet(Miku,Rin), "<:chuchu:317055647826837504>"},
   {nullopt, nullopt, "Calc.", Miku, "JimmyThumb-P"},
   {"ウミユリ海底譚", "Umiyuri Kaiteitan", "Tale of the Deep-sea Lily", Miku, "n-buna"},
   {"テレカクシ思春期", "Terekakushi Shishunki", "Embarrassment-Hiding Adolescence", Len, "HoneyWorks"},
@@ -426,9 +426,9 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"黙ってロックをやれって言ってんの！", "Damatte Rock o Yare tte Itten no!", "DO THE ROCK!", duet(MEIKO,Miku,Rin,Luka), "Nekotachi Kotatsu"},
   {"ストリートライト", nullopt, "Street Light", duet(Miku,Luka,Rin,Len,MEIKO,KAITO), "Negi Shower P"},
   {"ラストラス", nullopt, "Lustrous", Miku, "*Luna"},
-  {"ステラ", "Stella", "Stella", Miku, "Kotsuban-P"},
-  {"雪がとける前に", "Yuki ga Tokeru Mae ni", "Before the Snow Melts", Miku, "doriko"},
-  {"スターナイトスノウ", "Star Night Snow", "Star Night Snow", Miku, "n-buna×Orangestar"},
+  {"ステラ", "Stella", "Stella", Miku, "Kotsuban-P", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
+  {"雪がとける前に", "Yuki ga Tokeru Mae ni", "Before the Snow Melts", Miku, "doriko", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
+  {"スターナイトスノウ", "Star Night Snow", "Star Night Snow", Miku, "n-buna×Orangestar", nullopt, nullopt, "<a:mikusnowrng:926685701494435870>"},
   {"你好", "Nǐhǎo", "Hello", Miku, "MusikM"},
   {"初嵐", "Chūlán", "First Storm", Miku, "DECO*27"},
   {nullopt, nullopt, "Shining Star (Miku cover)", Miku, "Unknown"}, //https://vocadb.net/S/326238
@@ -477,7 +477,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"＊ハロー、プラネット。", "*Hello, Planet.", "*Hello, Planet.", Miku, "sasakure.UK"},
   {"番凩", "Tsugai Kogarashi", "Wintry Winds", duet(MEIKO, KAITO), "hinayukki@sigotositeP"},
   {"タイムリミット", "Time Limit", "Time Limit", Miku, "Tatami-P"},
-  {nullopt, nullopt, "Ievan Polkka", Miku, "Otomania"},/* Mikupa */
+  {nullopt, nullopt, "Ievan Polkka", Miku, "Otomania", nullopt, nullopt, "<:leek:235219960425611264>"},/* Mikupa */
   {"崩壊歌姫 -disruptive diva-", "Houkai Utahime", "Disruptive Diva", Miku, "Machigerita-P"},
   {nullopt, nullopt, "RIP=RELEASE", Luka, "minato"},
   {nullopt, nullopt, "Japanese Ninja No.1", Luka, "Deadball-P"},
@@ -497,11 +497,11 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"紅一葉", "Akahitoha", "A Single Red Leaf", Miku, "Kurousa-P"},
   {"能管＋平胴", "Nokan＋hirado", "Flute＋Flat Frame", NO_VIRTUAL_SINGER, "Kodo"},
   {"三宅", "Miyake", "Miyake", NO_VIRTUAL_SINGER, "Kodo"},
-  {"巡", "Meguru", "Patrol", NO_VIRTUAL_SINGER, "Kodo"},
+  {"巡", "Meguru", "Patrol", NO_VIRTUAL_SINGER, "Kodo", nullopt, Miku},
   {"族", "Zoku", "Tribe", Miku, "Kodo"},
   {"南部牛追歌", "Nanbu Ushioi Uta", "Southern Cattle-Chasing Song", Miku, "Kodo"},
   {"韋駄天", "Idaten", "Idaten", NO_VIRTUAL_SINGER, "Kodo"},
-  {"NEPPUU〜熱風〜", "Neppuu〜Neppuu〜", "NEPPUU ~Blistering Wind~", Miku, "Mikito-P"},
+  {"NEPPUU〜熱風〜", "Neppuu〜Neppuu〜", "NEPPUU ~Blistering Wind~", Miku, "Mikito-P", nullopt, nullopt, "<a:mikubongo:768370491634614293>"},
   {"いのちもやしてたたけよ", "Inochi Moyashite Tatake yo", "Let Your Life Be Vigorous and Open Your Mouth", Miku, "Kodo"},
   {"祭りだヘイカモン", "Matsuri da Hey Come On", "It's a Festival, Hey, C'mon", Miku, "Pinocchio-P"},
   {nullopt, nullopt, "LION", NO_VIRTUAL_SINGER, "Kodo"},
@@ -689,6 +689,10 @@ public:
             }
         }
         out << " by " << util::escape_markdown(song.producer);
+        if (song.singer == NO_VIRTUAL_SINGER && song.minor_roles || song.emoji_override) {
+            auto emoji = song.emoji_override.transform([](auto &sv) { return std::string(sv); }).value_or(singer_to_emoji(*song.minor_roles));
+            out << " with " << emoji;
+        }
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
     }
 };

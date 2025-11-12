@@ -116,6 +116,14 @@ get_config(std::string_view filename)
         } else if (data.contains("discord") && data["discord"].contains("public_key")) {
             res.public_key = data["discord"]["public_key"];
         }
+        if (data.contains("discord") && data["discord"].contains("owner_id")) {
+            auto owner_str = data["discord"]["owner_id"];
+            std::uint64_t owner_id;
+            auto [_, ec] = std::from_chars(std::to_address(owner_str.begin()), std::to_address(owner_str.end()), owner_id);
+            if (ec == std::errc()) {
+                res.owner_id = owner_id;
+            }
+        }
 
     }
 
@@ -147,6 +155,35 @@ get_config(std::string_view filename)
             std::string public_key;
             std::getline(public_key_file, public_key);
             res.public_key = public_key;
+        } while (0);
+    }
+
+    /* Default to $CREDENTIALS_DIRECTORY/owner_id if no owner_id */
+    if (!res.owner_id) {
+        do {
+            std::filesystem::path path;
+            const char* creds_dir_cstr = std::getenv("CREDENTIALS_DIRECTORY");
+            if (creds_dir_cstr) {
+                path = creds_dir_cstr;
+            } else if (std::filesystem::exists("/run/secrets")) {
+                path = "/run/secrets";
+            } else if (std::filesystem::exists("/var/run/secrets")) {
+                path = "/var/run/secrets";
+            }
+
+            auto owner_id_path = path / "owner_id";
+            if (!std::filesystem::exists(owner_id_path)) break;
+            std::ifstream owner_id_file(owner_id_path);
+            if (!owner_id_file.is_open()) break;
+            std::println("INFO: Reading owner_id from {}", owner_id_path.native());
+            std::string owner_str;
+            std::getline(owner_id_file, owner_str);
+            std::uint64_t owner_id;
+            auto [_, ec] = std::from_chars(std::to_address(owner_str.begin()), std::to_address(owner_str.end()), owner_id);
+            if (ec == std::errc()) {
+                res.owner_id = owner_id;
+            }
+
         } while (0);
     }
 

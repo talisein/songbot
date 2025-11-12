@@ -25,6 +25,7 @@ import concerts;
 #include "setlistlast_command.hpp"
 #include "song_command.hpp"
 #include "last_command.hpp"
+#include "version.hpp"
 
 namespace
 {
@@ -112,6 +113,43 @@ void context::on_ready(const dpp::ready_t& event)
             std::views::transform([](auto &p) { return p->get_command(); }) |
             std::ranges::to<std::vector>();
         bot->global_bulk_command_create(cmds);
+    }
+
+    /* Notify owner of restart */
+    if (dpp::run_once<struct notify_owner_on_restart>() && config.owner_id) {
+        dpp::snowflake id { *config.owner_id };
+        bot->user_get(id, [this](const dpp::confirmation_callback_t& conf) -> void {
+            if (conf.is_error()) {
+                log_error("Failed to get owner_id user: {}", conf.get_error().message);
+                return;
+            }
+            auto user = conf.get<dpp::user_identified>();
+
+            bot->current_user_get_guilds([this, user = std::move(user)](const dpp::confirmation_callback_t& conf) -> void {
+                std::string msg = "I've just restarted";
+                if (conf.is_error()) {
+                    log_error("Failed to get bot guilds: {}", conf.get_error().message);
+                    msg = "I've just restarted. I couldn't find my guilds today.";
+                } else {
+                    auto map = conf.get<dpp::guild_map>();
+                    using namespace std::literals;
+                    msg = std::format("I've just restarted. I'm in the following guilds {}: {}",
+                                      map.size(),
+                                      std::views::values(map) | std::views::transform(&dpp::guild::name));// | std::views::join_with(", "sv) | std::ranges::to<std::string>());
+                    bot->log(dpp::ll_debug, msg);
+                    bot->create_dm_channel(user.id, [this, msg = std::move(msg)](const dpp::confirmation_callback_t& conf) -> void {
+                        if (conf.is_error()) {
+                            log_error("Failed to create dm channel: {}", conf.get_error().message);
+                            return;
+                        }
+                        auto channel = conf.get<dpp::channel>();
+                        dpp::message m {channel.id, std::format("I've just restarted! Version {}", BUILD_GIT_COMMIT) };
+                        bot->message_create(m);
+                    });
+                }
+            });
+
+        });
     }
 }
 

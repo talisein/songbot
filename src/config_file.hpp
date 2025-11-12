@@ -22,6 +22,7 @@ struct bot_config
 {
     std::string api_token;
     std::optional<std::string> public_key;
+    std::optional<std::uint64_t> owner_id;
 };
 
 std::expected<bot_config, std::exception_ptr> get_config(std::string_view filename = "config.ini");

@@ -124,6 +124,11 @@ int main()
 
     };
 
+    "kodo"_test = [] {
+        auto song = lookup_song("Meguru");
+        expect(song.has_value());
+        expect(eq(std::format("{}", *song), "巡 (Meguru) / Patrol by Kodo with <:miku:235217471982927874>"sv));
+    };
 
     return 0;
 
