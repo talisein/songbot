@@ -41,7 +41,7 @@ public:
     std::default_random_engine rng_engine;
 
     template<auto severity, typename... Args>
-    void log(std::format_string<Args...> fmt, Args&&... args);
+    void log(Args&&... args);
 
     template<typename... Args>
     void log_error(std::format_string<Args...> fmt, Args&&... args);
@@ -72,9 +72,9 @@ public:
 
 template<auto severity, typename... Args>
 void
-context::log(std::format_string<Args...> fmt, Args&&... args)
+context::log(Args&&... args)
 {
-    bot->log(severity, std::format(std::move(fmt), std::forward<Args>(args)...));
+    bot->log(severity, std::format(std::forward<Args>(args)...));
 }
 
 template<typename... Args>
