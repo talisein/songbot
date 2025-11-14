@@ -26,6 +26,7 @@ import concerts;
 #include "song_command.hpp"
 #include "last_command.hpp"
 #include "version.hpp"
+#include "formatters.hpp"
 
 namespace
 {
@@ -72,12 +73,8 @@ context::context(std::string_view config_filename) :
     setup_bot();
 }
 
-void context::on_ready(const dpp::ready_t& event)
+dpp::task<void> context::on_ready(const dpp::ready_t& event)
 {
-    /* if (dpp::run_once<struct clear_bot_commands>()) {
-       bot->global_bulk_command_delete();
-       } */
-
     if (dpp::run_once<struct register_healthcheck_timer>()) {
         systemd::notify(0, "READY=1");
         systemd::notify(0, "STATUS=Mikumiku Setlists is ready for interaction");
@@ -112,43 +109,37 @@ void context::on_ready(const dpp::ready_t& event)
         auto cmds = std::views::values(commands) |
             std::views::transform([](auto &p) { return p->get_command(); }) |
             std::ranges::to<std::vector>();
-        bot->global_bulk_command_create(cmds);
+        auto conf = co_await bot->co_global_bulk_command_create(cmds);
+        if (conf.is_error()) {
+            log_error("Couldn't register commands: {:d}", conf.get_error());
+        }
     }
 
     /* Notify owner of restart */
     if (dpp::run_once<struct notify_owner_on_restart>() && config.owner_id) {
         dpp::snowflake id { *config.owner_id };
-        bot->user_get(id, [this](const dpp::confirmation_callback_t& conf) -> void {
-            if (conf.is_error()) {
-                log_error("Failed to get owner_id user: {}", conf.get_error().message);
-                return;
-            }
-            auto user = conf.get<dpp::user_identified>();
 
-            bot->current_user_get_guilds([this, user = std::move(user)](const dpp::confirmation_callback_t& conf) -> void {
-                if (conf.is_error()) {
-                    log_error("Failed to get bot guilds: {}", conf.get_error().message);
-                } else {
-                    auto map = conf.get<dpp::guild_map>();
-                    using namespace std::literals;
-                    log_info("I'm in the following guilds {}: {}",
-                             map.size(),
-                             std::views::values(map) | std::views::transform(&dpp::guild::name) | std::views::join_with(", "sv) | std::ranges::to<std::string>());
-                    bot->create_dm_channel(user.id, [this](const dpp::confirmation_callback_t& conf) -> void {
-                        if (conf.is_error()) {
-                            log_error("Failed to create dm channel: {}", conf.get_error().message);
-                            return;
-                        }
-                        auto channel = conf.get<dpp::channel>();
-                        std::string msg = std::format("Mikumiku Setlists starting up! *Pi-pi-pi*! Version {} ready to chat!", BUILD_GIT_COMMIT);
-                        dpp::message m {channel.id, msg};
-                        bot->message_create(m);
-                    });
-                }
-            });
+        dpp::message msg { std::format("Mikumiku Setlists starting up! *Pi-pi-pi*! Version {} ready to chat!", BUILD_GIT_COMMIT) };
+        auto dm_conf = co_await bot->co_direct_message_create(id, msg);
+        if (dm_conf.is_error()) {
+            log_error("Failed to send dm: {}", dm_conf.get_error());
+        }
 
-        });
+        auto guilds_conf = co_await bot->co_current_user_get_guilds();
+        if (guilds_conf.is_error()) {
+            log_error("Failed to get bot guilds: {}", guilds_conf.get_error());
+            co_return;
+        }
+
+        auto map = guilds_conf.get<dpp::guild_map>();
+        using namespace std::literals;
+        log_info("I'm in the following guilds {}: {}",
+                 map.size(),
+                 std::views::values(map) | std::views::transform(&dpp::guild::name) |
+                 std::views::join_with(", "sv) | std::ranges::to<std::string>());
     }
+
+    co_return;
 }
 
 void context::on_slashcommand(const dpp::slashcommand_t& event)
@@ -205,9 +196,11 @@ context::setup_bot()
         return on_slashcommand(event);
     });
 
-    bot->on_ready([this](const dpp::ready_t& event) {
-        return on_ready(event);
-    });
+    #if __cpp_lib_bind_front >= 202306L
+        bot->on_ready(std::bind_front<&context::on_ready>(this));
+    #else
+        bot->on_ready(std::bind_front(&context::on_ready, this));
+    #endif
 
     bot->on_autocomplete([this](const dpp::autocomplete_t & event) {
         return on_autocomplete(event);
