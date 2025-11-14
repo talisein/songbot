@@ -15,4 +15,4 @@ depth = 1
 # [provide] section is optional for wraps named after the project
 # but it's good practice. It tells Meson the dependency name to look for.
 [provide]
-json = nlohmann_json
+nlohmann_json = nlohmann_json_multiple_headers
