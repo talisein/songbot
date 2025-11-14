@@ -112,5 +112,36 @@ int main()
         */
     };
 
+    /* This was just used for some research
+    "in out"_test = [] {
+        auto in = { MIKU_EXPO }; //, SNOW_MIKU, JAPAN_TOUR, MIKUNOPOLIS };
+        auto out = { Mikunopolis, ME2014LANY, ME2016NA, ME2018NA, ME2024NA, ME2025, ME2021, ME2023VR };
+
+
+        std::set<std::string_view> songs;
+        for ( auto series : in ) {
+            for ( auto concert : std::views::filter(concerts, [series](const auto &c) { return c.series == series; })) {
+                for ( auto track : std::views::filter(setlists, [concert](const auto &t) { return t.concert_short_name == concert.short_name; } ))
+                {
+                    songs.insert(track.song);
+                }
+            }
+        }
+
+        for ( auto concert : out ) {
+            for ( auto track : std::views::filter(setlists, [concert](const auto &t) { return t.concert_short_name == concert; } ))
+            {
+                auto it = songs.find(track.song);
+                if (it == songs.end()) continue;
+                songs.erase(it);
+            }
+        }
+
+        auto s = std::views::join_with(songs, "\n"sv) | std::ranges::to<std::string>();
+
+        expect(eq(3Z, std::ranges::distance(songs)));
+        expect(eq(""sv, s));
+    };
+    */
     return 0;
 }
