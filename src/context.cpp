@@ -84,13 +84,13 @@ void context::on_ready(const dpp::ready_t& event)
         if (uint64_t usec = 0; systemd::watchdog_enabled(0, &usec) > 0) {
             uint64_t sec = usec / 1000 / 1000 / 2;
             if (sec > 5) {
-                bot->log(dpp::ll_info, std::format("Setting up watchdog timer with interval {}s", sec));
+                log_info("Setting up watchdog timer with interval {}s", sec);
                 bot->start_timer(on_healthcheck_timer, sec /* Seconds */);
             } else {
-                bot->log(dpp::ll_info, std::format("Watchdog timer ignored for interval {}s", sec));
+                log_info("Watchdog timer ignored for interval {}s", sec);
             }
         } else {
-            bot->log(dpp::ll_info, std::format("Starting default watchdog timer for 15s"));
+            log_info("Starting default watchdog timer for 15s");
             bot->start_timer(on_healthcheck_timer, 15 /* Seconds */);
         }
 
@@ -126,24 +126,22 @@ void context::on_ready(const dpp::ready_t& event)
             auto user = conf.get<dpp::user_identified>();
 
             bot->current_user_get_guilds([this, user = std::move(user)](const dpp::confirmation_callback_t& conf) -> void {
-                std::string msg = "I've just restarted";
                 if (conf.is_error()) {
                     log_error("Failed to get bot guilds: {}", conf.get_error().message);
-                    msg = "I've just restarted. I couldn't find my guilds today.";
                 } else {
                     auto map = conf.get<dpp::guild_map>();
                     using namespace std::literals;
-                    msg = std::format("I've just restarted. I'm in the following guilds {}: {}",
-                                      map.size(),
-                                      std::views::values(map) | std::views::transform(&dpp::guild::name));// | std::views::join_with(", "sv) | std::ranges::to<std::string>());
-                    bot->log(dpp::ll_debug, msg);
-                    bot->create_dm_channel(user.id, [this, msg = std::move(msg)](const dpp::confirmation_callback_t& conf) -> void {
+                    log_info("I'm in the following guilds {}: {}",
+                             map.size(),
+                             std::views::values(map) | std::views::transform(&dpp::guild::name) | std::views::join_with(", "sv) | std::ranges::to<std::string>());
+                    bot->create_dm_channel(user.id, [this](const dpp::confirmation_callback_t& conf) -> void {
                         if (conf.is_error()) {
                             log_error("Failed to create dm channel: {}", conf.get_error().message);
                             return;
                         }
                         auto channel = conf.get<dpp::channel>();
-                        dpp::message m {channel.id, std::format("I've just restarted! Version {}", BUILD_GIT_COMMIT) };
+                        std::string msg = std::format("Mikumiku Setlists starting up! *Pi-pi-pi*! Version {} ready to chat!", BUILD_GIT_COMMIT);
+                        dpp::message m {channel.id, msg};
                         bot->message_create(m);
                     });
                 }
@@ -157,8 +155,8 @@ void context::on_slashcommand(const dpp::slashcommand_t& event)
 {
     auto it = commands.find(event.command.get_command_name());
     if (it == std::ranges::end(commands)) {
-        bot->log(dpp::ll_debug, std::format("Got unexpected slashcommand for command={}",
-                                            event.command.get_command_name()));
+        log_debug("Got unexpected slashcommand for command={}",
+                  event.command.get_command_name());
         event.reply("I have a bug in my programming, so I'm not sure what to say.");
         slashcommand_unknown_counter->Increment();
         return;
@@ -172,7 +170,7 @@ void context::on_autocomplete(const dpp::autocomplete_t& event)
 {
     auto it = commands.find(event.name);
     if (it == std::ranges::end(commands)) {
-        bot->log(dpp::ll_debug, std::format("Got unexpected autocomplete for for event.name={}", event.name));
+        log_debug("Got unexpected autocomplete for for event.name={}", event.name);
         ac_unknown_counter->Increment();
         event.success();
         return;

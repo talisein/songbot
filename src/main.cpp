@@ -50,26 +50,26 @@ main()
 
     int sfd = signalfd(-1, &mask, 0);
     if (sfd == -1) {
-        ctx.log(dpp::ll_error, "Unable to create signalfd, errno={}", errno_to_ec(errno).message());
+        ctx.log_error("Unable to create signalfd, errno={}", errno_to_ec(errno).message());
     } else {
         dpp::socket_events ev { sfd, dpp::socket_event_flags::WANT_READ, [&ctx](dpp::socket fd, const struct dpp::socket_events&) -> void
         {
             signalfd_siginfo fdsi {};
             auto res = read(fd, &fdsi, sizeof(fdsi));
             if (res == sizeof(fdsi) && fdsi.ssi_signo == SIGTERM) {
-                ctx.log(dpp::ll_info, "Received SIGTERM, exiting.");
+                ctx.log_info("Received SIGTERM, exiting.");
                 systemd::notify(0, "STOPPING=1");
                 ctx.bot->shutdown();
             } else if (res == sizeof(fdsi)) {
-                ctx.log(dpp::ll_warning, "Received {}?", strsignal(fdsi.ssi_signo));
+                ctx.log_warning("Received {}?", strsignal(fdsi.ssi_signo));
             }
         } };
         ctx.bot->socketengine->register_socket(ev);
     }
 
-    ctx.log(dpp::ll_info, "songbot version {} starting now", BUILD_GIT_COMMIT);
+    ctx.log_info("songbot version {} starting now", BUILD_GIT_COMMIT);
     ctx.bot->start(dpp::st_wait);
-    ctx.log(dpp::ll_info, "Stopped.");
+    ctx.log_info("Stopped.");
 
     return 0;
 }

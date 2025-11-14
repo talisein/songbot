@@ -40,11 +40,20 @@ public:
 
     std::default_random_engine rng_engine;
 
-    template<typename... Args>
-    void log(dpp::loglevel, std::format_string<Args...> fmt, Args&&... args);
+    template<auto severity, typename... Args>
+    void log(std::format_string<Args...> fmt, Args&&... args);
 
     template<typename... Args>
     void log_error(std::format_string<Args...> fmt, Args&&... args);
+
+    template<typename... Args>
+    void log_info(std::format_string<Args...> fmt, Args&&... args);
+
+    template<typename... Args>
+    void log_debug(std::format_string<Args...> fmt, Args&&... args);
+
+    template<typename... Args>
+    void log_warning(std::format_string<Args...> fmt, Args&&... args);
 
 private:
     void setup_metrics();
@@ -61,9 +70,9 @@ public:
     prometheus::Counter* ac_unknown_counter;
 };
 
-template<typename... Args>
+template<auto severity, typename... Args>
 void
-context::log(dpp::loglevel severity, std::format_string<Args...> fmt, Args&&... args)
+context::log(std::format_string<Args...> fmt, Args&&... args)
 {
     bot->log(severity, std::format(std::move(fmt), std::forward<Args>(args)...));
 }
@@ -72,5 +81,26 @@ template<typename... Args>
 void
 context::log_error(std::format_string<Args...> fmt, Args&&... args)
 {
-    log(dpp::ll_error, std::move(fmt), std::forward<Args>(args)...);
+    log<dpp::ll_error>(std::move(fmt), std::forward<Args>(args)...);
+}
+
+template<typename... Args>
+void
+context::log_info(std::format_string<Args...> fmt, Args&&... args)
+{
+    log<dpp::ll_info>(std::move(fmt), std::forward<Args>(args)...);
+}
+
+template<typename... Args>
+void
+context::log_debug(std::format_string<Args...> fmt, Args&&... args)
+{
+    log<dpp::ll_debug>(std::move(fmt), std::forward<Args>(args)...);
+}
+
+template<typename... Args>
+void
+context::log_warning(std::format_string<Args...> fmt, Args&&... args)
+{
+    log<dpp::ll_warning>(std::move(fmt), std::forward<Args>(args)...);
 }
