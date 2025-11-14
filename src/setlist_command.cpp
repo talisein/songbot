@@ -120,7 +120,7 @@ namespace {
     };
 }
 
-std::expected<void, std::error_code>
+dpp::task<std::expected<void, std::error_code>>
 setlist_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
@@ -153,16 +153,16 @@ setlist_command::on_slashcommand(const dpp::slashcommand_t& event)
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->bot->log(dpp::ll_error, std::format("/setlist: System Error {}", e.what()));
         setlist_failure_counter->Increment();
-        return std::unexpected(e.code());
+        co_return std::unexpected(e.code());
     } catch (...) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->bot->log(dpp::ll_error, "/setlist: Unhandled exception");
         setlist_failure_counter->Increment();
-        return std::unexpected(songbot_error::explosion);
+        co_return std::unexpected(songbot_error::explosion);
     }
 
     setlist_success_counter->Increment();
-    return {};
+    co_return {};
 }
 
 std::expected<dpp::interaction_response, std::error_code>

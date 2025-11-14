@@ -47,7 +47,7 @@ song_command::get_command()
     return song_cmd;
 }
 
-std::expected<void, std::error_code>
+dpp::task<std::expected<void, std::error_code>>
 song_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     auto param = std::get<std::string>(event.get_parameter("song"));
@@ -61,12 +61,12 @@ song_command::on_slashcommand(const dpp::slashcommand_t& event)
     if (!song) {
         event.reply(std::format("I'm sorry, I don't know about the song '{}'", param));
         song_failure_counter->Increment();
-        return {};
+        co_return {};
     }
 
     event.reply(std::format("Full Name: {}\ncf_romanji: {}\ncf_name: {}", *song, song->cf_romanji_name.value_or("(none)"), song->cf_name));
     song_success_counter->Increment();
-    return {};
+    co_return {};
 }
 
 std::expected<dpp::interaction_response, std::error_code>

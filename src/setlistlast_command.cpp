@@ -325,7 +325,7 @@ setlistlast_command::on_button_click(const dpp::button_click_t& event)
     on_reveal_button_click(event, *args);
 }
 
-std::expected<void, std::error_code>
+dpp::task<std::expected<void, std::error_code>>
 setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     try {
@@ -341,16 +341,16 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->log_error("/setlistlast: System Error {}", e.what());
         setlistlast_failure_counter->Increment();
-        return std::unexpected(e.code());
+        co_return std::unexpected(e.code());
     } catch (std::bad_variant_access &e) {
         event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
         ctx->log_error("/setlistlast: std::get() {}", e.what());
         setlistlast_failure_counter->Increment();
-        return std::unexpected(songbot_error::explosion);
+        co_return std::unexpected(songbot_error::explosion);
     }
 
     setlistlast_success_counter->Increment();
-    return {};
+    co_return {};
 }
 
 std::expected<dpp::interaction_response, std::error_code>

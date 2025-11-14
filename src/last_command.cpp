@@ -47,7 +47,7 @@ last_command::get_command()
     return last_cmd;
 }
 
-std::expected<void, std::error_code>
+dpp::task<std::expected<void, std::error_code>>
 last_command::on_slashcommand(const dpp::slashcommand_t& event)
 {
     auto param = std::get<std::string>(event.get_parameter("song"));
@@ -62,7 +62,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
         auto msg = dpp::message(std::format("I'm sorry, I don't know about the song '{}'", param)).set_flags(dpp::message_flags::m_ephemeral);
         event.reply(msg);
         last_failure_counter->Increment();
-        return {};
+        co_return {};
     }
 
 
@@ -76,7 +76,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
         auto msg = dpp::message(std::format("I'm sorry, '{}' isn't in a concert I know about yet.", param)).set_flags(dpp::message_flags::m_ephemeral);
         event.reply(msg);
         last_failure_counter->Increment();
-        return {};
+        co_return {};
     }
 
     auto count = std::ranges::distance(rng);
@@ -108,7 +108,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t& event)
 
     event.reply(ss.view());
     last_success_counter->Increment();
-    return {};
+    co_return {};
 }
 
 std::expected<dpp::interaction_response, std::error_code>

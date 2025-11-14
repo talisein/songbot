@@ -60,7 +60,7 @@ private:
     void setup_bot();
 
     dpp::task<void> on_ready(const dpp::ready_t& event);
-    void on_slashcommand(const dpp::slashcommand_t& event);
+    dpp::task<void> on_slashcommand(const dpp::slashcommand_t& event);
     void on_autocomplete(const dpp::autocomplete_t& event);
 
 public:

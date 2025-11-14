@@ -142,18 +142,22 @@ dpp::task<void> context::on_ready(const dpp::ready_t& event)
     co_return;
 }
 
-void context::on_slashcommand(const dpp::slashcommand_t& event)
+dpp::task<void> context::on_slashcommand(const dpp::slashcommand_t& event)
 {
     auto it = commands.find(event.command.get_command_name());
     if (it == std::ranges::end(commands)) {
         log_debug("Got unexpected slashcommand for command={}",
                   event.command.get_command_name());
-        event.reply("I have a bug in my programming, so I'm not sure what to say.");
         slashcommand_unknown_counter->Increment();
-        return;
+        co_await event.co_reply("I have a bug in my programming, so I'm not sure what to say.");
+        co_return;
     }
 
-    it->second->on_slashcommand(event);
+    auto res = co_await it->second->on_slashcommand(event);
+    if (!res) {
+        log_error("/{} failed: {}:{}", it->first, res.error().message(), res.error().value());
+    }
+    co_return;
 }
 
 
@@ -192,19 +196,11 @@ context::setup_bot()
     commands.emplace("last", std::make_unique<last_command>(*this));
     commands.emplace("setlistlast", std::make_unique<setlistlast_command>(*this));
 
-    bot->on_slashcommand([this](const dpp::slashcommand_t& event) {
-        return on_slashcommand(event);
-    });
+    bot->on_slashcommand(util::bind_front<&context::on_slashcommand>(this));
 
-    #if __cpp_lib_bind_front >= 202306L
-        bot->on_ready(std::bind_front<&context::on_ready>(this));
-    #else
-        bot->on_ready(std::bind_front(&context::on_ready, this));
-    #endif
+    bot->on_ready(util::bind_front<&context::on_ready>(this));
 
-    bot->on_autocomplete([this](const dpp::autocomplete_t & event) {
-        return on_autocomplete(event);
-    });
+    bot->on_autocomplete(util::bind_front<&context::on_autocomplete>(this));
 }
 
 void

@@ -277,4 +277,27 @@ export namespace util
     }
 
 
+#if __cpp_lib_bind_front >= 202306L
+    using std::bind_front;
+#else
+    template<auto Func, typename... Param>
+    constexpr auto bind_front(Param&& ... params)
+        noexcept (
+        (... && noexcept(typename std::remove_reference_t<Param>(std::declval<Param>())) )
+            )
+    {
+        return [...param = std::forward<Param>(params)]<typename ... Inner>(Inner&& ...inner)
+            noexcept(noexcept(
+                         std::invoke(
+                             Func,
+                             std::declval<const typename std::remove_reference_t<Param>&>()...,
+                             std::declval<Inner>()...
+                             )
+            ))
+            {
+                return std::invoke(Func, param..., std::forward<Inner>(inner)...);
+            };
+    }
+#endif
+
 } // namespace util

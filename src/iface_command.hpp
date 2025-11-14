@@ -39,7 +39,7 @@ public:
 
     virtual ~iface_command() = default;
 
-    virtual std::expected<void, std::error_code> on_slashcommand(const dpp::slashcommand_t& event) = 0;
+    virtual dpp::task<std::expected<void, std::error_code>> on_slashcommand(const dpp::slashcommand_t& event) = 0;
 
     virtual std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) = 0;
 
