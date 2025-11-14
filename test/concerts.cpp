@@ -112,11 +112,12 @@ int main()
         */
     };
 
-    /* This was just used for some research
-    "in out"_test = [] {
-        auto in = { MIKU_EXPO }; //, SNOW_MIKU, JAPAN_TOUR, MIKUNOPOLIS };
-        auto out = { Mikunopolis, ME2014LANY, ME2016NA, ME2018NA, ME2024NA, ME2025, ME2021, ME2023VR };
 
+//This was just used for some research
+    "in out"_test = [] {
+        auto in = { MIKU_EXPO };//, SNOW_MIKU, JAPAN_TOUR, MIKUNOPOLIS };
+        auto out = { Mikunopolis, ME2014LANY, ME2016NA, ME2018NA, ME2024NA, ME2020EU };
+//        auto out = { ME2018EU, ME2020EU, ME2024EU, ME2021, ME2023VR };
 
         std::set<std::string_view> songs;
         for ( auto series : in ) {
@@ -142,6 +143,6 @@ int main()
         expect(eq(3Z, std::ranges::distance(songs)));
         expect(eq(""sv, s));
     };
-    */
+
     return 0;
 }

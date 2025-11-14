@@ -33,6 +33,7 @@ export enum ConcertSeries
     MIKUSGIVINGS_DAY,
     MIKUNOPOLIS,
     MIKU_EXPO, // 82
+    MIKU_EXPO_BIG, // 82
     MAGICAL_MIRAI, // 81
     SNOW_MIKU, // 204
     MIKUPA, // EventSeries 219
@@ -208,7 +209,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { GALAXY,           "Hatsune Miku GALAXY LIVE 2020",                                    GALAXY2020,  2020y/9/26, 2952 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2020",                                  MM2020,      2020y/11/28, 2758 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2020",                                       MWY2020,     2020y/12/25, 3250 },
-        { MIKU_EXPO,        "HATSUNE MIKU EXPO 2021 Online",                                    ME2021,      2021y/6/6, 3224 },
+        { MIKU_EXPO_BIG,    "HATSUNE MIKU EXPO 2021 Online",                                    ME2021,      2021y/6/6, 3224 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2021",                                  MM2021,      2021y/10/22, 3305 },
         { GALAXY,           "Hatsune Miku GALAXY LIVE 2021",                                    GALAXY2021,  2021y/12/18, 3979 },
         { MIKU_WITH_YOU,    "HATSUNE MIKU WITH YOU 2021",                                       MWY2021,     2021y/12/25, 4058 },
@@ -218,7 +219,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { JAPAN_TOUR,       "Hatsune Miku JAPAN TOUR 2023 ~THUNDERBOLT~",                       Thunderbolt, 2023y/2/23, 4765 },
         { KODO,             "Hatsune Miku × Kodo Taiko Special Live 2023",                      KODO2023,    2023y/6/3, 5910 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2023",                                  MM2023,      2023y/8/11, 6045 },
-        { MIKU_EXPO,        "HATSUNE MIKU EXPO 2023 VR",                                        ME2023VR,    2023y/11/11, 5751 },
+        { MIKU_EXPO_BIG,    "HATSUNE MIKU EXPO 2023 VR",                                        ME2023VR,    2023y/11/11, 5751 },
         { ANNIVERSARY,      "MK15th project MEIKO＆KAITO Online Concert",                       MK15,        2024y/2/24, 6539 },
         { MIKUFES,          "Miku FES'24 (Spring) ~Happy 16th Birthday~",                       MIKUFES24,   2024y/3/31, 6986 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2024 North America",                             ME2024NA,    2024y/4/4, 6516 },
@@ -228,7 +229,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2024 New Zealand & Australia",                   ME2024NZAU,  2024y/11/15, 7765 },
         { JAPAN_TOUR,       "Hatsune Miku JAPAN LIVE TOUR 2025 ~BLOOMING~",                     Blooming,    2025y/4/19, 8380 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2025",                                  MM2025,      2025y/8/1, 8768 },
-        { MIKU_EXPO,        "HATSUNE MIKU EXPO 2025 ASIA",                                      ME2025,      2025y/11/5, 9341 },
+        { MIKU_EXPO_BIG,        "HATSUNE MIKU EXPO 2025 ASIA",                                      ME2025,      2025y/11/5, 9341 },
     });
 
 static_assert(std::ranges::is_sorted(concerts, {}, &Concert::date),
