@@ -689,9 +689,14 @@ public:
             }
         }
         out << " by " << util::escape_markdown(song.producer);
-        if (song.singer == NO_VIRTUAL_SINGER && song.minor_roles || song.emoji_override) {
-            auto emoji = song.emoji_override.transform([](auto &sv) { return std::string(sv); }).value_or(singer_to_emoji(*song.minor_roles));
-            out << " with " << emoji;
+        if (song.singer == NO_VIRTUAL_SINGER
+            && (song.minor_roles || song.emoji_override))
+        {
+            auto emoji = song.emoji_override.transform([](auto sv) { return std::string(sv); })
+                .or_else([&song] { return song.minor_roles.transform(&singer_to_emoji); });
+            if (emoji) {
+                out << " with " << *emoji;
+            }
         }
         return std::ranges::copy(std::move(out).str(), ctx.out()).out;
     }
