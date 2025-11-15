@@ -326,7 +326,7 @@ setlistlast_command::on_button_click(const dpp::button_click_t& event)
 }
 
 dpp::task<std::expected<void, std::error_code>>
-setlistlast_command::on_slashcommand(const dpp::slashcommand_t& event)
+setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
 {
     try {
         const auto concert = std::get<std::string>(event.get_parameter("event"));

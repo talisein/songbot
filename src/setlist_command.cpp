@@ -121,7 +121,7 @@ namespace {
 }
 
 dpp::task<std::expected<void, std::error_code>>
-setlist_command::on_slashcommand(const dpp::slashcommand_t& event)
+setlist_command::on_slashcommand(const dpp::slashcommand_t event)
 {
     try {
         /* Some setlists are more than 2000 characters. So we need to split up

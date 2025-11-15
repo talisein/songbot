@@ -48,7 +48,7 @@ last_command::get_command()
 }
 
 dpp::task<std::expected<void, std::error_code>>
-last_command::on_slashcommand(const dpp::slashcommand_t& event)
+last_command::on_slashcommand(const dpp::slashcommand_t event)
 {
     auto param = std::get<std::string>(event.get_parameter("song"));
     auto song = lookup_song(param);

@@ -30,7 +30,7 @@ public:
 
     dpp::slashcommand get_command() override;
 
-    dpp::task<std::expected<void, std::error_code>> on_slashcommand(const dpp::slashcommand_t& event) override;
+    dpp::task<std::expected<void, std::error_code>> on_slashcommand(const dpp::slashcommand_t event) override;
 
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) override;
 
