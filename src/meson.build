@@ -11,9 +11,9 @@ std_module = custom_target('std_module',
              ],
  )
 
-prometheus_counter_h_module = custom_target('prometheus_counter_h_module',
+prometheus_histogram_h_module = custom_target('prometheus_histogram_h_module',
     input: 'prometheus.cppm', # Fake input. The input is prometheus.h from the subproject.
-    output: ['counter_h.gcm'],
+    output: ['histogram_h.gcm'],
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
@@ -23,7 +23,7 @@ prometheus_counter_h_module = custom_target('prometheus_counter_h_module',
         '-x', 'c++-user-header',
         '-I', prometheus_core_build_inc,
         '-I', prometheus_core_inc,
-        '-c', 'prometheus/counter.h',
+        '-c', 'prometheus/histogram.h',
     ],
 )
 
@@ -76,7 +76,7 @@ prometheus_module = custom_target('prometheus_module',
         '-I', prometheus_pull_build_inc,
         '-I', prometheus_pull_inc,
     ],
-    depends: [prometheus_counter_h_module, prometheus_registry_h_module, prometheus_exposer_h_module],
+    depends: [prometheus_registry_h_module, prometheus_exposer_h_module, prometheus_histogram_h_module],
 )
 
 dpp_h_module = custom_target('dpp_h_module',

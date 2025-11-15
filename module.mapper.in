@@ -5,9 +5,9 @@ vocadb.events  @BUILD_DIR@/src/vocadb/release_events.gcm
 @UNI_ALGO_INCLUDEDIR@/uni_algo/all.h @BUILD_DIR@/src/uni_algo_all.gcm
 @MAGIC_ENUM_INCLUDEDIR@/magic_enum/magic_enum_all.hpp @BUILD_DIR@/src/magic_enum_all.gcm
 @DPP_INCLUDEDIR@/dpp/dpp.h @BUILD_DIR@/src/dpp_h.gcm
-@PROMETHEUS_CORE_INCLUDEDIR@/prometheus/counter.h @BUILD_DIR@/src/counter_h.gcm
 @PROMETHEUS_PULL_INCLUDEDIR@/prometheus/exposer.h @BUILD_DIR@/src/exposer_h.gcm
 @PROMETHEUS_CORE_INCLUDEDIR@/prometheus/registry.h @BUILD_DIR@/src/registry_h.gcm
+@PROMETHEUS_CORE_INCLUDEDIR@/prometheus/histogram.h @BUILD_DIR@/src/histogram_h.gcm
 /usr/include/cpr/cpr.h @BUILD_DIR@/src/vocadb/cpr_h.gcm
 
 uni_algo @BUILD_DIR@/src/uni_algo.gcm

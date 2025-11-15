@@ -34,6 +34,10 @@ last_command::last_command(context &ctx) noexcept :
     ac_last_success_counter = &ctx.autocompletion_counter->Add({{"event", "last"}, {"result", "success"}});
     ac_last_no_match_counter = &ctx.autocompletion_counter->Add({{"event", "last"}, {"result", "no-match"}});
     ac_last_failure_counter = &ctx.autocompletion_counter->Add({{"event", "last"}, {"result", "failure"}});
+
+    prometheus::Histogram::BucketBoundaries buckets {0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0};
+    prometheus::Labels labels {{"command", "last"}};
+    autocomplete_latency = &ctx.autocomplete_latency->Add(labels, buckets);
 }
 
 dpp::slashcommand
@@ -141,7 +145,10 @@ last_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
 std::expected<dpp::interaction_response, std::error_code>
 last_command::on_autocomplete(const dpp::autocomplete_t& event)
 {
+    const auto start = std::chrono::high_resolution_clock::now();
     auto res = on_autocomplete_impl(event);
+    const auto end = std::chrono::high_resolution_clock::now();
+    autocomplete_latency->Observe(std::chrono::duration_cast<std::chrono::duration<double>>(end - start).count());
     if (res) {
         ac_last_success_counter->Increment();
     } else {

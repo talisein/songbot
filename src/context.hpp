@@ -68,6 +68,8 @@ public:
     prometheus::Counter* slashcommand_unknown_counter;
     prometheus::Family<prometheus::Counter>* autocompletion_counter;
     prometheus::Counter* ac_unknown_counter;
+
+    prometheus::Family<prometheus::Histogram>* autocomplete_latency;
 };
 
 template<auto severity, typename... Args>

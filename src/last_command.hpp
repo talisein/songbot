@@ -43,4 +43,6 @@ private:
     prometheus::Counter* ac_last_success_counter;
     prometheus::Counter* ac_last_no_match_counter;
     prometheus::Counter* ac_last_failure_counter;
+
+    prometheus::Histogram* autocomplete_latency;
 };

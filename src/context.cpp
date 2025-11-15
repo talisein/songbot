@@ -235,4 +235,11 @@ context::setup_metrics()
         .Help("Number of autocompletions")
         .Register(*metric_registry);
     ac_unknown_counter = &autocompletion_counter->Add({{"event", "unknown"}, {"result", "failure"}});
+
+
+    autocomplete_latency = &prometheus::BuildHistogram()
+                   .Name("autocomplete_latency_seconds")
+                   .Help("autocomplete execution time in seconds")
+                   .Register(*metric_registry);
+
 }
