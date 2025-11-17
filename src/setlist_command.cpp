@@ -130,7 +130,7 @@ setlist_command::on_slashcommand(const dpp::slashcommand_t event)
         std::vector<dpp::message> messages;
         for (const auto& line : get_setlist_lines(std::get<std::string>(event.get_parameter("event")))) {
             if ((reply.view().size() + line.size()) >= DISCORD_REPLY_LIMIT) {
-                messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral);
+                messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral).suppress_embeds(true);
                 reply.str(std::string());
                 reply << line;
             } else {

@@ -68,7 +68,7 @@ namespace {
                               track.pos,
                               track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s));
             if (song->vocadb_id) {
-                ss << '[' << util::escape_markdown(song->name) << "](https://vocadb.net/S/" << *song->vocadb_id << ')';
+                ss << '[' << song->name << "](https://vocadb.net/S/" << *song->vocadb_id << ')';
             } else {
                 ss << util::escape_markdown(song->name);
             }
