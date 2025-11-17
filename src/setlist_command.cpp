@@ -139,7 +139,7 @@ setlist_command::on_slashcommand(const dpp::slashcommand_t event)
         }
 
         if (reply.view().size() > 0) {
-            messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral);
+            messages.emplace_back(reply.view()).set_flags(dpp::message_flags::m_ephemeral).suppress_embeds(true);
         }
 
         /* Ok, we have a list of messages to send. */
