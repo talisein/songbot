@@ -110,7 +110,9 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
         ss << " Frequency Rank " << get_song_frequency_rank(song->name);
     }
 
-    event.reply(ss.view());
+    dpp::message msg{ss.view()};
+    msg.suppress_embeds(true);
+    event.reply(msg);
     last_success_counter->Increment();
     co_return {};
 }

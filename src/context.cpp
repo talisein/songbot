@@ -119,7 +119,7 @@ dpp::task<void> context::on_ready(const dpp::ready_t& event)
     if (dpp::run_once<struct notify_owner_on_restart>() && config.owner_id) {
         dpp::snowflake id { *config.owner_id };
 
-        dpp::message msg { std::format("Mikumiku Setlists starting up! *Pi-pi-pi*! Version {} ready to chat!", BUILD_GIT_COMMIT) };
+        dpp::message msg { std::format("*Pi-pi-pi*! Mikumiku Setlists starting up! Version {} ready to chat!", BUILD_GIT_COMMIT) };
         auto dm_conf = co_await bot->co_direct_message_create(id, msg);
         if (dm_conf.is_error()) {
             log_error("Failed to send dm: {}", dm_conf.get_error());
