@@ -64,10 +64,15 @@ namespace {
             std::ostringstream ss;
 
             using namespace std::literals;
-            ss << std::format("- {}. {}{}",
+            ss << std::format("- {}. {}",
                               track.pos,
-                              track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s),
-                              util::escape_markdown(song->name));
+                              track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s));
+            if (song->vocadb_id) {
+                ss << '[' << util::escape_markdown(song->name) << "](https://vocadb.net/S/" << *song->vocadb_id << ')';
+            } else {
+                ss << util::escape_markdown(song->name);
+            }
+
             if (song->singer != NO_VIRTUAL_SINGER) {
                 ss << " feat. ";
                 song_singer_emoji(ss, *song);

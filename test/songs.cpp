@@ -65,15 +65,15 @@ int main()
 
     "songname"_test = [] {
         auto str = std::format("{}", *lookup_song("Fire◎Flower"));
-        expect(eq(str, "Fire◎Flower feat. <:len:235217877446295553> by halyosy"sv));
+        expect(eq(str, "[Fire◎Flower](https://vocadb.net/S/6387) feat. <:len:235217877446295553> by halyosy"sv));
     };
 
     "altname"_test = [] {
         auto str = std::format("{}", *lookup_song("LLNF"));
-        expect(eq(str, "ルカルカ★ナイトフィーバー / Luka Luka★Night Fever feat. <:luka:235216119403773952> by samfree"sv));
+        expect(eq(str, "[ルカルカ★ナイトフィーバー / Luka Luka★Night Fever](https://vocadb.net/S/1435) feat. <:luka:235216119403773952> by samfree"sv));
 
         auto str2 = std::format("{}", *lookup_song("llnf"));
-        expect(eq(str2, "ルカルカ★ナイトフィーバー / Luka Luka★Night Fever feat. <:luka:235216119403773952> by samfree"sv));
+        expect(eq(str2, "[ルカルカ★ナイトフィーバー / Luka Luka★Night Fever](https://vocadb.net/S/1435) feat. <:luka:235216119403773952> by samfree"sv));
     };
 
     "Every AltName::name must exist in songs"_test = [] {
@@ -88,7 +88,7 @@ int main()
 
     "jp"_test = [] {
         auto str = std::format("{}", *lookup_song("恋色病棟"));
-        expect(eq(str, "恋色病棟 (Koi Iro Byoutou) / Love Ward feat. <:miku:235217471982927874> by OSTER project"sv));
+        expect(eq(str, "[恋色病棟 (Koi Iro Byoutou) / Love Ward](https://vocadb.net/S/3015) feat. <:miku:235217471982927874> by OSTER project"sv));
     };
 
 /*    "date"_test = [] {
