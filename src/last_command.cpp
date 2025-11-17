@@ -35,7 +35,7 @@ last_command::last_command(context &ctx) noexcept :
     ac_last_no_match_counter = &ctx.autocompletion_counter->Add({{"event", "last"}, {"result", "no-match"}});
     ac_last_failure_counter = &ctx.autocompletion_counter->Add({{"event", "last"}, {"result", "failure"}});
 
-    prometheus::Histogram::BucketBoundaries buckets {0.001,0.0025,0.005,0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0};
+    prometheus::Histogram::BucketBoundaries buckets {0.0001, 0.00025, 0.0005, 0.001, 0.0025, 0.005, 0.01, 0.025, 0.05, 0.1, 0.25, 0.5, 1.0};
     prometheus::Labels labels {{"command", "last"}};
     autocomplete_latency = &ctx.autocomplete_latency->Add(labels, buckets);
 }
