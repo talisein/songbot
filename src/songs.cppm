@@ -324,35 +324,35 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "magnet", duet(Miku, Luka), "minato", 5166},
   {nullopt, nullopt, "on the rocks", duet(MEIKO, KAITO), "OSTER Project", 203921},
   {"アングレイデイズ", "Ungray Days", "ungray days", Rin, "Tsumiki", 282018},
-  {nullopt, nullopt, "vivid", duet(Miku, Luka), "Utsu-P, Yuyoyuppe", 306270},//MEOWWWWWWWWWWWWWWWWWWW
-  {nullopt, nullopt, "Sweet Devil", Miku, "Hachioji-P"},
-  {"どうぶつ占い", "Doubutsu Uranai", "Animal Fortune-telling", Miku, "Scop"},
-  {nullopt, nullopt, "erase or zero", duet(Len,KAITO), "Crystal-P"},
-  {"スキキライ", "Suki Kirai", "Love-Hate", duet(Rin,Len), "HoneyWorks"},
-  {nullopt, nullopt, "shake it!", duet(Miku,Rin,Len), "emon(Tes.)"},
-  {nullopt, nullopt, "Leia", Luka, "Yuyoyuppe"},
-  {nullopt, nullopt, "FREELY TOMORROW", Miku, "Mitchie M"},
-  {nullopt, nullopt, "1/6 -out of the gravity-", Miku, "Vocaliod-P"},
-  {"カゲロウデイズ", "Kagerou Deizu", "Kagerou Daze", Miku, "Jin"},
-  {"心臓デモクラシー", "Shinzou Demokurashii", "Heart Democracy", Miku, "Mikito-P"},
-  {"ワンダーランドと羊の歌", "Wandaarando to Hitsuji no Uta", "Wonderland and the Sheep's Song", Miku, "Hachi"},
-  {nullopt, nullopt, "EARTH DAY", Miku, "HarryP"},
-  {"はじめまして地球人さん", "Hajimemashite Chikyuujin-san", "Nice to Meet You, Mr. Earthling", Miku, "Pinocchio-P"},
-  {"恋愛裁判", "Ren'ai Saiban", "Love Trial", Miku, "40mP"},
-  {"ロストワンの号哭", "Rosuto Wan no Goukoku", "Lost One's Weeping", Rin, "Neru"},
-  {"愛Dee", nullopt, "Ai Dee", duet(Miku,Luka), "Mitchie M"},
-  {nullopt, nullopt, "Packaged", Miku, "livetune"},
-  {nullopt, nullopt, "Hand in Hand", Miku, "livetune"},
-  {"39みゅーじっく！", "39みゅーじっく", "39 Music!", Miku, "Mikito-P", nullopt, nullopt, nullopt , "<:makuharichan:630043704501075968>"},
-  {nullopt, nullopt, "Strangers", Miku, "Heavenz"},
-  {"すろぉもぉしょん", nullopt, "SLoWMoTIoN", Miku, "Pinocchio-P"},
-  {"タイムマシン", nullopt, "Time Machine", Miku, "40mP"},
-  {"どりーみんチュチュ", nullopt, "Dreamin Chuchu", Luka, "emon(Tes.)", nullopt, nullopt, duet(Miku,Rin), "<:chuchu:317055647826837504>"},
-  {nullopt, nullopt, "Calc.", Miku, "JimmyThumb-P"},
-  {"ウミユリ海底譚", "Umiyuri Kaiteitan", "Tale of the Deep-sea Lily", Miku, "n-buna"},
-  {"テレカクシ思春期", "Terekakushi Shishunki", "Embarrassment-Hiding Adolescence", Len, "HoneyWorks"},
-  {nullopt, nullopt, "Baby Maniacs -Eight Mix-", Miku, "Hachioji-P"},
-  {nullopt, nullopt, "ray", Miku, "BUMP OF CHICKEN"},
+  {nullopt, nullopt, "vivid", duet(Miku, Luka), "Utsu-P, Yuyoyuppe", 306270},
+  {nullopt, nullopt, "Sweet Devil", Miku, "Hachioji-P", 1383},
+  {"どうぶつ占い", "Doubutsu Uranai", "Animal Fortune-telling", Miku, "Scop", 5393},
+  {nullopt, nullopt, "erase or zero", duet(Len,KAITO), "Crystal-P", 8247},
+  {"スキキライ", "Suki Kirai", "Love-Hate", duet(Rin,Len), "HoneyWorks", 8739},
+  {nullopt, nullopt, "shake it!", duet(Miku,Rin,Len), "emon(Tes.)", 11593},
+  {nullopt, nullopt, "Leia", Luka, "Yuyoyuppe", 4980},
+  {nullopt, nullopt, "FREELY TOMORROW", Miku, "Mitchie M", 5364},
+  {nullopt, nullopt, "1/6 -out of the gravity-", Miku, "Vocaliod-P", 8246},
+  {"カゲロウデイズ", "Kagerou Deizu", "Kagerou Daze", Miku, "Jin", 4979},
+  {"心臓デモクラシー", "Shinzou Demokurashii", "Heart Democracy", Miku, "Mikito-P", 8809},
+  {"ワンダーランドと羊の歌", "Wandaarando to Hitsuji no Uta", "Wonderland and the Sheep's Song", Miku, "Hachi", 2988},
+  {nullopt, nullopt, "EARTH DAY", Miku, "HarryP", 323568},
+  {"はじめまして地球人さん", "Hajimemashite Chikyuujin-san", "Nice to Meet You, Mr. Earthling", Miku, "Pinocchio-P", 68091},
+  {"恋愛裁判", "Ren'ai Saiban", "Love Trial", Miku, "40mP", 57519},
+  {"ロストワンの号哭", "Rosuto Wan no Goukoku", "Lost One's Weeping", Rin, "Neru", 19094},
+  {"愛Dee", nullopt, "Ai Dee", duet(Miku,Luka), "Mitchie M", 13086},
+  {nullopt, nullopt, "Packaged", Miku, "kz", 100671},
+  {nullopt, nullopt, "Hand in Hand", Miku, "kz", 89726},
+  {"39みゅーじっく！", "39みゅーじっく", "39 Music!", Miku, "Mikito-P", 127519, nullopt, nullopt , "<:makuharichan:630043704501075968>"},
+  {nullopt, nullopt, "Strangers", Miku, "Heavenz", 12322},
+  {"すろぉもぉしょん", nullopt, "SLoWMoTIoN", Miku, "Pinocchio-P", 56903},
+  {"タイムマシン", nullopt, "Time Machine", Miku, "40mP", 1354},
+  {"どりーみんチュチュ", nullopt, "Dreamin Chuchu", Luka, "emon(Tes.)", 47401, nullopt, duet(Miku,Rin), "<:chuchu:317055647826837504>"},
+  {nullopt, nullopt, "Calc.", Miku, "JimmyThumb-P", 7801},
+  {"ウミユリ海底譚", "Umiyuri Kaiteitan", "Tale of the Deep-sea Lily", Miku, "n-buna", 49871},
+  {"テレカクシ思春期", "Terekakushi Shishunki", "Embarrassment-Hiding Adolescence", Len, "HoneyWorks", 42649},
+  {nullopt, nullopt, "Baby Maniacs -Eight Mix-", Miku, "Hachioji-P", 126674},
+  {nullopt, nullopt, "ray", Miku, "BUMP OF CHICKEN", 50721},//MEOWWWWWWWWWWWWWWWWWWW
   {"なりすましゲンガー", "Narisumashi Genga", "Doubleganger", duet(Miku,Rin), "KulfiQ"},
   {nullopt, nullopt, "Singularity", Miku, "keisei"},
   {"ツギハギスタッカート", "Tsugihagi Staccato", "Patchwork Staccato", Miku, "toa"},
@@ -669,15 +669,15 @@ public:
             out << '[';
         }
         if (song.jp_name) {
-            out << util::escape_markdown(una::norm::to_nfc_utf8(*song.jp_name)) << ' ';
+            out << una::norm::to_nfc_utf8(*song.jp_name) << ' ';
             if (song.romanji_name && *song.cf_romanji_name != song.cf_name) {
-                out << "(" << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << ") ";
+                out << "(" << una::norm::to_nfc_utf8(*song.romanji_name) << ") ";
             }
             out << "/ ";
         } else {
             // romanji but no jp could be other languages (Venus at the fingertips)
             if (song.romanji_name) {
-                out << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << " / ";
+                out << una::norm::to_nfc_utf8(*song.romanji_name) << " / ";
             }
 
         }
