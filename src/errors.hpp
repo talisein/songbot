@@ -26,6 +26,7 @@ enum class songbot_error : int
     missing_api_token,
     autocomplete_no_match,
     autocomplete_no_focused_option,
+    reply_failure,
     explosion,
     http_error_400,
     http_error_404,

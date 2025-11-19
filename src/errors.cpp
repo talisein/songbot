@@ -36,6 +36,8 @@ songbot_error_category::message(int ev) const
             return "No match for autocompletion";
         case songbot_error::autocomplete_no_focused_option:
             return "Autocompletion requested but no passed option was focused";
+        case songbot_error::reply_failure:
+            return "Received error when trying to reply";
         case songbot_error::explosion:
             return "💥💥💥";
         case songbot_error::http_error_400:

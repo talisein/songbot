@@ -37,7 +37,7 @@ public:
 
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) override;
 
-    void on_button_click(const dpp::button_click_t& event);
+    dpp::task<void> on_button_click(const dpp::button_click_t& event);
 
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
@@ -55,7 +55,7 @@ private:
     state_storage<decltype(cmd_state_store)::key_t> btn_reveal_state_store; // map to cmd_state_store
     state_storage<decltype(cmd_state_store)::key_t> btn_lang_state_store; // map to cmd_state_store
 
-    void on_reveal_button_click(const dpp::button_click_t& event, const event_state& state);
+    dpp::task<void> on_reveal_button_click(const dpp::button_click_t& event, const event_state& state);
 
     prometheus::Counter* setlistlast_success_counter;
     prometheus::Counter* setlistlast_failure_counter;
