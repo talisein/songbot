@@ -63,6 +63,7 @@ if get_option('build_anidb_sourcegen')
   scraper_src = ['main.cpp', 'scraper.cpp', '../errors.cpp']
 
   scraper_exe = executable('vocadb-scraper', scraper_src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, util_module, cpr_module, json_module,
+                           cpp_args: '-Wno-terminate',
                            dependencies: [magic_enum_dep, curl_cpr_dep, json_dep],
                            sources: scraper_conf_file)
 

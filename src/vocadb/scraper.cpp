@@ -264,9 +264,12 @@ using namespace std::literals;
         if (j.contains(key)) {
             auto s = j[key].get<std::string>();
             std::istringstream ss(s);
-            std::chrono::year_month_day date;
+            using namespace std::literals;
+            std::chrono::year_month_day date{};
             ss >> std::chrono::parse("%Y-%m-%dT%H:%M:%SZ", date);
-
+            if (ss.fail()) {
+                throw std::runtime_error(std::format("Input stream error: std::chrono::parse failed on '{}'", date));
+            }
             return std::format("{:d}y/{:d}/{:d}",
                                static_cast<int>(date.year()),
                                static_cast<unsigned int>(date.month()),

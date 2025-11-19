@@ -1,12 +1,14 @@
 std_module = custom_target('std_module',
     input: files('/usr/include/c++/15/bits/std.cc'),
     output: 'std.gcm',
+#    output: ['std.o', 'std.gcm'],
     command: [cxx_compiler.cmd_array(),
               '-std=c++26',
               '-fmodules',
               '-fmodule-only',
               '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
               '-fsearch-include-path',
+#              '-o', '@OUTPUT0@',
               '-c', 'bits/std.cc'
              ],
  )
