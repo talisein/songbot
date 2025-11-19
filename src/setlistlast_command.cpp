@@ -41,7 +41,6 @@ namespace {
         }
 
         auto setlistlast = get_setlist(concert->short_name);
-//        co_yield std::format("## Setlist for {}:\n", concert->name);
         for (auto &track : setlistlast) {
             auto song = lookup_song(track.song, track.producer);
             if (!song) {
@@ -83,30 +82,10 @@ namespace {
             if (std::ranges::empty(rng)) {
                 ss << " **LIVE DEBUT**";
             } else {
-//                auto count = std::ranges::distance(rng);
-                ss << " *Previous: " << tour_to_string(std::ranges::begin(rng)->concert_short_name);
-                ss << "*";
-                /*
-                if (count > 1) {
-                    ss << ", " << count - 1 << " more before*";
-                } else {
-                    ss << "*";
-                }
-                */
+                ss << " *Previous: "
+                   << tour_to_string(std::ranges::begin(rng)->concert_short_name)
+                   << "*";
             }
-            /*
-            auto after_rng = std::views::take_while(std::views::reverse(setlists), [&](const auto &track)
-            {
-                return track.concert_short_name != concert->short_name;
-            }) | std::views::filter([&](const auto &track)
-            {
-                return track.song == song->name;
-            });
-            const auto after_count = std::ranges::distance(after_rng);
-            if (after_count > 0) {
-                ss << " *and " << after_count << " after*";
-            }
-            */
             ss << "\n";
             co_yield ss.str();
         }
