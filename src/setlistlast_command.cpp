@@ -20,6 +20,7 @@ import songs;
 import util;
 import concerts;
 import vocadb.events;
+import uni_algo;
 
 #include "setlistlast_command.hpp"
 #include "context.hpp"
@@ -130,7 +131,7 @@ namespace {
 
     [[nodiscard]] dpp::message
     make_reveal_gui(const auto& message,
-                    const std::optional<std::string>& header_content,
+                    std::ranges::range auto&& header_content,
                     const setlistlast_command::event_state& state,
                     bool use_ephemeral,
                     std::optional<std::string> reveal_button_id)
@@ -152,12 +153,14 @@ namespace {
         }
 
         /* header / thumbnail */
-        if (header_content) {
+        if (!std::ranges::empty(header_content)) {
             auto c = lookup_concert(state.concert);
             auto section = dpp::component().set_type(dpp::cot_section);
-            auto header  = dpp::component().set_type(dpp::cot_text_display)
-                           .set_content(*header_content);
-            section.add_component_v2(header);
+            for (const auto& header : header_content) {
+                auto widget = dpp::component().set_type(dpp::cot_text_display)
+                              .set_content(header);
+                section.add_component_v2(widget);
+            }
 
             if (c && c->vocadb_event_id) {
                 auto it = std::ranges::find_if(vocadb::events, [id = *c->vocadb_event_id](const auto &event) {
@@ -199,8 +202,48 @@ namespace {
         std::vector<std::string> messages;
 
         const auto c = lookup_concert(state.concert);
-        const auto header_content = std::make_optional<std::string>(std::format("## {}", c->name));
-        auto header_size = header_content->size();
+        std::vector<std::string> headers;
+        headers.emplace_back(std::format("## {}", c->name));
+        if (c->last_date) {
+            if (c->date.year() != c->last_date->year()) {
+                headers.emplace_back(std::format("{:%A, %e %B %Y} – {:%A, %e %B %Y}", c->date, *c->last_date));
+            } else if (c->date.month() != c->last_date->month()) {
+                headers.emplace_back(std::format("{:%A, %b %e} – {:%A, %b %e %Y}", c->date, *c->last_date));
+            } else {
+                headers.emplace_back(std::format("{:%B %e (%a)}–{:%e (%a) %Y}", c->date, *c->last_date));
+            }
+        } else {
+            headers.emplace_back(std::format("{:%A, %e %B %Y}", c->date));
+        }
+        if (auto it = std::ranges::find(vocadb::events, c->vocadb_event_id, &decltype(vocadb::events)::value_type::id);
+            it != std::ranges::end(vocadb::events))
+        {
+            using namespace std::literals;
+            std::vector<std::string> links;
+            const auto is_official_weblink = [](const auto &link) static -> bool {
+                return 0 == una::caseless::compare_utf8("Website (EN)"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Website"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Official website"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("mikuexpo.com"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Official Page"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Official Webpage"sv, link.description);
+            };
+            for (const auto &link : std::views::filter(it->web_links, is_official_weblink) | std::views::take(1))
+            {
+                links.emplace_back(std::format("[Offical Website]({})", link.url));
+            }
+            links.emplace_back(std::format("[VocaDB](https://vocadb.net/Es/{}/{})", it->id, it->url_slug));
+            const auto is_vocawiki_weblink = [](const auto &link) static -> bool {
+                return una::caseless::find_utf8(link.url, "vocaloid.wikia.com"sv) ||
+                    una::caseless::find_utf8(link.url, "vocaloid.fandom.com"sv);
+            };
+            for (const auto &link : std::views::filter(it->web_links, is_vocawiki_weblink) | std::views::take(1))
+            {
+                links.emplace_back(std::format("[VocaWiki]({})", link.url));
+            }
+            headers.emplace_back(std::format("-# {}", std::views::join_with(links, " — "sv) | std::ranges::to<std::string>()));
+        }
+        auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
         for (const auto& line : std::invoke(std::forward<GeneratorCallable>(line_generator),
                                              std::forward<GeneratorInput>(generator_input)))
         {
@@ -219,15 +262,15 @@ namespace {
         }
 
         /* Ok, we have a list of messages to send. Reply, then follow up if necessary. */
-        dpp::message msg;
-        auto first_gui = make_reveal_gui(messages.front(), header_content, state, use_ephemeral, reveal_button_callback_key);
+        auto first_gui = make_reveal_gui(messages.front(), headers,
+                                         state, use_ephemeral, reveal_button_callback_key);
         if (auto res = co_await event.co_reply(first_gui); res.is_error()) {
             ctx->log_error("reply_multimessage: {:d}", res.get_error());
             co_return std::unexpected(songbot_error::reply_failure);
         }
 
         for (const auto& msg : messages | std::views::drop(1)) {
-            auto gui = make_reveal_gui(msg, std::nullopt, state, use_ephemeral, std::nullopt);
+            auto gui = make_reveal_gui(msg, std::views::empty<std::string>, state, use_ephemeral, std::nullopt);
             auto res = co_await event.co_follow_up(gui);
             if (res.is_error()) {
                 ctx->log_error("reply_multimessage: {:d}", res.get_error());
