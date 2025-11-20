@@ -202,6 +202,12 @@ namespace {
         std::vector<std::string> messages;
 
         const auto c = lookup_concert(state.concert);
+        if (!c) {
+            dpp::message m{"I'm sorry, I don't know about a concert named '{}', state.concert"};
+            m.set_flags(dpp::message_flags::m_ephemeral);
+            co_await event.co_reply(m);
+            co_return std::unexpected(songbot_error::no_match);
+        }
         std::vector<std::string> headers;
         headers.emplace_back(std::format("## {}", c->name));
         if (c->last_date) {

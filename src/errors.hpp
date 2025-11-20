@@ -25,6 +25,7 @@ enum class songbot_error : int
     invalid_config_file,
     missing_api_token,
     autocomplete_no_match,
+    no_match,
     autocomplete_no_focused_option,
     reply_failure,
     explosion,

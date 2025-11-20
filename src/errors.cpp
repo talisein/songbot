@@ -34,6 +34,8 @@ songbot_error_category::message(int ev) const
             return "No Discord bot API token was provided in the configuration";
         case songbot_error::autocomplete_no_match:
             return "No match for autocompletion";
+        case songbot_error::no_match:
+            return "No match for request";
         case songbot_error::autocomplete_no_focused_option:
             return "Autocompletion requested but no passed option was focused";
         case songbot_error::reply_failure:
