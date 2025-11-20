@@ -232,7 +232,7 @@ namespace {
             {
                 links.emplace_back(std::format("[Offical Website]({})", link.url));
             }
-            links.emplace_back(std::format("[VocaDB](https://vocadb.net/Es/{}/{})", it->id, it->url_slug));
+            links.emplace_back(std::format("[VocaDB](https://vocadb.net/E/{}/{})", it->id, it->url_slug));
             const auto is_vocawiki_weblink = [](const auto &link) static -> bool {
                 return una::caseless::find_utf8(link.url, "vocaloid.wikia.com"sv) ||
                     una::caseless::find_utf8(link.url, "vocaloid.fandom.com"sv);
