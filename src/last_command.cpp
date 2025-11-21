@@ -19,6 +19,7 @@
 import util;
 import concerts;
 import songs;
+import songbot.errors;
 
 #include "last_command.hpp"
 #include "context.hpp"

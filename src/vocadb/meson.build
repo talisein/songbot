@@ -51,6 +51,7 @@ if get_option('build_anidb_sourcegen')
         '-DNLOHMANN_JSON_BUILD_MODULES',
         '-I', '../subprojects/json-9810c39/include',
     ],
+    depends: [std_module]
   )
 
   scraper_conf_data = configuration_data()
@@ -60,9 +61,9 @@ if get_option('build_anidb_sourcegen')
                                      output: 'config.h',
                                      configuration: scraper_conf_data)
 
-  scraper_src = ['main.cpp', 'scraper.cpp', '../errors.cpp']
+  scraper_src = ['main.cpp', 'scraper.cpp']
 
-  scraper_exe = executable('vocadb-scraper', scraper_src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, util_module, cpr_module, json_module,
+  scraper_exe = executable('vocadb-scraper', json_module, scraper_src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, util_module, cpr_module,
                            cpp_args: '-Wno-terminate',
                            dependencies: [magic_enum_dep, curl_cpr_dep, json_dep],
                            sources: scraper_conf_file)

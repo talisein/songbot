@@ -175,6 +175,21 @@ uni_algo_module = custom_target('uni_algo_module',
     depends: [uni_algo_all_module]
 )
 
+errors_module = custom_target('errors_module',
+    input: 'errors.cppm',
+    output: ['errors.o', 'errors.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module]
+)
+
 util_module = custom_target('util_module',
     input: 'util.cppm',
     output: ['util.o', 'util.gcm'],
@@ -187,7 +202,7 @@ util_module = custom_target('util_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, uni_algo_module, magic_enum_module]
+    depends: [std_module, errors_module, uni_algo_module, magic_enum_module]
 )
 
 songs_module = custom_target('songs_module',
@@ -226,12 +241,11 @@ project_version = vcs_tag(input: 'version.hpp.in',
                           fallback: meson.project_version())
 
 
-
 subdir('vocadb')
 
-src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'errors.cpp', 'setlist_command.cpp', 'song_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp']
+src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp']
 
-exe = executable('songbot', src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module, util_module, vocadb_events_module,
+exe = executable('songbot', src, errors_module, songs_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module, util_module, vocadb_events_module, std_module,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
                  install: true,
                  sources: project_version,

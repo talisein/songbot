@@ -24,7 +24,6 @@ import songs;
 import std;
 import magic_enum;
 
-#include "errors.hpp"
 
 constexpr size_t AUTOCOMPLETE_MAX_CHOICES = 25UZ;
 
