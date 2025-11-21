@@ -47,7 +47,6 @@ prometheus_core_dep  = prometheus_proj.dependency('core')
 prometheus_dep = declare_dependency(dependencies: [prometheus_pull_dep, prometheus_core_dep, zlib_dep])
 
 # C++ Module Mapper
-cxx_compiler = meson.get_compiler('cpp')
 module_conf_data = configuration_data()
 module_conf_data.set('BUILD_DIR', meson.project_build_root())
 module_conf_data.set('UNI_ALGO_INCLUDEDIR', uni_algo_dep.get_variable('includedir'))
@@ -74,6 +73,8 @@ add_project_arguments( '-fmodules',
                        '-fconstexpr-ops-limit=3355443200',
                        '--embed-dir=@0@'.format(meson.project_source_root() / 'res'),
                        language: ['cpp'])
+
+cxx_compiler = meson.get_compiler('cpp')
 
 subdir('src')
 subdir('test')

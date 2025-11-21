@@ -45,7 +45,8 @@ private:
     using key_t = std::string;
 public:
     struct event_state {
-        std::string concert;
+        std::string concert_str;
+        Concert concert;
         dpp::slashcommand_t event;
         key_t reveal_key;
         key_t lang_key;
