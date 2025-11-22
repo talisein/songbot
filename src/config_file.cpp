@@ -16,8 +16,6 @@
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-import std;
-
 #include "config_file.hpp"
 
 static
