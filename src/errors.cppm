@@ -44,27 +44,27 @@ public:
 
     std::string message(int ev) const override
     {
-        using namespace std::literals;
         switch (static_cast<songbot_error>(ev)) {
             case songbot_error::invalid_config_file:
-                return "Configuration file is invalid"s;
+                return "Configuration file is invalid";
             case songbot_error::missing_api_token:
-                return "No Discord bot API token was provided in the configuration"s;
+                return "No Discord bot API token was provided in the configuration";
             case songbot_error::autocomplete_no_match:
-                return "No match for autocompletion"s;
+                return "No match for autocompletion";
             case songbot_error::no_match:
-                return "No match for request"s;
+                return "No match for request";
             case songbot_error::autocomplete_no_focused_option:
-                return "Autocompletion requested but no passed option was focused"s;
+                return "Autocompletion requested but no passed option was focused";
             case songbot_error::reply_failure:
-                return "Received error when trying to reply"s;
+                return "Received error when trying to reply";
             case songbot_error::explosion:
-                return "💥💥💥"s;
+                return "💥💥💥";
             case songbot_error::http_error_400:
-                return "HTTP Error > 400"s;
+                return "HTTP Error > 400";
             case songbot_error::http_error_404:
-                return "HTTP Error 404 Not Found"s;
+                return "HTTP Error 404 Not Found";
         }
+
         return std::format("Unknown songbot error code {}", ev);
     }
 };
