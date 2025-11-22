@@ -1,4 +1,18 @@
-
+vocadb_api_module = custom_target('vocadb_api_module',
+                                  input: 'vocadb-api.cppm',
+                                  output: ['vocadb-api.o', 'vocadb-api.gcm'],
+                                  command: [
+                                    cxx_compiler.cmd_array(),
+                                    '-std=c++26',
+                                    opt_flag,
+                                    '-fmodules',
+                                    '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+                                    '-c', '@INPUT@',
+                                    '-o', '@OUTPUT0@',
+                                    '-fconstexpr-ops-limit=3355443200',
+                                  ],
+                                  depends: [std_module]
+                                 )
 
 if get_option('build_anidb_sourcegen')
 
@@ -56,22 +70,6 @@ if get_option('build_anidb_sourcegen')
     ],
     depends: [std_module]
   )
-
-  vocadb_api_module = custom_target('vocadb_api_module',
-    input: 'vocadb-api.cppm',
-    output: ['vocadb-api.o', 'vocadb-api.gcm'],
-    command: [
-        cxx_compiler.cmd_array(),
-        '-std=c++26',
-        opt_flag,
-        '-fmodules',
-        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
-        '-c', '@INPUT@',
-        '-o', '@OUTPUT0@',
-        '-fconstexpr-ops-limit=3355443200',
-    ],
-    depends: [std_module]
-)
 
   scraper_conf_data = configuration_data()
   scraper_conf_data.set('RES_DIR', meson.project_source_root() / 'res/')
