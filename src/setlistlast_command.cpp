@@ -28,6 +28,8 @@ import uni_algo;
 #include "formatters.hpp"
 
 namespace {
+    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
+
     static std::generator<std::string>
     get_setlistlast_lines(const Concert& concert)
     {
@@ -88,9 +90,72 @@ namespace {
         }
     }
 
+    /* Takes lines and concats them in a a big string less than DISCORD_REPLY_LIMIT */
+    static std::generator<std::string>
+    get_setlist_messages(std::generator<std::string>&& lines, size_t header_size)
+    {
+        std::ostringstream reply;
+        for (const auto& line : lines)
+        {
+            if ((reply.view().size() + line.size() + header_size) >= DISCORD_REPLY_LIMIT) {
+                co_yield reply.str();
+                reply.str(std::string());
+                reply << line;
+                header_size = 0;
+            } else {
+                reply << line;
+            }
+        }
+
+        if (reply.view().size() > 0) {
+            co_yield reply.str();
+        }
+    }
+
     static std::generator<std::string>
     get_header_lines(const Concert& concert)
     {
+        co_yield std::format("## {}", concert.name);
+        if (concert.last_date) {
+            if (concert.date.year() != concert.last_date->year()) {
+                co_yield std::format("{:%A, %e %B %Y} – {:%A, %e %B %Y}", concert.date, *concert.last_date);
+            } else if (concert.date.month() != concert.last_date->month()) {
+                co_yield std::format("{:%A, %b %e} – {:%A, %b %e %Y}", concert.date, *concert.last_date);
+            } else {
+                co_yield std::format("{:%B %e (%a)}–{:%e (%a) %Y}", concert.date, *concert.last_date);
+            }
+        } else {
+            co_yield std::format("{:%A, %e %B %Y}", concert.date);
+        }
+        if (auto it = std::ranges::find(vocadb::events, concert.vocadb_event_id, &decltype(vocadb::events)::value_type::id);
+            it != std::ranges::end(vocadb::events))
+        {
+            using namespace std::literals;
+            std::vector<std::string> links;
+            const auto is_official_weblink = [](const auto &link) static -> bool {
+                return 0 == una::caseless::compare_utf8("Website (EN)"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Website"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Official website"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("mikuexpo.com"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Official Page"sv, link.description) ||
+                    0 == una::caseless::compare_utf8("Official Webpage"sv, link.description);
+            };
+            for (const auto &link : std::views::filter(it->web_links, is_official_weblink) | std::views::take(1))
+            {
+                links.emplace_back(std::format("[Offical Website]({})", link.url));
+            }
+            links.emplace_back(std::format("[VocaDB](https://vocadb.net/E/{}/{})", it->id, it->url_slug));
+            const auto is_vocawiki_weblink = [](const auto &link) static -> bool {
+                return una::caseless::find_utf8(link.url, "vocaloid.wikia.com"sv) ||
+                    una::caseless::find_utf8(link.url, "vocaloid.fandom.com"sv);
+            };
+            for (const auto &link : std::views::filter(it->web_links, is_vocawiki_weblink) | std::views::take(1))
+            {
+                links.emplace_back(std::format("[VocaWiki]({})", link.url));
+            }
+            co_yield std::format("-# {}", std::views::join_with(links, " — "sv) | std::ranges::to<std::string>());
+        }
+
         co_return;
     }
 
@@ -129,8 +194,6 @@ setlistlast_command::get_command()
 }
 
 namespace {
-    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
-
     [[nodiscard]] dpp::message
     make_reveal_gui(const auto& message,
                     std::ranges::range auto&& header_content,
@@ -189,88 +252,35 @@ namespace {
 
     /* Takes a generator that produces multiple lines. It constructs a sequence
      * dpp::messages, each less than the reply limit and sends it off using the make_reveal_gui() */
-    template <typename EventType, typename GeneratorCallable>
+    template <typename EventType>
     dpp::task<std::expected<void, std::error_code>>
     reply_multimessage(const EventType& event,
                        context * const ctx,
-                       GeneratorCallable&& line_generator,
                        const Concert& concert,
                        const setlistlast_command::event_state& state,
                        bool use_ephemeral,
-                       std::optional<std::string> reveal_button_callback_key,
-                       dpp::command_completion_event_t final_callback = dpp::utility::log_error())
+                       std::optional<std::string> reveal_button_callback_key)
     {
         std::ostringstream reply;
-        std::vector<std::string> messages;
-        std::vector<std::string> headers;
-        headers.emplace_back(std::format("## {}", concert.name));
-        if (concert.last_date) {
-            if (concert.date.year() != concert.last_date->year()) {
-                headers.emplace_back(std::format("{:%A, %e %B %Y} – {:%A, %e %B %Y}", concert.date, *concert.last_date));
-            } else if (concert.date.month() != concert.last_date->month()) {
-                headers.emplace_back(std::format("{:%A, %b %e} – {:%A, %b %e %Y}", concert.date, *concert.last_date));
-            } else {
-                headers.emplace_back(std::format("{:%B %e (%a)}–{:%e (%a) %Y}", concert.date, *concert.last_date));
-            }
-        } else {
-            headers.emplace_back(std::format("{:%A, %e %B %Y}", concert.date));
-        }
-        if (auto it = std::ranges::find(vocadb::events, concert.vocadb_event_id, &decltype(vocadb::events)::value_type::id);
-            it != std::ranges::end(vocadb::events))
-        {
-            using namespace std::literals;
-            std::vector<std::string> links;
-            const auto is_official_weblink = [](const auto &link) static -> bool {
-                return 0 == una::caseless::compare_utf8("Website (EN)"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Website"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Official website"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("mikuexpo.com"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Official Page"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Official Webpage"sv, link.description);
-            };
-            for (const auto &link : std::views::filter(it->web_links, is_official_weblink) | std::views::take(1))
-            {
-                links.emplace_back(std::format("[Offical Website]({})", link.url));
-            }
-            links.emplace_back(std::format("[VocaDB](https://vocadb.net/E/{}/{})", it->id, it->url_slug));
-            const auto is_vocawiki_weblink = [](const auto &link) static -> bool {
-                return una::caseless::find_utf8(link.url, "vocaloid.wikia.com"sv) ||
-                    una::caseless::find_utf8(link.url, "vocaloid.fandom.com"sv);
-            };
-            for (const auto &link : std::views::filter(it->web_links, is_vocawiki_weblink) | std::views::take(1))
-            {
-                links.emplace_back(std::format("[VocaWiki]({})", link.url));
-            }
-            headers.emplace_back(std::format("-# {}", std::views::join_with(links, " — "sv) | std::ranges::to<std::string>()));
-        }
-        auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
-        for (const auto& line : std::invoke(std::forward<GeneratorCallable>(line_generator),
-                                            concert))
-        {
-            if ((reply.view().size() + line.size() + header_size) >= DISCORD_REPLY_LIMIT) {
-                messages.emplace_back(reply.view());
-                reply.str(std::string());
-                reply << line;
-                header_size = 0;
-            } else {
-                reply << line;
-            }
-        }
-
-        if (reply.view().size() > 0) {
-            messages.emplace_back(reply.view());
-        }
+        std::vector<std::string> headers = get_header_lines(concert) | std::ranges::to<std::vector>();
+        const auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
+        auto messages_gen = get_setlist_messages(get_setlistlast_lines(concert), header_size);
+        auto messages_it = std::ranges::begin(messages_gen);
 
         /* Ok, we have a list of messages to send. Reply, then follow up if necessary. */
-        auto first_gui = make_reveal_gui(messages.front(), headers,
+        auto first_gui = make_reveal_gui(*messages_it, headers,
                                          state, use_ephemeral, reveal_button_callback_key);
         auto res = co_await event.co_reply(first_gui);
-        co_return util::reply_handler(res, ctx);
+        if (res.is_error()) {
+            co_return util::reply_handler(res, ctx);
+        }
 
-        for (const auto& msg : messages | std::views::drop(1)) {
+        for (const auto& msg : std::ranges::subrange(std::move(++messages_it), std::ranges::end(messages_gen))) {
             auto gui = make_reveal_gui(msg, std::views::empty<std::string>, state, use_ephemeral, std::nullopt);
             auto res = co_await event.co_follow_up(gui);
-            co_return util::reply_handler(res, ctx);
+            if (res.is_error()) {
+                co_return util::reply_handler(res, ctx);
+            }
         }
 
         co_return {};
@@ -281,25 +291,17 @@ dpp::task<void>
 setlistlast_command::on_reveal_button_click(const dpp::button_click_t& event, const event_state& state)
 {
     const auto concert = state.concert;
-    auto on_completion = [event = state.event](const dpp::confirmation_callback_t &c) {
-        auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
-        if (c.is_error()) {
-            dpp::utility::log_error()(c);
-            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Sorry, I made a mistake and can't this setlist publically."));
-        } else {
-            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
-        }
-        event.edit_original_response(msg);
-    };
-
-    auto res = co_await reply_multimessage(event, ctx, &get_setlistlast_lines, concert, state, false, std::nullopt, on_completion);
-    if (res) {
+    auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
+    if (auto res = co_await reply_multimessage(event, ctx, concert, state, false, std::nullopt); res) {
+        msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
         setlistlast_reveal_success_counter->Increment();
     } else {
+        msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Sorry, I made a mistake and can't this setlist publically."));
         setlistlast_reveal_failure_counter->Increment();
     }
 
-    co_return;
+    auto res = co_await event.co_edit_original_response(msg);
+    util::reply_handler(res, ctx);
 }
 
 dpp::task<void>
@@ -333,7 +335,7 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
         cmd_pair.second.reveal_key = reveal_btn_pair.first;
         cmd_pair.second.lang_key = lang_btn_pair.first;
 
-        auto res = co_await reply_multimessage(event, ctx, &get_setlistlast_lines, *concert, cmd_pair.second, true, reveal_btn_pair.first);
+        auto res = co_await reply_multimessage(event, ctx, *concert, cmd_pair.second, true, reveal_btn_pair.first);
         if (res) {
             setlistlast_success_counter->Increment();
         } else {
