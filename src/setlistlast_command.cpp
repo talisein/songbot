@@ -27,16 +27,21 @@ import uni_algo;
 #include "formatters.hpp"
 
 namespace {
-    static std::generator<std::string>
-    get_setlistlast_lines(const Concert& concert)
+    static
+    std::generator<std::string> get_setlistlast_lines(std::string_view concert_name)
     {
-        if (concert.date > util::get_build_date()) {
+        const auto concert = lookup_concert(concert_name);
+        if (!concert) {
+            co_yield std::format("I don't know about '{}'", concert_name);
+            co_return;
+        }
+        if (concert->date > util::get_build_date()) {
             co_yield std::format("{} will first play on {}. I won't know the setlist until after that.",
-                                 concert.name, concert.date);
+                                 concert->name, concert->date);
             co_return;
         }
 
-        auto setlistlast = get_setlist(concert.short_name);
+        auto setlistlast = get_setlist(concert->short_name);
         for (auto &track : setlistlast) {
             auto song = lookup_song(track.song, track.producer);
             if (!song) {
@@ -46,11 +51,11 @@ namespace {
             /* Drop the concerts that occurred after the requested concert... */
             auto rng = std::views::drop_while(std::views::reverse(setlists), [&](const auto &track)
             {
-                return track.concert_short_name != concert.short_name;
+                return track.concert_short_name != concert->short_name;
             /* Drop the tracks for the requested concert... */
             }) | std::views::drop_while([&](const auto &track)
             {
-                return track.concert_short_name == concert.short_name;
+                return track.concert_short_name == concert->short_name;
             /* Match the remaining cases where the song name matches */
             }) | std::views::filter([&](const auto &track)
             {
@@ -85,12 +90,6 @@ namespace {
             ss << "\n";
             co_yield ss.str();
         }
-    }
-
-    static std::generator<std::string>
-    get_header_lines(const Concert& concert)
-    {
-        co_return;
     }
 
 }
@@ -142,7 +141,6 @@ namespace {
         auto container      = dpp::component().set_type(dpp::cot_container);
         container.set_accent(dpp::utility::rgb(134,206,203));
 
-        const auto concert = state.concert;
         /* Button row */
         if (reveal_button_id.has_value()) {
             auto action_row = dpp::component().set_type(dpp::cot_action_row);
@@ -156,6 +154,7 @@ namespace {
 
         /* header / thumbnail */
         if (!std::ranges::empty(header_content)) {
+            auto c = lookup_concert(state.concert);
             auto section = dpp::component().set_type(dpp::cot_section);
             for (const auto& header : header_content) {
                 auto widget = dpp::component().set_type(dpp::cot_text_display)
@@ -163,8 +162,8 @@ namespace {
                 section.add_component_v2(widget);
             }
 
-            if (concert.vocadb_event_id) {
-                auto it = std::ranges::find_if(vocadb::events, [id = concert.vocadb_event_id](const auto &event) {
+            if (c && c->vocadb_event_id) {
+                auto it = std::ranges::find_if(vocadb::events, [id = *c->vocadb_event_id](const auto &event) {
                     return event.id == id;
                 });
                 if (it != std::ranges::end(vocadb::events) &&
@@ -188,12 +187,12 @@ namespace {
 
     /* Takes a generator that produces multiple lines. It constructs a sequence
      * dpp::messages, each less than the reply limit and sends it off using the make_reveal_gui() */
-    template <typename EventType, typename GeneratorCallable>
+    template <typename EventType, typename GeneratorCallable, typename GeneratorInput>
     dpp::task<std::expected<void, std::error_code>>
     reply_multimessage(const EventType& event,
                        context * const ctx,
                        GeneratorCallable&& line_generator,
-                       const Concert& concert,
+                       GeneratorInput&& generator_input,
                        const setlistlast_command::event_state& state,
                        bool use_ephemeral,
                        std::optional<std::string> reveal_button_callback_key,
@@ -201,20 +200,28 @@ namespace {
     {
         std::ostringstream reply;
         std::vector<std::string> messages;
+
+        const auto c = lookup_concert(state.concert);
+        if (!c) {
+            dpp::message m{"I'm sorry, I don't know about a concert named '{}', state.concert"};
+            m.set_flags(dpp::message_flags::m_ephemeral);
+            co_await event.co_reply(m);
+            co_return std::unexpected(songbot_error::no_match);
+        }
         std::vector<std::string> headers;
-        headers.emplace_back(std::format("## {}", concert.name));
-        if (concert.last_date) {
-            if (concert.date.year() != concert.last_date->year()) {
-                headers.emplace_back(std::format("{:%A, %e %B %Y} – {:%A, %e %B %Y}", concert.date, *concert.last_date));
-            } else if (concert.date.month() != concert.last_date->month()) {
-                headers.emplace_back(std::format("{:%A, %b %e} – {:%A, %b %e %Y}", concert.date, *concert.last_date));
+        headers.emplace_back(std::format("## {}", c->name));
+        if (c->last_date) {
+            if (c->date.year() != c->last_date->year()) {
+                headers.emplace_back(std::format("{:%A, %e %B %Y} – {:%A, %e %B %Y}", c->date, *c->last_date));
+            } else if (c->date.month() != c->last_date->month()) {
+                headers.emplace_back(std::format("{:%A, %b %e} – {:%A, %b %e %Y}", c->date, *c->last_date));
             } else {
-                headers.emplace_back(std::format("{:%B %e (%a)}–{:%e (%a) %Y}", concert.date, *concert.last_date));
+                headers.emplace_back(std::format("{:%B %e (%a)}–{:%e (%a) %Y}", c->date, *c->last_date));
             }
         } else {
-            headers.emplace_back(std::format("{:%A, %e %B %Y}", concert.date));
+            headers.emplace_back(std::format("{:%A, %e %B %Y}", c->date));
         }
-        if (auto it = std::ranges::find(vocadb::events, concert.vocadb_event_id, &decltype(vocadb::events)::value_type::id);
+        if (auto it = std::ranges::find(vocadb::events, c->vocadb_event_id, &decltype(vocadb::events)::value_type::id);
             it != std::ranges::end(vocadb::events))
         {
             using namespace std::literals;
@@ -244,7 +251,7 @@ namespace {
         }
         auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
         for (const auto& line : std::invoke(std::forward<GeneratorCallable>(line_generator),
-                                            concert))
+                                             std::forward<GeneratorInput>(generator_input)))
         {
             if ((reply.view().size() + line.size() + header_size) >= DISCORD_REPLY_LIMIT) {
                 messages.emplace_back(reply.view());
@@ -321,27 +328,14 @@ dpp::task<std::expected<void, std::error_code>>
 setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
 {
     try {
-        const auto concert_str = std::get<std::string>(event.get_parameter("event"));
-        const auto concert = lookup_concert(concert_str);
-        if (!concert) {
-            dpp::message m{"I'm sorry, I don't know about a concert named '{}', state.concert"};
-            m.set_flags(dpp::message_flags::m_ephemeral);
-            auto res = co_await event.co_reply(m);
-            setlistlast_failure_counter->Increment();
-            if (res.is_error()) {
-                ctx->log_error("co_reply fail: {:d}", res.get_error());
-                co_return std::unexpected(songbot_error::reply_failure);
-            }
-            co_return std::unexpected(songbot_error::no_match);
-        }
-
-        auto cmd_pair = cmd_state_store.insert(concert_str, *concert, event);
+        const auto concert = std::get<std::string>(event.get_parameter("event"));
+        auto cmd_pair = cmd_state_store.insert(concert, event);
         auto reveal_btn_pair = btn_reveal_state_store.insert(cmd_pair.first);
         auto lang_btn_pair = btn_lang_state_store.insert(cmd_pair.first);
         cmd_pair.second.reveal_key = reveal_btn_pair.first;
         cmd_pair.second.lang_key = lang_btn_pair.first;
 
-        auto res = co_await reply_multimessage(event, ctx, &get_setlistlast_lines, *concert, cmd_pair.second, true, reveal_btn_pair.first);
+        auto res = co_await reply_multimessage(event, ctx, &get_setlistlast_lines, concert, cmd_pair.second, true, reveal_btn_pair.first);
         if (res) {
             setlistlast_success_counter->Increment();
             co_return res;
