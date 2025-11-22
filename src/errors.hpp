@@ -18,35 +18,32 @@
 
 #pragma once
 
-import dpp;
-import concerts;
-import songs;
 import std;
-import magic_enum;
 
-#include "errors.hpp"
-
-constexpr size_t AUTOCOMPLETE_MAX_CHOICES = 25UZ;
-
-class context;
-
-class iface_command
+enum class songbot_error : int
 {
-public:
-    iface_command(context& ctx, std::string_view cmd_name, std::string_view cmd_description) noexcept;
-
-    virtual dpp::slashcommand get_command();
-
-    virtual ~iface_command() = default;
-
-    virtual dpp::task<std::expected<void, std::error_code>> on_slashcommand(const dpp::slashcommand_t event) = 0;
-
-    virtual std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) = 0;
-
-protected:
-    context * const ctx;
-    const std::string_view cmd_name;
-    const std::string_view cmd_description;
-
-
+    invalid_config_file,
+    missing_api_token,
+    autocomplete_no_match,
+    no_match,
+    autocomplete_no_focused_option,
+    reply_failure,
+    explosion,
+    http_error_400,
+    http_error_404,
 };
+
+class songbot_error_category : public std::error_category {
+public:
+    const char* name() const noexcept override;
+    std::string message(int ev) const override;
+};
+
+const std::error_category& get_songbot_error_category() noexcept;
+
+namespace std {
+    template <>
+    struct is_error_code_enum<songbot_error> : public true_type {};
+}
+
+std::error_code make_error_code(songbot_error e) noexcept;

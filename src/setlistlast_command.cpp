@@ -20,7 +20,6 @@ import songs;
 import util;
 import concerts;
 import vocadb.events;
-import songbot.errors;
 import uni_algo;
 
 #include "setlistlast_command.hpp"

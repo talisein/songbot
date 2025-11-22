@@ -19,6 +19,7 @@
 import concerts;
 
 #include "scraper.hpp"
+#include "../errors.hpp"
 #include "vocadb-api.hpp"
 
 using json = nlohmann::json;
@@ -512,7 +513,7 @@ scraper::fetch_event_embeds(const json& event)
             std::ofstream ofs {tmppath, std::ios::binary | std::ios::out };
             auto res = download(url, ofs);
             if (!res) {
-                if (res.error() == std::make_error_code(std::errc::no_such_file_or_directory)) {
+                if (res.error() == songbot_error::http_error_404) {
                     downloaded_filenames.push_back(std::nullopt);
                     ofs.close();
                     std::filesystem::remove(tmppath);
@@ -566,12 +567,12 @@ scraper::get(const cpr::Url& url, const cpr::Parameters& params)
             return std::unexpected(cpr::make_error_code(res.error.code));
         }
         if (res.status_code == 404) {
-            return std::unexpected(std::make_error_code(std::errc::no_such_file_or_directory));
+            return std::unexpected(songbot_error::http_error_404);
         }
         if (res.status_code >= 400) {
             std::println(std::cerr, "Error: {}", res.status_code);
             std::println(std::cerr, "Body: {}", res.text);
-            return std::unexpected(std::make_error_code(std::errc::invalid_argument));
+            return std::unexpected(songbot_error::http_error_400);
         }
         return res;
     } catch (std::system_error& e) {
@@ -594,12 +595,12 @@ scraper::download(const cpr::Url& url, std::ofstream &os, const cpr::Parameters&
             return std::unexpected(cpr::make_error_code(res.error.code));
         }
         if (res.status_code == 404) {
-            return std::unexpected(std::make_error_code(std::errc::no_such_file_or_directory));
+            return std::unexpected(songbot_error::http_error_404);
         }
         if (res.status_code >= 400) {
             std::println(std::cerr, "Error: {}", res.status_code);
             std::println(std::cerr, "Body: {}", res.text);
-            return std::unexpected(std::make_error_code(std::errc::invalid_argument));
+            return std::unexpected(songbot_error::http_error_400);
         }
         return res;
     } catch (std::system_error& e) {
