@@ -57,22 +57,6 @@ if get_option('build_anidb_sourcegen')
     depends: [std_module]
   )
 
-  vocadb_api_module = custom_target('vocadb_api_module',
-    input: 'vocadb-api.cppm',
-    output: ['vocadb-api.o', 'vocadb-api.gcm'],
-    command: [
-        cxx_compiler.cmd_array(),
-        '-std=c++26',
-        opt_flag,
-        '-fmodules',
-        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
-        '-c', '@INPUT@',
-        '-o', '@OUTPUT0@',
-        '-fconstexpr-ops-limit=3355443200',
-    ],
-    depends: [std_module]
-)
-
   scraper_conf_data = configuration_data()
   scraper_conf_data.set('RES_DIR', meson.project_source_root() / 'res/')
   scraper_conf_data.set('GEN_DIR', meson.current_source_dir() / 'gen/')
@@ -83,7 +67,8 @@ if get_option('build_anidb_sourcegen')
   scraper_src = ['main.cpp', 'scraper.cpp']
 
   scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm,
-                           dependencies: [magic_enum_dep, curl_cpr_dep, json_dep, dpp_dep],
+                           cpp_args: '-Wno-terminate',
+                           dependencies: [magic_enum_dep, curl_cpr_dep, json_dep],
                            link_with: misc_modules_lib,
                            sources: scraper_conf_file)
 
@@ -105,9 +90,8 @@ vocadb_events_module = custom_target('events_module',
                                 '-I', meson.current_source_dir(),
                                 '--embed-dir=@0@'.format(meson.project_source_root() / 'res')
                               ],
-                              depends: [vocadb_api_module, std_module]
+                              depends: [std_module]
                              )
 
 vocadb_lib = static_library('vocadb',
-                            objects: [vocadb_api_module[0], vocadb_events_module[0]])
-vocadb_gcm = [vocadb_api_module[1], vocadb_events_module[1]]
+                            objects: [vocadb_events_module[0]])

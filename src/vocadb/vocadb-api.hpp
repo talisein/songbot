@@ -15,13 +15,11 @@
     You should have received a copy of the GNU General Public License
     along with this program.  If not, see <https://www.gnu.org/licenses/>.
 */
-module;
-
-export module vocadb.api;
+#pragma once
 
 import std;
 
-export namespace vocadb
+namespace vocadb
 {
     using namespace std::literals;
     constexpr std::string_view base_url { "https://vocadb.net"sv };

@@ -18,8 +18,12 @@
 
 #pragma once
 
-import std;
 import dpp;
+import concerts;
+import songs;
+import std;
+import magic_enum;
+
 
 constexpr size_t AUTOCOMPLETE_MAX_CHOICES = 25UZ;
 
