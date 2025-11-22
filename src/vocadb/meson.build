@@ -14,6 +14,7 @@ if get_option('build_anidb_sourcegen')
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -29,6 +30,7 @@ if get_option('build_anidb_sourcegen')
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -44,6 +46,7 @@ if get_option('build_anidb_sourcegen')
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -63,9 +66,10 @@ if get_option('build_anidb_sourcegen')
 
   scraper_src = ['main.cpp', 'scraper.cpp']
 
-  scraper_exe = executable('vocadb-scraper', json_module, scraper_src, songs_module, std_module, uni_algo_module, magic_enum_module, concerts_module, util_module, cpr_module,
+  scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm,
                            cpp_args: '-Wno-terminate',
                            dependencies: [magic_enum_dep, curl_cpr_dep, json_dep],
+                           link_with: misc_modules_lib,
                            sources: scraper_conf_file)
 
 endif
@@ -76,6 +80,7 @@ vocadb_events_module = custom_target('events_module',
                               command: [
                                 cxx_compiler.cmd_array(),
                                 '-std=c++26',
+                                opt_flag,
                                 '-fmodules',
                                 '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
                                 '-c', '@INPUT@',
@@ -87,3 +92,6 @@ vocadb_events_module = custom_target('events_module',
                               ],
                               depends: [std_module]
                              )
+
+vocadb_lib = static_library('vocadb',
+                            objects: [vocadb_events_module[0]])

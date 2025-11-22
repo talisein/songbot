@@ -227,7 +227,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { KODO,             "Hatsune Miku × Kodo Taiko Special Live 2018",
           KODO2018, 2018y/6/2, 2018y/6/3, 2948 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2018 USA & MEXICO",
-          ME2018NA, 2018y/6/29, 2019y/7/19, 1673 },
+          ME2018NA, 2018y/6/29, 2018y/7/19, 1673 },
         { MAGICAL_MIRAI,    "Hatsune Miku Magical Mirai 2018",
           MM2018, 2018y/8/25, 2018y/9/2, 1561 },
         { MIKU_WITH_YOU,    "MIKU WITH YOU 2018",

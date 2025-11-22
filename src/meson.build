@@ -4,11 +4,12 @@ std_module = custom_target('std_module',
 #    output: ['std.o', 'std.gcm'],
     command: [cxx_compiler.cmd_array(),
               '-std=c++26',
+              opt_flag,
               '-fmodules',
               '-fmodule-only',
               '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
               '-fsearch-include-path',
-#              '-o', '@OUTPUT0@',
+              '-o', '@OUTPUT0@',
               '-c', 'bits/std.cc'
              ],
  )
@@ -19,6 +20,7 @@ prometheus_histogram_h_module = custom_target('prometheus_histogram_h_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -35,6 +37,7 @@ prometheus_registry_h_module = custom_target('prometheus_registry_h_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -51,6 +54,7 @@ prometheus_exposer_h_module = custom_target('prometheus_exposer_h_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -69,6 +73,7 @@ prometheus_module = custom_target('prometheus_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -87,6 +92,7 @@ dpp_h_module = custom_target('dpp_h_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -102,6 +108,7 @@ dpp_module = custom_target('dpp_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-I', dpp_includedir,
@@ -118,6 +125,7 @@ magic_enum_all_module = custom_target('magic_enum_all_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -133,6 +141,7 @@ magic_enum_module = custom_target('magic_enum_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -149,6 +158,7 @@ uni_algo_all_module = custom_target('uni_algo_all_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-only',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
@@ -165,6 +175,7 @@ uni_algo_module = custom_target('uni_algo_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -181,6 +192,7 @@ errors_module = custom_target('errors_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -196,6 +208,7 @@ util_module = custom_target('util_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -211,6 +224,7 @@ songs_module = custom_target('songs_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -226,6 +240,7 @@ concerts_module = custom_target('concerts_module',
     command: [
         cxx_compiler.cmd_array(),
         '-std=c++26',
+        opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',
@@ -234,6 +249,12 @@ concerts_module = custom_target('concerts_module',
     ],
     depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module]
 )
+
+
+misc_modules_lib = static_library('misc',
+                                  objects: [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_module[0], dpp_module[0], prometheus_module[0], util_module[0], errors_module[0]])
+
+misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], std_module]
 
 project_version = vcs_tag(input: 'version.hpp.in',
                           output: 'version.hpp',
@@ -245,9 +266,10 @@ subdir('vocadb')
 
 src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp']
 
-exe = executable('songbot', src, errors_module, songs_module, uni_algo_module, magic_enum_module, concerts_module, dpp_module, prometheus_module, util_module, vocadb_events_module, std_module,
+exe = executable('songbot', src, misc_modules_gcm, vocadb_events_module[1],
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
                  install: true,
                  sources: project_version,
+                 link_with: [misc_modules_lib, vocadb_lib],
                  include_directories: include_directories('vocadb')
                 )

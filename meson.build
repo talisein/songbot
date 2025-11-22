@@ -3,8 +3,9 @@ project('songbot', ['c', 'cpp'],
         version : '0.0.1',
         meson_version : '>=1.4.0',
         default_options : ['c_std=c23',
-                           'cpp_std=c++23',
-                           'buildtype=release'])
+                           'cpp_std=c++26',
+                           'buildtype=release',
+                           'optimization=g'])
 
 
 magic_enum_dep = dependency('magic_enum',
@@ -65,6 +66,8 @@ module_conf_data.set('DPP_INCLUDEDIR', dpp_includedir)
 module_mapper_file = configure_file(input: 'module.mapper.in',
                                     output: 'module.mapper',
                                     configuration: module_conf_data)
+
+opt_flag = '-O' + get_option('optimization')
 
 add_project_arguments( '-fmodules',
                        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
