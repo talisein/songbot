@@ -264,18 +264,13 @@ namespace {
         /* Ok, we have a list of messages to send. Reply, then follow up if necessary. */
         auto first_gui = make_reveal_gui(messages.front(), headers,
                                          state, use_ephemeral, reveal_button_callback_key);
-        if (auto res = co_await event.co_reply(first_gui); res.is_error()) {
-            ctx->log_error("reply_multimessage: {:d}", res.get_error());
-            co_return std::unexpected(songbot_error::reply_failure);
-        }
+        auto res = co_await event.co_reply(first_gui);
+        co_return util::reply_handler(res, ctx);
 
         for (const auto& msg : messages | std::views::drop(1)) {
             auto gui = make_reveal_gui(msg, std::views::empty<std::string>, state, use_ephemeral, std::nullopt);
             auto res = co_await event.co_follow_up(gui);
-            if (res.is_error()) {
-                ctx->log_error("reply_multimessage: {:d}", res.get_error());
-                co_return std::unexpected(songbot_error::reply_failure);
-            }
+            co_return util::reply_handler(res, ctx);
         }
 
         co_return {};
@@ -325,15 +320,11 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
         const auto concert_str = std::get<std::string>(event.get_parameter("event"));
         const auto concert = lookup_concert(concert_str);
         if (!concert) {
-            dpp::message m{"I'm sorry, I don't know about a concert named '{}', state.concert"};
+            dpp::message m{std::format("I'm sorry, I don't know about a concert named '{}'", concert_str)};
             m.set_flags(dpp::message_flags::m_ephemeral);
             auto res = co_await event.co_reply(m);
             setlistlast_failure_counter->Increment();
-            if (res.is_error()) {
-                ctx->log_error("co_reply fail: {:d}", res.get_error());
-                co_return std::unexpected(songbot_error::reply_failure);
-            }
-            co_return std::unexpected(songbot_error::no_match);
+            co_return std::unexpected(util::reply_handler(res, ctx).error_or(songbot_error::no_match));
         }
 
         auto cmd_pair = cmd_state_store.insert(concert_str, *concert, event);
@@ -345,18 +336,21 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
         auto res = co_await reply_multimessage(event, ctx, &get_setlistlast_lines, *concert, cmd_pair.second, true, reveal_btn_pair.first);
         if (res) {
             setlistlast_success_counter->Increment();
-            co_return res;
         } else {
             setlistlast_failure_counter->Increment();
-            co_return res;
         }
+        co_return res;
     } catch(std::system_error &e) {
-        event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
+        dpp::message m("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
+        m.set_flags(dpp::message_flags::m_ephemeral);
+        event.reply(m);
         ctx->log_error("/setlistlast: System Error {}", e.what());
         setlistlast_failure_counter->Increment();
         co_return std::unexpected(e.code());
     } catch (std::bad_variant_access &e) {
-        event.reply("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
+        dpp::message m("I have a bug in my programming, so I can't give you that setlist. I'm sorry!");
+        m.set_flags(dpp::message_flags::m_ephemeral);
+        event.reply(m);
         ctx->log_error("/setlistlast: std::get() {}", e.what());
         setlistlast_failure_counter->Increment();
         co_return std::unexpected(songbot_error::explosion);

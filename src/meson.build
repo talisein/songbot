@@ -215,7 +215,7 @@ util_module = custom_target('util_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, errors_module, uni_algo_module, magic_enum_module]
+    depends: [std_module, uni_algo_module, magic_enum_module, errors_module]
 )
 
 songs_module = custom_target('songs_module',
@@ -231,7 +231,7 @@ songs_module = custom_target('songs_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, uni_algo_module, magic_enum_module, util_module]
+    depends: [std_module, uni_algo_module, magic_enum_module, util_module, errors_module]
 )
 
 concerts_module = custom_target('concerts_module',
@@ -247,7 +247,7 @@ concerts_module = custom_target('concerts_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module]
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module, errors_module]
 )
 
 

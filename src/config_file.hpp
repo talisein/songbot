@@ -17,8 +17,6 @@
 */
 #pragma once
 
-import std;
-
 struct bot_config
 {
     std::string api_token;
