@@ -15,12 +15,12 @@ ut_module = custom_target('ut_module',
 )
 
 ut_args = ['-r', 'junit', '-o']
-songs_test =  executable('songs_test', 'songs.cpp', ut_module, misc_modules_gcm, vocadb_events_module[1],
+songs_test =  executable('songs_test', 'songs.cpp', ut_module, misc_modules_gcm, vocadb_gcm,
                          link_whole: [misc_modules_lib, vocadb_lib],
                          dependencies: [boostut_dep, dpp_dep])
 test('songs', songs_test, args: [ut_args])
 
-concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, misc_modules_gcm, vocadb_events_module[1],
+concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, misc_modules_gcm, vocadb_gcm,
                             link_whole: [misc_modules_lib, vocadb_lib],
                             dependencies: [boostut_dep, dpp_dep])
 test('concerts', concerts_test, args: [ut_args])

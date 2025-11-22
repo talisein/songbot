@@ -266,7 +266,7 @@ subdir('vocadb')
 
 src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp']
 
-exe = executable('songbot', src, misc_modules_gcm, vocadb_events_module[1],
+exe = executable('songbot', src, misc_modules_gcm, vocadb_gcm,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
                  install: true,
                  sources: project_version,

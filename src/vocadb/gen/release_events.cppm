@@ -20,16 +20,15 @@
 
 module;
 
-#include "vocadb-api.hpp"
 
 export module vocadb.events;
 
 import std;
+import vocadb.api;
 
 namespace vocadb {
 
 using namespace std::literals;
-
 
 /* Miku FES'09 (Summer) */
 constexpr std::array<additional_name, 3> names_2522 {{
@@ -3653,7 +3652,7 @@ Art by [KEI](https://vocadb.net/Ar/9213))XYX"sv, 2023y/2/5, 4235, event_picture_
 
 * **June 3rd, 2023 (Sat.)**
 1st Show: OPEN 12:00 / START 13:00
-2nd Show: OPEN 18:00 / START 19:00 
+2nd Show: OPEN 18:00 / START 19:00
 
 * **June 4th, 2023 (Sun.)**
 OPEN 12:00 / START 13:00
@@ -3686,7 +3685,7 @@ Art by [LAM](https://vocadb.net/Ar/59773))XYX"sv, 2023y/8/13, 6045, event_pictur
 
 The show will be streamed for free both in VR and as a concert video.
 
-**Concert schedule** 
+**Concert schedule**
 * **November 12th, 2023**
 1st Show: (OPEN 9:00 / START 11:00 / CLOSE 12:15)
 2nd Show: (OPEN 15:00 / START 17:00 / CLOSE 18:15)

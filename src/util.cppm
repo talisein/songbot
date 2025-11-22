@@ -61,6 +61,19 @@ namespace {
 
 export namespace util
 {
+    /*
+    template <typename Context>
+    std::expected<void, std::error_code>
+    reply_handler(const dpp::confirmation_callback_t &cb, Context& ctx, const std::source_location src = std::source_location::current())
+    {
+        if (cb.is_error()) {
+            ctx->log_error("{} reply error: {:d}", src.function_name(), cb.get_error());
+            return std::unexpected(songbot_error::reply_failure);
+        } else {
+            return {};
+        }
+    }
+    */
     std::string escape_markdown(std::string_view input) {
         return escape_markdown_gen(input) | std::ranges::to<std::string>();
     }

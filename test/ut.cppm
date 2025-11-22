@@ -6,7 +6,7 @@ module;
 #endif
 
 export module boost.ut;
-export import std;
+import std;
 
 #define BOOST_UT_CXX_MODULES 1
 #include "ut.hpp"

@@ -17,9 +17,10 @@
 */
 
 import concerts;
+import songbot.errors;
+import vocadb.api;
 
 #include "scraper.hpp"
-#include "vocadb-api.hpp"
 
 using json = nlohmann::json;
 
@@ -47,11 +48,10 @@ namespace
 
 module;
 
-#include "vocadb-api.hpp"
-
 export module vocadb.events;
 
 import std;
+import vocadb.api;
 
 namespace vocadb {
 
@@ -267,7 +267,8 @@ using namespace std::literals;
             std::chrono::year_month_day date{};
             ss >> std::chrono::parse("%Y-%m-%dT%H:%M:%SZ", date);
             if (ss.fail()) {
-                throw std::runtime_error(std::format("Input stream error: std::chrono::parse failed on '{}'", date));
+                std::println(std::cerr, "Failed to parse date {}", date);
+                date = 2039y/3/9;
             }
             return std::format("{:d}y/{:d}/{:d}",
                                static_cast<int>(date.year()),
