@@ -462,7 +462,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "Promise", duet(Miku, Rin), "samfree", 1437},
   {nullopt, nullopt, "from Y to Y", duet(Miku, Luka), "JimmyThumb-P", 4230},
   {"ストロボナイツ", "Strobe Nights", "Strobe Nights", Miku, "kz", 2442},
-  {"ファインダー", "Finder", "finder", Miku, "kz", 291623},
+  {"ファインダー", "Finder", "finder (DSLR remix-re:edit)", Miku, "kz", 291623},
   {"クローバー♣クラブ", "Clover♣Club", "Clover♣Club", Miku, "Yuuyu-P", 5833},
   {nullopt, nullopt, "World's End Dancehall (English ver.)", duet(Miku, Luka), "wowaka", 506529},
   {"電気の恋人 -Programmer’s Song-", "Denki no Koibito -Programmer's Song-", "Electric Lovers - I am Programmer's Song", Miku, "MOSAIC.WAV×ika", 3855},
