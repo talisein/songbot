@@ -39,6 +39,10 @@ public:
     std::map<std::string_view, std::unique_ptr<iface_command>> commands;
 
     std::default_random_engine rng_engine;
+    std::uniform_int_distribution<std::uint64_t> key_dist;
+    std::string keygen() {
+        return std::to_string(key_dist(rng_engine));
+    }
 
     template<auto severity, typename... Args>
     void log(Args&&... args);

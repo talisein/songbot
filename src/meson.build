@@ -271,5 +271,6 @@ exe = executable('songbot', src, misc_modules_gcm, vocadb_gcm,
                  install: true,
                  sources: project_version,
                  link_with: [misc_modules_lib, vocadb_lib],
+                 link_args: ['-lstdc++exp'],
                  include_directories: include_directories('vocadb')
                 )

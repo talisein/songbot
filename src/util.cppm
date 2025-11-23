@@ -293,22 +293,48 @@ export namespace util
 #if __cpp_lib_bind_front >= 202306L
     using std::bind_front;
 #else
-    template<auto Func, typename... Param>
-    constexpr auto bind_front(Param&& ... params)
-        noexcept (
-        (... && noexcept(typename std::remove_reference_t<Param>(std::declval<Param>())) )
-            )
+    namespace detail
     {
-        return [...param = std::forward<Param>(params)]<typename ... Inner>(Inner&& ...inner)
-            noexcept(noexcept(
-                         std::invoke(
-                             Func,
-                             std::declval<const typename std::remove_reference_t<Param>&>()...,
-                             std::declval<Inner>()...
-                             )
-            ))
+        template<class T, class U>
+        struct copy_const
+            : std::conditional<std::is_const_v<T>, U const, U> {};
+
+        template<class T, class U,
+                 class X = typename copy_const<std::remove_reference_t<T>, U>::type>
+        struct copy_value_category
+            : std::conditional<std::is_lvalue_reference_v<T&&>, X&, X&&> {};
+
+        template <class T, class U>
+        struct type_forward_like
+            : copy_value_category<T, std::remove_reference_t<U>> {};
+
+        template <class T, class U>
+        using type_forward_like_t = typename type_forward_like<T, U>::type;
+    }
+
+    template<auto ConstFn, class... Args>
+    constexpr auto bind_front(Args&&... args)
+    {
+        using F = decltype(ConstFn);
+
+        if constexpr (std::is_pointer_v<F> or std::is_member_pointer_v<F>)
+            static_assert(ConstFn != nullptr);
+
+        return
+            [... bound_args(std::forward<Args>(args))]<class Self, class... T>
+            (
+                this Self&&, T&&... call_args
+                )
+            noexcept
+            (
+                std::is_nothrow_invocable_v<F,
+                detail::type_forward_like_t<Self, std::decay_t<Args>>..., T...>
+                )
+            -> std::invoke_result_t<F,
+                                    detail::type_forward_like_t<Self, std::decay_t<Args>>..., T...>
             {
-                return std::invoke(Func, param..., std::forward<Inner>(inner)...);
+                return std::invoke(ConstFn, std::forward_like<Self>(bound_args)...,
+                                   std::forward<T>(call_args)...);
             };
     }
 #endif

@@ -32,6 +32,15 @@ namespace
     errno_to_ec(int err) noexcept {
         return {err, std::generic_category()};
     }
+
+    extern "C" void sigsegv_handler(int sig)
+    {
+        std::cerr << "--- CRITICAL ERROR: Segmentation Fault (SIGSEGV) ---" << std::endl;
+        std::cerr << "--- Stack Trace ---" << std::endl;
+        std::cerr << std::stacktrace::current() << std::endl;
+        std::cerr << "--- Stack Trace Ends ---" << std::endl;
+        std::abort();
+    }
 }
 
 int
@@ -40,6 +49,8 @@ main()
     sigset_t mask;
     sigemptyset(&mask);
     sigaddset(&mask, SIGTERM);
+    std::signal(SIGSEGV, sigsegv_handler);
+
     if (int res = pthread_sigmask(SIG_BLOCK, &mask, nullptr); 0 != res) {
         std::println(std::cerr, "ERROR: Unable to mask SIGTERM. errno={}", errno_to_ec(res).message());
     } else {

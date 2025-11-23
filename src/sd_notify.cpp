@@ -30,6 +30,8 @@ namespace {
     constexpr std::string_view notice{SD_NOTICE};
     constexpr std::string_view info{SD_INFO};
     constexpr std::string_view debug{SD_DEBUG};
+
+    std::once_flag notify_socket_flag;
 }
 
 namespace systemd {
@@ -37,7 +39,9 @@ namespace systemd {
     {
         auto res = sd_notify(unset_environment, state);
         if (0 == res) {
-            std::println(std::cerr, "NOTICE: NOTIFY_SOCKET is not set, can't notify");
+            std::call_once(notify_socket_flag, [] static {
+                std::println(std::cerr, "NOTICE: NOTIFY_SOCKET is not set, can't notify");
+            });
         } else if (0 > res) {
             std::println(std::cerr, "ERROR: sd_notify(), errno={}", res);
         }

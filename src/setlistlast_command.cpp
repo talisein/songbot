@@ -92,10 +92,10 @@ namespace {
 
     /* Takes lines and concats them in a a big string less than DISCORD_REPLY_LIMIT */
     static std::generator<std::string>
-    get_setlist_messages(std::generator<std::string>&& lines, size_t header_size)
+    get_setlist_messages(const Concert &concert, size_t header_size)
     {
         std::ostringstream reply;
-        for (const auto& line : lines)
+        for (const auto& line : get_setlistlast_lines(concert))
         {
             if ((reply.view().size() + line.size() + header_size) >= DISCORD_REPLY_LIMIT) {
                 co_yield reply.str();
@@ -162,10 +162,7 @@ namespace {
 }
 
 setlistlast_command::setlistlast_command(context &ctx) noexcept :
-    iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance"),
-    cmd_state_store(ctx),
-    btn_reveal_state_store(ctx),
-    btn_lang_state_store(ctx)
+    iface_command(ctx, "setlistlast", "Full Concert Setlist with each song's previous appearance")
 {
     /* Metric: setlistlast */
     setlistlast_success_counter = &ctx.slashcommand_counter->Add({{"command", "setlistlast"}, {"result", "success"}, {"visibility", "ephemeral"}});
@@ -188,16 +185,43 @@ setlistlast_command::get_command()
 
     setlistlast_cmd.add_option(std::move(event_opt));
 
-    ctx->bot->on_button_click(util::bind_front<&setlistlast_command::on_button_click>(this));
-
     return setlistlast_cmd;
 }
 
 namespace {
-    [[nodiscard]] dpp::message
-    make_reveal_gui(const auto& message,
+    [[nodiscard]] dpp::component
+    make_gui_header(const Concert& concert,
                     std::ranges::range auto&& header_content,
-                    const setlistlast_command::event_state& state,
+                    dpp::message& message)
+    {
+        auto section = dpp::component().set_type(dpp::cot_section);
+        for (const auto& header : header_content) {
+            auto widget = dpp::component().set_type(dpp::cot_text_display)
+                .set_content(header);
+            section.add_component_v2(widget);
+        }
+
+        if (concert.vocadb_event_id) {
+            auto it = std::ranges::find_if(vocadb::events, [id = concert.vocadb_event_id](const auto &event) {
+                return event.id == id;
+            });
+            if (it != std::ranges::end(vocadb::events) &&
+                it->picture.original.size() > 0)
+            {
+                std::string_view data{reinterpret_cast<const char *>(it->picture.original.data()), it->picture.original.size_bytes()};
+                message.add_file("thumb.jpg", data, it->picture.mime);
+                section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail("attachment://thumb.jpg"));
+            }
+        }
+
+        return section;
+    }
+
+
+    [[nodiscard]] dpp::message
+    make_reveal_gui(const std::string& message,
+                    std::ranges::range auto&& header_content,
+                    const Concert& concert,
                     bool use_ephemeral,
                     std::optional<std::string> reveal_button_id)
     {
@@ -206,7 +230,6 @@ namespace {
         auto container      = dpp::component().set_type(dpp::cot_container);
         container.set_accent(dpp::utility::rgb(134,206,203));
 
-        const auto concert = state.concert;
         /* Button row */
         if (reveal_button_id.has_value()) {
             auto action_row = dpp::component().set_type(dpp::cot_action_row);
@@ -220,99 +243,84 @@ namespace {
 
         /* header / thumbnail */
         if (!std::ranges::empty(header_content)) {
-            auto section = dpp::component().set_type(dpp::cot_section);
-            for (const auto& header : header_content) {
-                auto widget = dpp::component().set_type(dpp::cot_text_display)
-                              .set_content(header);
-                section.add_component_v2(widget);
-            }
-
-            if (concert.vocadb_event_id) {
-                auto it = std::ranges::find_if(vocadb::events, [id = concert.vocadb_event_id](const auto &event) {
-                    return event.id == id;
-                });
-                if (it != std::ranges::end(vocadb::events) &&
-                    it->picture.original.size() > 0)
-                {
-                    std::string_view data{reinterpret_cast<const char *>(it->picture.original.data()), it->picture.original.size_bytes()};
-                    real_msg.add_file("thumb.jpg", data, it->picture.mime);
-                    section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail("attachment://thumb.jpg"));
-                }
-            }
+            auto section = make_gui_header(concert, header_content, real_msg);
             container.add_component_v2(section);
         }
 
+        /* Actual setlist content */
         auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
                                               .set_content(message);
         container.add_component_v2(text_display_1);
-
         real_msg.add_component_v2(container);
         return real_msg;
     }
 
-    /* Takes a generator that produces multiple lines. It constructs a sequence
-     * dpp::messages, each less than the reply limit and sends it off using the make_reveal_gui() */
-    template <typename EventType>
-    dpp::task<std::expected<void, std::error_code>>
-    reply_multimessage(const EventType& event,
-                       context * const ctx,
-                       const Concert& concert,
-                       const setlistlast_command::event_state& state,
-                       bool use_ephemeral,
-                       std::optional<std::string> reveal_button_callback_key)
-    {
-        std::ostringstream reply;
-        std::vector<std::string> headers = get_header_lines(concert) | std::ranges::to<std::vector>();
-        const auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
-        auto messages_gen = get_setlist_messages(get_setlistlast_lines(concert), header_size);
-        auto messages_it = std::ranges::begin(messages_gen);
+}
 
-        /* Ok, we have a list of messages to send. Reply, then follow up if necessary. */
-        auto first_gui = make_reveal_gui(*messages_it, headers,
-                                         state, use_ephemeral, reveal_button_callback_key);
-        auto res = co_await event.co_reply(first_gui);
+/* Takes a generator that produces multiple lines. It constructs a sequence
+ * dpp::messages, each less than the reply limit and sends it off using the make_reveal_gui() */
+
+dpp::task<std::expected<void, std::error_code>>
+setlistlast_command::reply_multimessage(const dpp::slashcommand_t& event,
+                                        const Concert& concert)
+{
+    std::vector<std::string> headers = get_header_lines(concert) | std::ranges::to<std::vector>();
+    const auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
+    auto button_click_key = ctx->keygen();
+    auto messages_gen = get_setlist_messages(concert, header_size);
+    auto messages_it = std::ranges::begin(messages_gen);
+    const auto make_first_gui = [first = *messages_it, &headers, &concert](bool use_ephemeral, auto button_key) {
+        return make_reveal_gui(first, headers, concert, use_ephemeral, button_key);
+    };
+    /* Ok, we have a list of messages to send. Reply, then follow up if necessary. */
+    auto res = co_await event.co_reply(make_first_gui(true, button_click_key));
+    if (res.is_error()) {
+        co_return util::reply_handler(res, ctx);
+    }
+
+    for (const auto& msg : std::ranges::subrange(std::move(++messages_it), std::ranges::end(messages_gen))) {
+        auto gui = make_reveal_gui(msg, std::views::empty<std::string>, concert, true, std::nullopt);
+        auto res = co_await event.co_follow_up(gui);
         if (res.is_error()) {
             co_return util::reply_handler(res, ctx);
         }
+    }
 
-        for (const auto& msg : std::ranges::subrange(std::move(++messages_it), std::ranges::end(messages_gen))) {
-            auto gui = make_reveal_gui(msg, std::views::empty<std::string>, state, use_ephemeral, std::nullopt);
-            auto res = co_await event.co_follow_up(gui);
-            if (res.is_error()) {
-                co_return util::reply_handler(res, ctx);
+    /* Wait for button click or expiration */
+    if (auto when_any_result = co_await dpp::when_any{
+            event.owner->on_button_click.when([key = button_click_key](const auto& click) {
+                return click.custom_id == key;
+            }),
+                event.owner->co_sleep(5 * 60) // 5 minutes
+                };
+        when_any_result.index() == 0)
+    { // Button clicked
+        const dpp::button_click_t click_event = when_any_result.get<0>();
+        if (auto conf = co_await click_event.co_reply(make_first_gui(false, std::nullopt)); conf.is_error()) {
+            setlistlast_reveal_failure_counter->Increment();
+            co_return util::reply_handler(conf, ctx);
+        }
+
+        for (const auto& msg : get_setlist_messages(concert, header_size) | std::views::drop(1)) {
+            auto gui = make_reveal_gui(msg, std::views::empty<std::string>, concert, false, std::nullopt);
+            auto conf = co_await click_event.co_follow_up(gui);
+            if (conf.is_error()) {
+                setlistlast_reveal_failure_counter->Increment();
+                co_return util::reply_handler(conf, ctx);
             }
         }
 
-        co_return {};
-    }
-}
-
-dpp::task<void>
-setlistlast_command::on_reveal_button_click(const dpp::button_click_t& event, const event_state& state)
-{
-    const auto concert = state.concert;
-    auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
-    if (auto res = co_await reply_multimessage(event, ctx, concert, state, false, std::nullopt); res) {
-        msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
+        auto success_msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
+        success_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
+        auto conf = co_await event.co_edit_original_response(success_msg);
         setlistlast_reveal_success_counter->Increment();
-    } else {
-        msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Sorry, I made a mistake and can't this setlist publically."));
-        setlistlast_reveal_failure_counter->Increment();
+        co_return util::reply_handler(conf, ctx);
+    } else { // Button expiring. Just replace the first message.
+        auto res = co_await event.co_edit_original_response(make_first_gui(true, std::nullopt));
+        co_return util::reply_handler(res, ctx);
     }
 
-    auto res = co_await event.co_edit_original_response(msg);
-    util::reply_handler(res, ctx);
-}
-
-dpp::task<void>
-setlistlast_command::on_button_click(const dpp::button_click_t& event)
-{
-    auto cmd_key = btn_reveal_state_store.get(event.custom_id);
-    if (!cmd_key) co_return;
-    auto args = cmd_state_store.get(*cmd_key);
-    if (!args) co_return;
-    co_await on_reveal_button_click(event, *args);
-    co_return;
+    co_return {};
 }
 
 dpp::task<std::expected<void, std::error_code>>
@@ -329,13 +337,7 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
             co_return std::unexpected(util::reply_handler(res, ctx).error_or(songbot_error::no_match));
         }
 
-        auto cmd_pair = cmd_state_store.insert(concert_str, *concert, event);
-        auto reveal_btn_pair = btn_reveal_state_store.insert(cmd_pair.first);
-        auto lang_btn_pair = btn_lang_state_store.insert(cmd_pair.first);
-        cmd_pair.second.reveal_key = reveal_btn_pair.first;
-        cmd_pair.second.lang_key = lang_btn_pair.first;
-
-        auto res = co_await reply_multimessage(event, ctx, *concert, cmd_pair.second, true, reveal_btn_pair.first);
+        auto res = co_await reply_multimessage(event, *concert);
         if (res) {
             setlistlast_success_counter->Increment();
         } else {

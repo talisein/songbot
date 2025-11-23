@@ -38,27 +38,13 @@ public:
 
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) override;
 
-    dpp::task<void> on_button_click(const dpp::button_click_t& event);
-
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
 
-    using key_t = std::string;
-public:
-    struct event_state {
-        std::string concert_str;
-        Concert concert;
-        dpp::slashcommand_t event;
-        key_t reveal_key;
-        key_t lang_key;
-    };
+    dpp::task<std::expected<void, std::error_code>>
+    reply_multimessage(const dpp::slashcommand_t& event, const Concert& concert);
+
 private:
-    state_storage<event_state> cmd_state_store;
-    state_storage<decltype(cmd_state_store)::key_t> btn_reveal_state_store; // map to cmd_state_store
-    state_storage<decltype(cmd_state_store)::key_t> btn_lang_state_store; // map to cmd_state_store
-
-    dpp::task<void> on_reveal_button_click(const dpp::button_click_t& event, const event_state& state);
-
     prometheus::Counter* setlistlast_success_counter;
     prometheus::Counter* setlistlast_failure_counter;
     prometheus::Counter* setlistlast_reveal_success_counter;
