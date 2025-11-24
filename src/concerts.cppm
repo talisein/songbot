@@ -569,7 +569,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { SANKYUGDF, 6, "Clover♣Club" },
         { SANKYUGDF, 7, "Vegetable Juice" },
         { SANKYUGDF, 8, "Romeo and Cinderella" },
-        { SANKYUGDF, 9, "finder" },
+        { SANKYUGDF, 9, "finder (DSLR remix-re:edit)" },
         { SANKYUGDF, 10, "Two-Sided Lovers" },
         { SANKYUGDF, 11, "stargazeR" },
         { SANKYUGDF, 12, "moon" },
