@@ -21,3 +21,4 @@ prometheus @BUILD_DIR@/src/prometheus.gcm
 util @BUILD_DIR@/src/util.gcm
 cpr @BUILD_DIR@/src/vocadb/cpr.gcm
 nlohmann.json @BUILD_DIR@/src/vocadb/json.gcm
+magic @BUILD_DIR@/src/vocadb/magic.gcm

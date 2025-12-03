@@ -71,6 +71,22 @@ if get_option('build_anidb_sourcegen')
     depends: [std_module]
   )
 
+  magic_dep = dependency('libmagic')
+  magic_module = custom_target('magic_module',
+    input: 'magic.cppm',
+    output: ['magic.o', 'magic.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+    ],
+    depends: [std_module]
+  )
+
   scraper_conf_data = configuration_data()
   scraper_conf_data.set('RES_DIR', meson.project_source_root() / 'res/')
   scraper_conf_data.set('GEN_DIR', meson.current_source_dir() / 'gen/')
@@ -80,8 +96,8 @@ if get_option('build_anidb_sourcegen')
 
   scraper_src = ['main.cpp', 'scraper.cpp']
 
-  scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm,
-                           dependencies: [magic_enum_dep, curl_cpr_dep, json_dep, dpp_dep],
+  scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm, magic_module,
+                           dependencies: [magic_enum_dep, curl_cpr_dep, json_dep, dpp_dep, magic_dep],
                            link_with: misc_modules_lib,
                            sources: scraper_conf_file)
 

@@ -19,3 +19,7 @@
 export module cpr;
 
 export import <cpr/cpr.h>;
+
+export namespace cpr {
+       constexpr auto URLDECODE = CURLU_URLDECODE;
+}

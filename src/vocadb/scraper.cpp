@@ -346,8 +346,6 @@ using namespace std::literals;
     constexpr double target_mean_delay_sec = 5.0;
     constexpr double shape_k = 5.0;
     constexpr double scale_beta = target_mean_delay_sec / shape_k;
-
-  constexpr auto CURLU_URLDECODE = (1<<6);
   
 } // anonymous namespace
 
@@ -800,7 +798,7 @@ get_suffix_from_url(const std::string& url)
   auto rc = curl_url_set(curlu_p.get(), CURLUPART_URL, url.c_str(), 0);
   if (CURLUE_OK != rc) return res;
   std::unique_ptr<char, decltype([](char *s) static { if (s) curl_free(s); })> buf { nullptr };
-  rc = curl_url_get(curlu_p.get(), CURLUPART_PATH, std::out_ptr(buf), CURLU_URLDECODE);
+  rc = curl_url_get(curlu_p.get(), CURLUPART_PATH, std::out_ptr(buf), cpr::URLDECODE);
   if (CURLUE_OK != rc) return res;
   std::string_view path_sv { buf.get() };
   std::filesystem::path path { path_sv };
