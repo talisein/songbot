@@ -52,6 +52,7 @@ public:
     scraper(std::filesystem::path res_directory) noexcept;
 
     std::expected<void, std::error_code> scrape_events(const std::filesystem::path& generated_src); // gen/release_events.cppm
+    std::expected<void, std::error_code> scrape_songs(const std::filesystem::path& generated_src); // gen/songs.cppm
 
 private:
     cpr::Session session;
@@ -59,9 +60,15 @@ private:
     std::default_random_engine rng_eng;
     std::gamma_distribution<double> dist;
 
+    std::expected<void, std::error_code> write_song_anonymous(const nlohmann::json& event,  std::ostream& stream);
     std::expected<void, std::error_code> write_event_anonymous(const nlohmann::json& event,  std::ostream& stream);
     std::expected<cpr::Response, std::error_code> get(const cpr::Url& url, const cpr::Parameters& params = {});
     std::expected<cpr::Response, std::error_code> download(const cpr::Url& url, std::ofstream& os, const cpr::Parameters& params = {});
-    std::expected<std::vector<std::optional<std::string>>, std::error_code> fetch_event_embeds(const nlohmann::json& event);
+  std::expected<void, std::error_code> write_pictures(std::ostream& os,
+						      const nlohmann::json& pic,
+						      const std::string_view id_namespace,
+						      std::uint64_t id);
+
+  std::expected<std::vector<std::optional<std::string>>, std::error_code> fetch_event_embeds(const nlohmann::json& event, const std::string_view id_namespace, std::uint64_t id);
     std::chrono::milliseconds get_request_delay();
 };

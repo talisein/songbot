@@ -106,6 +106,26 @@ vocadb_events_module = custom_target('events_module',
                               depends: [vocadb_api_module, std_module]
                              )
 
+vocadb_songs_module = custom_target('songs_module',
+                              input: 'gen/vocadb_songs.cppm',
+                              output: ['vocadb_songs.o', 'vocadb_songs.gcm'],
+                              command: [
+                                cxx_compiler.cmd_array(),
+                                '-std=c++26',
+                                opt_flag,
+                                '-fmodules',
+                                '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+                                '-c', '@INPUT@',
+                                '-o', '@OUTPUT0@',
+                                '-fconstexpr-ops-limit=3355443200',
+                                '-fconstexpr-loop-limit=2000000',
+                                '-I', meson.current_source_dir(),
+                                '--embed-dir=@0@'.format(meson.project_source_root() / 'res')
+                              ],
+                              depends: [vocadb_api_module, std_module]
+                             )
+
+
 vocadb_lib = static_library('vocadb',
-                            objects: [vocadb_api_module[0], vocadb_events_module[0]])
-vocadb_gcm = [vocadb_api_module[1], vocadb_events_module[1]]
+                            objects: [vocadb_api_module[0], vocadb_events_module[0], vocadb_songs_module[0]])
+vocadb_gcm = [vocadb_api_module[1], vocadb_events_module[1], vocadb_songs_module[1]]

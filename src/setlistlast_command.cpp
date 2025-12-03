@@ -140,25 +140,27 @@ namespace {
             using namespace std::literals;
             std::vector<std::string> links;
             const auto is_official_weblink = [](const auto &link) static -> bool {
-                return 0 == una::caseless::compare_utf8("Website (EN)"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Website"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Official website"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("mikuexpo.com"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Official Page"sv, link.description) ||
-                    0 == una::caseless::compare_utf8("Official Webpage"sv, link.description);
+	      return link.description.has_value() && link.url.has_value() && (
+		    0 == una::caseless::compare_utf8("Website (EN)"sv, *link.description) ||
+                    0 == una::caseless::compare_utf8("Website"sv, *link.description) ||
+                    0 == una::caseless::compare_utf8("Official website"sv, *link.description) ||
+                    0 == una::caseless::compare_utf8("mikuexpo.com"sv, *link.description) ||
+                    0 == una::caseless::compare_utf8("Official Page"sv, *link.description) ||
+                    0 == una::caseless::compare_utf8("Official Webpage"sv, *link.description));
             };
             for (const auto &link : std::views::filter(it->web_links, is_official_weblink) | std::views::take(1))
             {
-                links.push_back(std::format("[Offical Website]({})", link.url));
+                links.push_back(std::format("[Offical Website]({})", *link.url));
             }
             links.push_back(std::format("[VocaDB](https://vocadb.net/E/{}/{})", it->id, it->url_slug));
             const auto is_vocawiki_weblink = [](const auto &link) static -> bool {
-                return una::caseless::find_utf8(link.url, "vocaloid.wikia.com"sv) ||
-                    una::caseless::find_utf8(link.url, "vocaloid.fandom.com"sv);
+	      return link.url.has_value() && (
+		    una::caseless::find_utf8(*link.url, "vocaloid.wikia.com"sv) ||
+                    una::caseless::find_utf8(*link.url, "vocaloid.fandom.com"sv));
             };
             for (const auto &link : std::views::filter(it->web_links, is_vocawiki_weblink) | std::views::take(1))
             {
-                links.push_back(std::format("[VocaWiki]({})", link.url));
+                links.push_back(std::format("[VocaWiki]({})", *link.url));
             }
             headers.push_back(std::format("-# {}", std::views::join_with(links, " — "sv) | std::ranges::to<std::string>()));
         }
@@ -213,10 +215,10 @@ namespace {
                 return event.id == id;
             });
             if (it != std::ranges::end(vocadb::events) &&
-                it->picture.original.size() > 0)
+                it->main_picture.original.size() > 0)
             {
-                std::string_view data{reinterpret_cast<const char *>(it->picture.original.data()), it->picture.original.size_bytes()};
-                message.add_file("thumb.jpg", data, it->picture.mime);
+                std::string_view data{reinterpret_cast<const char *>(it->main_picture.original.data()), it->main_picture.original.size_bytes()};
+                message.add_file("thumb.jpg", data, it->main_picture.mime.value());
                 section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail("attachment://thumb.jpg"));
             }
         }

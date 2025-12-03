@@ -28,18 +28,18 @@ export namespace vocadb
     constexpr std::string_view release_events_url { "https://vocadb.net/api/releaseEvents/{}"sv };
     constexpr std::string_view songs_url { "https://vocadb.net/api/songs/{}"sv };
 
-    struct release_event_picture
+    struct picture
     {
-        std::string_view mime;
-        std::optional<std::string_view> name;
-        std::string_view url_original;
-        std::span<const std::uint8_t> original;
-        std::string_view url_small_thumb;
-        std::span<const std::uint8_t> small_thumb;
-        std::string_view url_thumb;
-        std::span<const std::uint8_t> thumb;
-        std::string_view url_tiny_thumb;
-        std::span<const std::uint8_t> tiny_thumb;
+      std::optional<std::string_view> mime;
+      std::optional<std::string_view> name;
+      std::string_view url_original;
+      std::span<const std::uint8_t> original;
+      std::optional<std::string_view> url_small_thumb;
+      std::optional<std::span<const std::uint8_t>> small_thumb;
+      std::optional<std::string_view> url_thumb;
+      std::span<const std::uint8_t> thumb;
+      std::optional<std::string_view> url_tiny_thumb;
+      std::optional<std::span<const std::uint8_t>> tiny_thumb;
     };
 
     struct additional_name
@@ -51,15 +51,58 @@ export namespace vocadb
     struct web_link
     {
         std::string_view category;
-        std::string_view description;
-        std::string_view url;
+        std::optional<std::string_view> description;
+        std::optional<std::string_view> url;
         std::uint64_t id;
     };
 
+  struct artist_t
+  {
+    std::optional<std::string_view> additional_names;
+    std::string_view artist_type;
+    std::optional<bool> deleted;
+    std::uint64_t id;
+    std::optional<std::string_view> name;
+    std::optional<std::string_view> picture_mime;
+    std::optional<std::chrono::year_month_day> release_date;
+    std::string_view status;
+    std::uint64_t version;
+  };
+
+  struct song_artists
+  {
+    std::optional<artist_t> artist;
+    std::string_view categories;
+    std::string_view effective_roles;
+    std::uint64_t id;
+    bool is_custom_name;
+    bool is_support;
+    std::optional<std::string_view> name;
+    std::string_view roles;
+  };
+  
+  struct song_pv
+  {
+    std::optional<std::string_view> author;
+    std::optional<std::uint64_t> created_by;
+    bool disabled;
+    std::optional<std::string_view> extended_metadata_json;
+    std::uint64_t id;
+    std::uint64_t length;
+    std::optional<std::string_view> name;
+    std::optional<std::chrono::year_month_day> publish_date;
+    std::optional<std::string_view> pv_id;
+    std::string_view service;
+    std::string_view pv_type;
+    std::optional<std::string_view> thumb_url;
+    std::optional<std::string_view> url;
+  };
+  
+  
     struct release_event
     {
         // AdditionalNames
-        std::string_view additional_names;
+        std::optional<std::string_view> additional_names;
         std::string_view category;
         std::chrono::year_month_day date;
         // Description
@@ -67,7 +110,7 @@ export namespace vocadb
         std::optional<std::chrono::year_month_day> end_date;
         std::uint64_t id;
         // Main Picture
-        release_event_picture picture;
+        picture main_picture;
         std::string_view name;
         // Names
         std::span<const additional_name> names;
@@ -91,4 +134,40 @@ export namespace vocadb
         std::span<const web_link> web_links;
     };
 
+  struct song
+  {
+    std::optional<std::string_view> additional_names;
+    // albums (skip)
+    std::span<const song_artists> artists;
+    std::string_view artist_string;
+    std::optional<std::chrono::year_month_day> create_date;
+    std::string_view default_name;
+    std::string_view default_name_language;
+    std::optional<bool> deleted;
+    std::uint64_t favorited_times;
+    std::uint64_t id;
+    std::chrono::seconds length;
+    // lyrics (skip)
+    picture main_picture;
+    std::optional<std::uint64_t> max_milli_bpm;
+    std::optional<std::uint64_t> merged_to;
+    std::optional<std::uint64_t> min_milli_bpm;
+    std::string_view name;
+    std::span<const additional_name> names;
+    std::optional<std::uint64_t> original_version_id;
+    std::optional<std::chrono::year_month_day> publish_date;
+    std::optional<std::span<const song_pv>> pvs;
+    std::string_view pv_services;
+    std::uint64_t rating_score;
+    // release_event (skip)
+    // release_events (skip)
+    std::string_view song_type;
+    std::string_view status;
+    // tags (skip)
+    std::string_view thumb_url;
+    std::uint64_t version;
+    std::span<const web_link> web_links;
+    std::span<const std::string_view> culture_codes;
+  };
+  
 } // namespace vocadb

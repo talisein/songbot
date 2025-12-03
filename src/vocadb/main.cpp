@@ -25,7 +25,7 @@ int main(int argc, char *argv[])
 {
     scraper scraper { RES_DIR } ;
     const std::filesystem::path gen_dir { GEN_DIR };
-    auto res = scraper.scrape_events(gen_dir / "release_events.cppm");
-
+    //    auto res = scraper.scrape_events(gen_dir / "release_events.cppm");
+    auto res = scraper.scrape_songs(gen_dir / "vocadb_songs.cppm");
     return 0;
 }
