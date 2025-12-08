@@ -64,11 +64,25 @@ private:
     std::expected<void, std::error_code> write_event_anonymous(const nlohmann::json& event,  std::ostream& stream);
     std::expected<cpr::Response, std::error_code> get(const cpr::Url& url, const cpr::Parameters& params = {});
     std::expected<cpr::Response, std::error_code> download(const cpr::Url& url, std::ofstream& os, const cpr::Parameters& params = {});
-  std::expected<void, std::error_code> write_pictures(std::ostream& os,
-						      const nlohmann::json& pic,
-						      const std::string_view id_namespace,
-						      std::uint64_t id);
+    std::expected<void, std::error_code> write_pictures(std::ostream& os,
+                                                        const nlohmann::json& pic,
+                                                        const std::string_view id_namespace,
+                                                        std::uint64_t id);
 
-  std::expected<std::vector<std::optional<std::string>>, std::error_code> fetch_event_embeds(const nlohmann::json& event, const std::string_view id_namespace, std::uint64_t id);
+    struct fetched_pic
+    {
+    public:
+        fetched_pic(const std::filesystem::path& res_dir, std::string_view filename);
+        std::string embed_filename;
+        std::string mime_type;
+        std::string file_ext;
+    };
+
+    std::expected<std::vector<std::optional<fetched_pic>>,
+                  std::error_code>
+    fetch_picture_embeds(const nlohmann::json& pictures,
+                         const std::string_view id_namespace,
+                         std::uint64_t id);
+
     std::chrono::milliseconds get_request_delay();
 };

@@ -19,6 +19,7 @@
 module;
 
 #include <cassert>
+#include <cerrno>
 
 export module util;
 
@@ -61,6 +62,21 @@ namespace {
 
 export namespace util
 {
+    std::error_code iostate_to_error_code(std::ios_base::iostate state) {
+        if (state & std::ios_base::badbit) {
+            return std::make_error_code(std::io_errc::stream);
+        }
+
+        if (state & std::ios_base::failbit) {
+            return std::make_error_code(std::errc::io_error);
+        }
+
+        if (state & std::ios_base::eofbit) {
+            return std::make_error_code(std::errc::no_message);
+        }
+
+        return {};
+    }
 
     template <typename Confirmation, typename Context>
     std::expected<void, std::error_code>

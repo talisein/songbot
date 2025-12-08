@@ -84,7 +84,7 @@ if get_option('build_anidb_sourcegen')
         '-c', '@INPUT@',
         '-o', '@OUTPUT0@',
     ],
-    depends: [std_module]
+    depends: [std_module, util_module]
   )
 
   scraper_conf_data = configuration_data()

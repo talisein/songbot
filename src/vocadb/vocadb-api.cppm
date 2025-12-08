@@ -32,14 +32,22 @@ export namespace vocadb
     {
       std::optional<std::string_view> mime;
       std::optional<std::string_view> name;
-      std::string_view url_original;
-      std::span<const std::uint8_t> original;
+      std::optional<std::string_view> url_original;
+      std::optional<std::span<const std::uint8_t>> original;
+      std::string_view original_mime_type;
+      std::string_view original_file_ext;
       std::optional<std::string_view> url_small_thumb;
       std::optional<std::span<const std::uint8_t>> small_thumb;
+      std::string_view small_thumb_mime_type;
+      std::string_view small_thumb_file_ext;
       std::optional<std::string_view> url_thumb;
-      std::span<const std::uint8_t> thumb;
+      std::optional<std::span<const std::uint8_t>> thumb;
+      std::string_view thumb_mime_type;
+      std::string_view thumb_file_ext;
       std::optional<std::string_view> url_tiny_thumb;
       std::optional<std::span<const std::uint8_t>> tiny_thumb;
+      std::string_view tiny_thumb_mime_type;
+      std::string_view tiny_thumb_file_ext;
     };
 
     struct additional_name
@@ -80,7 +88,7 @@ export namespace vocadb
     std::optional<std::string_view> name;
     std::string_view roles;
   };
-  
+
   struct song_pv
   {
     std::optional<std::string_view> author;
@@ -97,8 +105,8 @@ export namespace vocadb
     std::optional<std::string_view> thumb_url;
     std::optional<std::string_view> url;
   };
-  
-  
+
+
     struct release_event
     {
         // AdditionalNames
@@ -169,5 +177,5 @@ export namespace vocadb
     std::span<const web_link> web_links;
     std::span<const std::string_view> culture_codes;
   };
-  
+
 } // namespace vocadb

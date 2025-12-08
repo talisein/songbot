@@ -20,6 +20,7 @@ import concerts;
 import songs;
 import songbot.errors;
 import vocadb.api;
+import magic;
 
 #include "scraper.hpp"
 
@@ -326,27 +327,42 @@ using namespace std::literals;
     }
 
     [[nodiscard]]
-    cpr::Url
-    sanitize_url(std::string_view sv) noexcept
+    std::expected<cpr::Url, std::error_code>
+    sanitize_url(std::string url) noexcept
     {
-        return cpr::Url{sv.substr(0, sv.find_last_of('?'))};
+        std::unique_ptr<CURLU, decltype([](CURLU *h) static { if (h) curl_url_cleanup(h); })> curlu_p { curl_url() };
+        auto rc = curl_url_set(curlu_p.get(), CURLUPART_URL, url.c_str(), 0);
+        if (CURLUE_OK != rc) return std::unexpected(std::make_error_code(rc));
+        std::unique_ptr<char, decltype([](char *s) static { if (s) curl_free(s); })> scheme;
+        std::unique_ptr<char, decltype([](char *s) static { if (s) curl_free(s); })> host;
+        std::unique_ptr<char, decltype([](char *s) static { if (s) curl_free(s); })> path;
+        rc = curl_url_get(curlu_p.get(), CURLUPART_SCHEME, std::out_ptr(scheme), cpr::FLAG_DEFAULT_SCHEME);
+        if (CURLUE_OK != rc) return std::unexpected(std::make_error_code(rc));
+        rc = curl_url_get(curlu_p.get(), CURLUPART_HOST, std::out_ptr(host), cpr::FLAG_PUNYCODE);
+        if (CURLUE_OK != rc) return std::unexpected(std::make_error_code(rc));
+        rc = curl_url_get(curlu_p.get(), CURLUPART_PATH, std::out_ptr(path), 0);
+        if (CURLUE_OK != rc) return std::unexpected(std::make_error_code(rc));
+
+        return cpr::Url{std::format("{}://{}{}", scheme.get(), host.get(), path.get())};
     }
 
     struct {
         std::string_view key;
-      std::format_string<const std::string_view&, const std::uint64_t&, const std::string_view&> filename_format;
-      std::format_string<const std::string_view&, const std::uint64_t&> variable_format;
+        std::format_string<const std::string_view&, const std::uint64_t&> filename_format; // no extension
+        std::format_string<const std::string_view&, const std::uint64_t&> filename_variable_format;
+        std::format_string<const std::string_view&, const std::uint64_t&> mime_variable_format;
+        std::format_string<const std::string_view&, const std::uint64_t&> file_ext_variable_format;
     } constexpr pic_key_filename_map[] = {
-        { "urlOriginal",   "{}_pic_orig_{}.{}", "{}_pic_orig_{}" },
-        { "urlSmallThumb", "{}_pic_small_thumb_{}.{}", "{}_pic_small_thumb_{}" },
-        { "urlThumb",      "{}_pic_thumb_{}.{}", "{}_pic_thumb_{}" },
-        { "urlTinyThumb",  "{}_pic_tiny_thumb_{}.{}", "{}_pic_tiny_thumb_{}" },
+      { "urlOriginal",   "{}_pic_orig_{}", "{}_pic_orig_{}", "{}_mime_type_orig_{}", "{}_file_ext_orig_{}" },
+        { "urlSmallThumb", "{}_pic_small_thumb_{}", "{}_pic_small_thumb_{}", "{}_mime_type_small_thumb_{}", "{}_file_ext_small_thumb_{}" },
+        { "urlThumb",      "{}_pic_thumb_{}", "{}_pic_thumb_{}", "{}_mime_type_thumb_{}", "{}_file_ext_thumb_{}" },
+        { "urlTinyThumb",  "{}_pic_tiny_thumb_{}", "{}_pic_tiny_thumb_{}", "{}_mime_type_tiny_thumb_{}", "{}_file_ext_tiny_thumb_{}" },
     };
 
     constexpr double target_mean_delay_sec = 5.0;
     constexpr double shape_k = 5.0;
     constexpr double scale_beta = target_mean_delay_sec / shape_k;
-  
+
 } // anonymous namespace
 
 scraper::scraper(std::filesystem::path res_dir) noexcept :
@@ -366,11 +382,11 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
     vec.reserve(concerts.size());
 
     // sample for testing
-    //    auto gen = std::mt19937{std::random_device{}()};
-    //    std::vector<Song> sampled_songs;
-    //    std::ranges::sample(songs, std::back_inserter(sampled_songs), 20, gen);
-    
-    for (auto song : std::views::all(songs)
+        auto gen = std::mt19937{std::random_device{}()};
+        std::vector<Song> sampled_songs;
+        std::ranges::sample(songs, std::back_inserter(sampled_songs), 5, gen);
+
+    for (auto song : std::views::all(sampled_songs)
              | std::views::filter([](const auto& s) { return s.vocadb_id.has_value(); })
         )
     {
@@ -391,7 +407,7 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
     for (const auto& s : vec) {
         write_song_anonymous(s, full_file);
     }
-    
+
     // now write the final array
     std::println(full_file, "export constexpr std::array<song, {}> songs {{{{", vec.size());
     for (const auto& s : vec) {
@@ -439,7 +455,7 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
     file << full_file.view();
     file.flush();
     file.close();
-    
+
     return {};
 }
 
@@ -560,42 +576,63 @@ scraper::write_pictures(std::ostream& os,
 			const std::string_view id_namespace,
 			const std::uint64_t id)
 {
-  auto picture_embeds = fetch_event_embeds(pic, id_namespace, id);
+  auto picture_embeds = fetch_picture_embeds(pic, id_namespace, id);
   if (!picture_embeds) return std::unexpected(picture_embeds.error());
-  for (const auto& [opt_filename, map] : std::views::zip(std::views::all(picture_embeds.value()),
+  for (const auto& [embed_fileinfo, map] : std::views::zip(std::views::all(picture_embeds.value()),
 							 std::views::all(pic_key_filename_map)))
     {
-      std::string variable_name = std::format(map.variable_format, id_namespace, id);
-      if (opt_filename) {
+      const auto filename_variable_name = std::format(map.filename_variable_format, id_namespace, id);
+      const auto mime_variable_name     = std::format(map.mime_variable_format,     id_namespace, id);
+      const auto ext_variable_name      = std::format(map.file_ext_variable_format, id_namespace, id);
+      if (embed_fileinfo) {
 	std::println(os, R"(
 #if __has_embed("{}") == __STDC_EMBED_FOUND__
 constexpr std::array {} = std::to_array<std::uint8_t>({{
     #embed "{}"
 }});
+constexpr std::string_view {} = "{}";
+constexpr std::string_view {} = "{}";
 #else
 constexpr std::array<std::uint8_t, 0> {};
+constexpr std::string_view {} = "inode/x-empty";
+constexpr std::string_view {};
 #endif
 )",
-		     *opt_filename, variable_name, *opt_filename, variable_name);
+                 embed_fileinfo->embed_filename, filename_variable_name, embed_fileinfo->embed_filename,
+                 mime_variable_name, embed_fileinfo->mime_type,
+                 ext_variable_name, embed_fileinfo->file_ext,
+                 filename_variable_name, mime_variable_name, ext_variable_name);
       } else {
-	std::println(os, "constexpr std::array<std::uint8_t, 0> {};\n", variable_name);
+	std::println(os, R"(constexpr std::array<std::uint8_t, 0> {};
+constexpr std::string_view {} = "inode/x-empty";
+constexpr std::string_view {};
+)", filename_variable_name, mime_variable_name, ext_variable_name);
       }
     }
 
-  std::println(os, R"(constexpr picture picture_{0}_{1} = {{ {2}, {3}, {4}, {5}, {6}, {7}, {8}, {9}, {10}, {11}  }};
+  std::println(os, R"(constexpr picture picture_{0}_{1} = {{ {2}, {3}, {4}, {5}, {12}, {13}, {6}, {7}, {14}, {15}, {8}, {9}, {16}, {17}, {10}, {11}, {18}, {19}  }};
 )",
-	       /*0*/id_namespace,
-	       /*1*/id,		     
-	       /*2 mime*/as_opt(pic, "mime"),
-	       /*3 name*/as_opt(pic, "name"),
-	       /*4 url_orig*/as_opt(pic, pic_key_filename_map[0].key),
-	       /*5 orig */std::format(pic_key_filename_map[0].variable_format, id_namespace, id),
-	       /*6 url_small*/as_opt(pic, pic_key_filename_map[1].key),
-	       /*7 small*/std::format(pic_key_filename_map[1].variable_format, id_namespace, id),
-	       /*8 url_thumb */as_opt(pic, pic_key_filename_map[2].key),
-	       /*9 thumb*/std::format(pic_key_filename_map[2].variable_format, id_namespace, id),
-	       /*10 url tiny_thumb */as_opt(pic, pic_key_filename_map[3].key),
-	       /*11 tiny_thumb*/std::format(pic_key_filename_map[3].variable_format, id_namespace, id));
+               /*0*/id_namespace,
+               /*1*/id,
+               /*2 mime*/as_opt(pic, "mime"),
+               /*3 name*/as_opt(pic, "name"),
+               /*4 url_orig*/as_opt(pic, pic_key_filename_map[0].key),
+               /*5 orig */std::format(pic_key_filename_map[0].filename_variable_format, id_namespace, id),
+               /*6 url_small*/as_opt(pic, pic_key_filename_map[1].key),
+               /*7 small*/std::format(pic_key_filename_map[1].filename_variable_format, id_namespace, id),
+               /*8 url_thumb */as_opt(pic, pic_key_filename_map[2].key),
+               /*9 thumb*/std::format(pic_key_filename_map[2].filename_variable_format, id_namespace, id),
+               /*10 url tiny_thumb */as_opt(pic, pic_key_filename_map[3].key),
+               /*11 tiny_thumb*/std::format(pic_key_filename_map[3].filename_variable_format, id_namespace, id),
+               /*12*/std::format(pic_key_filename_map[0].mime_variable_format, id_namespace, id),
+               /*13*/std::format(pic_key_filename_map[0].file_ext_variable_format, id_namespace, id),
+               /*14*/std::format(pic_key_filename_map[1].mime_variable_format, id_namespace, id),
+               /*15*/std::format(pic_key_filename_map[1].file_ext_variable_format, id_namespace, id),
+               /*16*/std::format(pic_key_filename_map[2].mime_variable_format, id_namespace, id),
+               /*17*/std::format(pic_key_filename_map[2].file_ext_variable_format, id_namespace, id),
+               /*18*/std::format(pic_key_filename_map[3].mime_variable_format, id_namespace, id),
+               /*19*/std::format(pic_key_filename_map[3].file_ext_variable_format, id_namespace, id)
+    );
 
   return {};
 }
@@ -702,7 +739,7 @@ write_culture_codes(std::ostream& os,
   }
   std::println(os, "}}}};\n");
 }
-  
+
 std::expected<void, std::error_code>
 scraper::write_song_anonymous(const json& song,  std::ostream& full_file)
 {
@@ -717,7 +754,7 @@ scraper::write_song_anonymous(const json& song,  std::ostream& full_file)
 			     this_id_namespace,
 			     this_id);
     }
-    
+
     if (song.contains("webLinks")) {
       write_web_links(full_file,
 		      song["webLinks"],
@@ -753,7 +790,7 @@ scraper::write_song_anonymous(const json& song,  std::ostream& full_file)
 		this_id_namespace,
 		this_id);
     }
-    
+
     std::println(full_file, R"(/* End Song {}: {} */
 )", this_id, song["name"].get<std::string_view>());
     return {};
@@ -765,7 +802,7 @@ scraper::write_event_anonymous(const json& event,  std::ostream& full_file)
 {
     const auto this_id = event["id"].get<std::uint64_t>();
     const std::string_view this_id_namespace {"release_event"};
-    
+
     if (event.contains("names")) {
       write_additional_names(full_file,
 			     event["names"],
@@ -790,91 +827,106 @@ scraper::write_event_anonymous(const json& event,  std::ostream& full_file)
     return {};
 }
 
-std::string
-get_suffix_from_url(const std::string& url)
+scraper::fetched_pic::fetched_pic(const std::filesystem::path& res_dir, std::string_view filename) :
+  embed_filename(filename)
 {
-  std::string res { "jpg" };
-  std::unique_ptr<CURLU, decltype([](CURLU *h) static { if (h) curl_url_cleanup(h); })> curlu_p { curl_url() };
-  auto rc = curl_url_set(curlu_p.get(), CURLUPART_URL, url.c_str(), 0);
-  if (CURLUE_OK != rc) return res;
-  std::unique_ptr<char, decltype([](char *s) static { if (s) curl_free(s); })> buf { nullptr };
-  rc = curl_url_get(curlu_p.get(), CURLUPART_PATH, std::out_ptr(buf), cpr::URLDECODE);
-  if (CURLUE_OK != rc) return res;
-  std::string_view path_sv { buf.get() };
-  std::filesystem::path path { path_sv };
-  //meow
-  //MEOW
-  
-  return res;
-}
+  const auto path = res_dir / embed_filename;
 
-std::expected<std::vector<std::optional<std::string>>, std::error_code>
-scraper::fetch_event_embeds(const json& pics,
-			    const std::string_view id_namespace,
-			    const std::uint64_t id)
-{
-  if (!pics.contains("urlOriginal")) return {};
-  const auto url_orig = pics["urlOriginal"].get<std::string_view>();
-  
-  const auto suffix_pos = url_orig.find_last_of('.');
-  const auto suffix = url_orig.substr(suffix_pos + 1);
-  std::vector<std::optional<std::string>> downloaded_filenames;
-
-  for (const auto& pic : pic_key_filename_map) {
-    if (pics.contains(pic.key)) {
-      cpr::Url url { sanitize_url(pics[pic.key].template get<std::string>()) };
-      const auto filename = std::format(pic.filename_format, id_namespace, id, suffix);
-      const auto path = res_dir / filename;
-      const auto tmppath = std::filesystem::path{path}.replace_extension(std::format("{}.tmp", path.extension().string()));
-      const auto last_modified = std::chrono::clock_cast<std::chrono::system_clock>(std::filesystem::exists(path) ? std::filesystem::last_write_time(path) : std::filesystem::file_time_type::min());
-      if ((std::chrono::system_clock::now() - last_modified) < std::chrono::days{30}) {
-	downloaded_filenames.push_back(filename);
-	continue;
-      }
-      const auto zt = std::chrono::zoned_time{"UTC", last_modified};
-      cpr::Header hdrs {{ "If-Modified-Since", std::format("{:%a, %d %b %Y %H:%M:%S} GMT", zt) }};
-      session.SetHeader(hdrs);
-      std::ofstream ofs {tmppath, std::ios::binary | std::ios::out };
-      auto res = download(url, ofs);
-      if (!res) {
-	if (res.error() == std::make_error_code(std::errc::no_such_file_or_directory)) {
-	  downloaded_filenames.push_back(std::nullopt);
-	  ofs.close();
-	  std::filesystem::remove(tmppath);
-	  if (std::filesystem::exists(path)) {
-	    if (0uz == std::filesystem::file_size(path)) {
-	      std::filesystem::last_write_time(path, std::chrono::clock_cast<std::chrono::file_clock>(std::chrono::system_clock::now()));
-	    } else {
-	      std::println("Info: {} was fetched before but returned 404 today", filename);
-	    }
-	  } else {
-	    std::ofstream emptyfile {path};
-	  }
-	  continue;
-	} else {
-	  return std::unexpected(res.error());
-	}
-      }
-      if (res->status_code == 304) {
-	std::println("Info: {} has no change", filename);
-	ofs.close();
-	std::filesystem::remove(tmppath);
-	std::filesystem::last_write_time(path, std::chrono::clock_cast<std::chrono::file_clock>(std::chrono::system_clock::now()));
-
-      } else {
-	ofs.flush();
-	ftruncate(ofs.rdbuf()->native_handle(), ofs.tellp());
-	std::println("Info: {} written (tmp), size {}", filename, static_cast<std::streamoff>(ofs.tellp()));
-	ofs.close();
-	std::filesystem::rename(tmppath, path);
-      }
-      downloaded_filenames.push_back(filename);
-    } else {
-      downloaded_filenames.push_back(std::nullopt);
+  if (auto mime = magic::get_mime(path); mime) {
+    mime_type = mime.value();
+  } else {
+    try {
+      std::rethrow_exception(mime.error());
+    } catch (const std::exception& e) {
+      std::println(std::cerr, "Error: Unable to determine mime type for {}: {}", path.native(), e.what());
     }
+    mime_type = "image/jpeg";
   }
 
-  return downloaded_filenames;
+  if (auto ext = magic::get_ext(path); ext) {
+    file_ext = ext.value();
+  } else {
+    try {
+      std::rethrow_exception(ext.error());
+    } catch (const std::exception& e) {
+      std::println(std::cerr, "Error: Unable to determine extension for {}: {}", path.native(), e.what());
+    }
+    file_ext = "jpg";
+  }
+}
+
+std::expected<std::vector<std::optional<scraper::fetched_pic>>, std::error_code>
+scraper::fetch_picture_embeds(const json& pictures,
+                              const std::string_view id_namespace,
+                              const std::uint64_t id)
+{
+    std::vector<std::optional<scraper::fetched_pic>> downloaded_filenames;
+    for (const auto& pic : pic_key_filename_map) {
+        if (!pictures.contains(pic.key)) {
+            downloaded_filenames.push_back(std::nullopt);
+            continue;
+        }
+        const auto picture_url = pictures[pic.key].template get<std::string>();
+        auto e_url = sanitize_url(picture_url);
+        if (!e_url) {
+          std::println(std::cerr, "Error: Failed to sanitize url {}: {}", picture_url, e_url.error().message());
+          downloaded_filenames.push_back(std::nullopt);
+          continue;
+        }
+        const auto filename_noext = std::format(pic.filename_format, id_namespace, id);
+        const auto path = res_dir / filename_noext;
+        const auto tmppath = std::filesystem::path{path}.replace_extension(".tmp");
+        const auto now = std::chrono::system_clock::now();
+        const auto last_modified = std::chrono::clock_cast<std::chrono::system_clock>(std::filesystem::exists(path) ? std::filesystem::last_write_time(path) : std::filesystem::file_time_type::min());
+        if ((now - last_modified) < std::chrono::days{30}) {
+          downloaded_filenames.emplace_back(std::in_place, res_dir, filename_noext);
+          continue;
+        }
+        cpr::set_ifmodsince(session, last_modified);
+        std::ofstream ofs {tmppath, std::ios::binary | std::ios::out | std::ios::trunc };
+        if (!ofs) {
+          std::println(std::cerr, "Error: Failed to open {}", tmppath.native());
+          downloaded_filenames.push_back(std::nullopt);
+          continue;
+        }
+        auto res = download(e_url.value(), ofs);
+        if (!res) {
+          if (res.error() == std::make_error_code(std::errc::no_such_file_or_directory)) {
+            downloaded_filenames.push_back(std::nullopt);
+            ofs.close();
+            std::filesystem::remove(tmppath);
+            if (std::filesystem::exists(path)) {
+              if (0uz == std::filesystem::file_size(path)) {
+                std::filesystem::last_write_time(path, std::chrono::clock_cast<std::chrono::file_clock>(now));
+              } else {
+                std::println("Info: {} was fetched before but returned 404 today", filename_noext);
+              }
+            } else {
+              std::ofstream emptyfile {path};
+            }
+            continue;
+          } else {
+            std::println(std::cerr, "Error: Failed to download {}: {}", picture_url, res.error().message());
+            downloaded_filenames.push_back(std::nullopt);
+            continue;
+          }
+        }
+
+        if (res->status_code == 304) {
+          std::println("Info: {} has no change", filename_noext);
+          ofs.close();
+          std::filesystem::remove(tmppath);
+          std::filesystem::last_write_time(path, std::chrono::clock_cast<std::chrono::file_clock>(now));
+        } else {
+          ofs.flush();
+          std::println("Info: {} written (tmp), size {}", filename_noext, static_cast<std::streamoff>(ofs.tellp()));
+          ofs.close();
+          std::filesystem::rename(tmppath, path);
+        }
+        downloaded_filenames.emplace_back(std::in_place, res_dir, filename_noext);
+    }
+
+    return downloaded_filenames;
 }
 
 std::expected<cpr::Response, std::error_code>

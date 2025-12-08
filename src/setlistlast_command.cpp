@@ -215,11 +215,18 @@ namespace {
                 return event.id == id;
             });
             if (it != std::ranges::end(vocadb::events) &&
-                it->main_picture.original.size() > 0)
+                it->main_picture.original &&
+                it->main_picture.original->size() > 0)
             {
-                std::string_view data{reinterpret_cast<const char *>(it->main_picture.original.data()), it->main_picture.original.size_bytes()};
-                message.add_file("thumb.jpg", data, it->main_picture.mime.value());
-                section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail("attachment://thumb.jpg"));
+                using namespace std::literals;
+                std::string_view data{reinterpret_cast<const char *>(it->main_picture.original->data()), it->main_picture.original->size_bytes()};
+                std::string filename = std::format("{}.{}", it->id, it->main_picture.original_file_ext.size() > 0 ? it->main_picture.original_file_ext : "jpg"sv);
+                auto mime = it->main_picture.original_mime_type;
+                if (mime.size() == 0 && it->main_picture.mime) {
+                    mime = it->main_picture.mime.value();
+                }
+                message.add_file(filename, data, mime);
+                section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail(std::format("attachment://{}", filename)));
             }
         }
 

@@ -87,7 +87,7 @@ constexpr std::array event_pic_tiny_thumb_2522 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2522;
 #endif
 
-constexpr picture event_picture_2522 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2522.jpg?v=8)XYX"sv, event_pic_orig_2522, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2522.jpg?v=8)XYX"sv, event_pic_small_thumb_2522, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2522.jpg?v=8)XYX"sv, event_pic_thumb_2522, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2522.jpg?v=8)XYX"sv, event_pic_tiny_thumb_2522  };
+    constexpr picture event_picture_2522 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2522.jpg?v=8)XYX"sv, event_pic_orig_2522, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2522.jpg?v=8)XYX"sv, event_pic_small_thumb_2522, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2522.jpg?v=8)XYX"sv, event_pic_thumb_2522, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2522.jpg?v=8)XYX"sv, event_pic_tiny_thumb_2522, "", ""};
 
 /* Miku no Hi Kanshasai 39's Giving Day */
 constexpr std::array<additional_name, 2> names_2520 {{
@@ -139,7 +139,7 @@ constexpr std::array event_pic_tiny_thumb_2520 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2520;
 #endif
 
-constexpr picture event_picture_2520 = { "image/gif", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2520.gif?v=8)XYX"sv, event_pic_orig_2520, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2520.gif?v=8)XYX"sv, event_pic_small_thumb_2520, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2520.gif?v=8)XYX"sv, event_pic_thumb_2520, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2520.gif?v=8)XYX"sv, event_pic_tiny_thumb_2520  };
+    constexpr picture event_picture_2520 = { "image/gif", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2520.gif?v=8)XYX"sv, event_pic_orig_2520, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2520.gif?v=8)XYX"sv, event_pic_small_thumb_2520, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2520.gif?v=8)XYX"sv, event_pic_thumb_2520, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2520.gif?v=8)XYX"sv, event_pic_tiny_thumb_2520, "", ""};
 
 /* Hatsune Miku Live Party 2011 Tokyo */
 constexpr std::array<additional_name, 4> names_2523 {{
@@ -194,7 +194,7 @@ constexpr std::array event_pic_tiny_thumb_2523 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2523;
 #endif
 
-constexpr picture event_picture_2523 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2523.png?v=12)XYX"sv, event_pic_orig_2523, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2523.png?v=12)XYX"sv, event_pic_small_thumb_2523, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2523.png?v=12)XYX"sv, event_pic_thumb_2523, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2523.png?v=12)XYX"sv, event_pic_tiny_thumb_2523  };
+    constexpr picture event_picture_2523 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2523.png?v=12)XYX"sv, event_pic_orig_2523, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2523.png?v=12)XYX"sv, event_pic_small_thumb_2523, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2523.png?v=12)XYX"sv, event_pic_thumb_2523, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2523.png?v=12)XYX"sv, event_pic_tiny_thumb_2523, "", ""};
 
 /* MIKUNOPOLIS in LOS ANGELES “Happy to meet you, I'm HATSUNE MIKU” */
 constexpr std::array<additional_name, 4> names_2521 {{
@@ -247,7 +247,7 @@ constexpr std::array event_pic_tiny_thumb_2521 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2521;
 #endif
 
-constexpr picture event_picture_2521 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2521.png?v=6)XYX"sv, event_pic_orig_2521, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2521.png?v=6)XYX"sv, event_pic_small_thumb_2521, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2521.png?v=6)XYX"sv, event_pic_thumb_2521, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2521.png?v=6)XYX"sv, event_pic_tiny_thumb_2521  };
+    constexpr picture event_picture_2521 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2521.png?v=6)XYX"sv, event_pic_orig_2521, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2521.png?v=6)XYX"sv, event_pic_small_thumb_2521, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2521.png?v=6)XYX"sv, event_pic_thumb_2521, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2521.png?v=6)XYX"sv, event_pic_tiny_thumb_2521, "", ""};
 
 /* Hatsune Miku Live Party 2011 Sapporo */
 constexpr std::array<additional_name, 4> names_2526 {{
@@ -302,7 +302,7 @@ constexpr std::array event_pic_tiny_thumb_2526 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2526;
 #endif
 
-constexpr picture event_picture_2526 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2526.png?v=8)XYX"sv, event_pic_orig_2526, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2526.png?v=8)XYX"sv, event_pic_small_thumb_2526, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2526.png?v=8)XYX"sv, event_pic_thumb_2526, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2526.png?v=8)XYX"sv, event_pic_tiny_thumb_2526  };
+    constexpr picture event_picture_2526 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2526.png?v=8)XYX"sv, event_pic_orig_2526, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2526.png?v=8)XYX"sv, event_pic_small_thumb_2526, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2526.png?v=8)XYX"sv, event_pic_thumb_2526, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2526.png?v=8)XYX"sv, event_pic_tiny_thumb_2526, "", ""};
 
 /* Hatsune Miku Live Party 2011 Singapore */
 constexpr std::array<additional_name, 4> names_2527 {{
@@ -357,7 +357,7 @@ constexpr std::array event_pic_tiny_thumb_2527 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2527;
 #endif
 
-constexpr picture event_picture_2527 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2527.png?v=5)XYX"sv, event_pic_orig_2527, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2527.png?v=5)XYX"sv, event_pic_small_thumb_2527, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2527.png?v=5)XYX"sv, event_pic_thumb_2527, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2527.png?v=5)XYX"sv, event_pic_tiny_thumb_2527  };
+    constexpr picture event_picture_2527 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2527.png?v=5)XYX"sv, event_pic_orig_2527, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2527.png?v=5)XYX"sv, event_pic_small_thumb_2527, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2527.png?v=5)XYX"sv, event_pic_thumb_2527, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2527.png?v=5)XYX"sv, event_pic_tiny_thumb_2527, "", ""};
 
 /* Hatsune Miku Live Party 2012 Tokyo */
 constexpr std::array<additional_name, 4> names_4056 {{
@@ -413,7 +413,7 @@ constexpr std::array event_pic_tiny_thumb_4056 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_4056;
 #endif
 
-constexpr picture event_picture_4056 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4056.png?v=10)XYX"sv, event_pic_orig_4056, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4056.png?v=10)XYX"sv, event_pic_small_thumb_4056, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4056.png?v=10)XYX"sv, event_pic_thumb_4056, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4056.png?v=10)XYX"sv, event_pic_tiny_thumb_4056  };
+    constexpr picture event_picture_4056 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4056.png?v=10)XYX"sv, event_pic_orig_4056, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4056.png?v=10)XYX"sv, event_pic_small_thumb_4056, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4056.png?v=10)XYX"sv, event_pic_thumb_4056, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4056.png?v=10)XYX"sv, event_pic_tiny_thumb_4056, "", ""};
 
 /* Miku's Big Thanksgiving Day - Special 39's Production 2012 */
 constexpr std::array<additional_name, 3> names_1413 {{
@@ -467,7 +467,7 @@ constexpr std::array event_pic_tiny_thumb_1413 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1413;
 #endif
 
-constexpr picture event_picture_1413 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1413.jpg?v=12)XYX"sv, event_pic_orig_1413, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1413.jpg?v=12)XYX"sv, event_pic_small_thumb_1413, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1413.jpg?v=12)XYX"sv, event_pic_thumb_1413, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1413.jpg?v=12)XYX"sv, event_pic_tiny_thumb_1413  };
+    constexpr picture event_picture_1413 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1413.jpg?v=12)XYX"sv, event_pic_orig_1413, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1413.jpg?v=12)XYX"sv, event_pic_small_thumb_1413, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1413.jpg?v=12)XYX"sv, event_pic_thumb_1413, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1413.jpg?v=12)XYX"sv, event_pic_tiny_thumb_1413, "", ""};
 
 /* Hatsune Miku Live Party 2012 Hong Kong */
 constexpr std::array<additional_name, 4> names_2524 {{
@@ -522,7 +522,7 @@ constexpr std::array event_pic_tiny_thumb_2524 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2524;
 #endif
 
-constexpr picture event_picture_2524 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2524.jpg?v=6)XYX"sv, event_pic_orig_2524, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2524.jpg?v=6)XYX"sv, event_pic_small_thumb_2524, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2524.jpg?v=6)XYX"sv, event_pic_thumb_2524, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2524.jpg?v=6)XYX"sv, event_pic_tiny_thumb_2524  };
+    constexpr picture event_picture_2524 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2524.jpg?v=6)XYX"sv, event_pic_orig_2524, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2524.jpg?v=6)XYX"sv, event_pic_small_thumb_2524, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2524.jpg?v=6)XYX"sv, event_pic_thumb_2524, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2524.jpg?v=6)XYX"sv, event_pic_tiny_thumb_2524, "", ""};
 
 /* Hatsune Miku Live Party 2013 Sapporo */
 constexpr std::array<additional_name, 4> names_2510 {{
@@ -577,7 +577,7 @@ constexpr std::array event_pic_tiny_thumb_2510 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2510;
 #endif
 
-constexpr picture event_picture_2510 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2510.jpg?v=9)XYX"sv, event_pic_orig_2510, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2510.jpg?v=9)XYX"sv, event_pic_small_thumb_2510, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2510.jpg?v=9)XYX"sv, event_pic_thumb_2510, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2510.jpg?v=9)XYX"sv, event_pic_tiny_thumb_2510  };
+    constexpr picture event_picture_2510 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2510.jpg?v=9)XYX"sv, event_pic_orig_2510, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2510.jpg?v=9)XYX"sv, event_pic_small_thumb_2510, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2510.jpg?v=9)XYX"sv, event_pic_thumb_2510, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2510.jpg?v=9)XYX"sv, event_pic_tiny_thumb_2510, "", ""};
 
 /* Hatsune Miku Live Party 2013 Kansai */
 constexpr std::array<additional_name, 4> names_2511 {{
@@ -631,7 +631,7 @@ constexpr std::array event_pic_tiny_thumb_2511 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2511;
 #endif
 
-constexpr picture event_picture_2511 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2511.jpg?v=10)XYX"sv, event_pic_orig_2511, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2511.jpg?v=10)XYX"sv, event_pic_small_thumb_2511, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2511.jpg?v=10)XYX"sv, event_pic_thumb_2511, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2511.jpg?v=10)XYX"sv, event_pic_tiny_thumb_2511  };
+    constexpr picture event_picture_2511 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2511.jpg?v=10)XYX"sv, event_pic_orig_2511, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2511.jpg?v=10)XYX"sv, event_pic_small_thumb_2511, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2511.jpg?v=10)XYX"sv, event_pic_thumb_2511, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2511.jpg?v=10)XYX"sv, event_pic_tiny_thumb_2511, "", ""};
 
 /* Hatsune Miku Magical Mirai 2013 */
 constexpr std::array<additional_name, 4> names_2519 {{
@@ -683,7 +683,7 @@ constexpr std::array event_pic_tiny_thumb_2519 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2519;
 #endif
 
-constexpr picture event_picture_2519 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2519.jpg?v=4)XYX"sv, event_pic_orig_2519, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2519.jpg?v=4)XYX"sv, event_pic_small_thumb_2519, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2519.jpg?v=4)XYX"sv, event_pic_thumb_2519, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2519.jpg?v=4)XYX"sv, event_pic_tiny_thumb_2519  };
+    constexpr picture event_picture_2519 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2519.jpg?v=4)XYX"sv, event_pic_orig_2519, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2519.jpg?v=4)XYX"sv, event_pic_small_thumb_2519, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2519.jpg?v=4)XYX"sv, event_pic_thumb_2519, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2519.jpg?v=4)XYX"sv, event_pic_tiny_thumb_2519, "", ""};
 
 /* Miku Expo 2014 Jakarta */
 constexpr std::array<additional_name, 2> names_1939 {{
@@ -738,7 +738,7 @@ constexpr std::array event_pic_tiny_thumb_1939 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1939;
 #endif
 
-constexpr picture event_picture_1939 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1939.png?v=10)XYX"sv, event_pic_orig_1939, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1939.png?v=10)XYX"sv, event_pic_small_thumb_1939, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1939.png?v=10)XYX"sv, event_pic_thumb_1939, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1939.png?v=10)XYX"sv, event_pic_tiny_thumb_1939  };
+    constexpr picture event_picture_1939 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1939.png?v=10)XYX"sv, event_pic_orig_1939, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1939.png?v=10)XYX"sv, event_pic_small_thumb_1939, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1939.png?v=10)XYX"sv, event_pic_thumb_1939, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1939.png?v=10)XYX"sv, event_pic_tiny_thumb_1939, "", ""};
 
 /* Hatsune Miku Magical Mirai 2014 in OSAKA */
 constexpr std::array<additional_name, 4> names_2517 {{
@@ -793,7 +793,7 @@ constexpr std::array event_pic_tiny_thumb_2517 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2517;
 #endif
 
-constexpr picture event_picture_2517 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2517.jpg?v=6)XYX"sv, event_pic_orig_2517, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2517.jpg?v=6)XYX"sv, event_pic_small_thumb_2517, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2517.jpg?v=6)XYX"sv, event_pic_thumb_2517, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2517.jpg?v=6)XYX"sv, event_pic_tiny_thumb_2517  };
+    constexpr picture event_picture_2517 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2517.jpg?v=6)XYX"sv, event_pic_orig_2517, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2517.jpg?v=6)XYX"sv, event_pic_small_thumb_2517, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2517.jpg?v=6)XYX"sv, event_pic_thumb_2517, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2517.jpg?v=6)XYX"sv, event_pic_tiny_thumb_2517, "", ""};
 
 /* Miku Expo 2014 Los Angeles */
 constexpr std::array<additional_name, 1> names_1937 {{
@@ -842,7 +842,7 @@ constexpr std::array event_pic_tiny_thumb_1937 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1937;
 #endif
 
-constexpr picture event_picture_1937 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1937.png?v=4)XYX"sv, event_pic_orig_1937, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1937.png?v=4)XYX"sv, event_pic_small_thumb_1937, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1937.png?v=4)XYX"sv, event_pic_thumb_1937, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1937.png?v=4)XYX"sv, event_pic_tiny_thumb_1937  };
+    constexpr picture event_picture_1937 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1937.png?v=4)XYX"sv, event_pic_orig_1937, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1937.png?v=4)XYX"sv, event_pic_small_thumb_1937, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1937.png?v=4)XYX"sv, event_pic_thumb_1937, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1937.png?v=4)XYX"sv, event_pic_tiny_thumb_1937, "", ""};
 
 /* SNOW MIKU LIVE! 2015 presents MIKU EXPO Live Set */
 constexpr std::array<additional_name, 1> names_3792 {{
@@ -892,7 +892,7 @@ constexpr std::array event_pic_tiny_thumb_3792 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_3792;
 #endif
 
-constexpr picture event_picture_3792 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3792.jpg?v=4)XYX"sv, event_pic_orig_3792, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3792.jpg?v=4)XYX"sv, event_pic_small_thumb_3792, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3792.jpg?v=4)XYX"sv, event_pic_thumb_3792, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3792.jpg?v=4)XYX"sv, event_pic_tiny_thumb_3792  };
+    constexpr picture event_picture_3792 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3792.jpg?v=4)XYX"sv, event_pic_orig_3792, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3792.jpg?v=4)XYX"sv, event_pic_small_thumb_3792, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3792.jpg?v=4)XYX"sv, event_pic_thumb_3792, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3792.jpg?v=4)XYX"sv, event_pic_tiny_thumb_3792, "", ""};
 
 /* Miku Expo 2015 Shanghai */
 constexpr std::array<additional_name, 1> names_1940 {{
@@ -941,7 +941,7 @@ constexpr std::array event_pic_tiny_thumb_1940 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1940;
 #endif
 
-constexpr picture event_picture_1940 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1940.png?v=3)XYX"sv, event_pic_orig_1940, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1940.png?v=3)XYX"sv, event_pic_small_thumb_1940, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1940.png?v=3)XYX"sv, event_pic_thumb_1940, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1940.png?v=3)XYX"sv, event_pic_tiny_thumb_1940  };
+    constexpr picture event_picture_1940 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1940.png?v=3)XYX"sv, event_pic_orig_1940, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1940.png?v=3)XYX"sv, event_pic_small_thumb_1940, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1940.png?v=3)XYX"sv, event_pic_thumb_1940, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1940.png?v=3)XYX"sv, event_pic_tiny_thumb_1940, "", ""};
 
 /* Hatsune Miku Magical Mirai 2015 */
 constexpr std::array<additional_name, 4> names_2514 {{
@@ -994,7 +994,7 @@ constexpr std::array event_pic_tiny_thumb_2514 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2514;
 #endif
 
-constexpr picture event_picture_2514 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2514.jpg?v=4)XYX"sv, event_pic_orig_2514, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2514.jpg?v=4)XYX"sv, event_pic_small_thumb_2514, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2514.jpg?v=4)XYX"sv, event_pic_thumb_2514, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2514.jpg?v=4)XYX"sv, event_pic_tiny_thumb_2514  };
+    constexpr picture event_picture_2514 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2514.jpg?v=4)XYX"sv, event_pic_orig_2514, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2514.jpg?v=4)XYX"sv, event_pic_small_thumb_2514, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2514.jpg?v=4)XYX"sv, event_pic_thumb_2514, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2514.jpg?v=4)XYX"sv, event_pic_tiny_thumb_2514, "", ""};
 
 /* Miku Expo 2016 Fukuoka */
 constexpr std::array<additional_name, 1> names_1399 {{
@@ -1042,7 +1042,7 @@ constexpr std::array event_pic_tiny_thumb_1399 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1399;
 #endif
 
-constexpr picture event_picture_1399 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1399.jpg?v=8)XYX"sv, event_pic_orig_1399, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1399.jpg?v=8)XYX"sv, event_pic_small_thumb_1399, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1399.jpg?v=8)XYX"sv, event_pic_thumb_1399, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1399.jpg?v=8)XYX"sv, event_pic_tiny_thumb_1399  };
+    constexpr picture event_picture_1399 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1399.jpg?v=8)XYX"sv, event_pic_orig_1399, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1399.jpg?v=8)XYX"sv, event_pic_small_thumb_1399, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1399.jpg?v=8)XYX"sv, event_pic_thumb_1399, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1399.jpg?v=8)XYX"sv, event_pic_tiny_thumb_1399, "", ""};
 
 /* Miku Expo 2016 Seattle */
 constexpr std::array<additional_name, 1> names_1859 {{
@@ -1092,7 +1092,7 @@ constexpr std::array event_pic_tiny_thumb_1859 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1859;
 #endif
 
-constexpr picture event_picture_1859 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1859.jpg?v=5)XYX"sv, event_pic_orig_1859, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1859.jpg?v=5)XYX"sv, event_pic_small_thumb_1859, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1859.jpg?v=5)XYX"sv, event_pic_thumb_1859, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1859.jpg?v=5)XYX"sv, event_pic_tiny_thumb_1859  };
+    constexpr picture event_picture_1859 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1859.jpg?v=5)XYX"sv, event_pic_orig_1859, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1859.jpg?v=5)XYX"sv, event_pic_small_thumb_1859, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1859.jpg?v=5)XYX"sv, event_pic_thumb_1859, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1859.jpg?v=5)XYX"sv, event_pic_tiny_thumb_1859, "", ""};
 
 /* Miku Expo 2016 New Taipei City */
 constexpr std::array<additional_name, 1> names_1941 {{
@@ -1144,7 +1144,7 @@ constexpr std::array event_pic_tiny_thumb_1941 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1941;
 #endif
 
-constexpr picture event_picture_1941 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1941.jpg?v=4)XYX"sv, event_pic_orig_1941, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1941.jpg?v=4)XYX"sv, event_pic_small_thumb_1941, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1941.jpg?v=4)XYX"sv, event_pic_thumb_1941, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1941.jpg?v=4)XYX"sv, event_pic_tiny_thumb_1941  };
+    constexpr picture event_picture_1941 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1941.jpg?v=4)XYX"sv, event_pic_orig_1941, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1941.jpg?v=4)XYX"sv, event_pic_small_thumb_1941, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1941.jpg?v=4)XYX"sv, event_pic_thumb_1941, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1941.jpg?v=4)XYX"sv, event_pic_tiny_thumb_1941, "", ""};
 
 /* Hatsune Miku Magical Mirai 2016 */
 constexpr std::array<additional_name, 4> names_1398 {{
@@ -1197,7 +1197,7 @@ constexpr std::array event_pic_tiny_thumb_1398 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1398;
 #endif
 
-constexpr picture event_picture_1398 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1398.jpg?v=3)XYX"sv, event_pic_orig_1398, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1398.jpg?v=3)XYX"sv, event_pic_small_thumb_1398, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1398.jpg?v=3)XYX"sv, event_pic_thumb_1398, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1398.jpg?v=3)XYX"sv, event_pic_tiny_thumb_1398  };
+    constexpr picture event_picture_1398 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1398.jpg?v=3)XYX"sv, event_pic_orig_1398, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1398.jpg?v=3)XYX"sv, event_pic_small_thumb_1398, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1398.jpg?v=3)XYX"sv, event_pic_thumb_1398, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1398.jpg?v=3)XYX"sv, event_pic_tiny_thumb_1398, "", ""};
 
 /* Miku Expo 2016 Shanghai */
 constexpr std::array<additional_name, 1> names_1943 {{
@@ -1245,7 +1245,7 @@ constexpr std::array event_pic_tiny_thumb_1943 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1943;
 #endif
 
-constexpr picture event_picture_1943 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainOrig/82.jpg?v=4)XYX"sv, event_pic_orig_1943, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainSmall/82.jpg?v=4)XYX"sv, event_pic_small_thumb_1943, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainThumb/82.jpg?v=4)XYX"sv, event_pic_thumb_1943, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainTiny/82.jpg?v=4)XYX"sv, event_pic_tiny_thumb_1943  };
+    constexpr picture event_picture_1943 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainOrig/82.jpg?v=4)XYX"sv, event_pic_orig_1943, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainSmall/82.jpg?v=4)XYX"sv, event_pic_small_thumb_1943, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainThumb/82.jpg?v=4)XYX"sv, event_pic_thumb_1943, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEventSeries/mainTiny/82.jpg?v=4)XYX"sv, event_pic_tiny_thumb_1943, "", ""};
 
 /* Hatsune Miku × Kodō Special Live */
 constexpr std::array<additional_name, 4> names_2947 {{
@@ -1297,7 +1297,7 @@ constexpr std::array event_pic_tiny_thumb_2947 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2947;
 #endif
 
-constexpr picture event_picture_2947 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2947.jpg?v=3)XYX"sv, event_pic_orig_2947, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2947.jpg?v=3)XYX"sv, event_pic_small_thumb_2947, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2947.jpg?v=3)XYX"sv, event_pic_thumb_2947, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2947.jpg?v=3)XYX"sv, event_pic_tiny_thumb_2947  };
+    constexpr picture event_picture_2947 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2947.jpg?v=3)XYX"sv, event_pic_orig_2947, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2947.jpg?v=3)XYX"sv, event_pic_small_thumb_2947, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2947.jpg?v=3)XYX"sv, event_pic_thumb_2947, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2947.jpg?v=3)XYX"sv, event_pic_tiny_thumb_2947, "", ""};
 
 /* Hatsune Miku Magical Mirai 2017 */
 constexpr std::array<additional_name, 4> names_1397 {{
@@ -1351,7 +1351,7 @@ constexpr std::array event_pic_tiny_thumb_1397 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1397;
 #endif
 
-constexpr picture event_picture_1397 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1397.jpg?v=13)XYX"sv, event_pic_orig_1397, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1397.jpg?v=13)XYX"sv, event_pic_small_thumb_1397, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1397.jpg?v=13)XYX"sv, event_pic_thumb_1397, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1397.jpg?v=13)XYX"sv, event_pic_tiny_thumb_1397  };
+    constexpr picture event_picture_1397 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1397.jpg?v=13)XYX"sv, event_pic_orig_1397, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1397.jpg?v=13)XYX"sv, event_pic_small_thumb_1397, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1397.jpg?v=13)XYX"sv, event_pic_thumb_1397, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1397.jpg?v=13)XYX"sv, event_pic_tiny_thumb_1397, "", ""};
 
 /* HATSUNE MIKU with YOU 2017 CHINA FESTIVAL */
 constexpr std::array<additional_name, 3> names_1619 {{
@@ -1405,7 +1405,7 @@ constexpr std::array event_pic_tiny_thumb_1619 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1619;
 #endif
 
-constexpr picture event_picture_1619 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1619.jpg?v=13)XYX"sv, event_pic_orig_1619, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1619.jpg?v=13)XYX"sv, event_pic_small_thumb_1619, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1619.jpg?v=13)XYX"sv, event_pic_thumb_1619, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1619.jpg?v=13)XYX"sv, event_pic_tiny_thumb_1619  };
+    constexpr picture event_picture_1619 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1619.jpg?v=13)XYX"sv, event_pic_orig_1619, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1619.jpg?v=13)XYX"sv, event_pic_small_thumb_1619, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1619.jpg?v=13)XYX"sv, event_pic_thumb_1619, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1619.jpg?v=13)XYX"sv, event_pic_tiny_thumb_1619, "", ""};
 
 /* Miku Expo 2017 Kuala Lumpur */
 constexpr std::array<additional_name, 1> names_1584 {{
@@ -1455,7 +1455,7 @@ constexpr std::array event_pic_tiny_thumb_1584 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1584;
 #endif
 
-constexpr picture event_picture_1584 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1584.png?v=6)XYX"sv, event_pic_orig_1584, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1584.png?v=6)XYX"sv, event_pic_small_thumb_1584, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1584.png?v=6)XYX"sv, event_pic_thumb_1584, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1584.png?v=6)XYX"sv, event_pic_tiny_thumb_1584  };
+    constexpr picture event_picture_1584 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1584.png?v=6)XYX"sv, event_pic_orig_1584, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1584.png?v=6)XYX"sv, event_pic_small_thumb_1584, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1584.png?v=6)XYX"sv, event_pic_thumb_1584, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1584.png?v=6)XYX"sv, event_pic_tiny_thumb_1584, "", ""};
 
 /* SNOW MIKU LIVE! 2018 */
 constexpr std::array<additional_name, 1> names_1618 {{
@@ -1504,7 +1504,7 @@ constexpr std::array event_pic_tiny_thumb_1618 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1618;
 #endif
 
-constexpr picture event_picture_1618 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1618.jpg?v=6)XYX"sv, event_pic_orig_1618, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1618.jpg?v=6)XYX"sv, event_pic_small_thumb_1618, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1618.jpg?v=6)XYX"sv, event_pic_thumb_1618, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1618.jpg?v=6)XYX"sv, event_pic_tiny_thumb_1618  };
+    constexpr picture event_picture_1618 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1618.jpg?v=6)XYX"sv, event_pic_orig_1618, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1618.jpg?v=6)XYX"sv, event_pic_small_thumb_1618, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1618.jpg?v=6)XYX"sv, event_pic_thumb_1618, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1618.jpg?v=6)XYX"sv, event_pic_tiny_thumb_1618, "", ""};
 
 /* This is NIPPON Premium Theater Hatsune Miku × Kodō Special Live 2018 */
 constexpr std::array<additional_name, 2> names_2948 {{
@@ -1554,7 +1554,7 @@ constexpr std::array event_pic_tiny_thumb_2948 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2948;
 #endif
 
-constexpr picture event_picture_2948 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2948.jpg?v=5)XYX"sv, event_pic_orig_2948, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2948.jpg?v=5)XYX"sv, event_pic_small_thumb_2948, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2948.jpg?v=5)XYX"sv, event_pic_thumb_2948, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2948.jpg?v=5)XYX"sv, event_pic_tiny_thumb_2948  };
+    constexpr picture event_picture_2948 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2948.jpg?v=5)XYX"sv, event_pic_orig_2948, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2948.jpg?v=5)XYX"sv, event_pic_small_thumb_2948, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2948.jpg?v=5)XYX"sv, event_pic_thumb_2948, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2948.jpg?v=5)XYX"sv, event_pic_tiny_thumb_2948, "", ""};
 
 /* Miku Expo 2018 Los Angeles */
 constexpr std::array<additional_name, 1> names_1673 {{
@@ -1602,7 +1602,7 @@ constexpr std::array event_pic_tiny_thumb_1673 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1673;
 #endif
 
-constexpr picture event_picture_1673 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1673.jpg?v=3)XYX"sv, event_pic_orig_1673, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1673.jpg?v=3)XYX"sv, event_pic_small_thumb_1673, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1673.jpg?v=3)XYX"sv, event_pic_thumb_1673, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1673.jpg?v=3)XYX"sv, event_pic_tiny_thumb_1673  };
+    constexpr picture event_picture_1673 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1673.jpg?v=3)XYX"sv, event_pic_orig_1673, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1673.jpg?v=3)XYX"sv, event_pic_small_thumb_1673, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1673.jpg?v=3)XYX"sv, event_pic_thumb_1673, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1673.jpg?v=3)XYX"sv, event_pic_tiny_thumb_1673, "", ""};
 
 /* Hatsune Miku Magical Mirai 2018 in OSAKA */
 constexpr std::array<additional_name, 4> names_1561 {{
@@ -1657,7 +1657,7 @@ constexpr std::array event_pic_tiny_thumb_1561 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1561;
 #endif
 
-constexpr picture event_picture_1561 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1561.jpg?v=13)XYX"sv, event_pic_orig_1561, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1561.jpg?v=13)XYX"sv, event_pic_small_thumb_1561, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1561.jpg?v=13)XYX"sv, event_pic_thumb_1561, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1561.jpg?v=13)XYX"sv, event_pic_tiny_thumb_1561  };
+    constexpr picture event_picture_1561 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1561.jpg?v=13)XYX"sv, event_pic_orig_1561, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1561.jpg?v=13)XYX"sv, event_pic_small_thumb_1561, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1561.jpg?v=13)XYX"sv, event_pic_thumb_1561, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1561.jpg?v=13)XYX"sv, event_pic_tiny_thumb_1561, "", ""};
 
 /* MIKU WITH YOU 2018 in Beijing */
 constexpr std::array<additional_name, 3> names_2085 {{
@@ -1710,7 +1710,7 @@ constexpr std::array event_pic_tiny_thumb_2085 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2085;
 #endif
 
-constexpr picture event_picture_2085 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2085.jpg?v=14)XYX"sv, event_pic_orig_2085, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2085.jpg?v=14)XYX"sv, event_pic_small_thumb_2085, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2085.jpg?v=14)XYX"sv, event_pic_thumb_2085, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2085.jpg?v=14)XYX"sv, event_pic_tiny_thumb_2085  };
+    constexpr picture event_picture_2085 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2085.jpg?v=14)XYX"sv, event_pic_orig_2085, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2085.jpg?v=14)XYX"sv, event_pic_small_thumb_2085, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2085.jpg?v=14)XYX"sv, event_pic_thumb_2085, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2085.jpg?v=14)XYX"sv, event_pic_tiny_thumb_2085, "", ""};
 
 /* Miku Expo 2018 Paris */
 constexpr std::array<additional_name, 1> names_1854 {{
@@ -1761,7 +1761,7 @@ constexpr std::array event_pic_tiny_thumb_1854 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_1854;
 #endif
 
-constexpr picture event_picture_1854 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1854.png?v=7)XYX"sv, event_pic_orig_1854, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1854.png?v=7)XYX"sv, event_pic_small_thumb_1854, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1854.png?v=7)XYX"sv, event_pic_thumb_1854, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1854.png?v=7)XYX"sv, event_pic_tiny_thumb_1854  };
+    constexpr picture event_picture_1854 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/1854.png?v=7)XYX"sv, event_pic_orig_1854, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/1854.png?v=7)XYX"sv, event_pic_small_thumb_1854, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/1854.png?v=7)XYX"sv, event_pic_thumb_1854, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/1854.png?v=7)XYX"sv, event_pic_tiny_thumb_1854, "", ""};
 
 /* SNOW MIKU LIVE! 2019 */
 constexpr std::array<additional_name, 1> names_2422 {{
@@ -1811,7 +1811,7 @@ constexpr std::array event_pic_tiny_thumb_2422 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2422;
 #endif
 
-constexpr picture event_picture_2422 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2422.jpg?v=14)XYX"sv, event_pic_orig_2422, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2422.jpg?v=14)XYX"sv, event_pic_small_thumb_2422, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2422.jpg?v=14)XYX"sv, event_pic_thumb_2422, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2422.jpg?v=14)XYX"sv, event_pic_tiny_thumb_2422  };
+    constexpr picture event_picture_2422 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2422.jpg?v=14)XYX"sv, event_pic_orig_2422, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2422.jpg?v=14)XYX"sv, event_pic_small_thumb_2422, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2422.jpg?v=14)XYX"sv, event_pic_thumb_2422, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2422.jpg?v=14)XYX"sv, event_pic_tiny_thumb_2422, "", ""};
 
 /* Miku Expo 2019 New Taipei City */
 constexpr std::array<additional_name, 1> names_2489 {{
@@ -1860,7 +1860,7 @@ constexpr std::array event_pic_tiny_thumb_2489 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2489;
 #endif
 
-constexpr picture event_picture_2489 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2489.jpg?v=5)XYX"sv, event_pic_orig_2489, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2489.jpg?v=5)XYX"sv, event_pic_small_thumb_2489, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2489.jpg?v=5)XYX"sv, event_pic_thumb_2489, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2489.jpg?v=5)XYX"sv, event_pic_tiny_thumb_2489  };
+    constexpr picture event_picture_2489 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2489.jpg?v=5)XYX"sv, event_pic_orig_2489, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2489.jpg?v=5)XYX"sv, event_pic_small_thumb_2489, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2489.jpg?v=5)XYX"sv, event_pic_thumb_2489, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2489.jpg?v=5)XYX"sv, event_pic_tiny_thumb_2489, "", ""};
 
 /* Hatsune Miku Magical Mirai 2019 in OSAKA */
 constexpr std::array<additional_name, 4> names_2515 {{
@@ -1915,7 +1915,7 @@ constexpr std::array event_pic_tiny_thumb_2515 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2515;
 #endif
 
-constexpr picture event_picture_2515 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2515.jpg?v=7)XYX"sv, event_pic_orig_2515, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2515.jpg?v=7)XYX"sv, event_pic_small_thumb_2515, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2515.jpg?v=7)XYX"sv, event_pic_thumb_2515, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2515.jpg?v=7)XYX"sv, event_pic_tiny_thumb_2515  };
+    constexpr picture event_picture_2515 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2515.jpg?v=7)XYX"sv, event_pic_orig_2515, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2515.jpg?v=7)XYX"sv, event_pic_small_thumb_2515, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2515.jpg?v=7)XYX"sv, event_pic_thumb_2515, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2515.jpg?v=7)XYX"sv, event_pic_tiny_thumb_2515, "", ""};
 
 /* MIKU WITH YOU 2019 in Shanghai */
 constexpr std::array<additional_name, 3> names_3752 {{
@@ -1967,7 +1967,7 @@ constexpr std::array event_pic_tiny_thumb_3752 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_3752;
 #endif
 
-constexpr picture event_picture_3752 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3752.jpg?v=2)XYX"sv, event_pic_orig_3752, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3752.jpg?v=2)XYX"sv, event_pic_small_thumb_3752, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3752.jpg?v=2)XYX"sv, event_pic_thumb_3752, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3752.jpg?v=2)XYX"sv, event_pic_tiny_thumb_3752  };
+    constexpr picture event_picture_3752 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3752.jpg?v=2)XYX"sv, event_pic_orig_3752, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3752.jpg?v=2)XYX"sv, event_pic_small_thumb_3752, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3752.jpg?v=2)XYX"sv, event_pic_thumb_3752, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3752.jpg?v=2)XYX"sv, event_pic_tiny_thumb_3752, "", ""};
 
 /* Miku Expo 2020 London */
 constexpr std::array<additional_name, 1> names_2786 {{
@@ -2016,7 +2016,7 @@ constexpr std::array event_pic_tiny_thumb_2786 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2786;
 #endif
 
-constexpr picture event_picture_2786 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2786.jpg?v=7)XYX"sv, event_pic_orig_2786, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2786.jpg?v=7)XYX"sv, event_pic_small_thumb_2786, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2786.jpg?v=7)XYX"sv, event_pic_thumb_2786, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2786.jpg?v=7)XYX"sv, event_pic_tiny_thumb_2786  };
+    constexpr picture event_picture_2786 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2786.jpg?v=7)XYX"sv, event_pic_orig_2786, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2786.jpg?v=7)XYX"sv, event_pic_small_thumb_2786, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2786.jpg?v=7)XYX"sv, event_pic_thumb_2786, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2786.jpg?v=7)XYX"sv, event_pic_tiny_thumb_2786, "", ""};
 
 /* Nico Nico Net Chokaigi 2020 Natsu ✕ HATSUNE MIKU LIVE - UNTITLED 0 - */
 constexpr std::array<additional_name, 2> names_2939 {{
@@ -2067,7 +2067,7 @@ constexpr std::array event_pic_tiny_thumb_2939 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2939;
 #endif
 
-constexpr picture event_picture_2939 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2939.png?v=4)XYX"sv, event_pic_orig_2939, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2939.png?v=4)XYX"sv, event_pic_small_thumb_2939, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2939.png?v=4)XYX"sv, event_pic_thumb_2939, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2939.png?v=4)XYX"sv, event_pic_tiny_thumb_2939  };
+    constexpr picture event_picture_2939 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2939.png?v=4)XYX"sv, event_pic_orig_2939, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2939.png?v=4)XYX"sv, event_pic_small_thumb_2939, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2939.png?v=4)XYX"sv, event_pic_thumb_2939, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2939.png?v=4)XYX"sv, event_pic_tiny_thumb_2939, "", ""};
 
 /* Hatsune Miku GALAXY LIVE 2020 */
 constexpr std::array<additional_name, 2> names_2952 {{
@@ -2110,7 +2110,7 @@ constexpr std::array event_pic_tiny_thumb_2952 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2952;
 #endif
 
-constexpr picture event_picture_2952 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2952.jpg?v=9)XYX"sv, event_pic_orig_2952, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2952.jpg?v=9)XYX"sv, event_pic_small_thumb_2952, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2952.jpg?v=9)XYX"sv, event_pic_thumb_2952, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2952.jpg?v=9)XYX"sv, event_pic_tiny_thumb_2952  };
+    constexpr picture event_picture_2952 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2952.jpg?v=9)XYX"sv, event_pic_orig_2952, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2952.jpg?v=9)XYX"sv, event_pic_small_thumb_2952, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2952.jpg?v=9)XYX"sv, event_pic_thumb_2952, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2952.jpg?v=9)XYX"sv, event_pic_tiny_thumb_2952, "", ""};
 
 /* Hatsune Miku Magical Mirai 2020 in OSAKA */
 constexpr std::array<additional_name, 4> names_2758 {{
@@ -2169,7 +2169,7 @@ constexpr std::array event_pic_tiny_thumb_2758 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_2758;
 #endif
 
-constexpr picture event_picture_2758 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2758.jpg?v=17)XYX"sv, event_pic_orig_2758, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2758.jpg?v=17)XYX"sv, event_pic_small_thumb_2758, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2758.jpg?v=17)XYX"sv, event_pic_thumb_2758, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2758.jpg?v=17)XYX"sv, event_pic_tiny_thumb_2758  };
+    constexpr picture event_picture_2758 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/2758.jpg?v=17)XYX"sv, event_pic_orig_2758, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/2758.jpg?v=17)XYX"sv, event_pic_small_thumb_2758, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/2758.jpg?v=17)XYX"sv, event_pic_thumb_2758, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/2758.jpg?v=17)XYX"sv, event_pic_tiny_thumb_2758, "", ""};
 
 /* MIKU WITH YOU 2020 */
 constexpr std::array<additional_name, 3> names_3250 {{
@@ -2221,7 +2221,7 @@ constexpr std::array event_pic_tiny_thumb_3250 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_3250;
 #endif
 
-constexpr picture event_picture_3250 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3250.jpg?v=6)XYX"sv, event_pic_orig_3250, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3250.jpg?v=6)XYX"sv, event_pic_small_thumb_3250, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3250.jpg?v=6)XYX"sv, event_pic_thumb_3250, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3250.jpg?v=6)XYX"sv, event_pic_tiny_thumb_3250  };
+    constexpr picture event_picture_3250 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3250.jpg?v=6)XYX"sv, event_pic_orig_3250, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3250.jpg?v=6)XYX"sv, event_pic_small_thumb_3250, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3250.jpg?v=6)XYX"sv, event_pic_thumb_3250, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3250.jpg?v=6)XYX"sv, event_pic_tiny_thumb_3250, "", ""};
 
 /* Miku Expo 2021 Online */
 constexpr std::array<additional_name, 2> names_3224 {{
@@ -2280,7 +2280,7 @@ constexpr std::array event_pic_tiny_thumb_3224 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_3224;
 #endif
 
-constexpr picture event_picture_3224 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3224.jpg?v=18)XYX"sv, event_pic_orig_3224, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3224.jpg?v=18)XYX"sv, event_pic_small_thumb_3224, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3224.jpg?v=18)XYX"sv, event_pic_thumb_3224, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3224.jpg?v=18)XYX"sv, event_pic_tiny_thumb_3224  };
+    constexpr picture event_picture_3224 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3224.jpg?v=18)XYX"sv, event_pic_orig_3224, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3224.jpg?v=18)XYX"sv, event_pic_small_thumb_3224, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3224.jpg?v=18)XYX"sv, event_pic_thumb_3224, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3224.jpg?v=18)XYX"sv, event_pic_tiny_thumb_3224, "", ""};
 
 /* Hatsune Miku "Magical Mirai 2021" in OSAKA */
 constexpr std::array<additional_name, 2> names_3305 {{
@@ -2332,7 +2332,7 @@ constexpr std::array event_pic_tiny_thumb_3305 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_3305;
 #endif
 
-constexpr picture event_picture_3305 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3305.jpg?v=7)XYX"sv, event_pic_orig_3305, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3305.jpg?v=7)XYX"sv, event_pic_small_thumb_3305, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3305.jpg?v=7)XYX"sv, event_pic_thumb_3305, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3305.jpg?v=7)XYX"sv, event_pic_tiny_thumb_3305  };
+    constexpr picture event_picture_3305 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3305.jpg?v=7)XYX"sv, event_pic_orig_3305, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3305.jpg?v=7)XYX"sv, event_pic_small_thumb_3305, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3305.jpg?v=7)XYX"sv, event_pic_thumb_3305, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3305.jpg?v=7)XYX"sv, event_pic_tiny_thumb_3305, "", ""};
 
 /* Hatsune Miku GALAXY LIVE 2021 */
 constexpr std::array<additional_name, 2> names_3979 {{
@@ -2376,7 +2376,7 @@ constexpr std::array event_pic_tiny_thumb_3979 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_3979;
 #endif
 
-constexpr picture event_picture_3979 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3979.png?v=6)XYX"sv, event_pic_orig_3979, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3979.png?v=6)XYX"sv, event_pic_small_thumb_3979, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3979.png?v=6)XYX"sv, event_pic_thumb_3979, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3979.png?v=6)XYX"sv, event_pic_tiny_thumb_3979  };
+    constexpr picture event_picture_3979 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/3979.png?v=6)XYX"sv, event_pic_orig_3979, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/3979.png?v=6)XYX"sv, event_pic_small_thumb_3979, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/3979.png?v=6)XYX"sv, event_pic_thumb_3979, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/3979.png?v=6)XYX"sv, event_pic_tiny_thumb_3979, "", ""};
 
 /* MIKU WITH YOU 2021 */
 constexpr std::array<additional_name, 3> names_4058 {{
@@ -2427,7 +2427,7 @@ constexpr std::array event_pic_tiny_thumb_4058 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_4058;
 #endif
 
-constexpr picture event_picture_4058 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4058.jpg?v=5)XYX"sv, event_pic_orig_4058, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4058.jpg?v=5)XYX"sv, event_pic_small_thumb_4058, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4058.jpg?v=5)XYX"sv, event_pic_thumb_4058, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4058.jpg?v=5)XYX"sv, event_pic_tiny_thumb_4058  };
+    constexpr picture event_picture_4058 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4058.jpg?v=5)XYX"sv, event_pic_orig_4058, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4058.jpg?v=5)XYX"sv, event_pic_small_thumb_4058, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4058.jpg?v=5)XYX"sv, event_pic_thumb_4058, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4058.jpg?v=5)XYX"sv, event_pic_tiny_thumb_4058, "", ""};
 
 /* Kagamine Rin・Len Happy 14th Birthday Party "Two You☆★" */
 constexpr std::array<additional_name, 2> names_4161 {{
@@ -2479,7 +2479,7 @@ constexpr std::array event_pic_tiny_thumb_4161 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_4161;
 #endif
 
-constexpr picture event_picture_4161 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4161.jpg?v=9)XYX"sv, event_pic_orig_4161, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4161.jpg?v=9)XYX"sv, event_pic_small_thumb_4161, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4161.jpg?v=9)XYX"sv, event_pic_thumb_4161, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4161.jpg?v=9)XYX"sv, event_pic_tiny_thumb_4161  };
+    constexpr picture event_picture_4161 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4161.jpg?v=9)XYX"sv, event_pic_orig_4161, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4161.jpg?v=9)XYX"sv, event_pic_small_thumb_4161, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4161.jpg?v=9)XYX"sv, event_pic_thumb_4161, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4161.jpg?v=9)XYX"sv, event_pic_tiny_thumb_4161, "", ""};
 
 /* Hatsune Miku "Magical Mirai" 10th Anniversary in OSAKA */
 constexpr std::array<additional_name, 3> names_4233 {{
@@ -2533,7 +2533,7 @@ constexpr std::array event_pic_tiny_thumb_4233 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_4233;
 #endif
 
-constexpr picture event_picture_4233 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4233.jpg?v=8)XYX"sv, event_pic_orig_4233, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4233.jpg?v=8)XYX"sv, event_pic_small_thumb_4233, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4233.jpg?v=8)XYX"sv, event_pic_thumb_4233, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4233.jpg?v=8)XYX"sv, event_pic_tiny_thumb_4233  };
+    constexpr picture event_picture_4233 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4233.jpg?v=8)XYX"sv, event_pic_orig_4233, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4233.jpg?v=8)XYX"sv, event_pic_small_thumb_4233, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4233.jpg?v=8)XYX"sv, event_pic_thumb_4233, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4233.jpg?v=8)XYX"sv, event_pic_tiny_thumb_4233, "", ""};
 
 /* Hatsune Miku "Magical Mirai" 10th Anniversary in SAPPORO */
 constexpr std::array<additional_name, 3> names_4235 {{
@@ -2588,7 +2588,7 @@ constexpr std::array event_pic_tiny_thumb_4235 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_4235;
 #endif
 
-constexpr picture event_picture_4235 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4235.jpg?v=9)XYX"sv, event_pic_orig_4235, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4235.jpg?v=9)XYX"sv, event_pic_small_thumb_4235, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4235.jpg?v=9)XYX"sv, event_pic_thumb_4235, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4235.jpg?v=9)XYX"sv, event_pic_tiny_thumb_4235  };
+    constexpr picture event_picture_4235 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4235.jpg?v=9)XYX"sv, event_pic_orig_4235, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4235.jpg?v=9)XYX"sv, event_pic_small_thumb_4235, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4235.jpg?v=9)XYX"sv, event_pic_thumb_4235, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4235.jpg?v=9)XYX"sv, event_pic_tiny_thumb_4235, "", ""};
 
 /* HATSUNE MIKU JAPAN TOUR 2023 〜THUNDERBOLT〜 NAGOYA */
 constexpr std::array<additional_name, 2> names_4765 {{
@@ -2637,7 +2637,7 @@ constexpr std::array event_pic_tiny_thumb_4765 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_4765;
 #endif
 
-constexpr picture event_picture_4765 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4765.jpg?v=7)XYX"sv, event_pic_orig_4765, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4765.jpg?v=7)XYX"sv, event_pic_small_thumb_4765, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4765.jpg?v=7)XYX"sv, event_pic_thumb_4765, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4765.jpg?v=7)XYX"sv, event_pic_tiny_thumb_4765  };
+    constexpr picture event_picture_4765 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/4765.jpg?v=7)XYX"sv, event_pic_orig_4765, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/4765.jpg?v=7)XYX"sv, event_pic_small_thumb_4765, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/4765.jpg?v=7)XYX"sv, event_pic_thumb_4765, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/4765.jpg?v=7)XYX"sv, event_pic_tiny_thumb_4765, "", ""};
 
 /* Hatsune Miku × Kodō Special Live 2023 ~Yui~ */
 constexpr std::array<additional_name, 2> names_5910 {{
@@ -2691,7 +2691,7 @@ constexpr std::array event_pic_tiny_thumb_5910 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_5910;
 #endif
 
-constexpr picture event_picture_5910 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/5910.jpg?v=2)XYX"sv, event_pic_orig_5910, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/5910.jpg?v=2)XYX"sv, event_pic_small_thumb_5910, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/5910.jpg?v=2)XYX"sv, event_pic_thumb_5910, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/5910.jpg?v=2)XYX"sv, event_pic_tiny_thumb_5910  };
+    constexpr picture event_picture_5910 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/5910.jpg?v=2)XYX"sv, event_pic_orig_5910, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/5910.jpg?v=2)XYX"sv, event_pic_small_thumb_5910, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/5910.jpg?v=2)XYX"sv, event_pic_thumb_5910, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/5910.jpg?v=2)XYX"sv, event_pic_tiny_thumb_5910, "", ""};
 
 /* Hatsune Miku "Magical Mirai 2023" in OSAKA */
 constexpr std::array<additional_name, 2> names_6045 {{
@@ -2748,7 +2748,7 @@ constexpr std::array event_pic_tiny_thumb_6045 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_6045;
 #endif
 
-constexpr picture event_picture_6045 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6045.jpg?v=9)XYX"sv, event_pic_orig_6045, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6045.jpg?v=9)XYX"sv, event_pic_small_thumb_6045, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6045.jpg?v=9)XYX"sv, event_pic_thumb_6045, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6045.jpg?v=9)XYX"sv, event_pic_tiny_thumb_6045  };
+    constexpr picture event_picture_6045 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6045.jpg?v=9)XYX"sv, event_pic_orig_6045, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6045.jpg?v=9)XYX"sv, event_pic_small_thumb_6045, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6045.jpg?v=9)XYX"sv, event_pic_thumb_6045, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6045.jpg?v=9)XYX"sv, event_pic_tiny_thumb_6045, "", ""};
 
 /* Miku Expo 2023 VR */
 constexpr std::array<additional_name, 2> names_5751 {{
@@ -2808,7 +2808,7 @@ constexpr std::array event_pic_tiny_thumb_5751 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_5751;
 #endif
 
-constexpr picture event_picture_5751 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/5751.jpg?v=13)XYX"sv, event_pic_orig_5751, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/5751.jpg?v=13)XYX"sv, event_pic_small_thumb_5751, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/5751.jpg?v=13)XYX"sv, event_pic_thumb_5751, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/5751.jpg?v=13)XYX"sv, event_pic_tiny_thumb_5751  };
+    constexpr picture event_picture_5751 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/5751.jpg?v=13)XYX"sv, event_pic_orig_5751, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/5751.jpg?v=13)XYX"sv, event_pic_small_thumb_5751, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/5751.jpg?v=13)XYX"sv, event_pic_thumb_5751, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/5751.jpg?v=13)XYX"sv, event_pic_tiny_thumb_5751, "", ""};
 
 /* MK15th project MEIKO＆KAITO Online Concert */
 constexpr std::array<additional_name, 2> names_6539 {{
@@ -2858,7 +2858,7 @@ constexpr std::array event_pic_tiny_thumb_6539 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_6539;
 #endif
 
-constexpr picture event_picture_6539 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6539.jpg?v=6)XYX"sv, event_pic_orig_6539, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6539.jpg?v=6)XYX"sv, event_pic_small_thumb_6539, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6539.jpg?v=6)XYX"sv, event_pic_thumb_6539, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6539.jpg?v=6)XYX"sv, event_pic_tiny_thumb_6539  };
+    constexpr picture event_picture_6539 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6539.jpg?v=6)XYX"sv, event_pic_orig_6539, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6539.jpg?v=6)XYX"sv, event_pic_small_thumb_6539, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6539.jpg?v=6)XYX"sv, event_pic_thumb_6539, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6539.jpg?v=6)XYX"sv, event_pic_tiny_thumb_6539, "", ""};
 
 /* MIKU FES'24 (Spring)〜Happy 16th Birthday〜 */
 constexpr std::array<additional_name, 3> names_6986 {{
@@ -2910,7 +2910,7 @@ constexpr std::array event_pic_tiny_thumb_6986 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_6986;
 #endif
 
-constexpr picture event_picture_6986 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6986.jpg?v=13)XYX"sv, event_pic_orig_6986, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6986.jpg?v=13)XYX"sv, event_pic_small_thumb_6986, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6986.jpg?v=13)XYX"sv, event_pic_thumb_6986, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6986.jpg?v=13)XYX"sv, event_pic_tiny_thumb_6986  };
+    constexpr picture event_picture_6986 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6986.jpg?v=13)XYX"sv, event_pic_orig_6986, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6986.jpg?v=13)XYX"sv, event_pic_small_thumb_6986, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6986.jpg?v=13)XYX"sv, event_pic_thumb_6986, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6986.jpg?v=13)XYX"sv, event_pic_tiny_thumb_6986, "", ""};
 
 /* Miku Expo 2024 Vancouver  */
 constexpr std::array<additional_name, 1> names_6516 {{
@@ -2959,7 +2959,7 @@ constexpr std::array event_pic_tiny_thumb_6516 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_6516;
 #endif
 
-constexpr picture event_picture_6516 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6516.jpg?v=9)XYX"sv, event_pic_orig_6516, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6516.jpg?v=9)XYX"sv, event_pic_small_thumb_6516, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6516.jpg?v=9)XYX"sv, event_pic_thumb_6516, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6516.jpg?v=9)XYX"sv, event_pic_tiny_thumb_6516  };
+    constexpr picture event_picture_6516 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/6516.jpg?v=9)XYX"sv, event_pic_orig_6516, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/6516.jpg?v=9)XYX"sv, event_pic_small_thumb_6516, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/6516.jpg?v=9)XYX"sv, event_pic_thumb_6516, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/6516.jpg?v=9)XYX"sv, event_pic_tiny_thumb_6516, "", ""};
 
 /* MIKU WITH YOU 2024 in Shanghai */
 constexpr std::array<additional_name, 3> names_7673 {{
@@ -3009,7 +3009,7 @@ constexpr std::array event_pic_tiny_thumb_7673 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_7673;
 #endif
 
-constexpr picture event_picture_7673 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7673.jpg?v=4)XYX"sv, event_pic_orig_7673, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7673.jpg?v=4)XYX"sv, event_pic_small_thumb_7673, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7673.jpg?v=4)XYX"sv, event_pic_thumb_7673, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7673.jpg?v=4)XYX"sv, event_pic_tiny_thumb_7673  };
+    constexpr picture event_picture_7673 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7673.jpg?v=4)XYX"sv, event_pic_orig_7673, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7673.jpg?v=4)XYX"sv, event_pic_small_thumb_7673, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7673.jpg?v=4)XYX"sv, event_pic_thumb_7673, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7673.jpg?v=4)XYX"sv, event_pic_tiny_thumb_7673, "", ""};
 
 /* Hatsune Miku "Magical Mirai 2024" in FUKUOKA */
 constexpr std::array<additional_name, 2> names_7214 {{
@@ -3059,7 +3059,7 @@ constexpr std::array event_pic_tiny_thumb_7214 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_7214;
 #endif
 
-constexpr picture event_picture_7214 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7214.jpg?v=9)XYX"sv, event_pic_orig_7214, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7214.jpg?v=9)XYX"sv, event_pic_small_thumb_7214, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7214.jpg?v=9)XYX"sv, event_pic_thumb_7214, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7214.jpg?v=9)XYX"sv, event_pic_tiny_thumb_7214  };
+    constexpr picture event_picture_7214 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7214.jpg?v=9)XYX"sv, event_pic_orig_7214, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7214.jpg?v=9)XYX"sv, event_pic_small_thumb_7214, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7214.jpg?v=9)XYX"sv, event_pic_thumb_7214, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7214.jpg?v=9)XYX"sv, event_pic_tiny_thumb_7214, "", ""};
 
 /* Miku Expo 2024 London */
 constexpr std::array<additional_name, 1> names_7266 {{
@@ -3108,7 +3108,7 @@ constexpr std::array event_pic_tiny_thumb_7266 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_7266;
 #endif
 
-constexpr picture event_picture_7266 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7266.jpg?v=6)XYX"sv, event_pic_orig_7266, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7266.jpg?v=6)XYX"sv, event_pic_small_thumb_7266, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7266.jpg?v=6)XYX"sv, event_pic_thumb_7266, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7266.jpg?v=6)XYX"sv, event_pic_tiny_thumb_7266  };
+    constexpr picture event_picture_7266 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7266.jpg?v=6)XYX"sv, event_pic_orig_7266, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7266.jpg?v=6)XYX"sv, event_pic_small_thumb_7266, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7266.jpg?v=6)XYX"sv, event_pic_thumb_7266, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7266.jpg?v=6)XYX"sv, event_pic_tiny_thumb_7266, "", ""};
 
 /* Miku Expo 2024 Auckland */
 constexpr std::array<additional_name, 1> names_7765 {{
@@ -3157,7 +3157,7 @@ constexpr std::array event_pic_tiny_thumb_7765 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_7765;
 #endif
 
-constexpr picture event_picture_7765 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7765.jpg?v=3)XYX"sv, event_pic_orig_7765, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7765.jpg?v=3)XYX"sv, event_pic_small_thumb_7765, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7765.jpg?v=3)XYX"sv, event_pic_thumb_7765, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7765.jpg?v=3)XYX"sv, event_pic_tiny_thumb_7765  };
+    constexpr picture event_picture_7765 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/7765.jpg?v=3)XYX"sv, event_pic_orig_7765, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/7765.jpg?v=3)XYX"sv, event_pic_small_thumb_7765, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/7765.jpg?v=3)XYX"sv, event_pic_thumb_7765, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/7765.jpg?v=3)XYX"sv, event_pic_tiny_thumb_7765, "", ""};
 
 /* HATSUNE MIKU JAPAN TOUR 2025 〜BLOOMING〜 OSAKA */
 constexpr std::array<additional_name, 2> names_8380 {{
@@ -3206,7 +3206,7 @@ constexpr std::array event_pic_tiny_thumb_8380 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_8380;
 #endif
 
-constexpr picture event_picture_8380 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/8380.png?v=5)XYX"sv, event_pic_orig_8380, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/8380.png?v=5)XYX"sv, event_pic_small_thumb_8380, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/8380.png?v=5)XYX"sv, event_pic_thumb_8380, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/8380.png?v=5)XYX"sv, event_pic_tiny_thumb_8380  };
+    constexpr picture event_picture_8380 = { "image/png", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/8380.png?v=5)XYX"sv, event_pic_orig_8380, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/8380.png?v=5)XYX"sv, event_pic_small_thumb_8380, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/8380.png?v=5)XYX"sv, event_pic_thumb_8380, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/8380.png?v=5)XYX"sv, event_pic_tiny_thumb_8380, "", ""};
 
 /* Hatsune Miku "Magical Mirai 2025" in SENDAI */
 constexpr std::array<additional_name, 2> names_8768 {{
@@ -3256,7 +3256,7 @@ constexpr std::array event_pic_tiny_thumb_8768 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_8768;
 #endif
 
-constexpr picture event_picture_8768 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/8768.jpg?v=9)XYX"sv, event_pic_orig_8768, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/8768.jpg?v=9)XYX"sv, event_pic_small_thumb_8768, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/8768.jpg?v=9)XYX"sv, event_pic_thumb_8768, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/8768.jpg?v=9)XYX"sv, event_pic_tiny_thumb_8768  };
+    constexpr picture event_picture_8768 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/8768.jpg?v=9)XYX"sv, event_pic_orig_8768, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/8768.jpg?v=9)XYX"sv, event_pic_small_thumb_8768, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/8768.jpg?v=9)XYX"sv, event_pic_thumb_8768, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/8768.jpg?v=9)XYX"sv, event_pic_tiny_thumb_8768, "", ""};
 
 /* Miku Expo 2025 Bangkok */
 constexpr std::array<additional_name, 1> names_9341 {{
@@ -3305,7 +3305,7 @@ constexpr std::array event_pic_tiny_thumb_9341 = std::to_array<std::uint8_t>({
 constexpr std::array<std::uint8_t, 0> event_pic_tiny_thumb_9341;
 #endif
 
-constexpr picture event_picture_9341 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/9341.jpg?v=3)XYX"sv, event_pic_orig_9341, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/9341.jpg?v=3)XYX"sv, event_pic_small_thumb_9341, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/9341.jpg?v=3)XYX"sv, event_pic_thumb_9341, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/9341.jpg?v=3)XYX"sv, event_pic_tiny_thumb_9341  };
+    constexpr picture event_picture_9341 = { "image/jpeg", std::nullopt, R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainOrig/9341.jpg?v=3)XYX"sv, event_pic_orig_9341, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainSmall/9341.jpg?v=3)XYX"sv, event_pic_small_thumb_9341, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainThumb/9341.jpg?v=3)XYX"sv, event_pic_thumb_9341, "", "", R"XYX(https://vocadb.t3.storage.dev/img/ReleaseEvent/mainTiny/9341.jpg?v=3)XYX"sv, event_pic_tiny_thumb_9341, "", ""};
 
 export constexpr std::array<release_event, 63> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
