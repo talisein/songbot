@@ -382,11 +382,11 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
     vec.reserve(concerts.size());
 
     // sample for testing
-        auto gen = std::mt19937{std::random_device{}()};
-        std::vector<Song> sampled_songs;
-        std::ranges::sample(songs, std::back_inserter(sampled_songs), 5, gen);
+    // auto gen = std::mt19937{std::random_device{}()};
+    // std::vector<Song> sampled_songs;
+    // std::ranges::sample(songs, std::back_inserter(sampled_songs), 5, gen);
 
-    for (auto song : std::views::all(sampled_songs)
+    for (auto song : std::views::all(songs)
              | std::views::filter([](const auto& s) { return s.vocadb_id.has_value(); })
         )
     {

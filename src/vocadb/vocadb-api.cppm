@@ -156,7 +156,7 @@ export namespace vocadb
     std::uint64_t id;
     std::chrono::seconds length;
     // lyrics (skip)
-    picture main_picture;
+    std::optional<picture> main_picture;
     std::optional<std::uint64_t> max_milli_bpm;
     std::optional<std::uint64_t> merged_to;
     std::optional<std::uint64_t> min_milli_bpm;

@@ -139,7 +139,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
     std::vector<Song> res = {
   {"🔪、🔪、🔪", "Knife, Knife, Knife", "Knife, Knife, Knife", Miku, "Kikuo", 404329},
   {nullopt, nullopt, "1 + 1", Miku, "doriko", 118797},
-  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P", 15785},
+  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P", 15785}, // TODO: Change to 149312
   {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub (Chinese ver.)", duet(Rin, Len), "Mikito-P", 15785, "Chinese ver."},
   {"二次元ドリームフィーバー", "Nijigen Dream Fever", "2D Dream Fever", Miku, "PolyphonicBranch", 9376},
   {"39", "San Kyuu", "39 (Thank You)", Miku, "sasakure.UK, DECO*27", 14480, nullopt, nullopt, "<a:mikuarigathanks:941692452794933248>"},
