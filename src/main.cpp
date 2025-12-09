@@ -19,6 +19,7 @@
 #include <signal.h>
 #include <sys/signalfd.h>
 #include <cerrno>
+#include <execinfo.h>
 
 import std;
 
@@ -33,12 +34,71 @@ namespace
         return {err, std::generic_category()};
     }
 
+
+    void init_handlers()
+    {
+        int pipefd[2];
+
+        if (auto res = pipe(pipefd); res == -1) {
+            std::println(std::cerr, "Error: Couldn't open pipe");
+            return;
+        }
+
+        void *preload_buffer[2];
+        int frames = backtrace(preload_buffer, 2);
+
+        // Use the /dev/null descriptor to silently discard the output
+        if (frames > 0) {
+            backtrace_symbols_fd(preload_buffer, frames, pipefd[1]);
+        }
+
+        close(pipefd[0]);
+        close(pipefd[1]);
+    }
+
     extern "C" void sigsegv_handler(int sig)
     {
-        std::cerr << "--- CRITICAL ERROR: Segmentation Fault (SIGSEGV) ---" << std::endl;
-        std::cerr << "--- Stack Trace ---" << std::endl;
-        std::cerr << std::stacktrace::current() << std::endl;
-        std::cerr << "--- Stack Trace Ends ---" << std::endl;
+        const char msg[] = "\n--- Segmentation Fault (SIGSEGV) Detected ---\n";
+        // Using write() which is async-signal-safe
+        write(STDERR_FILENO, msg, sizeof(msg) - 1);
+
+        const int max_frames = 100;
+        void *callstack[max_frames];
+        int frames = 0;
+
+        // backtrace() is not strictly in the POSIX list, but is widely used
+        // and safer than std::stacktrace::current() which involves allocation.
+        frames = backtrace(callstack, max_frames);
+
+        const char trace_msg[] = "--- Stack Trace (Raw Output) ---\n";
+        write(STDERR_FILENO, trace_msg, sizeof(trace_msg) - 1);
+
+        // backtrace_symbols_fd() is also often considered safer for a raw dump
+        // as it writes directly to the file descriptor.
+        backtrace_symbols_fd(callstack, frames, STDERR_FILENO);
+
+        const char end_msg[] = "--------------------------------------------\n";
+        write(STDERR_FILENO, end_msg, sizeof(end_msg) - 1);
+
+        std::abort();
+    }
+
+    void terminate_handler() noexcept
+    {
+        auto eptr = std::current_exception();
+        if (eptr) {
+            try {
+                std::rethrow_exception(eptr);
+            } catch (const std::exception& e) {
+                std::println(std::cerr, "Uncaught exception: {}", e.what());
+            } catch (...) {
+                std::println(std::cerr, "Uncaught exception, but its not std::exception");
+            }
+        } else {
+            std::println("std::terminate called (no exception)");
+        }
+
+        std::println(std::cerr, "Stack trace:\n{}", std::stacktrace::current());
         std::abort();
     }
 }
@@ -50,6 +110,8 @@ main()
     sigemptyset(&mask);
     sigaddset(&mask, SIGTERM);
     std::signal(SIGSEGV, sigsegv_handler);
+    std::set_terminate(terminate_handler);
+    init_handlers();
 
     if (int res = pthread_sigmask(SIG_BLOCK, &mask, nullptr); 0 != res) {
         std::println(std::cerr, "ERROR: Unable to mask SIGTERM. errno={}", errno_to_ec(res).message());
