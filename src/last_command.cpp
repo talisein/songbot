@@ -20,6 +20,8 @@ import util;
 import concerts;
 import songs;
 import songbot.errors;
+import vocadb.api;
+import vocadb.songs;
 
 #include "last_command.hpp"
 #include "context.hpp"
@@ -71,37 +73,37 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
     }
 
 
-    auto rng = std::views::filter(std::views::reverse(setlists), [&name = song->name](const auto& track) { return name == track.song;}) |
+    auto prev_concerts_rng = std::views::filter(std::views::reverse(setlists), [&name = song->name](const auto& track) { return name == track.song;}) |
         std::views::filter([](const auto& track) {
             auto concert = lookup_concert(track.concert_short_name);
             using namespace std::literals;
             return (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert->last_date.value_or(concert->date))) > (36h);
         });
-    if (std::ranges::empty(rng)) {
+    if (std::ranges::empty(prev_concerts_rng)) {
         auto msg = dpp::message(std::format("I'm sorry, '{}' isn't in a concert I know about yet.", param)).set_flags(dpp::message_flags::m_ephemeral);
         event.reply(msg);
         last_failure_counter->Increment();
         co_return {};
     }
 
-    auto count = std::ranges::distance(rng);
+    auto count = std::ranges::distance(prev_concerts_rng);
 
     std::ostringstream ss;
     using namespace std::literals;
-    ss << std::format("{} last played at {}", *song, lookup_concert(std::ranges::begin(rng)->concert_short_name)->name);
-    ss << std::ranges::begin(rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(". ");
+    ss << std::format("{} last played at {}", *song, lookup_concert(std::ranges::begin(prev_concerts_rng)->concert_short_name)->name);
+    ss << std::ranges::begin(prev_concerts_rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(". ");
 
-    auto remaining = std::views::drop(rng, 1);
-    if (std::ranges::empty(remaining)) {
+    auto remaining_concerts_rng = std::views::drop(prev_concerts_rng, 1);
+    if (std::ranges::empty(remaining_concerts_rng)) {
         ss << "That's the only time its played!";
     } else {
         ss << "Prior to that: ";
-        ss << tour_to_string(std::ranges::begin(remaining)->concert_short_name);
-        if (auto it = std::ranges::begin(remaining); it->variant.has_value()) {
+        ss << tour_to_string(std::ranges::begin(remaining_concerts_rng)->concert_short_name);
+        if (auto it = std::ranges::begin(remaining_concerts_rng); it->variant.has_value()) {
             ss << " `" << it->variant.value() << "`";
         }
 
-        for (auto track : std::views::drop(remaining, 1)) {
+        for (auto track : std::views::drop(remaining_concerts_rng, 1)) {
             ss << ", " << tour_to_string(track.concert_short_name);
             if (track.variant.has_value()) {
                 ss << " `" << track.variant.value() << "`";
@@ -111,9 +113,107 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
         ss << " Frequency Rank " << get_song_frequency_rank(song->name);
     }
 
-    dpp::message msg{ss.view()};
-    msg.suppress_embeds(true);
-    event.reply(msg);
+    struct pic_details
+    {
+        std::span<const std::uint8_t> pic;
+        std::string_view mime_type;
+        std::string_view ext;
+    };
+    std::optional<pic_details> pic;
+    std::string subtext;
+    if (song->vocadb_id.has_value()) {
+        auto it = std::ranges::find(vocadb::songs, *song->vocadb_id, &vocadb::song::id);
+        if (it != std::ranges::end(vocadb::songs)) {
+            try {
+                std::ostringstream ss;
+                std::print(ss, "-# ");
+                if (it->publish_date) std::print(ss, "Published {} ", *it->publish_date);
+                if (it->pvs) {
+                    auto originals = std::views::filter(*it->pvs, [](const auto &pv) { return pv.pv_type == "Original"sv && pv.url.has_value(); });
+                    auto yt = std::ranges::find(originals, "Youtube"sv, &vocadb::song_pv::service);
+                    auto yt_end = std::ranges::end(originals);
+                    auto yt2 = std::ranges::find(*it->pvs, "Youtube"sv, &vocadb::song_pv::service);
+                    auto yt2_end = std::ranges::end(*it->pvs);
+                    auto nnd = std::ranges::find(originals, "NicoNicoDouga"sv, &vocadb::song_pv::service);
+                    auto nnd_end = std::ranges::end(originals);
+                    auto nnd2 = std::ranges::find(*it->pvs, "NicoNicoDouga"sv, &vocadb::song_pv::service);
+                    auto nnd2_end = std::ranges::end(*it->pvs);
+                    if (yt != yt_end || nnd != nnd_end || yt2 != yt2_end || nnd2 != nnd2_end) {
+                        std::print(ss, "PVs: ");
+                    }
+                    if (yt != yt_end) {
+                        std::print(ss, "[{}]({}) ", yt->service, *yt->url);
+                    } else if (yt2 != yt2_end) {
+                        std::print(ss, "[{}]({}) ", yt2->service, *yt2->url);
+                    }
+                    if (nnd != nnd_end) {
+                        std::print(ss, "[{}]({}) ", nnd->service, *nnd->url);
+                    } else if (nnd2 != nnd2_end) {
+                        std::print(ss, "[{}]({}) ", nnd2->service, *nnd2->url);
+                    }
+                }
+                if (!it->web_links.empty()) {
+                    auto rng = std::views::filter(it->web_links, [](const auto& link) { return link.description.has_value() && link.url.has_value(); });
+                    auto end = std::ranges::end(rng);
+                    auto lyrics = std::ranges::find_if(rng, [](const auto& link) { return *link.description == "Vocaloid Lyrics Wiki"sv; });
+                    auto wiki = std::ranges::find_if(rng, [](const auto& link) { return *link.description == "Vocaloid Wiki"sv; });
+                    if (lyrics != end || wiki != end) {
+                        std::print(ss, "Info: ");
+                    }
+                    if (lyrics != end && wiki != end) {
+                        std::print(ss, "[Lyrics]({}), ", *lyrics->url);
+                    } else if (lyrics != end) {
+                        std::print(ss, "[Lyrics]({})", *lyrics->url);
+                    }
+                    if (wiki != end) {
+                        std::print(ss, "[VocaWiki]({})", *wiki->url);
+                    }
+                }
+                subtext = ss.str();
+                pic = it->main_picture.transform([](const auto& pic) -> pic_details {
+                    if (pic.original && pic.thumb) {
+                        if (pic.original->size() > pic.thumb->size()) {
+                            return {*pic.original, pic.original_mime_type, pic.original_file_ext};
+                        } else {
+                            return {*pic.thumb, pic.thumb_mime_type, pic.thumb_file_ext};
+                        }
+                    }
+                    if (pic.original && pic.original->size() > 0) {
+                        return {*pic.original, pic.original_mime_type, pic.original_file_ext};
+                    }
+                    if (pic.thumb && pic.thumb->size() > 0) {
+                        return {*pic.thumb, pic.thumb_mime_type, pic.thumb_file_ext};
+                    }
+                    if (pic.small_thumb && pic.small_thumb->size() > 0) {
+                        return {*pic.small_thumb, pic.small_thumb_mime_type, pic.small_thumb_file_ext};
+                    }
+                    if (pic.tiny_thumb && pic.tiny_thumb->size() > 0) {
+                        return {*pic.tiny_thumb, pic.tiny_thumb_mime_type, pic.tiny_thumb_file_ext};
+                    }
+                    throw "oops";
+                });
+            } catch (...) {
+            }
+        }
+    }
+
+    if (!pic) {
+        dpp::message msg{ss.view()};
+        msg.suppress_embeds(true);
+        event.reply(msg);
+    } else {
+        auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2).suppress_embeds(true);
+        auto section = dpp::component().set_type(dpp::cot_section);
+        auto text = dpp::component().set_type(dpp::cot_text_display).set_content(ss.str());
+        section.add_component_v2(text);
+        section.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(subtext));
+        auto filename = std::format("{}.{}", *song->vocadb_id, pic->ext);
+        std::string_view data{reinterpret_cast<const char *>(pic->pic.data()), pic->pic.size_bytes()};
+        msg.add_file(filename, data, pic->mime_type);
+        section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail(std::format("attachment://{}", filename)));
+        msg.add_component_v2(section);
+        event.reply(msg);
+    }
     last_success_counter->Increment();
     co_return {};
 }
