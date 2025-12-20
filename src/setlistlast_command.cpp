@@ -241,10 +241,10 @@ namespace {
                     bool use_ephemeral,
                     std::optional<std::string> reveal_button_id)
     {
-        const auto flags    = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
-        auto real_msg       = dpp::message().set_flags(flags);
-        auto container      = dpp::component().set_type(dpp::cot_container);
-        container.set_accent(dpp::utility::rgb(134,206,203));
+        const auto flags      = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
+        auto real_msg         = dpp::message().set_flags(flags);
+        auto bottom_container = dpp::component().set_type(dpp::cot_container);
+        bottom_container.set_accent(dpp::utility::rgb(134,206,203));
 
         /* Button row */
         if (reveal_button_id.has_value()) {
@@ -260,14 +260,20 @@ namespace {
         /* header / thumbnail */
         if (!std::ranges::empty(header_content)) {
             auto section = make_gui_header(concert, header_content, real_msg);
-            container.add_component_v2(section);
+            real_msg.add_component_v2(section);
         }
 
         /* Actual setlist content */
+        using namespace std::literals;
+        bool is_spoiler = (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert.last_date.value_or(concert.date))) < (36h);
+        if (is_spoiler) {
+            bottom_container.set_spoiler(true);
+            real_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist Spoilers Below:"));
+        }
         auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
                                               .set_content(message);
-        container.add_component_v2(text_display_1);
-        real_msg.add_component_v2(container);
+        bottom_container.add_component_v2(text_display_1);
+        real_msg.add_component_v2(bottom_container);
         return real_msg;
     }
 
