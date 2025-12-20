@@ -139,8 +139,8 @@ constexpr std::vector<Song> generate_songs_incomplete()
     std::vector<Song> res = {
   {"🔪、🔪、🔪", "Knife, Knife, Knife", "Knife, Knife, Knife", Miku, "Kikuo", 404329},
   {nullopt, nullopt, "1 + 1", Miku, "doriko", 118797},
-  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P", 15785}, // TODO: Change to 149312
-  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub (Chinese ver.)", duet(Rin, Len), "Mikito-P", 15785, "Chinese ver."},
+  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub", duet(Rin, Len), "Mikito-P", 149312},
+  {"いーあるふぁんくらぶ", "Ii Aru Fanclub", "1 2 FanClub (Chinese ver.)", duet(Rin, Len), "Mikito-P", 149312, "Chinese ver."},
   {"二次元ドリームフィーバー", "Nijigen Dream Fever", "2D Dream Fever", Miku, "PolyphonicBranch", 9376},
   {"39", "San Kyuu", "39 (Thank You)", Miku, "sasakure.UK, DECO*27", 14480, nullopt, nullopt, "<a:mikuarigathanks:941692452794933248>"},
   {nullopt, nullopt, "8HIT", duet(Rin, Len), "Wonderful☆Opportunity", 9210},
@@ -316,7 +316,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ワールドイズマイン", "World is Mine", "World is Mine", Miku, "ryo", 1326, nullopt, nullopt, "<:mikutriumph:510922356739276800>"},
   {"ワールズエンド・ダンスホール", "World's End Dancehall", "World's End Dancehall", duet(Miku, Luka), "wowaka", 20},
   {nullopt, nullopt, "Yellow", Miku, "kz", 2905},
-  {nullopt, nullopt, "celluloid", Miku, "baker", 289839},
+  {nullopt, nullopt, "celluloid", Miku, "baker", 6489},
   {nullopt, nullopt, "glow", Miku, "keeno", 1797},
   {nullopt, nullopt, "imaginary love story", Miku, "Synthion", 481543},
   {nullopt, nullopt, "letter song", Miku, "doriko", 1077},
@@ -352,7 +352,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ウミユリ海底譚", "Umiyuri Kaiteitan", "Tale of the Deep-sea Lily", Miku, "n-buna", 49871},
   {"テレカクシ思春期", "Terekakushi Shishunki", "Embarrassment-Hiding Adolescence", Len, "HoneyWorks", 42649},
   {nullopt, nullopt, "Baby Maniacs -Eight Mix-", Miku, "Hachioji-P", 126674},
-  {nullopt, nullopt, "ray", Miku, "BUMP OF CHICKEN", 50721},
+  {nullopt, nullopt, "ray", Miku, "BUMP OF CHICKEN", 404792},
   {"なりすましゲンガー", "Narisumashi Genga", "Doubleganger", duet(Miku,Rin), "KulfiQ", 1932},
   {nullopt, nullopt, "Singularity", Miku, "keisei", 155305},
   {"ツギハギスタッカート", "Tsugihagi Staccato", "Patchwork Staccato", Miku, "toa", 58632},
@@ -517,6 +517,8 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ビターチョコデコレーション", "Bitter Choco Decoration", "Bitter Chocolate Decoration", Miku, "syudou", 221277},
   {"未来最終戦争", "Mirai Saishuu Sensou", "Future Final Wars", Miku, "DIVELA", 271920},
   {"ロンリーユニバース", "Lonely Universe", "Lonely Universe", Miku, "Aqu3ra", 232181},
+  {nullopt, nullopt, "Mag1c", Miku, "Xiǎo Miányáng magens", 843579},
+  {"ポケットのモンスター", "Pocket no Monster", "The Pokémon Inside My Heart", Miku, "Pinocchio-P", 538028},
     };
 
     return res;
@@ -612,6 +614,7 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "01_ballade", "Fragments of a Star"},
             { "01 ballade", "Fragments of a Star"},
             { "Repairers of the Deceptive World", "Whipstitching Person"},
+            { "The Pokemon Inside My Heart", "The Pokémon Inside My Heart"},
     };
     return res;
 }

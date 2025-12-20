@@ -111,6 +111,7 @@ export enum ConcertTour
     ME2025,
     GALAXY2020,
     GALAXY2021,
+    MWY2025,
 };
 
 export constexpr std::string_view
@@ -295,6 +296,8 @@ export constexpr std::array concerts = std::to_array<Concert>({
           MM2025, 2025y/8/1, 2025y/8/31, 8768 },
         { MIKU_EXPO,        "HATSUNE MIKU EXPO 2025 ASIA",
           ME2025, 2025y/11/5, 2025y/11/30, 9341 },
+        { MIKU_WITH_YOU,    "MIKU WITH YOU 2025",
+          MWY2025, 2025y/12/20, 2025y/12/21, 9644 },
     });
 
 static_assert(std::ranges::is_sorted(concerts, {}, &Concert::date),
@@ -2084,6 +2087,29 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2025, 22, "Rolling Girl"},
         { ME2025, 23, "DECORATOR"},
         { ME2025, 24, "Melt"},
+        { MWY2025, 1, "Mag1c"},
+        { MWY2025, 2, "Baby Maniacs -Eight Mix-"},
+        { MWY2025, 3, "Dream Color Planet"},
+        { MWY2025, 4, "COME BACK ~Returning to the Peak~"},
+        { MWY2025, 5, "Hyper Reality Show"},
+        { MWY2025, 6, "Remote Controller"},
+        { MWY2025, 7, "World's End Dancehall"},
+        { MWY2025, 8, "Wintry Winds"},
+        { MWY2025, 9, "Doctor=Funk Beat"},
+        { MWY2025, 10, "Dreamin Chuchu"},
+        { MWY2025, 11, "Diary Across Time And Space"},
+        { MWY2025, 12, "Kaisei"},
+        { MWY2025, 13, "Step Forward"},
+        { MWY2025, 14, "Romeo and Cinderella"},
+        { MWY2025, 15, "Moon West River"},
+        { MWY2025, 16, "Satisfaction"},
+        { MWY2025, 17, "39 (Thank You)"},
+        { MWY2025, 18, "My Stage With You"},
+        { MWY2025, 19, "Pick Me Up"},
+        { MWY2025, 20, "Blue Planet"},
+        { MWY2025, 21, "Melt"},
+        { MWY2025, 22, "The Pokémon Inside My Heart"},
+        { MWY2025, 23, "Blessing"},
     });
 
 

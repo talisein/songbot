@@ -95,7 +95,7 @@ namespace
                 std::println(std::cerr, "Uncaught exception, but its not std::exception");
             }
         } else {
-            std::println("std::terminate called (no exception)");
+            std::println(std::cerr, "std::terminate called (no exception)");
         }
 
         std::println(std::cerr, "Stack trace:\n{}", std::stacktrace::current());
