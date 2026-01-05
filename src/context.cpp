@@ -144,6 +144,23 @@ dpp::task<void> context::on_ready(const dpp::ready_t& event)
     co_return;
 }
 
+dpp::task<void>
+context::notify_owner_shutdown()
+{
+  if (config.owner_id) {
+    dpp::snowflake id { *config.owner_id };
+
+    dpp::message msg { std::format("*Pu-pu-pu*! Mikumiku Setlists ver. {} shutting down due to SIGTERM", BUILD_GIT_COMMIT) };
+    auto dm_conf = co_await bot->co_direct_message_create(id, msg);
+    if (dm_conf.is_error()) {
+      log_error("Failed to send dm: {}", dm_conf.get_error());
+    }
+  }
+
+  log_info("cluster::shutdown()");
+  bot->shutdown();
+}
+
 dpp::task<void> context::on_slashcommand(const dpp::slashcommand_t& event)
 {
     auto it = commands.find(event.command.get_command_name());

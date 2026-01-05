@@ -132,7 +132,7 @@ main()
             if (res == sizeof(fdsi) && fdsi.ssi_signo == SIGTERM) {
                 ctx.log_info("Received SIGTERM, exiting.");
                 systemd::notify(0, "STOPPING=1");
-                ctx.bot->shutdown();
+                [](auto& ctx) -> dpp::job { co_await ctx.notify_owner_shutdown(); }(ctx);
             } else if (res == sizeof(fdsi)) {
                 ctx.log_warning("Received {}?", strsignal(fdsi.ssi_signo));
             }
