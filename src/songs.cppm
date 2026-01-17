@@ -519,6 +519,9 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ロンリーユニバース", "Lonely Universe", "Lonely Universe", Miku, "Aqu3ra", 232181},
   {nullopt, nullopt, "Mag1c", Miku, "Xiǎo Miányáng magens", 843579},
   {"ポケットのモンスター", "Pocket no Monster", "The Pokémon Inside My Heart", Miku, "Pinocchio-P", 538028},
+  {"シアンブルー", "Cyan Blue", "Cyan Blue", Miku, "Police Piccadilly", 887891},
+  {"アイドル戦士", "Idol Senshi", "Idol Warrior", Miku, "Mitchie M", 760683},
+  {"インビテーション！", "INVITATION!", "INVITATION!", Miku, "Negi ShowerP", 501614},
     };
 
     return res;

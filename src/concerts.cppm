@@ -112,6 +112,8 @@ export enum ConcertTour
     GALAXY2020,
     GALAXY2021,
     MWY2025,
+    LAWSON,
+    DECO,
 };
 
 export constexpr std::string_view
@@ -298,6 +300,10 @@ export constexpr std::array concerts = std::to_array<Concert>({
           ME2025, 2025y/11/5, 2025y/11/30, 9341 },
         { MIKU_WITH_YOU,    "MIKU WITH YOU 2025",
           MWY2025, 2025y/12/20, 2025y/12/21, 9644 },
+        { NO_SERIES,    "Hatsune Miku LAWSON 50th Anniversary Special LIVE",
+          LAWSON, 2026y/1/17, 2026y/1/18,  9642 },
+        { NO_SERIES,    "DecoMiku LIVE starring Hatsune Miku 『Hello』",
+          DECO, 2026y/2/14, nullopt, 9401 },
     });
 
 static_assert(std::ranges::is_sorted(concerts, {}, &Concert::date),
@@ -2111,6 +2117,30 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { MWY2025, 21, "Melt"},
         { MWY2025, 22, "The Pokémon Inside My Heart"},
         { MWY2025, 23, "Blessing"},
+        { LAWSON, 1, "Sweet Devil"},
+        { LAWSON, 2, "The Snow White Princess is"},
+        { LAWSON, 3, "Teo"},
+        { LAWSON, 4, "Lost One's Weeping"},
+        { LAWSON, 5, "Butterfly on Your Right Shoulder"},
+        { LAWSON, 6, "Luka Luka★Night Fever"},
+        { LAWSON, 7, "Psi"},
+        { LAWSON, 8, "Weekender Girl"},
+        { LAWSON, 9, "Deep-Sea Girl"},
+        { LAWSON, 10, "Call!!"},
+        { LAWSON, 11, "Piano × Forte × Scandal"},
+        { LAWSON, 12, "When First Love Ends"},
+        { LAWSON, 13, "Idol Warrior"},
+        { LAWSON, 14, "Jump for Joy"},
+        { LAWSON, 15, "Wintry Winds"},
+        { LAWSON, 16, "shake it!"},
+        { LAWSON, 17, "Unknown Mother-Goose"},
+        { LAWSON, 18, "The Intense Voice of Hatsune Miku"},
+        { LAWSON, 19, "Snowmix♪"},
+        { LAWSON, 20, "Because You're Here"},
+        { LAWSON, 21, "Tell Your World"},
+        { LAWSON, 22, "Cyan Blue"},
+        { LAWSON, 23, "Dream Dream"},
+        { LAWSON, 24, "INVITATION!"},
     });
 
 
