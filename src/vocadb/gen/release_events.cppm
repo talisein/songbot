@@ -31,9 +31,9 @@ using namespace std::literals;
 
 
 constexpr std::array<additional_name, 3> names_release_event_2522 {{
+  {"Japanese"sv, R"XYX(ミクFES'09（夏）)XYX"sv},
   {"Romaji"sv, R"XYX(Miku FES'09 (Natsu))XYX"sv},
   {"English"sv, R"XYX(Miku FES'09 (Summer))XYX"sv},
-  {"Japanese"sv, R"XYX(ミクFES'09（夏）)XYX"sv},
 }};
 
 constexpr std::array<web_link, 9> web_links_release_event_2522 {{
@@ -74,9 +74,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2522 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2522;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2522") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2522 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2522"
+});
+constexpr std::string_view release_event_mime_type_thumb_2522 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2522 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2522;
 constexpr std::string_view release_event_mime_type_thumb_2522 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2522;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2522") == __STDC_EMBED_FOUND__
@@ -91,11 +100,11 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2522 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2522;
 #endif
 
-constexpr picture picture_release_event_2522 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2522.jpg)XYX"sv, release_event_pic_orig_2522, release_event_mime_type_orig_2522, release_event_file_ext_orig_2522, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2522.jpg)XYX"sv, release_event_pic_small_thumb_2522, release_event_mime_type_small_thumb_2522, release_event_file_ext_small_thumb_2522, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2522.jpg)XYX"sv, release_event_pic_thumb_2522, release_event_mime_type_thumb_2522, release_event_file_ext_thumb_2522, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2522.jpg)XYX"sv, release_event_pic_tiny_thumb_2522, release_event_mime_type_tiny_thumb_2522, release_event_file_ext_tiny_thumb_2522  };
+constexpr picture picture_release_event_2522 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2522.jpg?v=8)XYX"sv, release_event_pic_orig_2522, release_event_mime_type_orig_2522, release_event_file_ext_orig_2522, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2522.jpg?v=8)XYX"sv, release_event_pic_small_thumb_2522, release_event_mime_type_small_thumb_2522, release_event_file_ext_small_thumb_2522, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2522.jpg?v=8)XYX"sv, release_event_pic_thumb_2522, release_event_mime_type_thumb_2522, release_event_file_ext_thumb_2522, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2522.jpg?v=8)XYX"sv, release_event_pic_tiny_thumb_2522, release_event_mime_type_tiny_thumb_2522, release_event_file_ext_tiny_thumb_2522  };
 
 constexpr std::array<additional_name, 2> names_release_event_2520 {{
-  {"Romaji"sv, R"XYX(Miku no Hi Kanshasai 39's Giving Day)XYX"sv},
   {"Japanese"sv, R"XYX(ミクの日感謝祭39's Giving Day)XYX"sv},
+  {"Romaji"sv, R"XYX(Miku no Hi Kanshasai 39's Giving Day)XYX"sv},
 }};
 
 constexpr std::array<web_link, 3> web_links_release_event_2520 {{
@@ -130,9 +139,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2520 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2520;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2520") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2520 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2520"
+});
+constexpr std::string_view release_event_mime_type_thumb_2520 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2520 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2520;
 constexpr std::string_view release_event_mime_type_thumb_2520 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2520;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2520") == __STDC_EMBED_FOUND__
@@ -147,7 +165,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2520 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2520;
 #endif
 
-constexpr picture picture_release_event_2520 = { R"XYX(image/gif)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2520.gif)XYX"sv, release_event_pic_orig_2520, release_event_mime_type_orig_2520, release_event_file_ext_orig_2520, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2520.gif)XYX"sv, release_event_pic_small_thumb_2520, release_event_mime_type_small_thumb_2520, release_event_file_ext_small_thumb_2520, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2520.gif)XYX"sv, release_event_pic_thumb_2520, release_event_mime_type_thumb_2520, release_event_file_ext_thumb_2520, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2520.gif)XYX"sv, release_event_pic_tiny_thumb_2520, release_event_mime_type_tiny_thumb_2520, release_event_file_ext_tiny_thumb_2520  };
+constexpr picture picture_release_event_2520 = { R"XYX(image/gif)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2520.gif?v=8)XYX"sv, release_event_pic_orig_2520, release_event_mime_type_orig_2520, release_event_file_ext_orig_2520, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2520.gif?v=8)XYX"sv, release_event_pic_small_thumb_2520, release_event_mime_type_small_thumb_2520, release_event_file_ext_small_thumb_2520, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2520.gif?v=8)XYX"sv, release_event_pic_thumb_2520, release_event_mime_type_thumb_2520, release_event_file_ext_thumb_2520, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2520.gif?v=8)XYX"sv, release_event_pic_tiny_thumb_2520, release_event_mime_type_tiny_thumb_2520, release_event_file_ext_tiny_thumb_2520  };
 
 constexpr std::array<additional_name, 4> names_release_event_2523 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2011 Tokyo)XYX"sv},
@@ -189,9 +207,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2523 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2523;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2523") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2523 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2523"
+});
+constexpr std::string_view release_event_mime_type_thumb_2523 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2523 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2523;
 constexpr std::string_view release_event_mime_type_thumb_2523 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2523;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2523") == __STDC_EMBED_FOUND__
@@ -206,7 +233,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2523 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2523;
 #endif
 
-constexpr picture picture_release_event_2523 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2523.png)XYX"sv, release_event_pic_orig_2523, release_event_mime_type_orig_2523, release_event_file_ext_orig_2523, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2523.png)XYX"sv, release_event_pic_small_thumb_2523, release_event_mime_type_small_thumb_2523, release_event_file_ext_small_thumb_2523, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2523.png)XYX"sv, release_event_pic_thumb_2523, release_event_mime_type_thumb_2523, release_event_file_ext_thumb_2523, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2523.png)XYX"sv, release_event_pic_tiny_thumb_2523, release_event_mime_type_tiny_thumb_2523, release_event_file_ext_tiny_thumb_2523  };
+constexpr picture picture_release_event_2523 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2523.png?v=12)XYX"sv, release_event_pic_orig_2523, release_event_mime_type_orig_2523, release_event_file_ext_orig_2523, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2523.png?v=12)XYX"sv, release_event_pic_small_thumb_2523, release_event_mime_type_small_thumb_2523, release_event_file_ext_small_thumb_2523, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2523.png?v=12)XYX"sv, release_event_pic_thumb_2523, release_event_mime_type_thumb_2523, release_event_file_ext_thumb_2523, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2523.png?v=12)XYX"sv, release_event_pic_tiny_thumb_2523, release_event_mime_type_tiny_thumb_2523, release_event_file_ext_tiny_thumb_2523  };
 
 constexpr std::array<additional_name, 4> names_release_event_2521 {{
   {"Japanese"sv, R"XYX(MIKUNOPOLIS in LOS ANGELES “はじめまして、初音ミクです”)XYX"sv},
@@ -246,9 +273,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2521 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2521;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2521") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2521 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2521"
+});
+constexpr std::string_view release_event_mime_type_thumb_2521 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2521 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2521;
 constexpr std::string_view release_event_mime_type_thumb_2521 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2521;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2521") == __STDC_EMBED_FOUND__
@@ -263,7 +299,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2521 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2521;
 #endif
 
-constexpr picture picture_release_event_2521 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2521.png)XYX"sv, release_event_pic_orig_2521, release_event_mime_type_orig_2521, release_event_file_ext_orig_2521, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2521.png)XYX"sv, release_event_pic_small_thumb_2521, release_event_mime_type_small_thumb_2521, release_event_file_ext_small_thumb_2521, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2521.png)XYX"sv, release_event_pic_thumb_2521, release_event_mime_type_thumb_2521, release_event_file_ext_thumb_2521, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2521.png)XYX"sv, release_event_pic_tiny_thumb_2521, release_event_mime_type_tiny_thumb_2521, release_event_file_ext_tiny_thumb_2521  };
+constexpr picture picture_release_event_2521 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2521.png?v=6)XYX"sv, release_event_pic_orig_2521, release_event_mime_type_orig_2521, release_event_file_ext_orig_2521, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2521.png?v=6)XYX"sv, release_event_pic_small_thumb_2521, release_event_mime_type_small_thumb_2521, release_event_file_ext_small_thumb_2521, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2521.png?v=6)XYX"sv, release_event_pic_thumb_2521, release_event_mime_type_thumb_2521, release_event_file_ext_thumb_2521, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2521.png?v=6)XYX"sv, release_event_pic_tiny_thumb_2521, release_event_mime_type_tiny_thumb_2521, release_event_file_ext_tiny_thumb_2521  };
 
 constexpr std::array<additional_name, 4> names_release_event_2526 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2011 Sapporo)XYX"sv},
@@ -305,9 +341,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2526 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2526;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2526") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2526 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2526"
+});
+constexpr std::string_view release_event_mime_type_thumb_2526 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2526 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2526;
 constexpr std::string_view release_event_mime_type_thumb_2526 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2526;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2526") == __STDC_EMBED_FOUND__
@@ -322,7 +367,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2526 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2526;
 #endif
 
-constexpr picture picture_release_event_2526 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2526.png)XYX"sv, release_event_pic_orig_2526, release_event_mime_type_orig_2526, release_event_file_ext_orig_2526, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2526.png)XYX"sv, release_event_pic_small_thumb_2526, release_event_mime_type_small_thumb_2526, release_event_file_ext_small_thumb_2526, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2526.png)XYX"sv, release_event_pic_thumb_2526, release_event_mime_type_thumb_2526, release_event_file_ext_thumb_2526, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2526.png)XYX"sv, release_event_pic_tiny_thumb_2526, release_event_mime_type_tiny_thumb_2526, release_event_file_ext_tiny_thumb_2526  };
+constexpr picture picture_release_event_2526 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2526.png?v=8)XYX"sv, release_event_pic_orig_2526, release_event_mime_type_orig_2526, release_event_file_ext_orig_2526, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2526.png?v=8)XYX"sv, release_event_pic_small_thumb_2526, release_event_mime_type_small_thumb_2526, release_event_file_ext_small_thumb_2526, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2526.png?v=8)XYX"sv, release_event_pic_thumb_2526, release_event_mime_type_thumb_2526, release_event_file_ext_thumb_2526, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2526.png?v=8)XYX"sv, release_event_pic_tiny_thumb_2526, release_event_mime_type_tiny_thumb_2526, release_event_file_ext_tiny_thumb_2526  };
 
 constexpr std::array<additional_name, 4> names_release_event_2527 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2011 Singapore)XYX"sv},
@@ -364,9 +409,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2527 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2527;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2527") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2527 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2527"
+});
+constexpr std::string_view release_event_mime_type_thumb_2527 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2527 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2527;
 constexpr std::string_view release_event_mime_type_thumb_2527 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2527;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2527") == __STDC_EMBED_FOUND__
@@ -381,7 +435,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2527 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2527;
 #endif
 
-constexpr picture picture_release_event_2527 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2527.png)XYX"sv, release_event_pic_orig_2527, release_event_mime_type_orig_2527, release_event_file_ext_orig_2527, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2527.png)XYX"sv, release_event_pic_small_thumb_2527, release_event_mime_type_small_thumb_2527, release_event_file_ext_small_thumb_2527, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2527.png)XYX"sv, release_event_pic_thumb_2527, release_event_mime_type_thumb_2527, release_event_file_ext_thumb_2527, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2527.png)XYX"sv, release_event_pic_tiny_thumb_2527, release_event_mime_type_tiny_thumb_2527, release_event_file_ext_tiny_thumb_2527  };
+constexpr picture picture_release_event_2527 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2527.png?v=5)XYX"sv, release_event_pic_orig_2527, release_event_mime_type_orig_2527, release_event_file_ext_orig_2527, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2527.png?v=5)XYX"sv, release_event_pic_small_thumb_2527, release_event_mime_type_small_thumb_2527, release_event_file_ext_small_thumb_2527, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2527.png?v=5)XYX"sv, release_event_pic_thumb_2527, release_event_mime_type_thumb_2527, release_event_file_ext_thumb_2527, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2527.png?v=5)XYX"sv, release_event_pic_tiny_thumb_2527, release_event_mime_type_tiny_thumb_2527, release_event_file_ext_tiny_thumb_2527  };
 
 constexpr std::array<additional_name, 4> names_release_event_4056 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2012 Tokyo)XYX"sv},
@@ -424,9 +478,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_4056 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_4056;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_4056") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_4056 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_4056"
+});
+constexpr std::string_view release_event_mime_type_thumb_4056 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4056 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4056;
 constexpr std::string_view release_event_mime_type_thumb_4056 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_4056;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_4056") == __STDC_EMBED_FOUND__
@@ -441,7 +504,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_4056 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_4056;
 #endif
 
-constexpr picture picture_release_event_4056 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4056.png)XYX"sv, release_event_pic_orig_4056, release_event_mime_type_orig_4056, release_event_file_ext_orig_4056, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4056.png)XYX"sv, release_event_pic_small_thumb_4056, release_event_mime_type_small_thumb_4056, release_event_file_ext_small_thumb_4056, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4056.png)XYX"sv, release_event_pic_thumb_4056, release_event_mime_type_thumb_4056, release_event_file_ext_thumb_4056, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4056.png)XYX"sv, release_event_pic_tiny_thumb_4056, release_event_mime_type_tiny_thumb_4056, release_event_file_ext_tiny_thumb_4056  };
+constexpr picture picture_release_event_4056 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4056.png?v=10)XYX"sv, release_event_pic_orig_4056, release_event_mime_type_orig_4056, release_event_file_ext_orig_4056, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4056.png?v=10)XYX"sv, release_event_pic_small_thumb_4056, release_event_mime_type_small_thumb_4056, release_event_file_ext_small_thumb_4056, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4056.png?v=10)XYX"sv, release_event_pic_thumb_4056, release_event_mime_type_thumb_4056, release_event_file_ext_thumb_4056, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4056.png?v=10)XYX"sv, release_event_pic_tiny_thumb_4056, release_event_mime_type_tiny_thumb_4056, release_event_file_ext_tiny_thumb_4056  };
 
 constexpr std::array<additional_name, 3> names_release_event_1413 {{
   {"English"sv, R"XYX(Miku's Big Thanksgiving Day - Special 39's Production 2012)XYX"sv},
@@ -482,9 +545,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1413 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1413;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1413") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1413 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1413"
+});
+constexpr std::string_view release_event_mime_type_thumb_1413 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1413 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1413;
 constexpr std::string_view release_event_mime_type_thumb_1413 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1413;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1413") == __STDC_EMBED_FOUND__
@@ -499,7 +571,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1413 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1413;
 #endif
 
-constexpr picture picture_release_event_1413 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1413.jpg)XYX"sv, release_event_pic_orig_1413, release_event_mime_type_orig_1413, release_event_file_ext_orig_1413, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1413.jpg)XYX"sv, release_event_pic_small_thumb_1413, release_event_mime_type_small_thumb_1413, release_event_file_ext_small_thumb_1413, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1413.jpg)XYX"sv, release_event_pic_thumb_1413, release_event_mime_type_thumb_1413, release_event_file_ext_thumb_1413, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1413.jpg)XYX"sv, release_event_pic_tiny_thumb_1413, release_event_mime_type_tiny_thumb_1413, release_event_file_ext_tiny_thumb_1413  };
+constexpr picture picture_release_event_1413 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1413.jpg?v=12)XYX"sv, release_event_pic_orig_1413, release_event_mime_type_orig_1413, release_event_file_ext_orig_1413, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1413.jpg?v=12)XYX"sv, release_event_pic_small_thumb_1413, release_event_mime_type_small_thumb_1413, release_event_file_ext_small_thumb_1413, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1413.jpg?v=12)XYX"sv, release_event_pic_thumb_1413, release_event_mime_type_thumb_1413, release_event_file_ext_thumb_1413, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1413.jpg?v=12)XYX"sv, release_event_pic_tiny_thumb_1413, release_event_mime_type_tiny_thumb_1413, release_event_file_ext_tiny_thumb_1413  };
 
 constexpr std::array<additional_name, 4> names_release_event_2524 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2012 Hong Kong)XYX"sv},
@@ -541,9 +613,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2524 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2524;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2524") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2524 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2524"
+});
+constexpr std::string_view release_event_mime_type_thumb_2524 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2524 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2524;
 constexpr std::string_view release_event_mime_type_thumb_2524 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2524;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2524") == __STDC_EMBED_FOUND__
@@ -558,7 +639,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2524 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2524;
 #endif
 
-constexpr picture picture_release_event_2524 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2524.jpg)XYX"sv, release_event_pic_orig_2524, release_event_mime_type_orig_2524, release_event_file_ext_orig_2524, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2524.jpg)XYX"sv, release_event_pic_small_thumb_2524, release_event_mime_type_small_thumb_2524, release_event_file_ext_small_thumb_2524, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2524.jpg)XYX"sv, release_event_pic_thumb_2524, release_event_mime_type_thumb_2524, release_event_file_ext_thumb_2524, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2524.jpg)XYX"sv, release_event_pic_tiny_thumb_2524, release_event_mime_type_tiny_thumb_2524, release_event_file_ext_tiny_thumb_2524  };
+constexpr picture picture_release_event_2524 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2524.jpg?v=6)XYX"sv, release_event_pic_orig_2524, release_event_mime_type_orig_2524, release_event_file_ext_orig_2524, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2524.jpg?v=6)XYX"sv, release_event_pic_small_thumb_2524, release_event_mime_type_small_thumb_2524, release_event_file_ext_small_thumb_2524, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2524.jpg?v=6)XYX"sv, release_event_pic_thumb_2524, release_event_mime_type_thumb_2524, release_event_file_ext_thumb_2524, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2524.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_2524, release_event_mime_type_tiny_thumb_2524, release_event_file_ext_tiny_thumb_2524  };
 
 constexpr std::array<additional_name, 4> names_release_event_2510 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2013 Sapporo)XYX"sv},
@@ -600,9 +681,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2510 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2510;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2510") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2510 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2510"
+});
+constexpr std::string_view release_event_mime_type_thumb_2510 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2510 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2510;
 constexpr std::string_view release_event_mime_type_thumb_2510 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2510;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2510") == __STDC_EMBED_FOUND__
@@ -617,7 +707,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2510 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2510;
 #endif
 
-constexpr picture picture_release_event_2510 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2510.jpg)XYX"sv, release_event_pic_orig_2510, release_event_mime_type_orig_2510, release_event_file_ext_orig_2510, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2510.jpg)XYX"sv, release_event_pic_small_thumb_2510, release_event_mime_type_small_thumb_2510, release_event_file_ext_small_thumb_2510, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2510.jpg)XYX"sv, release_event_pic_thumb_2510, release_event_mime_type_thumb_2510, release_event_file_ext_thumb_2510, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2510.jpg)XYX"sv, release_event_pic_tiny_thumb_2510, release_event_mime_type_tiny_thumb_2510, release_event_file_ext_tiny_thumb_2510  };
+constexpr picture picture_release_event_2510 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2510.jpg?v=9)XYX"sv, release_event_pic_orig_2510, release_event_mime_type_orig_2510, release_event_file_ext_orig_2510, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2510.jpg?v=9)XYX"sv, release_event_pic_small_thumb_2510, release_event_mime_type_small_thumb_2510, release_event_file_ext_small_thumb_2510, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2510.jpg?v=9)XYX"sv, release_event_pic_thumb_2510, release_event_mime_type_thumb_2510, release_event_file_ext_thumb_2510, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2510.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_2510, release_event_mime_type_tiny_thumb_2510, release_event_file_ext_tiny_thumb_2510  };
 
 constexpr std::array<additional_name, 4> names_release_event_2511 {{
   {"English"sv, R"XYX(Hatsune Miku Live Party 2013 Kansai)XYX"sv},
@@ -658,9 +748,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2511 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2511;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2511") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2511 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2511"
+});
+constexpr std::string_view release_event_mime_type_thumb_2511 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2511 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2511;
 constexpr std::string_view release_event_mime_type_thumb_2511 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2511;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2511") == __STDC_EMBED_FOUND__
@@ -675,7 +774,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2511 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2511;
 #endif
 
-constexpr picture picture_release_event_2511 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2511.jpg)XYX"sv, release_event_pic_orig_2511, release_event_mime_type_orig_2511, release_event_file_ext_orig_2511, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2511.jpg)XYX"sv, release_event_pic_small_thumb_2511, release_event_mime_type_small_thumb_2511, release_event_file_ext_small_thumb_2511, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2511.jpg)XYX"sv, release_event_pic_thumb_2511, release_event_mime_type_thumb_2511, release_event_file_ext_thumb_2511, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2511.jpg)XYX"sv, release_event_pic_tiny_thumb_2511, release_event_mime_type_tiny_thumb_2511, release_event_file_ext_tiny_thumb_2511  };
+constexpr picture picture_release_event_2511 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2511.jpg?v=10)XYX"sv, release_event_pic_orig_2511, release_event_mime_type_orig_2511, release_event_file_ext_orig_2511, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2511.jpg?v=10)XYX"sv, release_event_pic_small_thumb_2511, release_event_mime_type_small_thumb_2511, release_event_file_ext_small_thumb_2511, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2511.jpg?v=10)XYX"sv, release_event_pic_thumb_2511, release_event_mime_type_thumb_2511, release_event_file_ext_thumb_2511, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2511.jpg?v=10)XYX"sv, release_event_pic_tiny_thumb_2511, release_event_mime_type_tiny_thumb_2511, release_event_file_ext_tiny_thumb_2511  };
 
 constexpr std::array<additional_name, 4> names_release_event_2519 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2013」)XYX"sv},
@@ -714,9 +813,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2519 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2519;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2519") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2519 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2519"
+});
+constexpr std::string_view release_event_mime_type_thumb_2519 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2519 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2519;
 constexpr std::string_view release_event_mime_type_thumb_2519 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2519;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2519") == __STDC_EMBED_FOUND__
@@ -731,7 +839,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2519 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2519;
 #endif
 
-constexpr picture picture_release_event_2519 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2519.jpg)XYX"sv, release_event_pic_orig_2519, release_event_mime_type_orig_2519, release_event_file_ext_orig_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2519.jpg)XYX"sv, release_event_pic_small_thumb_2519, release_event_mime_type_small_thumb_2519, release_event_file_ext_small_thumb_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2519.jpg)XYX"sv, release_event_pic_thumb_2519, release_event_mime_type_thumb_2519, release_event_file_ext_thumb_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2519.jpg)XYX"sv, release_event_pic_tiny_thumb_2519, release_event_mime_type_tiny_thumb_2519, release_event_file_ext_tiny_thumb_2519  };
+constexpr picture picture_release_event_2519 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2519.jpg?v=4)XYX"sv, release_event_pic_orig_2519, release_event_mime_type_orig_2519, release_event_file_ext_orig_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2519.jpg?v=4)XYX"sv, release_event_pic_small_thumb_2519, release_event_mime_type_small_thumb_2519, release_event_file_ext_small_thumb_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2519.jpg?v=4)XYX"sv, release_event_pic_thumb_2519, release_event_mime_type_thumb_2519, release_event_file_ext_thumb_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2519.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_2519, release_event_mime_type_tiny_thumb_2519, release_event_file_ext_tiny_thumb_2519  };
 
 constexpr std::array<additional_name, 2> names_release_event_1939 {{
   {"English"sv, R"XYX(Miku Expo 2014 Jakarta)XYX"sv},
@@ -773,9 +881,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1939 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1939;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1939") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1939 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1939"
+});
+constexpr std::string_view release_event_mime_type_thumb_1939 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1939 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1939;
 constexpr std::string_view release_event_mime_type_thumb_1939 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1939;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1939") == __STDC_EMBED_FOUND__
@@ -790,7 +907,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1939 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1939;
 #endif
 
-constexpr picture picture_release_event_1939 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1939.png)XYX"sv, release_event_pic_orig_1939, release_event_mime_type_orig_1939, release_event_file_ext_orig_1939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1939.png)XYX"sv, release_event_pic_small_thumb_1939, release_event_mime_type_small_thumb_1939, release_event_file_ext_small_thumb_1939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1939.png)XYX"sv, release_event_pic_thumb_1939, release_event_mime_type_thumb_1939, release_event_file_ext_thumb_1939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1939.png)XYX"sv, release_event_pic_tiny_thumb_1939, release_event_mime_type_tiny_thumb_1939, release_event_file_ext_tiny_thumb_1939  };
+constexpr picture picture_release_event_1939 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1939.png?v=10)XYX"sv, release_event_pic_orig_1939, release_event_mime_type_orig_1939, release_event_file_ext_orig_1939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1939.png?v=10)XYX"sv, release_event_pic_small_thumb_1939, release_event_mime_type_small_thumb_1939, release_event_file_ext_small_thumb_1939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1939.png?v=10)XYX"sv, release_event_pic_thumb_1939, release_event_mime_type_thumb_1939, release_event_file_ext_thumb_1939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1939.png?v=10)XYX"sv, release_event_pic_tiny_thumb_1939, release_event_mime_type_tiny_thumb_1939, release_event_file_ext_tiny_thumb_1939  };
 
 constexpr std::array<additional_name, 4> names_release_event_2517 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2014」in OSAKA)XYX"sv},
@@ -832,9 +949,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2517 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2517;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2517") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2517 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2517"
+});
+constexpr std::string_view release_event_mime_type_thumb_2517 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2517 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2517;
 constexpr std::string_view release_event_mime_type_thumb_2517 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2517;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2517") == __STDC_EMBED_FOUND__
@@ -849,7 +975,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2517 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2517;
 #endif
 
-constexpr picture picture_release_event_2517 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2517.jpg)XYX"sv, release_event_pic_orig_2517, release_event_mime_type_orig_2517, release_event_file_ext_orig_2517, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2517.jpg)XYX"sv, release_event_pic_small_thumb_2517, release_event_mime_type_small_thumb_2517, release_event_file_ext_small_thumb_2517, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2517.jpg)XYX"sv, release_event_pic_thumb_2517, release_event_mime_type_thumb_2517, release_event_file_ext_thumb_2517, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2517.jpg)XYX"sv, release_event_pic_tiny_thumb_2517, release_event_mime_type_tiny_thumb_2517, release_event_file_ext_tiny_thumb_2517  };
+constexpr picture picture_release_event_2517 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2517.jpg?v=6)XYX"sv, release_event_pic_orig_2517, release_event_mime_type_orig_2517, release_event_file_ext_orig_2517, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2517.jpg?v=6)XYX"sv, release_event_pic_small_thumb_2517, release_event_mime_type_small_thumb_2517, release_event_file_ext_small_thumb_2517, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2517.jpg?v=6)XYX"sv, release_event_pic_thumb_2517, release_event_mime_type_thumb_2517, release_event_file_ext_thumb_2517, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2517.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_2517, release_event_mime_type_tiny_thumb_2517, release_event_file_ext_tiny_thumb_2517  };
 
 constexpr std::array<additional_name, 1> names_release_event_1937 {{
   {"English"sv, R"XYX(Miku Expo 2014 Los Angeles)XYX"sv},
@@ -885,9 +1011,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1937 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1937;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1937") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1937 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1937"
+});
+constexpr std::string_view release_event_mime_type_thumb_1937 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1937 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1937;
 constexpr std::string_view release_event_mime_type_thumb_1937 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1937;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1937") == __STDC_EMBED_FOUND__
@@ -902,7 +1037,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1937 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1937;
 #endif
 
-constexpr picture picture_release_event_1937 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1937.png)XYX"sv, release_event_pic_orig_1937, release_event_mime_type_orig_1937, release_event_file_ext_orig_1937, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1937.png)XYX"sv, release_event_pic_small_thumb_1937, release_event_mime_type_small_thumb_1937, release_event_file_ext_small_thumb_1937, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1937.png)XYX"sv, release_event_pic_thumb_1937, release_event_mime_type_thumb_1937, release_event_file_ext_thumb_1937, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1937.png)XYX"sv, release_event_pic_tiny_thumb_1937, release_event_mime_type_tiny_thumb_1937, release_event_file_ext_tiny_thumb_1937  };
+constexpr picture picture_release_event_1937 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1937.png?v=4)XYX"sv, release_event_pic_orig_1937, release_event_mime_type_orig_1937, release_event_file_ext_orig_1937, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1937.png?v=4)XYX"sv, release_event_pic_small_thumb_1937, release_event_mime_type_small_thumb_1937, release_event_file_ext_small_thumb_1937, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1937.png?v=4)XYX"sv, release_event_pic_thumb_1937, release_event_mime_type_thumb_1937, release_event_file_ext_thumb_1937, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1937.png?v=4)XYX"sv, release_event_pic_tiny_thumb_1937, release_event_mime_type_tiny_thumb_1937, release_event_file_ext_tiny_thumb_1937  };
 
 constexpr std::array<additional_name, 1> names_release_event_3792 {{
   {"English"sv, R"XYX(SNOW MIKU LIVE! 2015 presents MIKU EXPO Live Set)XYX"sv},
@@ -939,9 +1074,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_3792 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_3792;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_3792") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_3792 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_3792"
+});
+constexpr std::string_view release_event_mime_type_thumb_3792 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_3792 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_3792;
 constexpr std::string_view release_event_mime_type_thumb_3792 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_3792;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_3792") == __STDC_EMBED_FOUND__
@@ -956,7 +1100,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_3792 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_3792;
 #endif
 
-constexpr picture picture_release_event_3792 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3792.jpg)XYX"sv, release_event_pic_orig_3792, release_event_mime_type_orig_3792, release_event_file_ext_orig_3792, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3792.jpg)XYX"sv, release_event_pic_small_thumb_3792, release_event_mime_type_small_thumb_3792, release_event_file_ext_small_thumb_3792, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3792.jpg)XYX"sv, release_event_pic_thumb_3792, release_event_mime_type_thumb_3792, release_event_file_ext_thumb_3792, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3792.jpg)XYX"sv, release_event_pic_tiny_thumb_3792, release_event_mime_type_tiny_thumb_3792, release_event_file_ext_tiny_thumb_3792  };
+constexpr picture picture_release_event_3792 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3792.jpg?v=4)XYX"sv, release_event_pic_orig_3792, release_event_mime_type_orig_3792, release_event_file_ext_orig_3792, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3792.jpg?v=4)XYX"sv, release_event_pic_small_thumb_3792, release_event_mime_type_small_thumb_3792, release_event_file_ext_small_thumb_3792, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3792.jpg?v=4)XYX"sv, release_event_pic_thumb_3792, release_event_mime_type_thumb_3792, release_event_file_ext_thumb_3792, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3792.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_3792, release_event_mime_type_tiny_thumb_3792, release_event_file_ext_tiny_thumb_3792  };
 
 constexpr std::array<additional_name, 1> names_release_event_1940 {{
   {"English"sv, R"XYX(Miku Expo 2015 Shanghai)XYX"sv},
@@ -992,9 +1136,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1940 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1940;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1940") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1940 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1940"
+});
+constexpr std::string_view release_event_mime_type_thumb_1940 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1940 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1940;
 constexpr std::string_view release_event_mime_type_thumb_1940 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1940;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1940") == __STDC_EMBED_FOUND__
@@ -1009,7 +1162,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1940 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1940;
 #endif
 
-constexpr picture picture_release_event_1940 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1940.png)XYX"sv, release_event_pic_orig_1940, release_event_mime_type_orig_1940, release_event_file_ext_orig_1940, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1940.png)XYX"sv, release_event_pic_small_thumb_1940, release_event_mime_type_small_thumb_1940, release_event_file_ext_small_thumb_1940, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1940.png)XYX"sv, release_event_pic_thumb_1940, release_event_mime_type_thumb_1940, release_event_file_ext_thumb_1940, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1940.png)XYX"sv, release_event_pic_tiny_thumb_1940, release_event_mime_type_tiny_thumb_1940, release_event_file_ext_tiny_thumb_1940  };
+constexpr picture picture_release_event_1940 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1940.png?v=3)XYX"sv, release_event_pic_orig_1940, release_event_mime_type_orig_1940, release_event_file_ext_orig_1940, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1940.png?v=3)XYX"sv, release_event_pic_small_thumb_1940, release_event_mime_type_small_thumb_1940, release_event_file_ext_small_thumb_1940, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1940.png?v=3)XYX"sv, release_event_pic_thumb_1940, release_event_mime_type_thumb_1940, release_event_file_ext_thumb_1940, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1940.png?v=3)XYX"sv, release_event_pic_tiny_thumb_1940, release_event_mime_type_tiny_thumb_1940, release_event_file_ext_tiny_thumb_1940  };
 
 constexpr std::array<additional_name, 4> names_release_event_2514 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2015」)XYX"sv},
@@ -1049,9 +1202,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2514 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2514;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2514") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2514 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2514"
+});
+constexpr std::string_view release_event_mime_type_thumb_2514 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2514 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2514;
 constexpr std::string_view release_event_mime_type_thumb_2514 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2514;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2514") == __STDC_EMBED_FOUND__
@@ -1066,7 +1228,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2514 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2514;
 #endif
 
-constexpr picture picture_release_event_2514 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2514.jpg)XYX"sv, release_event_pic_orig_2514, release_event_mime_type_orig_2514, release_event_file_ext_orig_2514, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2514.jpg)XYX"sv, release_event_pic_small_thumb_2514, release_event_mime_type_small_thumb_2514, release_event_file_ext_small_thumb_2514, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2514.jpg)XYX"sv, release_event_pic_thumb_2514, release_event_mime_type_thumb_2514, release_event_file_ext_thumb_2514, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2514.jpg)XYX"sv, release_event_pic_tiny_thumb_2514, release_event_mime_type_tiny_thumb_2514, release_event_file_ext_tiny_thumb_2514  };
+constexpr picture picture_release_event_2514 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2514.jpg?v=4)XYX"sv, release_event_pic_orig_2514, release_event_mime_type_orig_2514, release_event_file_ext_orig_2514, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2514.jpg?v=4)XYX"sv, release_event_pic_small_thumb_2514, release_event_mime_type_small_thumb_2514, release_event_file_ext_small_thumb_2514, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2514.jpg?v=4)XYX"sv, release_event_pic_thumb_2514, release_event_mime_type_thumb_2514, release_event_file_ext_thumb_2514, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2514.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_2514, release_event_mime_type_tiny_thumb_2514, release_event_file_ext_tiny_thumb_2514  };
 
 constexpr std::array<additional_name, 1> names_release_event_1399 {{
   {"English"sv, R"XYX(Miku Expo 2016 Fukuoka)XYX"sv},
@@ -1101,9 +1263,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1399 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1399;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1399") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1399 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1399"
+});
+constexpr std::string_view release_event_mime_type_thumb_1399 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1399 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1399;
 constexpr std::string_view release_event_mime_type_thumb_1399 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1399;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1399") == __STDC_EMBED_FOUND__
@@ -1118,7 +1289,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1399 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1399;
 #endif
 
-constexpr picture picture_release_event_1399 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1399.jpg)XYX"sv, release_event_pic_orig_1399, release_event_mime_type_orig_1399, release_event_file_ext_orig_1399, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1399.jpg)XYX"sv, release_event_pic_small_thumb_1399, release_event_mime_type_small_thumb_1399, release_event_file_ext_small_thumb_1399, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1399.jpg)XYX"sv, release_event_pic_thumb_1399, release_event_mime_type_thumb_1399, release_event_file_ext_thumb_1399, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1399.jpg)XYX"sv, release_event_pic_tiny_thumb_1399, release_event_mime_type_tiny_thumb_1399, release_event_file_ext_tiny_thumb_1399  };
+constexpr picture picture_release_event_1399 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1399.jpg?v=8)XYX"sv, release_event_pic_orig_1399, release_event_mime_type_orig_1399, release_event_file_ext_orig_1399, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1399.jpg?v=8)XYX"sv, release_event_pic_small_thumb_1399, release_event_mime_type_small_thumb_1399, release_event_file_ext_small_thumb_1399, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1399.jpg?v=8)XYX"sv, release_event_pic_thumb_1399, release_event_mime_type_thumb_1399, release_event_file_ext_thumb_1399, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1399.jpg?v=8)XYX"sv, release_event_pic_tiny_thumb_1399, release_event_mime_type_tiny_thumb_1399, release_event_file_ext_tiny_thumb_1399  };
 
 constexpr std::array<additional_name, 1> names_release_event_1859 {{
   {"English"sv, R"XYX(Miku Expo 2016 Seattle)XYX"sv},
@@ -1155,9 +1326,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1859 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1859;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1859") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1859 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1859"
+});
+constexpr std::string_view release_event_mime_type_thumb_1859 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1859 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1859;
 constexpr std::string_view release_event_mime_type_thumb_1859 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1859;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1859") == __STDC_EMBED_FOUND__
@@ -1172,7 +1352,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1859 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1859;
 #endif
 
-constexpr picture picture_release_event_1859 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1859.jpg)XYX"sv, release_event_pic_orig_1859, release_event_mime_type_orig_1859, release_event_file_ext_orig_1859, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1859.jpg)XYX"sv, release_event_pic_small_thumb_1859, release_event_mime_type_small_thumb_1859, release_event_file_ext_small_thumb_1859, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1859.jpg)XYX"sv, release_event_pic_thumb_1859, release_event_mime_type_thumb_1859, release_event_file_ext_thumb_1859, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1859.jpg)XYX"sv, release_event_pic_tiny_thumb_1859, release_event_mime_type_tiny_thumb_1859, release_event_file_ext_tiny_thumb_1859  };
+constexpr picture picture_release_event_1859 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1859.jpg?v=5)XYX"sv, release_event_pic_orig_1859, release_event_mime_type_orig_1859, release_event_file_ext_orig_1859, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1859.jpg?v=5)XYX"sv, release_event_pic_small_thumb_1859, release_event_mime_type_small_thumb_1859, release_event_file_ext_small_thumb_1859, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1859.jpg?v=5)XYX"sv, release_event_pic_thumb_1859, release_event_mime_type_thumb_1859, release_event_file_ext_thumb_1859, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1859.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_1859, release_event_mime_type_tiny_thumb_1859, release_event_file_ext_tiny_thumb_1859  };
 
 constexpr std::array<additional_name, 1> names_release_event_1941 {{
   {"English"sv, R"XYX(Miku Expo 2016 New Taipei City)XYX"sv},
@@ -1211,9 +1391,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1941 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1941;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1941") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1941 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1941"
+});
+constexpr std::string_view release_event_mime_type_thumb_1941 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1941 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1941;
 constexpr std::string_view release_event_mime_type_thumb_1941 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1941;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1941") == __STDC_EMBED_FOUND__
@@ -1228,7 +1417,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1941 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1941;
 #endif
 
-constexpr picture picture_release_event_1941 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1941.jpg)XYX"sv, release_event_pic_orig_1941, release_event_mime_type_orig_1941, release_event_file_ext_orig_1941, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1941.jpg)XYX"sv, release_event_pic_small_thumb_1941, release_event_mime_type_small_thumb_1941, release_event_file_ext_small_thumb_1941, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1941.jpg)XYX"sv, release_event_pic_thumb_1941, release_event_mime_type_thumb_1941, release_event_file_ext_thumb_1941, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1941.jpg)XYX"sv, release_event_pic_tiny_thumb_1941, release_event_mime_type_tiny_thumb_1941, release_event_file_ext_tiny_thumb_1941  };
+constexpr picture picture_release_event_1941 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1941.jpg?v=4)XYX"sv, release_event_pic_orig_1941, release_event_mime_type_orig_1941, release_event_file_ext_orig_1941, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1941.jpg?v=4)XYX"sv, release_event_pic_small_thumb_1941, release_event_mime_type_small_thumb_1941, release_event_file_ext_small_thumb_1941, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1941.jpg?v=4)XYX"sv, release_event_pic_thumb_1941, release_event_mime_type_thumb_1941, release_event_file_ext_thumb_1941, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1941.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_1941, release_event_mime_type_tiny_thumb_1941, release_event_file_ext_tiny_thumb_1941  };
 
 constexpr std::array<additional_name, 4> names_release_event_1398 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2016」)XYX"sv},
@@ -1268,9 +1457,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1398 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1398;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1398") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1398 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1398"
+});
+constexpr std::string_view release_event_mime_type_thumb_1398 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1398 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1398;
 constexpr std::string_view release_event_mime_type_thumb_1398 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1398;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1398") == __STDC_EMBED_FOUND__
@@ -1285,7 +1483,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1398 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1398;
 #endif
 
-constexpr picture picture_release_event_1398 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1398.jpg)XYX"sv, release_event_pic_orig_1398, release_event_mime_type_orig_1398, release_event_file_ext_orig_1398, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1398.jpg)XYX"sv, release_event_pic_small_thumb_1398, release_event_mime_type_small_thumb_1398, release_event_file_ext_small_thumb_1398, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1398.jpg)XYX"sv, release_event_pic_thumb_1398, release_event_mime_type_thumb_1398, release_event_file_ext_thumb_1398, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1398.jpg)XYX"sv, release_event_pic_tiny_thumb_1398, release_event_mime_type_tiny_thumb_1398, release_event_file_ext_tiny_thumb_1398  };
+constexpr picture picture_release_event_1398 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1398.jpg?v=3)XYX"sv, release_event_pic_orig_1398, release_event_mime_type_orig_1398, release_event_file_ext_orig_1398, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1398.jpg?v=3)XYX"sv, release_event_pic_small_thumb_1398, release_event_mime_type_small_thumb_1398, release_event_file_ext_small_thumb_1398, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1398.jpg?v=3)XYX"sv, release_event_pic_thumb_1398, release_event_mime_type_thumb_1398, release_event_file_ext_thumb_1398, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1398.jpg?v=3)XYX"sv, release_event_pic_tiny_thumb_1398, release_event_mime_type_tiny_thumb_1398, release_event_file_ext_tiny_thumb_1398  };
 
 constexpr std::array<additional_name, 1> names_release_event_1943 {{
   {"English"sv, R"XYX(Miku Expo 2016 Shanghai)XYX"sv},
@@ -1320,9 +1518,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1943 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1943;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1943") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1943 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1943"
+});
+constexpr std::string_view release_event_mime_type_thumb_1943 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1943 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1943;
 constexpr std::string_view release_event_mime_type_thumb_1943 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1943;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1943") == __STDC_EMBED_FOUND__
@@ -1337,7 +1544,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1943 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1943;
 #endif
 
-constexpr picture picture_release_event_1943 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainOrig/82.jpg)XYX"sv, release_event_pic_orig_1943, release_event_mime_type_orig_1943, release_event_file_ext_orig_1943, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainSmall/82.jpg)XYX"sv, release_event_pic_small_thumb_1943, release_event_mime_type_small_thumb_1943, release_event_file_ext_small_thumb_1943, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainThumb/82.jpg)XYX"sv, release_event_pic_thumb_1943, release_event_mime_type_thumb_1943, release_event_file_ext_thumb_1943, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainTiny/82.jpg)XYX"sv, release_event_pic_tiny_thumb_1943, release_event_mime_type_tiny_thumb_1943, release_event_file_ext_tiny_thumb_1943  };
+constexpr picture picture_release_event_1943 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainOrig/82.jpg?v=4)XYX"sv, release_event_pic_orig_1943, release_event_mime_type_orig_1943, release_event_file_ext_orig_1943, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainSmall/82.jpg?v=4)XYX"sv, release_event_pic_small_thumb_1943, release_event_mime_type_small_thumb_1943, release_event_file_ext_small_thumb_1943, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainThumb/82.jpg?v=4)XYX"sv, release_event_pic_thumb_1943, release_event_mime_type_thumb_1943, release_event_file_ext_thumb_1943, R"XYX(https://static.vocadb.net/img/ReleaseEventSeries/mainTiny/82.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_1943, release_event_mime_type_tiny_thumb_1943, release_event_file_ext_tiny_thumb_1943  };
 
 constexpr std::array<additional_name, 4> names_release_event_2947 {{
   {"Japanese"sv, R"XYX(初音ミク×鼓童スペシャルライブ)XYX"sv},
@@ -1376,9 +1583,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2947 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2947;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2947") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2947 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2947"
+});
+constexpr std::string_view release_event_mime_type_thumb_2947 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2947 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2947;
 constexpr std::string_view release_event_mime_type_thumb_2947 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2947;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2947") == __STDC_EMBED_FOUND__
@@ -1393,7 +1609,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2947 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2947;
 #endif
 
-constexpr picture picture_release_event_2947 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2947.jpg)XYX"sv, release_event_pic_orig_2947, release_event_mime_type_orig_2947, release_event_file_ext_orig_2947, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2947.jpg)XYX"sv, release_event_pic_small_thumb_2947, release_event_mime_type_small_thumb_2947, release_event_file_ext_small_thumb_2947, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2947.jpg)XYX"sv, release_event_pic_thumb_2947, release_event_mime_type_thumb_2947, release_event_file_ext_thumb_2947, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2947.jpg)XYX"sv, release_event_pic_tiny_thumb_2947, release_event_mime_type_tiny_thumb_2947, release_event_file_ext_tiny_thumb_2947  };
+constexpr picture picture_release_event_2947 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2947.jpg?v=3)XYX"sv, release_event_pic_orig_2947, release_event_mime_type_orig_2947, release_event_file_ext_orig_2947, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2947.jpg?v=3)XYX"sv, release_event_pic_small_thumb_2947, release_event_mime_type_small_thumb_2947, release_event_file_ext_small_thumb_2947, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2947.jpg?v=3)XYX"sv, release_event_pic_thumb_2947, release_event_mime_type_thumb_2947, release_event_file_ext_thumb_2947, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2947.jpg?v=3)XYX"sv, release_event_pic_tiny_thumb_2947, release_event_mime_type_tiny_thumb_2947, release_event_file_ext_tiny_thumb_2947  };
 
 constexpr std::array<additional_name, 4> names_release_event_1397 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2017」)XYX"sv},
@@ -1434,9 +1650,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1397 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1397;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1397") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1397 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1397"
+});
+constexpr std::string_view release_event_mime_type_thumb_1397 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1397 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1397;
 constexpr std::string_view release_event_mime_type_thumb_1397 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1397;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1397") == __STDC_EMBED_FOUND__
@@ -1451,7 +1676,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1397 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1397;
 #endif
 
-constexpr picture picture_release_event_1397 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1397.jpg)XYX"sv, release_event_pic_orig_1397, release_event_mime_type_orig_1397, release_event_file_ext_orig_1397, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1397.jpg)XYX"sv, release_event_pic_small_thumb_1397, release_event_mime_type_small_thumb_1397, release_event_file_ext_small_thumb_1397, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1397.jpg)XYX"sv, release_event_pic_thumb_1397, release_event_mime_type_thumb_1397, release_event_file_ext_thumb_1397, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1397.jpg)XYX"sv, release_event_pic_tiny_thumb_1397, release_event_mime_type_tiny_thumb_1397, release_event_file_ext_tiny_thumb_1397  };
+constexpr picture picture_release_event_1397 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1397.jpg?v=13)XYX"sv, release_event_pic_orig_1397, release_event_mime_type_orig_1397, release_event_file_ext_orig_1397, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1397.jpg?v=13)XYX"sv, release_event_pic_small_thumb_1397, release_event_mime_type_small_thumb_1397, release_event_file_ext_small_thumb_1397, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1397.jpg?v=13)XYX"sv, release_event_pic_thumb_1397, release_event_mime_type_thumb_1397, release_event_file_ext_thumb_1397, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1397.jpg?v=13)XYX"sv, release_event_pic_tiny_thumb_1397, release_event_mime_type_tiny_thumb_1397, release_event_file_ext_tiny_thumb_1397  };
 
 constexpr std::array<additional_name, 3> names_release_event_1619 {{
   {"Unspecified"sv, R"XYX(未来（ミク）には君がいる·初音ミク２０１７上海ライブ)XYX"sv},
@@ -1492,9 +1717,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1619 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1619;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1619") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1619 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1619"
+});
+constexpr std::string_view release_event_mime_type_thumb_1619 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1619 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1619;
 constexpr std::string_view release_event_mime_type_thumb_1619 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1619;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1619") == __STDC_EMBED_FOUND__
@@ -1509,7 +1743,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1619 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1619;
 #endif
 
-constexpr picture picture_release_event_1619 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1619.jpg)XYX"sv, release_event_pic_orig_1619, release_event_mime_type_orig_1619, release_event_file_ext_orig_1619, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1619.jpg)XYX"sv, release_event_pic_small_thumb_1619, release_event_mime_type_small_thumb_1619, release_event_file_ext_small_thumb_1619, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1619.jpg)XYX"sv, release_event_pic_thumb_1619, release_event_mime_type_thumb_1619, release_event_file_ext_thumb_1619, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1619.jpg)XYX"sv, release_event_pic_tiny_thumb_1619, release_event_mime_type_tiny_thumb_1619, release_event_file_ext_tiny_thumb_1619  };
+constexpr picture picture_release_event_1619 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1619.jpg?v=13)XYX"sv, release_event_pic_orig_1619, release_event_mime_type_orig_1619, release_event_file_ext_orig_1619, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1619.jpg?v=13)XYX"sv, release_event_pic_small_thumb_1619, release_event_mime_type_small_thumb_1619, release_event_file_ext_small_thumb_1619, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1619.jpg?v=13)XYX"sv, release_event_pic_thumb_1619, release_event_mime_type_thumb_1619, release_event_file_ext_thumb_1619, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1619.jpg?v=13)XYX"sv, release_event_pic_tiny_thumb_1619, release_event_mime_type_tiny_thumb_1619, release_event_file_ext_tiny_thumb_1619  };
 
 constexpr std::array<additional_name, 1> names_release_event_1584 {{
   {"English"sv, R"XYX(Miku Expo 2017 Kuala Lumpur)XYX"sv},
@@ -1546,9 +1780,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1584 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1584;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1584") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1584 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1584"
+});
+constexpr std::string_view release_event_mime_type_thumb_1584 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1584 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1584;
 constexpr std::string_view release_event_mime_type_thumb_1584 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1584;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1584") == __STDC_EMBED_FOUND__
@@ -1563,7 +1806,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1584 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1584;
 #endif
 
-constexpr picture picture_release_event_1584 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1584.png)XYX"sv, release_event_pic_orig_1584, release_event_mime_type_orig_1584, release_event_file_ext_orig_1584, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1584.png)XYX"sv, release_event_pic_small_thumb_1584, release_event_mime_type_small_thumb_1584, release_event_file_ext_small_thumb_1584, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1584.png)XYX"sv, release_event_pic_thumb_1584, release_event_mime_type_thumb_1584, release_event_file_ext_thumb_1584, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1584.png)XYX"sv, release_event_pic_tiny_thumb_1584, release_event_mime_type_tiny_thumb_1584, release_event_file_ext_tiny_thumb_1584  };
+constexpr picture picture_release_event_1584 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1584.png?v=6)XYX"sv, release_event_pic_orig_1584, release_event_mime_type_orig_1584, release_event_file_ext_orig_1584, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1584.png?v=6)XYX"sv, release_event_pic_small_thumb_1584, release_event_mime_type_small_thumb_1584, release_event_file_ext_small_thumb_1584, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1584.png?v=6)XYX"sv, release_event_pic_thumb_1584, release_event_mime_type_thumb_1584, release_event_file_ext_thumb_1584, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1584.png?v=6)XYX"sv, release_event_pic_tiny_thumb_1584, release_event_mime_type_tiny_thumb_1584, release_event_file_ext_tiny_thumb_1584  };
 
 constexpr std::array<additional_name, 1> names_release_event_1618 {{
   {"English"sv, R"XYX(SNOW MIKU LIVE! 2018)XYX"sv},
@@ -1599,9 +1842,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1618 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1618;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1618") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1618 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1618"
+});
+constexpr std::string_view release_event_mime_type_thumb_1618 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1618 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1618;
 constexpr std::string_view release_event_mime_type_thumb_1618 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1618;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1618") == __STDC_EMBED_FOUND__
@@ -1616,7 +1868,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1618 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1618;
 #endif
 
-constexpr picture picture_release_event_1618 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1618.jpg)XYX"sv, release_event_pic_orig_1618, release_event_mime_type_orig_1618, release_event_file_ext_orig_1618, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1618.jpg)XYX"sv, release_event_pic_small_thumb_1618, release_event_mime_type_small_thumb_1618, release_event_file_ext_small_thumb_1618, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1618.jpg)XYX"sv, release_event_pic_thumb_1618, release_event_mime_type_thumb_1618, release_event_file_ext_thumb_1618, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1618.jpg)XYX"sv, release_event_pic_tiny_thumb_1618, release_event_mime_type_tiny_thumb_1618, release_event_file_ext_tiny_thumb_1618  };
+constexpr picture picture_release_event_1618 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1618.jpg?v=6)XYX"sv, release_event_pic_orig_1618, release_event_mime_type_orig_1618, release_event_file_ext_orig_1618, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1618.jpg?v=6)XYX"sv, release_event_pic_small_thumb_1618, release_event_mime_type_small_thumb_1618, release_event_file_ext_small_thumb_1618, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1618.jpg?v=6)XYX"sv, release_event_pic_thumb_1618, release_event_mime_type_thumb_1618, release_event_file_ext_thumb_1618, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1618.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_1618, release_event_mime_type_tiny_thumb_1618, release_event_file_ext_tiny_thumb_1618  };
 
 constexpr std::array<additional_name, 2> names_release_event_2948 {{
   {"Japanese"sv, R"XYX(Ｔｈｉｓ　ｉｓ　ＮＩＰＰＯＮ　プレミアムシアター 初音ミク×鼓童　スペシャルライブ　２０１８)XYX"sv},
@@ -1653,9 +1905,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2948 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2948;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2948") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2948 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2948"
+});
+constexpr std::string_view release_event_mime_type_thumb_2948 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2948 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2948;
 constexpr std::string_view release_event_mime_type_thumb_2948 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2948;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2948") == __STDC_EMBED_FOUND__
@@ -1670,7 +1931,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2948 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2948;
 #endif
 
-constexpr picture picture_release_event_2948 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2948.jpg)XYX"sv, release_event_pic_orig_2948, release_event_mime_type_orig_2948, release_event_file_ext_orig_2948, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2948.jpg)XYX"sv, release_event_pic_small_thumb_2948, release_event_mime_type_small_thumb_2948, release_event_file_ext_small_thumb_2948, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2948.jpg)XYX"sv, release_event_pic_thumb_2948, release_event_mime_type_thumb_2948, release_event_file_ext_thumb_2948, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2948.jpg)XYX"sv, release_event_pic_tiny_thumb_2948, release_event_mime_type_tiny_thumb_2948, release_event_file_ext_tiny_thumb_2948  };
+constexpr picture picture_release_event_2948 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2948.jpg?v=5)XYX"sv, release_event_pic_orig_2948, release_event_mime_type_orig_2948, release_event_file_ext_orig_2948, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2948.jpg?v=5)XYX"sv, release_event_pic_small_thumb_2948, release_event_mime_type_small_thumb_2948, release_event_file_ext_small_thumb_2948, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2948.jpg?v=5)XYX"sv, release_event_pic_thumb_2948, release_event_mime_type_thumb_2948, release_event_file_ext_thumb_2948, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2948.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_2948, release_event_mime_type_tiny_thumb_2948, release_event_file_ext_tiny_thumb_2948  };
 
 constexpr std::array<additional_name, 1> names_release_event_1673 {{
   {"English"sv, R"XYX(Miku Expo 2018 Los Angeles)XYX"sv},
@@ -1705,9 +1966,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1673 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1673;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1673") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1673 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1673"
+});
+constexpr std::string_view release_event_mime_type_thumb_1673 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1673 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1673;
 constexpr std::string_view release_event_mime_type_thumb_1673 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1673;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1673") == __STDC_EMBED_FOUND__
@@ -1722,7 +1992,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1673 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1673;
 #endif
 
-constexpr picture picture_release_event_1673 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1673.jpg)XYX"sv, release_event_pic_orig_1673, release_event_mime_type_orig_1673, release_event_file_ext_orig_1673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1673.jpg)XYX"sv, release_event_pic_small_thumb_1673, release_event_mime_type_small_thumb_1673, release_event_file_ext_small_thumb_1673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1673.jpg)XYX"sv, release_event_pic_thumb_1673, release_event_mime_type_thumb_1673, release_event_file_ext_thumb_1673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1673.jpg)XYX"sv, release_event_pic_tiny_thumb_1673, release_event_mime_type_tiny_thumb_1673, release_event_file_ext_tiny_thumb_1673  };
+constexpr picture picture_release_event_1673 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1673.jpg?v=3)XYX"sv, release_event_pic_orig_1673, release_event_mime_type_orig_1673, release_event_file_ext_orig_1673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1673.jpg?v=3)XYX"sv, release_event_pic_small_thumb_1673, release_event_mime_type_small_thumb_1673, release_event_file_ext_small_thumb_1673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1673.jpg?v=3)XYX"sv, release_event_pic_thumb_1673, release_event_mime_type_thumb_1673, release_event_file_ext_thumb_1673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1673.jpg?v=3)XYX"sv, release_event_pic_tiny_thumb_1673, release_event_mime_type_tiny_thumb_1673, release_event_file_ext_tiny_thumb_1673  };
 
 constexpr std::array<additional_name, 4> names_release_event_1561 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2018」in OSAKA)XYX"sv},
@@ -1764,9 +2034,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1561 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1561;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1561") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1561 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1561"
+});
+constexpr std::string_view release_event_mime_type_thumb_1561 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1561 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1561;
 constexpr std::string_view release_event_mime_type_thumb_1561 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1561;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1561") == __STDC_EMBED_FOUND__
@@ -1781,7 +2060,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1561 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1561;
 #endif
 
-constexpr picture picture_release_event_1561 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1561.jpg)XYX"sv, release_event_pic_orig_1561, release_event_mime_type_orig_1561, release_event_file_ext_orig_1561, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1561.jpg)XYX"sv, release_event_pic_small_thumb_1561, release_event_mime_type_small_thumb_1561, release_event_file_ext_small_thumb_1561, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1561.jpg)XYX"sv, release_event_pic_thumb_1561, release_event_mime_type_thumb_1561, release_event_file_ext_thumb_1561, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1561.jpg)XYX"sv, release_event_pic_tiny_thumb_1561, release_event_mime_type_tiny_thumb_1561, release_event_file_ext_tiny_thumb_1561  };
+constexpr picture picture_release_event_1561 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1561.jpg?v=13)XYX"sv, release_event_pic_orig_1561, release_event_mime_type_orig_1561, release_event_file_ext_orig_1561, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1561.jpg?v=13)XYX"sv, release_event_pic_small_thumb_1561, release_event_mime_type_small_thumb_1561, release_event_file_ext_small_thumb_1561, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1561.jpg?v=13)XYX"sv, release_event_pic_thumb_1561, release_event_mime_type_thumb_1561, release_event_file_ext_thumb_1561, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1561.jpg?v=13)XYX"sv, release_event_pic_tiny_thumb_1561, release_event_mime_type_tiny_thumb_1561, release_event_file_ext_tiny_thumb_1561  };
 
 constexpr std::array<additional_name, 3> names_release_event_2085 {{
   {"English"sv, R"XYX(MIKU WITH YOU 2018 in Beijing)XYX"sv},
@@ -1821,9 +2100,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2085 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2085;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2085") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2085 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2085"
+});
+constexpr std::string_view release_event_mime_type_thumb_2085 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2085 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2085;
 constexpr std::string_view release_event_mime_type_thumb_2085 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2085;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2085") == __STDC_EMBED_FOUND__
@@ -1838,7 +2126,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2085 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2085;
 #endif
 
-constexpr picture picture_release_event_2085 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2085.jpg)XYX"sv, release_event_pic_orig_2085, release_event_mime_type_orig_2085, release_event_file_ext_orig_2085, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2085.jpg)XYX"sv, release_event_pic_small_thumb_2085, release_event_mime_type_small_thumb_2085, release_event_file_ext_small_thumb_2085, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2085.jpg)XYX"sv, release_event_pic_thumb_2085, release_event_mime_type_thumb_2085, release_event_file_ext_thumb_2085, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2085.jpg)XYX"sv, release_event_pic_tiny_thumb_2085, release_event_mime_type_tiny_thumb_2085, release_event_file_ext_tiny_thumb_2085  };
+constexpr picture picture_release_event_2085 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2085.jpg?v=14)XYX"sv, release_event_pic_orig_2085, release_event_mime_type_orig_2085, release_event_file_ext_orig_2085, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2085.jpg?v=14)XYX"sv, release_event_pic_small_thumb_2085, release_event_mime_type_small_thumb_2085, release_event_file_ext_small_thumb_2085, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2085.jpg?v=14)XYX"sv, release_event_pic_thumb_2085, release_event_mime_type_thumb_2085, release_event_file_ext_thumb_2085, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2085.jpg?v=14)XYX"sv, release_event_pic_tiny_thumb_2085, release_event_mime_type_tiny_thumb_2085, release_event_file_ext_tiny_thumb_2085  };
 
 constexpr std::array<additional_name, 1> names_release_event_1854 {{
   {"English"sv, R"XYX(Miku Expo 2018 Paris)XYX"sv},
@@ -1876,9 +2164,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_1854 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_1854;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_1854") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_1854 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_1854"
+});
+constexpr std::string_view release_event_mime_type_thumb_1854 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_1854 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_1854;
 constexpr std::string_view release_event_mime_type_thumb_1854 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_1854;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_1854") == __STDC_EMBED_FOUND__
@@ -1893,7 +2190,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_1854 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_1854;
 #endif
 
-constexpr picture picture_release_event_1854 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1854.png)XYX"sv, release_event_pic_orig_1854, release_event_mime_type_orig_1854, release_event_file_ext_orig_1854, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1854.png)XYX"sv, release_event_pic_small_thumb_1854, release_event_mime_type_small_thumb_1854, release_event_file_ext_small_thumb_1854, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1854.png)XYX"sv, release_event_pic_thumb_1854, release_event_mime_type_thumb_1854, release_event_file_ext_thumb_1854, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1854.png)XYX"sv, release_event_pic_tiny_thumb_1854, release_event_mime_type_tiny_thumb_1854, release_event_file_ext_tiny_thumb_1854  };
+constexpr picture picture_release_event_1854 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/1854.png?v=7)XYX"sv, release_event_pic_orig_1854, release_event_mime_type_orig_1854, release_event_file_ext_orig_1854, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/1854.png?v=7)XYX"sv, release_event_pic_small_thumb_1854, release_event_mime_type_small_thumb_1854, release_event_file_ext_small_thumb_1854, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/1854.png?v=7)XYX"sv, release_event_pic_thumb_1854, release_event_mime_type_thumb_1854, release_event_file_ext_thumb_1854, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/1854.png?v=7)XYX"sv, release_event_pic_tiny_thumb_1854, release_event_mime_type_tiny_thumb_1854, release_event_file_ext_tiny_thumb_1854  };
 
 constexpr std::array<additional_name, 1> names_release_event_2422 {{
   {"English"sv, R"XYX(SNOW MIKU LIVE! 2019)XYX"sv},
@@ -1930,9 +2227,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2422 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2422;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2422") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2422 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2422"
+});
+constexpr std::string_view release_event_mime_type_thumb_2422 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2422 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2422;
 constexpr std::string_view release_event_mime_type_thumb_2422 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2422;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2422") == __STDC_EMBED_FOUND__
@@ -1947,7 +2253,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2422 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2422;
 #endif
 
-constexpr picture picture_release_event_2422 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2422.jpg)XYX"sv, release_event_pic_orig_2422, release_event_mime_type_orig_2422, release_event_file_ext_orig_2422, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2422.jpg)XYX"sv, release_event_pic_small_thumb_2422, release_event_mime_type_small_thumb_2422, release_event_file_ext_small_thumb_2422, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2422.jpg)XYX"sv, release_event_pic_thumb_2422, release_event_mime_type_thumb_2422, release_event_file_ext_thumb_2422, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2422.jpg)XYX"sv, release_event_pic_tiny_thumb_2422, release_event_mime_type_tiny_thumb_2422, release_event_file_ext_tiny_thumb_2422  };
+constexpr picture picture_release_event_2422 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2422.jpg?v=14)XYX"sv, release_event_pic_orig_2422, release_event_mime_type_orig_2422, release_event_file_ext_orig_2422, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2422.jpg?v=14)XYX"sv, release_event_pic_small_thumb_2422, release_event_mime_type_small_thumb_2422, release_event_file_ext_small_thumb_2422, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2422.jpg?v=14)XYX"sv, release_event_pic_thumb_2422, release_event_mime_type_thumb_2422, release_event_file_ext_thumb_2422, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2422.jpg?v=14)XYX"sv, release_event_pic_tiny_thumb_2422, release_event_mime_type_tiny_thumb_2422, release_event_file_ext_tiny_thumb_2422  };
 
 constexpr std::array<additional_name, 1> names_release_event_2489 {{
   {"English"sv, R"XYX(Miku Expo 2019 New Taipei City)XYX"sv},
@@ -1983,9 +2289,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2489 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2489;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2489") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2489 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2489"
+});
+constexpr std::string_view release_event_mime_type_thumb_2489 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2489 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2489;
 constexpr std::string_view release_event_mime_type_thumb_2489 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2489;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2489") == __STDC_EMBED_FOUND__
@@ -2000,7 +2315,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2489 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2489;
 #endif
 
-constexpr picture picture_release_event_2489 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2489.jpg)XYX"sv, release_event_pic_orig_2489, release_event_mime_type_orig_2489, release_event_file_ext_orig_2489, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2489.jpg)XYX"sv, release_event_pic_small_thumb_2489, release_event_mime_type_small_thumb_2489, release_event_file_ext_small_thumb_2489, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2489.jpg)XYX"sv, release_event_pic_thumb_2489, release_event_mime_type_thumb_2489, release_event_file_ext_thumb_2489, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2489.jpg)XYX"sv, release_event_pic_tiny_thumb_2489, release_event_mime_type_tiny_thumb_2489, release_event_file_ext_tiny_thumb_2489  };
+constexpr picture picture_release_event_2489 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2489.jpg?v=5)XYX"sv, release_event_pic_orig_2489, release_event_mime_type_orig_2489, release_event_file_ext_orig_2489, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2489.jpg?v=5)XYX"sv, release_event_pic_small_thumb_2489, release_event_mime_type_small_thumb_2489, release_event_file_ext_small_thumb_2489, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2489.jpg?v=5)XYX"sv, release_event_pic_thumb_2489, release_event_mime_type_thumb_2489, release_event_file_ext_thumb_2489, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2489.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_2489, release_event_mime_type_tiny_thumb_2489, release_event_file_ext_tiny_thumb_2489  };
 
 constexpr std::array<additional_name, 4> names_release_event_2515 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2019」in OSAKA)XYX"sv},
@@ -2042,9 +2357,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2515 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2515;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2515") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2515 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2515"
+});
+constexpr std::string_view release_event_mime_type_thumb_2515 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2515 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2515;
 constexpr std::string_view release_event_mime_type_thumb_2515 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2515;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2515") == __STDC_EMBED_FOUND__
@@ -2059,7 +2383,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2515 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2515;
 #endif
 
-constexpr picture picture_release_event_2515 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2515.jpg)XYX"sv, release_event_pic_orig_2515, release_event_mime_type_orig_2515, release_event_file_ext_orig_2515, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2515.jpg)XYX"sv, release_event_pic_small_thumb_2515, release_event_mime_type_small_thumb_2515, release_event_file_ext_small_thumb_2515, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2515.jpg)XYX"sv, release_event_pic_thumb_2515, release_event_mime_type_thumb_2515, release_event_file_ext_thumb_2515, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2515.jpg)XYX"sv, release_event_pic_tiny_thumb_2515, release_event_mime_type_tiny_thumb_2515, release_event_file_ext_tiny_thumb_2515  };
+constexpr picture picture_release_event_2515 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2515.jpg?v=7)XYX"sv, release_event_pic_orig_2515, release_event_mime_type_orig_2515, release_event_file_ext_orig_2515, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2515.jpg?v=7)XYX"sv, release_event_pic_small_thumb_2515, release_event_mime_type_small_thumb_2515, release_event_file_ext_small_thumb_2515, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2515.jpg?v=7)XYX"sv, release_event_pic_thumb_2515, release_event_mime_type_thumb_2515, release_event_file_ext_thumb_2515, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2515.jpg?v=7)XYX"sv, release_event_pic_tiny_thumb_2515, release_event_mime_type_tiny_thumb_2515, release_event_file_ext_tiny_thumb_2515  };
 
 constexpr std::array<additional_name, 3> names_release_event_3752 {{
   {"English"sv, R"XYX(MIKU WITH YOU 2019 in Shanghai)XYX"sv},
@@ -2098,9 +2422,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_3752 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_3752;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_3752") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_3752 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_3752"
+});
+constexpr std::string_view release_event_mime_type_thumb_3752 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_3752 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_3752;
 constexpr std::string_view release_event_mime_type_thumb_3752 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_3752;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_3752") == __STDC_EMBED_FOUND__
@@ -2115,7 +2448,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_3752 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_3752;
 #endif
 
-constexpr picture picture_release_event_3752 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3752.jpg)XYX"sv, release_event_pic_orig_3752, release_event_mime_type_orig_3752, release_event_file_ext_orig_3752, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3752.jpg)XYX"sv, release_event_pic_small_thumb_3752, release_event_mime_type_small_thumb_3752, release_event_file_ext_small_thumb_3752, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3752.jpg)XYX"sv, release_event_pic_thumb_3752, release_event_mime_type_thumb_3752, release_event_file_ext_thumb_3752, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3752.jpg)XYX"sv, release_event_pic_tiny_thumb_3752, release_event_mime_type_tiny_thumb_3752, release_event_file_ext_tiny_thumb_3752  };
+constexpr picture picture_release_event_3752 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3752.jpg?v=2)XYX"sv, release_event_pic_orig_3752, release_event_mime_type_orig_3752, release_event_file_ext_orig_3752, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3752.jpg?v=2)XYX"sv, release_event_pic_small_thumb_3752, release_event_mime_type_small_thumb_3752, release_event_file_ext_small_thumb_3752, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3752.jpg?v=2)XYX"sv, release_event_pic_thumb_3752, release_event_mime_type_thumb_3752, release_event_file_ext_thumb_3752, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3752.jpg?v=2)XYX"sv, release_event_pic_tiny_thumb_3752, release_event_mime_type_tiny_thumb_3752, release_event_file_ext_tiny_thumb_3752  };
 
 constexpr std::array<additional_name, 1> names_release_event_2786 {{
   {"Japanese"sv, R"XYX(Miku Expo 2020 London)XYX"sv},
@@ -2151,9 +2484,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2786 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2786;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2786") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2786 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2786"
+});
+constexpr std::string_view release_event_mime_type_thumb_2786 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2786 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2786;
 constexpr std::string_view release_event_mime_type_thumb_2786 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2786;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2786") == __STDC_EMBED_FOUND__
@@ -2168,7 +2510,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2786 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2786;
 #endif
 
-constexpr picture picture_release_event_2786 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2786.jpg)XYX"sv, release_event_pic_orig_2786, release_event_mime_type_orig_2786, release_event_file_ext_orig_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2786.jpg)XYX"sv, release_event_pic_small_thumb_2786, release_event_mime_type_small_thumb_2786, release_event_file_ext_small_thumb_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2786.jpg)XYX"sv, release_event_pic_thumb_2786, release_event_mime_type_thumb_2786, release_event_file_ext_thumb_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2786.jpg)XYX"sv, release_event_pic_tiny_thumb_2786, release_event_mime_type_tiny_thumb_2786, release_event_file_ext_tiny_thumb_2786  };
+constexpr picture picture_release_event_2786 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2786.jpg?v=7)XYX"sv, release_event_pic_orig_2786, release_event_mime_type_orig_2786, release_event_file_ext_orig_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2786.jpg?v=7)XYX"sv, release_event_pic_small_thumb_2786, release_event_mime_type_small_thumb_2786, release_event_file_ext_small_thumb_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2786.jpg?v=7)XYX"sv, release_event_pic_thumb_2786, release_event_mime_type_thumb_2786, release_event_file_ext_thumb_2786, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2786.jpg?v=7)XYX"sv, release_event_pic_tiny_thumb_2786, release_event_mime_type_tiny_thumb_2786, release_event_file_ext_tiny_thumb_2786  };
 
 constexpr std::array<additional_name, 2> names_release_event_2939 {{
   {"Japanese"sv, R"XYX(ニコニコネット超会議2020夏✕HATSUNE MIKU LIVE - UNTITLED 0 -)XYX"sv},
@@ -2206,9 +2548,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2939 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2939;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2939") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2939 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2939"
+});
+constexpr std::string_view release_event_mime_type_thumb_2939 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2939 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2939;
 constexpr std::string_view release_event_mime_type_thumb_2939 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2939;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2939") == __STDC_EMBED_FOUND__
@@ -2223,7 +2574,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2939 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2939;
 #endif
 
-constexpr picture picture_release_event_2939 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2939.png)XYX"sv, release_event_pic_orig_2939, release_event_mime_type_orig_2939, release_event_file_ext_orig_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2939.png)XYX"sv, release_event_pic_small_thumb_2939, release_event_mime_type_small_thumb_2939, release_event_file_ext_small_thumb_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2939.png)XYX"sv, release_event_pic_thumb_2939, release_event_mime_type_thumb_2939, release_event_file_ext_thumb_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2939.png)XYX"sv, release_event_pic_tiny_thumb_2939, release_event_mime_type_tiny_thumb_2939, release_event_file_ext_tiny_thumb_2939  };
+constexpr picture picture_release_event_2939 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2939.png?v=4)XYX"sv, release_event_pic_orig_2939, release_event_mime_type_orig_2939, release_event_file_ext_orig_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2939.png?v=4)XYX"sv, release_event_pic_small_thumb_2939, release_event_mime_type_small_thumb_2939, release_event_file_ext_small_thumb_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2939.png?v=4)XYX"sv, release_event_pic_thumb_2939, release_event_mime_type_thumb_2939, release_event_file_ext_thumb_2939, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2939.png?v=4)XYX"sv, release_event_pic_tiny_thumb_2939, release_event_mime_type_tiny_thumb_2939, release_event_file_ext_tiny_thumb_2939  };
 
 constexpr std::array<additional_name, 2> names_release_event_2952 {{
   {"Japanese"sv, R"XYX(初音ミク GALAXY LIVE 2020)XYX"sv},
@@ -2260,9 +2611,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2952 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2952;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2952") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2952 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2952"
+});
+constexpr std::string_view release_event_mime_type_thumb_2952 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2952 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2952;
 constexpr std::string_view release_event_mime_type_thumb_2952 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2952;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2952") == __STDC_EMBED_FOUND__
@@ -2277,7 +2637,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2952 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2952;
 #endif
 
-constexpr picture picture_release_event_2952 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2952.jpg)XYX"sv, release_event_pic_orig_2952, release_event_mime_type_orig_2952, release_event_file_ext_orig_2952, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2952.jpg)XYX"sv, release_event_pic_small_thumb_2952, release_event_mime_type_small_thumb_2952, release_event_file_ext_small_thumb_2952, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2952.jpg)XYX"sv, release_event_pic_thumb_2952, release_event_mime_type_thumb_2952, release_event_file_ext_thumb_2952, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2952.jpg)XYX"sv, release_event_pic_tiny_thumb_2952, release_event_mime_type_tiny_thumb_2952, release_event_file_ext_tiny_thumb_2952  };
+constexpr picture picture_release_event_2952 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2952.jpg?v=9)XYX"sv, release_event_pic_orig_2952, release_event_mime_type_orig_2952, release_event_file_ext_orig_2952, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2952.jpg?v=9)XYX"sv, release_event_pic_small_thumb_2952, release_event_mime_type_small_thumb_2952, release_event_file_ext_small_thumb_2952, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2952.jpg?v=9)XYX"sv, release_event_pic_thumb_2952, release_event_mime_type_thumb_2952, release_event_file_ext_thumb_2952, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2952.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_2952, release_event_mime_type_tiny_thumb_2952, release_event_file_ext_tiny_thumb_2952  };
 
 constexpr std::array<additional_name, 4> names_release_event_2758 {{
   {"Unspecified"sv, R"XYX(マジカルミライ 2020 Osaka)XYX"sv},
@@ -2323,9 +2683,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_2758 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_2758;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_2758") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_2758 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_2758"
+});
+constexpr std::string_view release_event_mime_type_thumb_2758 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_2758 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_2758;
 constexpr std::string_view release_event_mime_type_thumb_2758 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_2758;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_2758") == __STDC_EMBED_FOUND__
@@ -2340,7 +2709,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_2758 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_2758;
 #endif
 
-constexpr picture picture_release_event_2758 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2758.jpg)XYX"sv, release_event_pic_orig_2758, release_event_mime_type_orig_2758, release_event_file_ext_orig_2758, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2758.jpg)XYX"sv, release_event_pic_small_thumb_2758, release_event_mime_type_small_thumb_2758, release_event_file_ext_small_thumb_2758, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2758.jpg)XYX"sv, release_event_pic_thumb_2758, release_event_mime_type_thumb_2758, release_event_file_ext_thumb_2758, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2758.jpg)XYX"sv, release_event_pic_tiny_thumb_2758, release_event_mime_type_tiny_thumb_2758, release_event_file_ext_tiny_thumb_2758  };
+constexpr picture picture_release_event_2758 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2758.jpg?v=17)XYX"sv, release_event_pic_orig_2758, release_event_mime_type_orig_2758, release_event_file_ext_orig_2758, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2758.jpg?v=17)XYX"sv, release_event_pic_small_thumb_2758, release_event_mime_type_small_thumb_2758, release_event_file_ext_small_thumb_2758, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2758.jpg?v=17)XYX"sv, release_event_pic_thumb_2758, release_event_mime_type_thumb_2758, release_event_file_ext_thumb_2758, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2758.jpg?v=17)XYX"sv, release_event_pic_tiny_thumb_2758, release_event_mime_type_tiny_thumb_2758, release_event_file_ext_tiny_thumb_2758  };
 
 constexpr std::array<additional_name, 3> names_release_event_3250 {{
   {"English"sv, R"XYX(MIKU WITH YOU 2020)XYX"sv},
@@ -2379,9 +2748,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_3250 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_3250;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_3250") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_3250 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_3250"
+});
+constexpr std::string_view release_event_mime_type_thumb_3250 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_3250 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_3250;
 constexpr std::string_view release_event_mime_type_thumb_3250 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_3250;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_3250") == __STDC_EMBED_FOUND__
@@ -2396,7 +2774,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_3250 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_3250;
 #endif
 
-constexpr picture picture_release_event_3250 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3250.jpg)XYX"sv, release_event_pic_orig_3250, release_event_mime_type_orig_3250, release_event_file_ext_orig_3250, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3250.jpg)XYX"sv, release_event_pic_small_thumb_3250, release_event_mime_type_small_thumb_3250, release_event_file_ext_small_thumb_3250, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3250.jpg)XYX"sv, release_event_pic_thumb_3250, release_event_mime_type_thumb_3250, release_event_file_ext_thumb_3250, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3250.jpg)XYX"sv, release_event_pic_tiny_thumb_3250, release_event_mime_type_tiny_thumb_3250, release_event_file_ext_tiny_thumb_3250  };
+constexpr picture picture_release_event_3250 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3250.jpg?v=6)XYX"sv, release_event_pic_orig_3250, release_event_mime_type_orig_3250, release_event_file_ext_orig_3250, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3250.jpg?v=6)XYX"sv, release_event_pic_small_thumb_3250, release_event_mime_type_small_thumb_3250, release_event_file_ext_small_thumb_3250, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3250.jpg?v=6)XYX"sv, release_event_pic_thumb_3250, release_event_mime_type_thumb_3250, release_event_file_ext_thumb_3250, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3250.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_3250, release_event_mime_type_tiny_thumb_3250, release_event_file_ext_tiny_thumb_3250  };
 
 constexpr std::array<additional_name, 2> names_release_event_3224 {{
   {"English"sv, R"XYX(Miku Expo 2021 Online)XYX"sv},
@@ -2442,9 +2820,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_3224 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_3224;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_3224") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_3224 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_3224"
+});
+constexpr std::string_view release_event_mime_type_thumb_3224 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_3224 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_3224;
 constexpr std::string_view release_event_mime_type_thumb_3224 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_3224;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_3224") == __STDC_EMBED_FOUND__
@@ -2459,7 +2846,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_3224 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_3224;
 #endif
 
-constexpr picture picture_release_event_3224 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3224.jpg)XYX"sv, release_event_pic_orig_3224, release_event_mime_type_orig_3224, release_event_file_ext_orig_3224, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3224.jpg)XYX"sv, release_event_pic_small_thumb_3224, release_event_mime_type_small_thumb_3224, release_event_file_ext_small_thumb_3224, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3224.jpg)XYX"sv, release_event_pic_thumb_3224, release_event_mime_type_thumb_3224, release_event_file_ext_thumb_3224, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3224.jpg)XYX"sv, release_event_pic_tiny_thumb_3224, release_event_mime_type_tiny_thumb_3224, release_event_file_ext_tiny_thumb_3224  };
+constexpr picture picture_release_event_3224 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3224.jpg?v=18)XYX"sv, release_event_pic_orig_3224, release_event_mime_type_orig_3224, release_event_file_ext_orig_3224, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3224.jpg?v=18)XYX"sv, release_event_pic_small_thumb_3224, release_event_mime_type_small_thumb_3224, release_event_file_ext_small_thumb_3224, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3224.jpg?v=18)XYX"sv, release_event_pic_thumb_3224, release_event_mime_type_thumb_3224, release_event_file_ext_thumb_3224, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3224.jpg?v=18)XYX"sv, release_event_pic_tiny_thumb_3224, release_event_mime_type_tiny_thumb_3224, release_event_file_ext_tiny_thumb_3224  };
 
 constexpr std::array<additional_name, 2> names_release_event_3305 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2021」in OSAKA)XYX"sv},
@@ -2498,9 +2885,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_3305 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_3305;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_3305") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_3305 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_3305"
+});
+constexpr std::string_view release_event_mime_type_thumb_3305 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_3305 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_3305;
 constexpr std::string_view release_event_mime_type_thumb_3305 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_3305;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_3305") == __STDC_EMBED_FOUND__
@@ -2515,7 +2911,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_3305 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_3305;
 #endif
 
-constexpr picture picture_release_event_3305 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3305.jpg)XYX"sv, release_event_pic_orig_3305, release_event_mime_type_orig_3305, release_event_file_ext_orig_3305, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3305.jpg)XYX"sv, release_event_pic_small_thumb_3305, release_event_mime_type_small_thumb_3305, release_event_file_ext_small_thumb_3305, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3305.jpg)XYX"sv, release_event_pic_thumb_3305, release_event_mime_type_thumb_3305, release_event_file_ext_thumb_3305, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3305.jpg)XYX"sv, release_event_pic_tiny_thumb_3305, release_event_mime_type_tiny_thumb_3305, release_event_file_ext_tiny_thumb_3305  };
+constexpr picture picture_release_event_3305 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3305.jpg?v=7)XYX"sv, release_event_pic_orig_3305, release_event_mime_type_orig_3305, release_event_file_ext_orig_3305, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3305.jpg?v=7)XYX"sv, release_event_pic_small_thumb_3305, release_event_mime_type_small_thumb_3305, release_event_file_ext_small_thumb_3305, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3305.jpg?v=7)XYX"sv, release_event_pic_thumb_3305, release_event_mime_type_thumb_3305, release_event_file_ext_thumb_3305, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3305.jpg?v=7)XYX"sv, release_event_pic_tiny_thumb_3305, release_event_mime_type_tiny_thumb_3305, release_event_file_ext_tiny_thumb_3305  };
 
 constexpr std::array<additional_name, 2> names_release_event_3979 {{
   {"Japanese"sv, R"XYX(初音ミク GALAXY LIVE 2021)XYX"sv},
@@ -2553,9 +2949,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_3979 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_3979;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_3979") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_3979 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_3979"
+});
+constexpr std::string_view release_event_mime_type_thumb_3979 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_3979 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_3979;
 constexpr std::string_view release_event_mime_type_thumb_3979 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_3979;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_3979") == __STDC_EMBED_FOUND__
@@ -2570,7 +2975,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_3979 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_3979;
 #endif
 
-constexpr picture picture_release_event_3979 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3979.png)XYX"sv, release_event_pic_orig_3979, release_event_mime_type_orig_3979, release_event_file_ext_orig_3979, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3979.png)XYX"sv, release_event_pic_small_thumb_3979, release_event_mime_type_small_thumb_3979, release_event_file_ext_small_thumb_3979, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3979.png)XYX"sv, release_event_pic_thumb_3979, release_event_mime_type_thumb_3979, release_event_file_ext_thumb_3979, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3979.png)XYX"sv, release_event_pic_tiny_thumb_3979, release_event_mime_type_tiny_thumb_3979, release_event_file_ext_tiny_thumb_3979  };
+constexpr picture picture_release_event_3979 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/3979.png?v=6)XYX"sv, release_event_pic_orig_3979, release_event_mime_type_orig_3979, release_event_file_ext_orig_3979, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/3979.png?v=6)XYX"sv, release_event_pic_small_thumb_3979, release_event_mime_type_small_thumb_3979, release_event_file_ext_small_thumb_3979, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/3979.png?v=6)XYX"sv, release_event_pic_thumb_3979, release_event_mime_type_thumb_3979, release_event_file_ext_thumb_3979, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/3979.png?v=6)XYX"sv, release_event_pic_tiny_thumb_3979, release_event_mime_type_tiny_thumb_3979, release_event_file_ext_tiny_thumb_3979  };
 
 constexpr std::array<additional_name, 3> names_release_event_4058 {{
   {"English"sv, R"XYX(MIKU WITH YOU 2021)XYX"sv},
@@ -2608,9 +3013,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_4058 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_4058;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_4058") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_4058 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_4058"
+});
+constexpr std::string_view release_event_mime_type_thumb_4058 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4058 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4058;
 constexpr std::string_view release_event_mime_type_thumb_4058 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_4058;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_4058") == __STDC_EMBED_FOUND__
@@ -2625,7 +3039,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_4058 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_4058;
 #endif
 
-constexpr picture picture_release_event_4058 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4058.jpg)XYX"sv, release_event_pic_orig_4058, release_event_mime_type_orig_4058, release_event_file_ext_orig_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4058.jpg)XYX"sv, release_event_pic_small_thumb_4058, release_event_mime_type_small_thumb_4058, release_event_file_ext_small_thumb_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4058.jpg)XYX"sv, release_event_pic_thumb_4058, release_event_mime_type_thumb_4058, release_event_file_ext_thumb_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4058.jpg)XYX"sv, release_event_pic_tiny_thumb_4058, release_event_mime_type_tiny_thumb_4058, release_event_file_ext_tiny_thumb_4058  };
+constexpr picture picture_release_event_4058 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4058.jpg?v=5)XYX"sv, release_event_pic_orig_4058, release_event_mime_type_orig_4058, release_event_file_ext_orig_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4058.jpg?v=5)XYX"sv, release_event_pic_small_thumb_4058, release_event_mime_type_small_thumb_4058, release_event_file_ext_small_thumb_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4058.jpg?v=5)XYX"sv, release_event_pic_thumb_4058, release_event_mime_type_thumb_4058, release_event_file_ext_thumb_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4058.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_4058, release_event_mime_type_tiny_thumb_4058, release_event_file_ext_tiny_thumb_4058  };
 
 constexpr std::array<additional_name, 2> names_release_event_4161 {{
   {"Japanese"sv, R"XYX(鏡音リン・レン Happy 14th Birthday Party「Two You☆★」)XYX"sv},
@@ -2664,9 +3078,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_4161 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_4161;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_4161") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_4161 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_4161"
+});
+constexpr std::string_view release_event_mime_type_thumb_4161 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4161 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4161;
 constexpr std::string_view release_event_mime_type_thumb_4161 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_4161;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_4161") == __STDC_EMBED_FOUND__
@@ -2681,7 +3104,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_4161 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_4161;
 #endif
 
-constexpr picture picture_release_event_4161 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4161.jpg)XYX"sv, release_event_pic_orig_4161, release_event_mime_type_orig_4161, release_event_file_ext_orig_4161, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4161.jpg)XYX"sv, release_event_pic_small_thumb_4161, release_event_mime_type_small_thumb_4161, release_event_file_ext_small_thumb_4161, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4161.jpg)XYX"sv, release_event_pic_thumb_4161, release_event_mime_type_thumb_4161, release_event_file_ext_thumb_4161, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4161.jpg)XYX"sv, release_event_pic_tiny_thumb_4161, release_event_mime_type_tiny_thumb_4161, release_event_file_ext_tiny_thumb_4161  };
+constexpr picture picture_release_event_4161 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4161.jpg?v=9)XYX"sv, release_event_pic_orig_4161, release_event_mime_type_orig_4161, release_event_file_ext_orig_4161, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4161.jpg?v=9)XYX"sv, release_event_pic_small_thumb_4161, release_event_mime_type_small_thumb_4161, release_event_file_ext_small_thumb_4161, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4161.jpg?v=9)XYX"sv, release_event_pic_thumb_4161, release_event_mime_type_thumb_4161, release_event_file_ext_thumb_4161, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4161.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_4161, release_event_mime_type_tiny_thumb_4161, release_event_file_ext_tiny_thumb_4161  };
 
 constexpr std::array<additional_name, 3> names_release_event_4233 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ」10th Anniversary in OSAKA)XYX"sv},
@@ -2722,9 +3145,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_4233 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_4233;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_4233") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_4233 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_4233"
+});
+constexpr std::string_view release_event_mime_type_thumb_4233 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4233 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4233;
 constexpr std::string_view release_event_mime_type_thumb_4233 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_4233;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_4233") == __STDC_EMBED_FOUND__
@@ -2739,7 +3171,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_4233 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_4233;
 #endif
 
-constexpr picture picture_release_event_4233 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4233.jpg)XYX"sv, release_event_pic_orig_4233, release_event_mime_type_orig_4233, release_event_file_ext_orig_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4233.jpg)XYX"sv, release_event_pic_small_thumb_4233, release_event_mime_type_small_thumb_4233, release_event_file_ext_small_thumb_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4233.jpg)XYX"sv, release_event_pic_thumb_4233, release_event_mime_type_thumb_4233, release_event_file_ext_thumb_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4233.jpg)XYX"sv, release_event_pic_tiny_thumb_4233, release_event_mime_type_tiny_thumb_4233, release_event_file_ext_tiny_thumb_4233  };
+constexpr picture picture_release_event_4233 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4233.jpg?v=8)XYX"sv, release_event_pic_orig_4233, release_event_mime_type_orig_4233, release_event_file_ext_orig_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4233.jpg?v=8)XYX"sv, release_event_pic_small_thumb_4233, release_event_mime_type_small_thumb_4233, release_event_file_ext_small_thumb_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4233.jpg?v=8)XYX"sv, release_event_pic_thumb_4233, release_event_mime_type_thumb_4233, release_event_file_ext_thumb_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4233.jpg?v=8)XYX"sv, release_event_pic_tiny_thumb_4233, release_event_mime_type_tiny_thumb_4233, release_event_file_ext_tiny_thumb_4233  };
 
 constexpr std::array<additional_name, 3> names_release_event_4235 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ」10th Anniversary in SAPPORO)XYX"sv},
@@ -2781,9 +3213,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_4235 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_4235;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_4235") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_4235 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_4235"
+});
+constexpr std::string_view release_event_mime_type_thumb_4235 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4235 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4235;
 constexpr std::string_view release_event_mime_type_thumb_4235 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_4235;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_4235") == __STDC_EMBED_FOUND__
@@ -2798,7 +3239,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_4235 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_4235;
 #endif
 
-constexpr picture picture_release_event_4235 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4235.jpg)XYX"sv, release_event_pic_orig_4235, release_event_mime_type_orig_4235, release_event_file_ext_orig_4235, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4235.jpg)XYX"sv, release_event_pic_small_thumb_4235, release_event_mime_type_small_thumb_4235, release_event_file_ext_small_thumb_4235, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4235.jpg)XYX"sv, release_event_pic_thumb_4235, release_event_mime_type_thumb_4235, release_event_file_ext_thumb_4235, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4235.jpg)XYX"sv, release_event_pic_tiny_thumb_4235, release_event_mime_type_tiny_thumb_4235, release_event_file_ext_tiny_thumb_4235  };
+constexpr picture picture_release_event_4235 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4235.jpg?v=9)XYX"sv, release_event_pic_orig_4235, release_event_mime_type_orig_4235, release_event_file_ext_orig_4235, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4235.jpg?v=9)XYX"sv, release_event_pic_small_thumb_4235, release_event_mime_type_small_thumb_4235, release_event_file_ext_small_thumb_4235, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4235.jpg?v=9)XYX"sv, release_event_pic_thumb_4235, release_event_mime_type_thumb_4235, release_event_file_ext_thumb_4235, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4235.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_4235, release_event_mime_type_tiny_thumb_4235, release_event_file_ext_tiny_thumb_4235  };
 
 constexpr std::array<additional_name, 2> names_release_event_4765 {{
   {"Japanese"sv, R"XYX(初音ミク JAPAN TOUR 2023 〜THUNDERBOLT〜 名古屋)XYX"sv},
@@ -2834,9 +3275,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_4765 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_4765;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_4765") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_4765 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_4765"
+});
+constexpr std::string_view release_event_mime_type_thumb_4765 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4765 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4765;
 constexpr std::string_view release_event_mime_type_thumb_4765 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_4765;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_4765") == __STDC_EMBED_FOUND__
@@ -2851,7 +3301,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_4765 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_4765;
 #endif
 
-constexpr picture picture_release_event_4765 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4765.jpg)XYX"sv, release_event_pic_orig_4765, release_event_mime_type_orig_4765, release_event_file_ext_orig_4765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4765.jpg)XYX"sv, release_event_pic_small_thumb_4765, release_event_mime_type_small_thumb_4765, release_event_file_ext_small_thumb_4765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4765.jpg)XYX"sv, release_event_pic_thumb_4765, release_event_mime_type_thumb_4765, release_event_file_ext_thumb_4765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4765.jpg)XYX"sv, release_event_pic_tiny_thumb_4765, release_event_mime_type_tiny_thumb_4765, release_event_file_ext_tiny_thumb_4765  };
+constexpr picture picture_release_event_4765 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4765.jpg?v=7)XYX"sv, release_event_pic_orig_4765, release_event_mime_type_orig_4765, release_event_file_ext_orig_4765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4765.jpg?v=7)XYX"sv, release_event_pic_small_thumb_4765, release_event_mime_type_small_thumb_4765, release_event_file_ext_small_thumb_4765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4765.jpg?v=7)XYX"sv, release_event_pic_thumb_4765, release_event_mime_type_thumb_4765, release_event_file_ext_thumb_4765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4765.jpg?v=7)XYX"sv, release_event_pic_tiny_thumb_4765, release_event_mime_type_tiny_thumb_4765, release_event_file_ext_tiny_thumb_4765  };
 
 constexpr std::array<additional_name, 2> names_release_event_5910 {{
   {"Japanese"sv, R"XYX(初音ミク×鼓童スペシャルライブ２０２３ ～結～)XYX"sv},
@@ -2892,9 +3342,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_5910 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_5910;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_5910") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_5910 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_5910"
+});
+constexpr std::string_view release_event_mime_type_thumb_5910 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_5910 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_5910;
 constexpr std::string_view release_event_mime_type_thumb_5910 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_5910;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_5910") == __STDC_EMBED_FOUND__
@@ -2909,7 +3368,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_5910 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_5910;
 #endif
 
-constexpr picture picture_release_event_5910 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/5910.jpg)XYX"sv, release_event_pic_orig_5910, release_event_mime_type_orig_5910, release_event_file_ext_orig_5910, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/5910.jpg)XYX"sv, release_event_pic_small_thumb_5910, release_event_mime_type_small_thumb_5910, release_event_file_ext_small_thumb_5910, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/5910.jpg)XYX"sv, release_event_pic_thumb_5910, release_event_mime_type_thumb_5910, release_event_file_ext_thumb_5910, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/5910.jpg)XYX"sv, release_event_pic_tiny_thumb_5910, release_event_mime_type_tiny_thumb_5910, release_event_file_ext_tiny_thumb_5910  };
+constexpr picture picture_release_event_5910 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/5910.jpg?v=2)XYX"sv, release_event_pic_orig_5910, release_event_mime_type_orig_5910, release_event_file_ext_orig_5910, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/5910.jpg?v=2)XYX"sv, release_event_pic_small_thumb_5910, release_event_mime_type_small_thumb_5910, release_event_file_ext_small_thumb_5910, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/5910.jpg?v=2)XYX"sv, release_event_pic_thumb_5910, release_event_mime_type_thumb_5910, release_event_file_ext_thumb_5910, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/5910.jpg?v=2)XYX"sv, release_event_pic_tiny_thumb_5910, release_event_mime_type_tiny_thumb_5910, release_event_file_ext_tiny_thumb_5910  };
 
 constexpr std::array<additional_name, 2> names_release_event_6045 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2023」in OSAKA)XYX"sv},
@@ -2953,9 +3412,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_6045 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_6045;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_6045") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_6045 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_6045"
+});
+constexpr std::string_view release_event_mime_type_thumb_6045 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_6045 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_6045;
 constexpr std::string_view release_event_mime_type_thumb_6045 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_6045;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_6045") == __STDC_EMBED_FOUND__
@@ -2970,7 +3438,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_6045 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_6045;
 #endif
 
-constexpr picture picture_release_event_6045 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6045.jpg)XYX"sv, release_event_pic_orig_6045, release_event_mime_type_orig_6045, release_event_file_ext_orig_6045, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6045.jpg)XYX"sv, release_event_pic_small_thumb_6045, release_event_mime_type_small_thumb_6045, release_event_file_ext_small_thumb_6045, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6045.jpg)XYX"sv, release_event_pic_thumb_6045, release_event_mime_type_thumb_6045, release_event_file_ext_thumb_6045, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6045.jpg)XYX"sv, release_event_pic_tiny_thumb_6045, release_event_mime_type_tiny_thumb_6045, release_event_file_ext_tiny_thumb_6045  };
+constexpr picture picture_release_event_6045 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6045.jpg?v=9)XYX"sv, release_event_pic_orig_6045, release_event_mime_type_orig_6045, release_event_file_ext_orig_6045, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6045.jpg?v=9)XYX"sv, release_event_pic_small_thumb_6045, release_event_mime_type_small_thumb_6045, release_event_file_ext_small_thumb_6045, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6045.jpg?v=9)XYX"sv, release_event_pic_thumb_6045, release_event_mime_type_thumb_6045, release_event_file_ext_thumb_6045, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6045.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_6045, release_event_mime_type_tiny_thumb_6045, release_event_file_ext_tiny_thumb_6045  };
 
 constexpr std::array<additional_name, 2> names_release_event_5751 {{
   {"English"sv, R"XYX(Miku Expo 2023 VR)XYX"sv},
@@ -3017,9 +3485,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_5751 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_5751;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_5751") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_5751 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_5751"
+});
+constexpr std::string_view release_event_mime_type_thumb_5751 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_5751 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_5751;
 constexpr std::string_view release_event_mime_type_thumb_5751 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_5751;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_5751") == __STDC_EMBED_FOUND__
@@ -3034,7 +3511,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_5751 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_5751;
 #endif
 
-constexpr picture picture_release_event_5751 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/5751.jpg)XYX"sv, release_event_pic_orig_5751, release_event_mime_type_orig_5751, release_event_file_ext_orig_5751, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/5751.jpg)XYX"sv, release_event_pic_small_thumb_5751, release_event_mime_type_small_thumb_5751, release_event_file_ext_small_thumb_5751, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/5751.jpg)XYX"sv, release_event_pic_thumb_5751, release_event_mime_type_thumb_5751, release_event_file_ext_thumb_5751, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/5751.jpg)XYX"sv, release_event_pic_tiny_thumb_5751, release_event_mime_type_tiny_thumb_5751, release_event_file_ext_tiny_thumb_5751  };
+constexpr picture picture_release_event_5751 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/5751.jpg?v=13)XYX"sv, release_event_pic_orig_5751, release_event_mime_type_orig_5751, release_event_file_ext_orig_5751, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/5751.jpg?v=13)XYX"sv, release_event_pic_small_thumb_5751, release_event_mime_type_small_thumb_5751, release_event_file_ext_small_thumb_5751, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/5751.jpg?v=13)XYX"sv, release_event_pic_thumb_5751, release_event_mime_type_thumb_5751, release_event_file_ext_thumb_5751, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/5751.jpg?v=13)XYX"sv, release_event_pic_tiny_thumb_5751, release_event_mime_type_tiny_thumb_5751, release_event_file_ext_tiny_thumb_5751  };
 
 constexpr std::array<additional_name, 2> names_release_event_6539 {{
   {"English"sv, R"XYX(MK15th project MEIKO＆KAITO Online Concert)XYX"sv},
@@ -3071,9 +3548,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_6539 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_6539;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_6539") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_6539 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_6539"
+});
+constexpr std::string_view release_event_mime_type_thumb_6539 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_6539 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_6539;
 constexpr std::string_view release_event_mime_type_thumb_6539 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_6539;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_6539") == __STDC_EMBED_FOUND__
@@ -3088,7 +3574,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_6539 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_6539;
 #endif
 
-constexpr picture picture_release_event_6539 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6539.jpg)XYX"sv, release_event_pic_orig_6539, release_event_mime_type_orig_6539, release_event_file_ext_orig_6539, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6539.jpg)XYX"sv, release_event_pic_small_thumb_6539, release_event_mime_type_small_thumb_6539, release_event_file_ext_small_thumb_6539, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6539.jpg)XYX"sv, release_event_pic_thumb_6539, release_event_mime_type_thumb_6539, release_event_file_ext_thumb_6539, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6539.jpg)XYX"sv, release_event_pic_tiny_thumb_6539, release_event_mime_type_tiny_thumb_6539, release_event_file_ext_tiny_thumb_6539  };
+constexpr picture picture_release_event_6539 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6539.jpg?v=6)XYX"sv, release_event_pic_orig_6539, release_event_mime_type_orig_6539, release_event_file_ext_orig_6539, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6539.jpg?v=6)XYX"sv, release_event_pic_small_thumb_6539, release_event_mime_type_small_thumb_6539, release_event_file_ext_small_thumb_6539, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6539.jpg?v=6)XYX"sv, release_event_pic_thumb_6539, release_event_mime_type_thumb_6539, release_event_file_ext_thumb_6539, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6539.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_6539, release_event_mime_type_tiny_thumb_6539, release_event_file_ext_tiny_thumb_6539  };
 
 constexpr std::array<additional_name, 3> names_release_event_6986 {{
   {"Japanese"sv, R"XYX(MIKU FES'24 (春)〜Happy 16th Birthday〜)XYX"sv},
@@ -3127,9 +3613,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_6986 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_6986;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_6986") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_6986 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_6986"
+});
+constexpr std::string_view release_event_mime_type_thumb_6986 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_6986 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_6986;
 constexpr std::string_view release_event_mime_type_thumb_6986 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_6986;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_6986") == __STDC_EMBED_FOUND__
@@ -3144,7 +3639,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_6986 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_6986;
 #endif
 
-constexpr picture picture_release_event_6986 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6986.jpg)XYX"sv, release_event_pic_orig_6986, release_event_mime_type_orig_6986, release_event_file_ext_orig_6986, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6986.jpg)XYX"sv, release_event_pic_small_thumb_6986, release_event_mime_type_small_thumb_6986, release_event_file_ext_small_thumb_6986, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6986.jpg)XYX"sv, release_event_pic_thumb_6986, release_event_mime_type_thumb_6986, release_event_file_ext_thumb_6986, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6986.jpg)XYX"sv, release_event_pic_tiny_thumb_6986, release_event_mime_type_tiny_thumb_6986, release_event_file_ext_tiny_thumb_6986  };
+constexpr picture picture_release_event_6986 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6986.jpg?v=13)XYX"sv, release_event_pic_orig_6986, release_event_mime_type_orig_6986, release_event_file_ext_orig_6986, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6986.jpg?v=13)XYX"sv, release_event_pic_small_thumb_6986, release_event_mime_type_small_thumb_6986, release_event_file_ext_small_thumb_6986, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6986.jpg?v=13)XYX"sv, release_event_pic_thumb_6986, release_event_mime_type_thumb_6986, release_event_file_ext_thumb_6986, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6986.jpg?v=13)XYX"sv, release_event_pic_tiny_thumb_6986, release_event_mime_type_tiny_thumb_6986, release_event_file_ext_tiny_thumb_6986  };
 
 constexpr std::array<additional_name, 1> names_release_event_6516 {{
   {"English"sv, R"XYX(Miku Expo 2024 Vancouver )XYX"sv},
@@ -3180,9 +3675,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_6516 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_6516;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_6516") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_6516 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_6516"
+});
+constexpr std::string_view release_event_mime_type_thumb_6516 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_6516 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_6516;
 constexpr std::string_view release_event_mime_type_thumb_6516 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_6516;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_6516") == __STDC_EMBED_FOUND__
@@ -3197,7 +3701,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_6516 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_6516;
 #endif
 
-constexpr picture picture_release_event_6516 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6516.jpg)XYX"sv, release_event_pic_orig_6516, release_event_mime_type_orig_6516, release_event_file_ext_orig_6516, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6516.jpg)XYX"sv, release_event_pic_small_thumb_6516, release_event_mime_type_small_thumb_6516, release_event_file_ext_small_thumb_6516, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6516.jpg)XYX"sv, release_event_pic_thumb_6516, release_event_mime_type_thumb_6516, release_event_file_ext_thumb_6516, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6516.jpg)XYX"sv, release_event_pic_tiny_thumb_6516, release_event_mime_type_tiny_thumb_6516, release_event_file_ext_tiny_thumb_6516  };
+constexpr picture picture_release_event_6516 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/6516.jpg?v=9)XYX"sv, release_event_pic_orig_6516, release_event_mime_type_orig_6516, release_event_file_ext_orig_6516, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/6516.jpg?v=9)XYX"sv, release_event_pic_small_thumb_6516, release_event_mime_type_small_thumb_6516, release_event_file_ext_small_thumb_6516, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/6516.jpg?v=9)XYX"sv, release_event_pic_thumb_6516, release_event_mime_type_thumb_6516, release_event_file_ext_thumb_6516, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/6516.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_6516, release_event_mime_type_tiny_thumb_6516, release_event_file_ext_tiny_thumb_6516  };
 
 constexpr std::array<additional_name, 3> names_release_event_7673 {{
   {"English"sv, R"XYX(MIKU WITH YOU 2024 in Shanghai)XYX"sv},
@@ -3234,9 +3738,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_7673 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_7673;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_7673") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_7673 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_7673"
+});
+constexpr std::string_view release_event_mime_type_thumb_7673 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_7673 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_7673;
 constexpr std::string_view release_event_mime_type_thumb_7673 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_7673;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_7673") == __STDC_EMBED_FOUND__
@@ -3251,7 +3764,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_7673 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_7673;
 #endif
 
-constexpr picture picture_release_event_7673 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7673.jpg)XYX"sv, release_event_pic_orig_7673, release_event_mime_type_orig_7673, release_event_file_ext_orig_7673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7673.jpg)XYX"sv, release_event_pic_small_thumb_7673, release_event_mime_type_small_thumb_7673, release_event_file_ext_small_thumb_7673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7673.jpg)XYX"sv, release_event_pic_thumb_7673, release_event_mime_type_thumb_7673, release_event_file_ext_thumb_7673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7673.jpg)XYX"sv, release_event_pic_tiny_thumb_7673, release_event_mime_type_tiny_thumb_7673, release_event_file_ext_tiny_thumb_7673  };
+constexpr picture picture_release_event_7673 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7673.jpg?v=4)XYX"sv, release_event_pic_orig_7673, release_event_mime_type_orig_7673, release_event_file_ext_orig_7673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7673.jpg?v=4)XYX"sv, release_event_pic_small_thumb_7673, release_event_mime_type_small_thumb_7673, release_event_file_ext_small_thumb_7673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7673.jpg?v=4)XYX"sv, release_event_pic_thumb_7673, release_event_mime_type_thumb_7673, release_event_file_ext_thumb_7673, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7673.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_7673, release_event_mime_type_tiny_thumb_7673, release_event_file_ext_tiny_thumb_7673  };
 
 constexpr std::array<additional_name, 2> names_release_event_7214 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2024」in FUKUOKA)XYX"sv},
@@ -3288,9 +3801,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_7214 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_7214;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_7214") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_7214 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_7214"
+});
+constexpr std::string_view release_event_mime_type_thumb_7214 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_7214 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_7214;
 constexpr std::string_view release_event_mime_type_thumb_7214 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_7214;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_7214") == __STDC_EMBED_FOUND__
@@ -3305,7 +3827,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_7214 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_7214;
 #endif
 
-constexpr picture picture_release_event_7214 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7214.jpg)XYX"sv, release_event_pic_orig_7214, release_event_mime_type_orig_7214, release_event_file_ext_orig_7214, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7214.jpg)XYX"sv, release_event_pic_small_thumb_7214, release_event_mime_type_small_thumb_7214, release_event_file_ext_small_thumb_7214, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7214.jpg)XYX"sv, release_event_pic_thumb_7214, release_event_mime_type_thumb_7214, release_event_file_ext_thumb_7214, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7214.jpg)XYX"sv, release_event_pic_tiny_thumb_7214, release_event_mime_type_tiny_thumb_7214, release_event_file_ext_tiny_thumb_7214  };
+constexpr picture picture_release_event_7214 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7214.jpg?v=9)XYX"sv, release_event_pic_orig_7214, release_event_mime_type_orig_7214, release_event_file_ext_orig_7214, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7214.jpg?v=9)XYX"sv, release_event_pic_small_thumb_7214, release_event_mime_type_small_thumb_7214, release_event_file_ext_small_thumb_7214, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7214.jpg?v=9)XYX"sv, release_event_pic_thumb_7214, release_event_mime_type_thumb_7214, release_event_file_ext_thumb_7214, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7214.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_7214, release_event_mime_type_tiny_thumb_7214, release_event_file_ext_tiny_thumb_7214  };
 
 constexpr std::array<additional_name, 1> names_release_event_7266 {{
   {"English"sv, R"XYX(Miku Expo 2024 London)XYX"sv},
@@ -3341,9 +3863,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_7266 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_7266;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_7266") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_7266 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_7266"
+});
+constexpr std::string_view release_event_mime_type_thumb_7266 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_7266 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_7266;
 constexpr std::string_view release_event_mime_type_thumb_7266 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_7266;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_7266") == __STDC_EMBED_FOUND__
@@ -3358,7 +3889,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_7266 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_7266;
 #endif
 
-constexpr picture picture_release_event_7266 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7266.jpg)XYX"sv, release_event_pic_orig_7266, release_event_mime_type_orig_7266, release_event_file_ext_orig_7266, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7266.jpg)XYX"sv, release_event_pic_small_thumb_7266, release_event_mime_type_small_thumb_7266, release_event_file_ext_small_thumb_7266, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7266.jpg)XYX"sv, release_event_pic_thumb_7266, release_event_mime_type_thumb_7266, release_event_file_ext_thumb_7266, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7266.jpg)XYX"sv, release_event_pic_tiny_thumb_7266, release_event_mime_type_tiny_thumb_7266, release_event_file_ext_tiny_thumb_7266  };
+constexpr picture picture_release_event_7266 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7266.jpg?v=6)XYX"sv, release_event_pic_orig_7266, release_event_mime_type_orig_7266, release_event_file_ext_orig_7266, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7266.jpg?v=6)XYX"sv, release_event_pic_small_thumb_7266, release_event_mime_type_small_thumb_7266, release_event_file_ext_small_thumb_7266, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7266.jpg?v=6)XYX"sv, release_event_pic_thumb_7266, release_event_mime_type_thumb_7266, release_event_file_ext_thumb_7266, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7266.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_7266, release_event_mime_type_tiny_thumb_7266, release_event_file_ext_tiny_thumb_7266  };
 
 constexpr std::array<additional_name, 1> names_release_event_7765 {{
   {"English"sv, R"XYX(Miku Expo 2024 Auckland)XYX"sv},
@@ -3394,9 +3925,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_7765 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_7765;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_7765") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_7765 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_7765"
+});
+constexpr std::string_view release_event_mime_type_thumb_7765 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_7765 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_7765;
 constexpr std::string_view release_event_mime_type_thumb_7765 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_7765;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_7765") == __STDC_EMBED_FOUND__
@@ -3411,7 +3951,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_7765 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_7765;
 #endif
 
-constexpr picture picture_release_event_7765 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7765.jpg)XYX"sv, release_event_pic_orig_7765, release_event_mime_type_orig_7765, release_event_file_ext_orig_7765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7765.jpg)XYX"sv, release_event_pic_small_thumb_7765, release_event_mime_type_small_thumb_7765, release_event_file_ext_small_thumb_7765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7765.jpg)XYX"sv, release_event_pic_thumb_7765, release_event_mime_type_thumb_7765, release_event_file_ext_thumb_7765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7765.jpg)XYX"sv, release_event_pic_tiny_thumb_7765, release_event_mime_type_tiny_thumb_7765, release_event_file_ext_tiny_thumb_7765  };
+constexpr picture picture_release_event_7765 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7765.jpg?v=3)XYX"sv, release_event_pic_orig_7765, release_event_mime_type_orig_7765, release_event_file_ext_orig_7765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7765.jpg?v=3)XYX"sv, release_event_pic_small_thumb_7765, release_event_mime_type_small_thumb_7765, release_event_file_ext_small_thumb_7765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7765.jpg?v=3)XYX"sv, release_event_pic_thumb_7765, release_event_mime_type_thumb_7765, release_event_file_ext_thumb_7765, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7765.jpg?v=3)XYX"sv, release_event_pic_tiny_thumb_7765, release_event_mime_type_tiny_thumb_7765, release_event_file_ext_tiny_thumb_7765  };
 
 constexpr std::array<additional_name, 2> names_release_event_8380 {{
   {"Japanese"sv, R"XYX(初音ミク JAPAN TOUR 2025 〜BLOOMING〜 大阪)XYX"sv},
@@ -3447,9 +3987,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_8380 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_8380;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_8380") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_8380 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_8380"
+});
+constexpr std::string_view release_event_mime_type_thumb_8380 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_8380 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_8380;
 constexpr std::string_view release_event_mime_type_thumb_8380 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_8380;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_8380") == __STDC_EMBED_FOUND__
@@ -3464,7 +4013,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_8380 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_8380;
 #endif
 
-constexpr picture picture_release_event_8380 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/8380.png)XYX"sv, release_event_pic_orig_8380, release_event_mime_type_orig_8380, release_event_file_ext_orig_8380, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/8380.png)XYX"sv, release_event_pic_small_thumb_8380, release_event_mime_type_small_thumb_8380, release_event_file_ext_small_thumb_8380, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/8380.png)XYX"sv, release_event_pic_thumb_8380, release_event_mime_type_thumb_8380, release_event_file_ext_thumb_8380, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/8380.png)XYX"sv, release_event_pic_tiny_thumb_8380, release_event_mime_type_tiny_thumb_8380, release_event_file_ext_tiny_thumb_8380  };
+constexpr picture picture_release_event_8380 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/8380.png?v=5)XYX"sv, release_event_pic_orig_8380, release_event_mime_type_orig_8380, release_event_file_ext_orig_8380, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/8380.png?v=5)XYX"sv, release_event_pic_small_thumb_8380, release_event_mime_type_small_thumb_8380, release_event_file_ext_small_thumb_8380, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/8380.png?v=5)XYX"sv, release_event_pic_thumb_8380, release_event_mime_type_thumb_8380, release_event_file_ext_thumb_8380, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/8380.png?v=5)XYX"sv, release_event_pic_tiny_thumb_8380, release_event_mime_type_tiny_thumb_8380, release_event_file_ext_tiny_thumb_8380  };
 
 constexpr std::array<additional_name, 2> names_release_event_8768 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2025」in SENDAI)XYX"sv},
@@ -3501,9 +4050,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_8768 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_8768;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_8768") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_8768 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_8768"
+});
+constexpr std::string_view release_event_mime_type_thumb_8768 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_8768 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_8768;
 constexpr std::string_view release_event_mime_type_thumb_8768 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_8768;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_8768") == __STDC_EMBED_FOUND__
@@ -3518,7 +4076,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_8768 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_8768;
 #endif
 
-constexpr picture picture_release_event_8768 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/8768.jpg)XYX"sv, release_event_pic_orig_8768, release_event_mime_type_orig_8768, release_event_file_ext_orig_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/8768.jpg)XYX"sv, release_event_pic_small_thumb_8768, release_event_mime_type_small_thumb_8768, release_event_file_ext_small_thumb_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/8768.jpg)XYX"sv, release_event_pic_thumb_8768, release_event_mime_type_thumb_8768, release_event_file_ext_thumb_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/8768.jpg)XYX"sv, release_event_pic_tiny_thumb_8768, release_event_mime_type_tiny_thumb_8768, release_event_file_ext_tiny_thumb_8768  };
+constexpr picture picture_release_event_8768 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/8768.jpg?v=9)XYX"sv, release_event_pic_orig_8768, release_event_mime_type_orig_8768, release_event_file_ext_orig_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/8768.jpg?v=9)XYX"sv, release_event_pic_small_thumb_8768, release_event_mime_type_small_thumb_8768, release_event_file_ext_small_thumb_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/8768.jpg?v=9)XYX"sv, release_event_pic_thumb_8768, release_event_mime_type_thumb_8768, release_event_file_ext_thumb_8768, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/8768.jpg?v=9)XYX"sv, release_event_pic_tiny_thumb_8768, release_event_mime_type_tiny_thumb_8768, release_event_file_ext_tiny_thumb_8768  };
 
 constexpr std::array<additional_name, 1> names_release_event_9341 {{
   {"English"sv, R"XYX(Miku Expo 2025 Bangkok)XYX"sv},
@@ -3554,9 +4112,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_9341 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_9341;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_9341") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_9341 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_9341"
+});
+constexpr std::string_view release_event_mime_type_thumb_9341 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9341 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9341;
 constexpr std::string_view release_event_mime_type_thumb_9341 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_9341;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_9341") == __STDC_EMBED_FOUND__
@@ -3571,7 +4138,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_9341 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_9341;
 #endif
 
-constexpr picture picture_release_event_9341 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9341.jpg)XYX"sv, release_event_pic_orig_9341, release_event_mime_type_orig_9341, release_event_file_ext_orig_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9341.jpg)XYX"sv, release_event_pic_small_thumb_9341, release_event_mime_type_small_thumb_9341, release_event_file_ext_small_thumb_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9341.jpg)XYX"sv, release_event_pic_thumb_9341, release_event_mime_type_thumb_9341, release_event_file_ext_thumb_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9341.jpg)XYX"sv, release_event_pic_tiny_thumb_9341, release_event_mime_type_tiny_thumb_9341, release_event_file_ext_tiny_thumb_9341  };
+constexpr picture picture_release_event_9341 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9341.jpg?v=3)XYX"sv, release_event_pic_orig_9341, release_event_mime_type_orig_9341, release_event_file_ext_orig_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9341.jpg?v=3)XYX"sv, release_event_pic_small_thumb_9341, release_event_mime_type_small_thumb_9341, release_event_file_ext_small_thumb_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9341.jpg?v=3)XYX"sv, release_event_pic_thumb_9341, release_event_mime_type_thumb_9341, release_event_file_ext_thumb_9341, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9341.jpg?v=3)XYX"sv, release_event_pic_tiny_thumb_9341, release_event_mime_type_tiny_thumb_9341, release_event_file_ext_tiny_thumb_9341  };
 
 constexpr std::array<additional_name, 3> names_release_event_9644 {{
   {"English"sv, R"XYX(MIKU WITH YOU 2025 in Shanghai)XYX"sv},
@@ -3609,9 +4176,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_9644 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_9644;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_9644") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_9644 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_9644"
+});
+constexpr std::string_view release_event_mime_type_thumb_9644 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9644 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9644;
 constexpr std::string_view release_event_mime_type_thumb_9644 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_9644;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_9644") == __STDC_EMBED_FOUND__
@@ -3626,9 +4202,122 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_9644 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_9644;
 #endif
 
-constexpr picture picture_release_event_9644 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9644.jpg)XYX"sv, release_event_pic_orig_9644, release_event_mime_type_orig_9644, release_event_file_ext_orig_9644, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9644.jpg)XYX"sv, release_event_pic_small_thumb_9644, release_event_mime_type_small_thumb_9644, release_event_file_ext_small_thumb_9644, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9644.jpg)XYX"sv, release_event_pic_thumb_9644, release_event_mime_type_thumb_9644, release_event_file_ext_thumb_9644, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9644.jpg)XYX"sv, release_event_pic_tiny_thumb_9644, release_event_mime_type_tiny_thumb_9644, release_event_file_ext_tiny_thumb_9644  };
+constexpr picture picture_release_event_9644 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9644.jpg?v=3)XYX"sv, release_event_pic_orig_9644, release_event_mime_type_orig_9644, release_event_file_ext_orig_9644, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9644.jpg?v=3)XYX"sv, release_event_pic_small_thumb_9644, release_event_mime_type_small_thumb_9644, release_event_file_ext_small_thumb_9644, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9644.jpg?v=3)XYX"sv, release_event_pic_thumb_9644, release_event_mime_type_thumb_9644, release_event_file_ext_thumb_9644, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9644.jpg?v=3)XYX"sv, release_event_pic_tiny_thumb_9644, release_event_mime_type_tiny_thumb_9644, release_event_file_ext_tiny_thumb_9644  };
 
-export constexpr std::array<release_event, 64> events {{
+constexpr std::array<additional_name, 2> names_release_event_9642 {{
+  {"Japanese"sv, R"XYX(初音ミク LAWSON 50th Anniversary Special LIVE)XYX"sv},
+  {"English"sv, R"XYX(Hatsune Miku LAWSON 50th Anniversary Special LIVE)XYX"sv},
+}};
+
+constexpr std::array<web_link, 4> web_links_release_event_9642 {{
+  {"Other"sv, R"XYX(Website)XYX"sv, R"XYX(https://l-tike.com/concert/lawson50th_260117_0118/)XYX"sv, 12686 },
+  {"Official"sv, R"XYX(Piapro Blog (1))XYX"sv, R"XYX(https://blog.piapro.net/2025/09/ni25090201.html)XYX"sv, 12687 },
+  {"Official"sv, R"XYX(Piapro Blog (2))XYX"sv, R"XYX(https://blog.piapro.net/2025/09/ni25092301.html)XYX"sv, 13304 },
+  {"Official"sv, R"XYX(Piapro Blog (3))XYX"sv, R"XYX(https://blog.piapro.net/2025/10/ni25100301.html)XYX"sv, 13305 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_9642") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_9642 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_9642"
+});
+constexpr std::string_view release_event_mime_type_orig_9642 = "image/jpeg";
+constexpr std::string_view release_event_file_ext_orig_9642 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_9642;
+constexpr std::string_view release_event_mime_type_orig_9642 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_9642;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_9642") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_9642 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_9642"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_9642 = "image/jpeg";
+constexpr std::string_view release_event_file_ext_small_thumb_9642 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_9642;
+constexpr std::string_view release_event_mime_type_small_thumb_9642 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_9642;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9642;
+constexpr std::string_view release_event_mime_type_thumb_9642 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9642;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_9642") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_9642 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_9642"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_9642 = "image/jpeg";
+constexpr std::string_view release_event_file_ext_tiny_thumb_9642 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_9642;
+constexpr std::string_view release_event_mime_type_tiny_thumb_9642 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_9642;
+#endif
+
+constexpr picture picture_release_event_9642 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9642.jpg?v=5)XYX"sv, release_event_pic_orig_9642, release_event_mime_type_orig_9642, release_event_file_ext_orig_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9642.jpg?v=5)XYX"sv, release_event_pic_small_thumb_9642, release_event_mime_type_small_thumb_9642, release_event_file_ext_small_thumb_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9642.jpg?v=5)XYX"sv, release_event_pic_thumb_9642, release_event_mime_type_thumb_9642, release_event_file_ext_thumb_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9642.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_9642, release_event_mime_type_tiny_thumb_9642, release_event_file_ext_tiny_thumb_9642  };
+
+constexpr std::array<additional_name, 3> names_release_event_9401 {{
+  {"English"sv, R"XYX(Hello)XYX"sv},
+  {"Unspecified"sv, R"XYX(デコミク LIVE starring 初音ミク 『Hello』Produced by DECO*27 / OTOIRO)XYX"sv},
+  {"Unspecified"sv, R"XYX(DECOMiku LIVE starring Hatsune Miku 『Hello』Produced by DECO*27 / OTOIRO)XYX"sv},
+}};
+
+constexpr std::array<web_link, 2> web_links_release_event_9401 {{
+  {"Other"sv, R"XYX(Website)XYX"sv, R"XYX(https://otoiro.co.jp/live/decomikulive2026)XYX"sv, 12346 },
+  {"Official"sv, R"XYX(X (Twitter))XYX"sv, R"XYX(https://x.com/DecoMiku_Live)XYX"sv, 12347 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_9401") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_9401 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_9401"
+});
+constexpr std::string_view release_event_mime_type_orig_9401 = "image/png";
+constexpr std::string_view release_event_file_ext_orig_9401 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_9401;
+constexpr std::string_view release_event_mime_type_orig_9401 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_9401;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_9401") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_9401 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_9401"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_9401 = "image/png";
+constexpr std::string_view release_event_file_ext_small_thumb_9401 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_9401;
+constexpr std::string_view release_event_mime_type_small_thumb_9401 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_9401;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9401;
+constexpr std::string_view release_event_mime_type_thumb_9401 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9401;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_9401") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_9401 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_9401"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_9401 = "image/png";
+constexpr std::string_view release_event_file_ext_tiny_thumb_9401 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_9401;
+constexpr std::string_view release_event_mime_type_tiny_thumb_9401 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_9401;
+#endif
+
+constexpr picture picture_release_event_9401 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9401.png?v=8)XYX"sv, release_event_pic_orig_9401, release_event_mime_type_orig_9401, release_event_file_ext_orig_9401, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9401.png?v=8)XYX"sv, release_event_pic_small_thumb_9401, release_event_mime_type_small_thumb_9401, release_event_file_ext_small_thumb_9401, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9401.png?v=8)XYX"sv, release_event_pic_thumb_9401, release_event_mime_type_thumb_9401, release_event_file_ext_thumb_9401, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9401.png?v=8)XYX"sv, release_event_pic_tiny_thumb_9401, release_event_mime_type_tiny_thumb_9401, release_event_file_ext_tiny_thumb_9401  };
+
+export constexpr std::array<release_event, 66> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
 
 **Concert Schedule**:
@@ -4058,6 +4747,8 @@ August 1st(Fri.) - 3rd(Sun.)
 Art by [Tiv](https://vocadb.net/Ar/161497))XYX"sv, 2025y/8/3, 8768, picture_release_event_8768, R"XYX(Hatsune Miku "Magical Mirai 2025" in SENDAI)XYX"sv, names_release_event_8768, 81, 2025, std::nullopt, 20912, R"(Hatsune Miku "Magical Mirai" 2025)", "Finished"sv, R"XYX(hatsune-miku-magical-mirai-202)XYX"sv, std::nullopt, web_links_release_event_8768 },
   {std::nullopt, "Unspecified"sv, 2025y/11/5, std::nullopt, std::nullopt, 9341, picture_release_event_9341, R"XYX(Miku Expo 2025 Bangkok)XYX"sv, names_release_event_9341, 82, 2025, R"XYX(Bangkok)XYX"sv, 22929, R"(Miku Expo 2025 Asia)", "Finished"sv, R"XYX(miku-expo-2025-bangkok)XYX"sv, R"XYX(UOB LIVE)XYX"sv, web_links_release_event_9341 },
   {R"XYX(未来有你 2025 in Shanghai, HATSUNE MIKU WITH YOU 2025 in Shanghai)XYX"sv, "Unspecified"sv, 2025y/12/20, std::nullopt, 2025y/12/21, 9644, picture_release_event_9644, R"XYX(MIKU WITH YOU 2025 in Shanghai)XYX"sv, names_release_event_9644, 173, 2025, R"XYX(in Shanghai)XYX"sv, 23552, R"(MIKU WITH YOU 2025)", "Draft"sv, R"XYX(miku-with-you-2025-in-shanghai)XYX"sv, R"XYX(Jing'an Sports Center)XYX"sv, web_links_release_event_9644 },
+  {R"XYX(初音ミク LAWSON 50th Anniversary Special LIVE)XYX"sv, "Concert"sv, 2026y/1/17, std::nullopt, 2026y/1/19, 9642, picture_release_event_9642, R"XYX(Hatsune Miku LAWSON 50th Anniversary Special LIVE)XYX"sv, names_release_event_9642, std::nullopt, 0, std::nullopt, std::nullopt, std::nullopt, "Draft"sv, R"XYX(hatsune-miku-lawson-50th-anniv)XYX"sv, std::nullopt, web_links_release_event_9642 },
+  {R"XYX(デコミク LIVE starring 初音ミク 『Hello』Produced by DECO*27 / OTOIRO, DECOMiku LIVE starring Hatsune Miku 『Hello』Produced by DECO*27 / OTOIRO)XYX"sv, "Concert"sv, 2026y/2/14, std::nullopt, std::nullopt, 9401, picture_release_event_9401, R"XYX(Hello)XYX"sv, names_release_event_9401, std::nullopt, 0, std::nullopt, std::nullopt, std::nullopt, "Draft"sv, R"XYX(hello)XYX"sv, R"XYX(国立代々木競技場第一体育館)XYX"sv, web_links_release_event_9401 },
 }};
 
 

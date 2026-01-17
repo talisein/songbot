@@ -878,7 +878,7 @@ scraper::fetch_picture_embeds(const json& pictures,
         const auto tmppath = std::filesystem::path{path}.replace_extension(".tmp");
         const auto now = std::chrono::system_clock::now();
         const auto last_modified = std::chrono::clock_cast<std::chrono::system_clock>(std::filesystem::exists(path) ? std::filesystem::last_write_time(path) : std::filesystem::file_time_type::min());
-        if ((now - last_modified) < std::chrono::days{30}) {
+        if ((now - last_modified) < std::chrono::years{1}) {
           downloaded_filenames.emplace_back(std::in_place, res_dir, filename_noext);
           continue;
         }

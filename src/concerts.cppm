@@ -2124,8 +2124,8 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { LAWSON, 5, "Butterfly on Your Right Shoulder"},
         { LAWSON, 6, "Luka Luka★Night Fever"},
         { LAWSON, 7, "Psi"},
-        { LAWSON, 8, "Weekender Girl", nullopt, "Day"},
-        { LAWSON, 8, "Common World Domination", nullopt, "Night"},
+        { LAWSON, 8, "Weekender Girl", nullopt, "Day 1"},
+        { LAWSON, 8, "Common World Domination", nullopt, "Night 1"},
         { LAWSON, 9, "Deep-Sea Girl"},
         { LAWSON, 10, "Call!!"},
         { LAWSON, 11, "Piano × Forte × Scandal"},
@@ -2156,7 +2156,7 @@ namespace {
     {
         std::vector<song_frequency> freqs;
         std::vector<std::string_view> names = std::views::transform(setlists, &SetlistTrack::song) | std::ranges::to<std::vector>();
-        std::ranges::sort(names);
+        std::ranges::stable_sort(names);
         std::string_view prev_name;
         size_t count = 0;
         auto out = std::back_inserter(freqs);
