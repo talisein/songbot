@@ -848,11 +848,11 @@ constexpr std::array<additional_name, 2> names_release_event_1939 {{
 
 constexpr std::array<web_link, 6> web_links_release_event_1939 {{
   {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.fandom.com/wiki/HATSUNE_MIKU_EXPO_2014_in_INDONESIA)XYX"sv, 960 },
+  {"Commercial"sv, R"XYX(KarenT special)XYX"sv, R"XYX(https://karent.jp/special/mikuexpo14)XYX"sv, 1796 },
+  {"Other"sv, R"XYX(MIKU EXPO in Indonesia Website)XYX"sv, R"XYX(https://mikuexpo.com/indonesia_top)XYX"sv, 1797 },
   {"Other"sv, R"XYX(mohax (VOCALO.ID) special interview)XYX"sv, R"XYX(https://mikuexpo.com/indonesia_karent#creator)XYX"sv, 1798 },
   {"Reference"sv, R"XYX(special Album)XYX"sv, R"XYX(https://vocadb.net/Al/9709)XYX"sv, 1799 },
   {"Other"sv, R"XYX(YouTube (special video))XYX"sv, R"XYX(https://youtu.be/Bo2LO4kWsyY)XYX"sv, 1800 },
-  {"Commercial"sv, R"XYX(KarenT special)XYX"sv, R"XYX(https://karent.jp/special/mikuexpo14)XYX"sv, 1796 },
-  {"Other"sv, R"XYX(MIKU EXPO in Indonesia Website)XYX"sv, R"XYX(https://mikuexpo.com/indonesia_top)XYX"sv, 1797 },
 }};
 
 
@@ -2002,8 +2002,8 @@ constexpr std::array<additional_name, 4> names_release_event_1561 {{
 }};
 
 constexpr std::array<web_link, 4> web_links_release_event_1561 {{
-  {"Other"sv, R"XYX(Website (EN))XYX"sv, R"XYX(http://magicalmirai.com/2018/index_en.html)XYX"sv, 526 },
   {"Other"sv, R"XYX(Website (JP))XYX"sv, R"XYX(http://magicalmirai.com/2018/)XYX"sv, 355 },
+  {"Other"sv, R"XYX(Website (EN))XYX"sv, R"XYX(http://magicalmirai.com/2018/index_en.html)XYX"sv, 526 },
   {"Other"sv, R"XYX(Website - OSAKA (EN))XYX"sv, R"XYX(https://magicalmirai.com/2018/osaka_top_en.html)XYX"sv, 1891 },
   {"Other"sv, R"XYX(Website - OSAKA (JP))XYX"sv, R"XYX(https://magicalmirai.com/2018/osaka_top.html)XYX"sv, 1892 },
 }};
@@ -3041,6 +3041,65 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_4058;
 
 constexpr picture picture_release_event_4058 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4058.jpg?v=5)XYX"sv, release_event_pic_orig_4058, release_event_mime_type_orig_4058, release_event_file_ext_orig_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4058.jpg?v=5)XYX"sv, release_event_pic_small_thumb_4058, release_event_mime_type_small_thumb_4058, release_event_file_ext_small_thumb_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4058.jpg?v=5)XYX"sv, release_event_pic_thumb_4058, release_event_mime_type_thumb_4058, release_event_file_ext_thumb_4058, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4058.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_4058, release_event_mime_type_tiny_thumb_4058, release_event_file_ext_tiny_thumb_4058  };
 
+constexpr std::array<additional_name, 3> names_release_event_4114 {{
+  {"Unspecified"sv, R"XYX(HATSUNE MIKU EXPO ЯƎWIИᗡ)XYX"sv},
+  {"English"sv, R"XYX(Miku Expo Rewind)XYX"sv},
+  {"Unspecified"sv, R"XYX(HATSUNE MIKU EXPO Rewind)XYX"sv},
+}};
+
+constexpr std::array<web_link, 5> web_links_release_event_4114 {{
+  {"Other"sv, R"XYX(Website (EN))XYX"sv, R"XYX(https://mikuexpo.com/rewind2022/index_en.html)XYX"sv, 2663 },
+  {"Other"sv, R"XYX(Website (JP))XYX"sv, R"XYX(https://mikuexpo.com/rewind2022/index.html)XYX"sv, 2664 },
+  {"Other"sv, R"XYX(HATSUNE MIKU OFFICIAL BLOG)XYX"sv, R"XYX(https://blog.piapro.net/2021/12/ta2112241.html)XYX"sv, 2665 },
+  {"Other"sv, R"XYX(Crypton Future Media (Press Release))XYX"sv, R"XYX(https://www.crypton.co.jp/cfm/news/2021/12/24me22rewind)XYX"sv, 3071 },
+  {"Reference"sv, R"XYX(MIKU EXPO Digital Stars 2022 Online)XYX"sv, R"XYX(https://vocadb.net/E/4276/miku-expo-digital-stars-2022-o)XYX"sv, 3072 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_4114") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_4114 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_4114"
+});
+constexpr std::string_view release_event_mime_type_orig_4114 = "image/png";
+constexpr std::string_view release_event_file_ext_orig_4114 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_4114;
+constexpr std::string_view release_event_mime_type_orig_4114 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_4114;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_4114") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_4114 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_4114"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_4114 = "image/png";
+constexpr std::string_view release_event_file_ext_small_thumb_4114 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_4114;
+constexpr std::string_view release_event_mime_type_small_thumb_4114 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_4114;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4114;
+constexpr std::string_view release_event_mime_type_thumb_4114 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4114;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_4114") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_4114 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_4114"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_4114 = "image/png";
+constexpr std::string_view release_event_file_ext_tiny_thumb_4114 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_4114;
+constexpr std::string_view release_event_mime_type_tiny_thumb_4114 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_4114;
+#endif
+
+constexpr picture picture_release_event_4114 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4114.jpg?v=15)XYX"sv, release_event_pic_orig_4114, release_event_mime_type_orig_4114, release_event_file_ext_orig_4114, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4114.jpg?v=15)XYX"sv, release_event_pic_small_thumb_4114, release_event_mime_type_small_thumb_4114, release_event_file_ext_small_thumb_4114, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4114.jpg?v=15)XYX"sv, release_event_pic_thumb_4114, release_event_mime_type_thumb_4114, release_event_file_ext_thumb_4114, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4114.jpg?v=15)XYX"sv, release_event_pic_tiny_thumb_4114, release_event_mime_type_tiny_thumb_4114, release_event_file_ext_tiny_thumb_4114  };
+
 constexpr std::array<additional_name, 2> names_release_event_4161 {{
   {"Japanese"sv, R"XYX(鏡音リン・レン Happy 14th Birthday Party「Two You☆★」)XYX"sv},
   {"English"sv, R"XYX(Kagamine Rin・Len Happy 14th Birthday Party "Two You☆★")XYX"sv},
@@ -3172,6 +3231,67 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_4233;
 #endif
 
 constexpr picture picture_release_event_4233 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4233.jpg?v=8)XYX"sv, release_event_pic_orig_4233, release_event_mime_type_orig_4233, release_event_file_ext_orig_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4233.jpg?v=8)XYX"sv, release_event_pic_small_thumb_4233, release_event_mime_type_small_thumb_4233, release_event_file_ext_small_thumb_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4233.jpg?v=8)XYX"sv, release_event_pic_thumb_4233, release_event_mime_type_thumb_4233, release_event_file_ext_thumb_4233, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4233.jpg?v=8)XYX"sv, release_event_pic_tiny_thumb_4233, release_event_mime_type_tiny_thumb_4233, release_event_file_ext_tiny_thumb_4233  };
+
+constexpr std::array<additional_name, 2> names_release_event_4490 {{
+  {"English"sv, R"XYX(Miku Expo Rewind+)XYX"sv},
+  {"Unspecified"sv, R"XYX(HATSUNE MIKU EXPO Rewind+)XYX"sv},
+}};
+
+constexpr std::array<web_link, 8> web_links_release_event_4490 {{
+  {"Other"sv, R"XYX(Website (EN))XYX"sv, R"XYX(https://mikuexpo.com/rewind2022/index_en.html)XYX"sv, 3507 },
+  {"Other"sv, R"XYX(Website (JP))XYX"sv, R"XYX(https://mikuexpo.com/rewind2022/index.html)XYX"sv, 3508 },
+  {"Other"sv, R"XYX(Crypton Future Media (Press Release))XYX"sv, R"XYX(https://www.crypton.co.jp/cfm/news/2022/08/19rewindplus)XYX"sv, 3509 },
+  {"Official"sv, R"XYX(Twitter (Announcement))XYX"sv, R"XYX(https://twitter.com/mikuexpo/status/1562984796724559872)XYX"sv, 3510 },
+  {"Other"sv, R"XYX(Google Docs (Song request survey))XYX"sv, R"XYX(https://docs.google.com/forms/d/e/1FAIpQLSfMmeS1ltbz4AFCSBNblp5_wDcRviBIlGLITnLcTpw6uYUSYQ/viewform)XYX"sv, 3511 },
+  {"Reference"sv, R"XYX(Song Remix Contest)XYX"sv, R"XYX(https://vocadb.net/E/4491)XYX"sv, 3517 },
+  {"Reference"sv, R"XYX(MIKU EXPO Rewind+ Digital Stars Online)XYX"sv, R"XYX(https://vocadb.net/E/4670)XYX"sv, 5239 },
+  {"Official"sv, R"XYX(Twitter (Timetable))XYX"sv, R"XYX(https://twitter.com/mikuexpo/status/1580741653110792192)XYX"sv, 5240 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_4490") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_4490 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_4490"
+});
+constexpr std::string_view release_event_mime_type_orig_4490 = "image/png";
+constexpr std::string_view release_event_file_ext_orig_4490 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_4490;
+constexpr std::string_view release_event_mime_type_orig_4490 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_4490;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_4490") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_4490 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_4490"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_4490 = "image/png";
+constexpr std::string_view release_event_file_ext_small_thumb_4490 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_4490;
+constexpr std::string_view release_event_mime_type_small_thumb_4490 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_4490;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_4490;
+constexpr std::string_view release_event_mime_type_thumb_4490 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_4490;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_4490") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_4490 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_4490"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_4490 = "image/png";
+constexpr std::string_view release_event_file_ext_tiny_thumb_4490 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_4490;
+constexpr std::string_view release_event_mime_type_tiny_thumb_4490 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_4490;
+#endif
+
+constexpr picture picture_release_event_4490 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/4490.jpg?v=8)XYX"sv, release_event_pic_orig_4490, release_event_mime_type_orig_4490, release_event_file_ext_orig_4490, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/4490.jpg?v=8)XYX"sv, release_event_pic_small_thumb_4490, release_event_mime_type_small_thumb_4490, release_event_file_ext_small_thumb_4490, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/4490.jpg?v=8)XYX"sv, release_event_pic_thumb_4490, release_event_mime_type_thumb_4490, release_event_file_ext_thumb_4490, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/4490.jpg?v=8)XYX"sv, release_event_pic_tiny_thumb_4490, release_event_mime_type_tiny_thumb_4490, release_event_file_ext_tiny_thumb_4490  };
 
 constexpr std::array<additional_name, 3> names_release_event_4235 {{
   {"Japanese"sv, R"XYX(初音ミク「マジカルミライ」10th Anniversary in SAPPORO)XYX"sv},
@@ -4242,9 +4362,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_9642 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_9642;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_9642") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_9642 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_9642"
+});
+constexpr std::string_view release_event_mime_type_thumb_9642 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9642 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9642;
 constexpr std::string_view release_event_mime_type_thumb_9642 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_9642;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_9642") == __STDC_EMBED_FOUND__
@@ -4259,7 +4388,7 @@ constexpr std::string_view release_event_mime_type_tiny_thumb_9642 = "inode/x-em
 constexpr std::string_view release_event_file_ext_tiny_thumb_9642;
 #endif
 
-constexpr picture picture_release_event_9642 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9642.jpg?v=5)XYX"sv, release_event_pic_orig_9642, release_event_mime_type_orig_9642, release_event_file_ext_orig_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9642.jpg?v=5)XYX"sv, release_event_pic_small_thumb_9642, release_event_mime_type_small_thumb_9642, release_event_file_ext_small_thumb_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9642.jpg?v=5)XYX"sv, release_event_pic_thumb_9642, release_event_mime_type_thumb_9642, release_event_file_ext_thumb_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9642.jpg?v=5)XYX"sv, release_event_pic_tiny_thumb_9642, release_event_mime_type_tiny_thumb_9642, release_event_file_ext_tiny_thumb_9642  };
+constexpr picture picture_release_event_9642 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9642.jpg?v=6)XYX"sv, release_event_pic_orig_9642, release_event_mime_type_orig_9642, release_event_file_ext_orig_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9642.jpg?v=6)XYX"sv, release_event_pic_small_thumb_9642, release_event_mime_type_small_thumb_9642, release_event_file_ext_small_thumb_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9642.jpg?v=6)XYX"sv, release_event_pic_thumb_9642, release_event_mime_type_thumb_9642, release_event_file_ext_thumb_9642, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9642.jpg?v=6)XYX"sv, release_event_pic_tiny_thumb_9642, release_event_mime_type_tiny_thumb_9642, release_event_file_ext_tiny_thumb_9642  };
 
 constexpr std::array<additional_name, 3> names_release_event_9401 {{
   {"English"sv, R"XYX(Hello)XYX"sv},
@@ -4298,9 +4427,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_9401 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_9401;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_9401") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_9401 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_9401"
+});
+constexpr std::string_view release_event_mime_type_thumb_9401 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9401 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9401;
 constexpr std::string_view release_event_mime_type_thumb_9401 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_9401;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_9401") == __STDC_EMBED_FOUND__
@@ -4317,7 +4455,7 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_9401;
 
 constexpr picture picture_release_event_9401 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9401.png?v=8)XYX"sv, release_event_pic_orig_9401, release_event_mime_type_orig_9401, release_event_file_ext_orig_9401, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9401.png?v=8)XYX"sv, release_event_pic_small_thumb_9401, release_event_mime_type_small_thumb_9401, release_event_file_ext_small_thumb_9401, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9401.png?v=8)XYX"sv, release_event_pic_thumb_9401, release_event_mime_type_thumb_9401, release_event_file_ext_thumb_9401, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9401.png?v=8)XYX"sv, release_event_pic_tiny_thumb_9401, release_event_mime_type_tiny_thumb_9401, release_event_file_ext_tiny_thumb_9401  };
 
-export constexpr std::array<release_event, 66> events {{
+export constexpr std::array<release_event, 68> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
 
 **Concert Schedule**:
@@ -4606,6 +4744,26 @@ October 22nd(Fri.) - 24th(Sun.)
 Art by [左](https://vocadb.net/Ar/3104))XYX"sv, 2021y/10/24, 3305, picture_release_event_3305, R"XYX(Hatsune Miku "Magical Mirai 2021" in OSAKA)XYX"sv, names_release_event_3305, 81, 2021, std::nullopt, 9909, R"(Hatsune Miku Magical Mirai 2021)", "Approved"sv, R"XYX(hatsune-miku-magical-mirai-202)XYX"sv, std::nullopt, web_links_release_event_3305 },
   {R"XYX(初音ミク GALAXY LIVE 2021)XYX"sv, "Unspecified"sv, 2021y/12/18, R"XYX(Art by れおえん)XYX"sv, 2021y/12/19, 3979, picture_release_event_3979, R"XYX(Hatsune Miku GALAXY LIVE 2021)XYX"sv, names_release_event_3979, 314, 2021, std::nullopt, 9993, R"(Hatsune Miku GALAXY LIVE 2021)", "Finished"sv, R"XYX(hatsune-miku-galaxy-live-2021)XYX"sv, R"XYX(INSPIX LIVE)XYX"sv, web_links_release_event_3979 },
   {R"XYX(未来有你 2021, HATSUNE MIKU WITH YOU 2021)XYX"sv, "Unspecified"sv, 2021y/12/25, R"XYX(Art by Liita)XYX"sv, std::nullopt, 4058, picture_release_event_4058, R"XYX(MIKU WITH YOU 2021)XYX"sv, names_release_event_4058, 173, 2021, std::nullopt, 10011, R"(MIKU WITH YOU 2021)", "Finished"sv, R"XYX(miku-with-you-2021)XYX"sv, std::nullopt, web_links_release_event_4058 },
+  {R"XYX(HATSUNE MIKU EXPO ЯƎWIИᗡ, HATSUNE MIKU EXPO Rewind)XYX"sv, "Concert"sv, 2022y/6/5, R"XYX(Livestream concert of selected clips from past MIKU EXPO performances, streamed for free.
+
+**Concert Schedule**:
+
+* **June 5th(Sun.)**
+1st Show: Daytime (OPEN 10:30 / START 12:30 / CLOSE 2:00)
+2nd Show: Nighttime (OPEN 5:30 / START 7:30 / CLOSE 9:00)
+3rd Show: Nighttime (OPEN 9:30 / START 11:30 / CLOSE 1:00)
+
+* All times JST
+
+**Streaming Platform**: YouTube Live ([HatsuneMiku](https://www.youtube.com/channel/UCJwGWV914kBlV4dKRn7AEFA)) / Twitch ([@cfm_official](https://www.twitch.tv/cfm_official))
+
+**Sub-events**:
+
+* Let’s paint 3.9
+* MIKU EXPO Rewind Gallery
+* [MIKU EXPO Digital Stars 2022 Online](https://vocadb.net/E/4276/miku-expo-digital-stars-2022-o)
+
+Art by [Zambiie](https://twitter.com/Margikrap))XYX"sv, std::nullopt, 4114, picture_release_event_4114, R"XYX(Miku Expo Rewind)XYX"sv, names_release_event_4114, 82, 2022, std::nullopt, 10387, R"(HATSUNE MIKU EXPO Rewind)", "Finished"sv, R"XYX(miku-expo-rewind)XYX"sv, R"XYX(YouTube Live / Twitch)XYX"sv, web_links_release_event_4114 },
   {R"XYX(鏡音リン・レン Happy 14th Birthday Party「Two You☆★」)XYX"sv, "Concert"sv, 2022y/7/7, R"XYX(Kagamine Rin and Len first solo live concert.
 
 **Concert Schedule**:
@@ -4632,6 +4790,25 @@ INTEX Osaka Hall 4
 August 12th(Fri.) - 14th(Sun.)
 
 Art by [KEI](https://vocadb.net/Ar/9213))XYX"sv, 2022y/8/14, 4233, picture_release_event_4233, R"XYX(Hatsune Miku "Magical Mirai" 10th Anniversary in OSAKA)XYX"sv, names_release_event_4233, 81, 2022, std::nullopt, 10556, R"(Hatsune Miku "Magical Mirai" 10th Anniversary (OSAKA & TOKYO))", "Approved"sv, R"XYX(hatsune-miku-magical-mirai-10t)XYX"sv, std::nullopt, web_links_release_event_4233 },
+  {R"XYX(HATSUNE MIKU EXPO Rewind+)XYX"sv, "Unspecified"sv, 2022y/11/6, R"XYX(New augmented edition of the [HATSUNE MIKU EXPO Rewind](https://vocadb.net/E/4114/hatsune-miku-expo-rewind) event, including new footage that has not been released in archives or on DVD. Streamed for free.
+
+**Concert Schedule**:
+
+* **November 6th(Sun.)**
+1st Show: OPEN 9:00 / START 10:30 / CLOSE 13:00
+2nd Show: OPEN 16:00 / START 17:30 / CLOSE 20:00
+
+* All times JST
+
+**Streaming Platform**: YouTube Live ([HatsuneMiku](https://www.youtube.com/channel/UCJwGWV914kBlV4dKRn7AEFA)) / Twitch ([@cfm_official](https://www.twitch.tv/cfm_official))
+
+**Sub-events**:
+
+* Let’s paint 3.939
+* MIKU EXPO Rewind+ Gallery
+* MIKU EXPO Rewind+ Digital Stars Online
+
+Art by [Zambiie](https://twitter.com/Margikrap))XYX"sv, std::nullopt, 4490, picture_release_event_4490, R"XYX(Miku Expo Rewind+)XYX"sv, names_release_event_4490, 82, 2022, std::nullopt, 10913, R"(HATSUNE MIKU EXPO Rewind+)", "Finished"sv, R"XYX(miku-expo-rewind)XYX"sv, R"XYX(YouTube Live / Twitch)XYX"sv, web_links_release_event_4490 },
   {R"XYX(初音ミク「マジカルミライ」10th Anniversary in SAPPORO, 初音ミク「マジカルミライ 2022」in SAPPORO)XYX"sv, "Unspecified"sv, 2023y/2/4, R"XYX(Magical Mirai 10th anniversary theme is "retro-future".
 
 Held in conjunction with [SNOW MIKU 2023](https://vocadb.net/E/4818/snow-miku-2023)
@@ -4747,7 +4924,7 @@ August 1st(Fri.) - 3rd(Sun.)
 Art by [Tiv](https://vocadb.net/Ar/161497))XYX"sv, 2025y/8/3, 8768, picture_release_event_8768, R"XYX(Hatsune Miku "Magical Mirai 2025" in SENDAI)XYX"sv, names_release_event_8768, 81, 2025, std::nullopt, 20912, R"(Hatsune Miku "Magical Mirai" 2025)", "Finished"sv, R"XYX(hatsune-miku-magical-mirai-202)XYX"sv, std::nullopt, web_links_release_event_8768 },
   {std::nullopt, "Unspecified"sv, 2025y/11/5, std::nullopt, std::nullopt, 9341, picture_release_event_9341, R"XYX(Miku Expo 2025 Bangkok)XYX"sv, names_release_event_9341, 82, 2025, R"XYX(Bangkok)XYX"sv, 22929, R"(Miku Expo 2025 Asia)", "Finished"sv, R"XYX(miku-expo-2025-bangkok)XYX"sv, R"XYX(UOB LIVE)XYX"sv, web_links_release_event_9341 },
   {R"XYX(未来有你 2025 in Shanghai, HATSUNE MIKU WITH YOU 2025 in Shanghai)XYX"sv, "Unspecified"sv, 2025y/12/20, std::nullopt, 2025y/12/21, 9644, picture_release_event_9644, R"XYX(MIKU WITH YOU 2025 in Shanghai)XYX"sv, names_release_event_9644, 173, 2025, R"XYX(in Shanghai)XYX"sv, 23552, R"(MIKU WITH YOU 2025)", "Draft"sv, R"XYX(miku-with-you-2025-in-shanghai)XYX"sv, R"XYX(Jing'an Sports Center)XYX"sv, web_links_release_event_9644 },
-  {R"XYX(初音ミク LAWSON 50th Anniversary Special LIVE)XYX"sv, "Concert"sv, 2026y/1/17, std::nullopt, 2026y/1/19, 9642, picture_release_event_9642, R"XYX(Hatsune Miku LAWSON 50th Anniversary Special LIVE)XYX"sv, names_release_event_9642, std::nullopt, 0, std::nullopt, std::nullopt, std::nullopt, "Draft"sv, R"XYX(hatsune-miku-lawson-50th-anniv)XYX"sv, std::nullopt, web_links_release_event_9642 },
+  {R"XYX(初音ミク LAWSON 50th Anniversary Special LIVE)XYX"sv, "Concert"sv, 2026y/1/17, std::nullopt, 2026y/1/19, 9642, picture_release_event_9642, R"XYX(Hatsune Miku LAWSON 50th Anniversary Special LIVE)XYX"sv, names_release_event_9642, std::nullopt, 0, std::nullopt, 23957, R"(初音ミク LAWSON 50th Anniversary Special LIVE)", "Finished"sv, R"XYX(hatsune-miku-lawson-50th-anniv)XYX"sv, std::nullopt, web_links_release_event_9642 },
   {R"XYX(デコミク LIVE starring 初音ミク 『Hello』Produced by DECO*27 / OTOIRO, DECOMiku LIVE starring Hatsune Miku 『Hello』Produced by DECO*27 / OTOIRO)XYX"sv, "Concert"sv, 2026y/2/14, std::nullopt, std::nullopt, 9401, picture_release_event_9401, R"XYX(Hello)XYX"sv, names_release_event_9401, std::nullopt, 0, std::nullopt, std::nullopt, std::nullopt, "Draft"sv, R"XYX(hello)XYX"sv, R"XYX(国立代々木競技場第一体育館)XYX"sv, web_links_release_event_9401 },
 }};
 
