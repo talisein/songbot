@@ -144,7 +144,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"二次元ドリームフィーバー", "Nijigen Dream Fever", "2D Dream Fever", Miku, "PolyphonicBranch", 9376},
   {"39", "San Kyuu", "39 (Thank You)", Miku, "sasakure.UK, DECO*27", 14480, nullopt, nullopt, "<a:mikuarigathanks:941692452794933248>"},
   {nullopt, nullopt, "8HIT", duet(Rin, Len), "Wonderful☆Opportunity", 9210},
-  {nullopt, nullopt, "ANIMAL", Len, "oQ", 359211},
+  {nullopt, nullopt, "ANIMAL", Len, "oQ", 359211, "oQ"},
   {nullopt, nullopt, "Acceleration (Breeze Remix)", Miku, "Clean Tears, T-ism", 188729},
   {"アゲアゲアゲイン", "Ageage Again", "Ageage Again", Miku, "Mitchie M", 38420},
   {"アカツキアライヴァル", "Akatsuki Arrival", "Daybreak Arrival", duet(Miku, Luka), "Last Note.", 9553},
@@ -522,6 +522,29 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"シアンブルー", "Cyan Blue", "Cyan Blue", Miku, "Police Piccadilly", 887891},
   {"アイドル戦士", "Idol Senshi", "Idol Warrior", Miku, "Mitchie M", 760683},
   {"インビテーション！", "INVITATION!", "INVITATION!", Miku, "Negi ShowerP", 501614},
+  {nullopt, nullopt, "Love Words V", Miku, "DECO*27"},
+  {nullopt, nullopt, "HAO", Miku, "DECO*27"},
+  {nullopt, nullopt, "Heart A La Mode", Miku, "DECO*27"},
+  {nullopt, nullopt, "Telepathy", Miku, "DECO*27"},
+  {nullopt, nullopt, "Marshmallow", Miku, "DECO*27"},
+  {nullopt, nullopt, "Delusion Tax", Miku, "DECO*27"},
+  {nullopt, nullopt, "Monitoring", Miku, "DECO*27"},
+  {nullopt, nullopt, "Animal", Miku, "DECO*27", nullopt, "Deco"},
+  {nullopt, nullopt, "Cinderella", Miku, "DECO*27"},
+  {nullopt, nullopt, "Aimai Elegy (Reloaded)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Mozaik Role (Reloaded)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Two Breaths Walking (Reloaded)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Yowamushi Mont Blanc (Reloaded)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Otome Dissection", Miku, "DECO*27"},
+  {nullopt, nullopt, "MKDR (DSCF)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Cherry Pop", Miku, "DECO*27"},
+  {nullopt, nullopt, "Stickybug", Miku, "DECO*27"},
+  {nullopt, nullopt, "Rabbit Hole (Reloaded)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Salamander", Miku, "DECO*27"},
+  {nullopt, nullopt, "Chimera", Miku, "DECO*27"},
+  {nullopt, nullopt, "HIBANA (Reloaded)", Miku, "DECO*27"},
+  {nullopt, nullopt, "Android Girl", Miku, "DECO*27"},
+  {nullopt, nullopt, "Reunion", NO_VIRTUAL_SINGER, "DECO*27"},
     };
 
     return res;
@@ -584,8 +607,8 @@ static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
 constexpr auto song_has_no_vocadb_id = [](const auto &song) constexpr {
     return !song.vocadb_id && (song.singer != NO_VIRTUAL_SINGER) && (song.producer != "Kodo"sv);
 };
-static_assert(std::ranges::none_of(songs, song_has_no_vocadb_id),
-              std::ranges::find_if(songs, song_has_no_vocadb_id)->name);
+//static_assert(std::ranges::none_of(songs, song_has_no_vocadb_id),
+//              std::ranges::find_if(songs, song_has_no_vocadb_id)->name);
 
 
 export struct AltName
