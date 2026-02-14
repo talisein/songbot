@@ -2222,8 +2222,8 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
 	{ DECO, 22, "Volt Tackle"},
 	{ DECO, 23, "Telepathy"},
 	{ DECO, 24, "Heart A La Mode"},
-	{ DECO, 25, "Dream Dream"},
-	{ DECO, 25, "Blue Planet"},
+	{ DECO, 25, "Dream Dream", nullopt, "Day"},
+	{ DECO, 25, "Blue Planet", nullopt, "Night"},
 	{ DECO, 26, "HAO"},
 	{ DECO, 27, "Love Words V"},
     });
