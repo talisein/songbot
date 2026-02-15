@@ -522,29 +522,29 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"シアンブルー", "Cyan Blue", "Cyan Blue", Miku, "Police Piccadilly", 887891},
   {"アイドル戦士", "Idol Senshi", "Idol Warrior", Miku, "Mitchie M", 760683},
   {"インビテーション！", "INVITATION!", "INVITATION!", Miku, "Negi ShowerP", 501614},
-  {nullopt, nullopt, "Love Words V", Miku, "DECO*27"},
-  {nullopt, nullopt, "HAO", Miku, "DECO*27"},
-  {nullopt, nullopt, "Heart A La Mode", Miku, "DECO*27"},
-  {nullopt, nullopt, "Telepathy", Miku, "DECO*27"},
-  {nullopt, nullopt, "Marshmallow", Miku, "DECO*27"},
-  {nullopt, nullopt, "Delusion Tax", Miku, "DECO*27"},
-  {nullopt, nullopt, "Monitoring", Miku, "DECO*27"},
-  {nullopt, nullopt, "Animal", Miku, "DECO*27", nullopt, "Deco"},
-  {nullopt, nullopt, "Cinderella", Miku, "DECO*27"},
-  {nullopt, nullopt, "Aimai Elegy (Reloaded)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Mozaik Role (Reloaded)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Two Breaths Walking (Reloaded)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Yowamushi Mont Blanc (Reloaded)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Otome Dissection", Miku, "DECO*27"},
-  {nullopt, nullopt, "MKDR (DSCF)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Cherry Pop", Miku, "DECO*27"},
-  {nullopt, nullopt, "Stickybug", Miku, "DECO*27"},
-  {nullopt, nullopt, "Rabbit Hole (Reloaded)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Salamander", Miku, "DECO*27"},
-  {nullopt, nullopt, "Chimera", Miku, "DECO*27"},
-  {nullopt, nullopt, "HIBANA (Reloaded)", Miku, "DECO*27"},
-  {nullopt, nullopt, "Android Girl", Miku, "DECO*27"},
-  {nullopt, nullopt, "Reunion", NO_VIRTUAL_SINGER, "DECO*27"},
+  {"愛言葉Ⅴ", "Ai Kotoba V", "Love Words V", Miku, "DECO*27", 915394},
+  {"ハオ", "HAO", "HAO", Miku, "DECO*27", 640212},
+  {"ハートアラモード", "Heart à la mode", "Heart à la mode", Miku, "DECO*27", 67964},
+  {"テレパシ", "Telepathy", "Telepathy", Miku, "DECO*27", 752940},
+  {"マシュマロ", "Marshmallow", "Marshmallow", Miku, "DECO*27", 848354},
+  {"妄想税", "Mousouzei", "Delusion Tax", Miku, "DECO*27", 38916},
+  {"モニタリング", "Monitoring", "Monitoring", Miku, "DECO*27", 668055},
+  {"アニマル", "Animal", "Animal", Miku, "DECO*27", 371426, "Deco"},
+  {"シンデレラ", "Cinderella", "Cinderella", Miku, "DECO*27", 346457},
+  {"愛迷エレジー (Reloaded)", "Aimai Elegy (Reloaded)", "Aimai Elegy (Reloaded)", Miku, "DECO*27", 878206},
+  {"モザイクロール (Reloaded)", "Mozaik Role (Reloaded)", "Mozaik Role (Reloaded)", Miku, "DECO*27", 358478},
+  {"二息歩行 (Reloaded)", "Nisoku Hokou (Reloaded)", "Two Breaths Walking (Reloaded)", Miku, "DECO*27", 286028},
+  {"弱虫モンブラン (Reloaded)", "Yowamushi Mont Blanc (Reloaded)", "Yowamushi Mont Blanc (Reloaded)", Miku, "DECO*27", 777659},
+  {"乙女解剖", "Otome Kaibou", "Otome Dissection", Miku, "DECO*27", 222749},
+  {"妄想感傷代償連盟", "Mousou Kanshou Daishou Renmei", "Delusional Sentimental Compensation Federation", Miku, "DECO*27", 131090},
+  {"チェリーポップ", "Cherry Pop", "Cherry Pop", Miku, "DECO*27", 816725},
+  {"おじゃま虫", "Ojamamushi", "Stickybug", Miku, "DECO*27", 48030},
+  {"ラビットホール (Reloaded)", "Rabbit Hole (Reloaded)", "Rabbit Hole (Reloaded)", Miku, "DECO*27", 668053},
+  {"サラマンダー", "Salamander", "Salamander", Miku, "DECO*27", 376689},
+  {"キメラ", "Chimera", "Chimera", Miku, "DECO*27", 396081},
+  {"ヒバナ -Reloaded-", "HIBANA -Reloaded-", "HIBANA -Reloaded-", Miku, "DECO*27", 230401},
+  {"アンドロイドガール", "Android Girl", "Android Girl", Miku, "DECO*27", 230406},
+  {nullopt, nullopt, "Reunion", NO_VIRTUAL_SINGER, "DECO*27", 230396},
     };
 
     return res;
@@ -607,8 +607,8 @@ static_assert(std::ranges::none_of(songs, song_has_same_jp_romanji_name),
 constexpr auto song_has_no_vocadb_id = [](const auto &song) constexpr {
     return !song.vocadb_id && (song.singer != NO_VIRTUAL_SINGER) && (song.producer != "Kodo"sv);
 };
-//static_assert(std::ranges::none_of(songs, song_has_no_vocadb_id),
-//              std::ranges::find_if(songs, song_has_no_vocadb_id)->name);
+static_assert(std::ranges::none_of(songs, song_has_no_vocadb_id),
+              std::ranges::find_if(songs, song_has_no_vocadb_id)->name);
 
 
 export struct AltName
@@ -641,6 +641,11 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "01 ballade", "Fragments of a Star"},
             { "Repairers of the Deceptive World", "Whipstitching Person"},
             { "The Pokemon Inside My Heart", "The Pokémon Inside My Heart"},
+	    { "Heart a la mode", "Heart à la mode"},
+	    { "MKDR", "Delusional Sentimental Compensation Federation"},
+	    { "DSCF", "Delusional Sentimental Compensation Federation"},
+	    { "MKDR DSCF", "Delusional Sentimental Compensation Federation"},
+	    { "MKDR (DSCF)", "Delusional Sentimental Compensation Federation"},
     };
     return res;
 }
