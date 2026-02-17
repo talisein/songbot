@@ -37,8 +37,13 @@ public:
 private:
     std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
 
+    dpp::task<std::expected<void, std::error_code>>
+    reply_multimessage(const dpp::slashcommand_t& event, const Concert& concert);
+
     prometheus::Counter* setlist_success_counter;
     prometheus::Counter* setlist_failure_counter;
+    prometheus::Counter* setlist_reveal_success_counter;
+    prometheus::Counter* setlist_reveal_failure_counter;
 
     prometheus::Counter* ac_setlist_success_counter;
     prometheus::Counter* ac_setlist_no_match_counter;

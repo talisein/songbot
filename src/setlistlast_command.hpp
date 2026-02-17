@@ -25,7 +25,6 @@ import util;
 import concerts;
 
 #include "iface_command.hpp"
-#include "state_storage.hpp"
 
 class setlistlast_command : public iface_command
 {
