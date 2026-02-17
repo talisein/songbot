@@ -367,6 +367,7 @@ using namespace std::literals;
 
 scraper::scraper(std::filesystem::path res_dir) noexcept :
     res_dir(std::move(res_dir)),
+    json_dir(this->res_dir / "json"),
     rng_eng([]{ std::random_device rd; std::seed_seq seq {rd(), rd(), rd(), rd()}; return std::default_random_engine{seq};  }()),
     dist(shape_k, scale_beta)
 {
@@ -390,14 +391,31 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
              | std::views::filter([](const auto& s) { return s.vocadb_id.has_value(); })
         )
     {
-        cpr::Url url{std::format(vocadb::songs_url, song.vocadb_id.value())};
-        cpr::Parameters params{{"fields", "AdditionalNames,Artists,MainPicture,Names,PVs,ThumbUrl,WebLinks,Bpm,CultureCodes"},
-                               {"lang", "English"}};
-        std::println("Fetching root json for {}", song.name);
-        auto res = get(url, params);
-        if (res && res->status_code == 200) {
-            vec.push_back(json::parse(res->text));
+        std::filesystem::path file = json_dir / std::format("song_{}", song.vocadb_id.value());
+        if (!std::filesystem::exists(file)) {
+          cpr::Url url{std::format(vocadb::songs_url, song.vocadb_id.value())};
+          cpr::Parameters params{{"fields", "AdditionalNames,Artists,MainPicture,Names,PVs,ThumbUrl,WebLinks,Bpm,CultureCodes"},
+                                 {"lang", "English"}};
+          std::println("Fetching root json for {}", song.name);
+          const auto tmppath = std::filesystem::path{file}.replace_extension(".tmp");
+          std::ofstream ofs {tmppath, std::ios::binary | std::ios::out | std::ios::trunc };
+          auto res = download(url, ofs, params);
+          if (!res || res->status_code != 200) {
+            if (!res)
+              std::println(std::cerr, "Error: Failed to download {}: {}", url.str(), res.error().message());
+            else
+              std::println(std::cerr, "Error: Failed to download {}: status code {}", url.str(), res->status_code);
+            ofs.close();
+            std::filesystem::remove(tmppath);
+            return std::unexpected(res.error());
+          } else {
+            ofs.flush();
+            ofs.close();
+            std::filesystem::rename(tmppath, file);
+          }
         }
+        std::ifstream ifs{file};
+        vec.push_back(json::parse(ifs));
     }
 
     std::ostringstream full_file;

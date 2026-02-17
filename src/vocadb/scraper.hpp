@@ -57,6 +57,7 @@ public:
 private:
     cpr::Session session;
     std::filesystem::path res_dir;
+    std::filesystem::path json_dir;
     std::default_random_engine rng_eng;
     std::gamma_distribution<double> dist;
 

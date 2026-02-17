@@ -526,7 +526,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"アニマル", "Animal", "Animal", Miku, "DECO*27", 371426, "Deco"},
   {"シンデレラ", "Cinderella", "Cinderella", Miku, "DECO*27", 346457},
   {"愛迷エレジー", "Aimai Elegy", "Aimai Elegy", Miku, "DECO*27", 42200},
-  {"モザイクロール (Reloaded)", "Mozaik Role (Reloaded)", "Mozaik Role (Reloaded)", Miku, "DECO*27", 358478}, // Original is Gumi
+  {"モザイクロール (Reloaded)", "Mozaik Role (Reloaded)", "Mozaik Role (Reloaded)", Miku, "DECO*27", 358478}, // Original is Gumi, so keep Reloaded here.
   {"弱虫モンブラン (Reloaded)", "Yowamushi Mont Blanc (Reloaded)", "Yowamushi Mont Blanc (Reloaded)", Miku, "DECO*27", 777659}, // Original is Gumi, so keep Reloaded here.
   {"乙女解剖", "Otome Kaibou", "Otome Dissection", Miku, "DECO*27", 222749},
   {"妄想感傷代償連盟", "Mousou Kanshou Daishou Renmei", "Delusional Sentimental Compensation Federation", Miku, "DECO*27", 131090},
@@ -633,11 +633,11 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "01 ballade", "Fragments of a Star"},
             { "Repairers of the Deceptive World", "Whipstitching Person"},
             { "The Pokemon Inside My Heart", "The Pokémon Inside My Heart"},
-	    { "Heart a la mode", "Heart à la mode"},
-	    { "MKDR", "Delusional Sentimental Compensation Federation"},
-	    { "DSCF", "Delusional Sentimental Compensation Federation"},
-	    { "MKDR DSCF", "Delusional Sentimental Compensation Federation"},
-	    { "MKDR (DSCF)", "Delusional Sentimental Compensation Federation"},
+            { "Heart a la mode", "Heart à la mode"},
+            { "MKDR", "Delusional Sentimental Compensation Federation"},
+            { "DSCF", "Delusional Sentimental Compensation Federation"},
+            { "MKDR DSCF", "Delusional Sentimental Compensation Federation"},
+            { "MKDR (DSCF)", "Delusional Sentimental Compensation Federation"},
     };
     return res;
 }
