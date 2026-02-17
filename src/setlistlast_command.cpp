@@ -67,15 +67,23 @@ namespace {
             ss << std::format("- {}. {}",
                               track.pos,
                               track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s));
-            if (song->vocadb_id) {
-                ss << '[' << song->name << "](https://vocadb.net/S/" << *song->vocadb_id << ')';
+            if (song->vocadb_id || track.remix_id) {
+              auto id = track.remix_id.or_else([&] { return song->vocadb_id; });
+              ss << '[' << song->name;
+              if (track.remix) {
+                ss << ' ' << *track.remix;
+              }
+              ss << "](https://vocadb.net/S/" << *id << ')';
             } else {
                 ss << util::escape_markdown(song->name);
+                if (track.remix) {
+                  ss << ' ' << util::escape_markdown(*track.remix);
+                }
             }
 
             if (song->singer != NO_VIRTUAL_SINGER) {
                 ss << " feat. ";
-                song_singer_emoji(ss, *song);
+                track_singer_emoji(ss, track, *song);
             }
             ss << " by " << util::escape_markdown(song->producer);
 

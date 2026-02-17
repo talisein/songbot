@@ -357,7 +357,9 @@ export struct SetlistTrack
     std::string_view song;
     std::optional<std::string_view> producer;
     std::optional<std::string_view> variant; // E.g. setlist A, setlist B.
-    std::optional<std::string_view> note; // E.g. Osaka Day 2
+    std::optional<std::string_view> remix; // E.g. -Reloaded-
+    std::optional<std::uint64_t> remix_id; // vocadb id for reloaded
+    std::optional<std::string_view> emoji_override; // Darkness
 };
 
 export constexpr std::array setlists = std::to_array<const SetlistTrack>({
@@ -484,7 +486,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { Mikunopolis, 14, "Butterfly on Your Right Shoulder" },
         { Mikunopolis, 15, "Meltdown" },
         { Mikunopolis, 16, "Just Be Friends" },
-        { Mikunopolis, 17, "World's End Dancehall (English ver.)" },
+        { Mikunopolis, 17, "World's End Dancehall", nullopt, nullopt, "(English ver.)", 506529 },
         { Mikunopolis, 18, "from Y to Y" },
         { Mikunopolis, 19, "The Farthest Ends" },
         { Mikunopolis, 20, "finder (DSLR remix-re:edit)" },
@@ -792,7 +794,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2014LANY, 16, "Parades" },
         { ME2014LANY, 17, "Vegetable Juice" },
         { ME2014LANY, 18, "The Snow White Princess is" },
-        { ME2014LANY, 19, "Just Be Friends (English ver.)" },
+        { ME2014LANY, 19, "Just Be Friends", nullopt, nullopt, "(English ver.)", 69073 },
         { ME2014LANY, 20, "Luka Luka★Night Fever" },
         { ME2014LANY, 21, "Secret Police" },
         { ME2014LANY, 22, "Yellow" },
@@ -818,7 +820,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { SM2015, 15, "Vegetable Juice" },
         { SM2015, 16, "The Snow White Princess is" },
         { SM2015, 17, "Venus at The Fingertips" },
-        { SM2015, 18, "Just Be Friends (English ver.)" },
+        { SM2015, 18, "Just Be Friends", nullopt, nullopt, "(English ver.)", 69073 },
         { SM2015, 19, "Luka Luka★Night Fever" },
         { SM2015, 20, "Tell Your World" },
         { SM2015, 21, "Secret Police" },
@@ -836,7 +838,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2015, 6, "Meltdown" },
         { ME2015, 7, "Fire◎Flower" },
         { ME2015, 8, "Butterfly on Your Right Shoulder" },
-        { ME2015, 9, "Spinning Song (Chinese ver.)" },
+        { ME2015, 9, "Spinning Song", nullopt, nullopt, "(Chinese ver.)", 221275 },
         { ME2015, 10, "Romeo and Cinderella" },
         { ME2015, 11, "Weekender Girl" },
         { ME2015, 12, "World's End Dancehall" },
@@ -931,8 +933,8 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2016NA, 21, "Cumulonimbus Cloud Graffiti" },
         { ME2016NA, 22, "Tell Your World" },
         { ME2016NA, 23, "Blue Star" },
-        { ME2016NA, 24, "Sharing The World" },
-        { ME2016NA, 24, "Sharing The World (Spanish ver.)" },
+        { ME2016NA, 24, "Sharing The World", nullopt, "US/CA" },
+        { ME2016NA, 24, "Sharing The World", nullopt, "Mexico", "(Spanish ver.)", 182370 },
         { ME2016NA, 25, "Miku" },
         { ME2016NA, 26, "39 (Thank You)" },
         { ME2016NA, 27, "Fragments of a Star" },
@@ -950,7 +952,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2016TW, 12, "Meltdown" },
         { ME2016TW, 13, "Butterfly on Your Right Shoulder" },
         { ME2016TW, 14, "Remote Controller" },
-        { ME2016TW, 15, "1 2 FanClub (Chinese ver.)" },
+        { ME2016TW, 15, "1 2 FanClub", nullopt, nullopt, "(Chinese ver.)" },
         { ME2016TW, 16, "Last Night, Good Night" },
         { ME2016TW, 17, "Ten Thousand Stars" },
         { ME2016TW, 18, "Just Be Friends" },
@@ -958,7 +960,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2016TW, 20, "The Intense Voice of Hatsune Miku" },
         { ME2016TW, 21, "Tell Your World" },
         { ME2016TW, 22, "Blue Star" },
-        { ME2016TW, 23, "Spinning Song (Chinese ver.)" },
+        { ME2016TW, 23, "Spinning Song", nullopt, nullopt, "(Chinese ver.)", 221275 },
         { ME2016TW, 24, "Secret Police" },
         { ME2016TW, 25, "39 (Thank You)" },
         { ME2016TW, 26, "Fragments of a Star" },
@@ -1000,8 +1002,8 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2016CN, 9, "Tokyo Teddy Bear" },
         { ME2016CN, 10, "Meltdown" },
         { ME2016CN, 10, "Remote Controller" },
-        { ME2016CN, 11, "1 2 FanClub (Chinese ver.)" },
-        { ME2016CN, 12, "Spinning Song (Chinese ver.)" },
+        { ME2016CN, 11, "1 2 FanClub", nullopt, nullopt, "(Chinese ver.)" },
+        { ME2016CN, 12, "Spinning Song", nullopt, nullopt, "(Chinese ver.)", 221275 },
         { ME2016CN, 13, "Snowman" },
         { ME2016CN, 14, "Change me" },
         { ME2016CN, 15, "Ten Thousand Stars" },
@@ -1015,7 +1017,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2016CN, 23, "Tell Your World" },
         { ME2016CN, 24, "The Disappearance of Hatsune Miku -DEAD END-" },
         { ME2016CN, 25, "39 (Thank You)" },
-        { ME2016CN, 26, "Though My Song Has No Shape (Chinese ver.)" },
+        { ME2016CN, 26, "Though My Song Has No Shape", nullopt, nullopt, "(Chinese ver.)", 326239 },
         { KODO2017, 1, "BURNING" },
         { KODO2017, 2, "Thousand Cherry Blossoms" },
         { KODO2017, 3, "The Disappearance of Hatsune Miku -DEAD END-" },
@@ -1916,7 +1918,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2024NA, 11, "Blue Star", nullopt, "Set A"sv },
         { ME2024NA, 11, "Decade", nullopt, "Set B"sv },
         { ME2024NA, 11, "Sharing The World", nullopt, "Set C"sv },
-        { ME2024NA, 11, "Sharing The World (Spanish ver.)", nullopt, "Mexico"sv },
+        { ME2024NA, 11, "Sharing The World", nullopt, "Mexico", "(Spanish ver.)", 182370 },
         { ME2024NA, 12, "Can't Make a Song!!", nullopt, "Set A"sv },
         { ME2024NA, 12, "MikuFiesta", nullopt, "Set B"sv },
         { ME2024NA, 12, "Ten Thousand Stars", nullopt, "Set C"sv },
@@ -2197,35 +2199,35 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { LAWSON, 22, "Cyan Blue"},
         { LAWSON, 23, "Dream Dream"},
         { LAWSON, 24, "INVITATION!"},
-	{ DECO, 1, "Reunion"},
-	{ DECO, 2, "Android Girl"},
-	{ DECO, 3, "HIBANA -Reloaded-"},
-	{ DECO, 4, "Ghost Rule"},
-	{ DECO, 5, "Streaming Heart", nullopt, "Day"},
-	{ DECO, 5, "Chimera", nullopt, "Night"},
-	{ DECO, 6, "Salamander"},
-	{ DECO, 7, "Rabbit Hole (Reloaded)"},
-	{ DECO, 8, "Stickybug"},
-	{ DECO, 9, "Cherry Pop"},
-	{ DECO, 10, "Delusional Sentimental Compensation Federation"},
-	{ DECO, 11, "Otome Dissection"},
-	{ DECO, 12, "Yowamushi Mont Blanc (Reloaded)"},
-	{ DECO, 13, "Two Breaths Walking (Reloaded)"},
-	{ DECO, 14, "Mozaik Role (Reloaded)"},
-	{ DECO, 15, "Aimai Elegy (Reloaded)"},
-	{ DECO, 16, "Vampire"},
-	{ DECO, 17, "Cinderella"},
-	{ DECO, 18, "Animal", "DECO*27"},
-	{ DECO, 19, "Monitoring"},
-	{ DECO, 20, "Delusion Tax"},
-	{ DECO, 21, "Marshmallow"},
-	{ DECO, 22, "Volt Tackle"},
-	{ DECO, 23, "Telepathy"},
-	{ DECO, 24, "Heart à la mode"},
-	{ DECO, 25, "Dream Dream", nullopt, "Day"},
-	{ DECO, 25, "Blue Planet", nullopt, "Night"},
-	{ DECO, 26, "HAO"},
-	{ DECO, 27, "Love Words V"},
+        { DECO, 1, "Reunion"},
+        { DECO, 2, "Android Girl", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 3, "HIBANA", nullopt, nullopt, "-Reloaded-", 230401, "<:darkness:1473393460592640115>"},
+        { DECO, 4, "Ghost Rule", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 5, "Streaming Heart", nullopt, "Day", nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 5, "Chimera", nullopt, "Night", nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 6, "Salamander", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 7, "Rabbit Hole", nullopt, nullopt, "(Reloaded)", 668053, "<:lightness:1473395618813837312>"},
+        { DECO, 8, "Stickybug", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 9, "Cherry Pop", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 10, "Delusional Sentimental Compensation Federation", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 11, "Otome Dissection", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 12, "Yowamushi Mont Blanc (Reloaded)", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 13, "Two Breaths Walking", nullopt, nullopt, "(Reloaded)", 286028, "<:darkness:1473393460592640115>"},
+        { DECO, 14, "Mozaik Role (Reloaded)", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 15, "Aimai Elegy", nullopt, nullopt, "(Reloaded)", 878206, "<:darkness:1473393460592640115>"},
+        { DECO, 16, "Vampire", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 17, "Cinderella", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 18, "Animal", "DECO*27", nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 19, "Monitoring", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 20, "Delusion Tax", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 21, "Marshmallow", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115>"},
+        { DECO, 22, "Volt Tackle", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 23, "Telepathy", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 24, "Heart à la mode", nullopt, nullopt, nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 25, "Dream Dream", nullopt, "Day", nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 25, "Blue Planet", nullopt, "Night", nullopt, nullopt, "<:lightness:1473395618813837312>"},
+        { DECO, 26, "HAO", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115><:lightness:1473395618813837312>"},
+        { DECO, 27, "Love Words V", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473393460592640115><:lightness:1473395618813837312>"},
     });
 
 
@@ -2317,4 +2319,14 @@ auto get_setlist(auto short_name)
     return std::views::all(setlists)
            | std::views::filter([&](const auto &track) { return track.concert_short_name == concert->short_name; })
            | std::ranges::to<std::vector>();
+}
+
+export void
+track_singer_emoji(std::ostream& os, const SetlistTrack& track, const Song& song)
+{
+  if (track.emoji_override) {
+    os << *track.emoji_override;
+  } else {
+    song_singer_emoji(os, song);
+  }
 }
