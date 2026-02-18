@@ -109,6 +109,7 @@ main()
     sigset_t mask;
     sigemptyset(&mask);
     sigaddset(&mask, SIGTERM);
+    sigaddset(&mask, SIGINT);
     std::signal(SIGSEGV, sigsegv_handler);
     std::set_terminate(terminate_handler);
     init_handlers();
@@ -129,12 +130,12 @@ main()
         {
             signalfd_siginfo fdsi {};
             auto res = read(fd, &fdsi, sizeof(fdsi));
-            if (res == sizeof(fdsi) && fdsi.ssi_signo == SIGTERM) {
-                ctx.log_info("Received SIGTERM, exiting.");
+            if (res == sizeof(fdsi) && (fdsi.ssi_signo == SIGTERM || fdsi.ssi_signo == SIGINT)) {
+                ctx.log_info("Received SIG{}, exiting.", sigabbrev_np(fdsi.ssi_signo));
                 systemd::notify(0, "STOPPING=1");
                 [](auto& ctx) -> dpp::job { co_await ctx.notify_owner_shutdown(); }(ctx);
             } else if (res == sizeof(fdsi)) {
-                ctx.log_warning("Received {}?", strsignal(fdsi.ssi_signo));
+                ctx.log_warning("Received SIG{} {}? Ignoring...", sigabbrev_np(fdsi.ssi_signo), strsignal(fdsi.ssi_signo));
             }
         } };
         ctx.bot->socketengine->register_socket(ev);
