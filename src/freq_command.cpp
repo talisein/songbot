@@ -104,11 +104,10 @@ freq_command::on_slashcommand(const dpp::slashcommand_t event)
       } else {
         const auto &click_event = when_any_result.get<1>();
         if (click_event.custom_id == next_key) {
-          start_idx += step;
-          start_idx = std::clamp(start_idx, 0UZ, song_frequencies.size());
+          start_idx = std::add_sat(start_idx, step);
+          start_idx = std::clamp(start_idx, 0UZ, std::sub_sat(song_frequencies.size(), 1UZ));
         } else if (click_event.custom_id == prev_key) {
-          start_idx -= step;
-          start_idx = std::clamp(start_idx, 0UZ, song_frequencies.size());
+          start_idx = std::sub_sat(start_idx, step);
         }
 
         if (auto conf = co_await click_event.co_reply(dpp::ir_deferred_update_message, dpp::message{}); conf.is_error()) {
