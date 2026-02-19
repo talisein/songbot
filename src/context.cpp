@@ -27,6 +27,7 @@ import concerts;
 #include "setlistlast_command.hpp"
 #include "song_command.hpp"
 #include "last_command.hpp"
+#include "freq_command.hpp"
 #include "version.hpp"
 #include "formatters.hpp"
 
@@ -114,6 +115,8 @@ dpp::task<void> context::on_ready(const dpp::ready_t& event)
         auto conf = co_await bot->co_global_bulk_command_create(cmds);
         if (conf.is_error()) {
             log_error("Couldn't register commands: {:d}", conf.get_error());
+        } else {
+            log_info("Registered {} commands", cmds.size());
         }
     }
 
@@ -214,6 +217,7 @@ context::setup_bot()
     commands.emplace("setlist", std::make_unique<setlist_command>(*this));
     commands.emplace("last", std::make_unique<last_command>(*this));
     commands.emplace("setlistlast", std::make_unique<setlistlast_command>(*this));
+    commands.emplace("freq", std::make_unique<freq_command>(*this));
 
     bot->on_slashcommand(util::bind_front<&context::on_slashcommand>(this));
 

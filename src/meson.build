@@ -264,7 +264,7 @@ project_version = vcs_tag(input: 'version.hpp.in',
 
 subdir('vocadb')
 
-src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp']
+src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_command.cpp', 'last_command.cpp', 'setlistlast_command.cpp', 'freq_command.cpp']
 
 exe = executable('songbot', src, misc_modules_gcm, vocadb_gcm,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
