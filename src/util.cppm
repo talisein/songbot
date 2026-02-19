@@ -80,10 +80,10 @@ export namespace util
 
     template <typename Confirmation, typename Context>
     std::expected<void, std::error_code>
-    reply_handler(const Confirmation& cb, Context& ctx, const std::source_location src = std::source_location::current())
+    reply_handler(const Confirmation& conf, Context& ctx, const std::source_location src = std::source_location::current())
     {
-        if (cb.is_error()) {
-            ctx->log_error("{} reply error: {:d}", src.function_name(), cb.get_error());
+        if (conf.is_error()) {
+            ctx->log_error("{} reply error: {:d}", src.function_name(), conf.get_error());
             return std::unexpected(songbot_error::reply_failure);
         } else {
             return {};

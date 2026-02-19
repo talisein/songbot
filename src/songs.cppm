@@ -638,6 +638,7 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "DSCF", "Delusional Sentimental Compensation Federation"},
             { "MKDR DSCF", "Delusional Sentimental Compensation Federation"},
             { "MKDR (DSCF)", "Delusional Sentimental Compensation Federation"},
+            { "Though My Song Has No Form", "Though My Song Has No Shape"},
     };
     return res;
 }

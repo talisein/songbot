@@ -25,6 +25,7 @@ import vocadb.songs;
 
 #include "last_command.hpp"
 #include "context.hpp"
+#include "formatters.hpp"
 
 last_command::last_command(context &ctx) noexcept :
     iface_command(ctx, "last", "Song details")
@@ -91,26 +92,27 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
     std::ostringstream ss;
     using namespace std::literals;
     ss << std::format("{} last played at {}", *song, lookup_concert(std::ranges::begin(prev_concerts_rng)->concert_short_name)->name);
-    ss << std::ranges::begin(prev_concerts_rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(". ");
+    ss << std::ranges::begin(prev_concerts_rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(".");
 
     auto remaining_concerts_rng = std::views::drop(prev_concerts_rng, 1);
+    std::ostringstream priors;
     if (std::ranges::empty(remaining_concerts_rng)) {
-        ss << "That's the only time its played!";
+      ss << " That's the only time its played!";
     } else {
-        ss << "Prior to that: ";
-        ss << tour_to_string(std::ranges::begin(remaining_concerts_rng)->concert_short_name);
+        priors << "Prior lives: ";
+        priors << tour_to_string(std::ranges::begin(remaining_concerts_rng)->concert_short_name);
         if (auto it = std::ranges::begin(remaining_concerts_rng); it->variant.has_value()) {
-            ss << " `" << it->variant.value() << "`";
+            priors << " `" << it->variant.value() << "`";
         }
 
         for (auto track : std::views::drop(remaining_concerts_rng, 1)) {
-            ss << ", " << tour_to_string(track.concert_short_name);
+            priors << ", " << tour_to_string(track.concert_short_name);
             if (track.variant.has_value()) {
-                ss << " `" << track.variant.value() << "`";
+                priors << " `" << track.variant.value() << "`";
             }
         }
-        ss << ". " << count << " times total.";
-        ss << " Frequency Rank " << get_song_frequency_rank(song->name);
+        priors << ". " << count << " times total.";
+        priors << " Frequency Rank " << get_song_frequency_rank(song->name);
     }
 
     struct pic_details
@@ -126,7 +128,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
         if (it != std::ranges::end(vocadb::songs)) {
             try {
                 std::ostringstream ss;
-                std::print(ss, "-# ");
+//                std::print(ss, "-# ");
                 if (it->publish_date) std::print(ss, "Published {} ", *it->publish_date);
                 if (it->pvs) {
                     auto originals = std::views::filter(*it->pvs, [](const auto &pv) { return pv.pv_type == "Original"sv && pv.url.has_value(); });
@@ -147,9 +149,9 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
                         std::print(ss, "[{}]({}) ", yt2->service, *yt2->url);
                     }
                     if (nnd != nnd_end) {
-                        std::print(ss, "[{}]({}) ", nnd->service, *nnd->url);
+                        std::print(ss, "[Nico]({}) ", *nnd->url);
                     } else if (nnd2 != nnd2_end) {
-                        std::print(ss, "[{}]({}) ", nnd2->service, *nnd2->url);
+                        std::print(ss, "[Nico]({}) ", *nnd2->url);
                     }
                 }
                 if (!it->web_links.empty()) {
@@ -197,22 +199,44 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
         }
     }
 
-    if (!pic) {
-        dpp::message msg{ss.view()};
-        msg.suppress_embeds(true);
-        event.reply(msg);
-    } else {
-        auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2).suppress_embeds(true);
-        auto section = dpp::component().set_type(dpp::cot_section);
+    if (!subtext.empty()) {
+      ss << "\n-# " << subtext;
+    }
+    auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2).suppress_embeds(true);
+
+    if (pic) {
+      auto section = dpp::component().set_type(dpp::cot_section);
+      constexpr auto PRIORS_THRESHOLD = 65Z;
+      if (priors.tellp() > PRIORS_THRESHOLD) {
         auto text = dpp::component().set_type(dpp::cot_text_display).set_content(ss.str());
         section.add_component_v2(text);
-        section.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(subtext));
-        auto filename = std::format("{}.{}", *song->vocadb_id, pic->ext);
-        std::string_view data{reinterpret_cast<const char *>(pic->pic.data()), pic->pic.size_bytes()};
-        msg.add_file(filename, data, pic->mime_type);
-        section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail(std::format("attachment://{}", filename)));
-        msg.add_component_v2(section);
-        event.reply(msg);
+      } else {
+        if (priors.tellp() > 0) {
+          ss << "\n-# " << priors.view();
+        }
+        auto text = dpp::component().set_type(dpp::cot_text_display).set_content(ss.str());
+        section.add_component_v2(text);
+      }
+      auto filename = std::format("{}.{}", *song->vocadb_id, pic->ext);
+      std::string_view data{reinterpret_cast<const char *>(pic->pic.data()), pic->pic.size_bytes()};
+      msg.add_file(filename, data, pic->mime_type);
+      section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail(std::format("attachment://{}", filename)));
+      msg.add_component_v2(section);
+
+      if (priors.tellp() > PRIORS_THRESHOLD) {
+        auto formatted_priors = std::format("-# {}", priors.view());
+        auto priors_text = dpp::component().set_type(dpp::cot_text_display).set_content(formatted_priors);
+        msg.add_component_v2(priors_text);
+      }
+    } else {
+      ss << priors.view();
+      auto text = dpp::component().set_type(dpp::cot_text_display).set_content(ss.str());
+      msg.add_component_v2(text);
+    }
+//    msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(subtext));
+    if (auto conf = co_await event.co_reply(msg); conf.is_error()) {
+      last_failure_counter->Increment();
+      co_return util::reply_handler(conf, ctx);
     }
     last_success_counter->Increment();
     co_return {};

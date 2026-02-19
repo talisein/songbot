@@ -126,17 +126,17 @@ tour_to_string(ConcertTour tour)
     return magic_enum::enum_switch([] (auto val) -> std::string_view{
         constexpr ConcertTour tour = val;
         switch (tour) {
-            case MIKUFES09:     return "Miku FES'09"sv;
-            case MIKUFES24:     return "Miku FES'24"sv;
-            case SANKYUGD:      return "39's Giving Day"sv;
-            case SANKYUGDF:     return "Final 39's Giving Day"sv;
-            case MP2011Tokyo:   return "MikuPa 2011 Tokyo"sv;
+            case MIKUFES09:     return "MikuFES09"sv;
+            case MIKUFES24:     return "MikuFES24"sv;
+            case SANKYUGD:      return "39GD"sv;
+            case SANKYUGDF:     return "F39GD"sv;
+/*          case MP2011Tokyo:   return "MikuPa 2011 Tokyo"sv;
             case MP2011Sapporo: return "MikuPa 2011 Sapporo"sv;
             case MP2011SG:      return "MikuPa 2011 Singapore"sv;
             case MP2012Tokyo:   return "MikuPa 2012 Tokyo"sv;
             case MP2012HKTW:    return "MikuPa 2012 HKTW"sv;
             case MP2013Sapporo: return "MikuPa 2013 Sapporo"sv;
-            case MP2013Kansai:  return "MikuPa 2013 Kansai"sv;
+            case MP2013Kansai:  return "MikuPa 2013 Kansai"sv;*/
             case MM2022:        return "MM10th"sv;
             case MM10Sapporo:   return "MM10th Sapporo"sv;
             case KAGA14:        return "Kagamine 14th"sv;
