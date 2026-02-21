@@ -2234,40 +2234,77 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
 export struct song_frequency
 {
     std::string_view song_name;
+    std::optional<std::string_view> producer;
     size_t count;
 };
 
 namespace {
+    constexpr bool always_true(const SetlistTrack&) { return true; }
+    constexpr ConcertSeries tour_to_series(ConcertTour t) {
+      auto c = std::ranges::find(concerts, t, &Concert::short_name);
+      return c->series;
+    }
+    constexpr bool is_miku_expo(const SetlistTrack& t) {
+      return tour_to_series(t.concert_short_name) == MIKU_EXPO;
+    }
+    constexpr bool is_mirai(const SetlistTrack& t) {
+      return tour_to_series(t.concert_short_name) == MAGICAL_MIRAI;
+    }
+    constexpr bool is_miku_with_you(const SetlistTrack& t) {
+      return tour_to_series(t.concert_short_name) == MIKU_WITH_YOU;
+    }
+    constexpr bool is_mikupa(const SetlistTrack& t) {
+      return tour_to_series(t.concert_short_name) == MIKUPA;
+    }
+    constexpr bool is_snow_miku(const SetlistTrack& t) {
+      return tour_to_series(t.concert_short_name) == SNOW_MIKU;
+    }
+
+    template<auto Filter = always_true>
     consteval auto generate_song_frequency()
     {
         std::vector<song_frequency> freqs;
-        std::vector<std::string_view> names = std::views::transform(setlists, &SetlistTrack::song) | std::ranges::to<std::vector>();
-        std::ranges::stable_sort(names);
-        std::string_view prev_name;
+        auto tracks = std::views::filter(setlists, Filter) | std::ranges::to<std::vector>();
+        std::ranges::stable_sort(tracks, [](const auto &l, const auto &r) {
+          if (l.song == r.song) {
+            return std::ranges::less{}(l.producer, r.producer);
+          } else {
+            return std::ranges::less{}(l.song, r.song);
+          }
+        });
+        std::string_view prev_song;
+        std::optional<std::string_view> prev_producer;
         size_t count = 0;
         auto out = std::back_inserter(freqs);
-        for (auto name : names) {
-            if (name == prev_name) {
+        for (auto track : tracks) {
+            if (track.song == prev_song && track.producer == prev_producer) {
                 ++count;
             } else { /* name != prev_name */
                 if (count != 0) {
-                    out = song_frequency{prev_name, count};
-                    prev_name = name;
+                    out = song_frequency{prev_song, prev_producer, count};
+                    prev_song = track.song;
+                    prev_producer = track.producer;
                     count = 1;
                 } else {
-                    prev_name = name;
+                    prev_song = track.song;
+                    prev_producer = track.producer;
                     count = 1;
                 }
             }
         }
-        out = song_frequency{prev_name, count};
+        out = song_frequency{prev_song, prev_producer, count};
 
         std::ranges::stable_sort(freqs, std::ranges::greater{}, &song_frequency::count);
         return freqs;
     }
 }
 
-export constexpr std::array song_frequencies = util::materialize<generate_song_frequency>();
+export constexpr std::array song_frequencies = util::materialize<generate_song_frequency<>>();
+export constexpr std::array song_frequencies_expo = util::materialize<generate_song_frequency<is_miku_expo>>();
+export constexpr std::array song_frequencies_mirai = util::materialize<generate_song_frequency<is_mirai>>();
+export constexpr std::array song_frequencies_mwy = util::materialize<generate_song_frequency<is_miku_with_you>>();
+export constexpr std::array song_frequencies_mikupa = util::materialize<generate_song_frequency<is_mikupa>>();
+export constexpr std::array song_frequencies_snowmiku = util::materialize<generate_song_frequency<is_snow_miku>>();
 
 export constexpr size_t get_song_frequency_rank(std::string_view song_name)
 {

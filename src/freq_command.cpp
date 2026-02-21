@@ -74,7 +74,7 @@ freq_command::on_slashcommand(const dpp::slashcommand_t event)
       auto text = dpp::component().set_type(dpp::cot_text_display);
       std::ostringstream ss;
       for (auto const [idx, song_freq] : std::views::enumerate(song_frequencies) | std::views::drop(start_idx) | std::views::take(step)) {
-        auto song = lookup_song(song_freq.song_name);
+        auto song = lookup_song(song_freq.song_name, song_freq.producer);
         if (song) {
           std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, *song);
         } else {
