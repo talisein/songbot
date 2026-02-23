@@ -391,12 +391,7 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
              | std::views::filter([](const auto& s) { return s.vocadb_id.has_value(); })
         )
     {
-        std::filesystem::path file = json_dir / std::format("song_{}.json", song.vocadb_id.value());
-        std::filesystem::path oldfile = json_dir / std::format("song_{}", song.vocadb_id.value());
-        if (std::filesystem::exists(oldfile)) {
-            std::filesystem::rename(oldfile, file);
-        }
-
+        const std::filesystem::path file = json_dir / std::format("song_{}.json", song.vocadb_id.value());
         if (!std::filesystem::exists(file)) {
           cpr::Url url{std::format(vocadb::songs_url, song.vocadb_id.value())};
           cpr::Parameters params{{"fields", "AdditionalNames,Artists,MainPicture,Names,PVs,ThumbUrl,WebLinks,Bpm,CultureCodes"},
@@ -491,7 +486,7 @@ scraper::scrape_events(const std::filesystem::path& generated_src)
              | std::views::filter([](const auto& c) { return c.vocadb_event_id.has_value(); })
         )
     {
-        std::filesystem::path file = json_dir / std::format("event_{}.json", concert.vocadb_event_id.value());
+        const std::filesystem::path file = json_dir / std::format("event_{}.json", concert.vocadb_event_id.value());
         if (!std::filesystem::exists(file)) {
           cpr::Url url{std::format(vocadb::release_events_url, concert.vocadb_event_id.value())};
           cpr::Parameters params{{"fields", "AdditionalNames,Description,MainPicture,Names,Series,SongList,Venue,WebLinks"},
