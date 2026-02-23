@@ -116,6 +116,9 @@ export enum ConcertTour
     MWY2025,
     LAWSON,
     DECO,
+    VOLTAGE,
+    ME2026NA,
+    ME2026EU
 };
 
 export constexpr std::string_view
@@ -312,6 +315,12 @@ export constexpr std::array concerts = std::to_array<Concert>({
           LAWSON, 2026y/1/17, 2026y/1/18,  9642 },
         { NO_SERIES,    "DecoMiku LIVE starring Hatsune Miku 『Hello』",
           DECO, 2026y/2/14, nullopt, 9401 },
+        { NO_SERIES,    "Pokémon feat. Hatsune Miku VOLTAGE Live!",
+          VOLTAGE, 2026y/3/20, 2026y/3/22, 9613 },
+        { MIKU_EXPO,    "HATSUNE MIKU EXPO 2026 NORTH AMERICA",
+          ME2026NA, 2026y/4/12, 2026y/5/19, 9811 },
+        { MIKU_EXPO,    "HATSUNE MIKU EXPO 2026 EUROPE",
+          ME2026EU, 2026y/11/12, 2026y/11/25, 12222 },
     });
 
 static_assert(std::ranges::is_sorted(concerts, {}, &Concert::date),

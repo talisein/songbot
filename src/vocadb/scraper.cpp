@@ -391,7 +391,12 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
              | std::views::filter([](const auto& s) { return s.vocadb_id.has_value(); })
         )
     {
-        std::filesystem::path file = json_dir / std::format("song_{}", song.vocadb_id.value());
+        std::filesystem::path file = json_dir / std::format("song_{}.json", song.vocadb_id.value());
+        std::filesystem::path oldfile = json_dir / std::format("song_{}", song.vocadb_id.value());
+        if (std::filesystem::exists(oldfile)) {
+            std::filesystem::rename(oldfile, file);
+        }
+
         if (!std::filesystem::exists(file)) {
           cpr::Url url{std::format(vocadb::songs_url, song.vocadb_id.value())};
           cpr::Parameters params{{"fields", "AdditionalNames,Artists,MainPicture,Names,PVs,ThumbUrl,WebLinks,Bpm,CultureCodes"},
@@ -484,17 +489,34 @@ scraper::scrape_events(const std::filesystem::path& generated_src)
     vec.reserve(concerts.size());
     for (auto concert : std::views::all(concerts)
              | std::views::filter([](const auto& c) { return c.vocadb_event_id.has_value(); })
-//             | std::views::take(2)
         )
     {
-        cpr::Url url{std::format(vocadb::release_events_url, concert.vocadb_event_id.value())};
-        cpr::Parameters params{{"fields", "AdditionalNames,Description,MainPicture,Names,Series,SongList,Venue,WebLinks"},
-                               {"lang", "English"}};
-        std::println("Fetching root json for {}", concert.name);
-        auto res = get(url, params);
-        if (res && res->status_code == 200) {
-            vec.push_back(json::parse(res->text));
+        std::filesystem::path file = json_dir / std::format("event_{}.json", concert.vocadb_event_id.value());
+        if (!std::filesystem::exists(file)) {
+          cpr::Url url{std::format(vocadb::release_events_url, concert.vocadb_event_id.value())};
+          cpr::Parameters params{{"fields", "AdditionalNames,Description,MainPicture,Names,Series,SongList,Venue,WebLinks"},
+                                 {"lang", "English"}};
+          std::println("Fetching root json for {}", concert.name);
+          const auto tmppath = std::filesystem::path{file}.replace_extension(".tmp");
+          std::ofstream ofs {tmppath, std::ios::binary | std::ios::out | std::ios::trunc };
+          auto res = download(url, ofs, params);
+          if (!res || res->status_code != 200) {
+            if (!res)
+              std::println(std::cerr, "Error: Failed to download {}: {}", url.str(), res.error().message());
+            else
+              std::println(std::cerr, "Error: Failed to download {}: status code {}", url.str(), res->status_code);
+            ofs.close();
+            std::filesystem::remove(tmppath);
+            return std::unexpected(res.error());
+          } else {
+            ofs.flush();
+            ofs.close();
+            std::filesystem::rename(tmppath, file);
+          }
         }
+
+        std::ifstream ifs{file};
+        vec.push_back(json::parse(ifs));
     }
 
     std::ostringstream full_file;
@@ -522,7 +544,7 @@ scraper::scrape_events(const std::filesystem::path& generated_src)
                      /*5*/id,
                      /*6*/std::format("picture_release_event_{}", id),
                      /*7*/as_raw(e["name"].get<std::string>()),
-		     /*8*/std::format("names_release_event_{}", id),
+                     /*8*/std::format("names_release_event_{}", id),
                      /*9*/as_opt<std::uint64_t>(e, "seriesId"),
                      /*10*/as_opt<std::uint64_t>(e, "seriesNumber"),
                      /*11*/as_opt(e, "seriesSuffix"),
