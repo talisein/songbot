@@ -27,6 +27,13 @@ import vocadb.songs;
 #include "context.hpp"
 #include "formatters.hpp"
 
+namespace
+{
+
+  constexpr std::string_view INDEX_PREFIX { "idx:" };
+
+}
+
 last_command::last_command(context &ctx) noexcept :
     iface_command(ctx, "last", "Song details")
 {
@@ -59,20 +66,41 @@ dpp::task<std::expected<void, std::error_code>>
 last_command::on_slashcommand(const dpp::slashcommand_t event)
 {
     auto param = std::get<std::string>(event.get_parameter("song"));
-    auto song = lookup_song(param);
-    if (!song) {
-        auto songs = match_songs(param);
-        if (songs.size() == 1) {
-            song = songs.front();
-        }
-    }
-    if (!song) {
+    std::optional<Song> song;
+    if (param.starts_with(INDEX_PREFIX)) {
+      std::string_view idx_chars = static_cast<std::string_view>(param).substr(INDEX_PREFIX.size());
+      std::int64_t idx;
+      auto [_, ec] = std::from_chars(idx_chars.data(), idx_chars.data() + idx_chars.size(), idx);
+      if (ec != std::errc()) {
         auto msg = dpp::message(std::format("I'm sorry, I don't know about the song '{}'", param)).set_flags(dpp::message_flags::m_ephemeral);
         event.reply(msg);
         last_failure_counter->Increment();
         co_return {};
+      } else {
+        auto v = std::views::all(songs) | std::views::drop(idx);
+        if (std::ranges::empty(v)) {
+          auto msg = dpp::message(std::format("I'm sorry, I don't know about the song '{}'", param)).set_flags(dpp::message_flags::m_ephemeral);
+          event.reply(msg);
+          last_failure_counter->Increment();
+          co_return {};
+        }
+        song = *std::ranges::begin(v);
+      }
+    } else {
+      song = lookup_song(param);
+      if (!song) {
+        auto songs = match_songs(param);
+        if (songs.size() == 1) {
+          song = songs.front();
+        }
+      }
+      if (!song) {
+        auto msg = dpp::message(std::format("I'm sorry, I don't know about the song '{}'", param)).set_flags(dpp::message_flags::m_ephemeral);
+        event.reply(msg);
+        last_failure_counter->Increment();
+        co_return {};
+      }
     }
-
 
     auto prev_concerts_rng = std::views::filter(std::views::reverse(setlists), [&name = song->name](const auto& track) { return name == track.song;}) |
         std::views::filter([](const auto& track) {
@@ -249,14 +277,16 @@ last_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
         try {
             std::string uservalue = std::get<std::string>(opt.value);
 
-            auto matches = match_songs(uservalue);
+            auto matches = match_songs_indexed(uservalue);
             if (matches.empty()) {
                 return std::unexpected(songbot_error::autocomplete_no_match);
             }
 
             auto resp = dpp::interaction_response(dpp::ir_autocomplete_reply);
             for (const auto& song : matches | std::views::take(AUTOCOMPLETE_MAX_CHOICES) ) {
-                resp.add_autocomplete_choice(dpp::command_option_choice(std::string(song.name), std::string(song.name)));
+              auto n = std::format("{} by {}", std::get<1>(song).name, std::get<1>(song).producer);
+              auto c = std::format("{}{}", INDEX_PREFIX, std::get<0>(song));
+              resp.add_autocomplete_choice(dpp::command_option_choice(n, c));
             }
 
             return resp;

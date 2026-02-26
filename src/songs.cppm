@@ -829,8 +829,9 @@ std::vector<Song> match_songs(std::string_view needle)
     };
     auto comparitor = [](const Song& a, const Song& b) constexpr { return a.name < b.name; };
     auto res = songs | std::views::filter(name_matches_needle) | std::ranges::to<std::set>(comparitor);
+    constexpr auto MAX_AUTOCOMPLETE_CHOICES = 25Z;
 
-    if (res.size() >= 25) {
+    if (res.size() >= MAX_AUTOCOMPLETE_CHOICES) {
         return std::views::common(res) | std::ranges::to<std::vector>();
     }
 
@@ -844,7 +845,7 @@ std::vector<Song> match_songs(std::string_view needle)
                          std::inserter(res, std::ranges::begin(res)),
                          romanji_matches_needle);
 
-    if (res.size() >= 25) {
+    if (res.size() >= MAX_AUTOCOMPLETE_CHOICES) {
         return std::views::common(res) | std::ranges::to<std::vector>();
     }
 
@@ -859,7 +860,7 @@ std::vector<Song> match_songs(std::string_view needle)
                          std::inserter(res, std::ranges::begin(res)),
                          jp_matches_needle);
 
-    if (res.size() >= 25) {
+    if (res.size() >= MAX_AUTOCOMPLETE_CHOICES) {
         return std::views::common(res) | std::ranges::to<std::vector>();
     }
 
@@ -870,7 +871,7 @@ std::vector<Song> match_songs(std::string_view needle)
     };
 
     const auto altname_xform = [] (const AltName& altname) {
-        return *lookup_song(altname.name);
+      return *lookup_song(altname.name);
     };
 
     std::ranges::copy(std::views::filter(alt_names, altname_matches_needle) |
@@ -879,6 +880,73 @@ std::vector<Song> match_songs(std::string_view needle)
 
     return res | std::ranges::to<std::vector>();
 }
+
+export [[nodiscard]]
+std::vector<std::tuple<std::int64_t, Song>> match_songs_indexed(std::string_view needle)
+{
+  auto indexed_songs = std::views::enumerate(songs);
+  auto cf_needle = util::to_nfkc_casefold(needle);
+
+  const auto name_matches_needle = [needle = cf_needle]
+    (const auto& pair) constexpr {
+    return std::ranges::contains_subrange(std::get<1>(pair).cf_name, needle);
+  };
+  auto comparitor = [](const auto& a, const auto& b) constexpr { return std::get<0>(a) < std::get<0>(b); };
+  auto res = indexed_songs | std::views::filter(name_matches_needle) | std::ranges::to<std::set>(comparitor);
+
+  constexpr auto MAX_AUTOCOMPLETE_CHOICES = 25Z;
+
+  if (res.size() >= MAX_AUTOCOMPLETE_CHOICES) {
+    return std::views::common(res) | std::ranges::to<std::vector>();
+  }
+
+  const auto has_romanji = [](const auto &pair) constexpr {
+    return std::get<1>(pair).cf_romanji_name.has_value(); };
+  const auto romanji_matches_needle = [needle = cf_needle]
+    (const auto& pair) {
+    return std::ranges::contains_subrange(*std::get<1>(pair).cf_romanji_name, needle);
+  };
+  std::ranges::copy_if(std::views::filter(indexed_songs, has_romanji),
+                       std::inserter(res, std::ranges::begin(res)),
+                       romanji_matches_needle);
+
+  if (res.size() >= MAX_AUTOCOMPLETE_CHOICES) {
+    return std::views::common(res) | std::ranges::to<std::vector>();
+  }
+
+
+  const auto has_jp = [](const auto &pair) constexpr {
+    return std::get<1>(pair).cf_jp_name.has_value(); };
+  const auto jp_matches_needle = [needle = cf_needle]
+    (const auto& pair) {
+    return std::ranges::contains_subrange(*std::get<1>(pair).cf_jp_name, needle);
+  };
+
+  std::ranges::copy_if(std::views::filter(indexed_songs, has_jp),
+                       std::inserter(res, std::ranges::begin(res)),
+                       jp_matches_needle);
+
+  if (res.size() >= MAX_AUTOCOMPLETE_CHOICES) {
+    return std::views::common(res) | std::ranges::to<std::vector>();
+  }
+
+
+  const auto altname_matches_needle = [needle = cf_needle]
+    (const AltName& altname) {
+    return std::ranges::contains_subrange(altname.cf_alt_name, needle);
+  };
+
+  const auto altname_xform = [&indexed_songs] (const AltName& altname) {
+    return *std::ranges::find(indexed_songs, altname.name, [](const auto& pair) { return std::get<1>(pair).name; });
+  };
+
+  std::ranges::copy(std::views::filter(alt_names, altname_matches_needle) |
+                    std::views::transform(altname_xform),
+                    std::inserter(res, std::ranges::begin(res)));
+  return res | std::ranges::to<std::vector>();
+
+}
+
 
 export [[nodiscard]]
 std::string
