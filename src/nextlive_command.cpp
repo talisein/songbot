@@ -210,8 +210,24 @@ nextlive_command::on_slashcommand(const dpp::slashcommand_t event)
   const auto c = lookup_concert(e.tour);
   auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2).suppress_embeds(true);
   std::ostringstream ss;
-  std::println(ss, "The next live is [{}](https://vocadb.net/E/{}) at [{}]({})", c->name, e.vocadb_id, e.location_name, e.location_link);
+  std::println(ss, "The next {}{}live is [{}](https://vocadb.net/E/{}) at [{}]({})",
+               requested_tour?magic_enum::enum_name(*requested_tour):""sv,
+               requested_tour?" "sv:""sv,
+               c->name, e.vocadb_id, e.location_name, e.location_link);
   std::println(ss, "{} {}", discord_timestamp(e.start_time.get_sys_time()), discord_timestamp_relative(e.start_time.get_sys_time()));
+  auto remaining = e.start_time.get_sys_time() - now;
+  if (remaining > 24h) {
+    const auto days = std::chrono::floor<std::chrono::days>(remaining);
+    remaining -= days;
+    const auto hours = std::chrono::floor<std::chrono::hours>(remaining);
+    std::print(ss, "{} day", days.count());
+    if (days >= 48h) ss << 's';
+    if (hours > 0h) {
+      std::print(ss, " and {} hour", hours.count());
+      if (hours > 1h) ss << 's';
+    }
+    std::print(ss, " remaining!");
+  }
 
   auto section = dpp::component().set_type(dpp::cot_section);
   auto text = dpp::component().set_type(dpp::cot_text_display).set_content(ss.str());
