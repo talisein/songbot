@@ -53,7 +53,7 @@ freq_command::on_slashcommand(const dpp::slashcommand_t event)
     const auto next_key = ctx->keygen();
     const auto prev_key = ctx->keygen();
 
-    auto make_msg = [&] {
+    auto make_msg = [&] (bool include_buttons){
       auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral).suppress_embeds(true);
       auto action_row = dpp::component().set_type(dpp::cot_action_row);
       if (start_idx > 0) {
@@ -78,19 +78,20 @@ freq_command::on_slashcommand(const dpp::slashcommand_t event)
         if (song) {
           std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, *song);
         } else {
-          std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, song_freq.song_name); // FIXME: METEOR & Meteor
+          std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, song_freq.song_name);
         }
       }
       text.set_content(ss.str());
       msg.add_component_v2(text);
-      msg.add_component_v2(action_row);
+      if (include_buttons) {
+        msg.add_component_v2(action_row);
+      }
 
       return msg;
     };
 
-    if (auto conf = co_await event.co_reply(make_msg()); conf.is_error()) {
-      freq_failure_counter->Increment();
-      co_return util::reply_handler(conf, ctx);
+    if (auto expected = co_await util::reply_handler_new(event.co_reply(make_msg(true)), ctx, nullptr, freq_failure_counter); !expected) {
+      co_return expected;
     }
 
     do {
@@ -100,7 +101,7 @@ freq_command::on_slashcommand(const dpp::slashcommand_t event)
           return click.custom_id == next_key || click.custom_id == prev_key;})};
       if (when_any_result.index() == 0) {
         // 5 min Timeout
-        break;
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(make_msg(false)), ctx, freq_success_counter, freq_failure_counter);
       } else {
         const auto &click_event = when_any_result.get<1>();
         if (click_event.custom_id == next_key) {
@@ -110,18 +111,16 @@ freq_command::on_slashcommand(const dpp::slashcommand_t event)
           start_idx = std::sub_sat(start_idx, step);
         }
 
-        if (auto conf = co_await click_event.co_reply(dpp::ir_deferred_update_message, dpp::message{}); conf.is_error()) {
-          freq_failure_counter->Increment();
-          co_return util::reply_handler(conf, ctx);
+
+        if (auto expected = co_await util::reply_handler_new(click_event.co_reply(dpp::ir_deferred_update_message, dpp::message{}), ctx, nullptr, freq_failure_counter); !expected) {
+          co_return expected;
         }
-        if (auto conf = co_await event.co_edit_original_response(make_msg()); conf.is_error()) {
-          freq_failure_counter->Increment();
-          co_return util::reply_handler(conf, ctx);
+        if (auto expected = co_await util::reply_handler_new(event.co_edit_original_response(make_msg(true)), ctx, nullptr, freq_failure_counter); !expected) {
+          co_return expected;
         }
       }
     } while (true);
 
-    freq_success_counter->Increment();
     co_return {};
 }
 

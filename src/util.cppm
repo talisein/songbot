@@ -20,6 +20,7 @@ module;
 
 #include <cassert>
 #include <cerrno>
+#include "dpp/coro/task.h"
 
 export module util;
 
@@ -27,6 +28,8 @@ import std;
 import uni_algo;
 import magic_enum;
 import songbot.errors;
+import prometheus;
+
 using namespace std::literals;
 
 namespace {
@@ -57,7 +60,6 @@ namespace {
             co_yield c; // Yield the original character
         }
     }
-
 }
 
 export namespace util
@@ -78,16 +80,17 @@ export namespace util
         return {};
     }
 
-    template <typename Confirmation, typename Context>
-    std::expected<void, std::error_code>
-    reply_handler(const Confirmation& conf, Context& ctx, const std::source_location src = std::source_location::current())
-    {
-        if (conf.is_error()) {
-            ctx->log_error("{} reply error: {:d}", src.function_name(), conf.get_error());
-            return std::unexpected(songbot_error::reply_failure);
-        } else {
-            return {};
-        }
+    template <typename Awaitable, typename Context>
+    dpp::task<std::expected<void, std::error_code>>
+    reply_handler_new(Awaitable&& awaitable, Context& ctx, prometheus::Counter* success_counter, prometheus::Counter* failure_counter, std::source_location src = std::source_location::current()) {
+      if (auto conf = co_await awaitable; conf.is_error())
+      {
+        if (failure_counter) failure_counter->Increment();
+        ctx->log_error("{}:{} reply error: {:d}", src.function_name(), src.line(), conf.get_error());
+        co_return std::unexpected(songbot_error::reply_failure);
+      }
+      if (success_counter) success_counter->Increment();
+      co_return {};
     }
 
     std::string escape_markdown(std::string_view input) {

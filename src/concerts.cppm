@@ -2239,6 +2239,9 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { DECO, 27, "Love Words V", nullopt, nullopt, nullopt, nullopt, "<:darkness:1473423127689302046><:lightness:1473422818321502430>"},
     });
 
+export constexpr auto exact_song_track_match = [](const Song& song, const SetlistTrack& track) constexpr {
+  return song.name == track.song && song.producer == track.producer.value_or(song.producer);
+};
 
 export struct song_frequency
 {

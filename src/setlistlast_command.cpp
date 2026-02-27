@@ -290,17 +290,18 @@ namespace {
     reply_and_followup(const Event& event, std::ranges::forward_range auto&& rng, context *ctx)
         requires std::same_as<std::ranges::range_value_t<decltype(rng)>, dpp::message>
     {
-        if (auto conf = co_await event.co_reply(*std::ranges::begin(rng));
-            conf.is_error())
+
+        if (auto e = co_await util::reply_handler_new(event.co_reply(*std::ranges::begin(rng)), ctx, nullptr, nullptr);
+            !e.has_value())
         {
-            co_return util::reply_handler(conf, ctx);
+          co_return e;
         }
 
         for (const auto& msg : rng | std::views::drop(1))
         {
-            auto conf = co_await event.co_follow_up(msg);
-            if (conf.is_error()) {
-                co_return util::reply_handler(conf, ctx);
+            auto e = co_await util::reply_handler_new(event.co_follow_up(msg), ctx, nullptr, nullptr);
+            if (!e.has_value()) {
+              co_return e;
             }
         }
 
@@ -357,12 +358,10 @@ setlistlast_command::reply_multimessage(const dpp::slashcommand_t& event,
         setlistlast_reveal_success_counter->Increment();
         auto success_msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
         success_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
-        auto conf = co_await event.co_edit_original_response(success_msg);
-        co_return util::reply_handler(conf, ctx);
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(success_msg), ctx, setlistlast_reveal_success_counter, setlistlast_reveal_failure_counter);
     } else { // Button expiring. Just replace the first message.
         auto expired_gui_msgs = make_gui_messages(concert, headers, setlist_chunks, true, std::nullopt);
-        auto res = co_await event.co_edit_original_response(*std::ranges::begin(expired_gui_msgs));
-        co_return util::reply_handler(res, ctx);
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(*std::ranges::begin(expired_gui_msgs)), ctx, setlistlast_reveal_success_counter, setlistlast_reveal_failure_counter);
     }
 
     co_return {};
@@ -377,9 +376,9 @@ setlistlast_command::on_slashcommand(const dpp::slashcommand_t event)
         if (!concert) {
             dpp::message m{std::format("I'm sorry, I don't know about a concert named '{}'", concert_str)};
             m.set_flags(dpp::message_flags::m_ephemeral);
-            auto res = co_await event.co_reply(m);
-            setlistlast_failure_counter->Increment();
-            co_return std::unexpected(util::reply_handler(res, ctx).error_or(songbot_error::no_match));
+
+            auto res = co_await util::reply_handler_new(event.co_reply(m), ctx, setlistlast_success_counter, setlistlast_failure_counter);
+            co_return std::unexpected(res.error_or(songbot_error::no_match));
         }
 
         auto res = co_await reply_multimessage(event, *concert);

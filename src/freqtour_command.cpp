@@ -84,9 +84,8 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
       if (!series_opt.has_value()) {
         dpp::message m{std::format("I'm sorry, I don't know about a concert series named '{}'", series_str)};
         m.set_flags(dpp::message_flags::m_ephemeral);
-        auto res = co_await event.co_reply(m);
-        freqtour_failure_counter->Increment();
-        co_return std::unexpected(util::reply_handler(res, ctx).error_or(songbot_error::no_match));
+        auto e = co_await util::reply_handler_new(event.co_reply(m), ctx, freqtour_success_counter, freqtour_failure_counter);
+        co_return std::unexpected(e.error_or(songbot_error::no_match));
       } else {
         queried_frequencies = freqs_for_series(*series_opt);
         series = *series_opt;
@@ -105,7 +104,7 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
       co_return std::unexpected(songbot_error::no_match);
     }
 
-    auto make_msg = [&] {
+    auto make_msg = [&] (bool include_buttons) {
       auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral).suppress_embeds(true);
       auto action_row = dpp::component().set_type(dpp::cot_action_row);
       if (start_idx > 0) {
@@ -136,15 +135,18 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
       }
       text.set_content(ss.str());
       msg.add_component_v2(text);
-      msg.add_component_v2(action_row);
+      if (include_buttons) {
+        msg.add_component_v2(action_row);
+      }
 
       return msg;
     };
 
-    if (auto conf = co_await event.co_reply(make_msg()); conf.is_error()) {
-      freqtour_failure_counter->Increment();
-      co_return util::reply_handler(conf, ctx);
+    if (auto e = co_await util::reply_handler_new(event.co_reply(make_msg(true)), ctx, nullptr, freqtour_failure_counter); !e.has_value())
+    {
+      co_return e;
     }
+
 
     do {
       auto when_any_result = co_await dpp::when_any{
@@ -153,7 +155,7 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
           return click.custom_id == next_key || click.custom_id == prev_key;})};
       if (when_any_result.index() == 0) {
         // 5 min Timeout
-        break;
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(make_msg(false)), ctx, freqtour_success_counter, freqtour_failure_counter);
       } else {
         const auto &click_event = when_any_result.get<1>();
         if (click_event.custom_id == next_key) {
@@ -163,18 +165,16 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
           start_idx = std::sub_sat(start_idx, step);
         }
 
-        if (auto conf = co_await click_event.co_reply(dpp::ir_deferred_update_message, dpp::message{}); conf.is_error()) {
-          freqtour_failure_counter->Increment();
-          co_return util::reply_handler(conf, ctx);
+
+        if (auto expected = co_await util::reply_handler_new(click_event.co_reply(dpp::ir_deferred_update_message, dpp::message{}), ctx, nullptr, freqtour_failure_counter); !expected) {
+          co_return expected;
         }
-        if (auto conf = co_await event.co_edit_original_response(make_msg()); conf.is_error()) {
-          freqtour_failure_counter->Increment();
-          co_return util::reply_handler(conf, ctx);
+        if (auto expected = co_await util::reply_handler_new(event.co_edit_original_response(make_msg(true)), ctx, nullptr, freqtour_failure_counter); !expected) {
+          co_return expected;
         }
       }
     } while (true);
 
-    freqtour_success_counter->Increment();
     co_return {};
 }
 
@@ -182,11 +182,4 @@ std::expected<dpp::interaction_response, std::error_code>
 freqtour_command::on_autocomplete(const dpp::autocomplete_t& event)
 {
   return std::unexpected(std::make_error_code(std::errc::invalid_argument));
-/*  constexpr std::array supported { MIKU_EXPO, MAGICAL_MIRAI, MIKUPA, MIKU_WITH_YOU, SNOW_MIKU };
-  auto resp = dpp::interaction_response(dpp::ir_autocomplete_reply);
-   for (const auto& s : supported) {
-     resp.add_autocomplete_choice(dpp::command_option_choice(std::string(magic_enum::enum_name(s)), std::string(magic_enum::enum_name(s))));
-  }
-
-  return resp;*/
 }
