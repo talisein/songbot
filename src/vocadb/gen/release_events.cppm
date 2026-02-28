@@ -4528,9 +4528,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_9613 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_9613;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_9613") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_9613 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_9613"
+});
+constexpr std::string_view release_event_mime_type_thumb_9613 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9613 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9613;
 constexpr std::string_view release_event_mime_type_thumb_9613 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_9613;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_9613") == __STDC_EMBED_FOUND__
@@ -4582,9 +4591,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_9811 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_9811;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_9811") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_9811 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_9811"
+});
+constexpr std::string_view release_event_mime_type_thumb_9811 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_9811 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_9811;
 constexpr std::string_view release_event_mime_type_thumb_9811 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_9811;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_9811") == __STDC_EMBED_FOUND__
@@ -4637,9 +4655,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_12222 = "inode/x-
 constexpr std::string_view release_event_file_ext_small_thumb_12222;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_12222") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_12222 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_12222"
+});
+constexpr std::string_view release_event_mime_type_thumb_12222 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_12222 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_12222;
 constexpr std::string_view release_event_mime_type_thumb_12222 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_12222;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_12222") == __STDC_EMBED_FOUND__
