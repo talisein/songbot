@@ -537,6 +537,30 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"キメラ", "Chimera", "Chimera", Miku, "DECO*27", 396081},
   {"アンドロイドガール", "Android Girl", "Android Girl", Miku, "DECO*27", 230406},
   {nullopt, nullopt, "Reunion", NO_VIRTUAL_SINGER, "DECO*27", 230396},
+  {"電気予報", "Denki Yohou", "Electricity Forecast", Miku, "inabakumori", 534385},
+  {"ミライどんなだろう", "Mirai Donna Darou", "What Kind of Future", Miku, "Mitchie M", 536349},
+  {"戦闘！初音ミク", "Sentou! Hatsune Miku", "Battle! (Hatsune Miku)", Miku, "cosMo", 557560},
+  {"きみとそらをとぶ", "Kimi to Sora o Tobu", "Fly With You", duet(Miku, Luka), "Kasamura Tota", 560308},
+  {"ガッチュー！", "Gotchu!", "I GOT YOU!", duet(Miku, Rin, Len), "Giga", 563199},
+  {nullopt, nullopt, "JUVENILE", Miku, "Jin", 566239},
+  {"俺ゴーストタイプ", "Ore Ghost Type", "I'm a Ghost Type", Miku, "syudou", 579184},
+  {"ゴー！ビッパ団", "Go! Bippa Dan", "GO! Team BIPPA", duet(Miku, Rin, Len), "Wonderful☆Opportunity", 581632},
+  {"ひゅ〜どろどろ", "Hyu~dorodoro", "Woo~oosh, Oozing", duet(Miku, MEIKO), "Van de Shop", 584100},
+  {nullopt, nullopt, "Encounter", Miku, "Orangestar", 586628},
+  {"むげんのチケット", "mugen no ticket", "Eon Ticket", duet(Miku, KAITO), "marasy", 586830},
+  {nullopt, nullopt, "PARTY ROCK ETERNITY", Miku, "Hachioji-P", 589291},
+  {"たびのまえ、たびのあと", "Tabi no Mae, Tabi no Ato", "Journey's Prequels, Journey's Traces", Miku, "iyowa", 592083},
+  {"エスパーエスパー", "Esper Esper", "Esper Esper", Miku, "NayutalieN", 593626},
+  {"メロメロイド", "MELLOMELLOID", "MELLOMELLOID", Miku, "Kairiki Bear", 594927},
+  {nullopt, nullopt, "Glorious Day", Miku, "Eve", 598025},
+  {"アフターエポックス", "After Epochs", "After Epochs", Miku, "sasakure.UK", 625986},
+  {"チャンピオン", "Champion", "Champion", Miku, "Kanaria", 650687},
+  {"しんかしんかしんか", "Shinka Shinka Shinka", "EVOLVE EVOLVE EVOLVE", Miku, "Sasuke Haraguchi", 709668},
+  {"ファサード・クエスチョン", "Façade Question", "Façade Question", duet(Miku, Teto), "32ki", 771172},
+  {"オーパーツ", "OOPÁRTS", "OOPÁRTS", Miku, "NILFRUITS", 840401},
+  {"ドキドキ！", "Dokidoki!", "Dokidoki!", duet(Miku, Len), "Surii", 853916},
+  {"たびだちのうた", "Tabidachi no Uta", "Departure Song", Miku, "Karasuyasabou", 906978},
+  {"スパイラル・メロディーズ", "Spiral Melodies", "Spiral Melodies", Miku, "Omoi", 925294},
     };
 
     return res;
@@ -639,6 +663,10 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "MKDR DSCF", "Delusional Sentimental Compensation Federation"},
             { "MKDR (DSCF)", "Delusional Sentimental Compensation Federation"},
             { "Though My Song Has No Form", "Though My Song Has No Shape"},
+            { "Electrical Forecast", "Electricity Forecast"},
+            { "GO! Team BIDOOF", "GO! Team BIPPA"},
+            { "Facade Question", "Façade Question"},
+            { "OOPARTS", "OOPÁRTS"},
     };
     return res;
 }

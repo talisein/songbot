@@ -129,7 +129,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
   auto prev_concerts_rng = std::views::filter(std::views::reverse(setlists), util::bind_front<exact_song_track_match>(*song)) |
     std::views::filter([](const auto& track) {
       auto concert = lookup_concert(track.concert_short_name);
-      return (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert->last_date.value_or(concert->date))) > SPOILER_DURATION;
+      return (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert->last_date.value_or(concert->date))) > SPOILER_DURATION || track.concert_short_name == VOLTAGE;
     });
   if (std::ranges::empty(prev_concerts_rng)) {
     auto msg = dpp::message(std::format("I'm sorry, '{}' isn't in a concert I know about yet.", param)).set_flags(dpp::message_flags::m_ephemeral);
