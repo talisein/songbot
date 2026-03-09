@@ -2263,6 +2263,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { VOLTAGE, 24, "Dokidoki!" },
         { VOLTAGE, 25, "Departure Song" },
         { VOLTAGE, 26, "Spiral Melodies" },
+        { VOLTAGE, 27, "Crossroad" },
 /*        { VOLTAGE, 1, "" },
         { VOLTAGE, 2, "" },
         { VOLTAGE, 3, "" },

@@ -561,6 +561,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ドキドキ！", "Dokidoki!", "Dokidoki!", duet(Miku, Len), "Surii", 853916},
   {"たびだちのうた", "Tabidachi no Uta", "Departure Song", Miku, "Karasuyasabou", 906978},
   {"スパイラル・メロディーズ", "Spiral Melodies", "Spiral Melodies", Miku, "Omoi", 925294},
+  {"クロスロード", "Crossroad", "Crossroad", Miku, "kz × TAKU INOUE", 929916},
     };
 
     return res;
