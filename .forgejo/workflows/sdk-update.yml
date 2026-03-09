@@ -1,0 +1,36 @@
+name: Periodic SDK Update
+on:
+  schedule:
+    - cron: '0 2 * * 1' # Runs every Monday at 2:00 AM
+  workflow_dispatch:
+
+jobs:
+  update-sdk:
+    runs-on: meiko
+    steps:
+      - name: Checkout
+        run: |
+          git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .
+
+      - name: Build and Push SDK and Runtime
+        run: |
+          # --- 1. Build the SDK (Build-time deps) ---
+          cat <<EOF > Containerfile.sdk
+          FROM fedora:42
+          RUN dnf -y upgrade && \
+              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake && \
+              dnf clean all
+          EOF
+          buildah bud -f Containerfile.sdk -t git.miku/talisein/songbot-sdk:latest .
+          buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
+          buildah push git.miku/talisein/songbot-sdk:latest
+
+          # --- 2. Build the Runtime (Production deps) ---
+          cat <<EOF > Containerfile.runtime
+          FROM fedora:42
+          RUN dnf -y upgrade && \
+              dnf -y install libcurl zlib-ng openssl && \
+              dnf clean all
+          EOF
+          buildah bud -f Containerfile.runtime -t git.miku/talisein/songbot-runtime:latest .
+          buildah push git.miku/talisein/songbot-runtime:latest

@@ -3,6 +3,7 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+  workflow_dispatch:
 
 jobs:
   build_and_publish:
@@ -15,8 +16,7 @@ jobs:
       - name: Build
         run: |
           buildah bud -t git.miku/${{ github.repository }}:main .
-      - name: Push 
+      - name: Push
         run: |
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
           buildah push git.miku/${{ github.repository }}:main
-          
