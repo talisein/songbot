@@ -34,7 +34,7 @@ namespace {
     get_setlist_lines(const Concert& concert)
     {
         std::vector<std::string> lines;
-        if (concert.date > util::get_build_date() && concert.short_name != VOLTAGE) {
+        if (concert.date > util::get_build_date()) {
             lines.push_back(std::format("{} will first play on {}. I won't know the setlist until after that.",
                                            concert.name, concert.date));
             return lines;
