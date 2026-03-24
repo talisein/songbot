@@ -28,6 +28,79 @@ using json = nlohmann::json;
 
 namespace
 {
+
+  std::map<std::string_view, std::uint64_t> localvoid_name_to_vocadb_map {
+    {"ひゅ〜どろどろ feat. 初音ミク, MEIKO", 584100},
+    {"弱虫モンブラン (Reloaded) feat. 初音ミク", 777659},
+    {"ミライどんなだろう feat. 初音ミク", 536349},
+    {"ボルテッカー feat. 初音ミク", 532518},
+    {"THUNDERBOLT feat. 初音ミク", 468978},
+    {"ポケットのモンスター feat. 初音ミク", 538028},
+    {"テレパシ feat. 初音ミク", 752940},
+    {"SUPERHERO feat. 鏡音レン", 580445},
+    {"ストリートライト", 746114},
+    {"スパイラル・メロディーズ", 925294},
+    {"SnowMix♪ feat. 初音ミク[SNOW MIKU 2023]", 460669},
+    {"SnowMix♪ / まらしぃ feat. 初音ミク[SNOW MIKU 2023]", 460669},
+    {"夜舞うシルエット feat. MEIKO", 542682},
+    {"ラビットホール feat. 初音ミク", 500519},
+    {"プシ feat.初音ミク", 460547},
+    {"プシ / r-906 feat.初音ミク", 460547},
+    {"Plaything feat. 初音ミク", 483001}, // uncharted
+    {"PARTY ROCK ETERNITY feat. 初音ミク", 589291},
+    {"Over Flow(er) feat. 初音ミク", 772578},
+    {"げんてん feat. MEIKO", 687114},
+    {"オーパーツ feat. 初音ミク", 840401},
+    {"新人類 feat. 鏡音リン", 480295},
+    {"NEPPUU〜熱風〜 feat. 初音ミク", 480845},
+    {"モニタリング feat. 初音ミク", 668055},
+    {"メズマライザー feat. 初音ミク, 重音テトSV", 610187},
+    {"メロメロイド feat. 初音ミク", 594927},
+    {"マシュマロ feat. 初音ミク", 848354},
+    {"MAGA MAGA feat. 巡音ルカ", 580170},
+    {"Mag1c feat. 初音ミク", 843579}, // uncharted
+    {"M@GICAL☆CURE! LOVE ♥ SHOT!", 540085},
+    {"ラストラス feat. 初音ミク", 789209},
+    {"愛言葉Ⅴ feat. 初音ミク", 915394},
+    {"混沌ブギ feat. 初音ミク", 525760},// 16 16
+    {"king妃jack躍 feat.初音ミク", 471960},
+    {"JUVENILE feat. 初音ミク", 566239},
+    {"たびのまえ、たびのあと feat. 初音ミク", 592083},
+    {"インビテーション！ feat. 初音ミク", 501614}, // uncharted
+    {"Intergalactic Bound feat. 初音ミク", 573584},
+    {"imaginary love story feat. 初音ミク", 481543},
+    {"【MIKU EXPO 2023 VR】imaginary love story", 481543},
+    {"アイドル戦士 feat. 初音ミク", 760683},
+    {"俺ゴーストタイプ feat. 初音ミク", 579184},
+    {"ガッチュー！", 563199},
+    {"【マジミラ2023】HERO feat. 初音ミク", 501613},
+    {"ハオ feat. 初音ミク", 640212},
+    {"ゴー！ビッパ団", 581632},
+    {"Glorious Day feat. 初音ミク", 598025},
+    {"Flyway ft. 鏡音レン, KAITO", 471637},
+    {"きみとそらをとぶ feat. 初音ミク, 巡音ルカ", 560308},
+    {"ファサード・クエスチョン", 771172},
+    {"しんかしんかしんか feat. 初音ミク", 709668},
+    {"エスパーエスパー feat. 初音ミク", 593626},
+    {"むげんのチケット feat. 初音ミク, KAITO", 586830},
+    {"Encounter feat. 初音ミク", 586628},
+    {"電気予報 feat. 初音ミク", 534385},
+    {"梦色星球 feat. 初音ミク", 642040}, // uncharted
+    {"ドキドキ！ feat. 初音ミク, 鏡音レン", 853916},
+    {"黙ってロックをやれって言ってんの！ feat. 初音ミク", 640328},
+    {"たびだちのうた feat. 初音ミク", 906978},
+    {"シアンブルー feat. 初音ミク", 887891},
+    {"クロスロード feat. 初音ミク", 929916},
+    {"チェリーポップ feat. 初音ミク", 816725},
+    {"チャンピオン feat. 初音ミク", 650687},
+    {"Call!! feat. カイト", 503050}, // uncharted
+    {"ブループラネット feat. 初音ミク", 525396},
+    {"戦闘！初音ミク feat. 初音ミク", 557560},
+    {"Artifact feat. 初音ミク", 848950},
+    {"アンテナ39 feat. 初音ミク", 630460},
+    {"アフターエポックス feat. 初音ミク", 625986},
+  };
+
     constexpr std::string_view preamble { R"###(/*
     Songbot: Hatsune Miku Concert Database for Discord
     Copyright (C) 2025  Andrew Potter
@@ -72,6 +145,23 @@ import vocadb.api;
 namespace vocadb {
 
 using namespace std::literals;
+
+)###"};
+
+  constexpr std::string_view preamble_localvoid { R"###(
+export module localvoid;
+
+import std;
+
+namespace localvoid {
+
+using namespace std::literals;
+
+export struct localvoid_data {
+  std::uint64_t vocadb_id;
+  std::uint16_t peak_rank;
+  std::uint16_t weeks;
+};
 
 )###"};
 
@@ -368,6 +458,7 @@ using namespace std::literals;
 scraper::scraper(std::filesystem::path res_dir) noexcept :
     res_dir(std::move(res_dir)),
     json_dir(this->res_dir / "json"),
+    localvoid_dir(this->res_dir / "localvoid"),
     rng_eng([]{ std::random_device rd; std::seed_seq seq {rd(), rd(), rd(), rd()}; return std::default_random_engine{seq};  }()),
     dist(shape_k, scale_beta)
 {
@@ -474,6 +565,23 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
     file.flush();
     file.close();
 
+    // localvoid stuff
+    for (const auto& j : vec) {
+      constexpr auto key = "publishDate";
+      if (j.contains(key)) {
+        auto s = j[key].get<std::string>();
+        std::istringstream ss(s);
+        using namespace std::literals;
+        std::chrono::year_month_day date{};
+        ss >> std::chrono::parse("%Y-%m-%dT%H:%M:%S", date);
+
+        if (date > 2022y/12/1) {
+          if (!std::ranges::contains(localvoid_name_to_vocadb_map | std::views::values, j["id"].get<std::uint64_t>())) {
+            std::println("{}: {} / {}", j["id"].get<std::uint64_t>(), j["name"].get<std::string>(), j["additionalNames"].get<std::string>());
+          }
+        }
+      }
+    }
     return {};
 }
 
@@ -1043,4 +1151,127 @@ scraper::get_request_delay()
     return std::chrono::duration_cast<std::chrono::milliseconds>(
         std::chrono::duration<double>(time_in_seconds)
     );
+}
+
+struct ymw_t
+{
+  int y;
+  unsigned m;
+  unsigned w;
+};
+
+std::generator<ymw_t> localvoid_week_generator(std::chrono::year_month begin, std::chrono::year_month_day end)
+{
+  using namespace std::chrono;
+  const year_month     current_month = {end.year(), end.month()};
+
+  for (auto ym = begin; ym <= current_month; ym += months{1}) {
+    const unsigned last_day_count = [&] {
+      if (ym == current_month) {
+        return static_cast<unsigned>(end.day());
+      } else {
+        year_month_day_last ymdl { ym.year(), ym.month() / std::chrono::last };
+        return static_cast<unsigned>(ymdl.day());
+      }}();
+    const auto num_weeks = (last_day_count + 6u) / 7u;
+
+    for (auto w = 1u; w <= num_weeks; ++w) {
+      co_yield {static_cast<int>(ym.year()), static_cast<unsigned>(ym.month()), w};
+    }
+  }
+}
+
+std::expected<void, std::error_code>
+scraper::scrape_localvoid(const std::filesystem::path& generated_src)
+{
+  constexpr std::string_view localvoid_url { "https://lvchart.com/api/data"sv };
+  std::vector<json> vec;
+
+  using namespace std::chrono;
+  constexpr auto       start_month = 2022y/12;
+  const auto           now = system_clock::now() - days{7};
+  vec.reserve((ceil<days>(floor<days>(now) - static_cast<sys_days>(year_month_day{start_month.year(), start_month.month(), std::chrono::day{1}}))).count());
+  for (const auto ymd : localvoid_week_generator(start_month, floor<days>(now))) {
+    const std::filesystem::path file = localvoid_dir / std::format("{}_{:02}_{}.json", ymd.y, ymd.m, ymd.w);
+    if (!std::filesystem::exists(file)) {
+      continue;
+      cpr::Url url{std::format(localvoid_url, ymd.y, ymd.m, ymd.w)};
+      cpr::Parameters params{{"year", std::to_string(ymd.y)},
+                             {"month", std::to_string(ymd.m)},
+                             {"week", std::to_string(ymd.w)}};
+      std::println("Fetching localvoid json for {}_{}_{}", ymd.y, ymd.m, ymd.w);
+      const auto tmppath = std::filesystem::path{file}.replace_extension(".tmp");
+      std::ofstream ofs {tmppath, std::ios::binary | std::ios::out | std::ios::trunc };
+      auto res = download(url, ofs, params);
+      if (!res || res->status_code != 200) {
+        if (!res)
+          std::println(std::cerr, "Error: Failed to download {}: {}", url.str(), res.error().message());
+        else
+          std::println(std::cerr, "Error: Failed to download {}: status code {}", url.str(), res->status_code);
+        ofs.close();
+        std::filesystem::remove(tmppath);
+        std::println(std::cerr, "Skipping...");
+        continue;
+      } else {
+        ofs.flush();
+        ofs.close();
+        std::filesystem::rename(tmppath, file);
+      }
+    }
+
+    std::ifstream ifs{file};
+    vec.push_back(json::parse(ifs));
+
+  }
+
+  std::ostringstream full_file;
+  std::println(full_file, "{}{}", preamble, preamble_localvoid);
+
+  std::multimap<std::uint64_t, int> rankings;
+  std::set<std::uint64_t> keys;
+  for (auto lv : vec) {
+    for (auto s : lv["songs"]) {
+      auto is_out = s["isOut"].get<bool>();
+      if (is_out) continue;
+      auto title = s["title"].get<std::string>();
+      if (auto it = localvoid_name_to_vocadb_map.find(title); it != std::end(localvoid_name_to_vocadb_map)) {
+        rankings.insert(decltype(rankings)::value_type(it->second, s["rank"].get<int>()));
+        keys.insert(it->second);
+      }
+    }
+  }
+
+  std::println(full_file, "export constexpr std::array<localvoid_data, {}> localvoid_ranks {{{{", keys.size());
+
+  for (auto key : keys) {
+    auto rng = rankings.equal_range(key);
+    std::stringstream ss;
+    ss << key << ": ";
+    std::vector<int> ranks;
+    for (auto i = rng.first; i != rng.second; ++i) {
+      ranks.push_back(i->second);
+    }
+    std::ranges::sort(ranks);
+    auto best = ranks.front();
+    auto weeks = std::ranges::distance(std::ranges::equal_range(ranks, best));
+    std::println(full_file, R"###( {{{}, {}, {} }},)###", key, best, weeks);
+  }
+
+  std::println(full_file, "}}}};\n");
+  std::println(full_file, "\n}} // namespace localvoid");
+  std::println("Writing to {}", generated_src.string());
+  std::fstream file { generated_src, std::ios_base::out | std::ios_base::trunc };
+  if (!file.is_open()) {
+    std::println("Not open!?");
+  }
+  file << full_file.view();
+  file.flush();
+  file.close();
+
+  for (auto it : localvoid_name_to_vocadb_map) {
+    if (!keys.contains(it.second)) {
+      std::println("Uncharted: {}", it.second);
+    }
+  }
+  return {};
 }

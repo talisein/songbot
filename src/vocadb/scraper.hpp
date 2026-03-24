@@ -53,11 +53,13 @@ public:
 
     std::expected<void, std::error_code> scrape_events(const std::filesystem::path& generated_src); // gen/release_events.cppm
     std::expected<void, std::error_code> scrape_songs(const std::filesystem::path& generated_src); // gen/songs.cppm
+    std::expected<void, std::error_code> scrape_localvoid(const std::filesystem::path& generated_src); // gen/songs.cppm
 
 private:
     cpr::Session session;
     std::filesystem::path res_dir;
     std::filesystem::path json_dir;
+    std::filesystem::path localvoid_dir;
     std::default_random_engine rng_eng;
     std::gamma_distribution<double> dist;
 

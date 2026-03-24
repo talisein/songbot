@@ -22,6 +22,7 @@ import songs;
 import songbot.errors;
 import vocadb.api;
 import vocadb.songs;
+import localvoid;
 
 #include "last_command.hpp"
 #include "context.hpp"
@@ -220,6 +221,15 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
             std::print(ss, "[VocaWiki]({})", *wiki->url);
           }
         }
+        if (auto it = std::ranges::find(localvoid::localvoid_ranks, *song->vocadb_id, &localvoid::localvoid_data::vocadb_id);
+            it != std::ranges::end(localvoid::localvoid_ranks))
+        {
+          std::print(ss, "\n-# [Peak Chart Rank](https://lvchart.com): {}", it->peak_rank);
+          if (it->weeks > 1) {
+            std::print(ss, " ({} weeks)", it->weeks);
+          }
+        }
+
         subtext = ss.str();
         pic = it->main_picture.transform([](const auto& pic) -> pic_details {
           if (pic.original && pic.thumb) {

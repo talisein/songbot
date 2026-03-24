@@ -544,7 +544,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ガッチュー！", "Gotchu!", "I GOT YOU!", duet(Miku, Rin, Len), "Giga", 563199},
   {nullopt, nullopt, "JUVENILE", Miku, "Jin", 566239},
   {"俺ゴーストタイプ", "Ore Ghost Type", "I'm a Ghost Type", Miku, "syudou", 579184},
-  {"ゴー！ビッパ団", "Go! Bippa Dan", "GO! Team BIPPA", duet(Miku, Rin, Len), "Wonderful☆Opportunity", 581632},
+  {"ゴー！ビッパ団", "Go! Bippa Dan", "GO! Team BIPPA", duet(Miku, Rin, Len), "Wonderful☆Opportunity", 581632, nullopt, KAITO},
   {"ひゅ〜どろどろ", "Hyu~dorodoro", "Woo~oosh, Oozing", duet(Miku, MEIKO), "Van de Shop", 584100},
   {nullopt, nullopt, "Encounter", Miku, "Orangestar", 586628},
   {"むげんのチケット", "mugen no ticket", "Eon Ticket", duet(Miku, KAITO), "marasy", 586830},
