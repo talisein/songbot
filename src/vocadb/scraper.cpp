@@ -1203,9 +1203,9 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
     const std::filesystem::path file = localvoid_dir / std::format("{}_{:02}_{}.json", ymd.y, ymd.m, ymd.w);
     if (!std::filesystem::exists(file)) {
       cpr::Url url{std::format(localvoid_url, ymd.y, ymd.m, ymd.w)};
-      cpr::Parameters params{{"year", std::to_string(ymd.y)},
+      cpr::Parameters params{{"year",  std::to_string(ymd.y)},
                              {"month", std::to_string(ymd.m)},
-                             {"week", std::to_string(ymd.w)}};
+                             {"week",  std::to_string(ymd.w)}};
       std::println("Fetching localvoid json for {}_{}_{}", ymd.y, ymd.m, ymd.w);
       const auto tmppath = std::filesystem::path{file}.replace_extension(".tmp");
       std::ofstream ofs {tmppath, std::ios::binary | std::ios::out | std::ios::trunc };
@@ -1252,11 +1252,10 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
 
   std::multimap<std::uint64_t, week_rank> rankings;
 
-  const auto sheetname_to_ymw = [](auto json) -> ymw_t {
-    // something like "2024_7_4"
-    auto sheetname = json["sheetName"].template get<std::string>();
-    std::stringstream ss {sheetname};
-    std::chrono::year_month_day ymd;
+  const auto sheetname_to_ymw = [](const auto& json) -> ymw_t {
+    // "sheetName": "2024_7_4"
+    std::stringstream ss { json["sheetName"].template get<std::string>() };
+    std::chrono::year_month_day ymd; // its not actually a day but a week number.
     std::chrono::from_stream(ss, "%Y_%m_%d", ymd);
     int y = static_cast<int>(ymd.year());
     unsigned m = static_cast<unsigned>(ymd.month());
@@ -1265,33 +1264,32 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
   };
 
   std::set<std::uint64_t> keys;
-  for (auto lv : vec) {
-    for (auto s : lv["songs"]) {
-      auto is_out = s["isOut"].get<bool>();
+  for (auto localvoid_json : vec) {
+    for (auto song_json : localvoid_json["songs"]) {
+      auto is_out = song_json["isOut"].get<bool>();
       if (is_out) continue;
-      auto title = s["title"].get<std::string>();
+      auto title = song_json["title"].get<std::string>();
       if (auto it = localvoid_name_to_vocadb_map.find(title); it != std::end(localvoid_name_to_vocadb_map)) {
-        rankings.insert(decltype(rankings)::value_type(it->second, {s["rank"].get<int>(), sheetname_to_ymw(lv)}));
-        keys.insert(it->second);
+        const auto& [_, anidb_id] = *it;
+        rankings.emplace(std::piecewise_construct,
+                         std::forward_as_tuple(anidb_id),
+                         std::forward_as_tuple(song_json["rank"].get<int>(), sheetname_to_ymw(localvoid_json)));
+        keys.insert(anidb_id);
       }
     }
   }
 
   std::println(full_file, "export constexpr std::array<localvoid_data, {}> localvoid_ranks {{{{", keys.size());
 
-
   for (auto key : keys) {
-    auto rng = rankings.equal_range(key);
-    std::stringstream ss;
-    ss << key << ": ";
-    std::vector<week_rank> ranks;
-    for (auto i = rng.first; i != rng.second; ++i) {
-      ranks.emplace_back(i->second);
-    }
+    const auto& [song_ranks_begin, song_ranks_end] = rankings.equal_range(key);
+    std::vector<week_rank> ranks = std::ranges::subrange(song_ranks_begin, song_ranks_end)
+                                   | std::views::values
+                                   | std::ranges::to<std::vector>();
     std::ranges::sort(ranks);
     auto best = ranks.front();
-    auto weeks = std::ranges::distance(std::ranges::equal_range(ranks, best.rank, std::less{}, &week_rank::rank));
-    std::println(full_file, R"###(  {{ {}, {:2}, {:2}, {{ {}, {:2}, {:2} }} }},)###", key, best.rank, weeks, best.week.y, best.week.m, best.week.w );
+    auto weeks_at_best = std::ranges::distance(std::ranges::equal_range(ranks, best.rank, std::less{}, &week_rank::rank));
+    std::println(full_file, R"###(  {{ {}, {:2}, {:2}, {{ {}, {:2}, {:2} }} }},)###", key, best.rank, weeks_at_best, best.week.y, best.week.m, best.week.w );
   }
 
   std::println(full_file, "}}}};\n");
