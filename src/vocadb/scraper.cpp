@@ -99,6 +99,8 @@ namespace
     {"Artifact feat. 初音ミク", 848950},
     {"アンテナ39 feat. 初音ミク", 630460},
     {"アフターエポックス feat. 初音ミク", 625986},
+    {"CONNECT:COMMUNE feat. 初音ミク", 907752},
+    {"Room for a Fantasy feat. 初音ミク", 878942},
   };
 
     constexpr std::string_view preamble { R"###(/*

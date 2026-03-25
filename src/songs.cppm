@@ -562,6 +562,8 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"たびだちのうた", "Tabidachi no Uta", "Departure Song", Miku, "Karasuyasabou", 906978},
   {"スパイラル・メロディーズ", "Spiral Melodies", "Spiral Melodies", Miku, "Omoi", 925294},
   {"クロスロード", "Crossroad", "Crossroad", Miku, "kz × TAKU INOUE", 929916},
+  {nullopt, nullopt, "CONNECT:COMMUNE", Miku, "FLAVOR FOLEY", 907752},
+  {nullopt, nullopt, "Room for a Fantasy", Miku, "nostraightanswer", 878942},
     };
 
     return res;

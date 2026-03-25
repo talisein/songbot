@@ -43,7 +43,7 @@ export struct localvoid_data {
 };
 
 
-export constexpr std::array<localvoid_data, 61> localvoid_ranks {{
+export constexpr std::array<localvoid_data, 63> localvoid_ranks {{
   { 460547,  4,  1, { 2022, 12,  5 } },
   { 460669,  1,  1, { 2022, 12,  5 } },
   { 468978, 15,  1, { 2023,  1,  3 } },
@@ -100,8 +100,10 @@ export constexpr std::array<localvoid_data, 61> localvoid_ranks {{
   { 848354,  1,  1, { 2025, 10,  2 } },
   { 848950, 25,  1, { 2025, 10,  2 } },
   { 853916, 12,  1, { 2025, 10,  4 } },
+  { 878942, 53,  1, { 2025, 12,  1 } },
   { 887891,  9,  1, { 2025, 12,  4 } },
   { 906978,  8,  1, { 2026,  1,  5 } },
+  { 907752, 20,  1, { 2026,  1,  5 } },
   { 915394,  4,  2, { 2026,  2,  3 } },
   { 925294, 21,  1, { 2026,  3,  1 } },
   { 929916,  6,  1, { 2026,  3,  2 } },
