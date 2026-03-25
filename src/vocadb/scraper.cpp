@@ -161,6 +161,14 @@ export struct localvoid_data {
   std::uint64_t vocadb_id;
   std::uint16_t peak_rank;
   std::uint16_t weeks;
+
+  struct
+  {
+    int y;
+    unsigned m;
+    unsigned w;
+  } ymw;
+
 };
 
 )###"};
@@ -1158,6 +1166,7 @@ struct ymw_t
   int y;
   unsigned m;
   unsigned w;
+  auto operator<=>(const ymw_t&) const = default;
 };
 
 std::generator<ymw_t> localvoid_week_generator(std::chrono::year_month begin, std::chrono::year_month_day end)
@@ -1227,7 +1236,36 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
   std::ostringstream full_file;
   std::println(full_file, "{}{}", preamble, preamble_localvoid);
 
-  std::multimap<std::uint64_t, int> rankings;
+  struct week_rank
+  {
+    int rank;
+    ymw_t week;
+
+    auto operator<=>(const week_rank& other) const {
+      if (auto cmp = rank <=> other.rank; cmp != 0) {
+        return cmp;
+      }
+
+      // flip ordering for week to put latest week first
+      return other.week <=> week;
+    }
+    bool operator==(const week_rank& other) const = default;
+  };
+
+  std::multimap<std::uint64_t, week_rank> rankings;
+
+  const auto sheetname_to_ymw = [](auto json) -> ymw_t {
+    // something like "2024_7_4"
+    auto sheetname = json["sheetName"].template get<std::string>();
+    std::stringstream ss {sheetname};
+    std::chrono::year_month_day ymd;
+    std::chrono::from_stream(ss, "%Y_%m_%d", ymd);
+    int y = static_cast<int>(ymd.year());
+    unsigned m = static_cast<unsigned>(ymd.month());
+    unsigned w = static_cast<unsigned>(ymd.day());
+    return {y, m, w};
+  };
+
   std::set<std::uint64_t> keys;
   for (auto lv : vec) {
     for (auto s : lv["songs"]) {
@@ -1235,7 +1273,7 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
       if (is_out) continue;
       auto title = s["title"].get<std::string>();
       if (auto it = localvoid_name_to_vocadb_map.find(title); it != std::end(localvoid_name_to_vocadb_map)) {
-        rankings.insert(decltype(rankings)::value_type(it->second, s["rank"].get<int>()));
+        rankings.insert(decltype(rankings)::value_type(it->second, {s["rank"].get<int>(), sheetname_to_ymw(lv)}));
         keys.insert(it->second);
       }
     }
@@ -1243,27 +1281,25 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
 
   std::println(full_file, "export constexpr std::array<localvoid_data, {}> localvoid_ranks {{{{", keys.size());
 
+
   for (auto key : keys) {
     auto rng = rankings.equal_range(key);
     std::stringstream ss;
     ss << key << ": ";
-    std::vector<int> ranks;
+    std::vector<week_rank> ranks;
     for (auto i = rng.first; i != rng.second; ++i) {
-      ranks.push_back(i->second);
+      ranks.emplace_back(i->second);
     }
     std::ranges::sort(ranks);
     auto best = ranks.front();
-    auto weeks = std::ranges::distance(std::ranges::equal_range(ranks, best));
-    std::println(full_file, R"###( {{{}, {}, {} }},)###", key, best, weeks);
+    auto weeks = std::ranges::distance(std::ranges::equal_range(ranks, best.rank, std::less{}, &week_rank::rank));
+    std::println(full_file, R"###(  {{ {}, {:2}, {:2}, {{ {}, {:2}, {:2} }} }},)###", key, best.rank, weeks, best.week.y, best.week.m, best.week.w );
   }
 
   std::println(full_file, "}}}};\n");
   std::println(full_file, "\n}} // namespace localvoid");
   std::println("Writing to {}", generated_src.string());
   std::fstream file { generated_src, std::ios_base::out | std::ios_base::trunc };
-  if (!file.is_open()) {
-    std::println("Not open!?");
-  }
   file << full_file.view();
   file.flush();
   file.close();

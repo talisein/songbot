@@ -224,7 +224,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
         if (auto it = std::ranges::find(localvoid::localvoid_ranks, *song->vocadb_id, &localvoid::localvoid_data::vocadb_id);
             it != std::ranges::end(localvoid::localvoid_ranks))
         {
-          std::print(ss, "\n-# [Peak Chart Rank](https://lvchart.com): {}", it->peak_rank);
+          std::print(ss, "\n-# [Peak Chart Rank](https://lvchart.com/?year={}&month={}&week={}): {}", it->ymw.y, it->ymw.m, it->ymw.w, it->peak_rank);
           if (it->weeks > 1) {
             std::print(ss, " ({} weeks)", it->weeks);
           }
