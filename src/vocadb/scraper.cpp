@@ -1171,24 +1171,23 @@ struct ymw_t
   auto operator<=>(const ymw_t&) const = default;
 };
 
-std::generator<ymw_t> localvoid_week_generator(std::chrono::year_month begin, std::chrono::year_month_day end)
+std::generator<ymw_t> localvoid_week_generator()
 {
   using namespace std::chrono;
-  const year_month     current_month = {end.year(), end.month()};
+  constexpr year_month_weekday start { 2022y, December, Thursday[1] };
+  const year_month_weekday end = []() -> year_month_weekday {
+    const year_month_weekday now { floor<days>(system_clock::now()) };
+    const year_month_weekday this_thursday { now.year(), now.month(), Thursday[now.index()] };
+    const year_month_weekday prev_thursday { static_cast<sys_days>(this_thursday) - days{7} };
+    return prev_thursday;
+  }();
 
-  for (auto ym = begin; ym <= current_month; ym += months{1}) {
-    const unsigned last_day_count = [&] {
-      if (ym == current_month) {
-        return static_cast<unsigned>(end.day());
-      } else {
-        year_month_day_last ymdl { ym.year(), ym.month() / std::chrono::last };
-        return static_cast<unsigned>(ymdl.day());
-      }}();
-    const auto num_weeks = (last_day_count + 6u) / 7u;
+  constexpr auto next_ymwd = [](const year_month_weekday &it) constexpr -> year_month_weekday {
+    return static_cast<sys_days>(it) + days{7};
+  };
 
-    for (auto w = 1u; w <= num_weeks; ++w) {
-      co_yield {static_cast<int>(ym.year()), static_cast<unsigned>(ym.month()), w};
-    }
+  for (auto ym = start; ym != end; ym = next_ymwd(ym)) {
+    co_yield { static_cast<int>(ym.year()), static_cast<unsigned>(ym.month()), static_cast<unsigned>(ym.index()) };
   }
 }
 
@@ -1199,13 +1198,10 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
   std::vector<json> vec;
 
   using namespace std::chrono;
-  constexpr auto       start_month = 2022y/12;
-  const auto           now = system_clock::now() - days{7};
-  vec.reserve((ceil<days>(floor<days>(now) - static_cast<sys_days>(year_month_day{start_month.year(), start_month.month(), std::chrono::day{1}}))).count());
-  for (const auto ymd : localvoid_week_generator(start_month, floor<days>(now))) {
+
+  for (const auto ymd : localvoid_week_generator()) {
     const std::filesystem::path file = localvoid_dir / std::format("{}_{:02}_{}.json", ymd.y, ymd.m, ymd.w);
     if (!std::filesystem::exists(file)) {
-      continue;
       cpr::Url url{std::format(localvoid_url, ymd.y, ymd.m, ymd.w)};
       cpr::Parameters params{{"year", std::to_string(ymd.y)},
                              {"month", std::to_string(ymd.m)},
