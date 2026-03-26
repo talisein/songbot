@@ -29,7 +29,7 @@ jobs:
           cat <<EOF > Containerfile.runtime
           FROM fedora:42
           RUN dnf -y upgrade && \
-              dnf -y install libcurl zlib-ng openssl && \
+              dnf -y install libcurl zlib-ng openssl glibc-all-langpacks && \
               dnf clean all
           EOF
           buildah bud -f Containerfile.runtime -t git.miku/talisein/songbot-runtime:latest .
