@@ -228,6 +228,10 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
           if (it->weeks > 1) {
             std::print(ss, " ({} weeks)", it->weeks);
           }
+
+          auto sv = localvoid::charts.front();
+          using json = nlohmann::json;
+          auto j = json::parse(sv);
         }
 
         subtext = ss.str();

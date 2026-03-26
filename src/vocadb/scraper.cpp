@@ -159,18 +159,18 @@ namespace localvoid {
 
 using namespace std::literals;
 
+export struct ymw_t {
+    int y;
+    unsigned m;
+    unsigned w;
+};
+
 export struct localvoid_data {
   std::uint64_t vocadb_id;
   std::uint16_t peak_rank;
   std::uint16_t weeks;
 
-  struct
-  {
-    int y;
-    unsigned m;
-    unsigned w;
-  } ymw;
-
+  ymw_t ymw;
 };
 
 )###"};
@@ -1178,8 +1178,8 @@ std::generator<ymw_t> localvoid_week_generator()
   const year_month_weekday end = []() -> year_month_weekday {
     const year_month_weekday now { floor<days>(system_clock::now()) };
     const year_month_weekday this_thursday { now.year(), now.month(), Thursday[now.index()] };
-    const year_month_weekday prev_thursday { static_cast<sys_days>(this_thursday) - days{7} };
-    return prev_thursday;
+//    const year_month_weekday prev_thursday { static_cast<sys_days>(this_thursday) - days{7} };
+    return this_thursday;
   }();
 
   constexpr auto next_ymwd = [](const year_month_weekday &it) constexpr -> year_month_weekday {
@@ -1196,6 +1196,9 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
 {
   constexpr std::string_view localvoid_url { "https://lvchart.com/api/data"sv };
   std::vector<json> vec;
+  std::vector<std::string> vars;
+  std::ostringstream full_file;
+  std::println(full_file, "{}{}", preamble, preamble_localvoid);
 
   using namespace std::chrono;
 
@@ -1228,11 +1231,28 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
 
     std::ifstream ifs{file};
     vec.push_back(json::parse(ifs));
-
+    if (std::filesystem::exists(file)) {
+      auto var = std::format("lv_data_{}_{}_{}", ymd.y, ymd.m, ymd.w);
+      std::println(full_file, R"(
+constexpr std::array {} = std::to_array<char8_t>({{
+    #embed "localvoid/{}"
+}});
+)", var, file.filename().string());
+      vars.push_back(var);
+    }
   }
 
-  std::ostringstream full_file;
-  std::println(full_file, "{}{}", preamble, preamble_localvoid);
+  std::print(full_file, R"(
+export constexpr std::array charts = std::to_array<std::u8string_view>({{
+)");
+  for (const auto &var : vars) {
+  std::print(full_file, R"(
+  std::u8string_view{{{}}},)", var);
+  }
+  std::println(full_file, R"(
+}});
+)");
+
 
   struct week_rank
   {

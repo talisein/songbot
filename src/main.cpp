@@ -120,6 +120,7 @@ main()
         std::println(std::cout, "DEBUG: Masked SIGTERM");
     }
 
+    std::locale::global(std::locale(""));
     context ctx("config.ini");
 
     int sfd = signalfd(-1, &mask, 0);

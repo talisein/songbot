@@ -30,6 +30,7 @@ import concerts;
 #include "freq_command.hpp"
 #include "freqtour_command.hpp"
 #include "nextlive_command.hpp"
+#include "lvchart_command.hpp"
 #include "version.hpp"
 #include "formatters.hpp"
 
@@ -222,6 +223,7 @@ context::setup_bot()
     commands.emplace("freq", std::make_unique<freq_command>(*this));
     commands.emplace("freqtour", std::make_unique<freqtour_command>(*this));
     commands.emplace("nextlive", std::make_unique<nextlive_command>(*this));
+    commands.emplace("lvchart", std::make_unique<lvchart_command>(*this));
 
     bot->on_slashcommand(util::bind_front<&context::on_slashcommand>(this));
 
