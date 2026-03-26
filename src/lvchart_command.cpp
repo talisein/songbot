@@ -74,12 +74,15 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
     std::ostringstream ss;
     std::string user_locale_str = event.command.locale;
     std::replace(user_locale_str.begin(), user_locale_str.end(), '-', '_');
+    std::locale l;
     try {
       std::locale user_loc(user_locale_str + ".UTF-8");
       ss.imbue(user_loc);
+      l = user_loc;
     } catch (const std::exception& e) {
       ctx->log_info("Couldn't set user locale {}: {}", user_locale_str, e.what());
-      ss.imbue(std::locale(""));
+      l = std::locale("");
+      ss.imbue(l);
     }
 
     using json = nlohmann::json;
@@ -87,7 +90,7 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
     const auto songs = chart["songs"];
     const auto is_not_out = [](const auto& song) -> bool { return !song["isOut"].template get<bool>(); };
     const size_t total_in_songs = std::ranges::distance(std::views::filter(songs, is_not_out));
-    const ssize_t max_view_width = std::format("{:+Ld}", std::views::filter(songs, is_not_out).begin()->at("viewIncrease").template get<ssize_t>()).size();
+    const ssize_t max_view_width = std::format(l, "{:+Ld}", std::views::filter(songs, is_not_out).begin()->at("viewIncrease").template get<ssize_t>()).size();
 
     auto make_msg = [&] (bool include_buttons){
       auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral).suppress_embeds(true);
