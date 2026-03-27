@@ -96,7 +96,7 @@ if get_option('build_anidb_sourcegen')
 
   scraper_src = ['main.cpp', 'scraper.cpp']
 
-  scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm, magic_module,
+  scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm, magic_module, vocadb_api_module,
                            dependencies: [magic_enum_dep, curl_cpr_dep, json_dep, dpp_dep, magic_dep],
                            link_with: misc_modules_lib,
                            sources: scraper_conf_file)

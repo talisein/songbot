@@ -1,0 +1,39 @@
+name: Autoscrape
+on:
+  schedule:
+    - cron: '0 10 * * *' # Runs every day at 10am
+  workflow_dispatch:
+
+jobs:
+  scrape:
+    runs-on: meiko
+    steps:
+      - name: Checkout
+        run: |
+          git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .
+
+      - name: Install build deps
+        run: |
+          dnf -y upgrade
+          dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake cpr-devel file-devel
+
+      - name: Build
+        run: |
+          meson setup build -Dbuild_anidb_sourcegen=true -Dcpp_std=c++26
+          meson compile -C build vocadb-scraper
+
+      - name: Run chart update
+        run: |
+          build/src/vocadb/vocadb-scraper
+          if git diff --quiet; then
+            echo "changed=false" >> $FORGEJO_OUTPUT
+          else
+            echo "changed=true" >> $FORGEJO_OUTPUT
+          fi
+
+      - name: Commit
+        if: steps.scrape.outputs.changed == 'true'
+        run: |
+          git add -u
+          git commit -m 'Auto Scraper Update'
+          git push

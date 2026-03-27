@@ -16,7 +16,7 @@ uni_algo_dep = dependency('uni-algo',
                           fallback: ['uni-algo'])
 
 boostut_dep = dependency('ut',
-                         default_options: {'wrap_mode': 'force'},
+                         default_options: {'wrap_mode': 'forcefallback'},
                          fallback: ['boostut', 'boostut_dep'])
 
 systemd_dep = dependency('libsystemd')
