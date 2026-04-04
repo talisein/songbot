@@ -34,7 +34,9 @@ jobs:
           EOF
           buildah bud -f Containerfile.runtime -t git.miku/talisein/songbot-runtime:latest .
           buildah push git.miku/talisein/songbot-runtime:latest
+
   trigger-songbot-build:
     runs-on: meiko
     needs: update-images
-    uses: ./.forgejo/workflows/docker-build.yaml
+    uses: ./.forgejo/workflows/docker-build.yml
+    secrets: inherit

@@ -1171,15 +1171,22 @@ struct ymw_t
   auto operator<=>(const ymw_t&) const = default;
 };
 
+template<std::integral T, std::integral U>
+inline auto sub(T t, U u) -> std::make_signed_t<std::common_type_t<T, U>>
+{
+  using common_signed_t = std::make_signed_t<std::common_type_t<T, U>>;
+  return static_cast<common_signed_t>(t) - static_cast<common_signed_t>(u);
+}
+
 std::generator<ymw_t> localvoid_week_generator()
 {
   using namespace std::chrono;
   constexpr year_month_weekday start { 2022y, December, Thursday[1] };
   const year_month_weekday end = []() -> year_month_weekday {
     const auto today { floor<days>(system_clock::now()) };
-    const auto days_to_thursday = static_cast<int>(Thursday.iso_encoding()) - static_cast<int>(static_cast<weekday>(today).iso_encoding());
+    const auto days_to_thursday = sub(Thursday.iso_encoding(), static_cast<weekday>(today).iso_encoding());
     const auto this_weeks_thursday = today + static_cast<days>(days_to_thursday);
-    return this_weeks_thursday;
+    return this_weeks_thursday + days{7};
   }();
 
   constexpr auto next_ymwd = [](const year_month_weekday &it) constexpr -> year_month_weekday {
