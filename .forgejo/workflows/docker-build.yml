@@ -3,6 +3,9 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+    paths-ignore:
+      - '.forgejo/**'
+
   workflow_call:
   workflow_dispatch:
 

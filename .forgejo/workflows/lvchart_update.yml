@@ -50,3 +50,9 @@ jobs:
           git add -u
           git commit -m 'Auto Scraper Update'
           git push
+
+  trigger-songbot-build:
+    runs-on: meiko
+    needs: scrape
+    uses: ./.forgejo/workflows/docker-build.yml
+    secrets: inherit
