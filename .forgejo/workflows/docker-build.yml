@@ -21,3 +21,22 @@ jobs:
         run: |
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
           buildah push git.miku/${{ github.repository }}:main
+
+  deploy:
+    runs-on: meiko
+    needs: build_and_publish
+    steps:
+      - name: Deploy
+        env:
+          SSH_KEY: ${{ secrets.SSH_DEPLOY_KEY }}
+
+        run: |
+          mkdir -p ~/.ssh
+          chmod 700 ~/.ssh
+
+          echo "$SSH_KEY" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+
+          ssh-keyscan -H 39music.wg.lan >> ~/.ssh/known_hosts
+
+          ssh -i ~/.ssh/id_ed25519 core@39music.wg.lan "podman-update"
