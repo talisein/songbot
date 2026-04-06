@@ -1,7 +1,7 @@
 name: Autoscrape
 on:
   schedule:
-    - cron: '0 10 * * *' # Runs every day at 10am
+    - cron: '0 10 * * Tue,Wed' # At 10:00, only on Tuesday and Wednesday
   workflow_dispatch:
 
 env:
