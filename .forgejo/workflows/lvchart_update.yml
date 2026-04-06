@@ -48,6 +48,7 @@ jobs:
         if: steps.has_change.outputs.changed == 'true'
         run: |
           git add -u
+          git add res/localvoid/*.json
           git commit -m 'Auto Scraper Update'
           git push
 
