@@ -130,6 +130,11 @@ int main()
         expect(eq(std::format("{}", *song), "巡 (Meguru) / Patrol by Kodo with <:miku:235217471982927874>"sv));
     };
 
+    "cf_producer"_test = [] {
+      auto song = lookup_song("CONNECT:COMMUNE");
+        expect(song.has_value());
+        expect(eq(song->cf_producer, "flavor foley"sv));
+    };
     return 0;
 
 }

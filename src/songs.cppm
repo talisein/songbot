@@ -121,6 +121,7 @@ export struct Song
     std::optional<std::string_view> cf_jp_name;
     std::optional<std::string_view> cf_romanji_name;
     std::string_view cf_name;
+    std::string_view cf_producer;
 };
 
 
@@ -570,8 +571,8 @@ constexpr std::vector<Song> generate_songs_incomplete()
 }
 
 constexpr auto casefolded_song_names_tuple = [] {
-    constexpr auto all_chars_data = util::generate_casefolded_fields<generate_songs_incomplete, 2, 3,
-                                                                     &Song::jp_name, &Song::romanji_name, &Song::name>();
+    constexpr auto all_chars_data = util::generate_casefolded_fields<generate_songs_incomplete, 2, 4,
+                                                                     &Song::jp_name, &Song::romanji_name, &Song::name, &Song::producer>();
 
     constexpr auto total_chars = std::get<2>(all_chars_data);
     std::array<char, total_chars> result_chars;
@@ -588,10 +589,11 @@ constexpr auto casefolded_song_names_tuple = [] {
 consteval std::vector<Song> generate_songs()
 {
     auto res = util::merge_casefolded_fields_from_tuple<Song, generate_songs_incomplete,
-                                                        2, 3,
+                                                        2, 4,
                                                         &Song::cf_jp_name,
                                                         &Song::cf_romanji_name,
-                                                        &Song::cf_name>(casefolded_song_names_tuple);
+                                                        &Song::cf_name,
+                                                        &Song::cf_producer>(casefolded_song_names_tuple);
     std::ranges::stable_sort(res, {}, &Song::cf_name);
     return res;
 }
