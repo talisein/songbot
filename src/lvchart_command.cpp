@@ -57,7 +57,9 @@ dpp::slashcommand
 lvchart_command::get_command()
 {
     auto lvchart_cmd = iface_command::get_command();
+    auto only_new_opt = dpp::command_option(dpp::command_option_type::co_boolean, "only_new", "Only show songs released last week", false);
 
+    lvchart_cmd.add_option(std::move(only_new_opt));
     return lvchart_cmd;
 }
 
@@ -70,6 +72,8 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
     constexpr auto step = 25UZ;
     const auto next_key = ctx->keygen();
     const auto prev_key = ctx->keygen();
+    const auto only_new_param = event.get_parameter("only_new");
+    const bool only_new = std::holds_alternative<bool>(only_new_param) && std::get<bool>(only_new_param);
 
     std::ostringstream ss;
     std::string user_locale_str = event.command.locale;
@@ -89,6 +93,7 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
     const auto chart = json::parse(localvoid::charts.back());
     const auto songs = chart["songs"];
     const auto is_not_out = [](const auto& song) -> bool { return !song["isOut"].template get<bool>(); };
+    const auto passes_new_filter = [only_new](const auto& song) -> bool { return (!only_new) || song["isNew"].template get<bool>(); };
     const size_t total_in_songs = std::ranges::distance(std::views::filter(songs, is_not_out));
     const ssize_t max_view_width = std::format(l, "{:+Ld}", std::views::filter(songs, is_not_out).begin()->at("viewIncrease").template get<ssize_t>()).size();
 
@@ -115,7 +120,11 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
       ss.clear();
       const auto ymd = sheetname_to_ymw(chart);
       std::println(ss, "## [Localvoid](https://lvchart.com)'s Vocaloid Song Chart for {:%B} {:%Y} (Week {})", ymd, ymd, ymd.index());
-      for (const auto& song : std::views::filter(songs, is_not_out) | std::views::drop(start_idx) | std::views::take(step)) {
+      for (const auto& song : std::views::filter(songs, is_not_out) |
+                              std::views::filter(passes_new_filter) |
+                              std::views::drop(start_idx) |
+                              std::views::take(step))
+      {
         auto rank           = song["rank"].template get<int>();
         auto views          = song["viewIncrease"].template get<std::int64_t>();
         auto title          = song["title"].template get<std::string>();
@@ -123,7 +132,8 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
         auto english_title  = song["englishTitle"].template get<std::string>();
         auto english_artist = song["englishArtist"].template get<std::string>();
         auto artist         = song["artist"].template get<std::string>();
-        std::print(ss, "{}. `{:+{}Ld}` [", rank, views, max_view_width);
+        auto is_new         = song["isNew"].template get<bool>();
+        std::print(ss, "- {}. `{:+{}Ld}` [", rank, views, max_view_width);
         if (!english_title.empty()) {
           std::print(ss, "{}", english_title);
         } else {
@@ -134,6 +144,9 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
           std::print(ss, "{}", english_artist);
         } else {
           std::print(ss, "{}", artist);
+        }
+        if (is_new) {
+          std::print(ss, " **(NEW!)**");
         }
         ss << '\n';
       }
