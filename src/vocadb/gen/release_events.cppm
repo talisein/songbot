@@ -4619,6 +4619,60 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_9811;
 
 constexpr picture picture_release_event_9811 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/9811.jpg?v=2)XYX"sv, release_event_pic_orig_9811, release_event_mime_type_orig_9811, release_event_file_ext_orig_9811, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/9811.jpg?v=2)XYX"sv, release_event_pic_small_thumb_9811, release_event_mime_type_small_thumb_9811, release_event_file_ext_small_thumb_9811, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/9811.jpg?v=2)XYX"sv, release_event_pic_thumb_9811, release_event_mime_type_thumb_9811, release_event_file_ext_thumb_9811, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/9811.jpg?v=2)XYX"sv, release_event_pic_tiny_thumb_9811, release_event_mime_type_tiny_thumb_9811, release_event_file_ext_tiny_thumb_9811  };
 
+constexpr std::array<additional_name, 2> names_release_event_12251 {{
+  {"Japanese"sv, R"XYX(初音ミク「マジカルミライ 2026」in TOKYO)XYX"sv},
+  {"English"sv, R"XYX(Hatsune Miku "Magical Mirai 2026" in TOKYO)XYX"sv},
+}};
+
+constexpr std::array<web_link, 1> web_links_release_event_12251 {{
+  {"Other"sv, R"XYX(Website)XYX"sv, R"XYX(https://magicalmirai.com/2026/)XYX"sv, 13747 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_12251") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_12251 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_12251"
+});
+constexpr std::string_view release_event_mime_type_orig_12251 = "image/png";
+constexpr std::string_view release_event_file_ext_orig_12251 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_12251;
+constexpr std::string_view release_event_mime_type_orig_12251 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_12251;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_12251") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_12251 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_12251"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_12251 = "image/png";
+constexpr std::string_view release_event_file_ext_small_thumb_12251 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_12251;
+constexpr std::string_view release_event_mime_type_small_thumb_12251 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_12251;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_12251;
+constexpr std::string_view release_event_mime_type_thumb_12251 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_12251;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_12251") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_12251 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_12251"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_12251 = "image/png";
+constexpr std::string_view release_event_file_ext_tiny_thumb_12251 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_12251;
+constexpr std::string_view release_event_mime_type_tiny_thumb_12251 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_12251;
+#endif
+
+constexpr picture picture_release_event_12251 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/12251.png?v=6)XYX"sv, release_event_pic_orig_12251, release_event_mime_type_orig_12251, release_event_file_ext_orig_12251, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/12251.png?v=6)XYX"sv, release_event_pic_small_thumb_12251, release_event_mime_type_small_thumb_12251, release_event_file_ext_small_thumb_12251, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/12251.png?v=6)XYX"sv, release_event_pic_thumb_12251, release_event_mime_type_thumb_12251, release_event_file_ext_thumb_12251, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/12251.png?v=6)XYX"sv, release_event_pic_tiny_thumb_12251, release_event_mime_type_tiny_thumb_12251, release_event_file_ext_tiny_thumb_12251  };
+
 constexpr std::array<additional_name, 2> names_release_event_12222 {{
   {"English"sv, R"XYX(MIKU EXPO 2026 London)XYX"sv},
   {"Unspecified"sv, R"XYX(HATSUNE MIKU EXPO 2026 London)XYX"sv},
@@ -4683,7 +4737,7 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_12222;
 
 constexpr picture picture_release_event_12222 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/12222.jpg?v=7)XYX"sv, release_event_pic_orig_12222, release_event_mime_type_orig_12222, release_event_file_ext_orig_12222, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/12222.jpg?v=7)XYX"sv, release_event_pic_small_thumb_12222, release_event_mime_type_small_thumb_12222, release_event_file_ext_small_thumb_12222, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/12222.jpg?v=7)XYX"sv, release_event_pic_thumb_12222, release_event_mime_type_thumb_12222, release_event_file_ext_thumb_12222, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/12222.jpg?v=7)XYX"sv, release_event_pic_tiny_thumb_12222, release_event_mime_type_tiny_thumb_12222, release_event_file_ext_tiny_thumb_12222  };
 
-export constexpr std::array<release_event, 71> events {{
+export constexpr std::array<release_event, 72> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
 
 **Concert Schedule**:
@@ -5156,6 +5210,17 @@ Art by [Tiv](https://vocadb.net/Ar/161497))XYX"sv, 2025y/8/3, 8768, picture_rele
   {R"XYX(デコミク LIVE starring 初音ミク 『Hello』Produced by DECO*27 / OTOIRO, DECOMiku LIVE starring Hatsune Miku 『Hello』Produced by DECO*27 / OTOIRO, デコミク LIVE starring 初音ミク 『Hello』, DECOMiku LIVE starring Hatsune Miku  『Hello』)XYX"sv, "Concert"sv, 2026y/2/14, std::nullopt, std::nullopt, 9401, picture_release_event_9401, R"XYX(Hello)XYX"sv, names_release_event_9401, std::nullopt, 0, std::nullopt, 24530, R"(デコミク LIVE starring 初音ミク 『Hello』)", "Finished"sv, R"XYX(hello)XYX"sv, R"XYX(国立代々木競技場第一体育館)XYX"sv, web_links_release_event_9401 },
   {R"XYX(ポケモン feat. 初音ミク VOLTAGE Live！, Pokemon feat. Hatsune Miku VOLTAGE Live!)XYX"sv, "Concert"sv, 2026y/3/20, std::nullopt, 2026y/3/22, 9613, picture_release_event_9613, R"XYX(VOLTAGE Live!)XYX"sv, names_release_event_9613, std::nullopt, 0, std::nullopt, std::nullopt, std::nullopt, "Draft"sv, R"XYX(voltage-live)XYX"sv, R"XYX(LaLa arena TOKYO-BAY)XYX"sv, web_links_release_event_9613 },
   {R"XYX(HATSUNE MIKU EXPO 2026 Chicago)XYX"sv, "Unspecified"sv, 2026y/4/12, std::nullopt, 2026y/4/13, 9811, picture_release_event_9811, R"XYX(MIKU EXPO 2026 Chicago)XYX"sv, names_release_event_9811, 82, 2026, R"XYX(Chicago)XYX"sv, std::nullopt, std::nullopt, "Draft"sv, R"XYX(miku-expo-2026-chicago)XYX"sv, R"XYX(The Auditorium Theatre)XYX"sv, web_links_release_event_9811 },
+  {R"XYX(初音ミク「マジカルミライ 2026」in TOKYO)XYX"sv, "Unspecified"sv, 2026y/8/28, R"XYX(Magical Mirai 2026’s theme is “Sonare of the Lake”.
+
+**Live Show**:
+Makuhari Messe International Exhibition Hall 9
+August 28th(Fri.) - August 30th(Sun.)
+
+**Exhibition**:
+Makuhari Messe International Exhibition Hall 1・2・3
+August 28th(Fri.) - August 30th(Sun.)
+
+Art by [緜](https://vocadb.net/Ar/186084).)XYX"sv, 2026y/8/30, 12251, picture_release_event_12251, R"XYX(Hatsune Miku "Magical Mirai 2026" in TOKYO)XYX"sv, names_release_event_12251, 81, 2026, R"XYX(TOKYO)XYX"sv, std::nullopt, std::nullopt, "Draft"sv, R"XYX(hatsune-miku-magical-mirai-202)XYX"sv, std::nullopt, web_links_release_event_12251 },
   {R"XYX(HATSUNE MIKU EXPO 2026 London)XYX"sv, "Unspecified"sv, 2026y/11/12, R"XYX(Illustration by [鈴ノ助](https://vocadb.net/Ar/2123))XYX"sv, std::nullopt, 12222, picture_release_event_12222, R"XYX(MIKU EXPO 2026 London)XYX"sv, names_release_event_12222, 82, 2026, R"XYX(London)XYX"sv, std::nullopt, std::nullopt, "Finished"sv, R"XYX(miku-expo-2026-london)XYX"sv, R"XYX(The O2)XYX"sv, web_links_release_event_12222 },
 }};
 
