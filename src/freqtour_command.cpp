@@ -27,6 +27,7 @@ import magic_enum;
 #include "freqtour_command.hpp"
 #include "context.hpp"
 #include "formatters.hpp"
+#include "paged_widget.hpp"
 
 freqtour_command::freqtour_command(context &ctx) noexcept :
     iface_command(ctx, "freqtour", "List the most frequent live songs for a concert series")
@@ -57,11 +58,6 @@ dpp::task<std::expected<void, std::error_code>>
 freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
 {
     using namespace std::literals;
-    auto start_idx = 0UZ;
-    constexpr auto step = 25UZ;
-    const auto next_key = ctx->keygen();
-    const auto prev_key = ctx->keygen();
-
     constexpr auto freqs_for_series = [](ConcertSeries series) constexpr -> std::span<const song_frequency, std::dynamic_extent> {
       switch (series) {
         case MIKU_EXPO: return song_frequencies_expo;
@@ -104,78 +100,21 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
       co_return std::unexpected(songbot_error::no_match);
     }
 
-    auto make_msg = [&] (bool include_buttons) {
-      auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral).suppress_embeds(true);
-      auto action_row = dpp::component().set_type(dpp::cot_action_row);
-      if (start_idx > 0) {
-        auto prev_button = dpp::component().set_type(dpp::cot_button)
-          .set_style(dpp::cos_primary)
-          .set_label(std::format("Prev {}", step))
-          .set_id(prev_key);
-        action_row.add_component_v2(prev_button);
-      }
-      if ((start_idx + step) < queried_frequencies.size()) {
-        auto next_button = dpp::component().set_type(dpp::cot_button)
-          .set_style(dpp::cos_primary)
-          .set_label(std::format("Next {}", step))
-          .set_id(next_key);
-        action_row.add_component_v2(next_button);
-      }
-
-      auto text = dpp::component().set_type(dpp::cot_text_display);
-      std::ostringstream ss;
-      std::println(ss, "# Song Frequency for Tour Series {}", magic_enum::enum_name(series));
-      for (auto const [idx, song_freq] : std::views::enumerate(queried_frequencies) | std::views::drop(start_idx) | std::views::take(step)) {
-        auto song = lookup_song(song_freq.song_name, song_freq.producer);
-        if (song) {
-          std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, *song);
-        } else {
-          std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, song_freq.song_name); // FIXME: METEOR & Meteor
+    constexpr size_t step = 25;
+    auto make_page = [&](size_t start_idx) -> std::string {
+        std::ostringstream ss;
+        std::println(ss, "# Song Frequency for Tour Series {}", magic_enum::enum_name(series));
+        for (auto const [idx, song_freq] : std::views::enumerate(queried_frequencies)
+                                         | std::views::drop(start_idx)
+                                         | std::views::take(step)) {
+            auto song = lookup_song(song_freq.song_name, song_freq.producer);
+            if (song) std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, *song);
+            else       std::println(ss, "{}. `{:2d}x` {}", idx + 1, song_freq.count, song_freq.song_name); // FIXME: METEOR & Meteor
         }
-      }
-      text.set_content(ss.str());
-      msg.add_component_v2(text);
-      if (include_buttons) {
-        msg.add_component_v2(action_row);
-      }
-
-      return msg;
+        return ss.str();
     };
-
-    if (auto e = co_await util::reply_handler_new(event.co_reply(make_msg(true)), ctx, nullptr, freqtour_failure_counter); !e.has_value())
-    {
-      co_return e;
-    }
-
-
-    do {
-      auto when_any_result = co_await dpp::when_any{
-        event.owner->co_sleep(5 * 60), // 5 minutes
-        event.owner->on_button_click.when([next_key, prev_key](const auto& click) {
-          return click.custom_id == next_key || click.custom_id == prev_key;})};
-      if (when_any_result.index() == 0) {
-        // 5 min Timeout
-        co_return co_await util::reply_handler_new(event.co_edit_original_response(make_msg(false)), ctx, freqtour_success_counter, freqtour_failure_counter);
-      } else {
-        const auto &click_event = when_any_result.get<1>();
-        if (click_event.custom_id == next_key) {
-          start_idx = std::add_sat(start_idx, step);
-          start_idx = std::clamp(start_idx, 0UZ, std::sub_sat(queried_frequencies.size(), 1UZ));
-        } else if (click_event.custom_id == prev_key) {
-          start_idx = std::sub_sat(start_idx, step);
-        }
-
-
-        if (auto expected = co_await util::reply_handler_new(click_event.co_reply(dpp::ir_deferred_update_message, dpp::message{}), ctx, nullptr, freqtour_failure_counter); !expected) {
-          co_return expected;
-        }
-        if (auto expected = co_await util::reply_handler_new(event.co_edit_original_response(make_msg(true)), ctx, nullptr, freqtour_failure_counter); !expected) {
-          co_return expected;
-        }
-      }
-    } while (true);
-
-    co_return {};
+    co_return co_await run_paged_widget(event, ctx, queried_frequencies.size(), step, make_page,
+                                        freqtour_success_counter, freqtour_failure_counter);
 }
 
 std::expected<dpp::interaction_response, std::error_code>
