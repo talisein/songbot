@@ -111,13 +111,19 @@ dpp::task<std::expected<void, std::error_code>>
 setlist_command::reply_multimessage(const dpp::slashcommand_t& event,
                                         const Concert& concert)
 {
-    const auto reveal_click_key = std::make_optional<std::string>(ctx->keygen());
+    const auto reveal_click_key = can_post_setlist_publicly(event, *ctx)
+        ? std::make_optional<std::string>(ctx->keygen())
+        : std::nullopt;
     auto headers = get_header_lines(concert);
     auto body_lines = get_setlist_lines(concert);
 
     auto first_msgs = setlist_message::build_messages(concert, headers, body_lines, true, reveal_click_key);
     if (auto res = co_await reply_and_followup(event, first_msgs, ctx); !res) {
         co_return res;
+    }
+
+    if (!reveal_click_key) {
+        co_return {};
     }
 
     /* Wait for button click or expiration */

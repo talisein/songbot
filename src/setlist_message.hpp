@@ -25,6 +25,7 @@ import concerts;
 class context;
 
 std::vector<std::string> get_header_lines(const Concert& concert);
+bool can_post_setlist_publicly(const dpp::slashcommand_t& event, const context& ctx);
 
 /* Builder for a setlist Discord reply. Inherits dpp::component (the body
  * cot_container) and tracks character count so build_messages() can split

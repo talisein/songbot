@@ -28,6 +28,22 @@ namespace {
     constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
 }
 
+bool
+can_post_setlist_publicly(const dpp::slashcommand_t& event, const context& ctx)
+{
+    if (ctx.config.owner_id && event.command.usr.id == *ctx.config.owner_id) {
+        return true;
+    }
+    if (!event.command.guild_id) {
+        return true;
+    }
+    auto it = event.command.resolved.member_permissions.find(event.command.usr.id);
+    if (it == event.command.resolved.member_permissions.end()) {
+        return false;
+    }
+    return static_cast<bool>(it->second & dpp::p_pin_messages);
+}
+
 std::vector<std::string>
 get_header_lines(const Concert& concert)
 {
