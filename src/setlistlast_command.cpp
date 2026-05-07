@@ -24,12 +24,11 @@ import songbot.errors;
 import uni_algo;
 
 #include "setlistlast_command.hpp"
+#include "setlist_message.hpp"
 #include "context.hpp"
 #include "formatters.hpp"
 
 namespace {
-    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
-
     static std::vector<std::string>
     get_setlistlast_lines(const Concert& concert)
     {
@@ -100,82 +99,6 @@ namespace {
 
         return lines;
     }
-
-    /* Takes lines and concats them in a a big string less than DISCORD_REPLY_LIMIT */
-    static std::vector<std::string>
-    get_setlist_chunks(const Concert &concert, size_t header_size)
-    {
-        std::vector<std::string> messages;
-        std::ostringstream reply;
-        for (const auto& line : get_setlistlast_lines(concert))
-        {
-            if ((reply.view().size() + line.size() + header_size) >= DISCORD_REPLY_LIMIT) {
-                messages.emplace_back(reply.view());
-                reply.str(std::string());
-                reply << line;
-                header_size = 0;
-            } else {
-                reply << line;
-            }
-        }
-
-        if (reply.view().size() > 0) {
-            messages.emplace_back(reply.view());
-        }
-
-        return messages;
-    }
-
-    static std::vector<std::string>
-    get_header_lines(const Concert& concert)
-    {
-        std::vector<std::string> headers;
-        headers.push_back(std::format("## {}", concert.name));
-        if (concert.last_date) {
-            if (concert.date.year() != concert.last_date->year()) {
-                headers.push_back(std::format("{:%A, %e %B %Y} – {:%A, %e %B %Y}", concert.date, *concert.last_date));
-            } else if (concert.date.month() != concert.last_date->month()) {
-                headers.push_back(std::format("{:%A, %b %e} – {:%A, %b %e %Y}", concert.date, *concert.last_date));
-            } else {
-                headers.push_back(std::format("{:%B %e (%a)}–{:%e (%a) %Y}", concert.date, *concert.last_date));
-            }
-        } else {
-            headers.push_back(std::format("{:%A, %e %B %Y}", concert.date));
-        }
-        if (auto it = std::ranges::find(vocadb::events, concert.vocadb_event_id, &decltype(vocadb::events)::value_type::id);
-            it != std::ranges::end(vocadb::events))
-        {
-            using namespace std::literals;
-            std::vector<std::string> links;
-            const auto is_official_weblink = [](const auto &link) static -> bool {
-	      return link.description.has_value() && link.url.has_value() && (
-		    0 == una::caseless::compare_utf8("Website (EN)"sv, *link.description) ||
-                    0 == una::caseless::compare_utf8("Website"sv, *link.description) ||
-                    0 == una::caseless::compare_utf8("Official website"sv, *link.description) ||
-                    0 == una::caseless::compare_utf8("mikuexpo.com"sv, *link.description) ||
-                    0 == una::caseless::compare_utf8("Official Page"sv, *link.description) ||
-                    0 == una::caseless::compare_utf8("Official Webpage"sv, *link.description));
-            };
-            for (const auto &link : std::views::filter(it->web_links, is_official_weblink) | std::views::take(1))
-            {
-                links.push_back(std::format("[Offical Website]({})", *link.url));
-            }
-            links.push_back(std::format("[VocaDB](https://vocadb.net/E/{}/{})", it->id, it->url_slug));
-            const auto is_vocawiki_weblink = [](const auto &link) static -> bool {
-	      return link.url.has_value() && (
-		    una::caseless::find_utf8(*link.url, "vocaloid.wikia.com"sv) ||
-                    una::caseless::find_utf8(*link.url, "vocaloid.fandom.com"sv));
-            };
-            for (const auto &link : std::views::filter(it->web_links, is_vocawiki_weblink) | std::views::take(1))
-            {
-                links.push_back(std::format("[VocaWiki]({})", *link.url));
-            }
-            headers.push_back(std::format("-# {}", std::views::join_with(links, " — "sv) | std::ranges::to<std::string>()));
-        }
-
-        return headers;
-    }
-
 }
 
 setlistlast_command::setlistlast_command(context &ctx) noexcept :
@@ -205,138 +128,16 @@ setlistlast_command::get_command()
     return setlistlast_cmd;
 }
 
-namespace {
-    [[nodiscard]] dpp::component
-    make_gui_header(const Concert& concert,
-                    std::ranges::range auto&& header_content,
-                    dpp::message& message)
-    {
-        auto section = dpp::component().set_type(dpp::cot_section);
-        for (const auto& header : header_content) {
-            auto widget = dpp::component().set_type(dpp::cot_text_display)
-                .set_content(header);
-            section.add_component_v2(widget);
-        }
-
-        if (concert.vocadb_event_id) {
-            auto it = std::ranges::find_if(vocadb::events, [id = concert.vocadb_event_id](const auto &event) {
-                return event.id == id;
-            });
-            if (it != std::ranges::end(vocadb::events) &&
-                it->main_picture.original &&
-                it->main_picture.original->size() > 0)
-            {
-                using namespace std::literals;
-                std::string_view data{reinterpret_cast<const char *>(it->main_picture.original->data()), it->main_picture.original->size_bytes()};
-                std::string filename = std::format("{}.{}", it->id, it->main_picture.original_file_ext.size() > 0 ? it->main_picture.original_file_ext : "jpg"sv);
-                auto mime = it->main_picture.original_mime_type;
-                if (mime.size() == 0 && it->main_picture.mime) {
-                    mime = it->main_picture.mime.value();
-                }
-                message.add_file(filename, data, mime);
-                section.set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail(std::format("attachment://{}", filename)));
-            }
-        }
-
-        return section;
-    }
-
-
-    [[nodiscard]] dpp::message
-    make_reveal_gui(const std::string& message,
-                    std::ranges::range auto&& header_content,
-                    const Concert& concert,
-                    bool use_ephemeral,
-                    std::optional<std::string> reveal_button_id)
-    {
-        const auto flags      = dpp::message_flags::m_using_components_v2 | (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
-        auto real_msg         = dpp::message().set_flags(flags);
-        auto bottom_container = dpp::component().set_type(dpp::cot_container);
-        bottom_container.set_accent(dpp::utility::rgb(134,206,203));
-
-        /* Button row */
-        if (reveal_button_id.has_value()) {
-            auto action_row = dpp::component().set_type(dpp::cot_action_row);
-            auto button     = dpp::component().set_type(dpp::cot_button)
-                              .set_style(dpp::cos_primary)
-                              .set_label("Post Publicly")
-                              .set_id(reveal_button_id.value());
-            action_row.add_component_v2(button);
-            real_msg.add_component_v2(action_row);
-        }
-
-        /* header / thumbnail */
-        if (!std::ranges::empty(header_content)) {
-            auto section = make_gui_header(concert, header_content, real_msg);
-            real_msg.add_component_v2(section);
-        }
-
-        /* Actual setlist content */
-        using namespace std::literals;
-        bool is_spoiler = (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert.last_date.value_or(concert.date))) < (36h);
-        if (is_spoiler) {
-            bottom_container.set_spoiler(true);
-            real_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist Spoilers Below:"));
-        }
-        auto text_display_1 = dpp::component().set_type(dpp::cot_text_display)
-                                              .set_content(message);
-        bottom_container.add_component_v2(text_display_1);
-        real_msg.add_component_v2(bottom_container);
-        return real_msg;
-    }
-
-    template<typename Event>
-    dpp::task<std::expected<void, std::error_code>>
-    reply_and_followup(const Event& event, std::ranges::forward_range auto&& rng, context *ctx)
-        requires std::same_as<std::ranges::range_value_t<decltype(rng)>, dpp::message>
-    {
-
-        if (auto e = co_await util::reply_handler_new(event.co_reply(*std::ranges::begin(rng)), ctx, nullptr, nullptr);
-            !e.has_value())
-        {
-          co_return e;
-        }
-
-        for (const auto& msg : rng | std::views::drop(1))
-        {
-            auto e = co_await util::reply_handler_new(event.co_follow_up(msg), ctx, nullptr, nullptr);
-            if (!e.has_value()) {
-              co_return e;
-            }
-        }
-
-        co_return {};
-    }
-
-    auto
-    make_gui_messages(const Concert& concert, std::ranges::forward_range auto& headers, std::ranges::forward_range auto& setlist_chunks, bool use_emphemeral, const std::optional<std::string>& reveal_button_key)
-    {
-        return std::views::concat(setlist_chunks | std::views::take(1) |
-                                  std::views::transform([=, &headers](const auto &msg) {
-                                      return make_reveal_gui(msg, headers,
-                                                             concert, use_emphemeral, reveal_button_key); }),
-                                  setlist_chunks | std::views::drop(1) |
-                                  std::views::transform([=](const auto &msg) {
-                                      return make_reveal_gui(msg, std::views::empty<std::string>,
-                                                             concert, use_emphemeral, std::nullopt); }));
-    }
-}
-
-
-/* Takes a generator that produces multiple lines. It constructs a sequence
- * dpp::messages, each less than the reply limit and sends it off using the make_reveal_gui() */
-
 dpp::task<std::expected<void, std::error_code>>
 setlistlast_command::reply_multimessage(const dpp::slashcommand_t& event,
                                         const Concert& concert)
 {
     const auto reveal_click_key = std::make_optional<std::string>(ctx->keygen());
     auto headers = get_header_lines(concert);
-    const auto header_size = std::ranges::fold_left(std::views::transform(headers, &std::string::size), 0UZ, std::plus<size_t>());
-    auto setlist_chunks = get_setlist_chunks(concert, header_size);
+    auto body_lines = get_setlistlast_lines(concert);
 
-    auto first_gui_msgs = make_gui_messages(concert, headers, setlist_chunks, true, reveal_click_key);
-    if (auto res = co_await reply_and_followup(event, std::move(first_gui_msgs), ctx); !res) {
+    auto first_msgs = setlist_message::build_messages(concert, headers, body_lines, true, reveal_click_key);
+    if (auto res = co_await reply_and_followup(event, first_msgs, ctx); !res) {
         co_return res;
     }
 
@@ -350,18 +151,18 @@ setlistlast_command::reply_multimessage(const dpp::slashcommand_t& event,
         when_any_result.index() == 0)
     { // Button clicked
         const dpp::button_click_t click_event = when_any_result.get<0>();
-        auto reveal_gui_msgs = make_gui_messages(concert, headers, setlist_chunks, false, std::nullopt);
-        if (auto res = co_await reply_and_followup(click_event, reveal_gui_msgs, ctx); !res) {
+        auto reveal_msgs = setlist_message::build_messages(concert, headers, body_lines, false, std::nullopt);
+        if (auto res = co_await reply_and_followup(click_event, reveal_msgs, ctx); !res) {
             setlistlast_reveal_failure_counter->Increment();
             co_return res;
         }
-        setlistlast_reveal_success_counter->Increment();
+
         auto success_msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
         success_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
         co_return co_await util::reply_handler_new(event.co_edit_original_response(success_msg), ctx, setlistlast_reveal_success_counter, setlistlast_reveal_failure_counter);
     } else { // Button expiring. Just replace the first message.
-        auto expired_gui_msgs = make_gui_messages(concert, headers, setlist_chunks, true, std::nullopt);
-        co_return co_await util::reply_handler_new(event.co_edit_original_response(*std::ranges::begin(expired_gui_msgs)), ctx, setlistlast_reveal_success_counter, setlistlast_reveal_failure_counter);
+        auto expired_msgs = setlist_message::build_messages(concert, headers, body_lines, true, std::nullopt);
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(*std::ranges::begin(expired_msgs)), ctx, setlistlast_reveal_success_counter, setlistlast_reveal_failure_counter);
     }
 
     co_return {};
