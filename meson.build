@@ -60,7 +60,14 @@ module_conf_data.set('PROMETHEUS_CORE_INCLUDEDIR', prometheus_core_inc)
 prometheus_pull_inc = prometheus_pull_dep.get_variable('includedir', default_value: '@0@/subprojects/prometheus-cpp-with-submodules/pull/include'.format(meson.project_source_root()))
 module_conf_data.set('PROMETHEUS_PULL_INCLUDEDIR', prometheus_pull_inc)
 
-dpp_includedir = dpp_dep.get_variable('includedir', default_value: '@0@/subprojects/DPP-1a0260a6a342c22f32c1f435387214a4a7175463/include'.format(meson.project_source_root()))
+_python3 = find_program('python3', required: true)
+_dpp_wrap_dir = run_command(
+    _python3, '-c',
+    'import configparser; c = configparser.ConfigParser(); c.read("@0@"); print(c["wrap-file"]["directory"])'.format(
+        meson.project_source_root() / 'subprojects' / 'dpp.wrap'),
+    check: true
+).stdout().strip()
+dpp_includedir = meson.project_source_root() / 'subprojects' / _dpp_wrap_dir / 'include'
 module_conf_data.set('DPP_INCLUDEDIR', dpp_includedir)
 
 module_mapper_file = configure_file(input: 'module.mapper.in',
