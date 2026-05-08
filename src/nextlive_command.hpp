@@ -23,15 +23,6 @@ import std;
 
 #include "iface_command.hpp"
 
-struct live_event
-{
-  ConcertTour tour;
-  std::uint64_t vocadb_id;
-  std::chrono::zoned_seconds start_time;
-  std::string_view location_name;
-  std::string_view location_link;
-};
-
 class nextlive_command : public iface_command
 {
 public:
@@ -44,7 +35,4 @@ public:
 
     prometheus::Counter* nextlive_success_counter;
     prometheus::Counter* nextlive_failure_counter;
-
-private:
-    std::vector<live_event> events;
 };
