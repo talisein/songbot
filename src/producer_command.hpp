@@ -39,6 +39,8 @@ private:
 
     prometheus::Counter* producer_success_counter;
     prometheus::Counter* producer_failure_counter;
+    prometheus::Counter* producer_reveal_success_counter;
+    prometheus::Counter* producer_reveal_failure_counter;
 
     prometheus::Counter* ac_producer_success_counter;
     prometheus::Counter* ac_producer_no_match_counter;

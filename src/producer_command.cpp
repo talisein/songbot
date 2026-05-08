@@ -23,6 +23,7 @@ import vocadb.api;
 import vocadb.songs;
 
 #include "producer_command.hpp"
+#include "setlist_message.hpp"
 #include "context.hpp"
 #include "formatters.hpp"
 
@@ -110,8 +111,10 @@ namespace
 producer_command::producer_command(context &ctx) noexcept :
     iface_command(ctx, "producer", "Show songs for a VocaDB producer")
 {
-    producer_success_counter = &ctx.slashcommand_counter->Add({{"command", "producer"}, {"result", "success"}});
-    producer_failure_counter = &ctx.slashcommand_counter->Add({{"command", "producer"}, {"result", "failure"}});
+    producer_success_counter = &ctx.slashcommand_counter->Add({{"command", "producer"}, {"result", "success"}, {"visibility", "ephemeral"}});
+    producer_failure_counter = &ctx.slashcommand_counter->Add({{"command", "producer"}, {"result", "failure"}, {"visibility", "ephemeral"}});
+    producer_reveal_success_counter = &ctx.slashcommand_counter->Add({{"command", "producer"}, {"result", "success"}, {"visibility", "public"}});
+    producer_reveal_failure_counter = &ctx.slashcommand_counter->Add({{"command", "producer"}, {"result", "failure"}, {"visibility", "public"}});
 
     ac_producer_success_counter = &ctx.autocompletion_counter->Add({{"event", "producer"}, {"result", "success"}});
     ac_producer_no_match_counter = &ctx.autocompletion_counter->Add({{"event", "producer"}, {"result", "no-match"}});
@@ -183,36 +186,109 @@ producer_command::on_slashcommand(const dpp::slashcommand_t event)
         | std::ranges::to<std::vector>();
     std::ranges::sort(song_list, {}, &Song::name);
 
-    std::ostringstream ss;
-    std::print(ss, "**{}**", artist->name.value_or("(unknown)"));
-    std::print(ss, " | [VocaDB](https://vocadb.net/Ar/{})\n", artist->id);
-    if (artist->additional_names.has_value() && !artist->additional_names->empty()) {
-        std::print(ss, "-# {}\n", *artist->additional_names);
+    std::string header;
+    {
+        std::ostringstream ss;
+        std::print(ss, "**{}**", artist->name.value_or("(unknown)"));
+        std::print(ss, " | [VocaDB](https://vocadb.net/Ar/{})\n", artist->id);
+        if (artist->additional_names.has_value() && !artist->additional_names->empty()) {
+            std::print(ss, "-# {}\n", *artist->additional_names);
+        }
+        header = ss.str();
     }
 
+    std::vector<std::string> body_lines;
     if (song_list.empty()) {
-        ss << "\nNo songs in the concert database.";
+        body_lines.emplace_back("\nNo songs in the concert database.");
     } else {
-        constexpr auto MAX_SONGS = 30Z;
-        std::print(ss, "{} Live Songs:\n", song_list.size());
-        for (const auto& song : song_list | std::views::take(MAX_SONGS)) {
+        body_lines.push_back(std::format("{} Live Songs:\n", song_list.size()));
+        for (const auto& song : song_list) {
             auto role = artist_role_in_song(*song.vocadb_id, artist->id);
             if (role.empty() || role == "Default"sv) {
-                std::print(ss, "- {}\n", song);
+                body_lines.push_back(std::format("- {}\n", song));
             } else {
-                std::print(ss, "- {} *({})*\n", song, role);
+                body_lines.push_back(std::format("- {} *({})*\n", song, role));
             }
-        }
-        if (std::cmp_greater(song_list.size(), MAX_SONGS)) {
-            std::print(ss, "-# ...and {} more", song_list.size() - MAX_SONGS);
         }
     }
 
-    auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2).suppress_embeds(true);
-    auto text = dpp::component().set_type(dpp::cot_text_display).set_content(ss.str());
-    msg.add_component_v2(text);
+    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
 
-    co_return co_await util::reply_handler_new(event.co_reply(msg), ctx, producer_success_counter, producer_failure_counter);
+    auto build_msgs = [&](bool ephemeral, const std::optional<std::string>& button_key) {
+        std::vector<std::string> chunks;
+        std::ostringstream current;
+        size_t current_header_size = header.size();
+        for (const auto& line : body_lines) {
+            if (current.view().size() + line.size() + current_header_size >= DISCORD_REPLY_LIMIT) {
+                if (!current.view().empty()) {
+                    chunks.emplace_back(current.view());
+                    current.str({});
+                }
+                current_header_size = 0;
+            }
+            current << line;
+        }
+        if (!current.view().empty()) chunks.emplace_back(current.view());
+        if (chunks.empty()) chunks.emplace_back("");
+
+        const auto flags = dpp::message_flags::m_using_components_v2 |
+                           (ephemeral ? dpp::message_flags::m_ephemeral : 0);
+        std::vector<dpp::message> result;
+        result.reserve(chunks.size());
+        for (size_t i = 0; i < chunks.size(); ++i) {
+            auto msg = dpp::message().set_flags(flags).suppress_embeds(true);
+            if (i == 0 && button_key) {
+                auto action_row = dpp::component().set_type(dpp::cot_action_row);
+                action_row.add_component_v2(dpp::component().set_type(dpp::cot_button)
+                    .set_style(dpp::cos_primary)
+                    .set_label("Post Publicly")
+                    .set_id(*button_key));
+                msg.add_component_v2(action_row);
+            }
+            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display)
+                .set_content(i == 0 ? header + chunks[i] : chunks[i]));
+            result.push_back(std::move(msg));
+        }
+        return result;
+    };
+
+    const auto reveal_click_key = (can_post_setlist_publicly(event, *ctx) || song_list.size() <= 5)
+        ? std::make_optional<std::string>(ctx->keygen())
+        : std::nullopt;
+
+    if (auto res = co_await reply_and_followup(event, build_msgs(true, reveal_click_key), ctx); !res) {
+        producer_failure_counter->Increment();
+        co_return res;
+    }
+    producer_success_counter->Increment();
+
+    if (!reveal_click_key) {
+        co_return {};
+    }
+
+    if (auto when_any_result = co_await dpp::when_any{
+            event.owner->on_button_click.when([key = reveal_click_key](const auto& click) {
+                return click.custom_id == key;
+            }),
+            event.owner->co_sleep(5 * 60)
+        };
+        when_any_result.index() == 0)
+    {
+        const dpp::button_click_t click_event = when_any_result.get<0>();
+        if (auto res = co_await reply_and_followup(click_event, build_msgs(false, std::nullopt), ctx); !res) {
+            producer_reveal_failure_counter->Increment();
+            co_return res;
+        }
+        producer_reveal_success_counter->Increment();
+        auto success_msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
+        success_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Posted to channel!"));
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(success_msg), ctx, producer_reveal_success_counter, producer_reveal_failure_counter);
+    } else {
+        auto expired = build_msgs(true, std::nullopt);
+        co_return co_await util::reply_handler_new(event.co_edit_original_response(*std::ranges::begin(expired)), ctx, producer_success_counter, producer_failure_counter);
+    }
+
+    co_return {};
 }
 
 std::expected<dpp::interaction_response, std::error_code>
