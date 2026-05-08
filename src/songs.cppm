@@ -752,7 +752,8 @@ public:
         }
         out << song.name;
         if (song.vocadb_id) {
-            out << "](https://vocadb.net/S/" << *song.vocadb_id << ')';
+            /* to_string avoids locale-dependent digit grouping in URLs */
+            out << "](https://vocadb.net/S/" << std::to_string(*song.vocadb_id) << ')';
         }
         if (song.singer != NO_VIRTUAL_SINGER) {
             out << " feat. ";
