@@ -1,9 +1,9 @@
 [wrap-file]
-source_url = https://github.com/brainboxdotcc/DPP/archive/1a0260a6a342c22f32c1f435387214a4a7175463.tar.gz
-source_filename = DPP-1a0260a.tar.gz
-source_hash = 08c359aa2e07c44a221d9ea9e6ce60ab0937573f7b99814418f8cad1893e9021
+source_url = https://github.com/brainboxdotcc/DPP/releases/download/v10.1.4/DPP-10.1.4.tar.gz
+source_filename = DPP-10.1.4.tar.gz
+source_hash = f11b6d3fc5cc8febcf672b573ca74293ead6c6ea48a66ac0316ab9a5cbd09441
 method = cmake
-directory = DPP-1a0260a6a342c22f32c1f435387214a4a7175463
+directory = DPP-10.1.4
 
 [provide]
 dpp = dpp_dep
