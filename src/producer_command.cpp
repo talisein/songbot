@@ -18,6 +18,7 @@
 
 import util;
 import songs;
+import concerts;
 import songbot.errors;
 import vocadb.api;
 import vocadb.songs;
@@ -132,6 +133,7 @@ producer_command::get_command()
     auto opt = dpp::command_option(dpp::command_option_type::co_string, "producer", "Name of producer, e.g. DECO*27", true);
     opt.set_auto_complete(true);
     cmd.add_option(std::move(opt));
+    cmd.add_option(dpp::command_option(dpp::co_boolean, "include_last", "Show the last concert each song was played at", false));
     return cmd;
 }
 
@@ -197,18 +199,31 @@ producer_command::on_slashcommand(const dpp::slashcommand_t event)
         header = ss.str();
     }
 
+    bool include_last = false;
+    if (auto v = event.get_parameter("include_last"); std::holds_alternative<bool>(v)) {
+        include_last = std::get<bool>(v);
+    }
+
     std::vector<std::string> body_lines;
     if (song_list.empty()) {
         body_lines.emplace_back("\nNo songs in the concert database.");
     } else {
         body_lines.push_back(std::format("{} Live Songs:\n", song_list.size()));
         for (const auto& song : song_list) {
+            std::string suffix;
             auto role = artist_role_in_song(*song.vocadb_id, artist->id);
-            if (role.empty() || role == "Default"sv) {
-                body_lines.push_back(std::format("- {}\n", song));
-            } else {
-                body_lines.push_back(std::format("- {} *({})*\n", song, role));
+            if (!role.empty() && role != "Default"sv) {
+                suffix += std::format(" *({})*", role);
             }
+            if (include_last) {
+                auto last_rng = std::views::reverse(setlists)
+                    | std::views::filter([&](const auto& track) { return track.song == song.name; })
+                    | std::views::filter(is_past_spoiler_window);
+                if (!std::ranges::empty(last_rng)) {
+                    suffix += std::format(" *Last: {}*", tour_to_string(std::ranges::begin(last_rng)->concert_short_name));
+                }
+            }
+            body_lines.push_back(std::format("- {}{}\n", song, suffix));
         }
     }
 

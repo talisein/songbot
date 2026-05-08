@@ -2435,6 +2435,16 @@ auto get_setlist(auto short_name)
            | std::ranges::to<std::vector>();
 }
 
+export [[nodiscard]] bool
+is_past_spoiler_window(const SetlistTrack& track)
+{
+    constexpr auto spoiler_duration = std::chrono::hours{36};
+    auto concert = lookup_concert(track.concert_short_name);
+    return (std::chrono::system_clock::now() -
+            static_cast<std::chrono::sys_days>(concert->last_date.value_or(concert->date)))
+           > spoiler_duration;
+}
+
 export void
 track_singer_emoji(std::ostream& os, const SetlistTrack& track, const Song& song)
 {

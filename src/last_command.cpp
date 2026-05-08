@@ -32,7 +32,6 @@ namespace
 {
   using namespace std::literals;
   constexpr std::string_view INDEX_PREFIX {"idx:"sv};
-  constexpr auto SPOILER_DURATION { 36h };
 }
 
 last_command::last_command(context &ctx) noexcept :
@@ -128,10 +127,7 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
 
   /* Song is populated now. Find the most recent concert. */
   auto prev_concerts_rng = std::views::filter(std::views::reverse(setlists), util::bind_front<exact_song_track_match>(*song)) |
-    std::views::filter([](const auto& track) {
-      auto concert = lookup_concert(track.concert_short_name);
-      return (std::chrono::system_clock::now() - static_cast<std::chrono::sys_days>(concert->last_date.value_or(concert->date))) > SPOILER_DURATION;
-    });
+    std::views::filter(is_past_spoiler_window);
   if (std::ranges::empty(prev_concerts_rng)) {
     auto msg = dpp::message(std::format("I'm sorry, '{}' isn't in a concert I know about yet.", param)).set_flags(dpp::message_flags::m_ephemeral);
     co_return co_await util::reply_handler_new(event.co_reply(msg), ctx, last_failure_counter, last_failure_counter);
