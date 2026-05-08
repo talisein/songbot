@@ -980,6 +980,35 @@ std::vector<std::tuple<std::int64_t, Song>> match_songs_indexed(std::string_view
 
 }
 
+export [[nodiscard]]
+std::vector<Song> match_producers(std::string_view needle)
+{
+  auto cf_needle = util::to_nfkc_casefold(needle);
+  const auto producer_matches_needle = [needle = cf_needle]
+    (const Song& song) constexpr {
+    return std::ranges::contains_subrange(song.cf_producer, needle);
+  };
+  auto comparitor = [](const Song& a, const Song& b) constexpr { return a.name < b.name; };
+  auto res = songs | std::views::filter(producer_matches_needle) | std::ranges::to<std::set>(comparitor);
+  return std::views::common(res) | std::ranges::to<std::vector>();
+}
+
+export [[nodiscard]]
+std::vector<std::tuple<std::int64_t, Song>> match_producers_indexed(std::string_view needle)
+{
+  auto indexed_songs = std::views::enumerate(songs);
+  auto cf_needle = util::to_nfkc_casefold(needle);
+
+  const auto producer_matches_needle = [needle = cf_needle]
+    (const auto& pair) constexpr {
+    return std::ranges::contains_subrange(std::get<1>(pair).cf_producer, needle);
+  };
+  auto comparitor = [](const auto& a, const auto& b) constexpr { return std::get<0>(a) < std::get<0>(b); };
+  auto res = indexed_songs | std::views::filter(producer_matches_needle) | std::ranges::to<std::set>(comparitor);
+
+  return std::views::common(res) | std::ranges::to<std::vector>();
+}
+
 
 export [[nodiscard]]
 std::string

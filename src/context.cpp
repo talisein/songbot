@@ -27,6 +27,7 @@ import concerts;
 #include "setlistlast_command.hpp"
 #include "song_command.hpp"
 #include "last_command.hpp"
+#include "lastp_command.hpp"
 #include "freq_command.hpp"
 #include "freqtour_command.hpp"
 #include "nextlive_command.hpp"
@@ -219,6 +220,7 @@ context::setup_bot()
 
     commands.emplace("setlist", std::make_unique<setlist_command>(*this));
     commands.emplace("last", std::make_unique<last_command>(*this));
+    commands.emplace("lastp", std::make_unique<lastp_command>(*this));
     commands.emplace("setlistlast", std::make_unique<setlistlast_command>(*this));
     commands.emplace("freq", std::make_unique<freq_command>(*this));
     commands.emplace("freqtour", std::make_unique<freqtour_command>(*this));
