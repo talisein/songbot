@@ -93,11 +93,17 @@ get_header_lines(const Concert& concert)
     return headers;
 }
 
-setlist_message::setlist_message(const Concert& concert)
+bool
+is_concert_spoiler(const Concert& concert)
 {
     using namespace std::literals;
-    is_spoiler = (std::chrono::system_clock::now() -
-                  static_cast<std::chrono::sys_days>(concert.last_date.value_or(concert.date))) < 36h;
+    return (std::chrono::system_clock::now() -
+            static_cast<std::chrono::sys_days>(concert.last_date.value_or(concert.date))) < 36h;
+}
+
+setlist_message::setlist_message(const Concert& concert, bool suppress_spoiler)
+{
+    is_spoiler = !suppress_spoiler && is_concert_spoiler(concert);
     this->set_type(dpp::cot_container);
     this->set_accent(dpp::utility::rgb(134, 206, 203));
     if (is_spoiler) {
@@ -153,7 +159,8 @@ setlist_message::set_body(std::string_view body_text)
 }
 
 dpp::message
-setlist_message::to_message(bool use_ephemeral, std::optional<std::string> reveal_button_id) const
+setlist_message::to_message(bool use_ephemeral, std::optional<std::string> reveal_button_id,
+                             std::optional<std::string> no_spoiler_button_id) const
 {
     const auto flags = dpp::message_flags::m_using_components_v2 |
                        (use_ephemeral ? dpp::message_flags::m_ephemeral : 0);
@@ -165,11 +172,18 @@ setlist_message::to_message(bool use_ephemeral, std::optional<std::string> revea
 
     if (reveal_button_id.has_value()) {
         auto action_row = dpp::component().set_type(dpp::cot_action_row);
-        auto button     = dpp::component().set_type(dpp::cot_button)
-                          .set_style(dpp::cos_primary)
-                          .set_label("Post Publicly")
-                          .set_id(reveal_button_id.value());
-        action_row.add_component_v2(button);
+        action_row.add_component_v2(
+            dpp::component().set_type(dpp::cot_button)
+                .set_style(dpp::cos_primary)
+                .set_label("Post Publicly")
+                .set_id(reveal_button_id.value()));
+        if (is_spoiler && no_spoiler_button_id.has_value()) {
+            action_row.add_component_v2(
+                dpp::component().set_type(dpp::cot_button)
+                    .set_style(dpp::cos_danger)
+                    .set_label("Post Publicly Without Spoiler Cover")
+                    .set_id(no_spoiler_button_id.value()));
+        }
         real_msg.add_component_v2(action_row);
     }
 
@@ -192,7 +206,9 @@ setlist_message::build_messages(
     const std::vector<std::string>& header_lines,
     const std::vector<std::string>& body_lines,
     bool use_ephemeral,
-    std::optional<std::string> reveal_button_id)
+    std::optional<std::string> reveal_button_id,
+    std::optional<std::string> no_spoiler_button_id,
+    bool suppress_spoiler)
 {
     const size_t header_size = std::ranges::fold_left(
         std::views::transform(header_lines, &std::string::size),
@@ -219,12 +235,14 @@ setlist_message::build_messages(
     std::vector<dpp::message> result;
     result.reserve(chunks.size());
     for (size_t i = 0; i < chunks.size(); ++i) {
-        setlist_message msg(concert);
+        setlist_message msg(concert, suppress_spoiler);
         if (i == 0) {
             msg.set_header(header_lines, concert);
         }
         msg.set_body(chunks[i]);
-        result.push_back(msg.to_message(use_ephemeral, i == 0 ? reveal_button_id : std::nullopt));
+        result.push_back(msg.to_message(use_ephemeral,
+            i == 0 ? reveal_button_id : std::nullopt,
+            i == 0 ? no_spoiler_button_id : std::nullopt));
     }
     return result;
 }

@@ -26,24 +26,28 @@ class context;
 
 std::vector<std::string> get_header_lines(const Concert& concert);
 bool can_post_setlist_publicly(const dpp::slashcommand_t& event, const context& ctx);
+bool is_concert_spoiler(const Concert& concert);
 
 /* Builder for a setlist Discord reply. Inherits dpp::component (the body
  * cot_container) and tracks character count so build_messages() can split
  * across multiple follow-up messages when needed. */
 class setlist_message : public dpp::component {
 public:
-    explicit setlist_message(const Concert& concert);
+    explicit setlist_message(const Concert& concert, bool suppress_spoiler = false);
     void set_header(const std::vector<std::string>& header_lines, const Concert& concert);
     void set_body(std::string_view body_text);
     size_t char_count() const { return header_char_count + body_char_count; }
     [[nodiscard]] dpp::message to_message(bool use_ephemeral,
-                                          std::optional<std::string> reveal_button_id) const;
+                                          std::optional<std::string> reveal_button_id,
+                                          std::optional<std::string> no_spoiler_button_id = std::nullopt) const;
     [[nodiscard]] static std::vector<dpp::message> build_messages(
         const Concert& concert,
         const std::vector<std::string>& header_lines,
         const std::vector<std::string>& body_lines,
         bool use_ephemeral,
-        std::optional<std::string> reveal_button_id);
+        std::optional<std::string> reveal_button_id,
+        std::optional<std::string> no_spoiler_button_id = std::nullopt,
+        bool suppress_spoiler = false);
 
 private:
     size_t header_char_count = 0;

@@ -111,13 +111,17 @@ dpp::task<std::expected<void, std::error_code>>
 setlist_command::reply_multimessage(const dpp::slashcommand_t& event,
                                         const Concert& concert)
 {
-    const auto reveal_click_key = can_post_setlist_publicly(event, *ctx)
+    const bool can_post = can_post_setlist_publicly(event, *ctx);
+    const auto reveal_click_key = can_post
+        ? std::make_optional<std::string>(ctx->keygen())
+        : std::nullopt;
+    const auto no_spoiler_click_key = can_post
         ? std::make_optional<std::string>(ctx->keygen())
         : std::nullopt;
     auto headers = get_header_lines(concert);
     auto body_lines = get_setlist_lines(concert);
 
-    auto first_msgs = setlist_message::build_messages(concert, headers, body_lines, true, reveal_click_key);
+    auto first_msgs = setlist_message::build_messages(concert, headers, body_lines, true, reveal_click_key, no_spoiler_click_key);
     if (auto res = co_await reply_and_followup(event, first_msgs, ctx); !res) {
         co_return res;
     }
@@ -128,15 +132,21 @@ setlist_command::reply_multimessage(const dpp::slashcommand_t& event,
 
     /* Wait for button click or expiration */
     if (auto when_any_result = co_await dpp::when_any{
-            event.owner->on_button_click.when([key = reveal_click_key](const auto& click) {
+            event.owner->on_button_click.when([key = *reveal_click_key](const auto& click) {
                 return click.custom_id == key;
             }),
-                event.owner->co_sleep(5 * 60) // 5 minutes
-                };
-        when_any_result.index() == 0)
+            event.owner->on_button_click.when([key = *no_spoiler_click_key](const auto& click) {
+                return click.custom_id == key;
+            }),
+            event.owner->co_sleep(5 * 60)
+        };
+        when_any_result.index() == 0 || when_any_result.index() == 1)
     { // Button clicked
-        const dpp::button_click_t click_event = when_any_result.get<0>();
-        auto reveal_msgs = setlist_message::build_messages(concert, headers, body_lines, false, std::nullopt);
+        const bool suppress_spoiler = when_any_result.index() == 1;
+        const dpp::button_click_t click_event = suppress_spoiler
+            ? when_any_result.get<1>()
+            : when_any_result.get<0>();
+        auto reveal_msgs = setlist_message::build_messages(concert, headers, body_lines, false, std::nullopt, std::nullopt, suppress_spoiler);
         if (auto res = co_await reply_and_followup(click_event, reveal_msgs, ctx); !res) {
             setlist_reveal_failure_counter->Increment();
             co_return res;
@@ -145,7 +155,7 @@ setlist_command::reply_multimessage(const dpp::slashcommand_t& event,
         auto success_msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2 | dpp::message_flags::m_ephemeral);
         success_msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content("Setlist posted to channel!"));
         co_return co_await util::reply_handler_new(event.co_edit_original_response(success_msg), ctx, setlist_reveal_success_counter, setlist_reveal_failure_counter);
-    } else { // Button expiring. Just replace the first message.
+    } else { // Buttons expiring. Replace the first message without buttons.
         auto expired_msgs = setlist_message::build_messages(concert, headers, body_lines, true, std::nullopt);
         co_return co_await util::reply_handler_new(event.co_edit_original_response(*std::ranges::begin(expired_msgs)), ctx, setlist_reveal_success_counter, setlist_reveal_failure_counter);
     }
