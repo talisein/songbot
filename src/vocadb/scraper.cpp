@@ -101,6 +101,11 @@ namespace
     {"アフターエポックス feat. 初音ミク", 625986},
     {"CONNECT:COMMUNE feat. 初音ミク", 907752},
     {"Room for a Fantasy feat. 初音ミク", 878942},
+    {"バッドシャーク / 鏡音リン", 478851},
+    {"青炎 feat. KAITO", 913761},
+    {"HELLO, NEW WORLD! feat. 巡音ルカ", 742688},
+    {"サロメ feat. MEIKO", 753184},
+    {"こたえて (feat. 初音ミク&鏡音リン&鏡音レン&巡音ルカ&MEIKO&KAITO)", 884096}, //uncharted
   };
 
     constexpr std::string_view preamble { R"###(/*
