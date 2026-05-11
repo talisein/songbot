@@ -565,6 +565,17 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"クロスロード", "Crossroad", "Crossroad", Miku, "kz × TAKU INOUE", 929916},
   {nullopt, nullopt, "CONNECT:COMMUNE", Miku, "FLAVOR FOLEY", 907752},
   {nullopt, nullopt, "Room for a Fantasy", Miku, "nostraightanswer", 878942},
+  {"空に免じて", "Sora ni Menjite", "Sora ni Menjite", Miku, "Kasamura Toota", 61041},
+  {nullopt, nullopt, "HELLO, NEW WORLD!", Luka, "Nanao", 742688},
+  {"死にたくない。", "Shinitaku Nai.", "I Don't Want to Die.", Len, "Usagi3", 400280},
+  {"ジェヘナ", "Gehenna", "Gehenna", Miku, "wotaku", 248865},
+  {"バッドシャーク", "Bad Shark", "Bad Shark", Rin, "niki", 478851},
+  {"ドーピングダンス", "Doping Dance", "Doping Dance", Miku, "STEAKA", 425435},
+  {"サロメ", "Salomé", "Salomé", MEIKO, "⌘HYNOME", 753184},
+  {"エル・タンゴ・エゴイスタ", "El・Tango・Egoista", "El・Tango・Egoista", duet(KAITO, Luka), "nyanyannya", 146056},
+  {"こたえて", "Kotaete", "Answer Me", duet(Miku, KAITO, MEIKO, Luka, Rin, Len), "imie", 884096},
+  {"青炎", "Sei-ei", "Blue Fire", KAITO, "Sekikomi Gohan", 913761},
+  {"泥中に咲く", "Deichuu ni Saku", "Blooming in the Mud", Miku, "HarryP", 220728},
     };
 
     return res;
