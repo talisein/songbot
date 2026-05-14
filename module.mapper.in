@@ -1,5 +1,9 @@
 std  @BUILD_DIR@/src/std.gcm
 songs  @BUILD_DIR@/src/songs.gcm
+concerts:types  @BUILD_DIR@/src/concerts-types.gcm
+concerts:raw_data  @BUILD_DIR@/src/concerts-raw_data.gcm
+concerts:data  @BUILD_DIR@/src/concerts-data.gcm
+concerts:algorithms  @BUILD_DIR@/src/concerts-algorithms.gcm
 concerts  @BUILD_DIR@/src/concerts.gcm
 songbot.errors  @BUILD_DIR@/src/errors.gcm
 vocadb.api  @BUILD_DIR@/src/vocadb/vocadb-api.gcm

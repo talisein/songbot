@@ -14,20 +14,20 @@ int main()
     using namespace boost::ut::operators::terse;
 
     "Every concert series needs to exist"_test = [] {
-        constexpr auto concert_series_exists = [](const SetlistTrack& track) constexpr -> bool { return std::ranges::contains(concerts, track.concert_short_name, &Concert::short_name); };
-        expect(std::ranges::all_of(setlists, concert_series_exists)) << [&] {
-            return magic_enum::enum_name(std::ranges::find_if_not(setlists, concert_series_exists)->concert_short_name); };
+        auto concert_series_exists = [](const SetlistTrack& track) -> bool { return std::ranges::contains(get_concerts(), track.concert_short_name, &Concert::short_name); };
+        expect(std::ranges::all_of(get_setlists(), concert_series_exists)) << [&] {
+            return magic_enum::enum_name(std::ranges::find_if_not(get_setlists(), concert_series_exists)->concert_short_name); };
     };
 
     "Every song needs to exist"_test = [] {
         constexpr auto song_exists = [](const SetlistTrack& track) constexpr -> bool { return lookup_song_strict(track.song, track.producer).has_value(); };
-        expect(std::ranges::all_of(setlists, song_exists)) << [&] {
-            return std::ranges::find_if_not(setlists, song_exists)->song; };
+        expect(std::ranges::all_of(get_setlists(), song_exists)) << [&] {
+            return std::ranges::find_if_not(get_setlists(), song_exists)->song; };
     };
 
     "Every setlist position in a series must exist."_test = [] {
         auto setlist_positions_skipped = [](const Concert& concert) -> bool {
-            auto tracks = setlists | util::make_needle_filter<&SetlistTrack::concert_short_name>(concert.short_name) | std::ranges::to<std::vector>();
+            auto tracks = get_setlists() | util::make_needle_filter<&SetlistTrack::concert_short_name>(concert.short_name) | std::ranges::to<std::vector>();
             std::ranges::stable_sort(tracks, {}, &SetlistTrack::pos);
             auto rng = std::views::slide(tracks, 2);
             for (auto pair : rng) {
@@ -39,13 +39,13 @@ int main()
             }
             return false;
         };
-        expect(std::ranges::none_of(concerts, setlist_positions_skipped)) << [&] {
-            return magic_enum::enum_name(std::ranges::find_if(concerts, setlist_positions_skipped)->short_name);
+        expect(std::ranges::none_of(get_concerts(), setlist_positions_skipped)) << [&] {
+            return magic_enum::enum_name(std::ranges::find_if(get_concerts(), setlist_positions_skipped)->short_name);
         };
     };
 
     "concert"_test = [] {
-        auto c = setlists[0];
+        auto c = get_setlists()[0];
         expect(eq(1, c.pos));
         expect(eq(MIKUFES09, c.concert_short_name));
         auto song = lookup_song(c.song);
@@ -86,7 +86,7 @@ int main()
     };
 
     "all"_test = [] {
-        for (auto track : setlists) {
+        for (auto track : get_setlists()) {
             auto song = lookup_song(track.song, track.producer);
             if (!song.has_value()) {
                 expect(eq(""sv, track.song));
@@ -95,7 +95,7 @@ int main()
     };
 
     "Check the case!"_test = [] {
-        for (auto track : setlists) {
+        for (auto track : get_setlists()) {
             auto song = lookup_song(track.song, track.producer);
             if (song) {
                 expect(eq(song->name, track.song));

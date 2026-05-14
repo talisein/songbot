@@ -235,6 +235,70 @@ songs_module = custom_target('songs_module',
     depends: [std_module, uni_algo_module, magic_enum_module, util_module, errors_module]
 )
 
+concerts_types_module = custom_target('concerts_types_module',
+    input: 'concerts-types.cppm',
+    output: ['concerts-types.o', 'concerts-types.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module, util_module]
+)
+
+concerts_raw_data_module = custom_target('concerts_raw_data_module',
+    input: 'concerts-raw_data.cppm',
+    output: ['concerts-raw_data.o', 'concerts-raw_data.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, concerts_types_module]
+)
+
+concerts_data_module = custom_target('concerts_data_module',
+    input: 'concerts-data.cppm',
+    output: ['concerts-data.o', 'concerts-data.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, songs_module, util_module, concerts_types_module, concerts_raw_data_module]
+)
+
+concerts_algorithms_module = custom_target('concerts_algorithms_module',
+    input: 'concerts-algorithms.cppm',
+    output: ['concerts-algorithms.o', 'concerts-algorithms.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module, concerts_types_module, concerts_raw_data_module, concerts_data_module]
+)
+
 concerts_module = custom_target('concerts_module',
     input: 'concerts.cppm',
     output: ['concerts.o', 'concerts.gcm'],
@@ -248,14 +312,14 @@ concerts_module = custom_target('concerts_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module, errors_module]
+    depends: [std_module, concerts_types_module, concerts_raw_data_module, concerts_data_module, concerts_algorithms_module]
 )
 
 
 misc_modules_lib = static_library('misc',
-                                  objects: [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_module[0], dpp_module[0], prometheus_module[0], util_module[0], errors_module[0]])
+                                  objects: [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_types_module[0], concerts_raw_data_module[0], concerts_data_module[0], concerts_algorithms_module[0], concerts_module[0], dpp_module[0], prometheus_module[0], util_module[0], errors_module[0]])
 
-misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], std_module]
+misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_types_module[1], concerts_raw_data_module[1], concerts_data_module[1], concerts_algorithms_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], std_module]
 
 project_version = vcs_tag(input: 'version.hpp.in',
                           output: 'version.hpp',
