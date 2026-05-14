@@ -128,10 +128,12 @@ magic_enum_module = custom_target('magic_enum_module',
         opt_flag,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-DMAGIC_ENUM_USE_STD_MODULE',
         '-c', '@INPUT@',
         '-o', '@OUTPUT0@',
         '-I', magic_enum_dep.get_variable('includedir', default_value: '@0@/subprojects/magic_enum-0.9.8/include'.format(meson.project_source_root())),
     ],
+    depends: [std_module]
 )
 
 uni_algo_all_module = custom_target('uni_algo_all_module',
