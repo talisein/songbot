@@ -529,7 +529,7 @@ scraper::scrape_songs(const std::filesystem::path& generated_src)
 
     // Write out un-exported stuff
     for (const auto& s : vec) {
-        write_song_anonymous(s, full_file);
+        if (auto write_result = write_song_anonymous(s, full_file); !write_result) return write_result;
     }
 
     // now write the final array
@@ -642,7 +642,7 @@ scraper::scrape_events(const std::filesystem::path& generated_src)
 
     // Write out un-exported stuff
     for (const auto& e : vec) {
-        write_event_anonymous(e, full_file);
+        if (auto write_result = write_event_anonymous(e, full_file); !write_result) return write_result;
     }
 
     // now write the final array
@@ -1040,7 +1040,8 @@ scraper::fetch_picture_embeds(const json& pictures,
           downloaded_filenames.emplace_back(std::in_place, res_dir, filename_noext);
           continue;
         }
-        cpr::set_ifmodsince(session, last_modified);
+        if (auto set_result = cpr::set_ifmodsince(session, last_modified); !set_result)
+            std::println(std::cerr, "Warning: Failed to set If-Modified-Since: {}", set_result.error().message());
         std::ofstream ofs {tmppath, std::ios::binary | std::ios::out | std::ios::trunc };
         if (!ofs) {
           std::println(std::cerr, "Error: Failed to open {}", tmppath.native());

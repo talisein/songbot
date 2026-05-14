@@ -77,9 +77,9 @@ run_paged_widget(
         } else {
             const auto& click = result.template get<1>();
             if (click.custom_id == next_key)
-                start_idx = std::clamp(std::add_sat(start_idx, step), 0UZ, std::sub_sat(total_count, 1UZ));
+                start_idx = std::clamp(std::saturating_add(start_idx, step), 0UZ, std::saturating_sub(total_count, 1UZ));
             else
-                start_idx = std::sub_sat(start_idx, step);
+                start_idx = std::saturating_sub(start_idx, step);
             if (auto e = co_await util::reply_handler_new(
                     click.co_reply(dpp::ir_deferred_update_message, dpp::message{}), ctx, nullptr, failure_counter); !e)
                 co_return e;

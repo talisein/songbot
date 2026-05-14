@@ -13,7 +13,7 @@ int main()
     "No Same Names"_test = [] {
 /* There must not be any duplicate songnames in songs. Its sorted, so just check adjacency. */
         auto songs_have_same_names = [](auto l, auto r) -> bool {
-            return static_cast<bool>(l.cf_name == r.cf_name) && static_cast<bool>(l.disambiguation == r.disambiguation);
+            return static_cast<bool>(l.cf_name == r.cf_name) && std::operator==(l.disambiguation, r.disambiguation);
         };
 
         auto sorted_songs = songs;
@@ -24,7 +24,7 @@ int main()
 
     "No same JP names"_test = [] {
         auto songs_have_same_jp_names = [](const Song& l, const Song& r) -> bool {
-            return static_cast<bool>(*l.cf_jp_name == *r.cf_jp_name) && static_cast<bool>(l.disambiguation == r.disambiguation);
+            return static_cast<bool>(*l.cf_jp_name == *r.cf_jp_name) && std::operator==(l.disambiguation, r.disambiguation);
         };
         std::vector<Song> jp_songs = std::views::filter(songs, [](const auto& song) { return song.jp_name.has_value(); } ) | std::ranges::to<std::vector>();
         std::ranges::sort(jp_songs, std::ranges::less{}, &Song::cf_jp_name);
@@ -35,7 +35,7 @@ int main()
 
     "No same romanji names"_test = [] {
         auto songs_have_same_romanji_names = [](const Song& l, const Song& r) -> bool {
-            return static_cast<bool>(*l.cf_romanji_name == *r.cf_romanji_name) && static_cast<bool>(l.disambiguation == r.disambiguation);
+            return static_cast<bool>(*l.cf_romanji_name == *r.cf_romanji_name) && std::operator==(l.disambiguation, r.disambiguation);
         };
         std::vector<Song> romanji_songs = std::views::filter(songs, [](const auto& song) { return song.romanji_name.has_value(); } ) | std::ranges::to<std::vector>();
         std::ranges::sort(romanji_songs, std::ranges::less{}, &Song::cf_romanji_name);

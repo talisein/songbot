@@ -1,5 +1,5 @@
 std_module = custom_target('std_module',
-    input: files('/usr/include/c++/15/bits/std.cc'),
+    input: files('/usr/include/c++/16/bits/std.cc'),
     output: 'std.gcm',
 #    output: ['std.o', 'std.gcm'],
     command: [cxx_compiler.cmd_array(),
