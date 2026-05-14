@@ -9,7 +9,7 @@ project('songbot', ['c', 'cpp'],
 
 
 magic_enum_dep = dependency('magic_enum',
-			    version: '>=0.9.7',
+			    version: '>=0.9.8',
                 fallback: ['magic_enum'])
 
 uni_algo_dep = dependency('uni-algo',
@@ -51,7 +51,7 @@ prometheus_dep = declare_dependency(dependencies: [prometheus_pull_dep, promethe
 module_conf_data = configuration_data()
 module_conf_data.set('BUILD_DIR', meson.project_build_root())
 module_conf_data.set('UNI_ALGO_INCLUDEDIR', uni_algo_dep.get_variable('includedir'))
-module_conf_data.set('MAGIC_ENUM_INCLUDEDIR', magic_enum_dep.get_variable('includedir', default_value: '@0@/subprojects/magic_enum-0.9.7/include'.format(meson.project_source_root())))
+module_conf_data.set('MAGIC_ENUM_INCLUDEDIR', magic_enum_dep.get_variable('includedir', default_value: '@0@/subprojects/magic_enum-0.9.8/include'.format(meson.project_source_root())))
 prometheus_core_inc = prometheus_core_dep.get_variable('includedir', default_value: '@0@/subprojects/prometheus-cpp-with-submodules/core/include'.format(meson.project_source_root()))
 prometheus_core_build_inc = meson.current_build_dir() / 'subprojects' / 'prometheus-cpp-with-submodules' / '__CMake_build' / 'core' / 'include'
 prometheus_pull_build_inc = meson.current_build_dir() / 'subprojects' / 'prometheus-cpp-with-submodules' / '__CMake_build' / 'pull' / 'include'
