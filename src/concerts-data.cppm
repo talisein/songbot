@@ -46,7 +46,7 @@ namespace {
         });
         std::string_view prev_song;
         std::optional<std::string_view> prev_producer;
-        size_t count = 0;
+        std::size_t count = 0;
         auto out = std::back_inserter(freqs);
         for (auto track : tracks) {
             if (track.song == prev_song && track.producer == prev_producer) {
@@ -77,4 +77,3 @@ export constexpr std::array song_frequencies_mirai = util::materialize<generate_
 export constexpr std::array song_frequencies_mwy = util::materialize<generate_song_frequency<is_miku_with_you>>();
 export constexpr std::array song_frequencies_mikupa = util::materialize<generate_song_frequency<is_mikupa>>();
 export constexpr std::array song_frequencies_snowmiku = util::materialize<generate_song_frequency<is_snow_miku>>();
-

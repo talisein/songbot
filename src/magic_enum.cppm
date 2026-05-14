@@ -1,21 +1,102 @@
-/*
-    Songbot: Hatsune Miku Concert Database for Discord
-    Copyright (C) 2025  Andrew Potter
+module;
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <https://www.gnu.org/licenses/>.
-*/
+#include <version>
+#if __has_include(<fmt/format.h>)
+#include <fmt/format.h>
+#endif
+#ifndef MAGIC_ENUM_USE_STD_MODULE
+#if defined(__cpp_lib_format)
+#include <format>
+#endif
+#include <magic_enum/magic_enum_all.hpp>
+#endif
 
 export module magic_enum;
 
-export import "magic_enum/magic_enum_all.hpp";
+#if defined(MAGIC_ENUM_USE_STD_MODULE)
+import std;
+
+extern "C++" {
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Winclude-angled-in-module-purview"
+#elif defined(_MSC_VER)
+#pragma warning(push)
+#pragma warning(disable : 5244)
+#endif
+
+#include <magic_enum/magic_enum_all.hpp>
+
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#elif defined(_MSC_VER)
+#pragma warning(pop)
+#endif
+}
+#endif
+
+export namespace magic_enum {
+namespace customize {
+    using customize::enum_range;
+}
+
+namespace iostream_operators {
+    using iostream_operators::operator<<;
+    using iostream_operators::operator>>;
+}
+
+namespace bitwise_operators {
+    using bitwise_operators::operator~;
+    using bitwise_operators::operator|;
+    using bitwise_operators::operator&;
+    using bitwise_operators::operator^;
+    using bitwise_operators::operator|=;
+    using bitwise_operators::operator&=;
+    using bitwise_operators::operator^=;
+}
+
+namespace containers {
+    using containers::array;
+    using containers::bitset;
+    using containers::set;
+}
+
+    using magic_enum::enum_name;
+    using magic_enum::enum_cast;
+    using magic_enum::enum_value;
+    using magic_enum::enum_values;
+    using magic_enum::enum_count;
+    using magic_enum::enum_integer;
+    using magic_enum::enum_names;
+    using magic_enum::enum_entries;
+    using magic_enum::enum_fuse;
+    using magic_enum::enum_switch;
+    using magic_enum::enum_for_each;
+    using magic_enum::enum_contains;
+    using magic_enum::enum_index;
+    using magic_enum::enum_flags_name;
+    using magic_enum::enum_flags_contains;
+    using magic_enum::enum_flags_cast;
+    using magic_enum::enum_type_name;
+    using magic_enum::is_unscoped_enum;
+    using magic_enum::is_unscoped_enum_v;
+    using magic_enum::is_scoped_enum;
+    using magic_enum::is_scoped_enum_v;
+    using magic_enum::underlying_type;
+    using magic_enum::underlying_type_t;
+    using magic_enum::case_insensitive;
+    using magic_enum::enum_flags_test;
+    using magic_enum::enum_flags_test_any;
+}
+
+#if defined(__cpp_lib_format)
+export namespace std {
+    using std::formatter;
+}
+#endif
+
+#if defined(FMT_VERSION)
+export namespace fmt {
+    using fmt::formatter;
+}
+#endif

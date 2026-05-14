@@ -119,22 +119,6 @@ dpp_module = custom_target('dpp_module',
 )
 
 
-magic_enum_all_module = custom_target('magic_enum_all_module',
-    input: 'magic_enum.cppm', # Fake input. The input is all.h from the subproject.
-    output: ['magic_enum_all.gcm'],
-    command: [
-        cxx_compiler.cmd_array(),
-        '-std=c++26',
-        opt_flag,
-        '-fmodules',
-        '-fmodule-only',
-        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
-        '-x', 'c++-user-header',
-        '-I', magic_enum_dep.get_variable('includedir', default_value: '@0@/subprojects/magic_enum-0.9.8/include'.format(meson.project_source_root())),
-        '-c', 'magic_enum/magic_enum_all.hpp',
-    ],
-)
-
 magic_enum_module = custom_target('magic_enum_module',
     input: 'magic_enum.cppm',
     output: ['magic_enum.o', 'magic_enum.gcm'],
@@ -147,9 +131,7 @@ magic_enum_module = custom_target('magic_enum_module',
         '-c', '@INPUT@',
         '-o', '@OUTPUT0@',
         '-I', magic_enum_dep.get_variable('includedir', default_value: '@0@/subprojects/magic_enum-0.9.8/include'.format(meson.project_source_root())),
-        '-I', meson.current_source_dir(),
     ],
-    depends: [magic_enum_all_module]
 )
 
 uni_algo_all_module = custom_target('uni_algo_all_module',

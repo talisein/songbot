@@ -199,5 +199,5 @@ export struct song_frequency
 {
     std::string_view song_name;
     std::optional<std::string_view> producer;
-    size_t count;
+    std::size_t count;
 };
