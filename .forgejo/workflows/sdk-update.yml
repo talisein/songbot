@@ -16,7 +16,7 @@ jobs:
         run: |
           # --- 1. Build the SDK (Build-time deps) ---
           cat <<EOF > Containerfile.sdk
-          FROM fedora:42
+          FROM fedora:44
           RUN dnf -y upgrade && \
               dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake && \
               dnf clean all
@@ -27,7 +27,7 @@ jobs:
 
           # --- 2. Build the Runtime (Production deps) ---
           cat <<EOF > Containerfile.runtime
-          FROM fedora:42
+          FROM fedora:44
           RUN dnf -y upgrade && \
               dnf -y install libcurl zlib-ng openssl glibc-all-langpacks && \
               dnf clean all

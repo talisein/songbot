@@ -6,7 +6,7 @@ COPY . .
 
 RUN meson setup build --prefix /app -Dcpp_std=c++26
 
-RUN meson compile -C build && meson test -C build && meson install -C build
+RUN meson compile -C build && meson test -C build --suite songbot && meson install -C build
 
 FROM git.miku/talisein/songbot-runtime:latest
 
