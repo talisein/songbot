@@ -33,6 +33,7 @@ export enum class songbot_error : int
     explosion,
     http_error_400,
     http_error_404,
+    lvchart_week_parse_error,
 };
 
 export class songbot_error_category : public std::error_category {
@@ -64,6 +65,8 @@ public:
                 return "HTTP Error > 400"s;
             case songbot_error::http_error_404:
                 return "HTTP Error 404 Not Found"s;
+            case songbot_error::lvchart_week_parse_error:
+                return "Failed to parse lvchart week date from sheetName"s;
         }
         return std::format("Unknown songbot error code {}", ev);
     }

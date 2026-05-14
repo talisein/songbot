@@ -260,6 +260,17 @@ export namespace util
         return res;
     }
 
+    std::expected<std::chrono::year_month_day, std::error_code>
+    parse_lvchart_sheetname(std::string_view sheetname)
+    {
+        // "sheetName": "2024_7_4" — the "day" field is actually a week number.
+        std::stringstream ss{std::string(sheetname)};
+        std::chrono::year_month_day ymd{};
+        if (!std::chrono::from_stream(ss, "%Y_%m_%d", ymd))
+            return std::unexpected(make_error_code(songbot_error::lvchart_week_parse_error));
+        return ymd;
+    }
+
     consteval std::chrono::year_month_day
     get_build_date()
     {

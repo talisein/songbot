@@ -29,22 +29,6 @@ import localvoid;
 #include "formatters.hpp"
 #include "paged_widget.hpp"
 
-namespace
-{
-  auto sheetname_to_ymw(const auto& json)
-  {
-    // "sheetName": "2024_7_4"
-    std::stringstream ss { json["sheetName"].template get<std::string>() };
-    std::chrono::year_month_day ymd; // its not actually a day but a week number.
-    std::chrono::from_stream(ss, "%Y_%m_%d", ymd);
-    unsigned w = static_cast<unsigned>(ymd.day());
-
-    std::chrono::year_month_weekday res { ymd.year(), ymd.month(), std::chrono::Thursday[w] };
-
-    return res;
-  };
-
-}
 
 lvchart_command::lvchart_command(context &ctx) noexcept :
     iface_command(ctx, "lvchart", "Localvoid's Weekly Vocaloid Song Chart")
@@ -94,11 +78,16 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
     const size_t total_in_songs = std::ranges::distance(std::views::filter(songs, is_not_out));
     const ssize_t max_view_width = std::format(l, "{:+Ld}", std::views::filter(songs, is_not_out).begin()->at("viewIncrease").template get<ssize_t>()).size();
 
+    const auto ymd_result = util::parse_lvchart_sheetname(chart["sheetName"].template get<std::string>());
+    if (!ymd_result)
+        co_return std::unexpected(ymd_result.error());
+    const auto& ymd = *ymd_result;
+    const auto ymw = std::chrono::year_month_weekday{ymd.year(), ymd.month(), std::chrono::Thursday[static_cast<unsigned>(ymd.day())]};
+
     constexpr size_t step = 25;
     auto make_page = [&](size_t start_idx) -> std::string {
         ss.str(""); ss.clear();
-        const auto ymd = sheetname_to_ymw(chart);
-        std::println(ss, "## [Localvoid](https://lvchart.com)'s Vocaloid Song Chart for {:%B} {:%Y} (Week {})", ymd, ymd, ymd.index());
+        std::println(ss, "## [Localvoid](https://lvchart.com)'s Vocaloid Song Chart for {:%B} {:%Y} (Week {})", ymw, ymw, ymw.index());
         for (const auto& song : std::views::filter(songs, is_not_out)
                               | std::views::filter(passes_new_filter)
                               | std::views::drop(start_idx)

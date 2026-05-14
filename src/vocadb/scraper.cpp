@@ -19,6 +19,7 @@
 import concerts;
 import songs;
 import songbot.errors;
+import util;
 import vocadb.api;
 import magic;
 
@@ -1285,19 +1286,13 @@ export constexpr std::array charts = std::to_array<std::u8string_view>({{
 
   std::multimap<std::uint64_t, week_rank> rankings;
 
-  const auto sheetname_to_ymw = [](const auto& json) -> ymw_t {
-    // "sheetName": "2024_7_4"
-    std::stringstream ss { json["sheetName"].template get<std::string>() };
-    std::chrono::year_month_day ymd; // its not actually a day but a week number.
-    std::chrono::from_stream(ss, "%Y_%m_%d", ymd);
-    int y = static_cast<int>(ymd.year());
-    unsigned m = static_cast<unsigned>(ymd.month());
-    unsigned w = static_cast<unsigned>(ymd.day());
-    return {y, m, w};
-  };
-
   std::set<std::uint64_t> keys;
   for (auto localvoid_json : vec) {
+    const auto ymd_result = util::parse_lvchart_sheetname(localvoid_json["sheetName"].get<std::string>());
+    if (!ymd_result) return std::unexpected(ymd_result.error());
+    const auto& ymd = *ymd_result;
+    const ymw_t ymw{static_cast<int>(ymd.year()), static_cast<unsigned>(ymd.month()), static_cast<unsigned>(ymd.day())};
+
     for (auto song_json : localvoid_json["songs"]) {
       auto is_out = song_json["isOut"].get<bool>();
       if (is_out) continue;
@@ -1306,7 +1301,7 @@ export constexpr std::array charts = std::to_array<std::u8string_view>({{
         const auto& [_, anidb_id] = *it;
         rankings.emplace(std::piecewise_construct,
                          std::forward_as_tuple(anidb_id),
-                         std::forward_as_tuple(song_json["rank"].get<int>(), sheetname_to_ymw(localvoid_json)));
+                         std::forward_as_tuple(song_json["rank"].get<int>(), ymw));
         keys.insert(anidb_id);
       }
     }
