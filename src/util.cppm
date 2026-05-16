@@ -34,16 +34,21 @@ using namespace std::literals;
 
 namespace {
     std::generator<char> escape_markdown_gen(std::string_view input, bool linktext = false) {
+        if (linktext) {
+            /* Backslash escaping doesn't work in Discord link text [...].
+               Replace * with fullwidth ＊ (U+FF0A); yield everything else as-is. */
+            for (char c : input) {
+                if (c == '*') {
+                    for (char b : std::string_view{"＊"}) co_yield b;
+                } else {
+                    co_yield c;
+                }
+            }
+            co_return;
+        }
         for (char c : input) {
             switch (c) {
                 case '*':
-                    if (linktext) {
-                        /* Backslash escaping doesn't work in Discord link text [...].
-                           Yield fullwidth ＊ (U+FF0A) instead. */
-                        for (char b : std::string_view{"＊"}) co_yield b;
-                        continue;
-                    }
-                    [[fallthrough]];
                 case '`':
                 case '_':
                 case '~':
@@ -59,12 +64,12 @@ namespace {
 //            case '+':
 //            case '.':
 //            case '!':*/
-                    co_yield '\\'; // Yield the escape character
+                    co_yield '\\';
                     break;
                 default:
                     break;
             }
-            co_yield c; // Yield the original character
+            co_yield c;
         }
     }
 }
