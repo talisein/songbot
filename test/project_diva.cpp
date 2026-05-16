@@ -51,5 +51,33 @@ int main()
         }
     };
 
+    "find_track_for_song: found"_test = [] {
+        auto song = lookup_song("Electric Angel");
+        expect(song.has_value());
+        auto result = find_track_for_song(*song);
+        expect(result.has_value());
+        expect(eq(DIVA, result->game));
+        expect(eq("Electric Angel"sv, result->song));
+    };
+
+    "find_track_for_song: song not in any game"_test = [] {
+        auto song = lookup_song("Over Flow(er)");
+        expect(song.has_value());
+        auto result = find_track_for_song(*song);
+        expect(not result.has_value());
+        expect(eq(result.error(), make_error_code(songbot_error::no_match)));
+    };
+
+    "find_track_for_song: round-trips with find_song_for_track"_test = [] {
+        for (const auto& track : diva_tracks) {
+            auto song = find_song_for_track(track);
+            if (!song.has_value()) continue;
+            auto found_track = find_track_for_song(*song);
+            expect(found_track.has_value()) << "find_track_for_song failed for: " << song->name;
+            if (found_track.has_value())
+                expect(eq(track.song, found_track->song));
+        }
+    };
+
     return 0;
 }

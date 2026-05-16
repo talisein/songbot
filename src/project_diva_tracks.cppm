@@ -20,6 +20,8 @@ export module project_diva:tracks;
 
 import :types;
 import std;
+import songs;
+import songbot.errors;
 
 using std::nullopt;
 export constexpr std::array diva_tracks = std::to_array<GameTrack>({
@@ -106,6 +108,40 @@ export constexpr std::array diva_tracks = std::to_array<GameTrack>({
     { DIVA, "Tell Me!! The Magical Lyric" },
     { DIVA, "starise" },
   });
+
+export std::expected<Song, std::error_code>
+find_song_for_track(const GameTrack& track)
+{
+    auto matches = songs | std::views::filter([&](const Song& s) { return song_matches_track(s, track); });
+
+    auto it = std::ranges::begin(matches);
+    if (it == std::ranges::end(matches))
+        return std::unexpected(make_error_code(songbot_error::no_match));
+    Song first = *it;
+    ++it;
+    if (!track.producer && it != std::ranges::end(matches))
+        return std::unexpected(make_error_code(songbot_error::multiple_matches));
+    return first;
+}
+
+export std::expected<GameTrack, std::error_code>
+find_track_for_song(const Song& song)
+{
+    auto matches = diva_tracks | std::views::filter([&](const GameTrack& t) { return song_matches_track(song, t); });
+
+    auto it = std::ranges::begin(matches);
+    if (it == std::ranges::end(matches))
+        return std::unexpected(make_error_code(songbot_error::no_match));
+    GameTrack first = *it;
+    ++it;
+    if (it != std::ranges::end(matches))
+        return std::unexpected(make_error_code(songbot_error::multiple_matches));
+    return first;
+}
+
+constexpr auto game_song_exists = [](const GameTrack& track) constexpr {
+    return std::ranges::any_of(songs, [&](const Song& s) { return song_matches_track(s, track); });
+};
 
 static_assert(std::ranges::all_of(diva_tracks, game_song_exists),
               std::ranges::find_if_not(diva_tracks, game_song_exists)->song);

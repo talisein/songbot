@@ -22,7 +22,6 @@ import std;
 import util;
 import magic_enum;
 import songs;
-import songbot.errors;
 
 using namespace std::literals;
 
@@ -79,22 +78,3 @@ constexpr bool song_matches_track(const Song& s, const GameTrack& track)
     return s.name == track.song &&
            track.producer.transform([&](const auto& p) { return s.producer == p; }).value_or(true);
 }
-
-export std::expected<Song, std::error_code>
-find_song_for_track(const GameTrack& track)
-{
-    auto matches = songs | std::views::filter([&](const Song& s) { return song_matches_track(s, track); });
-
-    auto it = std::ranges::begin(matches);
-    if (it == std::ranges::end(matches))
-        return std::unexpected(make_error_code(songbot_error::no_match));
-    Song first = *it;
-    ++it;
-    if (!track.producer && it != std::ranges::end(matches))
-        return std::unexpected(make_error_code(songbot_error::multiple_matches));
-    return first;
-}
-
-constexpr auto game_song_exists = [](const GameTrack& track) constexpr {
-    return std::ranges::any_of(songs, [&](const Song& s) { return song_matches_track(s, track); });
-};
