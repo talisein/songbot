@@ -124,19 +124,9 @@ find_song_for_track(const GameTrack& track)
     return first;
 }
 
-export std::expected<GameTrack, std::error_code>
-find_track_for_song(const Song& song)
+export bool song_is_game_track(const Song& song)
 {
-    auto matches = diva_tracks | std::views::filter([&](const GameTrack& t) { return song_matches_track(song, t); });
-
-    auto it = std::ranges::begin(matches);
-    if (it == std::ranges::end(matches))
-        return std::unexpected(make_error_code(songbot_error::no_match));
-    GameTrack first = *it;
-    ++it;
-    if (it != std::ranges::end(matches))
-        return std::unexpected(make_error_code(songbot_error::multiple_matches));
-    return first;
+    return std::ranges::any_of(diva_tracks, [&](const GameTrack& t) { return song_matches_track(song, t); });
 }
 
 constexpr auto game_song_exists = [](const GameTrack& track) constexpr {

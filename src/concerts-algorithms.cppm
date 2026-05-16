@@ -5,6 +5,7 @@ import :raw_data;
 import :data;
 import std;
 import songs;
+import songbot.errors;
 import util;
 import uni_algo;
 import magic_enum;
@@ -68,6 +69,32 @@ export constexpr size_t get_song_frequency(std::string_view song_name)
     } else {
         return it->count;
     }
+}
+
+constexpr bool song_matches_track(const Song& s, const SetlistTrack& track)
+{
+    return s.name == track.song &&
+           track.producer.transform([&](const auto& p) { return s.producer == p; }).value_or(true);
+}
+
+export std::expected<Song, std::error_code>
+find_song_for_track(const SetlistTrack& track)
+{
+    auto matches = songs | std::views::filter([&](const Song& s) { return song_matches_track(s, track); });
+
+    auto it = std::ranges::begin(matches);
+    if (it == std::ranges::end(matches))
+        return std::unexpected(make_error_code(songbot_error::no_match));
+    Song first = *it;
+    ++it;
+    if (!track.producer && it != std::ranges::end(matches))
+        return std::unexpected(make_error_code(songbot_error::multiple_matches));
+    return first;
+}
+
+export bool song_is_concert_track(const Song& song)
+{
+    return std::ranges::any_of(setlists, [&](const SetlistTrack& t) { return song_matches_track(song, t); });
 }
 
 /* Check that all concerts are ordered chronologically */

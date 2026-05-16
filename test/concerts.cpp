@@ -2,6 +2,7 @@ import std;
 import boost.ut;
 import songs;
 import concerts;
+import songbot.errors;
 import util;
 import magic_enum;
 
@@ -110,6 +111,48 @@ int main()
         expect(std::ranges::all_of(songs, song_has_frequency)) << [&] {
             return std::ranges::find_if_not(songs, song_has_frequency)->name; };
         */
+    };
+
+    "setlist: find_song_for_track by name"_test = [] {
+        auto result = find_song_for_track({ME2018NA, 4, "Ageage Again"});
+        expect(result.has_value());
+        expect(eq("Mitchie M"sv, result->producer));
+    };
+
+    "setlist: find_song_for_track with matching producer"_test = [] {
+        auto result = find_song_for_track({ME2018NA, 4, "Ageage Again", "Mitchie M"});
+        expect(result.has_value());
+        expect(eq("Ageage Again"sv, result->name));
+    };
+
+    "setlist: find_song_for_track wrong producer returns no_match"_test = [] {
+        auto result = find_song_for_track({ME2018NA, 4, "Ageage Again", "wrongP"});
+        expect(not result.has_value());
+        expect(eq(result.error(), make_error_code(songbot_error::no_match)));
+    };
+
+    "setlist: find_song_for_track nonexistent song returns no_match"_test = [] {
+        auto result = find_song_for_track({ME2014IN, 1, "this does not exist"});
+        expect(not result.has_value());
+        expect(eq(result.error(), make_error_code(songbot_error::no_match)));
+    };
+
+    "setlist: song_is_concert_track: true for concert song"_test = [] {
+        auto song = lookup_song("Over Flow(er)");
+        expect(song.has_value());
+        expect(song_is_concert_track(*song));
+    };
+
+    "setlist: song_is_concert_track: true for song in many concerts"_test = [] {
+        auto song = lookup_song("Electric Angel");
+        expect(song.has_value());
+        expect(song_is_concert_track(*song));
+    };
+
+    "setlist: song_is_concert_track: false for song not in any concert"_test = [] {
+        auto song = lookup_song("I'll Outrun You For Good♪");
+        expect(song.has_value());
+        expect(not song_is_concert_track(*song));
     };
 
     /* This was just used for some research
