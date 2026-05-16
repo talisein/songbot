@@ -134,7 +134,7 @@ main()
             if (res == sizeof(fdsi) && (fdsi.ssi_signo == SIGTERM || fdsi.ssi_signo == SIGINT)) {
                 ctx.log_info("Received SIG{}, exiting.", sigabbrev_np(fdsi.ssi_signo));
                 systemd::notify(0, "STOPPING=1");
-                [](auto& ctx) -> dpp::job { co_await ctx.notify_owner_shutdown(); }(ctx);
+                [](auto& ctx, std::string_view signame) -> dpp::job { co_await ctx.notify_owner_shutdown(signame); }(ctx, sigabbrev_np(fdsi.ssi_signo));
             } else if (res == sizeof(fdsi)) {
                 ctx.log_warning("Received SIG{} {}? Ignoring...", sigabbrev_np(fdsi.ssi_signo), strsignal(fdsi.ssi_signo));
             }

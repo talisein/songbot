@@ -59,7 +59,7 @@ public:
     template<typename... Args>
     void log_warning(std::format_string<Args...> fmt, Args&&... args);
 
-    dpp::task<void> notify_owner_shutdown();
+    dpp::task<void> notify_owner_shutdown(std::string_view signame);
 private:
     void setup_metrics();
     void setup_bot();
