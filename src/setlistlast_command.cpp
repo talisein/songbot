@@ -68,9 +68,9 @@ namespace {
                               track.variant.transform([](const auto& v) { return std::format("`{}` ", v); }).value_or(""s));
             if (song->vocadb_id || track.remix_id) {
               auto id = track.remix_id.or_else([&] { return song->vocadb_id; });
-              ss << '[' << song->name;
+              ss << '[' << util::escape_markdown(song->name, true);
               if (track.remix) {
-                ss << ' ' << *track.remix;
+                ss << ' ' << util::escape_markdown(*track.remix, true);
               }
               ss << "](https://vocadb.net/S/" << *id << ')';
             } else {

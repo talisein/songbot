@@ -787,24 +787,25 @@ public:
 
     constexpr auto format(const Song& song, std::format_context& ctx) const {
         std::ostringstream out;
-        if (song.vocadb_id) {
+        const bool is_linktext = song.vocadb_id.has_value();
+        if (is_linktext) {
             out << '[';
         }
         if (song.jp_name) {
-            out << util::escape_markdown(una::norm::to_nfc_utf8(*song.jp_name)) << ' ';
+            out << util::escape_markdown(una::norm::to_nfc_utf8(*song.jp_name), is_linktext) << ' ';
             if (song.romanji_name && *song.cf_romanji_name != song.cf_name) {
-                out << "(" << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << ") ";
+                out << "(" << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name), is_linktext) << ") ";
             }
             out << "/ ";
         } else {
             // romanji but no jp could be other languages (Venus at the fingertips)
             if (song.romanji_name) {
-                out << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << " / ";
+                out << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name), is_linktext) << " / ";
             }
 
         }
-        out << util::escape_markdown(song.name);
-        if (song.vocadb_id) {
+        out << util::escape_markdown(song.name, is_linktext);
+        if (is_linktext) {
             /* to_string avoids locale-dependent digit grouping in URLs */
             out << "](https://vocadb.net/S/" << std::to_string(*song.vocadb_id) << ')';
         }

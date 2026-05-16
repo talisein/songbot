@@ -33,10 +33,17 @@ import prometheus;
 using namespace std::literals;
 
 namespace {
-    std::generator<char> escape_markdown_gen(std::string_view input) {
+    std::generator<char> escape_markdown_gen(std::string_view input, bool linktext = false) {
         for (char c : input) {
             switch (c) {
                 case '*':
+                    if (linktext) {
+                        /* Backslash escaping doesn't work in Discord link text [...].
+                           Yield fullwidth ＊ (U+FF0A) instead. */
+                        for (char b : std::string_view{"＊"}) co_yield b;
+                        continue;
+                    }
+                    [[fallthrough]];
                 case '`':
                 case '_':
                 case '~':
@@ -93,8 +100,8 @@ export namespace util
       co_return {};
     }
 
-    std::string escape_markdown(std::string_view input) {
-        return escape_markdown_gen(input) | std::ranges::to<std::string>();
+    std::string escape_markdown(std::string_view input, bool linktext = false) {
+        return escape_markdown_gen(input, linktext) | std::ranges::to<std::string>();
     }
 
     constexpr auto
