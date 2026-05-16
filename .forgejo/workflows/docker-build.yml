@@ -19,7 +19,7 @@ jobs:
 
       - name: Build
         run: |
-          buildah bud -t git.miku/${{ github.repository }}:main .
+          buildah bud --build-arg RUN_BENCHMARKS=1 -t git.miku/${{ github.repository }}:main .
       - name: Push
         run: |
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
