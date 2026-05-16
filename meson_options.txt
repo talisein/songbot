@@ -2,3 +2,7 @@ option('build_anidb_sourcegen', type : 'boolean', value : false, description:
 '''Queries vocadb for song data and generates constexpr source code
 representation. Only intended for developer, this data will just be checked in
 (otherwise github action will scrape on every build).''')
+
+option('install_tests', type : 'boolean', value : false, description:
+'''Install test and benchmark executables alongside the main binary.
+Intended for container images where the benchmark should be runnable post-install.''')
