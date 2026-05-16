@@ -725,6 +725,7 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "Mobile Sensation", "MobiRe SenS@tion"},
             { "To the End of Infinity", "To Beyond a Duodecillion"},
             { "Can You Hear It?", "Can You Hear Me?"},
+            { "Salome", "Salomé"},
     };
     return res;
 }
