@@ -9320,67 +9320,64 @@ constexpr std::array<song_pv, 3> pvs_song_709668 {{
 
 /* End Song 709668: EVOLVE EVOLVE EVOLVE */
 
-/* Start Song 8396: Far Away */
+/* Start Song 2941: Far Away (GAME edit) */
 
-constexpr std::array<additional_name, 1> names_song_8396 {{
-  {"English"sv, R"XYX(Far Away)XYX"sv},
+constexpr std::array<additional_name, 1> names_song_2941 {{
+  {"English"sv, R"XYX(Far Away (GAME edit))XYX"sv},
 }};
 
-constexpr std::array<web_link, 3> web_links_song_8396 {{
-  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/Far_Away/kz)XYX"sv, 71443 },
-  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/Far_Away)XYX"sv, 71444 },
-  {"Commercial"sv, R"XYX(Spotify)XYX"sv, R"XYX(https://play.spotify.com/track/4TY0ecl4AEbkuK6aQhcFsH)XYX"sv, 74852 },
+constexpr std::array<web_link, 0> web_links_song_2941 {{
 }};
 
 
-#if __has_embed("song_pic_orig_8396") == __STDC_EMBED_FOUND__
-constexpr std::array song_pic_orig_8396 = std::to_array<std::uint8_t>({
-    #embed "song_pic_orig_8396"
+#if __has_embed("song_pic_orig_2941") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_2941 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_2941"
 });
-constexpr std::string_view song_mime_type_orig_8396 = "image/jpeg";
-constexpr std::string_view song_file_ext_orig_8396 = "jpeg";
+constexpr std::string_view song_mime_type_orig_2941 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_2941 = "jpeg";
 #else
-constexpr std::array<std::uint8_t, 0> song_pic_orig_8396;
-constexpr std::string_view song_mime_type_orig_8396 = "inode/x-empty";
-constexpr std::string_view song_file_ext_orig_8396;
+constexpr std::array<std::uint8_t, 0> song_pic_orig_2941;
+constexpr std::string_view song_mime_type_orig_2941 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_2941;
 #endif
 
-constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_8396;
-constexpr std::string_view song_mime_type_small_thumb_8396 = "inode/x-empty";
-constexpr std::string_view song_file_ext_small_thumb_8396;
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_2941;
+constexpr std::string_view song_mime_type_small_thumb_2941 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_2941;
 
 
-#if __has_embed("song_pic_thumb_8396") == __STDC_EMBED_FOUND__
-constexpr std::array song_pic_thumb_8396 = std::to_array<std::uint8_t>({
-    #embed "song_pic_thumb_8396"
+#if __has_embed("song_pic_thumb_2941") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_2941 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_2941"
 });
-constexpr std::string_view song_mime_type_thumb_8396 = "image/jpeg";
-constexpr std::string_view song_file_ext_thumb_8396 = "jpeg";
+constexpr std::string_view song_mime_type_thumb_2941 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_2941 = "jpeg";
 #else
-constexpr std::array<std::uint8_t, 0> song_pic_thumb_8396;
-constexpr std::string_view song_mime_type_thumb_8396 = "inode/x-empty";
-constexpr std::string_view song_file_ext_thumb_8396;
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_2941;
+constexpr std::string_view song_mime_type_thumb_2941 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_2941;
 #endif
 
-constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_8396;
-constexpr std::string_view song_mime_type_tiny_thumb_8396 = "inode/x-empty";
-constexpr std::string_view song_file_ext_tiny_thumb_8396;
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_2941;
+constexpr std::string_view song_mime_type_tiny_thumb_2941 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_2941;
 
-constexpr picture picture_song_8396 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/Ty23LnIH4oA/hqdefault.jpg)XYX"sv, song_pic_orig_8396, song_mime_type_orig_8396, song_file_ext_orig_8396, std::nullopt, song_pic_small_thumb_8396, song_mime_type_small_thumb_8396, song_file_ext_small_thumb_8396, R"XYX(https://i.ytimg.com/vi/Ty23LnIH4oA/default.jpg)XYX"sv, song_pic_thumb_8396, song_mime_type_thumb_8396, song_file_ext_thumb_8396, std::nullopt, song_pic_tiny_thumb_8396, song_mime_type_tiny_thumb_8396, song_file_ext_tiny_thumb_8396  };
+constexpr picture picture_song_2941 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/05s4z86pwdQ/hqdefault.jpg)XYX"sv, song_pic_orig_2941, song_mime_type_orig_2941, song_file_ext_orig_2941, std::nullopt, song_pic_small_thumb_2941, song_mime_type_small_thumb_2941, song_file_ext_small_thumb_2941, R"XYX(https://i.ytimg.com/vi/05s4z86pwdQ/default.jpg)XYX"sv, song_pic_thumb_2941, song_mime_type_thumb_2941, song_file_ext_thumb_2941, std::nullopt, song_pic_tiny_thumb_2941, song_mime_type_tiny_thumb_2941, song_file_ext_tiny_thumb_2941  };
 
-constexpr std::array<song_artists, 2> song_artists_song_8396 {{
-  { artist_t{ R"XYX(RE:NDZ, ダイソンP, Daison P)XYX"sv, "Producer"sv, false, 89, R"XYX(kz)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 29 }, "Producer"sv, "Default"sv, 5242, false, false, R"XYX(kz)XYX"sv, "Default"sv },
-  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 5243, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+constexpr std::array<song_artists, 2> song_artists_song_2941 {{
+  { artist_t{ R"XYX(RE:NDZ, ダイソンP, Daison P)XYX"sv, "Producer"sv, false, 89, R"XYX(kz)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 29 }, "Producer"sv, "Default"sv, 1491, false, false, R"XYX(kz)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 1492, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
 }};
 
-constexpr std::array<std::string_view, 1> culture_codes_song_8396 {{
+constexpr std::array<std::string_view, 1> culture_codes_song_2941 {{
 "ja"sv, }};
 
-constexpr std::array<song_pv, 1> pvs_song_8396 {{
-  { R"XYX(livetune+ - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 432491, 307, R"XYX(Far Away)XYX"sv, 2018y/9/4, R"XYX(Ty23LnIH4oA)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/Ty23LnIH4oA/default.jpg)XYX"sv, R"XYX(https://youtu.be/Ty23LnIH4oA)XYX"sv },
+constexpr std::array<song_pv, 1> pvs_song_2941 {{
+  { R"XYX(KamJPCH)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 703240, 187, R"XYX(【初音ミク】Far Away【Project DIVA Future Tone】)XYX"sv, 2016y/6/26, R"XYX(05s4z86pwdQ)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/05s4z86pwdQ/default.jpg)XYX"sv, R"XYX(https://youtu.be/05s4z86pwdQ)XYX"sv },
 }};
 
-/* End Song 8396: Far Away */
+/* End Song 2941: Far Away (GAME edit) */
 
 /* Start Song 2652: Sayonara Goodbye */
 
@@ -33074,7 +33071,7 @@ export constexpr std::array<song, 459> songs {{
   {R"XYX(エスパーエスパー, Psychic Psychic, 에스퍼 에스퍼)XYX"sv, song_artists_song_593626, R"XYX(NayutalieN feat. Hatsune Miku)XYX"sv, 2024y/3/1, R"XYX(エスパーエスパー)XYX"sv, "Japanese"sv, std::nullopt, 30, 593626, std::chrono::seconds(177), picture_song_593626, 157000, std::nullopt, 157000, R"XYX(Esper Esper)XYX"sv, names_song_593626, std::nullopt, 2024y/3/1, pvs_song_593626, "NicoNicoDouga, Youtube, Bilibili"sv, 186, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/VA35FGCCX0E/default.jpg)XYX"sv, 23, web_links_song_593626, culture_codes_song_593626},
   {R"XYX(それがあなたの幸せとしても, Sore ga Anata no Shiawase to Shite mo, Even If It's the Happiness of You, Even If You Assume That It is Your Happiness, 그것이 당신의 행복이라 할지라도)XYX"sv, song_artists_song_26010, R"XYX(Heavenz feat. Megurine Luka)XYX"sv, 2013y/3/29, R"XYX(それがあなたの幸せとしても)XYX"sv, "Japanese"sv, std::nullopt, 19, 26010, std::chrono::seconds(268), picture_song_26010, 77000, std::nullopt, 77000, R"XYX(Even If It's Your Happiness)XYX"sv, names_song_26010, std::nullopt, 2013y/4/2, pvs_song_26010, "NicoNicoDouga, Youtube, Bilibili"sv, 155, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/20503793/20503793)XYX"sv, 23, web_links_song_26010, culture_codes_song_26010},
   {R"XYX(しんかしんかしんか, Shinka Shinka Shinka, Evolution Evolution Evolution)XYX"sv, song_artists_song_709668, R"XYX(Sasuke Haraguchi feat. Hatsune Miku)XYX"sv, 2024y/12/6, R"XYX(しんかしんかしんか)XYX"sv, "Japanese"sv, std::nullopt, 17, 709668, std::chrono::seconds(197), picture_song_709668, std::nullopt, std::nullopt, std::nullopt, R"XYX(EVOLVE EVOLVE EVOLVE)XYX"sv, names_song_709668, std::nullopt, 2024y/12/6, pvs_song_709668, "NicoNicoDouga, Youtube"sv, 93, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/O_kA7kM3Sos/default.jpg)XYX"sv, 10, web_links_song_709668, culture_codes_song_709668},
-  {std::nullopt, song_artists_song_8396, R"XYX(kz feat. Hatsune Miku)XYX"sv, 2012y/1/14, R"XYX(Far Away)XYX"sv, "English"sv, std::nullopt, 19, 8396, std::chrono::seconds(306), picture_song_8396, 130000, std::nullopt, 130000, R"XYX(Far Away)XYX"sv, names_song_8396, 2941, 2012y/3/14, pvs_song_8396, "Youtube"sv, 122, "Remix"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/Ty23LnIH4oA/default.jpg)XYX"sv, 14, web_links_song_8396, culture_codes_song_8396},
+  {std::nullopt, song_artists_song_2941, R"XYX(kz feat. Hatsune Miku)XYX"sv, 2011y/11/6, R"XYX(Far Away (GAME edit))XYX"sv, "English"sv, std::nullopt, 11, 2941, std::chrono::seconds(200), picture_song_2941, 130000, std::nullopt, 130000, R"XYX(Far Away (GAME edit))XYX"sv, names_song_2941, std::nullopt, 2009y/7/2, pvs_song_2941, "Youtube"sv, 63, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/05s4z86pwdQ/default.jpg)XYX"sv, 15, web_links_song_2941, culture_codes_song_2941},
   {R"XYX(サヨナラ・グッバイ, Sayonara, Goodbye, 사요나라 굿바이)XYX"sv, song_artists_song_2652, R"XYX(Noboru, Project DIVA Channel feat. Hatsune Miku)XYX"sv, 2011y/11/4, R"XYX(サヨナラ・グッバイ)XYX"sv, "Japanese"sv, std::nullopt, 34, 2652, std::chrono::seconds(175), picture_song_2652, 154000, std::nullopt, 154000, R"XYX(Sayonara Goodbye)XYX"sv, names_song_2652, std::nullopt, 2009y/10/27, pvs_song_2652, "NicoNicoDouga, Youtube, Piapro"sv, 188, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/8637248/8637248)XYX"sv, 27, web_links_song_2652, culture_codes_song_2652},
   {R"XYX(ファサード・クエスチョン, Façade Question, 파사드 질문, Questão de fachada)XYX"sv, song_artists_song_771172, R"XYX(32ki feat. Hatsune Miku, Kasane Teto, Kasane Teto SV)XYX"sv, 2025y/4/1, R"XYX(ファサード・クエスチョン)XYX"sv, "Japanese"sv, std::nullopt, 30, 771172, std::chrono::seconds(250), picture_song_771172, std::nullopt, std::nullopt, std::nullopt, R"XYX(Facade Question)XYX"sv, names_song_771172, std::nullopt, 2025y/4/1, pvs_song_771172, "NicoNicoDouga, Youtube"sv, 202, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/njKdvdYQ-xE/default.jpg)XYX"sv, 34, web_links_song_771172, culture_codes_song_771172},
   {R"XYX(ファインダー (DSLR remix re:edit))XYX"sv, song_artists_song_291623, R"XYX(kz feat. Hatsune Miku)XYX"sv, 2020y/8/15, R"XYX(ファインダー (DSLR remix re:edit))XYX"sv, "Japanese"sv, std::nullopt, 17, 291623, std::chrono::seconds(217), picture_song_291623, 130000, std::nullopt, 130000, R"XYX(Finder (DSLR remix re:edit))XYX"sv, names_song_291623, 5221, 2010y/7/29, pvs_song_291623, "Youtube"sv, 77, "Remix"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/3zm8HmChkLg/default.jpg)XYX"sv, 4, web_links_song_291623, culture_codes_song_291623},

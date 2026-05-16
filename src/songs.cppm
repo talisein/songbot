@@ -468,7 +468,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"木枯らしの朝", "Kogarashi no Asa", "Anyway the Wind Blows", Miku, "Deadball-P", 8791},
   {"筆おろし", "Fude Oroshi", "First Time", Miku, "Deadball-P", 2477},
   {"既成事実", "Kisei Jijitsu", "I Remember About You Forever", Miku, "Deadball-P", 8789},
-  {nullopt, nullopt, "Far Away", Miku, "kz", 8396},
+  {nullopt, nullopt, "Far Away", Miku, "kz", 2941},
   {nullopt, nullopt, "Heart Beat", Miku, "kz", 5232},
   {nullopt, nullopt, "Crosslight", duet(Miku, Gumi), "kz", 1465},
   {"ブラック★ロックシューター", "Black★Rock Shooter", "Black★Rock Shooter", Miku, "ryo", 1323},
