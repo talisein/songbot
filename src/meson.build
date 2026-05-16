@@ -299,11 +299,59 @@ concerts_module = custom_target('concerts_module',
     depends: [std_module, concerts_types_module, concerts_raw_data_module, concerts_data_module, concerts_algorithms_module]
 )
 
+project_diva_types_module = custom_target('project_diva_types_module',
+    input: 'project_diva_types.cppm',
+    output: ['project_diva_types.o', 'project_diva_types.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module]
+)
+
+project_diva_tracks_module = custom_target('project_diva_tracks_module',
+    input: 'project_diva_tracks.cppm',
+    output: ['project_diva_tracks.o', 'project_diva_tracks.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module, project_diva_types_module]
+)
+
+project_diva_module = custom_target('project_diva_module',
+    input: 'project_diva.cppm',
+    output: ['project_diva.o', 'project_diva.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+        '-fconstexpr-ops-limit=3355443200',
+    ],
+    depends: [std_module, uni_algo_module, magic_enum_module, songs_module, util_module, project_diva_types_module, project_diva_tracks_module]
+)
+
 
 misc_modules_lib = static_library('misc',
-                                  objects: [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_types_module[0], concerts_raw_data_module[0], concerts_data_module[0], concerts_algorithms_module[0], concerts_module[0], dpp_module[0], prometheus_module[0], util_module[0], errors_module[0]])
+                                  objects: [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_types_module[0], concerts_raw_data_module[0], concerts_data_module[0], concerts_algorithms_module[0], concerts_module[0], dpp_module[0], prometheus_module[0], util_module[0], errors_module[0], project_diva_types_module[0], project_diva_tracks_module[0], project_diva_module[0]])
 
-misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_types_module[1], concerts_raw_data_module[1], concerts_data_module[1], concerts_algorithms_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], std_module]
+misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_types_module[1], concerts_raw_data_module[1], concerts_data_module[1], concerts_algorithms_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], project_diva_types_module[1], project_diva_tracks_module[1], project_diva_module[1], std_module]
 
 project_version = vcs_tag(input: 'version.hpp.in',
                           output: 'version.hpp',

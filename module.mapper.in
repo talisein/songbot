@@ -5,6 +5,9 @@ concerts:raw_data  @BUILD_DIR@/src/concerts-raw_data.gcm
 concerts:data  @BUILD_DIR@/src/concerts-data.gcm
 concerts:algorithms  @BUILD_DIR@/src/concerts-algorithms.gcm
 concerts  @BUILD_DIR@/src/concerts.gcm
+project_diva:types @BUILD_DIR@/src/project_diva_types.gcm
+project_diva:tracks @BUILD_DIR@/src/project_diva_tracks.gcm
+project_diva @BUILD_DIR@/src/project_diva.gcm
 songbot.errors  @BUILD_DIR@/src/errors.gcm
 vocadb.api  @BUILD_DIR@/src/vocadb/vocadb-api.gcm
 vocadb.events  @BUILD_DIR@/src/vocadb/release_events.gcm

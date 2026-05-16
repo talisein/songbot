@@ -68,6 +68,11 @@ int main()
         expect(eq(str, "[Fire◎Flower](https://vocadb.net/S/6387) feat. <:len:235217877446295553> by halyosy"sv));
     };
 
+    "cf_songname"_test = [] {
+      auto str = std::format("{}", *lookup_song("setsuna"));
+      expect(eq(str, "[ＳＥＴＳＵＮＡ](https://vocadb.net/S/4321) feat. <:miku:235217471982927874> by SHIKI"sv));
+    };
+
     "altname"_test = [] {
         auto str = std::format("{}", *lookup_song("LLNF"));
         expect(eq(str, "[ルカルカ★ナイトフィーバー / Luka Luka★Night Fever](https://vocadb.net/S/1435) feat. <:luka:235216119403773952> by samfree"sv));
