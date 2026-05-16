@@ -73,6 +73,25 @@ export struct GameTrack
   std::optional<std::string_view> emoji_override; // Darkness
 };
 
+export constexpr std::string_view diva_game_short_name(DivaGames g) noexcept
+{
+    switch (g) {
+        case DIVA:        return "PD1";
+        case DIVA_ARCADE: return "PDA";
+        case DIVA_2ND:    return "PD2";
+        case DIVA_EXTEND: return "PDEX";
+        case DIVA_F:      return "PDF";
+        case DIVA_FT:     return "PDFT";
+        case DIVA_MEGA39: return "PDM39";
+        case DIVA_F2:     return "PDF2";
+        case DIVA_X:      return "PDX";
+        case MIRAI:       return "PM";
+        case MIRAI_2:     return "PM2";
+        case MIRAI_DX:    return "PMDX";
+        default:          return magic_enum::enum_name(g);
+    }
+}
+
 constexpr bool song_matches_track(const Song& s, const GameTrack& track)
 {
     return s.name == track.song &&

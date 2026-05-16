@@ -218,6 +218,15 @@ lastp_command::on_slashcommand(const dpp::slashcommand_t event)
             std::print(ss, "[VocaWiki]({})", *wiki->url);
           }
         }
+        {
+          auto games = get_song_games(*song);
+          if (!games.empty()) {
+            std::print(ss, " Games: {}", diva_game_short_name(games.front()));
+            for (const auto& g : games | std::views::drop(1)) {
+              std::print(ss, ", {}", diva_game_short_name(g));
+            }
+          }
+        }
         if (auto it = std::ranges::find(localvoid::localvoid_ranks, *song->vocadb_id, &localvoid::localvoid_data::vocadb_id);
             it != std::ranges::end(localvoid::localvoid_ranks))
         {

@@ -129,6 +129,17 @@ export bool song_is_game_track(const Song& song)
     return std::ranges::any_of(diva_tracks, [&](const GameTrack& t) { return song_matches_track(song, t); });
 }
 
+export std::vector<DivaGames> get_song_games(const Song& song)
+{
+    std::vector<DivaGames> result;
+    for (const auto& track : diva_tracks) {
+        if (song_matches_track(song, track) && !std::ranges::contains(result, track.game)) {
+            result.push_back(track.game);
+        }
+    }
+    return result;
+}
+
 constexpr auto game_song_exists = [](const GameTrack& track) constexpr {
     return std::ranges::any_of(songs, [&](const Song& s) { return song_matches_track(s, track); });
 };
