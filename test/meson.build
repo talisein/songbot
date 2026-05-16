@@ -24,3 +24,8 @@ concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, misc_mod
                             link_whole: [misc_modules_lib, vocadb_lib],
                             dependencies: [boostut_dep, dpp_dep])
 test('concerts', concerts_test, args: [ut_args])
+
+project_diva_test = executable('project_diva_test', 'project_diva.cpp', ut_module, misc_modules_gcm, vocadb_gcm,
+                               link_whole: [misc_modules_lib, vocadb_lib],
+                               dependencies: [boostut_dep, dpp_dep])
+test('project_diva', project_diva_test, args: [ut_args])

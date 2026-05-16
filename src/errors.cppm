@@ -28,6 +28,7 @@ export enum class songbot_error : int
     missing_api_token,
     autocomplete_no_match,
     no_match,
+    multiple_matches,
     autocomplete_no_focused_option,
     reply_failure,
     explosion,
@@ -55,6 +56,8 @@ public:
                 return "No match for autocompletion"s;
             case songbot_error::no_match:
                 return "No match for request"s;
+            case songbot_error::multiple_matches:
+                return "Multiple matches for request"s;
             case songbot_error::autocomplete_no_focused_option:
                 return "Autocompletion requested but no passed option was focused"s;
             case songbot_error::reply_failure:
