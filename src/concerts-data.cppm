@@ -72,6 +72,12 @@ namespace {
 }
 
 export constexpr std::array song_frequencies = util::materialize<generate_song_frequency<>>();
+
+export constexpr auto setlists_by_song = util::materialize<[]() {
+    auto copy = setlists;
+    std::ranges::sort(copy, {}, &SetlistTrack::song);
+    return copy;
+}>();
 export constexpr std::array song_frequencies_expo = util::materialize<generate_song_frequency<is_miku_expo>>();
 export constexpr std::array song_frequencies_mirai = util::materialize<generate_song_frequency<is_mirai>>();
 export constexpr std::array song_frequencies_mwy = util::materialize<generate_song_frequency<is_miku_with_you>>();

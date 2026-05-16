@@ -94,7 +94,8 @@ find_song_for_track(const SetlistTrack& track)
 
 export bool song_is_concert_track(const Song& song)
 {
-    return std::ranges::any_of(setlists, [&](const SetlistTrack& t) { return song_matches_track(song, t); });
+    auto [first, last] = std::ranges::equal_range(setlists_by_song, song.name, {}, &SetlistTrack::song);
+    return std::ranges::any_of(first, last, [&](const SetlistTrack& t) { return song_matches_track(song, t); });
 }
 
 /* Check that all concerts are ordered chronologically */
