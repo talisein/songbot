@@ -19,6 +19,7 @@
 import util;
 import songs;
 import concerts;
+import project_diva;
 import songbot.errors;
 import vocadb.api;
 import vocadb.songs;
@@ -204,26 +205,56 @@ producer_command::on_slashcommand(const dpp::slashcommand_t event)
         include_last = std::get<bool>(v);
     }
 
+    std::vector<Song> concert_songs, game_only_songs, neat_songs;
+    for (const auto& s : song_list) {
+        if (song_is_concert_track(s))
+            concert_songs.push_back(s);
+        else if (song_is_game_track(s))
+            game_only_songs.push_back(s);
+        else
+            neat_songs.push_back(s);
+    }
+
     std::vector<std::string> body_lines;
-    if (song_list.empty()) {
+    if (concert_songs.empty() && game_only_songs.empty() && neat_songs.empty()) {
         body_lines.emplace_back("\nNo songs in the concert database.");
     } else {
-        body_lines.push_back(std::format("{} Live Songs:\n", song_list.size()));
-        for (const auto& song : song_list) {
-            std::string suffix;
-            auto role = artist_role_in_song(*song.vocadb_id, artist->id);
-            if (!role.empty() && role != "Default"sv) {
-                suffix += std::format(" *({})*", role);
-            }
-            if (include_last) {
-                auto last_rng = std::views::reverse(setlists)
-                    | std::views::filter([&](const auto& track) { return track.song == song.name; })
-                    | std::views::filter(is_past_spoiler_window);
-                if (!std::ranges::empty(last_rng)) {
-                    suffix += std::format(" *Last: {}*", tour_to_string(std::ranges::begin(last_rng)->concert_short_name));
+        if (!concert_songs.empty()) {
+            body_lines.push_back(std::format("{} Live Songs:\n", concert_songs.size()));
+            for (const auto& song : concert_songs) {
+                std::string suffix;
+                auto role = artist_role_in_song(*song.vocadb_id, artist->id);
+                if (!role.empty() && role != "Default"sv)
+                    suffix += std::format(" *({})*", role);
+                if (include_last) {
+                    auto last_rng = std::views::reverse(setlists)
+                        | std::views::filter([&](const auto& track) { return track.song == song.name; })
+                        | std::views::filter(is_past_spoiler_window);
+                    if (!std::ranges::empty(last_rng))
+                        suffix += std::format(" *Last: {}*", tour_to_string(std::ranges::begin(last_rng)->concert_short_name));
                 }
+                body_lines.push_back(std::format("- {}{}\n", song, suffix));
             }
-            body_lines.push_back(std::format("- {}{}\n", song, suffix));
+        }
+        if (!game_only_songs.empty()) {
+            body_lines.push_back(std::format("\n{} In the games, not yet in a concert:\n", game_only_songs.size()));
+            for (const auto& song : game_only_songs) {
+                std::string suffix;
+                auto role = artist_role_in_song(*song.vocadb_id, artist->id);
+                if (!role.empty() && role != "Default"sv)
+                    suffix = std::format(" *({})*", role);
+                body_lines.push_back(std::format("- {}{}\n", song, suffix));
+            }
+        }
+        if (!neat_songs.empty()) {
+            body_lines.push_back(std::format("\nOther songs:\n", neat_songs.size()));
+            for (const auto& song : neat_songs) {
+                std::string suffix;
+                auto role = artist_role_in_song(*song.vocadb_id, artist->id);
+                if (!role.empty() && role != "Default"sv)
+                    suffix = std::format(" *({})*", role);
+                body_lines.push_back(std::format("- {}{}\n", song, suffix));
+            }
         }
     }
 

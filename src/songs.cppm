@@ -791,19 +791,19 @@ public:
             out << '[';
         }
         if (song.jp_name) {
-            out << una::norm::to_nfc_utf8(*song.jp_name) << ' ';
+            out << util::escape_markdown(una::norm::to_nfc_utf8(*song.jp_name)) << ' ';
             if (song.romanji_name && *song.cf_romanji_name != song.cf_name) {
-                out << "(" << una::norm::to_nfc_utf8(*song.romanji_name) << ") ";
+                out << "(" << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << ") ";
             }
             out << "/ ";
         } else {
             // romanji but no jp could be other languages (Venus at the fingertips)
             if (song.romanji_name) {
-                out << una::norm::to_nfc_utf8(*song.romanji_name) << " / ";
+                out << util::escape_markdown(una::norm::to_nfc_utf8(*song.romanji_name)) << " / ";
             }
 
         }
-        out << song.name;
+        out << util::escape_markdown(song.name);
         if (song.vocadb_id) {
             /* to_string avoids locale-dependent digit grouping in URLs */
             out << "](https://vocadb.net/S/" << std::to_string(*song.vocadb_id) << ')';

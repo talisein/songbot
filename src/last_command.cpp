@@ -19,6 +19,7 @@
 import util;
 import concerts;
 import songs;
+import project_diva;
 import songbot.errors;
 import vocadb.api;
 import vocadb.songs;
@@ -128,37 +129,40 @@ last_command::on_slashcommand(const dpp::slashcommand_t event)
   /* Song is populated now. Find the most recent concert. */
   auto prev_concerts_rng = std::views::filter(std::views::reverse(setlists), util::bind_front<exact_song_track_match>(*song)) |
     std::views::filter(is_past_spoiler_window);
-  if (std::ranges::empty(prev_concerts_rng)) {
-    auto msg = dpp::message(std::format("I'm sorry, '{}' isn't in a concert I know about yet.", param)).set_flags(dpp::message_flags::m_ephemeral);
-    co_return co_await util::reply_handler_new(event.co_reply(msg), ctx, last_failure_counter, last_failure_counter);
-  }
-
-  auto count = std::ranges::distance(prev_concerts_rng);
-
   std::ostringstream ss;
-  using namespace std::literals;
-  ss << std::format("{} last played at {}", *song, lookup_concert(std::ranges::begin(prev_concerts_rng)->concert_short_name)->name);
-  ss << std::ranges::begin(prev_concerts_rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(".");
-
-  auto remaining_concerts_rng = std::views::drop(prev_concerts_rng, 1);
   std::ostringstream priors;
-  if (std::ranges::empty(remaining_concerts_rng)) {
-    ss << " That's the only time its played!";
-  } else {
-    priors << "Prior lives: ";
-    priors << tour_to_string(std::ranges::begin(remaining_concerts_rng)->concert_short_name);
-    if (auto it = std::ranges::begin(remaining_concerts_rng); it->variant.has_value()) {
-      priors << " `" << it->variant.value() << "`";
-    }
+  using namespace std::literals;
 
-    for (auto track : std::views::drop(remaining_concerts_rng, 1)) {
-      priors << ", " << tour_to_string(track.concert_short_name);
-      if (track.variant.has_value()) {
-        priors << " `" << track.variant.value() << "`";
-      }
+  if (std::ranges::empty(prev_concerts_rng)) {
+    if (song_is_game_track(*song)) {
+      ss << std::format("{} hasn't been performed at a concert yet, but it is in the Project DIVA games.", *song);
+    } else {
+      ss << std::format("{} isn't in a concert or game I know about yet — I just think it's neat!", *song);
     }
-    priors << ". " << count << " times total.";
-    priors << " Frequency Rank " << get_song_frequency_rank(song->name);
+  } else {
+    auto count = std::ranges::distance(prev_concerts_rng);
+    ss << std::format("{} last played at {}", *song, lookup_concert(std::ranges::begin(prev_concerts_rng)->concert_short_name)->name);
+    ss << std::ranges::begin(prev_concerts_rng)->variant.transform([](const auto &v) { return std::format(" `{}`. ", v); }).value_or(".");
+
+    auto remaining_concerts_rng = std::views::drop(prev_concerts_rng, 1);
+    if (std::ranges::empty(remaining_concerts_rng)) {
+      ss << " That's the only time its played!";
+    } else {
+      priors << "Prior lives: ";
+      priors << tour_to_string(std::ranges::begin(remaining_concerts_rng)->concert_short_name);
+      if (auto it = std::ranges::begin(remaining_concerts_rng); it->variant.has_value()) {
+        priors << " `" << it->variant.value() << "`";
+      }
+
+      for (auto track : std::views::drop(remaining_concerts_rng, 1)) {
+        priors << ", " << tour_to_string(track.concert_short_name);
+        if (track.variant.has_value()) {
+          priors << " `" << track.variant.value() << "`";
+        }
+      }
+      priors << ". " << count << " times total.";
+      priors << " Frequency Rank " << get_song_frequency_rank(song->name);
+    }
   }
 
   struct pic_details

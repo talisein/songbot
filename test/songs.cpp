@@ -140,6 +140,14 @@ int main()
         expect(song.has_value());
         expect(eq(song->cf_producer, "flavor foley"sv));
     };
+
+    "markdown escapes * in song names"_test = [] {
+        auto song = lookup_song("雨のちSweet*Drops");
+        expect(song.has_value());
+        auto str = std::format("{}", *song);
+        expect(eq(str, "[雨のちSweet\\*Drops (Ame Nochi Sweet\\*Drops) / Sweet\\*Drops After the Rain](https://vocadb.net/S/2948) feat. <:miku:235217471982927874> by OSTER project"sv));
+    };
+
     return 0;
 
 }
