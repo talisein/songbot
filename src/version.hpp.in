@@ -19,3 +19,4 @@
 import std;
 
 constexpr std::string_view BUILD_GIT_COMMIT { "PROJ_VERSION" };
+constexpr std::string_view BUILD_GIT_COMMIT_MSG { "PROJ_COMMIT_MSG" };

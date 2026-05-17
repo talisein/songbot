@@ -356,10 +356,13 @@ misc_modules_lib = static_library('misc',
 
 misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_types_module[1], concerts_raw_data_module[1], concerts_data_module[1], concerts_algorithms_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], project_diva_types_module[1], project_diva_tracks_module[1], project_diva_module[1], std_module]
 
-project_version = vcs_tag(input: 'version.hpp.in',
-                          output: 'version.hpp',
-                          replace_string: 'PROJ_VERSION',
-                          fallback: meson.project_version())
+python3 = find_program('python3')
+project_version = custom_target('version.hpp',
+    input: 'version.hpp.in',
+    output: 'version.hpp',
+    command: [python3, files('gen_version.py'), '@INPUT@', '@OUTPUT@', meson.project_version()],
+    build_always_stale: true,
+)
 
 
 subdir('vocadb')
