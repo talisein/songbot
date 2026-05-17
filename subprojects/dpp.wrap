@@ -2,8 +2,8 @@
 source_url = https://github.com/brainboxdotcc/DPP/releases/download/v10.1.4/DPP-10.1.4.tar.gz
 source_filename = DPP-10.1.4.tar.gz
 source_hash = f11b6d3fc5cc8febcf672b573ca74293ead6c6ea48a66ac0316ab9a5cbd09441
-method = cmake
 directory = DPP-10.1.4
+patch_directory = dpp
 
 [provide]
 dpp = dpp_dep

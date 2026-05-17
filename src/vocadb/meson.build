@@ -17,9 +17,6 @@ vocadb_api_module = custom_target('vocadb_api_module',
 if get_option('build_anidb_sourcegen')
 
   curl_cpr_dep = dependency('cpr')
-  json_dep = dependency('nlohmann_json',
-                        version: '>=3.12.99',
-                        fallback: 'json')
 
 #  cpr_inc = curl_cpr_dep.get_variable(cmake: 'CPR_INCLUDE_DIRS')
   cpr_h_module = custom_target('cpr_h_module',
@@ -51,7 +48,7 @@ if get_option('build_anidb_sourcegen')
         '-o', '@OUTPUT0@',
 #        '-I', cpr_inc,
     ],
-    depends: [cpr_h_module]
+    depends: [cpr_h_module, std_module]
   )
 
   json_module = custom_target('json_module',
@@ -66,7 +63,7 @@ if get_option('build_anidb_sourcegen')
         '-c', '@INPUT@',
         '-o', '@OUTPUT0@',
         '-DNLOHMANN_JSON_BUILD_MODULES',
-        '-I', '../subprojects/json-9810c39/include',
+        '-I', nlohmann_json_dep.get_variable('includedir'),
     ],
     depends: [std_module]
   )
@@ -97,7 +94,7 @@ if get_option('build_anidb_sourcegen')
   scraper_src = ['main.cpp', 'scraper.cpp']
 
   scraper_exe = executable('vocadb-scraper', scraper_src, json_module, cpr_module, misc_modules_gcm, magic_module, vocadb_api_module,
-                           dependencies: [magic_enum_dep, curl_cpr_dep, json_dep, dpp_dep, magic_dep],
+                           dependencies: [magic_enum_dep, curl_cpr_dep, nlohmann_json_dep, dpp_dep, magic_dep],
                            link_with: misc_modules_lib,
                            sources: scraper_conf_file)
 

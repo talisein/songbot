@@ -24,17 +24,10 @@ systemd_dep = dependency('libsystemd')
 zlib_dep = dependency('zlib')
 ssl_dep = dependency('openssl')
 
-# DPP discord library
+# DPP discord library — native Meson build via subprojects/packagefiles/dpp/meson.build
 cmake = import('cmake')
-dpp_opts = cmake.subproject_options()
-dpp_opts.add_cmake_defines({'DPP_BUILD_TEST': false})
-dpp_opts.add_cmake_defines({'DPP_NO_VCPKG': true})
-dpp_opts.add_cmake_defines({'DPP_NO_CONAN': true})
-dpp_opts.add_cmake_defines({'BUILD_SHARED_LIBS': true})
-dpp_opts.add_cmake_defines({'BUILD_VOICE_SUPPORT': false})
-dpp_opts.add_cmake_defines({'CMAKE_SUPPRESS_DEVELOPER_WARNINGS': true})
-dpp_proj = cmake.subproject('dpp', options: dpp_opts)
-dpp_dep = dpp_proj.dependency('dpp')
+dpp_dep = dependency('dpp', fallback: ['dpp', 'dpp_dep'])
+nlohmann_json_dep = dependency('nlohmann_json', fallback: ['json', 'nlohmann_json_multiple_headers'])
 
 # prometheus-cpp
 prometheus_opts = cmake.subproject_options()
@@ -59,14 +52,7 @@ module_conf_data.set('PROMETHEUS_CORE_INCLUDEDIR', prometheus_core_inc)
 prometheus_pull_inc = prometheus_pull_dep.get_variable('includedir', default_value: '@0@/subprojects/prometheus-cpp-with-submodules/pull/include'.format(meson.project_source_root()))
 module_conf_data.set('PROMETHEUS_PULL_INCLUDEDIR', prometheus_pull_inc)
 
-_python3 = find_program('python3', required: true)
-_dpp_wrap_dir = run_command(
-    _python3, '-c',
-    'import configparser; c = configparser.ConfigParser(); c.read("@0@"); print(c["wrap-file"]["directory"])'.format(
-        meson.project_source_root() / 'subprojects' / 'dpp.wrap'),
-    check: true
-).stdout().strip()
-dpp_includedir = meson.project_source_root() / 'subprojects' / _dpp_wrap_dir / 'include'
+dpp_includedir = dpp_dep.get_variable('includedir')
 module_conf_data.set('DPP_INCLUDEDIR', dpp_includedir)
 
 module_mapper_file = configure_file(input: 'module.mapper.in',
@@ -81,6 +67,7 @@ add_project_arguments( '-fmodules',
                        '-fcoroutines',
                        '-fconstexpr-ops-limit=3355443200',
                        '--embed-dir=@0@'.format(meson.project_source_root() / 'res'),
+                       '-DDPP_USE_EXTERNAL_JSON',
                        language: ['cpp'])
 
 cxx_compiler = meson.get_compiler('cpp')

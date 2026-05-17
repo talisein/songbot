@@ -20,11 +20,11 @@ module;
 
 #include <cassert>
 #include <cerrno>
-#include "dpp/coro/task.h"
 
 export module util;
 
 import std;
+import dpp;
 import uni_algo;
 import magic_enum;
 import songbot.errors;
