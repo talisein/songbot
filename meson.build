@@ -25,31 +25,24 @@ zlib_dep = dependency('zlib')
 ssl_dep = dependency('openssl')
 
 # DPP discord library — native Meson build via subprojects/packagefiles/dpp/meson.build
-cmake = import('cmake')
 dpp_dep = dependency('dpp', fallback: ['dpp', 'dpp_dep'])
 nlohmann_json_dep = dependency('nlohmann_json', fallback: ['json', 'nlohmann_json_multiple_headers'])
 
-# prometheus-cpp
-prometheus_opts = cmake.subproject_options()
-prometheus_opts.add_cmake_defines({'ENABLE_PUSH': false})
-prometheus_opts.add_cmake_defines({'ENABLE_TESTING': false})
-prometheus_opts.add_cmake_defines({'GENERATE_PKGCONFIG': false})
-prometheus_opts.add_cmake_defines({'CMAKE_SUPPRESS_DEVELOPER_WARNINGS': true})
-prometheus_proj = cmake.subproject('prometheus-cpp', options: prometheus_opts)
-prometheus_pull_dep  = prometheus_proj.dependency('pull')
-prometheus_core_dep  = prometheus_proj.dependency('core')
+# prometheus-cpp — native Meson build via subprojects/packagefiles/prometheus-cpp/meson.build
+prometheus_core_dep = dependency('prometheus-cpp-core', fallback: ['prometheus-cpp', 'core_dep'])
+prometheus_pull_dep = dependency('prometheus-cpp-pull', fallback: ['prometheus-cpp', 'pull_dep'])
 prometheus_dep = declare_dependency(dependencies: [prometheus_pull_dep, prometheus_core_dep, zlib_dep])
 
 # C++ Module Mapper
 module_conf_data = configuration_data()
 module_conf_data.set('BUILD_DIR', meson.project_build_root())
 module_conf_data.set('UNI_ALGO_INCLUDEDIR', uni_algo_dep.get_variable('includedir'))
-prometheus_core_inc = prometheus_core_dep.get_variable('includedir', default_value: '@0@/subprojects/prometheus-cpp-with-submodules/core/include'.format(meson.project_source_root()))
-prometheus_core_build_inc = meson.current_build_dir() / 'subprojects' / 'prometheus-cpp-with-submodules' / '__CMake_build' / 'core' / 'include'
-prometheus_pull_build_inc = meson.current_build_dir() / 'subprojects' / 'prometheus-cpp-with-submodules' / '__CMake_build' / 'pull' / 'include'
+prometheus_core_inc       = prometheus_core_dep.get_variable('includedir')
+prometheus_core_build_inc = prometheus_core_dep.get_variable('generated_includedir')
+prometheus_pull_inc       = prometheus_pull_dep.get_variable('includedir')
+prometheus_pull_build_inc = prometheus_pull_dep.get_variable('generated_includedir')
 
 module_conf_data.set('PROMETHEUS_CORE_INCLUDEDIR', prometheus_core_inc)
-prometheus_pull_inc = prometheus_pull_dep.get_variable('includedir', default_value: '@0@/subprojects/prometheus-cpp-with-submodules/pull/include'.format(meson.project_source_root()))
 module_conf_data.set('PROMETHEUS_PULL_INCLUDEDIR', prometheus_pull_inc)
 
 dpp_includedir = dpp_dep.get_variable('includedir')
