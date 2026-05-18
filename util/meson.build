@@ -34,6 +34,9 @@ res = gnome.compile_resources('song_searcher_resources',
     c_name: 'song_searcher_resources')
 
 executable('song_searcher',
-           ['song_searcher.cpp'],
+           ['song_searcher.cpp',
+            'song_item.cpp',
+            'primary_song_data_cell.cpp',
+            'secondary_song_data_cell.cpp'],
            res,
            dependencies: util_deps)
