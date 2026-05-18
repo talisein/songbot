@@ -92,8 +92,12 @@ int main()
     };
 
     "jp"_test = [] {
-        auto str = std::format("{}", *lookup_song("恋色病棟"));
+      auto loveward = lookup_song("恋色病棟");
+      expect(loveward.has_value());
+      if (loveward) {
+        auto str = std::format("{}", *loveward);
         expect(eq(str, "[恋色病棟 (Koi Iro Byoutou) / Love Ward](https://vocadb.net/S/3015) feat. <:miku:235217471982927874> by OSTER project"sv));
+      }
     };
 
 /*    "date"_test = [] {
