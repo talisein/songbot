@@ -4,6 +4,7 @@
 #include <peel/GLib/GLib.h>
 #include <peel/Gdk/Paintable.h>
 #include <peel/Gdk/Clipboard.h>
+#include <peel/Pango/EllipsizeMode.h>
 #include <peel/GObject/Binding.h>
 #include <peel/Soup/Session.h>
 #include <peel/Soup/Message.h>
@@ -273,6 +274,8 @@ class Application final : public Adw::Application
 
             auto name_label_float = Gtk::Label::create("");
             name_label_float->set_halign(Gtk::Align::START);
+            name_label_float->set_hexpand(true);
+            name_label_float->set_ellipsize(Pango::EllipsizeMode::END);
 
             auto artist_label_float = Gtk::Label::create("");
             artist_label_float->set_halign(Gtk::Align::START);
