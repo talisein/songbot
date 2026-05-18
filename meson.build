@@ -67,3 +67,7 @@ cxx_compiler = meson.get_compiler('cpp')
 
 subdir('src')
 subdir('test')
+
+if get_option('build_util')
+  subdir('util')
+endif
