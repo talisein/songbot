@@ -268,125 +268,161 @@ class Application final : public Adw::Application
         results = model;
         auto selection = Gtk::SingleSelection::create(std::move(model).cast<Gio::ListModel>());
 
-        auto factory = Gtk::SignalListItemFactory::create();
-        factory->connect_setup([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
-            auto *item = obj->cast<Gtk::ListItem>();
-
-            auto image_float = Gtk::Image::create();
-            image_float->set_pixel_size(64);
-
-            auto name_label_float = Gtk::Label::create("");
-            name_label_float->set_halign(Gtk::Align::START);
-            name_label_float->set_hexpand(true);
-            name_label_float->set_ellipsize(Pango::EllipsizeMode::END);
-
-            auto artist_label_float = Gtk::Label::create("");
-            artist_label_float->set_halign(Gtk::Align::START);
-
-            auto vocalist_label_float = Gtk::Label::create("");
-            vocalist_label_float->set_halign(Gtk::Align::START);
-
-            auto vbox = Gtk::Box::create(Gtk::Orientation::VERTICAL, 2);
-            vbox->append(std::move(name_label_float));
-            vbox->append(std::move(artist_label_float));
-            vbox->append(std::move(vocalist_label_float));
-            vbox->set_valign(Gtk::Align::CENTER);
-
-            auto type_label_float = Gtk::Label::create("");
-            type_label_float->set_halign(Gtk::Align::START);
-
-            auto date_label_float = Gtk::Label::create("");
-            date_label_float->set_halign(Gtk::Align::START);
-
-            auto duration_label_float = Gtk::Label::create("");
-            duration_label_float->set_halign(Gtk::Align::START);
-
-            auto info_box = Gtk::Box::create(Gtk::Orientation::VERTICAL, 2);
-            info_box->set_valign(Gtk::Align::CENTER);
-            info_box->append(std::move(type_label_float));
-            info_box->append(std::move(date_label_float));
-            info_box->append(std::move(duration_label_float));
-
-            auto id_btn_float = Gtk::Button::create_with_label("Copy ID");
-            auto names_btn_float = Gtk::Button::create_with_label("Copy Names");
-
-            auto btn_box = Gtk::Box::create(Gtk::Orientation::VERTICAL, 4);
-            btn_box->set_valign(Gtk::Align::CENTER);
-            btn_box->append(std::move(id_btn_float));
-            btn_box->append(std::move(names_btn_float));
-
-            auto hbox = Gtk::Box::create(Gtk::Orientation::HORIZONTAL, 8);
-            hbox->append(std::move(image_float));
-            hbox->append(std::move(vbox));
-            hbox->append(std::move(info_box));
-            hbox->append(std::move(btn_box));
-
-            item->set_child(std::move(hbox));
-        });
-
-        struct Bindings {
+        struct ThumbBindings {
             RefPtr<GObject::Binding> paint_bind;
+            ~ThumbBindings() { if (paint_bind) paint_bind->unbind(); }
+        };
+        struct ActionBindings {
             SignalConnection id_conn;
             SignalConnection names_conn;
-            ~Bindings() { if (paint_bind) paint_bind->unbind(); }
         };
 
-        factory->connect_bind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
-            auto *item         = obj->cast<Gtk::ListItem>();
-            auto *song         = item->get_item()->cast<SongItem>();
-            auto *hbox         = item->get_child()->cast<Gtk::Box>();
-            auto *image           = hbox->get_first_child()->cast<Gtk::Image>();
-            auto *vbox            = image->get_next_sibling()->cast<Gtk::Box>();
-            auto *name_label      = vbox->get_first_child()->cast<Gtk::Label>();
-            auto *artist_label    = name_label->get_next_sibling()->cast<Gtk::Label>();
-            auto *vocalist_label  = artist_label->get_next_sibling()->cast<Gtk::Label>();
-            auto *info_box        = vbox->get_next_sibling()->cast<Gtk::Box>();
-            auto *type_label      = info_box->get_first_child()->cast<Gtk::Label>();
-            auto *date_label      = type_label->get_next_sibling()->cast<Gtk::Label>();
-            auto *duration_label  = date_label->get_next_sibling()->cast<Gtk::Label>();
-            auto *btn_box         = info_box->get_next_sibling()->cast<Gtk::Box>();
-            auto *id_btn          = btn_box->get_first_child()->cast<Gtk::Button>();
-            auto *names_btn       = id_btn->get_next_sibling()->cast<Gtk::Button>();
-
-            int sid = song->get_id();
-
-            {
-                auto escaped = GLib::markup_escape_text(song->get_name().c_str(), -1);
-                auto markup = std::format("<a href=\"https://vocadb.net/S/{}\">{}</a>", sid, escaped.c_str());
-                name_label->set_markup(markup.c_str());
-            }
-            artist_label->set_label(song->get_artist().c_str());
-            vocalist_label->set_label(song->get_vocalists().c_str());
-            type_label->set_label(song->get_song_type().c_str());
-            date_label->set_label(song->get_publish_date().c_str());
-            duration_label->set_label(song->get_duration().c_str());
-
-            auto *binds = new Bindings{};
+        /* Column 1: thumbnail */
+        auto thumb_factory = Gtk::SignalListItemFactory::create();
+        thumb_factory->connect_setup([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            auto image = Gtk::Image::create();
+            image->set_pixel_size(64);
+            cell->set_child(std::move(image));
+        });
+        thumb_factory->connect_bind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell  = obj->cast<Gtk::ColumnView::Cell>();
+            auto *song  = cell->get_item()->cast<SongItem>();
+            auto *image = cell->get_child()->cast<Gtk::Image>();
+            auto *binds = new ThumbBindings{};
             binds->paint_bind = Object::bind_property(
                 song, SongItem::prop_paintable(),
                 image, Gtk::Image::prop_paintable(),
                 GObject::BindingFlags::SYNC_CREATE);
+            cell->set_data("binds", binds, [](gpointer b) { delete static_cast<ThumbBindings*>(b); });
+        });
+        thumb_factory->connect_unbind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            delete static_cast<ThumbBindings*>(cell->steal_data("binds"));
+        });
+        auto thumb_col = Gtk::ColumnView::Column::create(nullptr,
+            std::move(thumb_factory).cast<Gtk::ListItemFactory>());
+        thumb_col->set_fixed_width(72);
+
+        /* Column 2: title / artist / vocalists */
+        auto song_factory = Gtk::SignalListItemFactory::create();
+        song_factory->connect_setup([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            auto name_label = Gtk::Label::create("");
+            name_label->set_halign(Gtk::Align::START);
+            name_label->set_hexpand(true);
+            name_label->set_ellipsize(Pango::EllipsizeMode::END);
+            auto artist_label = Gtk::Label::create("");
+            artist_label->set_halign(Gtk::Align::START);
+            artist_label->set_ellipsize(Pango::EllipsizeMode::END);
+            auto vocalist_label = Gtk::Label::create("");
+            vocalist_label->set_halign(Gtk::Align::START);
+            auto vbox = Gtk::Box::create(Gtk::Orientation::VERTICAL, 2);
+            vbox->set_valign(Gtk::Align::CENTER);
+            vbox->append(std::move(name_label));
+            vbox->append(std::move(artist_label));
+            vbox->append(std::move(vocalist_label));
+            cell->set_child(std::move(vbox));
+        });
+        song_factory->connect_bind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell           = obj->cast<Gtk::ColumnView::Cell>();
+            auto *song           = cell->get_item()->cast<SongItem>();
+            auto *vbox           = cell->get_child()->cast<Gtk::Box>();
+            auto *name_label     = vbox->get_first_child()->cast<Gtk::Label>();
+            auto *artist_label   = name_label->get_next_sibling()->cast<Gtk::Label>();
+            auto *vocalist_label = artist_label->get_next_sibling()->cast<Gtk::Label>();
+            int sid = song->get_id();
+            auto escaped = GLib::markup_escape_text(song->get_name().c_str(), -1);
+            auto markup = std::format("<a href=\"https://vocadb.net/S/{}\">{}</a>", sid, escaped.c_str());
+            name_label->set_markup(markup.c_str());
+            artist_label->set_label(song->get_artist().c_str());
+            vocalist_label->set_label(song->get_vocalists().c_str());
+        });
+        auto song_col = Gtk::ColumnView::Column::create("Song",
+            std::move(song_factory).cast<Gtk::ListItemFactory>());
+        song_col->set_expand(true);
+        song_col->set_resizable(true);
+
+        /* Column 3: type / date / duration */
+        auto info_factory = Gtk::SignalListItemFactory::create();
+        info_factory->connect_setup([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            auto type_label     = Gtk::Label::create("");
+            type_label->set_halign(Gtk::Align::START);
+            auto date_label     = Gtk::Label::create("");
+            date_label->set_halign(Gtk::Align::START);
+            auto duration_label = Gtk::Label::create("");
+            duration_label->set_halign(Gtk::Align::START);
+            auto info_box = Gtk::Box::create(Gtk::Orientation::VERTICAL, 2);
+            info_box->set_valign(Gtk::Align::CENTER);
+            info_box->append(std::move(type_label));
+            info_box->append(std::move(date_label));
+            info_box->append(std::move(duration_label));
+            cell->set_child(std::move(info_box));
+        });
+        info_factory->connect_bind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell           = obj->cast<Gtk::ColumnView::Cell>();
+            auto *song           = cell->get_item()->cast<SongItem>();
+            auto *info_box       = cell->get_child()->cast<Gtk::Box>();
+            auto *type_label     = info_box->get_first_child()->cast<Gtk::Label>();
+            auto *date_label     = type_label->get_next_sibling()->cast<Gtk::Label>();
+            auto *duration_label = date_label->get_next_sibling()->cast<Gtk::Label>();
+            type_label->set_label(song->get_song_type().c_str());
+            date_label->set_label(song->get_publish_date().c_str());
+            duration_label->set_label(song->get_duration().c_str());
+        });
+        auto info_col = Gtk::ColumnView::Column::create("Info",
+            std::move(info_factory).cast<Gtk::ListItemFactory>());
+        info_col->set_resizable(true);
+
+        /* Column 4: copy buttons */
+        auto actions_factory = Gtk::SignalListItemFactory::create();
+        actions_factory->connect_setup([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            auto id_btn    = Gtk::Button::create_with_label("Copy ID");
+            auto names_btn = Gtk::Button::create_with_label("Copy Names");
+            auto btn_box   = Gtk::Box::create(Gtk::Orientation::VERTICAL, 4);
+            btn_box->set_valign(Gtk::Align::CENTER);
+            btn_box->append(std::move(id_btn));
+            btn_box->append(std::move(names_btn));
+            cell->set_child(std::move(btn_box));
+        });
+        actions_factory->connect_bind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell      = obj->cast<Gtk::ColumnView::Cell>();
+            auto *song      = cell->get_item()->cast<SongItem>();
+            auto *btn_box   = cell->get_child()->cast<Gtk::Box>();
+            auto *id_btn    = btn_box->get_first_child()->cast<Gtk::Button>();
+            auto *names_btn = id_btn->get_next_sibling()->cast<Gtk::Button>();
+            int sid = song->get_id();
+            std::string nt = song->copy_names_text();
+            auto *binds = new ActionBindings{};
             binds->id_conn = id_btn->connect_clicked([sid](Gtk::Button *) {
                 auto text = std::to_string(sid);
                 Gdk::Display::get_default()->get_clipboard()->set_text(text.c_str());
             });
-            std::string nt = song->copy_names_text();
             binds->names_conn = names_btn->connect_clicked([nt = std::move(nt)](Gtk::Button *) {
                 Gdk::Display::get_default()->get_clipboard()->set_text(nt.c_str());
             });
-            item->set_data("binds", binds, [](gpointer b) { delete static_cast<Bindings*>(b); });
+            cell->set_data("binds", binds, [](gpointer b) { delete static_cast<ActionBindings*>(b); });
         });
-        factory->connect_unbind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
-            auto *item = obj->cast<Gtk::ListItem>();
-            delete static_cast<Bindings*>(item->steal_data("binds"));
+        actions_factory->connect_unbind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            delete static_cast<ActionBindings*>(cell->steal_data("binds"));
         });
+        auto actions_col = Gtk::ColumnView::Column::create(nullptr,
+            std::move(actions_factory).cast<Gtk::ListItemFactory>());
 
-        auto list_view = Gtk::ListView::create(std::move(selection), std::move(factory));
+        auto col_view = Gtk::ColumnView::create(std::move(selection).cast<Gtk::SelectionModel>());
+        col_view->append_column(thumb_col);
+        col_view->append_column(song_col);
+        col_view->append_column(info_col);
+        col_view->append_column(actions_col);
+        col_view->set_show_row_separators(true);
 
         auto scrolled = Gtk::ScrolledWindow::create();
         scrolled->set_vexpand(true);
-        scrolled->set_policy(Gtk::PolicyType::NEVER, Gtk::PolicyType::AUTOMATIC);
-        scrolled->set_child(std::move(list_view));
+        scrolled->set_policy(Gtk::PolicyType::AUTOMATIC, Gtk::PolicyType::AUTOMATIC);
+        scrolled->set_child(std::move(col_view));
 
         auto label_float = Gtk::Label::create("");
         status_label = label_float;
