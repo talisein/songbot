@@ -675,6 +675,10 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "I'm Crazy For You", Miku, "SABA.U1", 114295 },
   {"猫なキミ", "Neko na Kimi", "The Cat-like You", Miku, "774P", 114296 },
   {"時にはsoftに、時にはdarkに", "Toki ni wa Soft ni, Toki ni wa Dark ni", "Sometimes Soft, Sometimes Dark", Miku, "NAV", 114297 },
+  {"えでぃっともーどのうた", "Edit Mode no Uta", "Song of Edit Mode", duet(Miku,Rin,Len,Luka,MEIKO,KAITO), "LamazeP", 41598 },
+  {nullopt, nullopt, "Start of Rainbow ～first step～", Miku, "Keiichi Sugiyama", 343187 },
+  {"藍色の日、空翔ける ～second flight～", "Ai-iro no Hi, Sora Kakeru ～second flight～", "The Date of Indigo, Fly Sky ～second flight～", Miku, "Keiichi Sugiyama", 478422 },
+  {"恋の祈り ～extend your wave～", "Koi no inori ～extend your wave～", "Prayer of Love ～extend your wave～", Miku, "Keiichi Sugiyama", 66424 },
   //meow
     };
 
