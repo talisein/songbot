@@ -35,6 +35,7 @@ struct SongData {
     std::string japanese_name;
     std::string romaji_name;
     std::string english_name;
+    std::string thumb_url;
 };
 
 class SongItem final : public GObject::Object
@@ -46,22 +47,132 @@ class SongItem final : public GObject::Object
     void init(Class *) { data = new SongData; }
     ~SongItem() { delete data; }
 
-public:
-    static RefPtr<SongItem> create(std::string name, std::string artist, std::string vocalists,
-                                   std::string song_type, std::string publish_date, std::string duration,
-                                   int id, std::string japanese, std::string romaji, std::string english)
+    static bool has_cjk(const std::string &s)
     {
+        for (size_t i = 0; i < s.size(); ) {
+            auto c = static_cast<unsigned char>(s[i]);
+            if (c < 0x80) { ++i; continue; }
+            if (c < 0xE0) { i += 2; continue; }
+            if (c < 0xF0) {
+                unsigned char b = i + 1 < s.size() ? static_cast<unsigned char>(s[i+1]) : 0;
+                /* U+3000–U+9FFF (Kana, CJK ideographs) or U+FF00–U+FFEF (fullwidth) */
+                if ((c >= 0xE3 && c <= 0xE9) || (c == 0xEF && b >= 0xBC)) return true;
+                i += 3;
+            } else { i += 4; }
+        }
+        return false;
+    }
+
+    static std::string producer_str(const nlohmann::json &song)
+    {
+        std::string result;
+        for (const auto &a : song.value("artists", nlohmann::json::array())) {
+            if (a.value("categories", "").find("Producer") == std::string::npos) continue;
+            std::string name = a.value("name", "");
+            /* If the returned name is still CJK, scan additionalNames for a Latin alternative. */
+            if (has_cjk(name) && a.contains("artist") && !a["artist"].is_null()) {
+                const auto &extra = a["artist"].value("additionalNames", "");
+                size_t pos = 0;
+                while (pos < extra.size()) {
+                    auto comma = extra.find(',', pos);
+                    auto end   = comma == std::string::npos ? extra.size() : comma;
+                    auto cand  = extra.substr(pos, end - pos);
+                    while (!cand.empty() && cand.front() == ' ') cand.erase(0, 1);
+                    while (!cand.empty() && cand.back()  == ' ') cand.pop_back();
+                    if (!cand.empty() && !has_cjk(cand)) { name = cand; break; }
+                    pos = comma == std::string::npos ? extra.size() : comma + 1;
+                }
+            }
+            if (!result.empty()) result += ", ";
+            result += name;
+        }
+        return result;
+    }
+
+    static std::string vocalist_str(const nlohmann::json &song)
+    {
+        static const std::pair<std::string_view, std::string_view> kMap[] = {
+            {"Hatsune Miku",  "Miku"},
+            {"Kagamine Rin",  "Rin"},
+            {"Kagamine Len",  "Len"},
+            {"Megurine Luka", "Luka"},
+            {"KAITO",         "KAITO"},
+            {"MEIKO",         "MEIKO"},
+            {"GUMI",          "GUMI"},
+            {"IA",            "IA"},
+            {"Kasane Teto",   "Teto"},
+            {"Yuzuki Yukari", "Yukari"},
+            {"v flower",      "flower"},
+        };
+        auto canonical = [](const std::string &n) -> std::string {
+            std::string_view sv{n};
+            for (auto &[prefix, canon] : kMap) {
+                if (sv.starts_with(prefix) &&
+                    (sv.size() == prefix.size() || sv[prefix.size()] == ' '))
+                    return std::string(canon);
+            }
+            return n;
+        };
+
+        std::set<std::string> seen;
+        std::vector<std::string> order;
+        for (const auto &a : song.value("artists", nlohmann::json::array())) {
+            if (a.value("categories", "").find("Vocalist") == std::string::npos) continue;
+            auto c = canonical(a.value("name", ""));
+            if (seen.insert(c).second) order.push_back(c);
+        }
+
+        if (order.empty()) return "";
+        if (order.size() == 1) return order[0];
+        std::string result = "duet(";
+        for (size_t i = 0; i < order.size(); ++i) {
+            if (i > 0) result += ',';
+            result += order[i];
+        }
+        result += ')';
+        return result;
+    }
+
+public:
+    static RefPtr<SongItem> create(const nlohmann::json &song)
+    {
+        int id = song.value("id", 0);
+
+        std::string japanese_name, romaji_name, english_name;
+        if (auto it = song.find("names"); it != song.end()) {
+            for (const auto &n : *it) {
+                auto lang = n.value("language", "");
+                if (lang == "Japanese")     japanese_name = n.value("value", "");
+                else if (lang == "Romaji")  romaji_name   = n.value("value", "");
+                else if (lang == "English") english_name  = n.value("value", "");
+            }
+        }
+        std::string display_name = english_name.empty()
+            ? song.value("name", "") : english_name;
+
+        std::string publish_date;
+        if (song.contains("publishDate") && !song["publishDate"].is_null()) {
+            auto raw = song["publishDate"].get<std::string>();
+            if (raw.size() >= 10) publish_date = raw.substr(0, 10);
+        }
+
+        std::string duration;
+        if (int secs = song.value("lengthSeconds", 0); secs > 0)
+            duration = std::format("{}:{:02}", secs / 60, secs % 60);
+
         auto item = Object::create<SongItem>();
-        item->data->name          = std::move(name);
-        item->data->artist        = std::move(artist);
-        item->data->vocalists     = std::move(vocalists);
-        item->data->song_type     = std::move(song_type);
+        item->data->name          = std::move(display_name);
+        item->data->artist        = producer_str(song);
+        item->data->vocalists     = vocalist_str(song);
+        item->data->song_type     = song.value("songType", "");
         item->data->publish_date  = std::move(publish_date);
         item->data->duration      = std::move(duration);
         item->data->id            = id;
-        item->data->japanese_name = std::move(japanese);
-        item->data->romaji_name   = std::move(romaji);
-        item->data->english_name  = std::move(english);
+        item->data->japanese_name = std::move(japanese_name);
+        item->data->romaji_name   = std::move(romaji_name);
+        item->data->english_name  = std::move(english_name);
+        if (song.contains("mainPicture") && !song["mainPicture"].is_null())
+            item->data->thumb_url = song["mainPicture"].value("urlThumb", "");
         return item;
     }
 
@@ -71,6 +182,7 @@ public:
     const std::string &get_song_type()    const { return data->song_type; }
     const std::string &get_publish_date() const { return data->publish_date; }
     const std::string &get_duration()     const { return data->duration; }
+    const std::string &get_thumb_url()    const { return data->thumb_url; }
     int get_id() const { return data->id; }
 
     Gdk::Paintable *get_paintable() const { return data->paintable; }
@@ -324,50 +436,6 @@ class Application final : public Adw::Application
             });
     }
 
-    static std::string vocalist_str(const nlohmann::json &song)
-    {
-        static const std::pair<std::string_view, std::string_view> kMap[] = {
-            {"Hatsune Miku",  "Miku"},
-            {"Kagamine Rin",  "Rin"},
-            {"Kagamine Len",  "Len"},
-            {"Megurine Luka", "Luka"},
-            {"KAITO",         "KAITO"},
-            {"MEIKO",         "MEIKO"},
-            {"GUMI",          "GUMI"},
-            {"IA",            "IA"},
-            {"Kasane Teto",   "Teto"},
-            {"Yuzuki Yukari", "Yukari"},
-            {"v flower",      "flower"},
-        };
-        auto canonical = [](const std::string &n) -> std::string {
-            std::string_view sv{n};
-            for (auto &[prefix, canon] : kMap) {
-                if (sv.starts_with(prefix) &&
-                    (sv.size() == prefix.size() || sv[prefix.size()] == ' '))
-                    return std::string(canon);
-            }
-            return n;
-        };
-
-        std::set<std::string> seen;
-        std::vector<std::string> order;
-        for (const auto &a : song.value("artists", nlohmann::json::array())) {
-            if (a.value("categories", "").find("Vocalist") == std::string::npos) continue;
-            auto c = canonical(a.value("name", ""));
-            if (seen.insert(c).second) order.push_back(c);
-        }
-
-        if (order.empty()) return "";
-        if (order.size() == 1) return order[0];
-        std::string result = "duet(";
-        for (size_t i = 0; i < order.size(); ++i) {
-            if (i > 0) result += ',';
-            result += order[i];
-        }
-        result += ')';
-        return result;
-    }
-
     void on_api_response(GObject::Object *src, Gio::AsyncResult *res)
     {
         UniquePtr<GLib::Error> error;
@@ -383,93 +451,15 @@ class Application final : public Adw::Application
         auto data = bytes->get_data();
         std::string_view response{reinterpret_cast<const char*>(data.data()), data.size()};
 
-        auto producers = [](const nlohmann::json &song) -> std::string {
-            /* Returns true if s contains any CJK/Kana UTF-8 characters. */
-            auto has_cjk = [](const std::string &s) -> bool {
-                for (size_t i = 0; i < s.size(); ) {
-                    auto c = static_cast<unsigned char>(s[i]);
-                    if (c < 0x80) { ++i; continue; }
-                    if (c < 0xE0) { i += 2; continue; }
-                    if (c < 0xF0) {
-                        unsigned char b = i + 1 < s.size() ? static_cast<unsigned char>(s[i+1]) : 0;
-                        /* U+3000–U+9FFF (Kana, CJK ideographs) or U+FF00–U+FFEF (fullwidth) */
-                        if ((c >= 0xE3 && c <= 0xE9) || (c == 0xEF && b >= 0xBC)) return true;
-                        i += 3;
-                    } else { i += 4; }
-                }
-                return false;
-            };
-
-            std::string result;
-            for (const auto &a : song.value("artists", nlohmann::json::array())) {
-                if (a.value("categories", "").find("Producer") == std::string::npos) continue;
-                std::string name = a.value("name", "");
-                /* If the returned name is still CJK, scan additionalNames for a Latin alternative. */
-                if (has_cjk(name) && a.contains("artist") && !a["artist"].is_null()) {
-                    const auto &extra = a["artist"].value("additionalNames", "");
-                    size_t pos = 0;
-                    while (pos < extra.size()) {
-                        auto comma = extra.find(',', pos);
-                        auto end   = comma == std::string::npos ? extra.size() : comma;
-                        auto cand  = extra.substr(pos, end - pos);
-                        while (!cand.empty() && cand.front() == ' ') cand.erase(0, 1);
-                        while (!cand.empty() && cand.back()  == ' ') cand.pop_back();
-                        if (!cand.empty() && !has_cjk(cand)) { name = cand; break; }
-                        pos = comma == std::string::npos ? extra.size() : comma + 1;
-                    }
-                }
-                if (!result.empty()) result += ", ";
-                result += name;
-            }
-            return result;
-        };
-
         try {
             auto json = nlohmann::json::parse(response);
 
             unsigned count = 0;
             for (const auto &song : json["items"]) {
-                int id = song.value("id", 0);
-
-                std::string japanese_name, romaji_name, english_name;
-                if (auto it = song.find("names"); it != song.end()) {
-                    for (const auto &n : *it) {
-                        auto lang = n.value("language", "");
-                        if (lang == "Japanese")     japanese_name = n.value("value", "");
-                        else if (lang == "Romaji")  romaji_name   = n.value("value", "");
-                        else if (lang == "English") english_name  = n.value("value", "");
-                    }
-                }
-                std::string display_name = english_name.empty()
-                    ? song.value("name", "") : english_name;
-
-                std::string song_type = song.value("songType", "");
-
-                std::string publish_date;
-                if (song.contains("publishDate") && !song["publishDate"].is_null()) {
-                    auto raw = song["publishDate"].get<std::string>();
-                    /* Keep only the date portion: "2011-03-09" */
-                    if (raw.size() >= 10) publish_date = raw.substr(0, 10);
-                }
-
-                std::string duration;
-                if (int secs = song.value("lengthSeconds", 0); secs > 0)
-                    duration = std::format("{}:{:02}", secs / 60, secs % 60);
-
-                std::string thumb_url;
-                if (song.contains("mainPicture") && !song["mainPicture"].is_null())
-                    thumb_url = song["mainPicture"].value("urlThumb", "");
-
-                auto item = SongItem::create(
-                    std::move(display_name), producers(song), vocalist_str(song),
-                    std::move(song_type), std::move(publish_date), std::move(duration),
-                    id, std::move(japanese_name), std::move(romaji_name), std::move(english_name));
+                auto item = SongItem::create(song);
                 results->append(item);
-
-                if (!thumb_url.empty()) {
-                    fetch_thumb(std::move(item), std::move(thumb_url));
-                }
-
+                if (const auto &url = item->get_thumb_url(); !url.empty())
+                    fetch_thumb(item, url);
                 ++count;
             }
             auto found_msg = std::format("Found {} results", count);
