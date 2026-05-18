@@ -1253,6 +1253,79 @@ constexpr std::array<song_pv, 5> pvs_song_188729 {{
 
 /* End Song 188729: Acceleration (Breeze Remix) */
 
+/* Start Song 552: ACUTE */
+
+constexpr std::array<additional_name, 1> names_song_552 {{
+  {"English"sv, R"XYX(ACUTE)XYX"sv},
+}};
+
+constexpr std::array<web_link, 6> web_links_song_552 {{
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm7992704)XYX"sv, 7305 },
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/6270.html)XYX"sv, 7306 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/ACUTE)XYX"sv, 7307 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/4233)XYX"sv, 7308 },
+  {"Official"sv, R"XYX(Karaoke download page)XYX"sv, R"XYX(http://whiteflame.jp/wp-content/themes/whiteflame/dl/ACUTE_karaoke.zip)XYX"sv, 27365 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/ACUTE/Kurousa-P)XYX"sv, 166638 },
+}};
+
+
+#if __has_embed("song_pic_orig_552") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_552 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_552"
+});
+constexpr std::string_view song_mime_type_orig_552 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_552 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_552;
+constexpr std::string_view song_mime_type_orig_552 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_552;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_552;
+constexpr std::string_view song_mime_type_small_thumb_552 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_552;
+
+
+#if __has_embed("song_pic_thumb_552") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_552 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_552"
+});
+constexpr std::string_view song_mime_type_thumb_552 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_552 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_552;
+constexpr std::string_view song_mime_type_thumb_552 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_552;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_552;
+constexpr std::string_view song_mime_type_tiny_thumb_552 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_552;
+
+constexpr picture picture_song_552 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/q7i-rWxHc0Y/hqdefault.jpg)XYX"sv, song_pic_orig_552, song_mime_type_orig_552, song_file_ext_orig_552, std::nullopt, song_pic_small_thumb_552, song_mime_type_small_thumb_552, song_file_ext_small_thumb_552, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7992704/7992704)XYX"sv, song_pic_thumb_552, song_mime_type_thumb_552, song_file_ext_thumb_552, std::nullopt, song_pic_tiny_thumb_552, song_mime_type_tiny_thumb_552, song_file_ext_tiny_thumb_552  };
+
+constexpr std::array<song_artists, 6> song_artists_song_552 {{
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 3545, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(巡音ルカ, 巡音流歌, 메구리네 루카)XYX"sv, "Vocaloid"sv, false, 2, R"XYX(Megurine Luka)XYX"sv, R"XYX(image/png)XYX"sv, 2009y/1/30, "Locked"sv, 27 }, "Vocalist"sv, "Default"sv, 3546, false, false, R"XYX(Megurine Luka)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(カイト)XYX"sv, "Vocaloid"sv, false, 71, R"XYX(KAITO)XYX"sv, R"XYX(image/png)XYX"sv, 2006y/2/14, "Locked"sv, 34 }, "Vocalist"sv, "Default"sv, 3547, false, false, R"XYX(KAITO)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(黒うさP, くろうさP, WhiteFlame, しゃな, syana, 흑토끼P, 쿠로우사P, 黑兔P)XYX"sv, "Producer"sv, false, 310, R"XYX(KurousaP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 31 }, "Producer"sv, "Default"sv, 3548, false, false, R"XYX(KurousaP)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(三重の人, unknown10397135)XYX"sv, "Animator"sv, false, 1391, R"XYX(Mienohito)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 21 }, "Animator"sv, "Default"sv, 17766, false, false, R"XYX(Mienohito)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(一葉モカ)XYX"sv, "Illustrator"sv, false, 2095, R"XYX(Ichiyou Moka)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 6 }, "Illustrator"sv, "Illustrator"sv, 17767, false, false, R"XYX(Ichiyou Moka)XYX"sv, "Illustrator"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_552 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 5> pvs_song_552 {{
+  { R"XYX(黒うさ)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 104806, 281, R"XYX(『ミク×ルカ×カイト』ACUTE『オリジナル曲PV』)XYX"sv, 2009y/8/21, R"XYX(sm7992704)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7992704/7992704)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm7992704)XYX"sv },
+  { R"XYX(ovee)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1017172, 301, R"XYX(Acute - KAITO, Hatsune Miku, Luka Megurine)XYX"sv, 2021y/8/30, R"XYX(g-41SEI7c-M)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/g-41SEI7c-M/default.jpg)XYX"sv, R"XYX(https://youtu.be/g-41SEI7c-M)XYX"sv },
+  { R"XYX(Vocaloid Indonesia)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1018709, 281, R"XYX(Hatsune Miku, Kaito, and Megurine Luka - Acute)XYX"sv, 2013y/4/25, R"XYX(89404333 eridiar/hatsune-miku-kaito-and)XYX"sv, "SoundCloud"sv, "Other"sv, R"XYX(https://i1.sndcdn.com/artworks-000046377230-iemq39-original.jpg)XYX"sv, R"XYX(http://soundcloud.com/eridiar/hatsune-miku-kaito-and)XYX"sv },
+  { R"XYX(nisha)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1212588, 274, R"XYX(【Acute PV】【初音ミク x KAITO x 巡音ルカ】Original PV 2009)XYX"sv, 2024y/3/7, R"XYX(q7i-rWxHc0Y)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/q7i-rWxHc0Y/default.jpg)XYX"sv, R"XYX(https://youtu.be/q7i-rWxHc0Y)XYX"sv },
+  { R"XYX(KazearashiP)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1434692, 282, R"XYX(『ミク×ルカ×カイト』ACUTE『オリジナル曲PV』)XYX"sv, 2009y/9/5, R"XYX(dwjLNU6HWL8)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/dwjLNU6HWL8/default.jpg)XYX"sv, R"XYX(https://youtu.be/dwjLNU6HWL8)XYX"sv },
+}};
+
+/* End Song 552: ACUTE */
+
 /* Start Song 41709: AFTER BURNER */
 
 constexpr std::array<additional_name, 2> names_song_41709 {{
@@ -2696,6 +2769,82 @@ constexpr std::array<song_pv, 4> pvs_song_848950 {{
 }};
 
 /* End Song 848950: Artifact */
+
+/* Start Song 5800: Ashes to Ashes */
+
+constexpr std::array<additional_name, 3> names_song_5800 {{
+  {"Japanese"sv, R"XYX(ハイハハイニ)XYX"sv},
+  {"Romaji"sv, R"XYX(Hai wa Hai ni)XYX"sv},
+  {"English"sv, R"XYX(Ashes to Ashes)XYX"sv},
+}};
+
+constexpr std::array<web_link, 8> web_links_song_5800 {{
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E3%83%8F%E3%82%A4%E3%83%8F%E3%83%8F%E3%82%A4%E3%83%8B_(Hai_wa_Hai_ni))XYX"sv, 54493 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm6448601)XYX"sv, 54494 },
+  {"Official"sv, R"XYX(Piapro (Karaoke with chorus))XYX"sv, R"XYX(http://piapro.jp/t/7a5b)XYX"sv, 54495 },
+  {"Official"sv, R"XYX(Piapro (Karaoke))XYX"sv, R"XYX(http://piapro.jp/t/7a5b/20090317124417)XYX"sv, 54496 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E3%83%8F%E3%82%A4%E3%83%8F%E3%83%8F%E3%82%A4%E3%83%8B_(Hai_wa_Hai_ni))XYX"sv, 54497 },
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/4594.html)XYX"sv, 54498 },
+  {"Official"sv, R"XYX(Pixiv (Illustration))XYX"sv, R"XYX(https://www.pixiv.net/member_illust.php?mode=medium&illust_id=3482579)XYX"sv, 54499 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(https://utaitedb.net/S/21261)XYX"sv, 105446 },
+}};
+
+
+#if __has_embed("song_pic_orig_5800") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_5800 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_5800"
+});
+constexpr std::string_view song_mime_type_orig_5800 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_5800 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_5800;
+constexpr std::string_view song_mime_type_orig_5800 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_5800;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_5800;
+constexpr std::string_view song_mime_type_small_thumb_5800 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_5800;
+
+
+#if __has_embed("song_pic_thumb_5800") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_5800 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_5800"
+});
+constexpr std::string_view song_mime_type_thumb_5800 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_5800 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_5800;
+constexpr std::string_view song_mime_type_thumb_5800 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_5800;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_5800;
+constexpr std::string_view song_mime_type_tiny_thumb_5800 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_5800;
+
+constexpr picture picture_song_5800 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/ixE4pIGAn1U/hqdefault.jpg)XYX"sv, song_pic_orig_5800, song_mime_type_orig_5800, song_file_ext_orig_5800, std::nullopt, song_pic_small_thumb_5800, song_mime_type_small_thumb_5800, song_file_ext_small_thumb_5800, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/6448601/6448601)XYX"sv, song_pic_thumb_5800, song_mime_type_thumb_5800, song_file_ext_thumb_5800, std::nullopt, song_pic_tiny_thumb_5800, song_mime_type_tiny_thumb_5800, song_file_ext_tiny_thumb_5800  };
+
+constexpr std::array<song_artists, 6> song_artists_song_5800 {{
+  { artist_t{ R"XYX(テンネン, おっぴろげP, OppirogeP, スザンナP)XYX"sv, "Producer"sv, false, 196, R"XYX(tennen)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 14 }, "Producer"sv, "Default"sv, 22741, false, false, R"XYX(tennen)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(カイト)XYX"sv, "Vocaloid"sv, false, 71, R"XYX(KAITO)XYX"sv, R"XYX(image/png)XYX"sv, 2006y/2/14, "Locked"sv, 34 }, "Vocalist"sv, "Default"sv, 22825, false, false, R"XYX(KAITO)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(だい)XYX"sv, "Producer"sv, false, 777, R"XYX(Dai)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 5 }, "Other"sv, "Instrumentalist"sv, 76112, false, false, R"XYX(Dai)XYX"sv, "Instrumentalist"sv },
+  { artist_t{ R"XYX(うむ, うむい, Umui, lilium_minor)XYX"sv, "Illustrator"sv, false, 2863, R"XYX(Um)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 12 }, "Illustrator"sv, "Illustrator"sv, 76113, false, false, R"XYX(Um)XYX"sv, "Default"sv },
+  { std::nullopt, "Animator"sv, "Animator"sv, 76114, true, false, R"XYX(あにら)XYX"sv, "Animator"sv },
+  { artist_t{ R"XYX(ピロリロP, karanabe)XYX"sv, "Producer"sv, false, 1359, R"XYX(PiroriroP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 10 }, "Other"sv, "Mastering"sv, 76115, false, false, R"XYX(PiroriroP)XYX"sv, "Mastering"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_5800 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 4> pvs_song_5800 {{
+  { R"XYX(テンネン)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 108275, 243, R"XYX(【KAITO】ハイハハイニ【オリジナル】)XYX"sv, 2009y/3/15, R"XYX(sm6448601)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/6448601/6448601)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm6448601)XYX"sv },
+  { R"XYX(soundares)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 223249, 244, R"XYX(KAITO's "ハイハハイニ" with English Sub)XYX"sv, 2009y/3/29, R"XYX(U4MtjwuRahk)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/U4MtjwuRahk/default.jpg)XYX"sv, R"XYX(https://youtu.be/U4MtjwuRahk)XYX"sv },
+  { R"XYX(Tennen Jas)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 223250, 244, R"XYX(Kaito : Ashes To Ashes "ハイハハイニ")XYX"sv, 2013y/6/16, R"XYX(ixE4pIGAn1U)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/ixE4pIGAn1U/default.jpg)XYX"sv, R"XYX(https://youtu.be/ixE4pIGAn1U)XYX"sv },
+  { R"XYX(テンネン)XYX"sv, std::nullopt, false, R"XYX({"Timestamp":"20090408135918"})XYX"sv, 287649, 244, R"XYX(【KAITO】ハイハハイニ【オリジナル】)XYX"sv, 2009y/4/8, R"XYX(h8dyma65aic2ugfp)XYX"sv, "Piapro"sv, "Original"sv, R"XYX(https://cdn.piapro.jp/thumb_i/ff/ff24newyr9qccz5y_20151003083244_0250_0250.png)XYX"sv, R"XYX(http://piapro.jp/content/h8dyma65aic2ugfp)XYX"sv },
+}};
+
+/* End Song 5800: Ashes to Ashes */
 
 /* Start Song 126674: Baby Maniacs -Eight Mix- */
 
@@ -6289,6 +6438,78 @@ constexpr std::array<song_pv, 4> pvs_song_907752 {{
 
 /* End Song 907752: CONNECT:COMMUNE */
 
+/* Start Song 16581: Continuation of Dreams */
+
+constexpr std::array<additional_name, 4> names_song_16581 {{
+  {"Japanese"sv, R"XYX(夢の続き)XYX"sv},
+  {"Romaji"sv, R"XYX(Yume no Tsuzuki)XYX"sv},
+  {"English"sv, R"XYX(Continuation of Dreams)XYX"sv},
+  {"Unspecified"sv, R"XYX(Continuing Dream)XYX"sv},
+}};
+
+constexpr std::array<web_link, 4> web_links_song_16581 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/6188.html)XYX"sv, 53183 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm7911934)XYX"sv, 73032 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E5%A4%A2%E3%81%AE%E7%B6%9A%E3%81%8D_(Yume_no_Tsuzuki))XYX"sv, 73033 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E5%A4%A2%E3%81%AE%E7%B6%9A%E3%81%8D_(Yume_no_Tsuzuki))XYX"sv, 73034 },
+}};
+
+
+#if __has_embed("song_pic_orig_16581") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_16581 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_16581"
+});
+constexpr std::string_view song_mime_type_orig_16581 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_16581 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_16581;
+constexpr std::string_view song_mime_type_orig_16581 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_16581;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_16581;
+constexpr std::string_view song_mime_type_small_thumb_16581 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_16581;
+
+
+#if __has_embed("song_pic_thumb_16581") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_16581 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_16581"
+});
+constexpr std::string_view song_mime_type_thumb_16581 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_16581 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_16581;
+constexpr std::string_view song_mime_type_thumb_16581 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_16581;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_16581;
+constexpr std::string_view song_mime_type_tiny_thumb_16581 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_16581;
+
+constexpr picture picture_song_16581 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/sst5F1bbgfw/hqdefault.jpg)XYX"sv, song_pic_orig_16581, song_mime_type_orig_16581, song_file_ext_orig_16581, std::nullopt, song_pic_small_thumb_16581, song_mime_type_small_thumb_16581, song_file_ext_small_thumb_16581, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7911934/7911934)XYX"sv, song_pic_thumb_16581, song_mime_type_thumb_16581, song_file_ext_thumb_16581, std::nullopt, song_pic_tiny_thumb_16581, song_mime_type_tiny_thumb_16581, song_file_ext_tiny_thumb_16581  };
+
+constexpr std::array<song_artists, 6> song_artists_song_16581 {{
+  { artist_t{ R"XYX(ジェミニの人, Gemini no Hito)XYX"sv, "Producer"sv, false, 46, R"XYX(Dixie Flatline)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 28 }, "Producer"sv, "Composer, Lyricist"sv, 22819, false, false, R"XYX(Dixie Flatline)XYX"sv, "Composer, Lyricist"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 22820, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音リン, 鏡音鈴, 카가미네 린, 镜音铃)XYX"sv, "Vocaloid"sv, false, 14, R"XYX(Kagamine Rin)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 36 }, "Vocalist"sv, "Default"sv, 22821, false, true, R"XYX(Kagamine Rin)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音レン, 鏡音連, 카가미네 렌, 镜音连)XYX"sv, "Vocaloid"sv, false, 15, R"XYX(Kagamine Len)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 34 }, "Vocalist"sv, "Default"sv, 22822, false, true, R"XYX(Kagamine Len)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(巡音ルカ, 巡音流歌, 메구리네 루카)XYX"sv, "Vocaloid"sv, false, 2, R"XYX(Megurine Luka)XYX"sv, R"XYX(image/png)XYX"sv, 2009y/1/30, "Locked"sv, 27 }, "Vocalist"sv, "Default"sv, 22823, false, true, R"XYX(Megurine Luka)XYX"sv, "Default"sv },
+  { std::nullopt, "Illustrator"sv, "Illustrator"sv, 1591245, true, false, R"XYX(もけお)XYX"sv, "Illustrator"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_16581 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 3> pvs_song_16581 {{
+  { R"XYX(Dixie)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 110301, 325, R"XYX(【初音ミク・リン・レン・ルカ】夢の続き【オリジナル】)XYX"sv, 2009y/8/11, R"XYX(sm7911934)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7911934/7911934)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm7911934)XYX"sv },
+  { R"XYX(dixie flatline)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 871312, 326, R"XYX(【初音ミク・リン・レン・ルカ】夢の続き【オリジナル】)XYX"sv, 2023y/12/31, R"XYX(sst5F1bbgfw)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/sst5F1bbgfw/default.jpg)XYX"sv, R"XYX(https://youtu.be/sst5F1bbgfw)XYX"sv },
+  { R"XYX(tony31706)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 871313, 326, R"XYX(【初音ミク・リン・レン・ルカ】夢の続き【オリジナル】中文字幕)XYX"sv, 2009y/8/17, R"XYX(RYfAV6dD5KU)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/RYfAV6dD5KU/default.jpg)XYX"sv, R"XYX(https://youtu.be/RYfAV6dD5KU)XYX"sv },
+}};
+
+/* End Song 16581: Continuation of Dreams */
+
 /* Start Song 850: Cool Love Song */
 
 constexpr std::array<additional_name, 5> names_song_850 {{
@@ -8783,6 +9004,82 @@ constexpr std::array<song_pv, 7> pvs_song_8290 {{
 
 /* End Song 8290: DREAM DREAM */
 
+/* Start Song 3636: Dream-Eating Monochrome Baku */
+
+constexpr std::array<additional_name, 5> names_song_3636 {{
+  {"Japanese"sv, R"XYX(夢喰い白黒バク)XYX"sv},
+  {"Romaji"sv, R"XYX(Yumekui Shirokuro Baku)XYX"sv},
+  {"English"sv, R"XYX(Dream-Eating Monochrome Baku)XYX"sv},
+  {"Unspecified"sv, R"XYX(Черно-Белый Баку, Пожирающий Сны)XYX"sv},
+  {"Unspecified"sv, R"XYX(Dream-Eating Black and White Baku)XYX"sv},
+}};
+
+constexpr std::array<web_link, 7> web_links_song_3636 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/17017.html)XYX"sv, 13784 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/a/%E5%A4%A2%E5%96%B0%E3%81%84%E7%99%BD%E9%BB%92%E3%83%90%E3%82%AF)XYX"sv, 13785 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E5%A4%A2%E5%96%B0%E3%81%84%E7%99%BD%E9%BB%92%E3%83%90%E3%82%AF_%28Yumekui_Shirokuro_Baku%29)XYX"sv, 13786 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/4328)XYX"sv, 13787 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm14926860)XYX"sv, 54512 },
+  {"Official"sv, R"XYX(Pixiv (Illustration))XYX"sv, R"XYX(https://www.pixiv.net/member_illust.php?mode=medium&illust_id=20085193)XYX"sv, 54513 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E5%A4%A2%E5%96%B0%E3%81%84%E7%99%BD%E9%BB%92%E3%83%90%E3%82%AF_%28Yumekui_Shirokuro_Baku%29)XYX"sv, 54514 },
+}};
+
+
+#if __has_embed("song_pic_orig_3636") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_3636 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_3636"
+});
+constexpr std::string_view song_mime_type_orig_3636 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_3636 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_3636;
+constexpr std::string_view song_mime_type_orig_3636 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_3636;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_3636;
+constexpr std::string_view song_mime_type_small_thumb_3636 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_3636;
+
+
+#if __has_embed("song_pic_thumb_3636") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_3636 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_3636"
+});
+constexpr std::string_view song_mime_type_thumb_3636 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_3636 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_3636;
+constexpr std::string_view song_mime_type_thumb_3636 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_3636;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_3636;
+constexpr std::string_view song_mime_type_tiny_thumb_3636 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_3636;
+
+constexpr picture picture_song_3636 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/9dxeTQYYg1Y/hqdefault.jpg)XYX"sv, song_pic_orig_3636, song_mime_type_orig_3636, song_file_ext_orig_3636, std::nullopt, song_pic_small_thumb_3636, song_mime_type_small_thumb_3636, song_file_ext_small_thumb_3636, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/14926860/14926860)XYX"sv, song_pic_thumb_3636, song_mime_type_thumb_3636, song_file_ext_thumb_3636, std::nullopt, song_pic_tiny_thumb_3636, song_mime_type_tiny_thumb_3636, song_file_ext_tiny_thumb_3636  };
+
+constexpr std::array<song_artists, 6> song_artists_song_3636 {{
+  { artist_t{ std::nullopt, "Producer"sv, false, 105, R"XYX(Nem)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 15 }, "Producer"sv, "Default"sv, 15306, false, false, R"XYX(Nem)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(たま, Tama Songe)XYX"sv, "Animator"sv, false, 1724, R"XYX(Tama)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 11 }, "Animator, Illustrator"sv, "Animator, Illustrator"sv, 15336, false, false, R"XYX(Tama)XYX"sv, "Animator, Illustrator"sv },
+  { artist_t{ std::nullopt, "Producer"sv, false, 2981, R"XYX(madamxx)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 6 }, "Other"sv, "Mastering, Mixer"sv, 171108, false, false, R"XYX(madamxx)XYX"sv, "Mastering, Mixer"sv },
+  { artist_t{ R"XYX(二階堂拓人)XYX"sv, "Instrumentalist"sv, false, 9147, R"XYX(Nikaido Takuto)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 4 }, "Other"sv, "Instrumentalist"sv, 171109, false, false, R"XYX(Nikaido Takuto)XYX"sv, "Instrumentalist"sv },
+  { artist_t{ R"XYX(石井裕)XYX"sv, "Instrumentalist"sv, false, 29599, R"XYX(Ishii Yutaka)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 4 }, "Other"sv, "Instrumentalist"sv, 171110, false, false, R"XYX(Ishii Yutaka)XYX"sv, "Instrumentalist"sv },
+  { artist_t{ R"XYX(鏡音レン Append (Power))XYX"sv, "Vocaloid"sv, false, 350, R"XYX(Kagamine Len Append (Power))XYX"sv, R"XYX(image/png)XYX"sv, 2010y/12/27, "Approved"sv, 18 }, "Vocalist"sv, "Default"sv, 254447, false, false, R"XYX(Kagamine Len Append (Power))XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_3636 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 3> pvs_song_3636 {{
+  { R"XYX(Nem)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 107636, 219, R"XYX(【鏡音レン】夢喰い白黒バク【オリジナル曲PV付】)XYX"sv, 2011y/7/4, R"XYX(sm14926860)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/14926860/14926860.75971164)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm14926860)XYX"sv },
+  { R"XYX(鏡音レン Kagamine Len)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 766263, 220, R"XYX(【鏡音レン】夢喰い白黒バク【オリジナル曲PV付】)XYX"sv, 2014y/8/7, R"XYX(9dxeTQYYg1Y)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/9dxeTQYYg1Y/default.jpg)XYX"sv, R"XYX(https://youtu.be/9dxeTQYYg1Y)XYX"sv },
+  { R"XYX(LATprojectV3)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 766264, 220, R"XYX(【鏡音レン】夢喰い白黒バク【オリジナル曲PV付】)XYX"sv, 2015y/4/23, R"XYX(MDDnAob1U7g)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/MDDnAob1U7g/default.jpg)XYX"sv, R"XYX(https://youtu.be/MDDnAob1U7g)XYX"sv },
+}};
+
+/* End Song 3636: Dream-Eating Monochrome Baku */
+
 /* Start Song 47401: Dreamin Chuchu */
 
 constexpr std::array<additional_name, 3> names_song_47401 {{
@@ -9149,6 +9446,79 @@ constexpr std::array<song_pv, 5> pvs_song_157860 {{
 }};
 
 /* End Song 157860: DUNE */
+
+/* Start Song 2607: DYE */
+
+constexpr std::array<additional_name, 1> names_song_2607 {{
+  {"English"sv, R"XYX(DYE)XYX"sv},
+}};
+
+constexpr std::array<web_link, 8> web_links_song_2607 {{
+  {"Reference"sv, R"XYX(MikuWki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/8584.html)XYX"sv, 456 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.fandom.com/wiki/DYE)XYX"sv, 2742 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/16856)XYX"sv, 19651 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/nm9571705)XYX"sv, 19652 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/DYE)XYX"sv, 54515 },
+  {"Official"sv, R"XYX(Piapro - Instrumental)XYX"sv, R"XYX(http://piapro.jp/t/4lkb)XYX"sv, 54532 },
+  {"Commercial"sv, R"XYX(Spotify)XYX"sv, R"XYX(https://play.spotify.com/track/1lP6wJYjTZSmaE0RMJR0DF)XYX"sv, 81053 },
+  {"Commercial"sv, R"XYX(Amazon)XYX"sv, R"XYX(https://www.amazon.com/dp/B003I4T13M)XYX"sv, 81054 },
+}};
+
+
+#if __has_embed("song_pic_orig_2607") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_2607 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_2607"
+});
+constexpr std::string_view song_mime_type_orig_2607 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_2607 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_2607;
+constexpr std::string_view song_mime_type_orig_2607 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_2607;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_2607;
+constexpr std::string_view song_mime_type_small_thumb_2607 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_2607;
+
+
+#if __has_embed("song_pic_thumb_2607") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_2607 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_2607"
+});
+constexpr std::string_view song_mime_type_thumb_2607 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_2607 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_2607;
+constexpr std::string_view song_mime_type_thumb_2607 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_2607;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_2607;
+constexpr std::string_view song_mime_type_tiny_thumb_2607 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_2607;
+
+constexpr picture picture_song_2607 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/_HlF-2K1WhQ/hqdefault.jpg)XYX"sv, song_pic_orig_2607, song_mime_type_orig_2607, song_file_ext_orig_2607, std::nullopt, song_pic_small_thumb_2607, song_mime_type_small_thumb_2607, song_file_ext_small_thumb_2607, R"XYX(https://i.ytimg.com/vi/_HlF-2K1WhQ/default.jpg)XYX"sv, song_pic_thumb_2607, song_mime_type_thumb_2607, song_file_ext_thumb_2607, std::nullopt, song_pic_tiny_thumb_2607, song_mime_type_tiny_thumb_2607, song_file_ext_tiny_thumb_2607  };
+
+constexpr std::array<song_artists, 3> song_artists_song_2607 {{
+  { artist_t{ R"XYX(巡音ルカ, 巡音流歌, 메구리네 루카)XYX"sv, "Vocaloid"sv, false, 2, R"XYX(Megurine Luka)XYX"sv, R"XYX(image/png)XYX"sv, 2009y/1/30, "Locked"sv, 27 }, "Vocalist"sv, "Default"sv, 4424, false, false, R"XYX(Megurine Luka)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(Momo'n'ga-Jump!)XYX"sv, "Producer"sv, false, 40, R"XYX(AVTechNO!)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 23 }, "Producer"sv, "Default"sv, 4425, false, false, R"XYX(AVTechNO!)XYX"sv, "Default"sv },
+  { artist_t{ std::nullopt, "Illustrator"sv, false, 7801, R"XYX(kior)XYX"sv, std::nullopt, std::nullopt, "Finished"sv, 7 }, "Illustrator"sv, "Illustrator"sv, 86262, false, false, R"XYX(kior)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 2> culture_codes_song_2607 {{
+"en"sv, "ja"sv, }};
+
+constexpr std::array<song_pv, 6> pvs_song_2607 {{
+  { std::nullopt, std::nullopt, true, R"XYX(std::nullopt)XYX"sv, 252559, 0, R"XYX(巡音ルカオリジナル DYE)XYX"sv, std::nullopt, R"XYX(nm9571705)XYX"sv, "NicoNicoDouga"sv, "Original"sv, std::nullopt, R"XYX(http://www.nicovideo.jp/watch/nm9571705)XYX"sv },
+  { R"XYX(キッコロ)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 369417, 229, R"XYX(巡音ルカ　『DYE』)XYX"sv, 2010y/12/4, R"XYX(sm12932450)XYX"sv, "NicoNicoDouga"sv, "Reprint"sv, R"XYX(http://nicovideo.cdn.nimg.jp/thumbnails/12932450/12932450)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm12932450)XYX"sv },
+  { R"XYX(pencilanime09)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 369418, 230, R"XYX(巡音ルカオリジナル DYE)XYX"sv, 2010y/3/3, R"XYX(2LF0oNQ9j2U)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/2LF0oNQ9j2U/default.jpg)XYX"sv, R"XYX(https://youtu.be/2LF0oNQ9j2U)XYX"sv },
+  { R"XYX(Vocaloid Techno)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 369419, 229, R"XYX(Megurine Luka - DYE - VOCALOID)XYX"sv, 2014y/1/3, R"XYX(127738523 vocaloid-tech/megurine-luka-dye-vocaloid)XYX"sv, "SoundCloud"sv, "Reprint"sv, R"XYX(https://i1.sndcdn.com/artworks-000066958687-6th1xg-large.jpg)XYX"sv, R"XYX(http://soundcloud.com/vocaloid-tech/megurine-luka-dye-vocaloid)XYX"sv },
+  { R"XYX(911)XYX"sv, std::nullopt, false, R"XYX({"Aid":1868,"Bvid":"BV1xx411c7k7","Cid":3908382})XYX"sv, 509038, 229, R"XYX(巡音ルカ DYE)XYX"sv, 2010y/2/2, R"XYX(1868)XYX"sv, "Bilibili"sv, "Reprint"sv, R"XYX(http://i2.hdslb.com/bfs/archive/6fcf47f506b99f2a9f46e67a562a60b3fd84bd0e.jpg)XYX"sv, R"XYX(https://www.bilibili.com/video/av1868)XYX"sv },
+  { R"XYX(AVTechNO! - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 931629, 230, R"XYX(DYE (feat. Megurine Luka))XYX"sv, 2020y/4/3, R"XYX(_HlF-2K1WhQ)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/_HlF-2K1WhQ/default.jpg)XYX"sv, R"XYX(https://youtu.be/_HlF-2K1WhQ)XYX"sv },
+}};
+
+/* End Song 2607: DYE */
 
 /* Start Song 323568: Earth Day */
 
@@ -12265,6 +12635,79 @@ constexpr std::array<song_pv, 4> pvs_song_50132 {{
 
 /* End Song 50132: Glass Wall */
 
+/* Start Song 12056: GLASSES */
+
+constexpr std::array<additional_name, 2> names_song_12056 {{
+  {"Romaji"sv, R"XYX(MEGANE)XYX"sv},
+  {"English"sv, R"XYX(GLASSES)XYX"sv},
+}};
+
+constexpr std::array<web_link, 8> web_links_song_12056 {{
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/MEGANE)XYX"sv, 3879 },
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/8417.html)XYX"sv, 3880 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/nm9440139)XYX"sv, 3881 },
+  {"Official"sv, R"XYX(Piapro (Off-vocal))XYX"sv, R"XYX(https://piapro.jp/t/6kqJ)XYX"sv, 3889 },
+  {"Commercial"sv, R"XYX(iTunes (US))XYX"sv, R"XYX(https://itunes.apple.com/us/album/megane-single/473609752)XYX"sv, 79177 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(https://utaitedb.net/S/1627)XYX"sv, 105796 },
+  {"Official"sv, R"XYX(Piapro (Off-vocal with chorus))XYX"sv, R"XYX(https://piapro.jp/t/AaYJ)XYX"sv, 105797 },
+  {"Official"sv, R"XYX(Piapro (Illustration))XYX"sv, R"XYX(https://piapro.jp/t/0g-c)XYX"sv, 113185 },
+}};
+
+
+#if __has_embed("song_pic_orig_12056") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_12056 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_12056"
+});
+constexpr std::string_view song_mime_type_orig_12056 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_12056 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_12056;
+constexpr std::string_view song_mime_type_orig_12056 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_12056;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_12056;
+constexpr std::string_view song_mime_type_small_thumb_12056 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_12056;
+
+
+#if __has_embed("song_pic_thumb_12056") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_12056 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_12056"
+});
+constexpr std::string_view song_mime_type_thumb_12056 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_12056 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_12056;
+constexpr std::string_view song_mime_type_thumb_12056 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_12056;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_12056;
+constexpr std::string_view song_mime_type_tiny_thumb_12056 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_12056;
+
+constexpr picture picture_song_12056 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/cEyyVhlRGfg/hqdefault.jpg)XYX"sv, song_pic_orig_12056, song_mime_type_orig_12056, song_file_ext_orig_12056, std::nullopt, song_pic_small_thumb_12056, song_mime_type_small_thumb_12056, song_file_ext_small_thumb_12056, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/9440139/9440139)XYX"sv, song_pic_thumb_12056, song_mime_type_thumb_12056, song_file_ext_thumb_12056, std::nullopt, song_pic_tiny_thumb_12056, song_mime_type_tiny_thumb_12056, song_file_ext_tiny_thumb_12056  };
+
+constexpr std::array<song_artists, 3> song_artists_song_12056 {{
+  { artist_t{ std::nullopt, "Producer"sv, false, 1501, R"XYX(Ultra-Noob)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 9 }, "Producer"sv, "Default"sv, 12415, false, false, R"XYX(Ultra-Noob)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(巡音ルカ, 巡音流歌, 메구리네 루카)XYX"sv, "Vocaloid"sv, false, 2, R"XYX(Megurine Luka)XYX"sv, R"XYX(image/png)XYX"sv, 2009y/1/30, "Locked"sv, 27 }, "Vocalist"sv, "Default"sv, 12416, false, false, R"XYX(Megurine Luka)XYX"sv, "Default"sv },
+  { artist_t{ std::nullopt, "Illustrator"sv, false, 16031, R"XYX(UpRightLeftDownChuChuChu)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 3 }, "Illustrator"sv, "Illustrator"sv, 103826, false, false, R"XYX(UpRightLeftDownChuChuChu)XYX"sv, "Illustrator"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_12056 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 5> pvs_song_12056 {{
+  { R"XYX(ikuy398)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 39607, 308, R"XYX(Megurine Luka - MEGANE (GLASSES) - English & Romaji Subs)XYX"sv, std::nullopt, R"XYX(C49UYJEspp4)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/C49UYJEspp4/default.jpg)XYX"sv, R"XYX(https://youtu.be/C49UYJEspp4)XYX"sv },
+  { R"XYX(Lysimachus)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 39608, 308, R"XYX(MEGANE - Ultra-Noob)XYX"sv, std::nullopt, R"XYX(Dr9NCQ4lhA0)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/Dr9NCQ4lhA0/default.jpg)XYX"sv, R"XYX(https://youtu.be/Dr9NCQ4lhA0)XYX"sv },
+  { R"XYX(Ultra-Noob)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 148166, 306, R"XYX(【巡音ルカ】MEGANE【オリジナル】)XYX"sv, 2010y/1/19, R"XYX(nm9440139)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/9440139/9440139)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/nm9440139)XYX"sv },
+  { R"XYX(Ultra-Noob)XYX"sv, std::nullopt, false, R"XYX({"Timestamp":"20100121062123"})XYX"sv, 285002, 308, R"XYX(MEGANE)XYX"sv, 2010y/1/21, R"XYX(owx85q66csls8qrq)XYX"sv, "Piapro"sv, "Original"sv, R"XYX(https://cdn.piapro.jp/thumb_i/yb/ybm0f1drrvqino76_20110811123214_0250_0250.jpg)XYX"sv, R"XYX(http://piapro.jp/content/owx85q66csls8qrq)XYX"sv },
+  { R"XYX(Ultra-Noob - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 870785, 308, R"XYX(MEGANE (feat. Megurine Luka))XYX"sv, 2020y/4/3, R"XYX(cEyyVhlRGfg)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/cEyyVhlRGfg/default.jpg)XYX"sv, R"XYX(https://youtu.be/cEyyVhlRGfg)XYX"sv },
+}};
+
+/* End Song 12056: GLASSES */
+
 /* Start Song 598025: Glorious Day */
 
 constexpr std::array<additional_name, 1> names_song_598025 {{
@@ -12639,6 +13082,75 @@ constexpr std::array<song_pv, 7> pvs_song_354245 {{
 }};
 
 /* End Song 354245: God-ish */
+
+/* Start Song 3389: God-Tier Tune */
+
+constexpr std::array<additional_name, 4> names_song_3389 {{
+  {"Japanese"sv, R"XYX(神曲)XYX"sv},
+  {"Romaji"sv, R"XYX(Kamikyoku)XYX"sv},
+  {"English"sv, R"XYX(God-Tier Tune)XYX"sv},
+  {"Unspecified"sv, R"XYX(Godly Song)XYX"sv},
+}};
+
+constexpr std::array<web_link, 2> web_links_song_3389 {{
+  {"Reference"sv, R"XYX(Hatsune Miku wiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/14220.html)XYX"sv, 537 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/14348)XYX"sv, 15346 },
+}};
+
+
+#if __has_embed("song_pic_orig_3389") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_3389 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_3389"
+});
+constexpr std::string_view song_mime_type_orig_3389 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_3389 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_3389;
+constexpr std::string_view song_mime_type_orig_3389 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_3389;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_3389;
+constexpr std::string_view song_mime_type_small_thumb_3389 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_3389;
+
+
+#if __has_embed("song_pic_thumb_3389") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_3389 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_3389"
+});
+constexpr std::string_view song_mime_type_thumb_3389 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_3389 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_3389;
+constexpr std::string_view song_mime_type_thumb_3389 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_3389;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_3389;
+constexpr std::string_view song_mime_type_tiny_thumb_3389 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_3389;
+
+constexpr picture picture_song_3389 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/wsE1FabUeAY/hqdefault.jpg)XYX"sv, song_pic_orig_3389, song_mime_type_orig_3389, song_file_ext_orig_3389, std::nullopt, song_pic_small_thumb_3389, song_mime_type_small_thumb_3389, song_file_ext_small_thumb_3389, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/13452778/13452778)XYX"sv, song_pic_thumb_3389, song_mime_type_thumb_3389, song_file_ext_thumb_3389, std::nullopt, song_pic_tiny_thumb_3389, song_mime_type_tiny_thumb_3389, song_file_ext_tiny_thumb_3389  };
+
+constexpr std::array<song_artists, 4> song_artists_song_3389 {{
+  { artist_t{ R"XYX(おにゅうP, OnyuuP)XYX"sv, "Producer"sv, false, 92, R"XYX(onewP)XYX"sv, R"XYX(image/gif)XYX"sv, std::nullopt, "Finished"sv, 11 }, "Producer"sv, "Composer, Lyricist"sv, 4273, false, false, R"XYX(onewP)XYX"sv, "Composer, Lyricist"sv },
+  { artist_t{ R"XYX(んぽすけ, nposuke)XYX"sv, "Animator"sv, false, 11417, R"XYX(Sui)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 3 }, "Animator"sv, "Default"sv, 91138, false, false, R"XYX(Sui)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(ピノキオピー, ピノキオP, 工藤大発見, DAIHAKKEN, Kudou Daihakken, 匹诺曹P, 피노키오피)XYX"sv, "Producer"sv, false, 28, R"XYX(PinocchioP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 38 }, "Producer"sv, "Arranger, Instrumentalist, Mastering, Mixer"sv, 91139, false, false, R"XYX(PinocchioP)XYX"sv, "Arranger, Instrumentalist, Mastering, Mixer"sv },
+  { artist_t{ R"XYX(初音ミク Append (Solid))XYX"sv, "Vocaloid"sv, false, 76, R"XYX(Hatsune Miku Append (Solid))XYX"sv, R"XYX(image/png)XYX"sv, 2010y/4/30, "Locked"sv, 20 }, "Vocalist"sv, "Default"sv, 1897642, false, false, R"XYX(Hatsune Miku Append (Solid))XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_3389 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 4> pvs_song_3389 {{
+  { R"XYX(おにゅう)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 107627, 198, R"XYX(【初音ミク】神曲【オリジナル・PV付き】)XYX"sv, 2011y/1/30, R"XYX(sm13452778)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/13452778/13452778)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm13452778)XYX"sv },
+  { R"XYX(Everless-Avanti)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 167112, 198, R"XYX(【初音ミク】神曲【オリジナル・PV付き】中文字幕)XYX"sv, 2012y/6/26, R"XYX(rOTizQ4h948)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/rOTizQ4h948/default.jpg)XYX"sv, R"XYX(https://youtu.be/rOTizQ4h948)XYX"sv },
+  { R"XYX(ikuy398)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 284584, 199, R"XYX(Hatsune Miku - God Song (神曲) - English/Romaji Subs)XYX"sv, 2011y/1/31, R"XYX(-hzADatM-Ek)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/-hzADatM-Ek/default.jpg)XYX"sv, R"XYX(https://youtu.be/-hzADatM-Ek)XYX"sv },
+  { R"XYX(onewP - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 509281, 198, R"XYX(神曲 (feat. Hatsune Miku))XYX"sv, 2020y/4/3, R"XYX(wsE1FabUeAY)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/wsE1FabUeAY/default.jpg)XYX"sv, R"XYX(https://youtu.be/wsE1FabUeAY)XYX"sv },
+}};
+
+/* End Song 3389: God-Tier Tune */
 
 /* Start Song 2923: Requiem for the Phantasma [25,Dec] */
 
@@ -16852,6 +17364,73 @@ constexpr std::array<song_pv, 3> pvs_song_566239 {{
 }};
 
 /* End Song 566239: JUVENILE */
+
+/* Start Song 13961: Kagamine HachiHachi Flower Fight */
+
+constexpr std::array<additional_name, 4> names_song_13961 {{
+  {"Japanese"sv, R"XYX(鏡音八八花合戦)XYX"sv},
+  {"Romaji"sv, R"XYX(Kagamine Hachihachi Hana no Kassen)XYX"sv},
+  {"English"sv, R"XYX(Kagamine HachiHachi Flower Fight)XYX"sv},
+  {"Unspecified"sv, R"XYX(Hachi-Hachi Flowery Battle of Kagamines)XYX"sv},
+}};
+
+constexpr std::array<web_link, 1> web_links_song_13961 {{
+  {"Official"sv, R"XYX(Piapro)XYX"sv, R"XYX(http://piapro.jp/content/it0oykmjd8qoyixk)XYX"sv, 167019 },
+}};
+
+
+#if __has_embed("song_pic_orig_13961") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_13961 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_13961"
+});
+constexpr std::string_view song_mime_type_orig_13961 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_13961 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_13961;
+constexpr std::string_view song_mime_type_orig_13961 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_13961;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_13961;
+constexpr std::string_view song_mime_type_small_thumb_13961 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_13961;
+
+
+#if __has_embed("song_pic_thumb_13961") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_13961 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_13961"
+});
+constexpr std::string_view song_mime_type_thumb_13961 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_13961 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_13961;
+constexpr std::string_view song_mime_type_thumb_13961 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_13961;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_13961;
+constexpr std::string_view song_mime_type_tiny_thumb_13961 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_13961;
+
+constexpr picture picture_song_13961 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/9zhrDj4KRlc/hqdefault.jpg)XYX"sv, song_pic_orig_13961, song_mime_type_orig_13961, song_file_ext_orig_13961, std::nullopt, song_pic_small_thumb_13961, song_mime_type_small_thumb_13961, song_file_ext_small_thumb_13961, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/9206487/9206487)XYX"sv, song_pic_thumb_13961, song_mime_type_thumb_13961, song_file_ext_thumb_13961, std::nullopt, song_pic_tiny_thumb_13961, song_mime_type_tiny_thumb_13961, song_file_ext_tiny_thumb_13961  };
+
+constexpr std::array<song_artists, 5> song_artists_song_13961 {{
+  { artist_t{ R"XYX(モジャP, MojaP, MojyaP, ヒゲとかモジャモジャ, Hige Toka Mojamoja, パイロケット)XYX"sv, "Producer"sv, false, 1917, R"XYX(Mogiavelli)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 14 }, "Producer"sv, "Default"sv, 16324, false, false, R"XYX(Mogiavelli)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音レン, 鏡音連, 카가미네 렌, 镜音连)XYX"sv, "Vocaloid"sv, false, 15, R"XYX(Kagamine Len)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 34 }, "Vocalist"sv, "Default"sv, 16325, false, false, R"XYX(Kagamine Len)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音リン, 鏡音鈴, 카가미네 린, 镜音铃)XYX"sv, "Vocaloid"sv, false, 14, R"XYX(Kagamine Rin)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 36 }, "Vocalist"sv, "Default"sv, 16326, false, false, R"XYX(Kagamine Rin)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(にれぎる)XYX"sv, "Lyricist"sv, false, 3451, R"XYX(Niregiru)XYX"sv, std::nullopt, std::nullopt, "Finished"sv, 4 }, "Other"sv, "Lyricist"sv, 31950, false, false, R"XYX(Niregiru)XYX"sv, "Lyricist"sv },
+  { artist_t{ std::nullopt, "Animator"sv, false, 3453, R"XYX(melou)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 4 }, "Animator"sv, "Default"sv, 31963, false, false, R"XYX(melou)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_13961 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 2> pvs_song_13961 {{
+  { R"XYX(melou)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 151046, 148, R"XYX(【鏡音リン･レン】鏡音八八花合戦【歌舞伎パンク・PV付き】)XYX"sv, 2009y/12/26, R"XYX(sm9206487)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/9206487/9206487)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm9206487)XYX"sv },
+  { R"XYX(Rinka Rii (RRRINKA))XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 162708, 149, R"XYX(【鏡音リン･レン】鏡音八八花合戦【歌舞伎パンク・PV付き】)XYX"sv, 2009y/12/30, R"XYX(9zhrDj4KRlc)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/9zhrDj4KRlc/default.jpg)XYX"sv, R"XYX(https://youtu.be/9zhrDj4KRlc)XYX"sv },
+}};
+
+/* End Song 13961: Kagamine HachiHachi Flower Fight */
 
 /* Start Song 4979: Heat-Haze Daze */
 
@@ -21820,6 +22399,80 @@ constexpr std::array<song_pv, 5> pvs_song_668055 {{
 
 /* End Song 668055: Monitoring */
 
+/* Start Song 2651: Monochrome∞Blue Sky */
+
+constexpr std::array<additional_name, 4> names_song_2651 {{
+  {"Japanese"sv, R"XYX(モノクロ∞ブルースカイ)XYX"sv},
+  {"English"sv, R"XYX(Monochrome∞Blue Sky)XYX"sv},
+  {"Unspecified"sv, R"XYX(Monochrome∞BlueSky)XYX"sv},
+  {"Romaji"sv, R"XYX(monochro ∞ blue sky)XYX"sv},
+}};
+
+constexpr std::array<web_link, 8> web_links_song_2651 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/9343.html)XYX"sv, 2918 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%AD%E2%88%9E%E3%83%96%E3%83%AB%E3%83%BC%E3%82%B9%E3%82%AB%E3%82%A4_%28Monochro_%E2%88%9E_Blue_Sky%29)XYX"sv, 2919 },
+  {"Official"sv, R"XYX(Piapro / Instrumental)XYX"sv, R"XYX(http://piapro.jp/t/8E7f)XYX"sv, 42385 },
+  {"Official"sv, R"XYX(Pixiv / Illustration)XYX"sv, R"XYX(http://www.pixiv.net/member_illust.php?mode=medium&illust_id=9578921)XYX"sv, 42386 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm10150980)XYX"sv, 42387 },
+  {"Reference"sv, R"XYX(Pixiv Encyclopedia)XYX"sv, R"XYX(http://dic.pixiv.net/a/%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%AD%E2%88%9E%E3%83%96%E3%83%AB%E3%83%BC%E3%82%B9%E3%82%AB%E3%82%A4)XYX"sv, 42388 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/19988)XYX"sv, 42389 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E3%83%A2%E3%83%8E%E3%82%AF%E3%83%AD%E2%88%9E%E3%83%96%E3%83%AB%E3%83%BC%E3%82%B9%E3%82%AB%E3%82%A4_%28Monochrome_%E2%88%9E_Blue_Sky%29)XYX"sv, 77096 },
+}};
+
+
+#if __has_embed("song_pic_orig_2651") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_2651 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_2651"
+});
+constexpr std::string_view song_mime_type_orig_2651 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_2651 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_2651;
+constexpr std::string_view song_mime_type_orig_2651 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_2651;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_2651;
+constexpr std::string_view song_mime_type_small_thumb_2651 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_2651;
+
+
+#if __has_embed("song_pic_thumb_2651") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_2651 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_2651"
+});
+constexpr std::string_view song_mime_type_thumb_2651 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_2651 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_2651;
+constexpr std::string_view song_mime_type_thumb_2651 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_2651;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_2651;
+constexpr std::string_view song_mime_type_tiny_thumb_2651 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_2651;
+
+constexpr picture picture_song_2651 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/YW2ytgYAiTQ/hqdefault.jpg)XYX"sv, song_pic_orig_2651, song_mime_type_orig_2651, song_file_ext_orig_2651, std::nullopt, song_pic_small_thumb_2651, song_mime_type_small_thumb_2651, song_file_ext_small_thumb_2651, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/10150980/10150980.29219)XYX"sv, song_pic_thumb_2651, song_mime_type_thumb_2651, song_file_ext_thumb_2651, std::nullopt, song_pic_tiny_thumb_2651, song_mime_type_tiny_thumb_2651, song_file_ext_tiny_thumb_2651  };
+
+constexpr std::array<song_artists, 3> song_artists_song_2651 {{
+  { artist_t{ R"XYX(のぼる↑, 江藤昇, Noboru Etou, 노보루↑)XYX"sv, "Producer"sv, false, 299, R"XYX(Noboru)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 23 }, "Producer"sv, "Composer, Lyricist"sv, 5079, false, false, R"XYX(Noboru)XYX"sv, "Composer, Lyricist"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 5086, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(Nidy, 4hands)XYX"sv, "Illustrator"sv, false, 2078, R"XYX(2D)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 14 }, "Animator, Illustrator"sv, "Animator, Illustrator"sv, 17630, false, false, R"XYX(2D)XYX"sv, "Animator, Illustrator"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_2651 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 4> pvs_song_2651 {{
+  { R"XYX(のぼる↑)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 420650, 236, R"XYX(【初音ミク】 モノクロ∞ブルースカイ 【オリジナル・のぼる↑】)XYX"sv, 2010y/3/25, R"XYX(sm10150980)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/10150980/10150980.29219)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm10150980)XYX"sv },
+  { R"XYX(のぼる↑)XYX"sv, std::nullopt, false, R"XYX({"Timestamp":"20100328234418"})XYX"sv, 420651, 225, R"XYX(モノクロ∞ブルースカイ)XYX"sv, 2010y/3/28, R"XYX(vkb49grnec342n1x)XYX"sv, "Piapro"sv, "Original"sv, R"XYX(https://cdn.piapro.jp/thumb_i/ff/ff0pierandly7qvb_20110304124104_0250_0250.png)XYX"sv, R"XYX(http://piapro.jp/content/vkb49grnec342n1x)XYX"sv },
+  { R"XYX(swallow327)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 420652, 237, R"XYX(【初音ミク】モノクロ∞ブルースカイ【with 中文字幕】)XYX"sv, 2010y/3/26, R"XYX(-WyYGJ0O7V4)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/-WyYGJ0O7V4/default.jpg)XYX"sv, R"XYX(https://youtu.be/-WyYGJ0O7V4)XYX"sv },
+  { R"XYX(のぼる↑ - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 877843, 226, R"XYX(モノクロ∞ブルースカイ)XYX"sv, 2023y/3/23, R"XYX(YW2ytgYAiTQ)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/YW2ytgYAiTQ/default.jpg)XYX"sv, R"XYX(https://youtu.be/YW2ytgYAiTQ)XYX"sv },
+}};
+
+/* End Song 2651: Monochrome∞Blue Sky */
+
 /* Start Song 5701: moon */
 
 constexpr std::array<additional_name, 3> names_song_5701 {{
@@ -22167,6 +22820,83 @@ constexpr std::array<song_pv, 3> pvs_song_199152 {{
 
 /* End Song 199152: Music Like Magic! */
 
+/* Start Song 3269: Music of Heaven */
+
+constexpr std::array<additional_name, 5> names_song_3269 {{
+  {"Japanese"sv, R"XYX(天樂)XYX"sv},
+  {"Romaji"sv, R"XYX(Tengaku)XYX"sv},
+  {"English"sv, R"XYX(Music of Heaven)XYX"sv},
+  {"Unspecified"sv, R"XYX(Music of Heavens)XYX"sv},
+  {"Unspecified"sv, R"XYX(천악)XYX"sv},
+}};
+
+constexpr std::array<web_link, 12> web_links_song_3269 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/6192.html)XYX"sv, 10105 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm7918983)XYX"sv, 10106 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/1919)XYX"sv, 10107 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E5%A4%A9%E6%A8%82_%28Tengaku%29)XYX"sv, 10108 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E5%A4%A9%E6%A8%82_(Tengaku))XYX"sv, 51777 },
+  {"Official"sv, R"XYX(Pixiv (Illustration))XYX"sv, R"XYX(https://www.pixiv.net/member_illust.php?mode=medium&illust_id=5616413)XYX"sv, 66533 },
+  {"Commercial"sv, R"XYX(Spotify)XYX"sv, R"XYX(https://open.spotify.com/track/79HcrcBQ6s2gDpetLznvAt?si=ZIj7dyVCTDqtAevZpjDtlg)XYX"sv, 94242 },
+  {"Reference"sv, R"XYX(Moegirlpedia (zh-cn))XYX"sv, R"XYX(https://zh.moegirl.org.cn/%E5%A4%A9%E4%B9%90)XYX"sv, 163961 },
+  {"Reference"sv, R"XYX(Namu Wiki)XYX"sv, R"XYX(https://en.namu.wiki/w/%EC%B2%9C%EC%95%85)XYX"sv, 163962 },
+  {"Reference"sv, R"XYX(Pixiv Encyclopedia)XYX"sv, R"XYX(https://dic.pixiv.net/a/%E5%A4%A9%E6%A8%82)XYX"sv, 163963 },
+  {"Reference"sv, R"XYX(Project SEKAI Wiki)XYX"sv, R"XYX(https://projectsekai.fandom.com/wiki/Tengaku)XYX"sv, 163964 },
+  {"Reference"sv, R"XYX(Sekaipedia)XYX"sv, R"XYX(https://www.sekaipedia.org/wiki/Tengaku)XYX"sv, 163965 },
+}};
+
+
+#if __has_embed("song_pic_orig_3269") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_3269 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_3269"
+});
+constexpr std::string_view song_mime_type_orig_3269 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_3269 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_3269;
+constexpr std::string_view song_mime_type_orig_3269 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_3269;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_3269;
+constexpr std::string_view song_mime_type_small_thumb_3269 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_3269;
+
+
+#if __has_embed("song_pic_thumb_3269") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_3269 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_3269"
+});
+constexpr std::string_view song_mime_type_thumb_3269 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_3269 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_3269;
+constexpr std::string_view song_mime_type_thumb_3269 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_3269;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_3269;
+constexpr std::string_view song_mime_type_tiny_thumb_3269 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_3269;
+
+constexpr picture picture_song_3269 = { std::nullopt, std::nullopt, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7918983/7918983.63901958)XYX"sv, song_pic_orig_3269, song_mime_type_orig_3269, song_file_ext_orig_3269, std::nullopt, song_pic_small_thumb_3269, song_mime_type_small_thumb_3269, song_file_ext_small_thumb_3269, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7918983/7918983.63901958)XYX"sv, song_pic_thumb_3269, song_mime_type_thumb_3269, song_file_ext_thumb_3269, std::nullopt, song_pic_tiny_thumb_3269, song_mime_type_tiny_thumb_3269, song_file_ext_tiny_thumb_3269  };
+
+constexpr std::array<song_artists, 4> song_artists_song_3269 {{
+  { artist_t{ R"XYX(ゆうゆ, 篠螺悠那, Yuuna Sasara, 美月正, 仮乃スガタ, カガリ鳥, 유우유)XYX"sv, "Producer"sv, false, 66, R"XYX(Yuuyu)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 41 }, "Producer"sv, "Default"sv, 6445, false, false, R"XYX(Yuuyu)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音リン, 鏡音鈴, 카가미네 린, 镜音铃)XYX"sv, "Vocaloid"sv, false, 14, R"XYX(Kagamine Rin)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 36 }, "Vocalist"sv, "Default"sv, 6464, false, false, R"XYX(Kagamine Rin)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(あちゃ, どあらP, DoaraP)XYX"sv, "Producer"sv, false, 778, R"XYX(Acha)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 8 }, "Animator"sv, "Animator"sv, 152268, false, false, R"XYX(Acha)XYX"sv, "Animator"sv },
+  { artist_t{ std::nullopt, "Illustrator"sv, false, 14626, R"XYX(tamajam)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 5 }, "Illustrator"sv, "Illustrator"sv, 152269, false, false, R"XYX(tamajam)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_3269 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 1> pvs_song_3269 {{
+  { R"XYX(ゆうゆ)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 629919, 275, R"XYX(【鏡音リン】 天樂 【オリジナル】)XYX"sv, 2009y/8/12, R"XYX(sm7918983)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7918983/7918983.63901958)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm7918983)XYX"sv },
+}};
+
+/* End Song 3269: Music of Heaven */
+
 /* Start Song 177679: Chentaku */
 
 constexpr std::array<additional_name, 1> names_song_177679 {{
@@ -22439,6 +23169,73 @@ constexpr std::array<song_pv, 6> pvs_song_7235 {{
 }};
 
 /* End Song 7235: My Time */
+
+/* Start Song 16580: Negative-Positive*Continues */
+
+constexpr std::array<additional_name, 3> names_song_16580 {{
+  {"Japanese"sv, R"XYX(ネガポジ＊コンティニューズ)XYX"sv},
+  {"Romaji"sv, R"XYX(Negaposi*Continues)XYX"sv},
+  {"English"sv, R"XYX(Negative-Positive*Continues)XYX"sv},
+}};
+
+constexpr std::array<web_link, 4> web_links_song_16580 {{
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E3%83%8D%E3%82%AC%E3%83%9D%E3%82%B8%EF%BC%8A%E3%82%B3%E3%83%B3%E3%83%86%E3%82%A3%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%BA_(Negaposi%EF%BC%8AContinues))XYX"sv, 73725 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.wikia.com/wiki/%E3%83%8D%E3%82%AC%E3%83%9D%E3%82%B8%EF%BC%8A%E3%82%B3%E3%83%B3%E3%83%86%E3%82%A3%E3%83%8B%E3%83%A5%E3%83%BC%E3%82%BA_(Negaposi*Continues))XYX"sv, 73726 },
+  {"Official"sv, R"XYX(SoundCloud (Preview))XYX"sv, R"XYX(https://soundcloud.com/umaainc/09-negaposi-continues-feat)XYX"sv, 109538 },
+  {"Reference"sv, R"XYX(VocaDB - ポジネガ＊ミステイカーズ)XYX"sv, R"XYX(https://vocadb.net/S/503039)XYX"sv, 127651 },
+}};
+
+
+#if __has_embed("song_pic_orig_16580") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_16580 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_16580"
+});
+constexpr std::string_view song_mime_type_orig_16580 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_16580 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_16580;
+constexpr std::string_view song_mime_type_orig_16580 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_16580;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_16580;
+constexpr std::string_view song_mime_type_small_thumb_16580 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_16580;
+
+
+#if __has_embed("song_pic_thumb_16580") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_16580 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_16580"
+});
+constexpr std::string_view song_mime_type_thumb_16580 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_16580 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_16580;
+constexpr std::string_view song_mime_type_thumb_16580 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_16580;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_16580;
+constexpr std::string_view song_mime_type_tiny_thumb_16580 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_16580;
+
+constexpr picture picture_song_16580 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/LdnlHz3qGrQ/hqdefault.jpg)XYX"sv, song_pic_orig_16580, song_mime_type_orig_16580, song_file_ext_orig_16580, std::nullopt, song_pic_small_thumb_16580, song_mime_type_small_thumb_16580, song_file_ext_small_thumb_16580, R"XYX(https://i.ytimg.com/vi/LdnlHz3qGrQ/default.jpg)XYX"sv, song_pic_thumb_16580, song_mime_type_thumb_16580, song_file_ext_thumb_16580, std::nullopt, song_pic_tiny_thumb_16580, song_mime_type_tiny_thumb_16580, song_file_ext_tiny_thumb_16580  };
+
+constexpr std::array<song_artists, 2> song_artists_song_16580 {{
+  { artist_t{ R"XYX(ささくれUK, ささくれP, ササクレ・ユーケイ, TJ.Hangneil)XYX"sv, "Producer"sv, false, 51, R"XYX(sasakure.UK)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 42 }, "Producer"sv, "Default"sv, 22818, false, false, R"XYX(sasakure.UK)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 40876, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_16580 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 3> pvs_song_16580 {{
+  { R"XYX(ProjectstOrmStudio)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 167528, 191, R"XYX(Negaposi*Continues (Hatsune Miku: Project Diva f))XYX"sv, 2015y/1/2, R"XYX(KiJrHNAnLdg)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/KiJrHNAnLdg/default.jpg)XYX"sv, R"XYX(https://youtu.be/KiJrHNAnLdg)XYX"sv },
+  { R"XYX(sasakure.UK - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 356422, 188, R"XYX(ネガポジ＊コンティニューズ (feat. 初音ミク))XYX"sv, 2018y/11/14, R"XYX(LdnlHz3qGrQ)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/LdnlHz3qGrQ/default.jpg)XYX"sv, R"XYX(https://youtu.be/LdnlHz3qGrQ)XYX"sv },
+  { R"XYX(Karin's Channel)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 482568, 195, R"XYX(Hatsune Miku: Project DIVA Future Tone - [PV] "Negaposi*Continues" (Romaji/English Subs))XYX"sv, 2017y/2/20, R"XYX(CuMyQWiho9U)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/CuMyQWiho9U/default.jpg)XYX"sv, R"XYX(https://youtu.be/CuMyQWiho9U)XYX"sv },
+}};
+
+/* End Song 16580: Negative-Positive*Continues */
 
 /* Start Song 480845: NEPPUU ~Blistering Wind~ */
 
@@ -23628,6 +24425,84 @@ constexpr std::array<song_pv, 4> pvs_song_3007 {{
 }};
 
 /* End Song 3007: One-Sided Love Samba */
+
+/* Start Song 12443: ONLINE GAME ADDICTS SPRECHCHOR */
+
+constexpr std::array<additional_name, 6> names_song_12443 {{
+  {"Japanese"sv, R"XYX(ネトゲ廃人シュプレヒコール)XYX"sv},
+  {"Romaji"sv, R"XYX(Netgame Haijin Sprechchor)XYX"sv},
+  {"English"sv, R"XYX(ONLINE GAME ADDICTS SPRECHCHOR)XYX"sv},
+  {"English"sv, R"XYX(Online Game Addict Chant)XYX"sv},
+  {"Unspecified"sv, R"XYX(The MMORPG Addict's Anthem)XYX"sv},
+  {"Unspecified"sv, R"XYX(온라인 게임 폐인 슈프레히코어)XYX"sv},
+}};
+
+constexpr std::array<web_link, 7> web_links_song_12443 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/12512.html)XYX"sv, 1380 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E3%83%8D%E3%83%88%E3%82%B2%E5%BB%83%E4%BA%BA%E3%82%B7%E3%83%A5%E3%83%97%E3%83%AC%E3%83%92%E3%82%B3%E3%83%BC%E3%83%AB_%28Netoge_Haijin_Sprechchor%29)XYX"sv, 2925 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/2237)XYX"sv, 10865 },
+  {"Official"sv, R"XYX(Pixiv (Illustration))XYX"sv, R"XYX(https://www.pixiv.net/member_illust.php?mode=medium&illust_id=13904482)XYX"sv, 68711 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm12441199)XYX"sv, 68712 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E3%83%8D%E3%83%88%E3%82%B2%E5%BB%83%E4%BA%BA%E3%82%B7%E3%83%A5%E3%83%97%E3%83%AC%E3%83%92%E3%82%B3%E3%83%BC%E3%83%AB_%28Netoge_Haijin_Sprechchor%29)XYX"sv, 68713 },
+  {"Official"sv, R"XYX(Piapro (Illustration))XYX"sv, R"XYX(https://piapro.jp/t/q_He)XYX"sv, 75328 },
+}};
+
+
+#if __has_embed("song_pic_orig_12443") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_12443 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_12443"
+});
+constexpr std::string_view song_mime_type_orig_12443 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_12443 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_12443;
+constexpr std::string_view song_mime_type_orig_12443 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_12443;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_12443;
+constexpr std::string_view song_mime_type_small_thumb_12443 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_12443;
+
+
+#if __has_embed("song_pic_thumb_12443") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_12443 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_12443"
+});
+constexpr std::string_view song_mime_type_thumb_12443 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_12443 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_12443;
+constexpr std::string_view song_mime_type_thumb_12443 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_12443;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_12443;
+constexpr std::string_view song_mime_type_tiny_thumb_12443 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_12443;
+
+constexpr picture picture_song_12443 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/WdAy_55dxqA/hqdefault.jpg)XYX"sv, song_pic_orig_12443, song_mime_type_orig_12443, song_file_ext_orig_12443, std::nullopt, song_pic_small_thumb_12443, song_mime_type_small_thumb_12443, song_file_ext_small_thumb_12443, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/12441199/12441199)XYX"sv, song_pic_thumb_12443, song_mime_type_thumb_12443, song_file_ext_thumb_12443, std::nullopt, song_pic_tiny_thumb_12443, song_mime_type_tiny_thumb_12443, song_file_ext_tiny_thumb_12443  };
+
+constexpr std::array<song_artists, 5> song_artists_song_12443 {{
+  { artist_t{ R"XYX(さつき が てんこもり, TENKOMORI)XYX"sv, "Producer"sv, false, 95, R"XYX(Satsuki ga Tenkomori)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 35 }, "Producer"sv, "Default"sv, 1893, false, false, R"XYX(Satsuki ga Tenkomori)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 13351, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(Ryohei Sataka, 佐高 陵平, 佐高陵平, さたか りょうへい, BUGLOUD)XYX"sv, "Producer"sv, false, 1075, R"XYX(y0c1e)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 25 }, "Animator"sv, "Animator"sv, 24003, false, false, R"XYX(y0c1e)XYX"sv, "Animator"sv },
+  { artist_t{ R"XYX(マクロ, maclo95, kignyo122)XYX"sv, "Illustrator"sv, false, 2605, R"XYX(Maclo)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 10 }, "Illustrator"sv, "Illustrator"sv, 24004, false, false, R"XYX(Maclo)XYX"sv, "Illustrator"sv },
+  { artist_t{ R"XYX(歌手不明)XYX"sv, "OtherVocalist"sv, false, 23554, R"XYX(Unknown vocalist(s))XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 12 }, "Vocalist"sv, "Default"sv, 1810655, false, true, R"XYX(Unknown vocalist(s))XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_12443 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 5> pvs_song_12443 {{
+  { R"XYX(さつき が てんこもり)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 110681, 294, R"XYX(【初音ミク】ネトゲ廃人シュプレヒコール【ボトラー】)XYX"sv, 2010y/10/15, R"XYX(sm12441199)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/12441199/12441199)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm12441199)XYX"sv },
+  { R"XYX(TENKOMORI)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 228036, 295, R"XYX(【VOCALOID】ネトゲ廃人シュプレヒコール(ONLINE GAME ADDICTS SPRECHCHOR))XYX"sv, 2014y/7/4, R"XYX(WdAy_55dxqA)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/WdAy_55dxqA/default.jpg)XYX"sv, R"XYX(https://youtu.be/WdAy_55dxqA)XYX"sv },
+  { R"XYX(ikuy398)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 267011, 294, R"XYX([Eng Sub] Miku - ONLINE GAME ADDICTS SPRECHCHOR (ネトゲ廃人シュプレヒコール))XYX"sv, 2010y/11/9, R"XYX(yMqKkDZJXNk)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/yMqKkDZJXNk/default.jpg)XYX"sv, R"XYX(https://youtu.be/yMqKkDZJXNk)XYX"sv },
+  { R"XYX(googoo888)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 267015, 289, R"XYX([60fps Full風] Online Game Addicts Sprechchor ネトゲ廃人シュプレヒコール - Hatsune Miku 初音ミク DIVA English Romaji)XYX"sv, 2014y/8/16, R"XYX(Yq0zBXN1o2A)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/Yq0zBXN1o2A/default.jpg)XYX"sv, R"XYX(https://youtu.be/Yq0zBXN1o2A)XYX"sv },
+  { R"XYX( Satsuki ga Tenkomori - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 418955, 292, R"XYX(ネトゲ廃人シュプレヒコール feat.初音ミク)XYX"sv, 2020y/6/30, R"XYX(I3cETfu08w4)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/I3cETfu08w4/default.jpg)XYX"sv, R"XYX(https://youtu.be/I3cETfu08w4)XYX"sv },
+}};
+
+/* End Song 12443: ONLINE GAME ADDICTS SPRECHCHOR */
 
 /* Start Song 840401: OOPÁRTS */
 
@@ -26567,6 +27442,84 @@ constexpr std::array<song_pv, 4> pvs_song_2259 {{
 
 /* End Song 2259: Rin Rin Signal */
 
+/* Start Song 8678: Rin-chan Now! */
+
+constexpr std::array<additional_name, 4> names_song_8678 {{
+  {"Japanese"sv, R"XYX(リンちゃんなう！)XYX"sv},
+  {"English"sv, R"XYX(Rin-chan Now!)XYX"sv},
+  {"Romaji"sv, R"XYX(Rin-chan Nau!)XYX"sv},
+  {"Unspecified"sv, R"XYX(鈴醤NOW！)XYX"sv},
+}};
+
+constexpr std::array<web_link, 8> web_links_song_8678 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/19827.html)XYX"sv, 1245 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/%E3%83%AA%E3%83%B3%E3%81%A1%E3%82%83%E3%82%93%E3%81%AA%E3%81%86%EF%BC%81_%28Rin-chan_Nau!%29)XYX"sv, 3127 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm16539814)XYX"sv, 3128 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/2602)XYX"sv, 33217 },
+  {"Official"sv, R"XYX(Piapro / Karaoke)XYX"sv, R"XYX(http://piapro.jp/t/6mkR)XYX"sv, 33218 },
+  {"Official"sv, R"XYX(Pixiv / Illustration)XYX"sv, R"XYX(http://www.pixiv.net/member_illust.php?mode=medium&illust_id=25410059)XYX"sv, 33219 },
+  {"Reference"sv, R"XYX(Pixiv Encyclopedia)XYX"sv, R"XYX(http://dic.pixiv.net/a/%E3%83%AA%E3%83%B3%E3%81%A1%E3%82%83%E3%82%93%E3%81%AA%E3%81%86%21)XYX"sv, 33220 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E3%83%AA%E3%83%B3%E3%81%A1%E3%82%83%E3%82%93%E3%81%AA%E3%81%86%EF%BC%81_(Rin-chan_Nau!))XYX"sv, 125535 },
+}};
+
+
+#if __has_embed("song_pic_orig_8678") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_8678 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_8678"
+});
+constexpr std::string_view song_mime_type_orig_8678 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_8678 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_8678;
+constexpr std::string_view song_mime_type_orig_8678 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_8678;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_8678;
+constexpr std::string_view song_mime_type_small_thumb_8678 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_8678;
+
+
+#if __has_embed("song_pic_thumb_8678") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_8678 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_8678"
+});
+constexpr std::string_view song_mime_type_thumb_8678 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_8678 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_8678;
+constexpr std::string_view song_mime_type_thumb_8678 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_8678;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_8678;
+constexpr std::string_view song_mime_type_tiny_thumb_8678 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_8678;
+
+constexpr picture picture_song_8678 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/_oS2aIhE2_U/hqdefault.jpg)XYX"sv, song_pic_orig_8678, song_mime_type_orig_8678, song_file_ext_orig_8678, std::nullopt, song_pic_small_thumb_8678, song_mime_type_small_thumb_8678, song_file_ext_small_thumb_8678, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/16539814/16539814)XYX"sv, song_pic_thumb_8678, song_mime_type_thumb_8678, song_file_ext_thumb_8678, std::nullopt, song_pic_tiny_thumb_8678, song_mime_type_tiny_thumb_8678, song_file_ext_tiny_thumb_8678  };
+
+constexpr std::array<song_artists, 6> song_artists_song_8678 {{
+  { artist_t{ R"XYX(オワタP, ガルナ, Garuna, 오와타P, 가루나)XYX"sv, "Producer"sv, false, 94, R"XYX(OwataP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 36 }, "Producer"sv, "Default"sv, 6789, false, false, R"XYX(OwataP)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(巡音ルカ, 巡音流歌, 메구리네 루카)XYX"sv, "Vocaloid"sv, false, 2, R"XYX(Megurine Luka)XYX"sv, R"XYX(image/png)XYX"sv, 2009y/1/30, "Locked"sv, 27 }, "Vocalist"sv, "Default"sv, 6790, false, false, R"XYX(Megurine Luka)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 6791, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音リン, 鏡音鈴, 카가미네 린, 镜音铃)XYX"sv, "Vocaloid"sv, false, 14, R"XYX(Kagamine Rin)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 36 }, "Vocalist"sv, "Default"sv, 9338, false, true, R"XYX(Kagamine Rin)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(田村ヒロ)XYX"sv, "Illustrator"sv, false, 2324, R"XYX(Tamura Hiro)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 10 }, "Animator, Illustrator"sv, "Animator, Illustrator"sv, 20841, false, false, R"XYX(Tamura Hiro)XYX"sv, "Animator, Illustrator"sv },
+  { artist_t{ R"XYX(杉の人, rlldi, sezu)XYX"sv, "Lyricist"sv, false, 2133, R"XYX(Sugi no Hito)XYX"sv, R"XYX(image/png)XYX"sv, std::nullopt, "Finished"sv, 10 }, "Other"sv, "Lyricist"sv, 124279, false, false, R"XYX(Sugi no Hito)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_8678 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 5> pvs_song_8678 {{
+  { R"XYX(ガルナ@オワタP)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 138252, 173, R"XYX(【初音ミク・巡音ルカ】リンちゃんなう！【鏡音生誕祭2011】)XYX"sv, 2011y/12/27, R"XYX(sm16539814)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/16539814/16539814)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm16539814)XYX"sv },
+  { R"XYX(ガルナ(オワタP))XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 166417, 174, R"XYX([official]リンちゃんなう！ feat.オワタP(初音ミク、巡音ルカ))XYX"sv, 2014y/6/13, R"XYX(_oS2aIhE2_U)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/_oS2aIhE2_U/default.jpg)XYX"sv, R"XYX(https://youtu.be/_oS2aIhE2_U)XYX"sv },
+  { R"XYX(niconico555movies)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 166418, 174, R"XYX(【Miku Luka】 Rin-chan Nau! 【eng annotation】)XYX"sv, 2011y/12/30, R"XYX(GeA86lonJoY)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/GeA86lonJoY/default.jpg)XYX"sv, R"XYX(https://youtu.be/GeA86lonJoY)XYX"sv },
+  { R"XYX(Garuna)XYX"sv, std::nullopt, false, R"XYX({"Aid":46216639,"Bvid":"BV1Eb411H7Az","Cid":80972708})XYX"sv, 388153, 174, R"XYX([official]リンちゃんなう！／鈴醤NOW! feat.オワタP(初音ミク、巡音ルカ))XYX"sv, 2019y/3/14, R"XYX(46216639)XYX"sv, "Bilibili"sv, "Original"sv, R"XYX(http://i1.hdslb.com/bfs/archive/03ae4a5081588b0d5a693175da2e8d4f3289d803.jpg)XYX"sv, R"XYX(https://www.bilibili.com/video/av46216639)XYX"sv },
+  { R"XYX(OWATAP - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1231825, 168, R"XYX(リンちゃんなう！ (feat. 初音ミク & 巡音ルカ))XYX"sv, 2019y/6/25, R"XYX(hQAcJRVIi7g)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/hQAcJRVIi7g/default.jpg)XYX"sv, R"XYX(https://youtu.be/hQAcJRVIi7g)XYX"sv },
+}};
+
+/* End Song 8678: Rin-chan Now! */
+
 /* Start Song 5550: RING×RING×RING */
 
 constexpr std::array<additional_name, 2> names_song_5550 {{
@@ -27142,6 +28095,73 @@ constexpr std::array<song_pv, 3> pvs_song_178433 {{
 }};
 
 /* End Song 178433: Round off the Square Earth */
+
+/* Start Song 16061: Sadistic.Music∞Factory */
+
+constexpr std::array<additional_name, 1> names_song_16061 {{
+  {"English"sv, R"XYX(Sadistic.Music∞Factory)XYX"sv},
+}};
+
+constexpr std::array<web_link, 5> web_links_song_16061 {{
+  {"Official"sv, R"XYX(Pixiv (Illustration))XYX"sv, R"XYX(http://www.pixiv.net/member_illust.php?mode=medium&illust_id=29761526)XYX"sv, 27614 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/Sadistic.Music%E2%88%9EFactory)XYX"sv, 47770 },
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/22629.html)XYX"sv, 47771 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm18729289)XYX"sv, 47772 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/Sadistic.Music%E2%88%9EFactory)XYX"sv, 74062 },
+}};
+
+
+#if __has_embed("song_pic_orig_16061") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_16061 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_16061"
+});
+constexpr std::string_view song_mime_type_orig_16061 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_16061 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_16061;
+constexpr std::string_view song_mime_type_orig_16061 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_16061;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_16061;
+constexpr std::string_view song_mime_type_small_thumb_16061 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_16061;
+
+
+#if __has_embed("song_pic_thumb_16061") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_16061 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_16061"
+});
+constexpr std::string_view song_mime_type_thumb_16061 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_16061 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_16061;
+constexpr std::string_view song_mime_type_thumb_16061 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_16061;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_16061;
+constexpr std::string_view song_mime_type_tiny_thumb_16061 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_16061;
+
+constexpr picture picture_song_16061 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/uhVqF55BRNM/hqdefault.jpg)XYX"sv, song_pic_orig_16061, song_mime_type_orig_16061, song_file_ext_orig_16061, std::nullopt, song_pic_small_thumb_16061, song_mime_type_small_thumb_16061, song_file_ext_small_thumb_16061, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/18729289/18729289)XYX"sv, song_pic_thumb_16061, song_mime_type_thumb_16061, song_file_ext_thumb_16061, std::nullopt, song_pic_tiny_thumb_16061, song_mime_type_tiny_thumb_16061, song_file_ext_tiny_thumb_16061  };
+
+constexpr std::array<song_artists, 2> song_artists_song_16061 {{
+  { artist_t{ R"XYX(cosMo@暴走P, 暴走P, BousouP, 黒猫アンティーク, Kuroneko Antique, コスモ, こすも, cosMo, 魔法少女P, cosMo@폭주P)XYX"sv, "Producer"sv, false, 85, R"XYX(cosMo@BousouP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 51 }, "Producer"sv, "Default"sv, 21127, false, false, R"XYX(cosMo@BousouP)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 21128, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_16061 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 4> pvs_song_16061 {{
+  { R"XYX(cosMo＠暴走P)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 926064, 161, R"XYX(初音ミクオリジナル曲「Sadistic.Music∞Factory」)XYX"sv, 2012y/8/27, R"XYX(sm18729289)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/18729289/18729289)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm18729289)XYX"sv },
+  { R"XYX(非洲のGUMI酱)XYX"sv, std::nullopt, false, R"XYX({"Aid":345656,"Bvid":"BV1nx411F7JR","Cid":536463})XYX"sv, 1352401, 161, R"XYX(【初音ミク】Sadistic.Music∞Factory【暴走P】)XYX"sv, 2012y/8/27, R"XYX(345656)XYX"sv, "Bilibili"sv, "Reprint"sv, R"XYX(http://i1.hdslb.com/bfs/archive/3ea2f3180c6b533462a86b19383a670eda685f4a.jpg)XYX"sv, R"XYX(https://www.bilibili.com/video/av345656)XYX"sv },
+  { R"XYX(Vocaloidsama2)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1352402, 162, R"XYX([Hatsune Miku] Sadistic.Music∞Factory [Sub Esp + Romaji])XYX"sv, 2012y/9/3, R"XYX(uhVqF55BRNM)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/uhVqF55BRNM/default.jpg)XYX"sv, R"XYX(https://youtu.be/uhVqF55BRNM)XYX"sv },
+  { R"XYX(Karin's Channel)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 1352403, 166, R"XYX(Hatsune Miku: Project DIVA Future Tone - [PV] "Sadistic.Music∞Factory" (Romaji/English/Español Subs))XYX"sv, 2017y/3/7, R"XYX(_kM6MQgiPPg)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/_kM6MQgiPPg/default.jpg)XYX"sv, R"XYX(https://youtu.be/_kM6MQgiPPg)XYX"sv },
+}};
+
+/* End Song 16061: Sadistic.Music∞Factory */
 
 /* Start Song 8741: Sakura Rain */
 
@@ -30651,6 +31671,70 @@ constexpr std::array<song_pv, 1> pvs_song_343187 {{
 
 /* End Song 343187: Start of Rainbow ～first step～ */
 
+/* Start Song 16558: Stay with me */
+
+constexpr std::array<additional_name, 1> names_song_16558 {{
+  {"English"sv, R"XYX(Stay with me)XYX"sv},
+}};
+
+constexpr std::array<web_link, 2> web_links_song_16558 {{
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.fandom.com/wiki/Stay_with_me/shu-tP)XYX"sv, 104826 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/Stay_with_me/shu-tP)XYX"sv, 104827 },
+}};
+
+
+#if __has_embed("song_pic_orig_16558") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_16558 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_16558"
+});
+constexpr std::string_view song_mime_type_orig_16558 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_16558 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_16558;
+constexpr std::string_view song_mime_type_orig_16558 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_16558;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_16558;
+constexpr std::string_view song_mime_type_small_thumb_16558 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_16558;
+
+
+#if __has_embed("song_pic_thumb_16558") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_16558 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_16558"
+});
+constexpr std::string_view song_mime_type_thumb_16558 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_16558 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_16558;
+constexpr std::string_view song_mime_type_thumb_16558 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_16558;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_16558;
+constexpr std::string_view song_mime_type_tiny_thumb_16558 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_16558;
+
+constexpr picture picture_song_16558 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/LLpP0Wfq1gU/hqdefault.jpg)XYX"sv, song_pic_orig_16558, song_mime_type_orig_16558, song_file_ext_orig_16558, std::nullopt, song_pic_small_thumb_16558, song_mime_type_small_thumb_16558, song_file_ext_small_thumb_16558, R"XYX(https://i.ytimg.com/vi/LLpP0Wfq1gU/default.jpg)XYX"sv, song_pic_thumb_16558, song_mime_type_thumb_16558, song_file_ext_thumb_16558, std::nullopt, song_pic_tiny_thumb_16558, song_mime_type_tiny_thumb_16558, song_file_ext_tiny_thumb_16558  };
+
+constexpr std::array<song_artists, 3> song_artists_song_16558 {{
+  { artist_t{ R"XYX(SHUICHI TANAKA, FEEL THE SONIC, TECHNiA)XYX"sv, "Producer"sv, false, 184, R"XYX(shu-t)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 21 }, "Producer"sv, "Default"sv, 22746, false, false, R"XYX(shu-t)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(メイコ)XYX"sv, "Vocaloid"sv, false, 176, R"XYX(MEIKO)XYX"sv, R"XYX(image/png)XYX"sv, 2004y/11/5, "Locked"sv, 34 }, "Vocalist"sv, "Default"sv, 22824, false, false, R"XYX(MEIKO)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(アサミ, 桐田アサミ, アサミ（99P）, undoundo)XYX"sv, "Illustrator"sv, false, 12933, R"XYX(asami)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 9 }, "Illustrator"sv, "Illustrator"sv, 388566, false, false, R"XYX(asami)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_16558 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 3> pvs_song_16558 {{
+  { R"XYX(SHUICHI TANAKA)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 138920, 247, R"XYX([初音ミク -Project DIVA- f] Stay with me -Original Length- / shu-t [MEIKO])XYX"sv, 2012y/8/28, R"XYX(LLpP0Wfq1gU)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/LLpP0Wfq1gU/default.jpg)XYX"sv, R"XYX(https://youtu.be/LLpP0Wfq1gU)XYX"sv },
+  { R"XYX(shu-t)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 138921, 246, R"XYX(【MEIKO】Stay with me -Original Length- / shu-t【Project DIVA f】)XYX"sv, 2012y/8/28, R"XYX(sm18737456)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/18737456/18737456)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm18737456)XYX"sv },
+  { R"XYX(shu-t - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 690283, 243, R"XYX(Stay with me -Orignal Length- (feat. MEIKO))XYX"sv, 2020y/4/3, R"XYX(TbinRcUqXqo)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/TbinRcUqXqo/default.jpg)XYX"sv, R"XYX(https://youtu.be/TbinRcUqXqo)XYX"sv },
+}};
+
+/* End Song 16558: Stay with me */
+
 /* Start Song 96665: Stella */
 
 constexpr std::array<additional_name, 2> names_song_96665 {{
@@ -31308,6 +32392,78 @@ constexpr std::array<song_pv, 4> pvs_song_2442 {{
 }};
 
 /* End Song 2442: Strobo Nights */
+
+/* Start Song 15394: Summer Idol */
+
+constexpr std::array<additional_name, 2> names_song_15394 {{
+  {"Japanese"sv, R"XYX(サマーアイドル)XYX"sv},
+  {"English"sv, R"XYX(Summer Idol)XYX"sv},
+}};
+
+constexpr std::array<web_link, 7> web_links_song_15394 {{
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(https://www5.atwiki.jp/hmiku/pages/22457.html)XYX"sv, 54272 },
+  {"Official"sv, R"XYX(Webpage)XYX"sv, R"XYX(http://fuwafuwacinnamon.sakura.ne.jp/music/summer.html)XYX"sv, 54273 },
+  {"Reference"sv, R"XYX(Niconico Commons (Off vocal))XYX"sv, R"XYX(http://commons.nicovideo.jp/material/nc54137)XYX"sv, 54274 },
+  {"Reference"sv, R"XYX(Project DIVA Wiki)XYX"sv, R"XYX(http://project-diva.wikia.com/wiki/Summer_Idol)XYX"sv, 54275 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/%E3%82%B5%E3%83%9E%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB_(Summer_Idol))XYX"sv, 87739 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.fandom.com/wiki/%E3%82%B5%E3%83%9E%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB_(Summer_Idol))XYX"sv, 87740 },
+  {"Reference"sv, R"XYX(ChordWiki)XYX"sv, R"XYX(https://ja.chordwiki.org/wiki/%E3%82%B5%E3%83%9E%E3%83%BC%E3%82%A2%E3%82%A4%E3%83%89%E3%83%AB)XYX"sv, 87741 },
+}};
+
+
+#if __has_embed("song_pic_orig_15394") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_15394 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_15394"
+});
+constexpr std::string_view song_mime_type_orig_15394 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_15394 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_15394;
+constexpr std::string_view song_mime_type_orig_15394 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_15394;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_15394;
+constexpr std::string_view song_mime_type_small_thumb_15394 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_15394;
+
+
+#if __has_embed("song_pic_thumb_15394") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_15394 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_15394"
+});
+constexpr std::string_view song_mime_type_thumb_15394 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_15394 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_15394;
+constexpr std::string_view song_mime_type_thumb_15394 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_15394;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_15394;
+constexpr std::string_view song_mime_type_tiny_thumb_15394 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_15394;
+
+constexpr picture picture_song_15394 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/kY6Xe4Au_sI/hqdefault.jpg)XYX"sv, song_pic_orig_15394, song_mime_type_orig_15394, song_file_ext_orig_15394, std::nullopt, song_pic_small_thumb_15394, song_mime_type_small_thumb_15394, song_file_ext_small_thumb_15394, R"XYX(https://i.ytimg.com/vi/kY6Xe4Au_sI/default.jpg)XYX"sv, song_pic_thumb_15394, song_mime_type_thumb_15394, song_file_ext_thumb_15394, std::nullopt, song_pic_tiny_thumb_15394, song_mime_type_tiny_thumb_15394, song_file_ext_tiny_thumb_15394  };
+
+constexpr std::array<song_artists, 4> song_artists_song_15394 {{
+  { artist_t{ R"XYX(不破志奈, ふわしな, fuwacina , テスロ, TESRO, ロゼット, ROSET, ふわふわシナモン, Fuwafuwa Cinnamon, ふたなりP, FutanariP, FTNR-P)XYX"sv, "Producer"sv, false, 58, R"XYX(OSTER project)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 40 }, "Producer"sv, "Default"sv, 19283, false, false, R"XYX(OSTER project)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(あたたたP, にぼし, Niboshi)XYX"sv, "Animator"sv, false, 1454, R"XYX(AtatataP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Finished"sv, 12 }, "Animator"sv, "Default"sv, 19284, false, false, R"XYX(AtatataP)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 19285, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(鏡音リン, 鏡音鈴, 카가미네 린, 镜音铃)XYX"sv, "Vocaloid"sv, false, 14, R"XYX(Kagamine Rin)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/12/27, "Locked"sv, 36 }, "Vocalist"sv, "Default"sv, 19286, false, false, R"XYX(Kagamine Rin)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_15394 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 4> pvs_song_15394 {{
+  { R"XYX(AmeSubs)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 6669, 255, R"XYX(Hatsune Miku and Kagamine Rin - Summer Idol (サマーアイドル))XYX"sv, std::nullopt, R"XYX(9Pb4U_uJdkc)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/9Pb4U_uJdkc/default.jpg)XYX"sv, R"XYX(https://youtu.be/9Pb4U_uJdkc)XYX"sv },
+  { R"XYX(OSTER projectテスロ&ロゼット)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 141054, 256, R"XYX(【初音ミク・鏡音リン】サマーアイドル)XYX"sv, 2012y/8/8, R"XYX(kY6Xe4Au_sI)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/kY6Xe4Au_sI/default.jpg)XYX"sv, R"XYX(https://youtu.be/kY6Xe4Au_sI)XYX"sv },
+  { R"XYX(OSTER project)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 141055, 255, R"XYX(【初音ミク・鏡音リン】サマーアイドル【オリジナル曲】)XYX"sv, 2012y/8/8, R"XYX(sm18562171)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/18562171/18562171)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm18562171)XYX"sv },
+  { R"XYX(OSTER Project - Topic)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 617495, 258, R"XYX(サマーアイドル)XYX"sv, 2020y/12/15, R"XYX(9ob9IsFc8nI)XYX"sv, "Youtube"sv, "Original"sv, R"XYX(https://i.ytimg.com/vi/9ob9IsFc8nI/default.jpg)XYX"sv, R"XYX(https://youtu.be/9ob9IsFc8nI)XYX"sv },
+}};
+
+/* End Song 15394: Summer Idol */
 
 /* Start Song 41600: Sunset Nostalgic -remix- */
 
@@ -36161,6 +37317,73 @@ constexpr std::array<song_pv, 6> pvs_song_173702 {{
 
 /* End Song 173702: weigh anchor */
 
+/* Start Song 3386: What do you mean!? */
+
+constexpr std::array<additional_name, 3> names_song_3386 {{
+  {"English"sv, R"XYX(What do you mean!?)XYX"sv},
+  {"Romaji"sv, R"XYX(Dou Iu Koto na no!?)XYX"sv},
+  {"Japanese"sv, R"XYX(どういうことなの！？)XYX"sv},
+}};
+
+constexpr std::array<web_link, 5> web_links_song_3386 {{
+  {"Reference"sv, R"XYX(Hatsune Miku wiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/13989.html)XYX"sv, 531 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(https://utaitedb.net/S/19743)XYX"sv, 104323 },
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(https://dic.nicovideo.jp/a/%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E3%81%93%E3%81%A8%E3%81%AA%E3%81%AE%21%3F)XYX"sv, 104324 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.fandom.com/wiki/%E3%81%A9%E3%81%86%E3%81%84%E3%81%86%E3%81%93%E3%81%A8%E3%81%AA%E3%81%AE%EF%BC%81%EF%BC%9F_(Dou_Iu_Koto_Nano!%3F))XYX"sv, 104326 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/どういうことなの！？_(Dou_Iu_Koto_na_no!%3F))XYX"sv, 136430 },
+}};
+
+
+#if __has_embed("song_pic_orig_3386") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_3386 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_3386"
+});
+constexpr std::string_view song_mime_type_orig_3386 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_3386 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_3386;
+constexpr std::string_view song_mime_type_orig_3386 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_3386;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_3386;
+constexpr std::string_view song_mime_type_small_thumb_3386 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_3386;
+
+
+#if __has_embed("song_pic_thumb_3386") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_3386 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_3386"
+});
+constexpr std::string_view song_mime_type_thumb_3386 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_3386 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_3386;
+constexpr std::string_view song_mime_type_thumb_3386 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_3386;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_3386;
+constexpr std::string_view song_mime_type_tiny_thumb_3386 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_3386;
+
+constexpr picture picture_song_3386 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/sbptRUyK8Rc/hqdefault.jpg)XYX"sv, song_pic_orig_3386, song_mime_type_orig_3386, song_file_ext_orig_3386, std::nullopt, song_pic_small_thumb_3386, song_mime_type_small_thumb_3386, song_file_ext_small_thumb_3386, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/13299882/13299882)XYX"sv, song_pic_thumb_3386, song_mime_type_thumb_3386, song_file_ext_thumb_3386, std::nullopt, song_pic_tiny_thumb_3386, song_mime_type_tiny_thumb_3386, song_file_ext_tiny_thumb_3386  };
+
+constexpr std::array<song_artists, 2> song_artists_song_3386 {{
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 2233, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(くちばしP, tetsuo, Taro Kuchibashi, ガイル君)XYX"sv, "Producer"sv, false, 27, R"XYX(KuchibashiP)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 22 }, "Producer"sv, "Default"sv, 2234, false, false, R"XYX(KuchibashiP)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_3386 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 2> pvs_song_3386 {{
+  { R"XYX(ikuy398)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 5013, 242, R"XYX(Hatsune Miku - What Do You Mean?! (どういうことなの！？) - English/Romaji Sub)XYX"sv, std::nullopt, R"XYX(sbptRUyK8Rc)XYX"sv, "Youtube"sv, "Reprint"sv, R"XYX(https://i.ytimg.com/vi/sbptRUyK8Rc/default.jpg)XYX"sv, R"XYX(https://youtu.be/sbptRUyK8Rc)XYX"sv },
+  { R"XYX(くちばし)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 107881, 241, R"XYX(初音ミク（Θ）どういうことなの！？)XYX"sv, 2011y/1/13, R"XYX(sm13299882)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/13299882/13299882)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm13299882)XYX"sv },
+}};
+
+/* End Song 3386: What do you mean!? */
+
 /* Start Song 536349: What Kind of Future */
 
 constexpr std::array<additional_name, 6> names_song_536349 {{
@@ -37048,6 +38271,73 @@ constexpr std::array<song_pv, 2> pvs_song_20 {{
 
 /* End Song 20: World's End Dancehall */
 
+/* Start Song 16560: THE WORLD END UMBRELLA */
+
+constexpr std::array<additional_name, 1> names_song_16560 {{
+  {"English"sv, R"XYX(THE WORLD END UMBRELLA)XYX"sv},
+}};
+
+constexpr std::array<web_link, 6> web_links_song_16560 {{
+  {"Reference"sv, R"XYX(NicoNicoPedia)XYX"sv, R"XYX(http://dic.nicovideo.jp/v/sm7441402)XYX"sv, 3774 },
+  {"Reference"sv, R"XYX(MikuWiki)XYX"sv, R"XYX(http://www5.atwiki.jp/hmiku/pages/5685.html)XYX"sv, 3776 },
+  {"Reference"sv, R"XYX(UtaiteDB)XYX"sv, R"XYX(http://utaitedb.net/S/5972)XYX"sv, 27327 },
+  {"Official"sv, R"XYX(Piapro / Karaoke)XYX"sv, R"XYX(http://piapro.jp/t/zrWe)XYX"sv, 27328 },
+  {"Reference"sv, R"XYX(Vocaloid Lyrics Wiki)XYX"sv, R"XYX(https://vocaloidlyrics.miraheze.org/wiki/THE_WORLD_END_UMBRELLA)XYX"sv, 73673 },
+  {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(http://vocaloid.wikia.com/wiki/WORLD%27S_END_UMBRELLA)XYX"sv, 73674 },
+}};
+
+
+#if __has_embed("song_pic_orig_16560") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_16560 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_16560"
+});
+constexpr std::string_view song_mime_type_orig_16560 = "image/jpeg";
+constexpr std::string_view song_file_ext_orig_16560 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_orig_16560;
+constexpr std::string_view song_mime_type_orig_16560 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_16560;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_16560;
+constexpr std::string_view song_mime_type_small_thumb_16560 = "inode/x-empty";
+constexpr std::string_view song_file_ext_small_thumb_16560;
+
+
+#if __has_embed("song_pic_thumb_16560") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_thumb_16560 = std::to_array<std::uint8_t>({
+    #embed "song_pic_thumb_16560"
+});
+constexpr std::string_view song_mime_type_thumb_16560 = "image/jpeg";
+constexpr std::string_view song_file_ext_thumb_16560 = "jpeg";
+#else
+constexpr std::array<std::uint8_t, 0> song_pic_thumb_16560;
+constexpr std::string_view song_mime_type_thumb_16560 = "inode/x-empty";
+constexpr std::string_view song_file_ext_thumb_16560;
+#endif
+
+constexpr std::array<std::uint8_t, 0> song_pic_tiny_thumb_16560;
+constexpr std::string_view song_mime_type_tiny_thumb_16560 = "inode/x-empty";
+constexpr std::string_view song_file_ext_tiny_thumb_16560;
+
+constexpr picture picture_song_16560 = { std::nullopt, std::nullopt, R"XYX(https://i1.ytimg.com/vi/W_KPncdwlCk/hqdefault.jpg)XYX"sv, song_pic_orig_16560, song_mime_type_orig_16560, song_file_ext_orig_16560, std::nullopt, song_pic_small_thumb_16560, song_mime_type_small_thumb_16560, song_file_ext_small_thumb_16560, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7441402/7441402)XYX"sv, song_pic_thumb_16560, song_mime_type_thumb_16560, song_file_ext_thumb_16560, std::nullopt, song_pic_tiny_thumb_16560, song_mime_type_tiny_thumb_16560, song_file_ext_tiny_thumb_16560  };
+
+constexpr std::array<song_artists, 2> song_artists_song_16560 {{
+  { artist_t{ R"XYX(ハチ, Kenshi Yonezu, 米津玄師, 蛙屋, Kawazuya)XYX"sv, "Producer"sv, false, 49, R"XYX(HACHI)XYX"sv, R"XYX(image/jpeg)XYX"sv, std::nullopt, "Approved"sv, 29 }, "Producer"sv, "Default"sv, 22748, false, false, R"XYX(HACHI)XYX"sv, "Default"sv },
+  { artist_t{ R"XYX(初音ミク, 初音未来, Chūyīn Wèilái, 하츠네 미쿠, 初音未來)XYX"sv, "Vocaloid"sv, false, 1, R"XYX(Hatsune Miku)XYX"sv, R"XYX(image/png)XYX"sv, 2007y/8/31, "Locked"sv, 39 }, "Vocalist"sv, "Default"sv, 37317, false, false, R"XYX(Hatsune Miku)XYX"sv, "Default"sv },
+}};
+
+constexpr std::array<std::string_view, 1> culture_codes_song_16560 {{
+"ja"sv, }};
+
+constexpr std::array<song_pv, 3> pvs_song_16560 {{
+  { R"XYX(ハチ)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 91349, 314, R"XYX(【オリジナル曲PV】THE WORLD END UMBRELLA【初音ミク】)XYX"sv, 2009y/6/25, R"XYX(sm7441402)XYX"sv, "NicoNicoDouga"sv, "Original"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7441402/7441402)XYX"sv, R"XYX(http://www.nicovideo.jp/watch/sm7441402)XYX"sv },
+  { R"XYX(ハチ)XYX"sv, std::nullopt, false, R"XYX({"Timestamp":"20090626024625"})XYX"sv, 104647, 310, R"XYX(THE WORLD END UMBRELLA)XYX"sv, 2009y/6/26, R"XYX(d1ketxijalu23a56)XYX"sv, "Piapro"sv, "Original"sv, R"XYX(https://res.piapro.jp/r/images/card/250/miku.png?20260120)XYX"sv, R"XYX(http://piapro.jp/content/d1ketxijalu23a56)XYX"sv },
+  { R"XYX(vgperson)XYX"sv, std::nullopt, false, R"XYX(std::nullopt)XYX"sv, 285594, 315, R"XYX(Hatsune Miku - THE WORLD END UMBRELLA)XYX"sv, 2015y/10/16, R"XYX(W_KPncdwlCk)XYX"sv, "Youtube"sv, "Other"sv, R"XYX(https://i.ytimg.com/vi/W_KPncdwlCk/default.jpg)XYX"sv, R"XYX(https://youtu.be/W_KPncdwlCk)XYX"sv },
+}};
+
+/* End Song 16560: THE WORLD END UMBRELLA */
+
 /* Start Song 2905: Yellow */
 
 constexpr std::array<additional_name, 1> names_song_2905 {{
@@ -37539,7 +38829,7 @@ constexpr std::array<song_pv, 3> pvs_song_3012 {{
 
 /* End Song 3012: ZIGG-ZAGG */
 
-export constexpr std::array<song, 527> songs {{
+export constexpr std::array<song, 545> songs {{
   {R"XYX(#心がどっか寂しいんだ, #Kokoro ga Dokka Sabishiin da, #feel lonely, #IFEELLONELY)XYX"sv, song_artists_song_289363, R"XYX(Kanzaki Iori feat. Kagamine Len V4X (Power))XYX"sv, 2020y/7/25, R"XYX(#心がどっか寂しいんだ)XYX"sv, "Japanese"sv, std::nullopt, 9, 289363, std::chrono::seconds(247), picture_song_289363, std::nullopt, std::nullopt, std::nullopt, R"XYX(#My Heart Feels Lonely)XYX"sv, names_song_289363, std::nullopt, 2020y/7/25, pvs_song_289363, "NicoNicoDouga, Youtube"sv, 65, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/37245164/37245164.96415720)XYX"sv, 15, web_links_song_289363, culture_codes_song_289363},
   {R"XYX(＊ハロー、プラネット。)XYX"sv, song_artists_song_2924, R"XYX(sasakure.UK feat. Hatsune Miku)XYX"sv, 2011y/11/6, R"XYX(＊ハロー、プラネット。)XYX"sv, "Japanese"sv, std::nullopt, 163, 2924, std::chrono::seconds(305), picture_song_2924, 150000, std::nullopt, 150000, R"XYX(*Hello, Planet.)XYX"sv, names_song_2924, std::nullopt, 2008y/9/23, pvs_song_2924, "NicoNicoDouga, Youtube"sv, 846, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7138245/7138245)XYX"sv, 32, web_links_song_2924, culture_codes_song_2924},
   {R"XYX(星のカケラ, Hoshi no Kakera, Beautiful Ballade, 01_ballade, Ballade)XYX"sv, song_artists_song_2241, R"XYX(Eiji Hirasawa feat. Hatsune Miku)XYX"sv, 2011y/11/3, R"XYX(星のカケラ)XYX"sv, "Japanese"sv, std::nullopt, 58, 2241, std::chrono::seconds(52), picture_song_2241, 109000, std::nullopt, 109000, R"XYX(Star Fragment)XYX"sv, names_song_2241, 730922, 2007y/8/23, pvs_song_2241, "NicoNicoDouga, Youtube"sv, 298, "Remaster"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/zQ7xqGhdX30/default.jpg)XYX"sv, 43, web_links_song_2241, culture_codes_song_2241},
@@ -37557,6 +38847,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(花舞月詠譚, Hanamai Tsukuyomi Tan)XYX"sv, song_artists_song_237415, R"XYX(Hoskey, Project DIVA Channel feat. Megurine Luka)XYX"sv, 2019y/5/11, R"XYX(花舞月詠譚)XYX"sv, "Japanese"sv, std::nullopt, 10, 237415, std::chrono::seconds(156), picture_song_237415, 185000, std::nullopt, 139000, R"XYX(A Tale of Flower Petals and the Singing Moon)XYX"sv, names_song_237415, std::nullopt, 2010y/10/17, pvs_song_237415, "NicoNicoDouga, Youtube, Piapro"sv, 70, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/AXqSmwNNciY/default.jpg)XYX"sv, 15, web_links_song_237415, culture_codes_song_237415},
   {std::nullopt, song_artists_song_8971, R"XYX(Lemm feat. Hatsune Miku Append (Dark))XYX"sv, 2012y/1/31, R"XYX(Absolunote)XYX"sv, "English"sv, std::nullopt, 54, 8971, std::chrono::seconds(294), picture_song_8971, 189000, std::nullopt, 142000, R"XYX(Absolunote)XYX"sv, names_song_8971, std::nullopt, 2011y/10/13, pvs_song_8971, "NicoNicoDouga, Youtube, Vimeo, Piapro"sv, 296, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/15875228/15875228)XYX"sv, 16, web_links_song_8971, culture_codes_song_8971},
   {R"XYX(Acceleration (New Version))XYX"sv, song_artists_song_188729, R"XYX(Clean Tears feat. Hatsune Miku V3 (Solid))XYX"sv, 2018y/4/1, R"XYX(Acceleration (Breeze Remix))XYX"sv, "English"sv, std::nullopt, 15, 188729, std::chrono::seconds(292), picture_song_188729, std::nullopt, std::nullopt, std::nullopt, R"XYX(Acceleration (Breeze Remix))XYX"sv, names_song_188729, 5113, 2018y/4/1, pvs_song_188729, "NicoNicoDouga, Youtube, Bilibili"sv, 111, "Remix"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/32982184/32982184)XYX"sv, 13, web_links_song_188729, culture_codes_song_188729},
+  {std::nullopt, song_artists_song_552, R"XYX(KurousaP feat. Hatsune Miku, Megurine Luka, KAITO)XYX"sv, 2011y/10/26, R"XYX(ACUTE)XYX"sv, "English"sv, std::nullopt, 91, 552, std::chrono::seconds(281), picture_song_552, 114000, std::nullopt, 114000, R"XYX(ACUTE)XYX"sv, names_song_552, std::nullopt, 2009y/8/20, pvs_song_552, "NicoNicoDouga, Youtube, SoundCloud"sv, 523, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7992704/7992704)XYX"sv, 35, web_links_song_552, culture_codes_song_552},
   {R"XYX(AFTER BURNER -NICO MIX-)XYX"sv, song_artists_song_41709, R"XYX(PonzP feat. MEIKO)XYX"sv, 2013y/10/11, R"XYX(AFTER BURNER)XYX"sv, "English"sv, std::nullopt, 17, 41709, std::chrono::seconds(175), picture_song_41709, 173000, std::nullopt, 173000, R"XYX(AFTER BURNER)XYX"sv, names_song_41709, std::nullopt, 2010y/10/17, pvs_song_41709, "NicoNicoDouga, Youtube"sv, 95, "Remix"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/12457415/12457415)XYX"sv, 16, web_links_song_41709, culture_codes_song_41709},
   {R"XYX(アフターエポックス, Afutaa Epokkusu, 애프터 에포크스)XYX"sv, song_artists_song_625986, R"XYX(sasakure.UK feat. Hatsune Miku)XYX"sv, 2024y/5/10, R"XYX(アフターエポックス)XYX"sv, "Japanese"sv, std::nullopt, 28, 625986, std::chrono::seconds(212), picture_song_625986, 152000, std::nullopt, 152000, R"XYX(After Epochs)XYX"sv, names_song_625986, std::nullopt, 2024y/5/10, pvs_song_625986, "NicoNicoDouga, Youtube"sv, 162, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/pykE4kMhUUU/default.jpg)XYX"sv, 17, web_links_song_625986, culture_codes_song_625986},
   {R"XYX(アゲアゲアゲイン, Age Age Again, Up Up Again)XYX"sv, song_artists_song_38420, R"XYX(Mitchie M feat. Hatsune Miku)XYX"sv, 2013y/8/30, R"XYX(アゲアゲアゲイン)XYX"sv, "Japanese"sv, std::nullopt, 126, 38420, std::chrono::seconds(220), picture_song_38420, 175000, std::nullopt, 175000, R"XYX(Ageage Again)XYX"sv, names_song_38420, std::nullopt, 2013y/10/4, pvs_song_38420, "NicoNicoDouga, Youtube, SoundCloud, Bilibili"sv, 770, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/uwwU55zBYlQ/default.jpg)XYX"sv, 24, web_links_song_38420, culture_codes_song_38420},
@@ -37577,6 +38868,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(木枯らしの朝, Kogarashi no Asa, Wintry Morning)XYX"sv, song_artists_song_8791, R"XYX(DeadballP feat. Hatsune Miku)XYX"sv, 2012y/1/22, R"XYX(木枯らしの朝)XYX"sv, "Japanese"sv, std::nullopt, 4, 8791, std::chrono::seconds(259), picture_song_8791, 162000, std::nullopt, 162000, R"XYX(Anyway the Wind Blows)XYX"sv, names_song_8791, 469831, 2008y/1/30, pvs_song_8791, "NicoNicoDouga, Youtube, Piapro"sv, 38, "Remaster"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/2182661/2182661)XYX"sv, 14, web_links_song_8791, culture_codes_song_8791},
   {std::nullopt, song_artists_song_1723, R"XYX(tokuP feat. Hatsune Miku)XYX"sv, 2011y/11/2, R"XYX(ARiA)XYX"sv, "English"sv, std::nullopt, 57, 1723, std::chrono::seconds(310), picture_song_1723, 172000, std::nullopt, 172000, R"XYX(ARiA)XYX"sv, names_song_1723, std::nullopt, 2010y/3/3, pvs_song_1723, "NicoNicoDouga, Youtube"sv, 294, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/sp75u8Qvwfc/default.jpg)XYX"sv, 18, web_links_song_1723, culture_codes_song_1723},
   {std::nullopt, song_artists_song_848950, R"XYX(buzzG, Coch feat. Hatsune Miku)XYX"sv, 2025y/10/10, R"XYX(Artifact)XYX"sv, "English"sv, std::nullopt, 7, 848950, std::chrono::seconds(241), picture_song_848950, std::nullopt, std::nullopt, std::nullopt, R"XYX(Artifact)XYX"sv, names_song_848950, std::nullopt, 2025y/10/10, pvs_song_848950, "NicoNicoDouga, Youtube, Bilibili"sv, 63, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/UPL_viPDFSM/default.jpg)XYX"sv, 11, web_links_song_848950, culture_codes_song_848950},
+  {R"XYX(ハイハハイニ, Hai wa Hai ni)XYX"sv, song_artists_song_5800, R"XYX(tennen feat. KAITO)XYX"sv, 2011y/12/31, R"XYX(ハイハハイニ)XYX"sv, "Japanese"sv, std::nullopt, 67, 5800, std::chrono::seconds(243), picture_song_5800, 130000, std::nullopt, 130000, R"XYX(Ashes to Ashes)XYX"sv, names_song_5800, std::nullopt, 2009y/3/16, pvs_song_5800, "NicoNicoDouga, Youtube, Piapro"sv, 367, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/6448601/6448601)XYX"sv, 16, web_links_song_5800, culture_codes_song_5800},
   {std::nullopt, song_artists_song_126674, R"XYX(HachioujiP feat. Hatsune Miku)XYX"sv, 2016y/6/11, R"XYX(Baby Maniacs -Eight Mix-)XYX"sv, "Japanese"sv, std::nullopt, 7, 126674, std::chrono::seconds(224), picture_song_126674, std::nullopt, std::nullopt, std::nullopt, R"XYX(Baby Maniacs -Eight Mix-)XYX"sv, names_song_126674, 5347, 2016y/6/15, pvs_song_126674, "Youtube"sv, 49, "Remix"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/xaU56lzDzdc/default.jpg)XYX"sv, 9, web_links_song_126674, culture_codes_song_126674},
   {R"XYX(フキゲンワルツ, Fukigen Waltz, Grumpy Waltz, Pouty Waltz)XYX"sv, song_artists_song_9237, R"XYX(OSTER project feat. Hatsune Miku)XYX"sv, 2012y/2/10, R"XYX(フキゲンワルツ)XYX"sv, "Japanese"sv, std::nullopt, 41, 9237, std::chrono::seconds(261), picture_song_9237, 105000, std::nullopt, 105000, R"XYX(Bad Mood Waltz)XYX"sv, names_song_9237, std::nullopt, 2008y/3/13, pvs_song_9237, "NicoNicoDouga, Youtube, Piapro"sv, 229, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/3136028/3136028)XYX"sv, 24, web_links_song_9237, culture_codes_song_9237},
   {R"XYX(バッドシャーク)XYX"sv, song_artists_song_478851, R"XYX(niki feat. Kagamine Rin)XYX"sv, 2023y/2/28, R"XYX(バッドシャーク)XYX"sv, "Japanese"sv, std::nullopt, 15, 478851, std::chrono::seconds(151), picture_song_478851, std::nullopt, std::nullopt, std::nullopt, R"XYX(Bad Shark)XYX"sv, names_song_478851, std::nullopt, 2023y/2/28, pvs_song_478851, "NicoNicoDouga, Youtube"sv, 121, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/4FV-sT2_WB4/default.jpg)XYX"sv, 8, web_links_song_478851, culture_codes_song_478851},
@@ -37627,6 +38919,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(重返巅峰, COME BACK～重返巅峰～, COME BACK~再び頂点へ~, COME BACK ~Returning to the Peak~)XYX"sv, song_artists_song_259351, R"XYX(Mikunya feat. Hatsune Miku V4 (Chinese))XYX"sv, 2019y/11/1, R"XYX(COME BACK)XYX"sv, "English"sv, std::nullopt, 4, 259351, std::chrono::seconds(204), picture_song_259351, std::nullopt, std::nullopt, std::nullopt, R"XYX(COME BACK)XYX"sv, names_song_259351, std::nullopt, 2019y/11/1, pvs_song_259351, "Youtube, Bilibili"sv, 24, "Original"sv, "Finished"sv, R"XYX(https://i2.hdslb.com/bfs/archive/3d0f8aa50725878486ab9e15f49fef8545d64abf.jpg)XYX"sv, 6, web_links_song_259351, culture_codes_song_259351},
   {R"XYX(ありふれたせかいせいふく, Arifureta Sekai Seifuku)XYX"sv, song_artists_song_13351, R"XYX(PinocchioP feat. Hatsune Miku Append (Dark))XYX"sv, 2012y/6/18, R"XYX(ありふれたせかいせいふく)XYX"sv, "Japanese"sv, std::nullopt, 295, 13351, std::chrono::seconds(205), picture_song_13351, 150000, std::nullopt, 150000, R"XYX(Common World Domination)XYX"sv, names_song_13351, std::nullopt, 2012y/6/18, pvs_song_13351, "NicoNicoDouga, Youtube, SoundCloud"sv, 1505, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/8Z3TbMBfDM0/default.jpg)XYX"sv, 28, web_links_song_13351, culture_codes_song_13351},
   {std::nullopt, song_artists_song_907752, R"XYX(Various artists)XYX"sv, 2026y/1/30, R"XYX(CONNECT:COMMUNE)XYX"sv, "English"sv, std::nullopt, 40, 907752, std::chrono::seconds(229), picture_song_907752, std::nullopt, std::nullopt, std::nullopt, R"XYX(CONNECT:COMMUNE)XYX"sv, names_song_907752, std::nullopt, 2026y/1/30, pvs_song_907752, "NicoNicoDouga, Youtube, Bilibili"sv, 248, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/cF91xil98Mc/default.jpg)XYX"sv, 18, web_links_song_907752, culture_codes_song_907752},
+  {R"XYX(夢の続き, Yume no Tsuzuki, Continuing Dream)XYX"sv, song_artists_song_16581, R"XYX(Dixie Flatline feat. Hatsune Miku)XYX"sv, 2012y/9/24, R"XYX(夢の続き)XYX"sv, "Japanese"sv, std::nullopt, 35, 16581, std::chrono::seconds(325), picture_song_16581, 80000, std::nullopt, 80000, R"XYX(Continuation of Dreams)XYX"sv, names_song_16581, std::nullopt, 2009y/8/11, pvs_song_16581, "NicoNicoDouga, Youtube"sv, 201, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7911934/7911934)XYX"sv, 14, web_links_song_16581, culture_codes_song_16581},
   {R"XYX(イケ恋歌, Ikerenka, Cool (Len) Love Song, Ikelenka)XYX"sv, song_artists_song_850, R"XYX(LeleleP feat. Kagamine Len)XYX"sv, 2011y/10/27, R"XYX(イケ恋歌)XYX"sv, "Japanese"sv, std::nullopt, 14, 850, std::chrono::seconds(217), picture_song_850, 180000, std::nullopt, 180000, R"XYX(Cool Love Song)XYX"sv, names_song_850, std::nullopt, 2008y/3/31, pvs_song_850, "NicoNicoDouga, Youtube, Piapro"sv, 102, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/2849292/2849292)XYX"sv, 26, web_links_song_850, culture_codes_song_850},
   {R"XYX(越过海岸线, 海岸線を越えて)XYX"sv, song_artists_song_206326, R"XYX(kz feat. Hatsune Miku V4 (Chinese))XYX"sv, 2018y/10/4, R"XYX(越过海岸线)XYX"sv, "Japanese"sv, std::nullopt, 4, 206326, std::chrono::seconds(285), picture_song_206326, std::nullopt, std::nullopt, std::nullopt, R"XYX(Crossing the Coastline)XYX"sv, names_song_206326, std::nullopt, 2018y/9/30, pvs_song_206326, "Youtube, Bilibili"sv, 32, "Original"sv, "Finished"sv, R"XYX(http://i2.hdslb.com/bfs/archive/0ed611a28e879ba72dffd2bd4208f2a65a28ee1f.jpg)XYX"sv, 14, web_links_song_206326, culture_codes_song_206326},
   {std::nullopt, song_artists_song_1465, R"XYX(kz feat. Hatsune Miku, GUMI)XYX"sv, 2011y/11/1, R"XYX(Crosslight)XYX"sv, "English"sv, std::nullopt, 7, 1465, std::chrono::seconds(325), picture_song_1465, 133000, std::nullopt, 133000, R"XYX(Crosslight)XYX"sv, names_song_1465, std::nullopt, 2009y/8/25, pvs_song_1465, "Youtube"sv, 49, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/6S0aS_X6UCw/default.jpg)XYX"sv, 9, web_links_song_1465, culture_codes_song_1465},
@@ -37661,11 +38954,13 @@ export constexpr std::array<song, 527> songs {{
   {std::nullopt, song_artists_song_51667, R"XYX(Camellia feat. Hatsune Miku, Hatsune Miku V3 (English))XYX"sv, 2014y/4/6, R"XYX(Drag the ground)XYX"sv, "English"sv, std::nullopt, 11, 51667, std::chrono::seconds(270), picture_song_51667, std::nullopt, std::nullopt, std::nullopt, R"XYX(Drag the ground)XYX"sv, names_song_51667, std::nullopt, 2014y/4/5, pvs_song_51667, "Youtube"sv, 87, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/cbcRrkVTeC0/default.jpg)XYX"sv, 13, web_links_song_51667, culture_codes_song_51667},
   {R"XYX(梦色星球, Mèngsè Xīngqiú, 夢色惑星, Yume Iro Wakusei)XYX"sv, song_artists_song_642040, R"XYX(AzureHead, Zhouxiaocan feat. Hatsune Miku V4 (Chinese))XYX"sv, 2024y/6/20, R"XYX(梦色星球)XYX"sv, "Japanese"sv, std::nullopt, 1, 642040, std::chrono::seconds(216), picture_song_642040, std::nullopt, std::nullopt, std::nullopt, R"XYX(Dream Color Planet)XYX"sv, names_song_642040, std::nullopt, 2024y/6/19, pvs_song_642040, "Youtube, Bilibili"sv, 31, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/0sZGdIutmZU/default.jpg)XYX"sv, 17, web_links_song_642040, culture_codes_song_642040},
   {R"XYX(ゆめゆめ, YUMEYUME)XYX"sv, song_artists_song_8290, R"XYX(DECO*27 feat. Hatsune Miku)XYX"sv, 2012y/1/12, R"XYX(ゆめゆめ)XYX"sv, "Japanese"sv, std::nullopt, 63, 8290, std::chrono::seconds(221), picture_song_8290, 160000, std::nullopt, 160000, R"XYX(DREAM DREAM)XYX"sv, names_song_8290, std::nullopt, 2012y/1/12, pvs_song_8290, "NicoNicoDouga, Youtube, SoundCloud"sv, 407, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/07r67gGbtLQ/default.jpg)XYX"sv, 28, web_links_song_8290, culture_codes_song_8290},
+  {R"XYX(夢喰い白黒バク, Yumekui Shirokuro Baku, Черно-Белый Баку, Пожирающий Сны, Dream-Eating Black and White Baku)XYX"sv, song_artists_song_3636, R"XYX(Nem feat. Kagamine Len Append (Power))XYX"sv, 2011y/11/13, R"XYX(夢喰い白黒バク)XYX"sv, "Japanese"sv, std::nullopt, 123, 3636, std::chrono::seconds(219), picture_song_3636, 197000, std::nullopt, 197000, R"XYX(Dream-Eating Monochrome Baku)XYX"sv, names_song_3636, std::nullopt, 2011y/7/4, pvs_song_3636, "NicoNicoDouga, Youtube"sv, 685, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/14926860/14926860)XYX"sv, 20, web_links_song_3636, culture_codes_song_3636},
   {R"XYX(どりーみんチュチュ, 드리밍 츄츄)XYX"sv, song_artists_song_47401, R"XYX(emon(Tes.) feat. Megurine Luka)XYX"sv, 2014y/1/29, R"XYX(どりーみんチュチュ)XYX"sv, "Japanese"sv, std::nullopt, 107, 47401, std::chrono::seconds(241), picture_song_47401, 128000, std::nullopt, 128000, R"XYX(Dreamin Chuchu)XYX"sv, names_song_47401, std::nullopt, 2014y/2/28, pvs_song_47401, "NicoNicoDouga, Youtube, Bilibili"sv, 637, "Original"sv, "Finished"sv, R"XYX(http://i1.ytimg.com/vi/WdHRGH1Qv70/default.jpg)XYX"sv, 30, web_links_song_47401, culture_codes_song_47401},
   {R"XYX(Dreaming Leaf ‐ユメミルコトノハ‐, Dreaming Leaf -Yume Miru Kotonoha-)XYX"sv, song_artists_song_5547, R"XYX(OSTER project feat. Hatsune Miku)XYX"sv, 2011y/12/27, R"XYX(Dreaming Leaf ‐ユメミルコトノハ‐)XYX"sv, "Japanese"sv, std::nullopt, 19, 5547, std::chrono::seconds(265), picture_song_5547, std::nullopt, std::nullopt, std::nullopt, R"XYX(Dreaming Leaf -Dreaming Words-)XYX"sv, names_song_5547, std::nullopt, 2007y/10/8, pvs_song_5547, "NicoNicoDouga, Youtube"sv, 135, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1235385/1235385)XYX"sv, 17, web_links_song_5547, culture_codes_song_5547},
   {R"XYX(ドリームレス・ドリームス, 드림리스 드림즈)XYX"sv, song_artists_song_156001, R"XYX(Harumaki Gohan feat. Hatsune Miku)XYX"sv, 2017y/5/6, R"XYX(ドリームレス・ドリームス)XYX"sv, "Japanese"sv, std::nullopt, 44, 156001, std::chrono::seconds(230), picture_song_156001, std::nullopt, std::nullopt, std::nullopt, R"XYX(Dreamless Dreams)XYX"sv, names_song_156001, std::nullopt, 2017y/5/6, pvs_song_156001, "NicoNicoDouga, Youtube"sv, 270, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/31165275/31165275)XYX"sv, 19, web_links_song_156001, culture_codes_song_156001},
   {std::nullopt, song_artists_song_60953, R"XYX(Giga feat. Kagamine Rin Append (Sweet), Megurine Luka)XYX"sv, 2014y/7/18, R"XYX(drop pop candy)XYX"sv, "English"sv, std::nullopt, 205, 60953, std::chrono::seconds(227), picture_song_60953, 130000, std::nullopt, 130000, R"XYX(drop pop candy)XYX"sv, names_song_60953, std::nullopt, 2014y/7/18, pvs_song_60953, "NicoNicoDouga, Youtube, SoundCloud"sv, 1191, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/4sq2lPNxi7M/default.jpg)XYX"sv, 29, web_links_song_60953, culture_codes_song_60953},
   {R"XYX(砂の惑星, Suna no Wakusei, Sand Planet)XYX"sv, song_artists_song_157860, R"XYX(HACHI feat. Hatsune Miku)XYX"sv, 2017y/5/26, R"XYX(砂の惑星)XYX"sv, "Japanese"sv, std::nullopt, 236, 157860, std::chrono::seconds(239), picture_song_157860, 95000, std::nullopt, 95000, R"XYX(DUNE)XYX"sv, names_song_157860, std::nullopt, 2017y/7/20, pvs_song_157860, "NicoNicoDouga, Youtube, Bilibili"sv, 1302, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/31606995/31606995)XYX"sv, 34, web_links_song_157860, culture_codes_song_157860},
+  {std::nullopt, song_artists_song_2607, R"XYX(AVTechNO! feat. Megurine Luka)XYX"sv, 2011y/11/4, R"XYX(DYE)XYX"sv, "English"sv, std::nullopt, 76, 2607, std::chrono::seconds(230), picture_song_2607, 158000, std::nullopt, 158000, R"XYX(DYE)XYX"sv, names_song_2607, std::nullopt, 2010y/2/1, pvs_song_2607, "NicoNicoDouga, Youtube, SoundCloud, Bilibili"sv, 433, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/_HlF-2K1WhQ/default.jpg)XYX"sv, 32, web_links_song_2607, culture_codes_song_2607},
   {std::nullopt, song_artists_song_323568, R"XYX(Koolit13 feat. Lizett, Natalie Summer)XYX"sv, 2021y/3/23, R"XYX(Earth Day)XYX"sv, "English"sv, std::nullopt, 1, 323568, std::chrono::seconds(65), picture_song_323568, std::nullopt, std::nullopt, std::nullopt, R"XYX(Earth Day)XYX"sv, names_song_323568, std::nullopt, 2012y/4/23, pvs_song_323568, "Youtube"sv, 3, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/G50LeyB9QVQ/default.jpg)XYX"sv, 3, web_links_song_323568, culture_codes_song_323568},
   {R"XYX(エゴロック, Egorock)XYX"sv, song_artists_song_202936, R"XYX(THREEE feat. Kagamine Len V4X (Power))XYX"sv, 2018y/9/7, R"XYX(エゴロック)XYX"sv, "Japanese"sv, std::nullopt, 19, 202936, std::chrono::seconds(60), picture_song_202936, std::nullopt, std::nullopt, std::nullopt, R"XYX(Ego Rock)XYX"sv, names_song_202936, std::nullopt, 2018y/9/7, pvs_song_202936, "NicoNicoDouga, Youtube"sv, 111, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/33817538/33817538)XYX"sv, 13, web_links_song_202936, culture_codes_song_202936},
   {R"XYX(えれくとりっく・えんじぇぅ, 일렉트릭 엔젤)XYX"sv, song_artists_song_230750, R"XYX(yasuo feat. Hatsune Miku)XYX"sv, 2019y/3/24, R"XYX(えれくとりっく・えんじぇぅ)XYX"sv, "Japanese"sv, std::nullopt, 18, 230750, std::chrono::seconds(118), picture_song_230750, std::nullopt, std::nullopt, std::nullopt, R"XYX(Electric Angel)XYX"sv, names_song_230750, std::nullopt, 2007y/9/28, pvs_song_230750, "NicoNicoDouga, Youtube"sv, 146, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1185318/1185318)XYX"sv, 12, web_links_song_230750, culture_codes_song_230750},
@@ -37710,11 +39005,13 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(巨大少女, Kyodai Shoujo)XYX"sv, song_artists_song_653, R"XYX(40mP feat. Hatsune Miku)XYX"sv, 2011y/10/26, R"XYX(巨大少女)XYX"sv, "Japanese"sv, std::nullopt, 32, 653, std::chrono::seconds(268), picture_song_653, 135000, std::nullopt, 135000, R"XYX(Gigantic Girl)XYX"sv, names_song_653, std::nullopt, 2009y/5/26, pvs_song_653, "NicoNicoDouga, Youtube"sv, 214, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7164046/7164046)XYX"sv, 20, web_links_song_653, culture_codes_song_653},
   {R"XYX(GimmexGimme, Gimme x Gimme)XYX"sv, song_artists_song_246033, R"XYX(HachioujiP, Giga feat. various)XYX"sv, 2019y/7/19, R"XYX(Gimme×Gimme)XYX"sv, "English"sv, std::nullopt, 140, 246033, std::chrono::seconds(220), picture_song_246033, 105000, std::nullopt, 105000, R"XYX(Gimme×Gimme)XYX"sv, names_song_246033, std::nullopt, 2019y/8/28, pvs_song_246033, "NicoNicoDouga, Youtube, Bilibili"sv, 774, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/ERo-sPa1a5g/default.jpg)XYX"sv, 34, web_links_song_246033, culture_codes_song_246033},
   {std::nullopt, song_artists_song_50132, R"XYX(GuitarHeroPianoZero feat. Hatsune Miku V3 (English))XYX"sv, 2014y/3/2, R"XYX(Glass Wall)XYX"sv, "English"sv, std::nullopt, 38, 50132, std::chrono::seconds(282), picture_song_50132, std::nullopt, std::nullopt, std::nullopt, R"XYX(Glass Wall)XYX"sv, names_song_50132, std::nullopt, 2014y/3/1, pvs_song_50132, "NicoNicoDouga, Youtube, Bandcamp"sv, 210, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/olRbG-9mfa0/default.jpg)XYX"sv, 17, web_links_song_50132, culture_codes_song_50132},
+  {R"XYX(MEGANE)XYX"sv, song_artists_song_12056, R"XYX(Ultra-Noob feat. Megurine Luka)XYX"sv, 2012y/5/8, R"XYX(MEGANE)XYX"sv, "Romaji"sv, std::nullopt, 55, 12056, std::chrono::seconds(307), picture_song_12056, 120000, std::nullopt, 120000, R"XYX(GLASSES)XYX"sv, names_song_12056, std::nullopt, 2010y/1/20, pvs_song_12056, "NicoNicoDouga, Youtube, Piapro"sv, 323, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/9440139/9440139)XYX"sv, 27, web_links_song_12056, culture_codes_song_12056},
   {std::nullopt, song_artists_song_598025, R"XYX(Eve, Tomoki Numano, Zingai feat. Hatsune Miku V4X (Solid))XYX"sv, 2024y/3/9, R"XYX(Glorious Day)XYX"sv, "English"sv, std::nullopt, 21, 598025, std::chrono::seconds(211), picture_song_598025, std::nullopt, std::nullopt, std::nullopt, R"XYX(Glorious Day)XYX"sv, names_song_598025, std::nullopt, 2024y/3/9, pvs_song_598025, "NicoNicoDouga, Youtube"sv, 111, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/43501233/43501233.68350756)XYX"sv, 31, web_links_song_598025, culture_codes_song_598025},
   {std::nullopt, song_artists_song_1797, R"XYX(keeno feat. Hatsune Miku Append (Dark))XYX"sv, 2011y/11/2, R"XYX(glow)XYX"sv, "English"sv, std::nullopt, 105, 1797, std::chrono::seconds(283), picture_song_1797, 85010, std::nullopt, 85010, R"XYX(glow)XYX"sv, names_song_1797, std::nullopt, 2010y/6/28, pvs_song_1797, "NicoNicoDouga, Youtube, Piapro"sv, 549, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/11209477/11209477)XYX"sv, 40, web_links_song_1797, culture_codes_song_1797},
   {std::nullopt, song_artists_song_251108, R"XYX(Otomania feat. Hatsune Miku)XYX"sv, 2019y/8/23, R"XYX(GO MY WAY!!)XYX"sv, "English"sv, std::nullopt, 5, 251108, std::chrono::seconds(121), picture_song_251108, std::nullopt, std::nullopt, std::nullopt, R"XYX(GO MY WAY!!)XYX"sv, names_song_251108, 397214, 2007y/9/22, pvs_song_251108, "NicoNicoDouga, Youtube"sv, 29, "Cover"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1109430/1109430)XYX"sv, 5, web_links_song_251108, culture_codes_song_251108},
   {R"XYX(ゴー！ビッパ団, Go! Bippa Dan, GO! Team BIDOOF, Go! Bidoof Group, 고! 비버니단)XYX"sv, song_artists_song_581632, R"XYX(JesusP, WONDERFUL★OPPORTUNITY! feat. various)XYX"sv, 2024y/2/2, R"XYX(ゴー！ビッパ団)XYX"sv, "Japanese"sv, std::nullopt, 30, 581632, std::chrono::seconds(237), picture_song_581632, std::nullopt, std::nullopt, std::nullopt, R"XYX(GO! Team BIPPA)XYX"sv, names_song_581632, std::nullopt, 2024y/2/2, pvs_song_581632, "NicoNicoDouga, Youtube"sv, 190, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/43339305/43339305.80746463)XYX"sv, 25, web_links_song_581632, culture_codes_song_581632},
   {R"XYX(神っぽいな, Kamippoi na, 신 같네, 像神一样呐 )XYX"sv, song_artists_song_354245, R"XYX(PinocchioP feat. Hatsune Miku V4X (Dark))XYX"sv, 2021y/9/17, R"XYX(神っぽいな)XYX"sv, "Japanese"sv, std::nullopt, 205, 354245, std::chrono::seconds(205), picture_song_354245, 142000, std::nullopt, 142000, R"XYX(God-ish)XYX"sv, names_song_354245, std::nullopt, 2021y/9/17, pvs_song_354245, "NicoNicoDouga, Youtube, SoundCloud, Bilibili, Bandcamp"sv, 1137, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/EHBFKhLUVig/default.jpg)XYX"sv, 39, web_links_song_354245, culture_codes_song_354245},
+  {R"XYX(神曲, Kamikyoku, Godly Song)XYX"sv, song_artists_song_3389, R"XYX(onewP, PinocchioP feat. Hatsune Miku Append (Solid))XYX"sv, 2011y/11/12, R"XYX(神曲)XYX"sv, "Japanese"sv, std::nullopt, 44, 3389, std::chrono::seconds(198), picture_song_3389, 109000, std::nullopt, 109000, R"XYX(God-Tier Tune)XYX"sv, names_song_3389, std::nullopt, 2011y/1/30, pvs_song_3389, "NicoNicoDouga, Youtube"sv, 234, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/13452778/13452778)XYX"sv, 23, web_links_song_3389, culture_codes_song_3389},
   {R"XYX(金の聖夜霜雪に朽ちて, Kogane no Seiya Sousetsu ni Kuchite, Golden Holy Night Rotting into the Frost and Snow, 金色的圣诞夜复活霜雪)XYX"sv, song_artists_song_2923, R"XYX(DeadballP feat. Hatsune Miku)XYX"sv, 2011y/11/6, R"XYX(金の聖夜霜雪に朽ちて)XYX"sv, "Japanese"sv, std::nullopt, 46, 2923, std::chrono::seconds(246), picture_song_2923, 185000, std::nullopt, 185000, R"XYX(Requiem for the Phantasma [25,Dec])XYX"sv, names_song_2923, std::nullopt, 2007y/12/18, pvs_song_2923, "NicoNicoDouga, Youtube, Piapro, Bilibili"sv, 238, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1807929/1807929)XYX"sv, 28, web_links_song_2923, culture_codes_song_2923},
   {R"XYX(いいねってYEAH!, Ii ne tte YEAH!)XYX"sv, song_artists_song_415813, R"XYX(JesusP feat. Kagamine Rin, Kagamine Len)XYX"sv, 2022y/6/24, R"XYX(いいねってYEAH!)XYX"sv, "Japanese"sv, std::nullopt, 15, 415813, std::chrono::seconds(255), picture_song_415813, std::nullopt, std::nullopt, std::nullopt, R"XYX(Good is YEAH!)XYX"sv, names_song_415813, std::nullopt, 2022y/6/24, pvs_song_415813, "NicoNicoDouga, Youtube, Bilibili"sv, 119, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/MfCP7QNcKaY/default.jpg)XYX"sv, 11, web_links_song_415813, culture_codes_song_415813},
   {std::nullopt, song_artists_song_13734, R"XYX(Narushima Takashi feat. Kagamine Rin Append (Power), Kagamine Rin Append (Sweet))XYX"sv, 2012y/6/29, R"XYX(Gothic and Loneliness ~I’m the very DIVA~)XYX"sv, "English"sv, std::nullopt, 18, 13734, std::chrono::seconds(178), picture_song_13734, 157000, std::nullopt, 157000, R"XYX(Gothic and Loneliness ~I’m the very DIVA~)XYX"sv, names_song_13734, 49751, 2011y/12/14, pvs_song_13734, "NicoNicoDouga, Youtube"sv, 86, "Remix"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/16425574/16425574)XYX"sv, 12, web_links_song_13734, culture_codes_song_13734},
@@ -37775,6 +39072,7 @@ export constexpr std::array<song, 527> songs {{
   {std::nullopt, song_artists_song_234902, R"XYX(EasyPop feat. Megurine Luka V4X (Hard), Hatsune Miku V4X (Original))XYX"sv, 2019y/4/23, R"XYX(Jump for Joy)XYX"sv, "English"sv, std::nullopt, 14, 234902, std::chrono::seconds(222), picture_song_234902, 126000, std::nullopt, 126000, R"XYX(Jump for Joy)XYX"sv, names_song_234902, std::nullopt, 2019y/6/13, pvs_song_234902, "NicoNicoDouga, Youtube, Bilibili"sv, 122, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/QlfXsuPEJ8s/default.jpg)XYX"sv, 19, web_links_song_234902, culture_codes_song_234902},
   {std::nullopt, song_artists_song_1360, R"XYX(Dixie Flatline feat. Megurine Luka)XYX"sv, 2011y/11/1, R"XYX(Just Be Friends)XYX"sv, "English"sv, std::nullopt, 171, 1360, std::chrono::seconds(304), picture_song_1360, 128000, std::nullopt, 128000, R"XYX(Just Be Friends)XYX"sv, names_song_1360, std::nullopt, 2009y/7/4, pvs_song_1360, "NicoNicoDouga, Youtube, Piapro"sv, 973, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7528841/7528841)XYX"sv, 51, web_links_song_1360, culture_codes_song_1360},
   {std::nullopt, song_artists_song_566239, R"XYX(JIN, bibi feat. Hatsune Miku V4X (Original))XYX"sv, 2023y/12/22, R"XYX(JUVENILE)XYX"sv, "English"sv, std::nullopt, 31, 566239, std::chrono::seconds(274), picture_song_566239, std::nullopt, std::nullopt, std::nullopt, R"XYX(JUVENILE)XYX"sv, names_song_566239, std::nullopt, 2023y/12/22, pvs_song_566239, "NicoNicoDouga, Youtube"sv, 167, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/N2-HzUpMY7c/default.jpg)XYX"sv, 19, web_links_song_566239, culture_codes_song_566239},
+  {R"XYX(鏡音八八花合戦, Kagamine Hachihachi Hana no Kassen, Hachi-Hachi Flowery Battle of Kagamines)XYX"sv, song_artists_song_13961, R"XYX(Mogiavelli feat. Kagamine Len, Kagamine Rin)XYX"sv, 2012y/7/4, R"XYX(鏡音八八花合戦)XYX"sv, "Japanese"sv, std::nullopt, 27, 13961, std::chrono::seconds(153), picture_song_13961, 172000, std::nullopt, 172000, R"XYX(Kagamine HachiHachi Flower Fight)XYX"sv, names_song_13961, std::nullopt, 2009y/12/27, pvs_song_13961, "NicoNicoDouga, Youtube"sv, 165, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/9206487/9206487)XYX"sv, 18, web_links_song_13961, culture_codes_song_13961},
   {R"XYX(カゲロウデイズ, Kagerou Daze, Kagerou Days, Heat-Haze Days)XYX"sv, song_artists_song_4979, R"XYX(JIN feat. Hatsune Miku Append (Vivid), Hatsune Miku Append (Sweet))XYX"sv, 2011y/12/10, R"XYX(カゲロウデイズ)XYX"sv, "Japanese"sv, std::nullopt, 167, 4979, std::chrono::seconds(234), picture_song_4979, 199000, std::nullopt, 199000, R"XYX(Heat-Haze Daze)XYX"sv, names_song_4979, std::nullopt, 2011y/9/30, pvs_song_4979, "NicoNicoDouga"sv, 916, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/15751190/15751190)XYX"sv, 29, web_links_song_4979, culture_codes_song_4979},
   {R"XYX(快晴, Kaisei, Clear Weather, 쾌청)XYX"sv, song_artists_song_164111, R"XYX(Orangestar feat. Hatsune Miku)XYX"sv, 2017y/8/4, R"XYX(快晴)XYX"sv, "Japanese"sv, std::nullopt, 9, 164111, std::chrono::seconds(262), picture_song_164111, std::nullopt, std::nullopt, std::nullopt, R"XYX(Good Weather)XYX"sv, names_song_164111, 713110, 2017y/8/30, pvs_song_164111, "SoundCloud"sv, 75, "Remix"sv, "Approved"sv, R"XYX(https://i1.sndcdn.com/artworks-000307274691-rulil3-t500x500.jpg)XYX"sv, 23, web_links_song_164111, culture_codes_song_164111},
   {R"XYX(からくりピエロ, Karakuri Pierrot)XYX"sv, song_artists_song_1363, R"XYX(40mP feat. Hatsune Miku)XYX"sv, 2011y/11/1, R"XYX(からくりピエロ)XYX"sv, "Japanese"sv, std::nullopt, 223, 1363, std::chrono::seconds(295), picture_song_1363, 102000, std::nullopt, 102000, R"XYX(Clockwork Clown)XYX"sv, names_song_1363, std::nullopt, 2011y/7/15, pvs_song_1363, "NicoNicoDouga, Youtube, Piapro, Bilibili"sv, 1237, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/15022913/15022913)XYX"sv, 35, web_links_song_1363, culture_codes_song_1363},
@@ -37843,15 +39141,18 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(ミラクルペイント, 미라클 페인트)XYX"sv, song_artists_song_3658, R"XYX(OSTER project feat. Hatsune Miku)XYX"sv, 2011y/11/13, R"XYX(ミラクルペイント)XYX"sv, "Japanese"sv, std::nullopt, 120, 3658, std::chrono::seconds(260), picture_song_3658, 107000, std::nullopt, 107000, R"XYX(Miracle Paint)XYX"sv, names_song_3658, std::nullopt, 2007y/11/22, pvs_song_3658, "NicoNicoDouga, Youtube"sv, 646, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/gqPWXe0dCC4/default.jpg)XYX"sv, 30, web_links_song_3658, culture_codes_song_3658},
   {R"XYX(モバイリ：センセーション, Mobairi: Sensation, MobiRe: Sens@tioN, Mobile: Sensation)XYX"sv, song_artists_song_5239, R"XYX(sasakure.UK feat. Kagamine Rin)XYX"sv, 2011y/12/19, R"XYX(モバイリ：センセーション)XYX"sv, "Japanese"sv, std::nullopt, 8, 5239, std::chrono::seconds(205), picture_song_5239, 123000, std::nullopt, 123000, R"XYX(MobiRe:Sensation)XYX"sv, names_song_5239, std::nullopt, 2008y/2/9, pvs_song_5239, "NicoNicoDouga"sv, 66, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/2272180/2272180)XYX"sv, 16, web_links_song_5239, culture_codes_song_5239},
   {R"XYX(モニタリング, 모니터링)XYX"sv, song_artists_song_668055, R"XYX(DECO*27, Hayato Yamamoto, OTOIRO feat. Hatsune Miku)XYX"sv, 2024y/8/30, R"XYX(モニタリング)XYX"sv, "Japanese"sv, std::nullopt, 218, 668055, std::chrono::seconds(176), picture_song_668055, 132000, std::nullopt, 132000, R"XYX(Monitoring)XYX"sv, names_song_668055, std::nullopt, 2024y/11/22, pvs_song_668055, "NicoNicoDouga, Youtube, Bilibili"sv, 1084, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/kbNdx0yqbZE/default.jpg)XYX"sv, 23, web_links_song_668055, culture_codes_song_668055},
+  {R"XYX(モノクロ∞ブルースカイ, monochro ∞ blue sky, Monochrome∞BlueSky)XYX"sv, song_artists_song_2651, R"XYX(Noboru feat. Hatsune Miku)XYX"sv, 2011y/11/4, R"XYX(モノクロ∞ブルースカイ)XYX"sv, "Japanese"sv, std::nullopt, 65, 2651, std::chrono::seconds(236), picture_song_2651, 130000, std::nullopt, 130000, R"XYX(Monochrome∞Blue Sky)XYX"sv, names_song_2651, std::nullopt, 2009y/12/30, pvs_song_2651, "NicoNicoDouga, Youtube, Piapro"sv, 356, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/10150980/10150980.29219)XYX"sv, 31, web_links_song_2651, culture_codes_song_2651},
   {R"XYX(moon(Fullver.), moon(Fullver.)v1.1)XYX"sv, song_artists_song_5701, R"XYX(iroha(sasaki) feat. Hatsune Miku)XYX"sv, 2011y/12/31, R"XYX(moon)XYX"sv, "English"sv, std::nullopt, 72, 5701, std::chrono::seconds(335), picture_song_5701, 150000, std::nullopt, 150000, R"XYX(moon)XYX"sv, names_song_5701, 537263, 2007y/10/29, pvs_song_5701, "NicoNicoDouga, Youtube, SoundCloud"sv, 387, "Remaster"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1400559/1400559)XYX"sv, 29, web_links_song_5701, culture_codes_song_5701},
   {R"XYX(月西江, Yue Xi Jiang, 月·西江)XYX"sv, song_artists_song_237976, R"XYX(SolPie feat. Hatsune Miku)XYX"sv, 2019y/5/15, R"XYX(月西江)XYX"sv, "Japanese"sv, std::nullopt, 2, 237976, std::chrono::seconds(280), picture_song_237976, std::nullopt, std::nullopt, std::nullopt, R"XYX(Moon West River)XYX"sv, names_song_237976, std::nullopt, 2010y/5/8, pvs_song_237976, "Youtube"sv, 16, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/Hgvqm5EWgbo/default.jpg)XYX"sv, 26, web_links_song_237976, culture_codes_song_237976},
   {R"XYX(モザイクロール (Reloaded), 모자이크 롤 (Reloaded))XYX"sv, song_artists_song_358478, R"XYX(DECO*27, Rockwell, OTOIRO feat. Hatsune Miku)XYX"sv, 2021y/10/8, R"XYX(モザイクロール (Reloaded))XYX"sv, "Japanese"sv, std::nullopt, 30, 358478, std::chrono::seconds(160), picture_song_358478, 148000, std::nullopt, 148000, R"XYX(Mozaik Role (Reloaded))XYX"sv, names_song_358478, 1381, 2021y/10/8, pvs_song_358478, "NicoNicoDouga, Youtube, Bilibili"sv, 222, "Remaster"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/WysuxO4yR04/default.jpg)XYX"sv, 20, web_links_song_358478, culture_codes_song_358478},
   {R"XYX(多重未来のカルテット～QUARTET THEME～, Tajuu Mirai no Quartet ~QUARTET THEME~, Quartet of Multiple Futures -Quartet Theme-)XYX"sv, song_artists_song_8974, R"XYX(Kusemono feat. Hatsune Miku)XYX"sv, 2012y/1/31, R"XYX(多重未来のカルテット～QUARTET THEME～)XYX"sv, "Japanese"sv, std::nullopt, 9, 8974, std::chrono::seconds(171), picture_song_8974, 150000, std::nullopt, 150000, R"XYX(Multiple Future Quartet ~QUARTET THEME~)XYX"sv, names_song_8974, std::nullopt, 2010y/11/1, pvs_song_8974, "NicoNicoDouga, Youtube"sv, 73, "Cover"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/12616770/12616770)XYX"sv, 17, web_links_song_8974, culture_codes_song_8974},
   {R"XYX(魔法みたいなミュージック！, Mahou Mitai na Music!)XYX"sv, song_artists_song_199152, R"XYX(OSTER project feat. Hatsune Miku)XYX"sv, 2018y/8/1, R"XYX(魔法みたいなミュージック！)XYX"sv, "Japanese"sv, std::nullopt, 17, 199152, std::chrono::seconds(268), picture_song_199152, 105000, std::nullopt, 105000, R"XYX(Music Like Magic!)XYX"sv, names_song_199152, std::nullopt, 2018y/8/1, pvs_song_199152, "Youtube, Bilibili"sv, 147, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/jrBzSRiXuvo/default.jpg)XYX"sv, 14, web_links_song_199152, culture_codes_song_199152},
+  {R"XYX(天樂, Tengaku, Music of Heavens, 천악)XYX"sv, song_artists_song_3269, R"XYX(Yuuyu feat. Kagamine Rin)XYX"sv, 2011y/11/12, R"XYX(天樂)XYX"sv, "Japanese"sv, std::nullopt, 263, 3269, std::chrono::seconds(276), picture_song_3269, 232000, std::nullopt, 232000, R"XYX(Music of Heaven)XYX"sv, names_song_3269, std::nullopt, 2009y/8/12, pvs_song_3269, "NicoNicoDouga"sv, 913, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7918983/7918983.63901958)XYX"sv, 33, web_links_song_3269, culture_codes_song_3269},
   {std::nullopt, song_artists_song_177679, R"XYX(SonaOne feat. Hatsune Miku)XYX"sv, 2017y/12/16, R"XYX(Chentaku)XYX"sv, "Japanese"sv, std::nullopt, 0, 177679, std::chrono::seconds(235), picture_song_177679, std::nullopt, std::nullopt, std::nullopt, R"XYX(Chentaku)XYX"sv, names_song_177679, std::nullopt, std::nullopt, pvs_song_177679, "Youtube"sv, 4, "Cover"sv, "Draft"sv, R"XYX(https://i.ytimg.com/vi/VtMAZ7wzlgg/default.jpg)XYX"sv, 5, web_links_song_177679, culture_codes_song_177679},
   {R"XYX(私の恋はヘルファイア, Watashi no Koi wa Hellfire, 나의 사랑은 헬파이어)XYX"sv, song_artists_song_363931, R"XYX(SLAVE.V-V-R feat. MEIKO V3 (Power), MEIKO V3 (English), MEIKO V3 (Whisper))XYX"sv, 2021y/11/2, R"XYX(私の恋はヘルファイア)XYX"sv, "Japanese"sv, std::nullopt, 93, 363931, std::chrono::seconds(195), picture_song_363931, 200000, std::nullopt, 200000, R"XYX(My Love is Hellfire)XYX"sv, names_song_363931, std::nullopt, 2021y/11/2, pvs_song_363931, "NicoNicoDouga, Youtube, Bilibili"sv, 497, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/heTaHWABCOo/default.jpg)XYX"sv, 30, web_links_song_363931, culture_codes_song_363931},
   {std::nullopt, song_artists_song_373813, R"XYX(cannibaltim, Zhouxiaocan feat. Hatsune Miku V4 (Chinese))XYX"sv, 2021y/12/25, R"XYX(My Stage With You)XYX"sv, "Japanese"sv, std::nullopt, 0, 373813, std::chrono::seconds(232), picture_song_373813, std::nullopt, std::nullopt, std::nullopt, R"XYX(My Stage With You)XYX"sv, names_song_373813, std::nullopt, 2021y/12/1, pvs_song_373813, "Youtube"sv, 26, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/OBhRRKbTD_w/default.jpg)XYX"sv, 14, web_links_song_373813, culture_codes_song_373813},
   {R"XYX(私の時間, Watashi no Jikan)XYX"sv, song_artists_song_7235, R"XYX(KuchibashiP feat. Hatsune Miku)XYX"sv, 2012y/1/1, R"XYX(私の時間)XYX"sv, "Japanese"sv, std::nullopt, 68, 7235, std::chrono::seconds(269), picture_song_7235, 145000, std::nullopt, 145000, R"XYX(My Time)XYX"sv, names_song_7235, std::nullopt, 2007y/10/22, pvs_song_7235, "NicoNicoDouga, Youtube, Piapro"sv, 344, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1340413/1340413)XYX"sv, 23, web_links_song_7235, culture_codes_song_7235},
+  {R"XYX(ネガポジ＊コンティニューズ, Negaposi*Continues)XYX"sv, song_artists_song_16580, R"XYX(sasakure.UK feat. Hatsune Miku)XYX"sv, 2012y/9/24, R"XYX(ネガポジ＊コンティニューズ)XYX"sv, "Japanese"sv, std::nullopt, 83, 16580, std::chrono::seconds(191), picture_song_16580, 220000, std::nullopt, 220000, R"XYX(Negative-Positive*Continues)XYX"sv, names_song_16580, std::nullopt, 2013y/3/6, pvs_song_16580, "Youtube"sv, 411, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/LdnlHz3qGrQ/default.jpg)XYX"sv, 20, web_links_song_16580, culture_codes_song_16580},
   {R"XYX(NEPPUU〜熱風〜, NEPPUU ~Neppuu~, NEPPUU, HOT WIND)XYX"sv, song_artists_song_480845, R"XYX(MikitoP feat. Hatsune Miku V4X (Solid))XYX"sv, 2023y/3/7, R"XYX(NEPPUU〜熱風〜)XYX"sv, "Japanese"sv, std::nullopt, 16, 480845, std::chrono::seconds(276), picture_song_480845, std::nullopt, std::nullopt, std::nullopt, R"XYX(NEPPUU ~Blistering Wind~)XYX"sv, names_song_480845, std::nullopt, 2023y/3/7, pvs_song_480845, "NicoNicoDouga, Youtube, Bilibili"sv, 92, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/DmACzPgHYjQ/default.jpg)XYX"sv, 19, web_links_song_480845, culture_codes_song_480845},
   {std::nullopt, song_artists_song_220959, R"XYX(Yuyoyuppe feat. Megurine Luka)XYX"sv, 2019y/1/1, R"XYX(Never Die)XYX"sv, "English"sv, std::nullopt, 22, 220959, std::chrono::seconds(215), picture_song_220959, std::nullopt, std::nullopt, std::nullopt, R"XYX(Never Die)XYX"sv, names_song_220959, std::nullopt, 2019y/1/30, pvs_song_220959, "NicoNicoDouga, Youtube"sv, 146, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/34552092/34552092.67738)XYX"sv, 16, web_links_song_220959, culture_codes_song_220959},
   {R"XYX(新人類, Shinjinrui, しんじんるい, A New Human, 신인류)XYX"sv, song_artists_song_480295, R"XYX(Various artists)XYX"sv, 2023y/3/4, R"XYX(新人類)XYX"sv, "Japanese"sv, std::nullopt, 73, 480295, std::chrono::seconds(153), picture_song_480295, 144000, std::nullopt, 144000, R"XYX(New Human Race)XYX"sv, names_song_480295, std::nullopt, 2023y/3/19, pvs_song_480295, "NicoNicoDouga, Youtube, Bilibili"sv, 393, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/41943266/41943266.84593065)XYX"sv, 29, web_links_song_480295, culture_codes_song_480295},
@@ -37869,6 +39170,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(大江戸ジュリアナイト, 大江户Julia-Night, Ohedo Julia-Night)XYX"sv, song_artists_song_164109, R"XYX(Mitchie M feat. Hatsune Miku, KAITO V3 (Straight))XYX"sv, 2017y/8/4, R"XYX(大江戸ジュリアナイト)XYX"sv, "Japanese"sv, std::nullopt, 174, 164109, std::chrono::seconds(228), picture_song_164109, 144000, std::nullopt, 144000, R"XYX(Ooedo Julia-Night)XYX"sv, names_song_164109, std::nullopt, 2017y/8/30, pvs_song_164109, "NicoNicoDouga, Youtube, SoundCloud, Bilibili"sv, 882, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/y3yyYYLyVzw/default.jpg)XYX"sv, 25, web_links_song_164109, culture_codes_song_164109},
   {std::nullopt, song_artists_song_203921, R"XYX(OSTER project feat. MEIKO Append (β), KAITO Append Normal (β))XYX"sv, 2018y/9/18, R"XYX(on the rocks)XYX"sv, "English"sv, std::nullopt, 42, 203921, std::chrono::seconds(263), picture_song_203921, 150000, std::nullopt, 150000, R"XYX(on the rocks)XYX"sv, names_song_203921, std::nullopt, 2012y/3/8, pvs_song_203921, "NicoNicoDouga, Youtube"sv, 212, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/W_CWcceCnHY/default.jpg)XYX"sv, 13, web_links_song_203921, culture_codes_song_203921},
   {R"XYX(片想いサンバ, Kataomoi Samba, Unrequited Love Samba)XYX"sv, song_artists_song_3007, R"XYX(OwataP, Project DIVA Channel feat. Hatsune Miku)XYX"sv, 2011y/11/7, R"XYX(片想いサンバ)XYX"sv, "Japanese"sv, std::nullopt, 53, 3007, std::chrono::seconds(178), picture_song_3007, 150000, std::nullopt, 150000, R"XYX(One-Sided Love Samba)XYX"sv, names_song_3007, std::nullopt, 2009y/10/23, pvs_song_3007, "NicoNicoDouga, Youtube"sv, 253, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/8598971/8598971)XYX"sv, 21, web_links_song_3007, culture_codes_song_3007},
+  {R"XYX(ネトゲ廃人シュプレヒコール, Netgame Haijin Sprechchor, Online Game Addict Chant, The MMORPG Addict's Anthem, 온라인 게임 폐인 슈프레히코어)XYX"sv, song_artists_song_12443, R"XYX(Satsuki ga Tenkomori feat. Hatsune Miku)XYX"sv, 2012y/5/22, R"XYX(ネトゲ廃人シュプレヒコール)XYX"sv, "Japanese"sv, std::nullopt, 141, 12443, std::chrono::seconds(294), picture_song_12443, 175000, std::nullopt, 175000, R"XYX(ONLINE GAME ADDICTS SPRECHCHOR)XYX"sv, names_song_12443, std::nullopt, 2010y/10/15, pvs_song_12443, "NicoNicoDouga, Youtube"sv, 847, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/12441199/12441199)XYX"sv, 35, web_links_song_12443, culture_codes_song_12443},
   {R"XYX(オーパーツ, OOPARTS, Out-of-place artifact, 오파츠)XYX"sv, song_artists_song_840401, R"XYX(NILFRUITS feat. Hatsune Miku V4X (Solid))XYX"sv, 2025y/9/18, R"XYX(オーパーツ)XYX"sv, "Japanese"sv, std::nullopt, 23, 840401, std::chrono::seconds(172), picture_song_840401, std::nullopt, std::nullopt, std::nullopt, R"XYX(OOPÁRTS)XYX"sv, names_song_840401, std::nullopt, 2025y/9/18, pvs_song_840401, "NicoNicoDouga, Youtube"sv, 145, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/LFZK8GbCmQY/default.jpg)XYX"sv, 15, web_links_song_840401, culture_codes_song_840401},
   {R"XYX(げんてん, Genten, 원점)XYX"sv, song_artists_song_687114, R"XYX(Daibaku Hashin feat. MEIKO SP (Original))XYX"sv, 2024y/10/17, R"XYX(げんてん)XYX"sv, "Japanese"sv, std::nullopt, 10, 687114, std::chrono::seconds(194), picture_song_687114, std::nullopt, std::nullopt, std::nullopt, R"XYX(Origin)XYX"sv, names_song_687114, std::nullopt, 2024y/10/17, pvs_song_687114, "NicoNicoDouga, Youtube, Bilibili"sv, 82, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/xADz415OHB8/default.jpg)XYX"sv, 16, web_links_song_687114, culture_codes_song_687114},
   {R"XYX(乙女解剖, Otome Kaibou, Maiden Autopsy, Otome Dissection)XYX"sv, song_artists_song_222749, R"XYX(Various artists)XYX"sv, 2019y/1/18, R"XYX(乙女解剖)XYX"sv, "Japanese"sv, std::nullopt, 150, 222749, std::chrono::seconds(230), picture_song_222749, std::nullopt, std::nullopt, std::nullopt, R"XYX(Maiden Dissection)XYX"sv, names_song_222749, std::nullopt, 2019y/1/18, pvs_song_222749, "NicoNicoDouga, Youtube, Bilibili"sv, 859, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/7zwCIz-Ohn4/default.jpg)XYX"sv, 26, web_links_song_222749, culture_codes_song_222749},
@@ -37911,6 +39213,7 @@ export constexpr std::array<song, 527> songs {{
   {std::nullopt, song_artists_song_230396, R"XYX(DECO*27, Rockwell)XYX"sv, 2019y/3/22, R"XYX(Reunion)XYX"sv, "English"sv, std::nullopt, 5, 230396, std::chrono::seconds(37), picture_song_230396, std::nullopt, std::nullopt, std::nullopt, R"XYX(Reunion)XYX"sv, names_song_230396, std::nullopt, 2019y/5/22, pvs_song_230396, "Youtube"sv, 47, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/Tj_fJVHQTI8/default.jpg)XYX"sv, 8, web_links_song_230396, culture_codes_song_230396},
   {R"XYX(リバースユニバース)XYX"sv, song_artists_song_238956, R"XYX(NayutalieN feat. Hatsune Miku)XYX"sv, 2019y/5/26, R"XYX(リバースユニバース)XYX"sv, "Japanese"sv, std::nullopt, 4, 238956, std::chrono::seconds(189), std::nullopt, std::nullopt, std::nullopt, std::nullopt, R"XYX(Reverse Universe)XYX"sv, names_song_238956, std::nullopt, 2017y/8/30, pvs_song_238956, "Nothing"sv, 24, "Original"sv, "Finished"sv, R"XYX()XYX"sv, 8, web_links_song_238956, culture_codes_song_238956},
   {R"XYX(リンリンシグナル, 铃声的信号)XYX"sv, song_artists_song_2259, R"XYX(Dios/SignalP feat. Kagamine Rin, Kagamine Len)XYX"sv, 2011y/11/3, R"XYX(リンリンシグナル)XYX"sv, "Japanese"sv, std::nullopt, 33, 2259, std::chrono::seconds(244), picture_song_2259, 124000, std::nullopt, 124000, R"XYX(Rin Rin Signal)XYX"sv, names_song_2259, 224639, 2008y/1/7, pvs_song_2259, "NicoNicoDouga, Youtube, Piapro, Bilibili"sv, 196, "Remix"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/1971028/1971028)XYX"sv, 23, web_links_song_2259, culture_codes_song_2259},
+  {R"XYX(リンちゃんなう！, Rin-chan Nau!, 鈴醤NOW！)XYX"sv, song_artists_song_8678, R"XYX(OwataP feat. Megurine Luka, Hatsune Miku)XYX"sv, 2012y/1/20, R"XYX(リンちゃんなう！)XYX"sv, "Japanese"sv, std::nullopt, 101, 8678, std::chrono::seconds(173), picture_song_8678, 200000, std::nullopt, 200000, R"XYX(Rin-chan Now!)XYX"sv, names_song_8678, std::nullopt, 2011y/8/13, pvs_song_8678, "NicoNicoDouga, Youtube, Bilibili"sv, 563, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/16539814/16539814)XYX"sv, 21, web_links_song_8678, culture_codes_song_8678},
   {R"XYX(RING x RING x RING)XYX"sv, song_artists_song_5550, R"XYX(OSTER project feat. Kagamine Rin)XYX"sv, 2011y/12/27, R"XYX(RING×RING×RING)XYX"sv, "Japanese"sv, std::nullopt, 15, 5550, std::chrono::seconds(222), picture_song_5550, std::nullopt, std::nullopt, std::nullopt, R"XYX(RING×RING×RING)XYX"sv, names_song_5550, std::nullopt, 2008y/3/9, pvs_song_5550, "NicoNicoDouga, Youtube, Piapro"sv, 115, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/2582693/2582693)XYX"sv, 18, web_links_song_5550, culture_codes_song_5550},
   {std::nullopt, song_artists_song_7234, R"XYX(Minato Takahiro feat. Megurine Luka)XYX"sv, 2012y/1/1, R"XYX(RIP=RELEASE)XYX"sv, "English"sv, std::nullopt, 96, 7234, std::chrono::seconds(256), picture_song_7234, 115000, std::nullopt, 115000, R"XYX(RIP=RELEASE)XYX"sv, names_song_7234, std::nullopt, 2009y/1/30, pvs_song_7234, "NicoNicoDouga, Youtube"sv, 504, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/5992615/5992615)XYX"sv, 16, web_links_song_7234, culture_codes_song_7234},
   {R"XYX(ロキ)XYX"sv, song_artists_song_185363, R"XYX(MikitoP feat. Kagamine Rin V4X (Power))XYX"sv, 2018y/2/27, R"XYX(ロキ)XYX"sv, "Japanese"sv, std::nullopt, 154, 185363, std::chrono::seconds(230), picture_song_185363, 150000, std::nullopt, 150000, R"XYX(ROKI)XYX"sv, names_song_185363, std::nullopt, 2018y/2/27, pvs_song_185363, "NicoNicoDouga, Youtube, Bilibili"sv, 942, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/32798041/32798041)XYX"sv, 30, web_links_song_185363, culture_codes_song_185363},
@@ -37919,6 +39222,7 @@ export constexpr std::array<song, 527> songs {{
   {std::nullopt, song_artists_song_878942, R"XYX(nostraightanswer feat. Hatsune Miku V4 (English))XYX"sv, 2025y/12/3, R"XYX(Room for a Fantasy)XYX"sv, "English"sv, std::nullopt, 15, 878942, std::chrono::seconds(218), picture_song_878942, std::nullopt, std::nullopt, std::nullopt, R"XYX(Room for a Fantasy)XYX"sv, names_song_878942, std::nullopt, 2025y/12/3, pvs_song_878942, "Youtube"sv, 97, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/fPVGGOUs_f4/default.jpg)XYX"sv, 9, web_links_song_878942, culture_codes_song_878942},
   {std::nullopt, song_artists_song_41707, R"XYX(ShinjouP feat. KAITO)XYX"sv, 2013y/10/11, R"XYX(Rosary Pale)XYX"sv, "English"sv, std::nullopt, 29, 41707, std::chrono::seconds(219), picture_song_41707, std::nullopt, std::nullopt, std::nullopt, R"XYX(Rosary Pale)XYX"sv, names_song_41707, std::nullopt, 2009y/1/4, pvs_song_41707, "NicoNicoDouga, Youtube, Piapro"sv, 156, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/5749954/5749954)XYX"sv, 19, web_links_song_41707, culture_codes_song_41707},
   {R"XYX(四角い地球を丸くする, Shikakui Chikyuu o Maruku Suru)XYX"sv, song_artists_song_178433, R"XYX(TOKOTOKO feat. Hatsune Miku)XYX"sv, 2017y/12/22, R"XYX(四角い地球を丸くする)XYX"sv, "Japanese"sv, std::nullopt, 14, 178433, std::chrono::seconds(216), picture_song_178433, std::nullopt, std::nullopt, std::nullopt, R"XYX(Round off the Square Earth)XYX"sv, names_song_178433, std::nullopt, 2017y/12/22, pvs_song_178433, "NicoNicoDouga, Youtube"sv, 104, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/32459303/32459303)XYX"sv, 12, web_links_song_178433, culture_codes_song_178433},
+  {std::nullopt, song_artists_song_16061, R"XYX(cosMo@BousouP feat. Hatsune Miku)XYX"sv, 2012y/8/27, R"XYX(Sadistic.Music∞Factory)XYX"sv, "English"sv, std::nullopt, 138, 16061, std::chrono::seconds(162), picture_song_16061, 165000, std::nullopt, 165000, R"XYX(Sadistic.Music∞Factory)XYX"sv, names_song_16061, std::nullopt, 2012y/8/27, pvs_song_16061, "NicoNicoDouga, Youtube, Bilibili"sv, 715, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/18729289/18729289)XYX"sv, 26, web_links_song_16061, culture_codes_song_16061},
   {R"XYX(桜ノ雨, Sakura no Ame, Cherry Blossom Rain, Rain of Cherry Blossoms)XYX"sv, song_artists_song_8741, R"XYX(halyosy, is, absorb feat. Hatsune Miku)XYX"sv, 2012y/1/21, R"XYX(桜ノ雨)XYX"sv, "Japanese"sv, std::nullopt, 58, 8741, std::chrono::seconds(401), picture_song_8741, 76000, std::nullopt, 76000, R"XYX(Sakura Rain)XYX"sv, names_song_8741, std::nullopt, 2008y/2/22, pvs_song_8741, "NicoNicoDouga, Youtube, Piapro"sv, 336, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/1UAkQP8tytM/default.jpg)XYX"sv, 19, web_links_song_8741, culture_codes_song_8741},
   {R"XYX(サラマンダー, 샐러맨더)XYX"sv, song_artists_song_376689, R"XYX(DECO*27, Rockwell, OTOIRO feat. Hatsune Miku V4X (Original))XYX"sv, 2022y/1/7, R"XYX(サラマンダー)XYX"sv, "Japanese"sv, std::nullopt, 65, 376689, std::chrono::seconds(156), picture_song_376689, 172000, std::nullopt, 172000, R"XYX(Salamander)XYX"sv, names_song_376689, std::nullopt, 2022y/1/7, pvs_song_376689, "NicoNicoDouga, Youtube, Bilibili"sv, 487, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/39853779/39853779.47627592)XYX"sv, 26, web_links_song_376689, culture_codes_song_376689},
   {R"XYX(サロメ, Salome)XYX"sv, song_artists_song_753184, R"XYX(⌘HYNOME feat. MEIKO V3 (Whisper))XYX"sv, 2025y/2/21, R"XYX(サロメ)XYX"sv, "Japanese"sv, std::nullopt, 6, 753184, std::chrono::seconds(189), picture_song_753184, std::nullopt, std::nullopt, std::nullopt, R"XYX(Salomé)XYX"sv, names_song_753184, std::nullopt, 2025y/2/22, pvs_song_753184, "NicoNicoDouga, Youtube"sv, 54, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/44676437/44676437.30039595)XYX"sv, 12, web_links_song_753184, culture_codes_song_753184},
@@ -37970,6 +39274,7 @@ export constexpr std::array<song, 527> songs {{
   {std::nullopt, song_artists_song_41599, R"XYX(shimajiro feat. Hatsune Miku)XYX"sv, 2013y/10/9, R"XYX(starise)XYX"sv, "English"sv, std::nullopt, 5, 41599, std::chrono::seconds(143), picture_song_41599, std::nullopt, std::nullopt, std::nullopt, R"XYX(starise)XYX"sv, names_song_41599, std::nullopt, 2008y/9/10, pvs_song_41599, "Youtube"sv, 25, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/W3CbcxFhhcQ/default.jpg)XYX"sv, 17, web_links_song_41599, culture_codes_song_41599},
   {R"XYX(スターライト☆リディアン)XYX"sv, song_artists_song_3009, R"XYX(Laa Laa~P, Project DIVA Channel feat. Hatsune Miku)XYX"sv, 2011y/11/7, R"XYX(Starlite★Lydian)XYX"sv, "English"sv, std::nullopt, 6, 3009, std::chrono::seconds(200), picture_song_3009, 145000, std::nullopt, 145000, R"XYX(Starlite★Lydian)XYX"sv, names_song_3009, std::nullopt, 2009y/10/15, pvs_song_3009, "NicoNicoDouga, Youtube"sv, 54, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/8520667/8520667)XYX"sv, 14, web_links_song_3009, culture_codes_song_3009},
   {std::nullopt, song_artists_song_343187, R"XYX(Keiichi Sugiyama feat. Hatsune Miku)XYX"sv, 2021y/7/12, R"XYX(Start of Rainbow ～first step～)XYX"sv, "Japanese"sv, std::nullopt, 3, 343187, std::chrono::seconds(302), picture_song_343187, std::nullopt, std::nullopt, std::nullopt, R"XYX(Start of Rainbow ～first step～)XYX"sv, names_song_343187, std::nullopt, 2011y/11/10, pvs_song_343187, "Youtube"sv, 27, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/tzJw5VhHz8I/default.jpg)XYX"sv, 4, web_links_song_343187, culture_codes_song_343187},
+  {std::nullopt, song_artists_song_16558, R"XYX(shu-t feat. MEIKO)XYX"sv, 2012y/9/24, R"XYX(Stay with me)XYX"sv, "English"sv, std::nullopt, 29, 16558, std::chrono::seconds(247), picture_song_16558, 126000, std::nullopt, 126000, R"XYX(Stay with me)XYX"sv, names_song_16558, std::nullopt, 2012y/8/28, pvs_song_16558, "NicoNicoDouga, Youtube"sv, 183, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/LLpP0Wfq1gU/default.jpg)XYX"sv, 20, web_links_song_16558, culture_codes_song_16558},
   {R"XYX(ステラ)XYX"sv, song_artists_song_96665, R"XYX(KotsBeirne feat. Hatsune Miku)XYX"sv, 2015y/7/31, R"XYX(ステラ)XYX"sv, "Japanese"sv, std::nullopt, 7, 96665, std::chrono::seconds(254), picture_song_96665, std::nullopt, std::nullopt, std::nullopt, R"XYX(Stella)XYX"sv, names_song_96665, std::nullopt, 2015y/7/31, pvs_song_96665, "NicoNicoDouga, Youtube, Bilibili"sv, 51, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/MJlmlKhRsDI/default.jpg)XYX"sv, 8, web_links_song_96665, culture_codes_song_96665},
   {R"XYX(踏步、出发)XYX"sv, song_artists_song_303981, R"XYX(MACHWOLF feat. Hatsune Miku V4 (Chinese))XYX"sv, 2020y/11/25, R"XYX(踏步、出发)XYX"sv, "Japanese"sv, std::nullopt, 2, 303981, std::chrono::seconds(258), picture_song_303981, std::nullopt, std::nullopt, std::nullopt, R"XYX(Step forward)XYX"sv, names_song_303981, std::nullopt, 2020y/11/25, pvs_song_303981, "Youtube, Bilibili"sv, 40, "Original"sv, "Finished"sv, R"XYX(http://i2.hdslb.com/bfs/archive/71b96f748511e9c0e0679b318daeb37b9f806da8.jpg)XYX"sv, 11, web_links_song_303981, culture_codes_song_303981},
   {R"XYX(おじゃま虫, Ojamamushi, Ojama Mushi, 방해쟁이, 麻烦鬼)XYX"sv, song_artists_song_48030, R"XYX(DECO*27, kous feat. Hatsune Miku)XYX"sv, 2014y/2/13, R"XYX(おじゃま虫)XYX"sv, "Japanese"sv, std::nullopt, 38, 48030, std::chrono::seconds(217), picture_song_48030, 143000, std::nullopt, 143000, R"XYX(Stickybug)XYX"sv, names_song_48030, std::nullopt, 2014y/2/14, pvs_song_48030, "NicoNicoDouga, Youtube, SoundCloud"sv, 268, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/22872605/22872605)XYX"sv, 26, web_links_song_48030, culture_codes_song_48030},
@@ -37979,6 +39284,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(ストリーミングハート)XYX"sv, song_artists_song_48029, R"XYX(DECO*27, kous feat. Hatsune Miku)XYX"sv, 2014y/2/13, R"XYX(ストリーミングハート)XYX"sv, "Japanese"sv, std::nullopt, 129, 48029, std::chrono::seconds(179), picture_song_48029, 210000, std::nullopt, 210000, R"XYX(Streaming Heart)XYX"sv, names_song_48029, std::nullopt, 2014y/3/21, pvs_song_48029, "NicoNicoDouga, Youtube, SoundCloud"sv, 754, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/23144598/23144598)XYX"sv, 27, web_links_song_48029, culture_codes_song_48029},
   {R"XYX(ストリートライト)XYX"sv, song_artists_song_746114, R"XYX(Negi ShowerP feat. various)XYX"sv, 2025y/2/5, R"XYX(ストリートライト)XYX"sv, "Japanese"sv, std::nullopt, 6, 746114, std::chrono::seconds(196), picture_song_746114, std::nullopt, std::nullopt, std::nullopt, R"XYX(Street Light)XYX"sv, names_song_746114, std::nullopt, 2025y/2/5, pvs_song_746114, "NicoNicoDouga, Youtube, Piapro, Bilibili"sv, 48, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/NPOhKU5VTrQ/default.jpg)XYX"sv, 13, web_links_song_746114, culture_codes_song_746114},
   {R"XYX(ストロボナイツ, Strobe Nights)XYX"sv, song_artists_song_2442, R"XYX(kz, livetune feat. Hatsune Miku)XYX"sv, 2011y/11/4, R"XYX(ストロボナイツ)XYX"sv, "Japanese"sv, std::nullopt, 80, 2442, std::chrono::seconds(345), picture_song_2442, 130000, std::nullopt, 130000, R"XYX(Strobo Nights)XYX"sv, names_song_2442, std::nullopt, 2007y/11/30, pvs_song_2442, "NicoNicoDouga, Youtube"sv, 390, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/l62uUZqz0Z8/default.jpg)XYX"sv, 30, web_links_song_2442, culture_codes_song_2442},
+  {R"XYX(サマーアイドル)XYX"sv, song_artists_song_15394, R"XYX(OSTER project feat. Hatsune Miku, Kagamine Rin)XYX"sv, 2012y/8/8, R"XYX(サマーアイドル)XYX"sv, "Japanese"sv, std::nullopt, 63, 15394, std::chrono::seconds(256), picture_song_15394, 180000, std::nullopt, 180000, R"XYX(Summer Idol)XYX"sv, names_song_15394, std::nullopt, 2012y/8/8, pvs_song_15394, "NicoNicoDouga, Youtube"sv, 334, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/kY6Xe4Au_sI/default.jpg)XYX"sv, 16, web_links_song_15394, culture_codes_song_15394},
   {R"XYX(夕暮れノスタルジック -remix-, Yuugure Nostalgic -remix-, twilight nostalgia -remix-)XYX"sv, song_artists_song_41600, R"XYX(guriplus feat. Hatsune Miku)XYX"sv, 2013y/10/9, R"XYX(夕暮れノスタルジック -remix-)XYX"sv, "Japanese"sv, std::nullopt, 6, 41600, std::chrono::seconds(244), picture_song_41600, std::nullopt, std::nullopt, std::nullopt, R"XYX(Sunset Nostalgic -remix-)XYX"sv, names_song_41600, 208260, 2008y/1/12, pvs_song_41600, "NicoNicoDouga, Youtube, Piapro"sv, 15, "Remix"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/2013633/2013633)XYX"sv, 17, web_links_song_41600, culture_codes_song_41600},
   {R"XYX(スーパーハイパーマスターファイヤーサンダーフリーザーアルテママダンテホーリースターバーストストリームブラックマジックダークメシアイカリャクゼンシュウチュウビッグバンアルティメットアタック)XYX"sv, song_artists_song_316650, R"XYX(Emasaki feat. Hatsune Miku)XYX"sv, 2021y/2/22, R"XYX(スーパーハイパーマスターファイヤーサンダーフリーザーアルテママダンテホーリースターバーストストリームブラックマジックダークメシアイカリャクゼンシュウチュウビッグバンアルティメットアタック)XYX"sv, "Japanese"sv, std::nullopt, 1, 316650, std::chrono::seconds(189), picture_song_316650, std::nullopt, std::nullopt, std::nullopt, R"XYX(Super Hyper Master Fire Thunder Freezer Ultima Madante Holy Star Burst Stream Black Magic Dark Messiah Ikaryaku Zenshuuchuu Big Bang Ultimate Attack)XYX"sv, names_song_316650, std::nullopt, 2021y/2/20, pvs_song_316650, "NicoNicoDouga, Youtube"sv, 7, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/38305432/38305432.77839273)XYX"sv, 5, web_links_song_316650, culture_codes_song_316650},
   {std::nullopt, song_artists_song_580445, R"XYX(Mellowcle feat. Kagamine Len)XYX"sv, 2024y/1/30, R"XYX(SUPERHERO)XYX"sv, "English"sv, std::nullopt, 17, 580445, std::chrono::seconds(211), picture_song_580445, std::nullopt, std::nullopt, std::nullopt, R"XYX(SUPERHERO)XYX"sv, names_song_580445, std::nullopt, 2024y/1/30, pvs_song_580445, "NicoNicoDouga, Youtube, Piapro"sv, 135, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/EWGe3KRc144/default.jpg)XYX"sv, 15, web_links_song_580445, culture_codes_song_580445},
@@ -38048,6 +39354,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(あったかいと, Attakaito, 따뜻하니까)XYX"sv, song_artists_song_107188, R"XYX(halyosy feat. KAITO V3 (Straight))XYX"sv, 2015y/11/24, R"XYX(あったかいと)XYX"sv, "Japanese"sv, std::nullopt, 28, 107188, std::chrono::seconds(243), picture_song_107188, std::nullopt, std::nullopt, std::nullopt, R"XYX(Warm Kaito)XYX"sv, names_song_107188, std::nullopt, 2016y/1/20, pvs_song_107188, "NicoNicoDouga, Youtube"sv, 206, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/28212412/28212412)XYX"sv, 22, web_links_song_107188, culture_codes_song_107188},
   {R"XYX(ウィークエンダーガール)XYX"sv, song_artists_song_15047, R"XYX(HachioujiP, kz feat. Hatsune Miku)XYX"sv, 2012y/8/2, R"XYX(Weekender Girl)XYX"sv, "English"sv, std::nullopt, 109, 15047, std::chrono::seconds(212), picture_song_15047, 132000, std::nullopt, 132000, R"XYX(Weekender Girl)XYX"sv, names_song_15047, std::nullopt, 2012y/8/23, pvs_song_15047, "NicoNicoDouga, Youtube"sv, 656, "Original"sv, "Approved"sv, R"XYX(https://i.ytimg.com/vi/06d8SwcSm_Q/default.jpg)XYX"sv, 27, web_links_song_15047, culture_codes_song_15047},
   {R"XYX(抜錨, Batsubyou, Setting Sail, Anchor, 발묘)XYX"sv, song_artists_song_173702, R"XYX(Nanahoshi Orchestra feat. Megurine Luka V4X (Hard))XYX"sv, 2017y/11/5, R"XYX(抜錨)XYX"sv, "Japanese"sv, std::nullopt, 48, 173702, std::chrono::seconds(204), picture_song_173702, std::nullopt, std::nullopt, std::nullopt, R"XYX(weigh anchor)XYX"sv, names_song_173702, std::nullopt, 2017y/11/12, pvs_song_173702, "NicoNicoDouga, Youtube"sv, 268, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/33360604/33360604)XYX"sv, 25, web_links_song_173702, culture_codes_song_173702},
+  {R"XYX(どういうことなの！？, Dou Iu Koto na no!?)XYX"sv, song_artists_song_3386, R"XYX(KuchibashiP feat. Hatsune Miku)XYX"sv, 2011y/11/12, R"XYX(どういうことなの！？)XYX"sv, "Japanese"sv, std::nullopt, 73, 3386, std::chrono::seconds(241), picture_song_3386, 172000, std::nullopt, 172000, R"XYX(What do you mean!?)XYX"sv, names_song_3386, std::nullopt, 2011y/1/13, pvs_song_3386, "NicoNicoDouga, Youtube"sv, 384, "Original"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/13299882/13299882)XYX"sv, 18, web_links_song_3386, culture_codes_song_3386},
   {R"XYX(ミライどんなだろう, Mirai Donna Darou, Miraidon Na Darou, I Wonder What the Future's Like, 미래는 어떨까)XYX"sv, song_artists_song_536349, R"XYX(Mitchie M feat. Hatsune Miku V4X (Original))XYX"sv, 2023y/10/13, R"XYX(ミライどんなだろう)XYX"sv, "Japanese"sv, std::nullopt, 35, 536349, std::chrono::seconds(215), picture_song_536349, 178000, std::nullopt, 178000, R"XYX(What Kind of Future)XYX"sv, names_song_536349, std::nullopt, 2023y/10/13, pvs_song_536349, "NicoNicoDouga, Youtube"sv, 217, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/EG05Sm68z4s/default.jpg)XYX"sv, 24, web_links_song_536349, culture_codes_song_536349},
   {R"XYX(初めての恋が終わる時, Hajimete no Koi ga Owaru Toki, 첫사랑이 끝날 때, When the First Love Ends)XYX"sv, song_artists_song_1327, R"XYX(ryo feat. Hatsune Miku)XYX"sv, 2011y/11/1, R"XYX(初めての恋が終わる時)XYX"sv, "Japanese"sv, std::nullopt, 142, 1327, std::chrono::seconds(322), picture_song_1327, 180000, std::nullopt, 100000, R"XYX(When First Love Ends)XYX"sv, names_song_1327, std::nullopt, 2008y/12/12, pvs_song_1327, "NicoNicoDouga, Youtube"sv, 738, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/5524166/5524166)XYX"sv, 36, web_links_song_1327, culture_codes_song_1327},
   {R"XYX(カガリビト, Kagaribito, Whipstitching Person)XYX"sv, song_artists_song_298, R"XYX(millstones feat. Hatsune Miku Append (Dark), Hatsune Miku Append (Soft), Hatsune Miku Append (Solid))XYX"sv, 2011y/5/15, R"XYX(カガリビト)XYX"sv, "Japanese"sv, std::nullopt, 23, 298, std::chrono::seconds(310), picture_song_298, 110000, std::nullopt, 110000, R"XYX(Repairers of the Deceptive World)XYX"sv, names_song_298, std::nullopt, 2011y/1/16, pvs_song_298, "NicoNicoDouga, Youtube"sv, 119, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/UmeAKdiiYTc/default.jpg)XYX"sv, 19, web_links_song_298, culture_codes_song_298},
@@ -38060,6 +39367,7 @@ export constexpr std::array<song, 527> songs {{
   {R"XYX(ひゅ〜どろどろ, Hyu~dorodoro, Huh, Muddled, Woo~oosh, Oozing, Spooky winds, Hyuu~Dorodoro, 휴~ 두두두둥)XYX"sv, song_artists_song_584100, R"XYX(Kuriyama Yuri, Koh Hashikura feat. Hatsune Miku V4X (Solid), MEIKO V3 (Power))XYX"sv, 2024y/2/9, R"XYX(ひゅ〜どろどろ)XYX"sv, "Japanese"sv, std::nullopt, 43, 584100, std::chrono::seconds(177), picture_song_584100, std::nullopt, std::nullopt, std::nullopt, R"XYX(Awoo)XYX"sv, names_song_584100, std::nullopt, 2024y/2/9, pvs_song_584100, "NicoNicoDouga, Youtube"sv, 261, "Original"sv, "Finished"sv, R"XYX(https://i.ytimg.com/vi/8D_7-jNaErg/default.jpg)XYX"sv, 35, web_links_song_584100, culture_codes_song_584100},
   {R"XYX(ワールドイズマイン, The World Is Mine)XYX"sv, song_artists_song_1326, R"XYX(ryo, supercell feat. Hatsune Miku)XYX"sv, 2011y/11/1, R"XYX(ワールドイズマイン)XYX"sv, "Japanese"sv, std::nullopt, 313, 1326, std::chrono::seconds(255), picture_song_1326, 165000, std::nullopt, 165000, R"XYX(World is Mine)XYX"sv, names_song_1326, std::nullopt, 2008y/5/31, pvs_song_1326, "NicoNicoDouga, Youtube"sv, 1653, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/3504435/3504435)XYX"sv, 27, web_links_song_1326, culture_codes_song_1326},
   {R"XYX(ワールズエンド・ダンスホール, 世末舞厅, 世界末日舞厅, 월즈 엔드 댄스홀)XYX"sv, song_artists_song_20, R"XYX(wowaka feat. Hatsune Miku, Megurine Luka)XYX"sv, 2011y/1/12, R"XYX(ワールズエンド・ダンスホール)XYX"sv, "Japanese"sv, std::nullopt, 410, 20, std::chrono::seconds(218), picture_song_20, 171000, std::nullopt, 171000, R"XYX(World's End Dancehall)XYX"sv, names_song_20, std::nullopt, 2010y/5/18, pvs_song_20, "NicoNicoDouga, Youtube"sv, 1948, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/10759623/10759623)XYX"sv, 33, web_links_song_20, culture_codes_song_20},
+  {std::nullopt, song_artists_song_16560, R"XYX(HACHI feat. Hatsune Miku)XYX"sv, 2012y/9/24, R"XYX(THE WORLD END UMBRELLA)XYX"sv, "English"sv, std::nullopt, 22, 16560, std::chrono::seconds(314), picture_song_16560, std::nullopt, std::nullopt, std::nullopt, R"XYX(THE WORLD END UMBRELLA)XYX"sv, names_song_16560, std::nullopt, 2009y/6/25, pvs_song_16560, "NicoNicoDouga, Youtube, Piapro"sv, 132, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/7441402/7441402)XYX"sv, 11, web_links_song_16560, culture_codes_song_16560},
   {std::nullopt, song_artists_song_2905, R"XYX(kz feat. Hatsune Miku)XYX"sv, 2011y/11/6, R"XYX(Yellow)XYX"sv, "English"sv, std::nullopt, 104, 2905, std::chrono::seconds(200), picture_song_2905, 127000, std::nullopt, 127000, R"XYX(Yellow)XYX"sv, names_song_2905, std::nullopt, 2010y/7/2, pvs_song_2905, "NicoNicoDouga, Youtube"sv, 540, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/11251947/11251947)XYX"sv, 31, web_links_song_2905, culture_codes_song_2905},
   {R"XYX(牛乳飲め！, Gyuuyuu Nome!)XYX"sv, song_artists_song_8790, R"XYX(DeadballP feat. Hatsune Miku)XYX"sv, 2012y/1/22, R"XYX(牛乳飲め！)XYX"sv, "Japanese"sv, std::nullopt, 13, 8790, std::chrono::seconds(238), picture_song_8790, 162000, std::nullopt, 162000, R"XYX(You Should Drink Milk!)XYX"sv, names_song_8790, 470132, 2008y/1/25, pvs_song_8790, "NicoNicoDouga, Youtube, Piapro"sv, 89, "Remaster"sv, "Finished"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/2132271/2132271)XYX"sv, 19, web_links_song_8790, culture_codes_song_8790},
   {R"XYX(少女A, Shoujo A, Young Girl A)XYX"sv, song_artists_song_42111, R"XYX(siinamota feat. Kagamine Rin Append (Power))XYX"sv, 2013y/10/17, R"XYX(少女A)XYX"sv, "Japanese"sv, std::nullopt, 209, 42111, std::chrono::seconds(242), picture_song_42111, 130000, std::nullopt, 130000, R"XYX(Girl A)XYX"sv, names_song_42111, std::nullopt, 2013y/10/17, pvs_song_42111, "NicoNicoDouga, Youtube"sv, 982, "Original"sv, "Approved"sv, R"XYX(https://nicovideo.cdn.nimg.jp/thumbnails/22061366/22061366)XYX"sv, 23, web_links_song_42111, culture_codes_song_42111},
