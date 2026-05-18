@@ -120,6 +120,24 @@ int main()
         expect(not(lookup_song("this song does not exist yet").has_value()));
     };
 
+    "get_autocomplete_text_for_song"_test = [] {
+        constexpr std::string_view LONG_NAME = "Super Hyper Master Fire Thunder Freezer Ultima Madante Holy Star Burst Stream Black Magic Dark Messiah Ikaryaku Zenshuuchuu Big Bang Ultimate Attack";
+
+        /* Long name truncated to fit within 100-char API limit */
+        Song long_name{std::nullopt, std::nullopt, LONG_NAME, Miku, "wowaka"};
+        expect(eq(get_autocomplete_text_for_song(long_name),
+                  "Super Hyper Master Fire Thunder Freezer Ultima Madante Holy Star Burst Stream Black Mag... by wowaka"sv));
+
+        /* Long producer truncated; short name fits unmodified */
+        Song long_prod{std::nullopt, std::nullopt, "Melt", Miku, "Some Very Long Producer Name That Exceeds Forty Characters"};
+        expect(eq(get_autocomplete_text_for_song(long_prod),
+                  "Melt by Some Very Long Producer Name That Exc..."sv));
+
+        /* Short name and producer: no truncation */
+        Song short_both{std::nullopt, std::nullopt, "Melt", Miku, "ryo"};
+        expect(eq(get_autocomplete_text_for_song(short_both), "Melt by ryo"sv));
+    };
+
     "match"_test = [] {
         auto songs = match_songs("senbon");
 

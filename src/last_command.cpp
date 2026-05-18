@@ -323,7 +323,7 @@ last_command::on_autocomplete_impl(const dpp::autocomplete_t& event)
 
             auto resp = dpp::interaction_response(dpp::ir_autocomplete_reply);
             for (const auto& song : matches | std::views::take(AUTOCOMPLETE_MAX_CHOICES) ) {
-              auto n = std::format("{} by {}", std::get<1>(song).name, std::get<1>(song).producer);
+              auto n = get_autocomplete_text_for_song(std::get<1>(song));
               auto c = std::format("{}{}", INDEX_PREFIX, std::get<0>(song));
               resp.add_autocomplete_choice(dpp::command_option_choice(n, c));
             }

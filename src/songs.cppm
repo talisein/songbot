@@ -1133,6 +1133,26 @@ get_random_songname(auto &&rng_engine)
     return std::format("{} by {}", song.name, song.producer);
 }
 
+export constexpr std::size_t AUTOCOMPLETE_CHOICE_NAME_MAX_LENGTH = 100;
+
+export [[nodiscard]]
+std::string
+get_autocomplete_text_for_song(const Song& song)
+{
+    constexpr std::size_t BY_SEP_LEN = 4; /* " by " */
+    constexpr std::size_t MAX_PRODUCER = 40;
+    constexpr std::size_t ELLIPSIS_LEN = 3;
+
+    auto prod = song.producer.size() > MAX_PRODUCER
+        ? std::string(song.producer.substr(0, MAX_PRODUCER - ELLIPSIS_LEN)) + "..."
+        : std::string(song.producer);
+    const auto name_budget = AUTOCOMPLETE_CHOICE_NAME_MAX_LENGTH - BY_SEP_LEN - prod.size();
+    auto name = song.name.size() > name_budget
+        ? std::string(song.name.substr(0, name_budget - ELLIPSIS_LEN)) + "..."
+        : std::string(song.name);
+    return std::format("{} by {}", name, prod);
+}
+
 struct spreadsheet
 {
     std::string_view jp_name;
