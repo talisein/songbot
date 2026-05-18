@@ -3,6 +3,7 @@
 #include <peel/Gio/Gio.h>
 #include <peel/GLib/GLib.h>
 #include <peel/Gdk/Paintable.h>
+#include <peel/Gdk/Clipboard.h>
 #include <peel/GObject/Binding.h>
 #include <peel/Soup/Session.h>
 #include <peel/Soup/Message.h>
@@ -77,9 +78,7 @@ public:
     void set_paintable(Gdk::Paintable *p)
     {
         if (p) {
-            data->paintable = RefPtr<Gdk::Paintable>::adopt_ref(
-                reinterpret_cast<Gdk::Paintable*>(
-                    g_object_ref(reinterpret_cast<::GObject*>(p))));
+            data->paintable = RefPtr<Gdk::Paintable>(p);
         } else {
             data->paintable = {};
         }
@@ -234,9 +233,8 @@ class Application final : public Adw::Application
             int sid = song->get_id();
 
             {
-                char *escaped = g_markup_escape_text(song->get_name().c_str(), -1);
-                auto markup = std::format("<a href=\"https://vocadb.net/S/{}\">{}</a>", sid, escaped);
-                g_free(escaped);
+                auto escaped = GLib::markup_escape_text(song->get_name().c_str(), -1);
+                auto markup = std::format("<a href=\"https://vocadb.net/S/{}\">{}</a>", sid, escaped.c_str());
                 name_label->set_markup(markup.c_str());
             }
             artist_label->set_label(song->get_artist().c_str());
@@ -252,13 +250,11 @@ class Application final : public Adw::Application
                 GObject::BindingFlags::SYNC_CREATE);
             binds->id_conn = id_btn->connect_clicked([sid](Gtk::Button *) {
                 auto text = std::to_string(sid);
-                gdk_clipboard_set_text(
-                    gdk_display_get_clipboard(gdk_display_get_default()), text.c_str());
+                Gdk::Display::get_default()->get_clipboard()->set_text(text.c_str());
             });
             std::string nt = song->copy_names_text();
             binds->names_conn = names_btn->connect_clicked([nt = std::move(nt)](Gtk::Button *) {
-                gdk_clipboard_set_text(
-                    gdk_display_get_clipboard(gdk_display_get_default()), nt.c_str());
+                Gdk::Display::get_default()->get_clipboard()->set_text(nt.c_str());
             });
             item->set_data("binds", binds, [](gpointer b) { delete static_cast<Bindings*>(b); });
         });
@@ -314,12 +310,11 @@ class Application final : public Adw::Application
         results->remove_all();
         status_label->set_label("Searching\xe2\x80\xa6");
 
-        char *escaped = g_uri_escape_string(text, nullptr, true);
+        auto escaped = GLib::Uri::escape_string(text, nullptr, true);
         auto url = std::format(
             "https://vocadb.net/api/songs?query={}&maxResults=20"
             "&fields=Artists,Names,MainPicture&nameMatchMode=Partial&sort=RatingScore&lang=English",
-            escaped);
-        g_free(escaped);
+            escaped.c_str());
 
         auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
         soup_session->send_and_read_async(
@@ -504,18 +499,15 @@ class Application final : public Adw::Application
             return;
         }
 
-        GError *err = nullptr;
-        GdkTexture *texture = gdk_texture_new_from_bytes(
-            reinterpret_cast<GBytes*>(static_cast<GLib::Bytes*>(bytes)), &err);
+        UniquePtr<GLib::Error> err;
+        auto texture = Gdk::Texture::create_from_bytes(bytes, &err);
         if (err) {
             std::println("thumb texture error: {}", err->message);
-            g_error_free(err);
             return;
         }
         if (!texture) return;
 
-        item->set_paintable(reinterpret_cast<Gdk::Paintable*>(texture));
-        g_object_unref(texture);
+        item->set_paintable(texture->cast<Gdk::Paintable>());
     }
 
 public:
