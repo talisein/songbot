@@ -675,10 +675,30 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "I'm Crazy For You", Miku, "SABA.U1", 114295 },
   {"猫なキミ", "Neko na Kimi", "The Cat-like You", Miku, "774P", 114296 },
   {"時にはsoftに、時にはdarkに", "Toki ni wa Soft ni, Toki ni wa Dark ni", "Sometimes Soft, Sometimes Dark", Miku, "NAV", 114297 },
+  /* Diva extend */
   {"えでぃっともーどのうた", "Edit Mode no Uta", "Song of Edit Mode", duet(Miku,Rin,Len,Luka,MEIKO,KAITO), "LamazeP", 41598 },
   {nullopt, nullopt, "Start of Rainbow ～first step～", Miku, "Keiichi Sugiyama", 343187 },
   {"藍色の日、空翔ける ～second flight～", "Ai-iro no Hi, Sora Kakeru ～second flight～", "The Date of Indigo, Fly Sky ～second flight～", Miku, "Keiichi Sugiyama", 478422 },
   {"恋の祈り ～extend your wave～", "Koi no inori ～extend your wave～", "Prayer of Love ～extend your wave～", Miku, "Keiichi Sugiyama", 66424 },
+  /* Diva f */
+  {nullopt, nullopt, "DYE", Luka, "AVTechNO!", 2607 },
+  {"サマーアイドル", nullopt, "Summer Idol", duet(Miku,Rin), "OSTER project", 15394 },
+  {nullopt, nullopt, "ACUTE", duet(Miku,Luka,KAITO), "KurousaP", 552 },
+  {"どういうことなの！？", "Dou Iu Koto na no!?", "What Do You Mean!?", Miku, "KuchibashiP", 3386 },
+  {nullopt, nullopt, "Stay with me", MEIKO, "shu-t", 16558 },
+  {"ハイハハイニ", "Hai wa Hai ni", "Ashes to Ashes", KAITO, "tennen", 5800 },
+  {nullopt, nullopt, "WORLD'S END UMBRELLA", Miku, "HACHI", 16560 },
+  {"モノクロ∞ブルースカイ", "Monochrome∞Blue Sky", "Monochrome∞Blue Sky", Miku, "Noboru", 2651 },
+  {nullopt, "MEGANE", "GLASSES", Luka, "Ultra-Noob", 12056 },
+  {"鏡音八八花合戦", "Kagamine Hachihachi Hana no Kassen", "Kagamine HachiHachi Flower Fight", duet(Len,Rin), "Mogiavelli", 13961 },
+  {"ネトゲ廃人シュプレヒコール", "Netgame Haijin Sprechchor", "Online Game Addicts Sprechchor", Miku, "Satsuki ga Tenkomori", 12443 },
+  {"天樂", "Tengaku", "Music of Heaven", Rin, "Yuuyu", 3269 },
+  {"神曲", "Kamikyoku", "God-Tier Tune", Miku, "onewP, PinocchioP", 3389 },
+  {"ネガポジ＊コンティニューズ", "Negaposi*Continues", "Negaposi*Continues", Miku, "sasakure.UK", 16580 },
+  {nullopt, nullopt, "Sadistic.Music∞Factory", Miku, "cosMo@BousouP", 16061 },
+  {"夢の続き", "Yume no Tsuzuki", "Continuation of Dreams", duet(Miku,Rin,Len,Luka), "Dixie Flatline", 16581 },
+  {"夢喰い白黒バク", "Yumekui Shirokuro Baku", "Dream-Eating Monochrome Baku", Len, "Nem", 3636 },
+  {"リンちゃんなう！", "Rin-chan Now!", "Rin-chan Now!", duet(Luka,Miku,Rin), "OwataP", 8678 },
   //meow
     };
 
@@ -799,6 +819,8 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "Unrequited Love Samba", "One-Sided Love Samba"},
             { "How'd It Get To Be Like This?", "How Did This Happen"},
             { "The Whimsy Girl", "The Cat-like You"},
+            { "The MMORPG Addict's Anthem", "Online Game Addicts Sprechchor" },
+            { "Sadistic Music Factory", "Sadistic.Music∞Factory" },
     };
     return res;
 }
