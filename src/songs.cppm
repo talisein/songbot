@@ -664,6 +664,17 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {nullopt, nullopt, "Absolunote", Miku, "Lemm", 8971 },
   {"ルシッドドリーミング", "Lucid Dreaming", "Lucid Dreaming", Miku, "naiveP", 5027 },
   {"アウト オブ エデン", nullopt, "Out Of Eden", Len, "Kouhei", 13921 },
+  {nullopt, nullopt, "GO MY WAY!!", Miku, "Otomania", 251108 },
+  {nullopt, nullopt, "relations", duet(Rin,Luka), "Koji Nakagawa, HaroP", 113488 },
+  {nullopt, nullopt, "Endless Nightmare", duet(Luka,Miku), "EM, WEB-MIX", 106642 },
+  {nullopt, nullopt, "Cardioid", Miku, "DATEKEN", 2290 },
+  {nullopt, nullopt, "EXtend", Miku, "FB777", 26754 },
+  {nullopt, nullopt, "Hometown", MEIKO, "SuzukazeP", 10221 },
+  {"なんで? ", "Nande?", "Why?", Len, "rerulili", 5725 },
+  {nullopt, nullopt, "Hallo World", Rin, "DuronII", 114293 },
+  {nullopt, nullopt, "I'm Crazy For You", Miku, "SABA.U1", 114295 },
+  {"猫なキミ", "Neko na Kimi", "The Cat-like You", Miku, "774P", 114296 },
+  {"時にはsoftに、時にはdarkに", "Toki ni wa Soft ni, Toki ni wa Dark ni", "Sometimes Soft, Sometimes Dark", Miku, "NAV", 114297 },
   //meow
     };
 
@@ -783,6 +794,7 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "Salome", "Salomé"},
             { "Unrequited Love Samba", "One-Sided Love Samba"},
             { "How'd It Get To Be Like This?", "How Did This Happen"},
+            { "The Whimsy Girl", "The Cat-like You"},
     };
     return res;
 }
