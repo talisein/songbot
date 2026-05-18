@@ -5,9 +5,12 @@
 #include <peel/Gdk/Paintable.h>
 #include <peel/Gdk/Clipboard.h>
 #include <peel/Pango/EllipsizeMode.h>
+#include <peel/Gly/Gly.h>
+#include <peel/GlyGtk4/GlyGtk4.h>
 #include <peel/GObject/Binding.h>
 #include <peel/Soup/Session.h>
 #include <peel/Soup/Message.h>
+#include <peel/Soup/Status.h>
 #include <peel/Gio/Cancellable.h>
 #include <peel/Gio/AsyncResult.h>
 #include <peel/Gtk/ShortcutController.h>
@@ -478,12 +481,12 @@ class Application final : public Adw::Application
         auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
         soup_session->send_and_read_async(
             msg, G_PRIORITY_LOW, cancellable,
-            [this, item = std::move(item)](GObject::Object *src, Gio::AsyncResult *res) mutable {
-                on_thumb_response(std::move(item), src, res);
+            [this, item = std::move(item), msg](GObject::Object *src, Gio::AsyncResult *res) mutable {
+                on_thumb_response(std::move(item), msg, src, res);
             });
     }
 
-    void on_thumb_response(RefPtr<SongItem> item, GObject::Object *src, Gio::AsyncResult *res)
+    void on_thumb_response(RefPtr<SongItem> item, RefPtr<Soup::Message> msg, GObject::Object *src, Gio::AsyncResult *res)
     {
         UniquePtr<GLib::Error> error;
         auto bytes = static_cast<Soup::Session*>(src)->send_and_read_finish(res, &error);
@@ -491,15 +494,43 @@ class Application final : public Adw::Application
             std::println("thumb error: {}", error->message);
             return;
         }
+        if (msg->get_status() != Soup::Status::OK)
+            return;
 
-        UniquePtr<GLib::Error> err;
-        auto texture = Gdk::Texture::create_from_bytes(bytes, &err);
-        if (err) {
-            std::println("thumb texture error: {}", err->message);
+        auto loader = Gly::Loader::create_for_bytes(bytes);
+        loader->load_async(cancellable,
+            [this, item = std::move(item), loader](GObject::Object *src, Gio::AsyncResult *res) mutable {
+                on_gly_load(std::move(item), src, res);
+            });
+    }
+
+    void on_gly_load(RefPtr<SongItem> item, GObject::Object *src, Gio::AsyncResult *res)
+    {
+        UniquePtr<GLib::Error> error;
+        auto image = static_cast<Gly::Loader*>(src)->load_finish(res, &error);
+        if (error) {
+            std::println("thumb gly load error: {}", error->message);
             return;
         }
-        if (!texture) return;
+        if (!image) return;
 
+        image->next_frame_async(cancellable,
+            [this, item = std::move(item), image](GObject::Object *src, Gio::AsyncResult *res) mutable {
+                on_gly_frame(std::move(item), src, res);
+            });
+    }
+
+    void on_gly_frame(RefPtr<SongItem> item, GObject::Object *src, Gio::AsyncResult *res)
+    {
+        UniquePtr<GLib::Error> error;
+        auto frame = static_cast<Gly::Image*>(src)->next_frame_finish(res, &error);
+        if (error) {
+            std::println("thumb gly frame error: {}", error->message);
+            return;
+        }
+        if (!frame) return;
+
+        auto texture = GlyGtk4::frame_get_texture(frame);
         item->set_paintable(texture->cast<Gdk::Paintable>());
     }
 
@@ -522,6 +553,7 @@ PEEL_CLASS_IMPL(Application, "SongSearcherApplication", Adw::Application)
 
 int main(int argc, char *argv[])
 {
+    GLib::setenv("RUST_LOG", "warn", false);
     RefPtr<Application> app = Application::create();
     return app->run(argc, argv);
 }
