@@ -28,18 +28,8 @@
 using namespace peel;
 
 struct SongData {
-    std::string name;
-    std::string artist;
-    std::string vocalists;
-    std::string song_type;
-    std::string publish_date;
-    std::string duration;
+    nlohmann::json json;
     RefPtr<Gdk::Paintable> paintable;
-    int id = 0;
-    std::string japanese_name;
-    std::string romaji_name;
-    std::string english_name;
-    std::string thumb_url;
 };
 
 class SongItem final : public GObject::Object
@@ -140,10 +130,111 @@ class SongItem final : public GObject::Object
 public:
     static RefPtr<SongItem> create(const nlohmann::json &song)
     {
-        int id = song.value("id", 0);
+        auto item = Object::create<SongItem>();
+        item->data->json = song;
+        return item;
+    }
 
+    peel::String get_name() const
+    {
+        std::string english_name, romaji_name;
+        if (auto it = data->json.find("names"); it != data->json.end()) {
+            for (const auto &n : *it) {
+                auto lang = n.value("language", "");
+                if (lang == "English" && english_name.empty()) english_name = n.value("value", "");
+                else if (lang == "Romaji" && romaji_name.empty()) romaji_name = n.value("value", "");
+            }
+        }
+        if (!english_name.empty()) return peel::String(english_name.c_str());
+        if (!romaji_name.empty())  return peel::String(romaji_name.c_str());
+        return peel::String(data->json.value("name", "").c_str());
+    }
+
+    peel::String get_artist()    const { return peel::String(producer_str(data->json).c_str()); }
+    peel::String get_vocalists() const { return peel::String(vocalist_str(data->json).c_str()); }
+    peel::String get_song_type() const { return peel::String(data->json.value("songType", "").c_str()); }
+
+    peel::String get_publish_date() const
+    {
+        if (data->json.contains("publishDate") && !data->json["publishDate"].is_null()) {
+            auto raw = data->json["publishDate"].get<std::string>();
+            if (raw.size() >= 10) return peel::String(raw.substr(0, 10).c_str());
+        }
+        return peel::String("");
+    }
+
+    peel::String get_duration() const
+    {
+        if (int secs = data->json.value("lengthSeconds", 0); secs > 0) {
+            auto s = std::format("{}:{:02}", secs / 60, secs % 60);
+            return peel::String(s.c_str());
+        }
+        return peel::String("");
+    }
+
+    int get_id() const { return data->json.value("id", 0); }
+
+    peel::String get_japanese_name() const
+    {
+        if (auto it = data->json.find("names"); it != data->json.end())
+            for (const auto &n : *it)
+                if (n.value("language", "") == "Japanese")
+                    return peel::String(n.value("value", "").c_str());
+        return peel::String("");
+    }
+
+    peel::String get_romaji_name() const
+    {
+        if (auto it = data->json.find("names"); it != data->json.end())
+            for (const auto &n : *it)
+                if (n.value("language", "") == "Romaji")
+                    return peel::String(n.value("value", "").c_str());
+        return peel::String("");
+    }
+
+    peel::String get_english_name() const
+    {
+        if (auto it = data->json.find("names"); it != data->json.end())
+            for (const auto &n : *it)
+                if (n.value("language", "") == "English")
+                    return peel::String(n.value("value", "").c_str());
+        return peel::String("");
+    }
+
+    peel::String get_thumb_url() const
+    {
+        if (data->json.contains("mainPicture") && !data->json["mainPicture"].is_null())
+            return peel::String(data->json["mainPicture"].value("urlThumb", "").c_str());
+        return peel::String("");
+    }
+
+    Gdk::Paintable *get_paintable() const { return data->paintable; }
+
+    void set_paintable(Gdk::Paintable *p)
+    {
+        if (p) data->paintable = RefPtr<Gdk::Paintable>(p);
+        else   data->paintable = {};
+        notify(prop_paintable());
+    }
+
+    PEEL_PROPERTY(const char *, name,          "name")
+    PEEL_PROPERTY(const char *, artist,        "artist")
+    PEEL_PROPERTY(const char *, vocalists,     "vocalists")
+    PEEL_PROPERTY(const char *, song_type,     "song-type")
+    PEEL_PROPERTY(const char *, publish_date,  "publish-date")
+    PEEL_PROPERTY(const char *, duration,      "duration")
+    PEEL_PROPERTY(int,          id,            "id")
+    PEEL_PROPERTY(const char *, japanese_name, "japanese-name")
+    PEEL_PROPERTY(const char *, romaji_name,   "romaji-name")
+    PEEL_PROPERTY(const char *, english_name,  "english-name")
+    PEEL_PROPERTY(const char *, thumb_url,     "thumb-url")
+    PEEL_PROPERTY(Gdk::Paintable, paintable,   "paintable")
+
+    std::string copy_names_text() const
+    {
+        const auto &j = data->json;
         std::string japanese_name, romaji_name, english_name;
-        if (auto it = song.find("names"); it != song.end()) {
+        if (auto it = j.find("names"); it != j.end()) {
             for (const auto &n : *it) {
                 auto lang = n.value("language", "");
                 if (lang == "Japanese")     japanese_name = n.value("value", "");
@@ -151,74 +242,31 @@ public:
                 else if (lang == "English") english_name  = n.value("value", "");
             }
         }
-        std::string display_name = english_name.empty()
-            ? song.value("name", "") : english_name;
-
-        std::string publish_date;
-        if (song.contains("publishDate") && !song["publishDate"].is_null()) {
-            auto raw = song["publishDate"].get<std::string>();
-            if (raw.size() >= 10) publish_date = raw.substr(0, 10);
-        }
-
-        std::string duration;
-        if (int secs = song.value("lengthSeconds", 0); secs > 0)
-            duration = std::format("{}:{:02}", secs / 60, secs % 60);
-
-        auto item = Object::create<SongItem>();
-        item->data->name          = std::move(display_name);
-        item->data->artist        = producer_str(song);
-        item->data->vocalists     = vocalist_str(song);
-        item->data->song_type     = song.value("songType", "");
-        item->data->publish_date  = std::move(publish_date);
-        item->data->duration      = std::move(duration);
-        item->data->id            = id;
-        item->data->japanese_name = std::move(japanese_name);
-        item->data->romaji_name   = std::move(romaji_name);
-        item->data->english_name  = std::move(english_name);
-        if (song.contains("mainPicture") && !song["mainPicture"].is_null())
-            item->data->thumb_url = song["mainPicture"].value("urlThumb", "");
-        return item;
-    }
-
-    const std::string &get_name()         const { return data->name; }
-    const std::string &get_artist()       const { return data->artist; }
-    const std::string &get_vocalists()    const { return data->vocalists; }
-    const std::string &get_song_type()    const { return data->song_type; }
-    const std::string &get_publish_date() const { return data->publish_date; }
-    const std::string &get_duration()     const { return data->duration; }
-    const std::string &get_thumb_url()    const { return data->thumb_url; }
-    int get_id() const { return data->id; }
-
-    Gdk::Paintable *get_paintable() const { return data->paintable; }
-
-    void set_paintable(Gdk::Paintable *p)
-    {
-        if (p) {
-            data->paintable = RefPtr<Gdk::Paintable>(p);
-        } else {
-            data->paintable = {};
-        }
-        notify(prop_paintable());
-    }
-
-    PEEL_PROPERTY(Gdk::Paintable, paintable, "paintable")
-
-    std::string copy_names_text() const
-    {
         auto qfmt = [](const std::string &s) -> std::string {
             if (s.empty()) return "nullopt";
             return std::format("\"{}\"", s);
         };
-        const auto &vocal = data->vocalists.empty() ? "nullopt" : data->vocalists;
+        auto vocal = vocalist_str(j);
         return std::format("{{{}, {}, {}, {}, {}, {} }},",
-            qfmt(data->japanese_name), qfmt(data->romaji_name), qfmt(data->english_name),
-            vocal, qfmt(data->artist), data->id);
+            qfmt(japanese_name), qfmt(romaji_name), qfmt(english_name),
+            vocal.empty() ? "nullopt" : vocal, qfmt(producer_str(j)), j.value("id", 0));
     }
 
 private:
     template<typename F>
     static void define_properties(F &f)
     {
+        f.prop(prop_name(),          nullptr).get(&SongItem::get_name);
+        f.prop(prop_artist(),        nullptr).get(&SongItem::get_artist);
+        f.prop(prop_vocalists(),     nullptr).get(&SongItem::get_vocalists);
+        f.prop(prop_song_type(),     nullptr).get(&SongItem::get_song_type);
+        f.prop(prop_publish_date(),  nullptr).get(&SongItem::get_publish_date);
+        f.prop(prop_duration(),      nullptr).get(&SongItem::get_duration);
+        f.prop(prop_id(),            0, G_MAXINT, 0).get(&SongItem::get_id);
+        f.prop(prop_japanese_name(), nullptr).get(&SongItem::get_japanese_name);
+        f.prop(prop_romaji_name(),   nullptr).get(&SongItem::get_romaji_name);
+        f.prop(prop_english_name(),  nullptr).get(&SongItem::get_english_name);
+        f.prop(prop_thumb_url(),     nullptr).get(&SongItem::get_thumb_url);
         f.prop(prop_paintable())
          .get(&SongItem::get_paintable)
          .set(&SongItem::set_paintable);
@@ -272,6 +320,26 @@ class Application final : public Adw::Application
             RefPtr<GObject::Binding> paint_bind;
             ~ThumbBindings() { if (paint_bind) paint_bind->unbind(); }
         };
+        struct SongBindings {
+            RefPtr<GObject::Binding> name_bind;
+            RefPtr<GObject::Binding> artist_bind;
+            RefPtr<GObject::Binding> vocalist_bind;
+            ~SongBindings() {
+                if (name_bind)     name_bind->unbind();
+                if (artist_bind)   artist_bind->unbind();
+                if (vocalist_bind) vocalist_bind->unbind();
+            }
+        };
+        struct InfoBindings {
+            RefPtr<GObject::Binding> type_bind;
+            RefPtr<GObject::Binding> date_bind;
+            RefPtr<GObject::Binding> dur_bind;
+            ~InfoBindings() {
+                if (type_bind) type_bind->unbind();
+                if (date_bind) date_bind->unbind();
+                if (dur_bind)  dur_bind->unbind();
+            }
+        };
         struct ActionBindings {
             SignalConnection id_conn;
             SignalConnection names_conn;
@@ -310,13 +378,14 @@ class Application final : public Adw::Application
             auto *cell = obj->cast<Gtk::ColumnView::Cell>();
             auto name_label = Gtk::Label::create("");
             name_label->set_halign(Gtk::Align::START);
-            name_label->set_hexpand(true);
             name_label->set_ellipsize(Pango::EllipsizeMode::END);
+            name_label->set_use_markup(true);
             auto artist_label = Gtk::Label::create("");
             artist_label->set_halign(Gtk::Align::START);
             artist_label->set_ellipsize(Pango::EllipsizeMode::END);
             auto vocalist_label = Gtk::Label::create("");
             vocalist_label->set_halign(Gtk::Align::START);
+            vocalist_label->set_ellipsize(Pango::EllipsizeMode::END);
             auto vbox = Gtk::Box::create(Gtk::Orientation::VERTICAL, 2);
             vbox->set_valign(Gtk::Align::CENTER);
             vbox->append(std::move(name_label));
@@ -332,11 +401,30 @@ class Application final : public Adw::Application
             auto *artist_label   = name_label->get_next_sibling()->cast<Gtk::Label>();
             auto *vocalist_label = artist_label->get_next_sibling()->cast<Gtk::Label>();
             int sid = song->get_id();
-            auto escaped = GLib::markup_escape_text(song->get_name().c_str(), -1);
-            auto markup = std::format("<a href=\"https://vocadb.net/S/{}\">{}</a>", sid, escaped.c_str());
-            name_label->set_markup(markup.c_str());
-            artist_label->set_label(song->get_artist().c_str());
-            vocalist_label->set_label(song->get_vocalists().c_str());
+            auto *binds = new SongBindings{};
+            binds->name_bind = Object::bind_property(
+                song, SongItem::prop_name(),
+                name_label, Gtk::Label::prop_label(),
+                GObject::BindingFlags::SYNC_CREATE,
+                [sid](const char *name) -> peel::String {
+                    auto escaped = GLib::markup_escape_text(name, -1);
+                    return peel::String(std::format(
+                        "<a href=\"https://vocadb.net/S/{}\">{}</a>",
+                        sid, escaped.c_str()).c_str());
+                });
+            binds->artist_bind = Object::bind_property(
+                song, SongItem::prop_artist(),
+                artist_label, Gtk::Label::prop_label(),
+                GObject::BindingFlags::SYNC_CREATE);
+            binds->vocalist_bind = Object::bind_property(
+                song, SongItem::prop_vocalists(),
+                vocalist_label, Gtk::Label::prop_label(),
+                GObject::BindingFlags::SYNC_CREATE);
+            cell->set_data("binds", binds, [](gpointer b) { delete static_cast<SongBindings*>(b); });
+        });
+        song_factory->connect_unbind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            delete static_cast<SongBindings*>(cell->steal_data("binds"));
         });
         auto song_col = Gtk::ColumnView::Column::create("Song",
             std::move(song_factory).cast<Gtk::ListItemFactory>());
@@ -367,9 +455,24 @@ class Application final : public Adw::Application
             auto *type_label     = info_box->get_first_child()->cast<Gtk::Label>();
             auto *date_label     = type_label->get_next_sibling()->cast<Gtk::Label>();
             auto *duration_label = date_label->get_next_sibling()->cast<Gtk::Label>();
-            type_label->set_label(song->get_song_type().c_str());
-            date_label->set_label(song->get_publish_date().c_str());
-            duration_label->set_label(song->get_duration().c_str());
+            auto *binds = new InfoBindings{};
+            binds->type_bind = Object::bind_property(
+                song, SongItem::prop_song_type(),
+                type_label, Gtk::Label::prop_label(),
+                GObject::BindingFlags::SYNC_CREATE);
+            binds->date_bind = Object::bind_property(
+                song, SongItem::prop_publish_date(),
+                date_label, Gtk::Label::prop_label(),
+                GObject::BindingFlags::SYNC_CREATE);
+            binds->dur_bind = Object::bind_property(
+                song, SongItem::prop_duration(),
+                duration_label, Gtk::Label::prop_label(),
+                GObject::BindingFlags::SYNC_CREATE);
+            cell->set_data("binds", binds, [](gpointer b) { delete static_cast<InfoBindings*>(b); });
+        });
+        info_factory->connect_unbind([](Gtk::SignalListItemFactory *, GObject::Object *obj) {
+            auto *cell = obj->cast<Gtk::ColumnView::Cell>();
+            delete static_cast<InfoBindings*>(cell->steal_data("binds"));
         });
         auto info_col = Gtk::ColumnView::Column::create("Info",
             std::move(info_factory).cast<Gtk::ListItemFactory>());
@@ -500,8 +603,10 @@ class Application final : public Adw::Application
             for (const auto &song : json["items"]) {
                 auto item = SongItem::create(song);
                 results->append(item);
-                if (const auto &url = item->get_thumb_url(); !url.empty())
-                    fetch_thumb(item, url);
+                if (song.contains("mainPicture") && !song["mainPicture"].is_null()) {
+                    auto url = song["mainPicture"].value("urlThumb", "");
+                    if (!url.empty()) fetch_thumb(item, std::move(url));
+                }
                 ++count;
             }
             auto found_msg = std::format("Found {} results", count);
