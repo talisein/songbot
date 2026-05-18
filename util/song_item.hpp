@@ -24,6 +24,7 @@ class SongItem final : public peel::GObject::Object
 
 public:
     static peel::RefPtr<SongItem> create(const nlohmann::json &song);
+    static peel::RefPtr<SongItem> create_placeholder();
 
     peel::String get_name() const;
     peel::String get_artist() const;

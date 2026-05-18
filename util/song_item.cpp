@@ -7,7 +7,7 @@
 using namespace peel;
 
 struct SongData {
-    nlohmann::json json;
+    nlohmann::json json = nlohmann::json::object();
     RefPtr<Gdk::Paintable> paintable;
 };
 
@@ -109,6 +109,12 @@ SongItem::create(const nlohmann::json &song)
     auto item = Object::create<SongItem>();
     item->data->json = song;
     return item;
+}
+
+RefPtr<SongItem>
+SongItem::create_placeholder()
+{
+    return Object::create<SongItem>();
 }
 
 peel::String

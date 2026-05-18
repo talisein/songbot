@@ -37,6 +37,7 @@ executable('song_searcher',
            ['song_searcher.cpp',
             'song_item.cpp',
             'primary_song_data_cell.cpp',
-            'secondary_song_data_cell.cpp'],
+            'secondary_song_data_cell.cpp',
+            'vocadb_song_model.cpp'],
            res,
            dependencies: util_deps)

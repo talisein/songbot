@@ -1,6 +1,7 @@
 #include "song_item.hpp"
 #include "primary_song_data_cell.hpp"
 #include "secondary_song_data_cell.hpp"
+#include "vocadb_song_model.hpp"
 #include <peel/Adw/Adw.h>
 #include <peel/Gtk/Gtk.h>
 #include <peel/Gio/Gio.h>
@@ -37,7 +38,7 @@ class ApplicationWindow final : public Adw::ApplicationWindow
         Gtk::ScrolledWindow *scrolled;
     } m;
 
-    Gio::ListStore           *results = nullptr;
+    VocadbSongModel          *model = nullptr;
     RefPtr<Soup::Session>     soup_session;
     RefPtr<Gio::Cancellable>  cancellable;
 
@@ -45,7 +46,6 @@ class ApplicationWindow final : public Adw::ApplicationWindow
     void vfunc_dispose();
 
     void on_search_changed();
-    void on_api_response(GObject::Object *, Gio::AsyncResult *);
     void fetch_thumb(RefPtr<SongItem> item, std::string url);
     void on_thumb_response(RefPtr<SongItem> item, RefPtr<Soup::Message> msg, GObject::Object *, Gio::AsyncResult *);
     void on_gly_load(RefPtr<SongItem> item, GObject::Object *, Gio::AsyncResult *);
@@ -91,9 +91,22 @@ ApplicationWindow::init(Class *)
             m.search_entry->set_text("");
     });
 
-    auto model = Gio::ListStore::create(GObject::Type::of<SongItem>());
-    results = model;
-    auto selection = Gtk::SingleSelection::create(std::move(model).cast<Gio::ListModel>());
+    auto mdl = VocadbSongModel::create(soup_session);
+    model = mdl;
+    mdl->connect_items_changed([this](Gio::ListModel *, unsigned pos, unsigned removed, unsigned added) {
+        for (unsigned i = pos; i < pos + added; ++i) {
+            auto *item = model->get_song_item(i);
+            if (!item || item->get_id() == 0) continue;
+            auto url = std::string(item->get_thumb_url());
+            if (!url.empty()) fetch_thumb(RefPtr<SongItem>(item), std::move(url));
+        }
+        if (pos == 0 && removed == 0) {
+            unsigned n = model->get_n_items();
+            auto msg = n > 0 ? std::format("Found {} results", n) : std::string("No results");
+            m.status_label->set_label(msg.c_str());
+        }
+    });
+    auto selection = Gtk::SingleSelection::create(std::move(mdl).cast<Gio::ListModel>());
 
     struct ThumbBindings {
         RefPtr<GObject::Binding> paint_bind;
@@ -236,59 +249,10 @@ ApplicationWindow::on_search_changed()
     if (cancellable) cancellable->cancel();
     cancellable = Gio::Cancellable::create();
 
-    results->remove_all();
     m.status_label->set_label("Searching\xe2\x80\xa6");
-
-    auto escaped = GLib::Uri::escape_string(text, nullptr, true);
-    auto url = std::format(
-        "https://vocadb.net/api/songs?query={}&maxResults=20"
-        "&fields=Artists,Names,MainPicture&nameMatchMode=Partial&sort=RatingScore&lang=English",
-        escaped.c_str());
-
-    auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
-    soup_session->send_and_read_async(
-        msg, G_PRIORITY_DEFAULT, cancellable,
-        [this](GObject::Object *src, Gio::AsyncResult *res) {
-            on_api_response(src, res);
-        });
+    model->search(text);
 }
 
-void
-ApplicationWindow::on_api_response(GObject::Object *src, Gio::AsyncResult *res)
-{
-    UniquePtr<GLib::Error> error;
-    auto bytes = static_cast<Soup::Session*>(src)->send_and_read_finish(res, &error);
-    if (error) {
-        if (error->matches(G_IO_ERROR, G_IO_ERROR_CANCELLED)) return;
-        std::println("api error: {}", error->message);
-        auto msg = std::format("Error: {}", error->message);
-        m.status_label->set_label(msg.c_str());
-        return;
-    }
-
-    auto data = bytes->get_data();
-    std::string_view response{reinterpret_cast<const char*>(data.data()), data.size()};
-
-    try {
-        auto json = nlohmann::json::parse(response);
-
-        unsigned count = 0;
-        for (const auto &song : json["items"]) {
-            auto item = SongItem::create(song);
-            results->append(item);
-            if (song.contains("mainPicture") && !song["mainPicture"].is_null()) {
-                auto url = song["mainPicture"].value("urlThumb", "");
-                if (!url.empty()) fetch_thumb(item, std::move(url));
-            }
-            ++count;
-        }
-        auto found_msg = std::format("Found {} results", count);
-        m.status_label->set_label(found_msg.c_str());
-    } catch (const std::exception &e) {
-        auto err_msg = std::format("Parse error: {}", e.what());
-        m.status_label->set_label(err_msg.c_str());
-    }
-}
 
 void
 ApplicationWindow::fetch_thumb(RefPtr<SongItem> item, std::string url)
