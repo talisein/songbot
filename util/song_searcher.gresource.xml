@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/bot/hatsune/SongSearcher">
+    <file>song_searcher.ui</file>
+    <file>primary_song_data_cell.ui</file>
+    <file>secondary_song_data_cell.ui</file>
+  </gresource>
+</gresources>

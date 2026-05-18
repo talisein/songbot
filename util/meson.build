@@ -1,3 +1,5 @@
+gnome = import('gnome')
+
 gtk_dep = dependency('gtk4')
 adwaita_dep = dependency('libadwaita-1', version: '>= 1.5')
 libsoup_dep = dependency('libsoup-3.0')
@@ -25,6 +27,13 @@ peel_gtk_dep = declare_dependency(sources: peel_gtk)
 
 util_deps = [gtk_dep, adwaita_dep, libsoup_dep, glycin_dep, glycin_gtk4_dep, peel_dep, peel_gtk_dep, nlohmann_json_dep]
 
+res = gnome.compile_resources('song_searcher_resources',
+    'song_searcher.gresource.xml',
+    install_header: false,
+    export: false,
+    c_name: 'song_searcher_resources')
+
 executable('song_searcher',
            ['song_searcher.cpp'],
+           res,
            dependencies: util_deps)
