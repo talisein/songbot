@@ -110,7 +110,6 @@ ApplicationWindow::init(Class *)
 
     struct ThumbBindings {
         RefPtr<GObject::Binding> paint_bind;
-        ~ThumbBindings() { if (paint_bind) paint_bind->unbind(); }
     };
     struct ActionBindings {
         SignalConnection id_conn;
