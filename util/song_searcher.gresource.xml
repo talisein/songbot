@@ -5,4 +5,7 @@
     <file>primary_song_data_cell.ui</file>
     <file>secondary_song_data_cell.ui</file>
   </gresource>
+  <gresource prefix="/bot/hatsune/SongSearcher/icons/hicolor/scalable/apps">
+    <file>bot.hatsune.SongSearcher.svg</file>
+  </gresource>
 </gresources>

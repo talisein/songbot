@@ -328,7 +328,10 @@ class Application final : public Adw::Application
     void vfunc_activate()
     {
         parent_vfunc_activate<Application>();
+        Gtk::IconTheme::get_for_display(Gdk::Display::get_default())
+            ->add_resource_path("/bot/hatsune/SongSearcher/icons");
         auto *window = ApplicationWindow::create(cast<Adw::Application>());
+        window->set_icon_name("bot.hatsune.SongSearcher");
         window->present();
     }
 
