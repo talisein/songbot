@@ -4,6 +4,8 @@
 #include <peel/String.h>
 #include <peel/RefPtr.h>
 #include <peel/Gdk/Paintable.h>
+#include <peel/Soup/Session.h>
+#include <peel/Gio/Cancellable.h>
 #include <nlohmann/json.hpp>
 #include <string>
 
@@ -17,6 +19,7 @@ class SongItem final : public peel::GObject::Object
 
     void init(Class *);
     ~SongItem();
+    void fetch_thumb();
 
     static bool has_cjk(const std::string &s);
     static std::string producer_str(const nlohmann::json &song);
@@ -24,7 +27,8 @@ class SongItem final : public peel::GObject::Object
 
 public:
     static peel::RefPtr<SongItem> create(const nlohmann::json &song);
-    static peel::RefPtr<SongItem> create_placeholder();
+    static peel::RefPtr<SongItem> create_placeholder(peel::Soup::Session *session, peel::Gio::Cancellable *cancellable);
+    void populate(const nlohmann::json &song);
 
     peel::String get_name() const;
     peel::String get_artist() const;

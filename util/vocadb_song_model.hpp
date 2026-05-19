@@ -27,6 +27,7 @@ class VocadbSongModel final : public peel::Gio::ListModel
     unsigned                               total_count = 0;
     std::vector<peel::RefPtr<SongItem>>    items;
     std::set<unsigned>                     chunks_in_flight;
+    std::set<unsigned>                     chunks_fetched;
     peel::RefPtr<peel::Gio::Cancellable>   cancellable;
 
     peel::Type                             vfunc_get_item_type();

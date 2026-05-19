@@ -3,6 +3,8 @@
 #include <peel/GLib/GLib.h>
 #include <peel/Soup/Message.h>
 #include <nlohmann/json.hpp>
+#include <algorithm>
+#include <ranges>
 #include <format>
 #include <print>
 #include <chrono>
@@ -46,7 +48,8 @@ RefPtr<GObject::Object>
 VocadbSongModel::vfunc_get_item(unsigned position)
 {
     if (position >= total_count) return nullptr;
-    if (!items[position]) fetch_chunk((position / chunk_size) * chunk_size);
+    if (items[position]->get_id() == 0)
+        fetch_chunk((position / chunk_size) * chunk_size);
     return items[position];
 }
 
@@ -54,14 +57,8 @@ void
 VocadbSongModel::fetch_chunk(unsigned start)
 {
     unsigned chunk_idx = start / chunk_size;
-    if (chunks_in_flight.count(chunk_idx)) return;
+    if (chunks_in_flight.count(chunk_idx) || chunks_fetched.count(chunk_idx)) return;
     chunks_in_flight.insert(chunk_idx);
-
-    /* Pre-fill with placeholders so vfunc_get_item never returns null for valid positions */
-    unsigned end = std::min(start + chunk_size, total_count);
-    for (unsigned i = start; i < end; ++i)
-        if (!items[i]) items[i] = SongItem::create_placeholder();
-
     pending_chunks.push(start);
     if (!cooldown_source)
         schedule_next_chunk();
@@ -130,6 +127,7 @@ VocadbSongModel::on_chunk_response(unsigned start, unsigned seq, GObject::Object
     if (error) {
         if (error->matches(G_IO_ERROR, G_IO_ERROR_CANCELLED)) return;
         std::println("VocadbSongModel error: {}", error->message);
+        chunks_fetched.insert(start / chunk_size);
         chunks_in_flight.erase(start / chunk_size);
         return;
     }
@@ -145,34 +143,31 @@ VocadbSongModel::on_chunk_response(unsigned start, unsigned seq, GObject::Object
         auto json = nlohmann::json::parse(response);
         if (!json.contains("items")) {
             std::println("VocadbSongModel unexpected response: {}", response);
+            chunks_fetched.insert(start / chunk_size);
             chunks_in_flight.erase(start / chunk_size);
             return;
         }
         const auto &json_items = json["items"];
-        unsigned n = json_items.size();
 
         if (start == 0) {
             unsigned new_total = json.value("totalCount", 0u);
             total_count = new_total;
             items.resize(total_count);
-            for (unsigned i = 0; i < n && i < total_count; ++i)
-                items[i] = SongItem::create(json_items[i]);
-            /* fetch_chunk(0) was called when total_count==0 so it skipped the pre-fill;
-               fill the rest of this chunk now so vfunc_get_item never returns null
-               while chunk 0 is still in chunks_in_flight during items_changed */
-            unsigned chunk0_end = std::min(chunk_size, total_count);
-            for (unsigned i = n; i < chunk0_end; ++i)
-                items[i] = SongItem::create_placeholder();
-            items_changed(0, 0, total_count);
+            std::ranges::generate(items, [this] { return SongItem::create_placeholder(soup_session, cancellable); });
+            for (auto [item, json] : std::views::zip(items, json_items))
+                item->populate(json);
+            chunks_fetched.insert(0u);
             chunks_in_flight.erase(0u);
+            items_changed(0, 0, total_count);
         } else {
-            for (unsigned i = 0; i < n && start + i < total_count; ++i)
-                items[start + i] = SongItem::create(json_items[i]);
-            items_changed(start, n, n);
+            for (auto [item, json] : std::views::zip(items | std::views::drop(start), json_items))
+                item->populate(json);
+            chunks_fetched.insert(start / chunk_size);
             chunks_in_flight.erase(start / chunk_size);
         }
     } catch (const std::exception &e) {
         std::println("VocadbSongModel parse error: {} — body: {}", e.what(), response);
+        chunks_fetched.insert(start / chunk_size);
         chunks_in_flight.erase(start / chunk_size);
     }
 }
@@ -197,6 +192,7 @@ VocadbSongModel::search(const char *text)
     total_count = 0;
     items.clear();
     chunks_in_flight.clear();
+    chunks_fetched.clear();
     last_send_time = {};
     if (old_total > 0) items_changed(0, old_total, 0);
     cancellable = Gio::Cancellable::create();

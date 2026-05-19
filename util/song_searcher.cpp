@@ -8,14 +8,8 @@
 #include <peel/GLib/GLib.h>
 #include <peel/Gdk/Paintable.h>
 #include <peel/Gdk/Clipboard.h>
-#include <peel/Gly/Gly.h>
-#include <peel/GlyGtk4/GlyGtk4.h>
 #include <peel/GObject/Binding.h>
 #include <peel/Soup/Session.h>
-#include <peel/Soup/Message.h>
-#include <peel/Soup/Status.h>
-#include <peel/Gio/Cancellable.h>
-#include <peel/Gio/AsyncResult.h>
 #include <peel/Gtk/ShortcutController.h>
 #include <peel/Gtk/Shortcut.h>
 #include <peel/Gtk/ShortcutTrigger.h>
@@ -38,18 +32,13 @@ class ApplicationWindow final : public Adw::ApplicationWindow
         Gtk::ScrolledWindow *scrolled;
     } m;
 
-    VocadbSongModel          *model = nullptr;
-    RefPtr<Soup::Session>     soup_session;
-    RefPtr<Gio::Cancellable>  cancellable;
+    VocadbSongModel       *model = nullptr;
+    RefPtr<Soup::Session>  soup_session;
 
     void init(Class *);
     void vfunc_dispose();
 
     void on_search_changed();
-    void fetch_thumb(RefPtr<SongItem> item, std::string url);
-    void on_thumb_response(RefPtr<SongItem> item, RefPtr<Soup::Message> msg, GObject::Object *, Gio::AsyncResult *);
-    void on_gly_load(RefPtr<SongItem> item, GObject::Object *, Gio::AsyncResult *);
-    void on_gly_frame(RefPtr<SongItem> item, GObject::Object *, Gio::AsyncResult *);
 
 public:
     static ApplicationWindow* create(Adw::Application *app)
@@ -93,13 +82,7 @@ ApplicationWindow::init(Class *)
 
     auto mdl = VocadbSongModel::create(soup_session);
     model = mdl;
-    mdl->connect_items_changed([this](Gio::ListModel *, unsigned pos, unsigned removed, unsigned added) {
-        for (unsigned i = pos; i < pos + added; ++i) {
-            auto *item = model->get_song_item(i);
-            if (!item || item->get_id() == 0) continue;
-            auto url = std::string(item->get_thumb_url());
-            if (!url.empty()) fetch_thumb(RefPtr<SongItem>(item), std::move(url));
-        }
+    mdl->connect_items_changed([this](Gio::ListModel *, unsigned pos, unsigned removed, unsigned) {
         if (pos == 0 && removed == 0) {
             unsigned n = model->get_n_items();
             auto msg = n > 0 ? std::format("Found {} results", n) : std::string("No results");
@@ -200,15 +183,15 @@ ApplicationWindow::init(Class *)
         auto *btn_box   = cell->get_child()->cast<Gtk::Box>();
         auto *id_btn    = btn_box->get_first_child()->cast<Gtk::Button>();
         auto *names_btn = id_btn->get_next_sibling()->cast<Gtk::Button>();
-        int sid = song->get_id();
-        std::string nt = song->copy_names_text();
         auto *binds = new ActionBindings{};
-        binds->id_conn = id_btn->connect_clicked([sid](Gtk::Button *) {
-            auto text = std::to_string(sid);
+        RefPtr<SongItem> ref(song);
+        binds->id_conn = id_btn->connect_clicked([ref](Gtk::Button *) {
+            auto text = std::to_string(ref->get_id());
             Gdk::Display::get_default()->get_clipboard()->set_text(text.c_str());
         });
-        binds->names_conn = names_btn->connect_clicked([nt = std::move(nt)](Gtk::Button *) {
-            Gdk::Display::get_default()->get_clipboard()->set_text(nt.c_str());
+        binds->names_conn = names_btn->connect_clicked([ref](Gtk::Button *) {
+            auto text = ref->copy_names_text();
+            Gdk::Display::get_default()->get_clipboard()->set_text(text.c_str());
         });
         cell->set_data("binds", binds, [](gpointer b) { delete static_cast<ActionBindings*>(b); });
     });
@@ -244,76 +227,11 @@ ApplicationWindow::on_search_changed()
 {
     const char *text = m.search_entry->get_text();
     if (!text || !*text) return;
-
-    if (cancellable) cancellable->cancel();
-    cancellable = Gio::Cancellable::create();
-
     m.status_label->set_label("Searching\xe2\x80\xa6");
     model->search(text);
 }
 
 
-void
-ApplicationWindow::fetch_thumb(RefPtr<SongItem> item, std::string url)
-{
-    auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
-    soup_session->send_and_read_async(
-        msg, G_PRIORITY_LOW, cancellable,
-        [this, item = std::move(item), msg](GObject::Object *src, Gio::AsyncResult *res) mutable {
-            on_thumb_response(std::move(item), msg, src, res);
-        });
-}
-
-void
-ApplicationWindow::on_thumb_response(RefPtr<SongItem> item, RefPtr<Soup::Message> msg, GObject::Object *src, Gio::AsyncResult *res)
-{
-    UniquePtr<GLib::Error> error;
-    auto bytes = static_cast<Soup::Session*>(src)->send_and_read_finish(res, &error);
-    if (error) {
-        std::println("thumb error: {}", error->message);
-        return;
-    }
-    if (msg->get_status() != Soup::Status::OK)
-        return;
-
-    auto loader = Gly::Loader::create_for_bytes(bytes);
-    loader->load_async(cancellable,
-        [this, item = std::move(item), loader](GObject::Object *src, Gio::AsyncResult *res) mutable {
-            on_gly_load(std::move(item), src, res);
-        });
-}
-
-void
-ApplicationWindow::on_gly_load(RefPtr<SongItem> item, GObject::Object *src, Gio::AsyncResult *res)
-{
-    UniquePtr<GLib::Error> error;
-    auto image = static_cast<Gly::Loader*>(src)->load_finish(res, &error);
-    if (error) {
-        std::println("thumb gly load error: {}", error->message);
-        return;
-    }
-    if (!image) return;
-
-    image->next_frame_async(cancellable,
-        [this, item = std::move(item), image](GObject::Object *src, Gio::AsyncResult *res) mutable {
-            on_gly_frame(std::move(item), src, res);
-        });
-}
-
-void
-ApplicationWindow::on_gly_frame(RefPtr<SongItem> item, GObject::Object *src, Gio::AsyncResult *res)
-{
-    UniquePtr<GLib::Error> error;
-    auto frame = static_cast<Gly::Image*>(src)->next_frame_finish(res, &error);
-    if (error) {
-        std::println("thumb gly frame error: {}", error->message);
-        return;
-    }
-    if (!frame) return;
-
-    auto texture = GlyGtk4::frame_get_texture(frame);
-    item->set_paintable(texture->cast<Gdk::Paintable>());
-}
 
 PEEL_CLASS_IMPL(ApplicationWindow, "SongSearcherApplicationWindow", Adw::ApplicationWindow)
 

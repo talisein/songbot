@@ -1,14 +1,24 @@
 #include "song_item.hpp"
+#include <peel/Soup/Message.h>
+#include <peel/Soup/Status.h>
+#include <peel/Gio/AsyncResult.h>
+#include <peel/GLib/GLib.h>
+#include <peel/Gdk/Texture.h>
+#include <peel/Gly/Gly.h>
+#include <peel/GlyGtk4/GlyGtk4.h>
 #include <nlohmann/json.hpp>
 #include <format>
+#include <print>
 #include <set>
 #include <vector>
 
 using namespace peel;
 
 struct SongData {
-    nlohmann::json json = nlohmann::json::object();
+    nlohmann::json         json        = nlohmann::json::object();
     RefPtr<Gdk::Paintable> paintable;
+    Soup::Session         *session     = nullptr;
+    Gio::Cancellable      *cancellable = nullptr;
 };
 
 void SongItem::init(Class *) { data = new SongData; }
@@ -112,9 +122,70 @@ SongItem::create(const nlohmann::json &song)
 }
 
 RefPtr<SongItem>
-SongItem::create_placeholder()
+SongItem::create_placeholder(Soup::Session *session, Gio::Cancellable *cancellable)
 {
-    return Object::create<SongItem>();
+    auto item = Object::create<SongItem>();
+    item->data->session     = session;
+    item->data->cancellable = cancellable;
+    return item;
+}
+
+void
+SongItem::populate(const nlohmann::json &song)
+{
+    data->json = song;
+    freeze_notify();
+    notify(prop_name());
+    notify(prop_artist());
+    notify(prop_vocalists());
+    notify(prop_song_type());
+    notify(prop_publish_date());
+    notify(prop_duration());
+    notify(prop_id());
+    notify(prop_japanese_name());
+    notify(prop_romaji_name());
+    notify(prop_english_name());
+    notify(prop_thumb_url());
+    thaw_notify();
+    fetch_thumb();
+}
+
+void
+SongItem::fetch_thumb()
+{
+    if (data->paintable || !data->session) return;
+    auto url = std::string(get_thumb_url());
+    if (url.empty()) return;
+
+    auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
+    RefPtr<SongItem> ref(this);
+    data->session->send_and_read_async(msg, G_PRIORITY_LOW, data->cancellable,
+        [ref, msg](GObject::Object *src, Gio::AsyncResult *res) {
+            UniquePtr<GLib::Error> error;
+            auto bytes = static_cast<Soup::Session *>(src)->send_and_read_finish(res, &error);
+            if (error) { std::println("thumb error: {}", error->message); return; }
+            if (msg->get_status() != Soup::Status::OK) return;
+
+            auto loader = Gly::Loader::create_for_bytes(bytes);
+            loader->load_async(ref->data->cancellable,
+                [ref, loader](GObject::Object *src, Gio::AsyncResult *res) {
+                    UniquePtr<GLib::Error> error;
+                    auto image = static_cast<Gly::Loader *>(src)->load_finish(res, &error);
+                    if (error) { std::println("thumb load error: {}", error->message); return; }
+                    if (!image) return;
+
+                    image->next_frame_async(ref->data->cancellable,
+                        [ref, image](GObject::Object *src, Gio::AsyncResult *res) {
+                            UniquePtr<GLib::Error> error;
+                            auto frame = static_cast<Gly::Image *>(src)->next_frame_finish(res, &error);
+                            if (error) { std::println("thumb frame error: {}", error->message); return; }
+                            if (!frame) return;
+
+                            auto texture = GlyGtk4::frame_get_texture(frame);
+                            ref->set_paintable(texture->cast<Gdk::Paintable>());
+                        });
+                });
+        });
 }
 
 peel::String
@@ -197,7 +268,18 @@ SongItem::get_thumb_url() const
     return peel::String("");
 }
 
-Gdk::Paintable *SongItem::get_paintable() const { return data->paintable; }
+static Gdk::Paintable *
+placeholder_paintable()
+{
+    static auto tex = Gdk::Texture::create_from_resource("/bot/hatsune/SongSearcher/leek-placeholder.svg");
+    return tex->cast<Gdk::Paintable>();
+}
+
+Gdk::Paintable *SongItem::get_paintable() const
+{
+    if (data->paintable) return data->paintable;
+    return placeholder_paintable();
+}
 
 void
 SongItem::set_paintable(Gdk::Paintable *p)
