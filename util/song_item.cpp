@@ -6,6 +6,7 @@
 #include <peel/Gdk/Texture.h>
 #include <peel/Gly/Gly.h>
 #include <peel/GlyGtk4/GlyGtk4.h>
+#include <peel/coro/AsyncResult.h>
 #include <nlohmann/json.hpp>
 #include <format>
 #include <print>
@@ -150,42 +151,48 @@ SongItem::populate(const nlohmann::json &song)
     fetch_thumb();
 }
 
-void
+coro::SimpleTask
 SongItem::fetch_thumb()
 {
-    if (data->paintable || !data->session) return;
+    if (data->paintable || !data->session) co_return;
     auto url = std::string(get_thumb_url());
-    if (url.empty()) return;
+    if (url.empty()) co_return;
 
-    auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
     RefPtr<SongItem> ref(this);
-    data->session->send_and_read_async(msg, G_PRIORITY_LOW, data->cancellable,
-        [ref, msg](GObject::Object *src, Gio::AsyncResult *res) {
-            UniquePtr<GLib::Error> error;
-            auto bytes = static_cast<Soup::Session *>(src)->send_and_read_finish(res, &error);
-            if (error) { std::println("thumb error: {}", error->message); return; }
-            if (msg->get_status() != Soup::Status::OK) return;
+    auto msg = Soup::Message::create(SOUP_METHOD_GET, url.c_str());
+    coro::AsyncResult ar;
+    UniquePtr<GLib::Error> error;
 
-            auto loader = Gly::Loader::create_for_bytes(bytes);
-            loader->load_async(ref->data->cancellable,
-                [ref, loader](GObject::Object *src, Gio::AsyncResult *res) {
-                    UniquePtr<GLib::Error> error;
-                    auto image = static_cast<Gly::Loader *>(src)->load_finish(res, &error);
-                    if (error) { std::println("thumb load error: {}", error->message); return; }
-                    if (!image) return;
+    data->session->send_and_read_async(msg, G_PRIORITY_LOW, data->cancellable, ar.callback());
+    auto bytes = data->session->send_and_read_finish(co_await ar, &error);
+    if (error) {
+        if (!error->matches(G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            std::println("thumb error: {}", error->message);
+        co_return;
+    }
+    if (msg->get_status() != Soup::Status::OK) co_return;
 
-                    image->next_frame_async(ref->data->cancellable,
-                        [ref, image](GObject::Object *src, Gio::AsyncResult *res) {
-                            UniquePtr<GLib::Error> error;
-                            auto frame = static_cast<Gly::Image *>(src)->next_frame_finish(res, &error);
-                            if (error) { std::println("thumb frame error: {}", error->message); return; }
-                            if (!frame) return;
+    auto loader = Gly::Loader::create_for_bytes(bytes);
+    loader->load_async(data->cancellable, ar.callback());
+    auto image = loader->load_finish(co_await ar, &error);
+    if (error) {
+        if (!error->matches(G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            std::println("thumb load error: {}", error->message);
+        co_return;
+    }
+    if (!image) co_return;
 
-                            auto texture = GlyGtk4::frame_get_texture(frame);
-                            ref->set_paintable(texture->cast<Gdk::Paintable>());
-                        });
-                });
-        });
+    image->next_frame_async(data->cancellable, ar.callback());
+    auto frame = image->next_frame_finish(co_await ar, &error);
+    if (error) {
+        if (!error->matches(G_IO_ERROR, G_IO_ERROR_CANCELLED))
+            std::println("thumb frame error: {}", error->message);
+        co_return;
+    }
+    if (!frame) co_return;
+
+    auto texture = GlyGtk4::frame_get_texture(frame);
+    set_paintable(texture->cast<Gdk::Paintable>());
 }
 
 peel::String

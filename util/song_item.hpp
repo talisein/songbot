@@ -6,6 +6,7 @@
 #include <peel/Gdk/Paintable.h>
 #include <peel/Soup/Session.h>
 #include <peel/Gio/Cancellable.h>
+#include <peel/coro/SimpleTask.h>
 #include <nlohmann/json.hpp>
 #include <string>
 
@@ -19,7 +20,7 @@ class SongItem final : public peel::GObject::Object
 
     void init(Class *);
     ~SongItem();
-    void fetch_thumb();
+    peel::coro::SimpleTask fetch_thumb();
 
     static bool has_cjk(const std::string &s);
     static std::string producer_str(const nlohmann::json &song);
