@@ -13,15 +13,17 @@ env:
 jobs:
   scrape:
     runs-on: meiko
+    outputs:
+      changed: ${{ steps.has_change.outputs.changed }}
+    container:
+      image: git.miku/talisein/songbot-sdk:latest
     steps:
+      - name: Install build deps
+        run: dnf -y install cpr-devel file-devel
+
       - name: Checkout
         run: |
           git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .
-
-      - name: Install build deps
-        run: |
-          dnf -y upgrade
-          dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake cpr-devel file-devel
 
       - name: Build
         run: |
@@ -55,5 +57,6 @@ jobs:
   trigger-songbot-build:
     runs-on: meiko
     needs: scrape
+    if: needs.scrape.outputs.changed == 'true'
     uses: ./.forgejo/workflows/docker-build.yml
     secrets: inherit

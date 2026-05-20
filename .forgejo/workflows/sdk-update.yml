@@ -18,10 +18,17 @@ jobs:
           cat <<EOF > Containerfile.sdk
           FROM fedora:44
           RUN dnf -y upgrade && \
-              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake && \
+              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel && \
               dnf clean all
+          ARG TALINET_CA
+          RUN echo "\$TALINET_CA" > /tmp/talinet_root.crt && \
+              trust anchor --store /tmp/talinet_root.crt && \
+              update-ca-trust extract && \
+              rm /tmp/talinet_root.crt
           EOF
-          buildah bud -f Containerfile.sdk -t git.miku/talisein/songbot-sdk:latest .
+          buildah bud -f Containerfile.sdk \
+            --build-arg TALINET_CA="${{ secrets.TALINET_ROOT_CA }}" \
+            -t git.miku/talisein/songbot-sdk:latest .
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
           buildah push git.miku/talisein/songbot-sdk:latest
 
