@@ -11,7 +11,7 @@
 
 using namespace peel;
 
-static constexpr unsigned chunk_size = 205;
+static constexpr unsigned chunk_size = 100;
 static constexpr auto fetch_cooldown = std::chrono::seconds(5);
 
 namespace {
