@@ -19327,9 +19327,18 @@ constexpr std::array<web_link, 4> web_links_song_23076 {{
   {"Official"sv, R"XYX(Pixiv - Illustration by Momopan)XYX"sv, R"XYX(https://www.pixiv.net/member_illust.php?mode=medium&illust_id=33586838)XYX"sv, 87854 },
 }};
 
+
+#if __has_embed("song_pic_orig_23076") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_23076 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_23076"
+});
+constexpr std::string_view song_mime_type_orig_23076 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_23076 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> song_pic_orig_23076;
 constexpr std::string_view song_mime_type_orig_23076 = "inode/x-empty";
 constexpr std::string_view song_file_ext_orig_23076;
+#endif
 
 constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_23076;
 constexpr std::string_view song_mime_type_small_thumb_23076 = "inode/x-empty";
