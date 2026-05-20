@@ -122,17 +122,17 @@ void
 VocadbSongModel::on_chunk_response(unsigned start, unsigned seq, GObject::Object *src, Gio::AsyncResult *res)
 {
     std::println("vocadb response: start={} seq={} current={}", start, seq, search_seq);
+    if (seq != search_seq) {
+        std::println("VocadbSongModel discarding stale response: start={} seq={}", start, seq);
+        return;
+    }
+    chunks_in_flight.erase(start / chunk_size);
     UniquePtr<GLib::Error> error;
     auto bytes = static_cast<Soup::Session*>(src)->send_and_read_finish(res, &error);
     if (error) {
         if (error->matches(G_IO_ERROR, G_IO_ERROR_CANCELLED)) return;
         std::println("VocadbSongModel error: {}", error->message);
-        chunks_fetched.insert(start / chunk_size);
-        chunks_in_flight.erase(start / chunk_size);
-        return;
-    }
-    if (seq != search_seq) {
-        std::println("VocadbSongModel discarding stale response: start={} seq={}", start, seq);
+        sig_error.emit(this, error);
         return;
     }
 
@@ -143,32 +143,29 @@ VocadbSongModel::on_chunk_response(unsigned start, unsigned seq, GObject::Object
         auto json = nlohmann::json::parse(response);
         if (!json.contains("items")) {
             std::println("VocadbSongModel unexpected response: {}", response);
-            chunks_fetched.insert(start / chunk_size);
-            chunks_in_flight.erase(start / chunk_size);
             return;
         }
         const auto &json_items = json["items"];
+        unsigned n = json_items.size();
 
         if (start == 0) {
             unsigned new_total = json.value("totalCount", 0u);
+            std::println("vocadb chunk: start=0 got={} totalCount={}", n, new_total);
             total_count = new_total;
             items.resize(total_count);
             std::ranges::generate(items, [this] { return SongItem::create_placeholder(soup_session, cancellable); });
             for (auto [item, json] : std::views::zip(items, json_items))
                 item->populate(json);
             chunks_fetched.insert(0u);
-            chunks_in_flight.erase(0u);
             items_changed(0, 0, total_count);
         } else {
+            std::println("vocadb chunk: start={} got={}", start, n);
             for (auto [item, json] : std::views::zip(items | std::views::drop(start), json_items))
                 item->populate(json);
             chunks_fetched.insert(start / chunk_size);
-            chunks_in_flight.erase(start / chunk_size);
         }
     } catch (const std::exception &e) {
         std::println("VocadbSongModel parse error: {} — body: {}", e.what(), response);
-        chunks_fetched.insert(start / chunk_size);
-        chunks_in_flight.erase(start / chunk_size);
     }
 }
 
@@ -214,5 +211,10 @@ VocadbSongModel::get_song_item(unsigned pos) const
     return nullptr;
 }
 
-void VocadbSongModel::Class::init() {}
+Signal<VocadbSongModel, void(const GLib::Error *)> VocadbSongModel::sig_error;
+
+void VocadbSongModel::Class::init()
+{
+    sig_error = Signal<VocadbSongModel, void(const GLib::Error *)>::create("error");
+}
 PEEL_CLASS_IMPL(VocadbSongModel, "SongSearcherVocadbSongModel", GObject::Object)

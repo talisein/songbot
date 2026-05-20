@@ -6,6 +6,8 @@
 #include <peel/Soup/Session.h>
 #include <peel/class.h>
 #include <peel/RefPtr.h>
+#include <peel/signal.h>
+#include <peel/GLib/GLib.h>
 #include <vector>
 #include <queue>
 #include <set>
@@ -46,9 +48,13 @@ class VocadbSongModel final : public peel::Gio::ListModel
 
     void init(Class *) {}
 
+    static peel::Signal<VocadbSongModel, void(const peel::GLib::Error *)> sig_error;
+
 public:
     static peel::RefPtr<VocadbSongModel> create(peel::Soup::Session *session);
     void search(const char *text);
     void cancel();
     SongItem *get_song_item(unsigned pos) const;
+
+    PEEL_SIGNAL_CONNECT_METHOD(error, sig_error)
 };

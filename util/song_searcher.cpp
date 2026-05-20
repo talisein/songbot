@@ -89,6 +89,10 @@ ApplicationWindow::init(Class *)
             m.status_label->set_label(msg.c_str());
         }
     });
+    mdl->connect_error([this](VocadbSongModel *, const GLib::Error *err) {
+        auto msg = std::format("Error: {}", err->message);
+        m.status_label->set_label(msg.c_str());
+    });
     auto selection = Gtk::SingleSelection::create(std::move(mdl).cast<Gio::ListModel>());
 
     struct ThumbBindings {
