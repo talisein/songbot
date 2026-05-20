@@ -1,6 +1,6 @@
 project('dpp', ['cpp'],
         license: 'Apache-2.0',
-        version: '10.1.4',
+        version: '10.1.5',
         meson_version: '>=1.4.0',
         default_options: ['cpp_std=c++17'])
 
