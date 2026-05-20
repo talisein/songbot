@@ -699,6 +699,37 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"夢の続き", "Yume no Tsuzuki", "Continuation of Dreams", duet(Miku,Rin,Len,Luka), "Dixie Flatline", 16581 },
   {"夢喰い白黒バク", "Yumekui Shirokuro Baku", "Dream-Eating Monochrome Baku", Len, "Nem", 3636 },
   {"リンちゃんなう！", "Rin-chan Now!", "Rin-chan Now!", duet(Luka,Miku,Rin), "OwataP", 8678 },
+  {"トリコロール・エア・ライン", nullopt, "Tricolore Airline", Miku, "atsuzoukun", 32167 },
+  {"巴里映画少女", "Paris Eiga Shoujo", "Paris Cinema Girl", Miku, "apfel note", 50041 },
+  {nullopt, nullopt, "SING&SMILE", Miku, "Re:nG", 3263 },
+  {"唐傘さんが通る", "Karakasa-san ga Tooru", "Here Comes Mr. Umbrella", Len, "IyaiyaP", 55507 },
+  {"デンパラダイム", "Denparadigm", "Electric Paradigm", Miku, "lumo", 28500 },
+  {"システマティック・ラヴ", nullopt, "Systematic Love", Miku, "Camellia", 19060 },
+  {"おはヨーデル", "Oha Yo-del!!!", "Good Morning Yodel!!", Miku, "Bakudan Poppy", 105237 },
+  {"月向うまでのトラベル", "Tsuki Mukau Made no Travel", "Travel Beyond the Moon", duet(Rin,Len), "vilP", 71158 },
+  {"ブラックノートに溺れさせて", "Black Note ni Obore Sasete", "Let Me Lose Myself in The Black Note", Miku, "Shun13", 39003 },
+  {"キミに", "Kimi ni", "To You", Miku, "teaeye", 26232 },
+  {"ナイト・オブ・ライト", nullopt, "Knight of Light", duet(KAITO,Miku), "TinySymphony", 23076 },
+  {nullopt, nullopt, "Mellow Yellow", MEIKO, "SorrowfulP, MelissaP", 35300 },
+  {"ぎずも", "Gizmo", "Gizmo", Miku, "uguis08", 29341 },
+  {"エレクトロサチュレイタ", "Electrosaturator", "Electrosaturator", Miku, "tilt-six", 21064 },
+  {"偶像無線", "Guuzou Musen", "Idol Radio", KAITO, "Daisuke Ohnuma", 89703 },
+  {nullopt, nullopt, "Glory 3usi9", Miku, "nanou", 36611 },
+  {nullopt, nullopt, "PIANO*GIRL", Miku, "OSTER project", 7800 },
+  {"壊セ壊セ", "Kowase Kowase", "Break it, Break it!", MEIKO, "E.L.V.N", 3388 },
+  {"指切り", "Yubikiri", "Pinky Promise", Miku, "scop", 4715 },
+  {nullopt, nullopt, "soundless voice", Len, "HitoshizukuP", 7820 },
+  {nullopt, nullopt, "Knife", duet(Miku,Rin,Len), "rerulili", 4478 },
+  {nullopt, nullopt, "Blackjack", Luka, "YuchaP, kaichi", 3390 },
+  {"アドレサンス", "Adolescence", "Adolescence", duet(Rin,Len), "Dios/SignalP", 2251 },
+  {"君の体温", "Kimi no Taion", "Your Warmth", Miku, "Stag BeetleP", 1318 },
+  {"骸骨楽団とリリア", "Gaikotsu Gakudan to Lilia", "Skeleton Orchestra and Lilia", Miku, "Tohma", 556 },
+  {nullopt, nullopt, "LOL -lots of laugh-", Miku, "zoccon", 14205 },
+  {"アマツキツネ", "Amatsu Kitsune", "The Celestial Fox", Rin, "marasy", 15691 },
+  {nullopt, nullopt, "1925", Miku, "T-POCKET", 7319 },
+  {"ジグソーパズル", nullopt, "Jigsaw Puzzle", duet(Len,Rin), "Mafumafu", 215140 },
+  {"ジターバグ", nullopt, "Jitterbug", duet(Miku,MEIKO), "Kuriyama Yuri, Koh Hashikura", 256954 },
+  {"ドラマツルギー", nullopt, "Dramaturgy", Miku, "Eve, Tomoki Numano", 170110 },
   //meow
     };
 
@@ -706,7 +737,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
 }
 
 constexpr auto casefolded_song_names_tuple = [] {
-    constexpr auto all_chars_data = util::generate_casefolded_fields<generate_songs_incomplete, 2, 4,
+  constexpr auto all_chars_data = util::generate_casefolded_fields<generate_songs_incomplete, 2, 4,
                                                                      &Song::jp_name, &Song::romanji_name, &Song::name, &Song::producer>();
 
     constexpr auto total_chars = std::get<2>(all_chars_data);
@@ -821,6 +852,9 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "The Whimsy Girl", "The Cat-like You"},
             { "The MMORPG Addict's Anthem", "Online Game Addicts Sprechchor" },
             { "Sadistic Music Factory", "Sadistic.Music∞Factory" },
+            { "Travel to the Other Side of the Moon", "Travel Beyond the Moon" },
+            { "Pinky Swear", "Pinky Promise" },
+
     };
     return res;
 }
