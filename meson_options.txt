@@ -6,7 +6,3 @@ representation. Only intended for developer, this data will just be checked in
 option('install_tests', type : 'boolean', value : false, description:
 '''Install test and benchmark executables alongside the main binary.
 Intended for container images where the benchmark should be runnable post-install.''')
-
-option('build_util', type : 'boolean', value : false, description:
-'''Build utility programs (song_searcher etc) for developer use.
-Requires gtk4, libadwaita, libcurl, and peel.''')
