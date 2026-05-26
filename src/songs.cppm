@@ -741,6 +741,11 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ハロ／ハワユ", "Hello/How are you?", "Hello/How are you?", duet(Miku,Gumi), "nanou", 1416 },
   {"マトリョシカ", "Matryoshka", "Matryoshka", duet(Miku,Gumi), "HACHI", 368 },
   {"ハッピーシンセサイザ", "Happy Synthesizer", "Happy Synthesizer", duet(Luka,Gumi), "EasyPop", 3177 },
+  /* Mirai 2 */
+  {"エレクトリック・ラブ", "Electric Love", "Electric Love", Miku, "HachioujiP", 1389 },
+  {"インビジブル", "Invisible", "Invisible", duet(Gumi,Rin), "kemu, Ore BananaP", 8251 },
+  {"ドレミファロンド", "DoReMiFa Rondo", "DoReMiFa Rondo", Miku, "40mP", 8601 },
+  {"子猫のパヤパヤ", "Koneko no Payapaya", "Payapaya Kitten", duet(Miku,MEIKO), "OnecupP", 5635 },
   //meow
     };
 
