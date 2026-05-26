@@ -1,6 +1,7 @@
 import std;
 import boost.ut;
 import songs;
+import uni_algo;
 
 int main()
 {
@@ -136,6 +137,22 @@ int main()
         /* Short name and producer: no truncation */
         Song short_both{std::nullopt, std::nullopt, "Melt", Miku, "ryo"};
         expect(eq(get_autocomplete_text_for_song(short_both), "Melt by ryo"sv));
+    };
+
+    "get_autocomplete_text_for_song utf8"_test = [] {
+        /* Producer truncation: 35 ASCII + "あ" (3 bytes) + "xxx" = 41 bytes total.
+           Naive substr(0, 37) splits the 3-byte sequence mid-codepoint → invalid UTF-8. */
+        std::string prod_str = std::string(35, 'A') + "\xE3\x81\x82xxx";
+        Song tricky_prod{std::nullopt, std::nullopt, "Melt", Miku, prod_str};
+        auto r1 = get_autocomplete_text_for_song(tricky_prod);
+        expect(una::is_valid_utf8(r1)) << "producer truncation must not split a multibyte codepoint";
+
+        /* Name truncation: budget=93, cut=90 bytes with producer "ryo" (3 bytes).
+           88 ASCII + "あ" + "xxx" = 94 bytes; naive substr(0, 90) splits mid-codepoint. */
+        std::string name_str = std::string(88, 'A') + "\xE3\x81\x82xxx";
+        Song tricky_name{std::nullopt, std::nullopt, name_str, Miku, "ryo"};
+        auto r2 = get_autocomplete_text_for_song(tricky_name);
+        expect(una::is_valid_utf8(r2)) << "name truncation must not split a multibyte codepoint";
     };
 
     "match"_test = [] {

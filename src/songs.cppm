@@ -1223,6 +1223,18 @@ get_random_songname(auto &&rng_engine)
 
 export constexpr std::size_t AUTOCOMPLETE_CHOICE_NAME_MAX_LENGTH = 100;
 
+/* Returns the longest prefix of s that is at most max_bytes bytes and ends on a grapheme cluster boundary. */
+std::string_view utf8_truncate(std::string_view s, std::size_t max_bytes)
+{
+    if (s.size() <= max_bytes) return s;
+    std::size_t safe_len = 0;
+    for (auto cluster : una::ranges::grapheme::utf8_view{s}) {
+        if (safe_len + cluster.size() > max_bytes) break;
+        safe_len += cluster.size();
+    }
+    return s.substr(0, safe_len);
+}
+
 export [[nodiscard]]
 std::string
 get_autocomplete_text_for_song(const Song& song)
@@ -1232,13 +1244,13 @@ get_autocomplete_text_for_song(const Song& song)
     constexpr std::size_t ELLIPSIS_LEN = 3;
 
     auto prod = song.producer.size() > MAX_PRODUCER
-        ? std::string(song.producer.substr(0, MAX_PRODUCER - ELLIPSIS_LEN)) + "..."
+        ? std::string(utf8_truncate(song.producer, MAX_PRODUCER - ELLIPSIS_LEN)) + "..."
         : std::string(song.producer);
     const auto name_budget = AUTOCOMPLETE_CHOICE_NAME_MAX_LENGTH - BY_SEP_LEN - prod.size();
     auto name = song.name.size() > name_budget
-        ? std::string(song.name.substr(0, name_budget - ELLIPSIS_LEN)) + "..."
+        ? std::string(utf8_truncate(song.name, name_budget - ELLIPSIS_LEN)) + "..."
         : std::string(song.name);
-    return std::format("{} by {}", name, prod);
+    return una::norm::to_nfc_utf8(std::format("{} by {}", name, prod));
 }
 
 struct spreadsheet
