@@ -746,7 +746,6 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"インビジブル", "Invisible", "Invisible", duet(Gumi,Rin), "kemu, Ore BananaP", 8251 },
   {"ドレミファロンド", "DoReMiFa Rondo", "DoReMiFa Rondo", Miku, "40mP", 8601 },
   {"子猫のパヤパヤ", "Koneko no Payapaya", "Payapaya Kitten", duet(Miku,MEIKO), "OnecupP", 5635 },
-  //meow
     };
 
     return res;
