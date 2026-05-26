@@ -730,6 +730,17 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"ジグソーパズル", nullopt, "Jigsaw Puzzle", duet(Len,Rin), "Mafumafu", 215140 },
   {"ジターバグ", nullopt, "Jitterbug", duet(Miku,MEIKO), "Kuriyama Yuri, Koh Hashikura", 256954 },
   {"ドラマツルギー", nullopt, "Dramaturgy", Miku, "Eve, Tomoki Numano", 170110 },
+  /* diva X */
+  {"罪の名前", "Tsumi no Namae", "The Name of the Sin", Miku, "ryo", 121112 },
+  {"クノイチでも恋がしたい", "Kunoichi Demo Koi ga Shitai", "Even a Kunoichi Needs Love", duet(Miku,Rin), "MikitoP, Suzumu", 24039 },
+  {"Mrs.Pumpkinの滑稽な夢 ", "Mrs. Pumpkin no Kokkei na Yume", "Humorous Dream of Mrs. Pumpkin", Miku, "HACHI", 1573 },
+  {"卑怯戦隊うろたんだー", "Hikyou Sentai Urotander", "Coward Fighters Urotander", duet(Miku,KAITO,MEIKO), "ShinP", 235 },
+  {"バビロン", "Babylon", "Babylon", Miku, "Tohma", 4989 },
+  /* Project Mirai */
+  {"逆さまレインボー", "Sakasama Rainbow", "Reverse Rainbow", duet(Rin,Miku), "sunzriverP", 7922 },
+  {"ハロ／ハワユ", "Hello/How are you?", "Hello/How are you?", duet(Miku,Gumi), "nanou", 1416 },
+  {"マトリョシカ", "Matryoshka", "Matryoshka", duet(Miku,Gumi), "HACHI", 368 },
+  {"ハッピーシンセサイザ", "Happy Synthesizer", "Happy Synthesizer", duet(Luka,Gumi), "EasyPop", 3177 },
   //meow
     };
 
@@ -854,7 +865,8 @@ constexpr std::vector<AltName> generate_altnames_incomplete()
             { "Sadistic Music Factory", "Sadistic.Music∞Factory" },
             { "Travel to the Other Side of the Moon", "Travel Beyond the Moon" },
             { "Pinky Swear", "Pinky Promise" },
-
+            { "A Female Ninja, but I Want to Love", "Even a Kunoichi Needs Love" },
+            { "Mrs. Pumpkin's Comical Dream", "Humorous Dream of Mrs. Pumpkin" },
     };
     return res;
 }

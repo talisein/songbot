@@ -763,6 +763,28 @@ export constexpr std::array diva_tracks = std::to_array<GameTrack>({
     /* Project DIVA X: Downloadable */
     { DIVA_X, "Hand in Hand" },
     { DIVA_X, "Sharing The World" },
+    /* Project mirai */
+    { MIRAI, "My Time" },
+    { MIRAI, "finder (DSLR remix-re:edit)" },
+    { MIRAI, "Reverse Rainbow" },
+    { MIRAI, "Tricolore Airline" },
+    { MIRAI, "Animal Fortune-telling" },
+    { MIRAI, "No Logic" },
+    { MIRAI, "on the rocks" },
+    { MIRAI, "Delusion Sketch" },
+    { MIRAI, "Daughter of Evil (The Princess of Lucifer)" },
+    { MIRAI, "Servant of Evil (His Significance of Existence)" },
+    { MIRAI, "SING&SMILE" },
+    { MIRAI, "PIANO*GIRL" },
+    { MIRAI, "Melancholic" },
+    { MIRAI, "Hello/How are you?" },
+    { MIRAI, "LOL -lots of laugh-" },
+    { MIRAI, "Deep-Sea Girl" },
+    { MIRAI, "Your Warmth" },
+    { MIRAI, "Matryoshka" },
+    { MIRAI, "Happy Synthesizer" },
+    { MIRAI, "Dream Dream" },
+    { MIRAI, "Clover♣Club" },
   });
 
 export std::expected<Song, std::error_code>
