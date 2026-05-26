@@ -235,35 +235,29 @@ lastp_command::on_slashcommand(const dpp::slashcommand_t event)
             std::print(ss, " ({} weeks)", it->weeks);
           }
 
-          auto sv = localvoid::charts.front();
-          using json = nlohmann::json;
-          auto j = json::parse(sv);
         }
 
         subtext = ss.str();
-        pic = it->main_picture.transform([](const auto& pic) -> pic_details {
+        pic = it->main_picture.and_then([](const auto& pic) -> std::optional<pic_details> {
           if (pic.original && pic.thumb) {
             if (pic.original->size() > pic.thumb->size()) {
-              return {*pic.original, pic.original_mime_type, pic.original_file_ext};
+              return pic_details{*pic.original, pic.original_mime_type, pic.original_file_ext};
             } else {
-              return {*pic.thumb, pic.thumb_mime_type, pic.thumb_file_ext};
+              return pic_details{*pic.thumb, pic.thumb_mime_type, pic.thumb_file_ext};
             }
           }
-          if (pic.original && pic.original->size() > 0) {
-            return {*pic.original, pic.original_mime_type, pic.original_file_ext};
-          }
-          if (pic.thumb && pic.thumb->size() > 0) {
-            return {*pic.thumb, pic.thumb_mime_type, pic.thumb_file_ext};
-          }
-          if (pic.small_thumb && pic.small_thumb->size() > 0) {
-            return {*pic.small_thumb, pic.small_thumb_mime_type, pic.small_thumb_file_ext};
-          }
-          if (pic.tiny_thumb && pic.tiny_thumb->size() > 0) {
-            return {*pic.tiny_thumb, pic.tiny_thumb_mime_type, pic.tiny_thumb_file_ext};
-          }
-          throw "oops";
+          if (pic.original && pic.original->size() > 0)
+            return pic_details{*pic.original, pic.original_mime_type, pic.original_file_ext};
+          if (pic.thumb && pic.thumb->size() > 0)
+            return pic_details{*pic.thumb, pic.thumb_mime_type, pic.thumb_file_ext};
+          if (pic.small_thumb && pic.small_thumb->size() > 0)
+            return pic_details{*pic.small_thumb, pic.small_thumb_mime_type, pic.small_thumb_file_ext};
+          if (pic.tiny_thumb && pic.tiny_thumb->size() > 0)
+            return pic_details{*pic.tiny_thumb, pic.tiny_thumb_mime_type, pic.tiny_thumb_file_ext};
+          return std::nullopt;
         });
-      } catch (...) {
+      } catch (const std::exception& e) {
+        ctx->log_error("/lastp: vocadb enrichment failed for id {}: {}", *song->vocadb_id, e.what());
       }
     }
   }

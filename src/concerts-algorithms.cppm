@@ -289,6 +289,7 @@ is_past_spoiler_window(const SetlistTrack& track)
     /* fallback for concerts without known show times */
     constexpr auto spoiler_duration = std::chrono::hours{36};
     auto concert = lookup_concert(track.concert_short_name);
+    if (!concert) return true;
     return (std::chrono::system_clock::now() -
             static_cast<std::chrono::sys_days>(concert->last_date.value_or(concert->date)))
            > spoiler_duration;

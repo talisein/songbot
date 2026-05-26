@@ -1053,6 +1053,9 @@ Song operator ""_song(const char* short_name, std::size_t len)
     return *lookup_song({short_name, len});
 }
 
+static_assert(std::ranges::all_of(alt_names, [](const AltName& a) { return lookup_song(a.name).has_value(); }),
+              "AltName::name target not found in songs array");
+
 export [[nodiscard]]
 std::vector<Song> match_songs(std::string_view needle)
 {
@@ -1104,13 +1107,12 @@ std::vector<Song> match_songs(std::string_view needle)
         return std::ranges::contains_subrange(altname.cf_alt_name, needle);
     };
 
-    const auto altname_xform = [] (const AltName& altname) {
-      return *lookup_song(altname.name);
-    };
-
-    std::ranges::copy(std::views::filter(alt_names, altname_matches_needle) |
-                      std::views::transform(altname_xform),
-                      std::inserter(res, std::ranges::begin(res)));
+    std::ranges::copy(
+        std::views::filter(alt_names, altname_matches_needle)
+        | std::views::transform([](const AltName& altname) { return lookup_song(altname.name); })
+        | std::views::filter([](const auto& s) { return s.has_value(); })
+        | std::views::transform([](const auto& s) { return *s; }),
+        std::inserter(res, std::ranges::begin(res)));
 
     return res | std::ranges::to<std::vector>();
 }
@@ -1170,13 +1172,16 @@ std::vector<std::tuple<std::int64_t, Song>> match_songs_indexed(std::string_view
     return std::ranges::contains_subrange(altname.cf_alt_name, needle);
   };
 
-  const auto altname_xform = [&indexed_songs] (const AltName& altname) {
-    return *std::ranges::find(indexed_songs, altname.name, [](const auto& pair) { return std::get<1>(pair).name; });
-  };
-
-  std::ranges::copy(std::views::filter(alt_names, altname_matches_needle) |
-                    std::views::transform(altname_xform),
-                    std::inserter(res, std::ranges::begin(res)));
+  std::ranges::copy(
+      std::views::filter(alt_names, altname_matches_needle)
+      | std::views::transform([&indexed_songs](const AltName& altname) -> std::optional<std::tuple<std::int64_t, Song>> {
+          auto it = std::ranges::find(indexed_songs, altname.name, [](const auto& p) { return std::get<1>(p).name; });
+          if (it == std::ranges::end(indexed_songs)) return std::nullopt;
+          return *it;
+      })
+      | std::views::filter([](const auto& s) { return s.has_value(); })
+      | std::views::transform([](const auto& s) { return *s; }),
+      std::inserter(res, std::ranges::begin(res)));
   return res | std::ranges::to<std::vector>();
 
 }
