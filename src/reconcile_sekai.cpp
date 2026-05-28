@@ -89,7 +89,7 @@ int main(int argc, char* argv[])
             hunks.push_back({lo, hi});
     }
 
-    std::print("--- a/{0}\n+++ b/{0}\n", filepath);
+    std::print("--- a/src/project_sekai_tracks.cppm\n+++ b/src/project_sekai_tracks.cppm\n");
     for (const auto& [lo, hi] : hunks) {
         std::print("@@ -{},{} +{},{} @@\n", lo + 1, hi - lo, lo + 1, hi - lo);
         for (int i = lo; i < hi; ++i) {
