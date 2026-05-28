@@ -43,4 +43,6 @@ private:
     prometheus::Counter* ac_song_success_counter;
     prometheus::Counter* ac_song_no_match_counter;
     prometheus::Counter* ac_song_failure_counter;
+
+    prometheus::Histogram* autocomplete_latency;
 };

@@ -220,6 +220,7 @@ context::setup_bot()
     bot->on_log(cerr_logger{});
 
     commands.emplace("setlist", std::make_unique<setlist_command>(*this));
+    commands.emplace("song", std::make_unique<song_command>(*this));
     commands.emplace("last", std::make_unique<last_command>(*this));
     commands.emplace("lastp", std::make_unique<lastp_command>(*this));
     commands.emplace("setlistlast", std::make_unique<setlistlast_command>(*this));
