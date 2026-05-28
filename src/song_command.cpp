@@ -88,6 +88,13 @@ song_command::on_slashcommand(const dpp::slashcommand_t event)
     }
 
     const Song& song = *song_result;
+
+    if (!song.vocadb_id) {
+        auto msg = dpp::message(std::format("{} isn't a Vocaloid song — no details available.", song.name))
+            .set_flags(dpp::message_flags::m_ephemeral);
+        co_return co_await util::reply_handler_new(event.co_reply(msg), ctx, song_success_counter, song_failure_counter);
+    }
+
     auto enriched = enrich_from_vocadb(song, ctx);
 
     std::string alt_names;
