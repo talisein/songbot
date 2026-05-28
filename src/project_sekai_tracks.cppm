@@ -37,24 +37,24 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 46, VSG,    "Greenlights Serenade" },
     { 47, VSG,    "Melt" },
     { 48, VSG,    "World is Mine" },
-    { 49, VSG,    "Hatsune Miku no Shoushitsu" },
+    { 49, VSG,    "Hatsune Miku no Shoushitsu" }, // miss
     { 50, VSG,    "Blessing" },
     { 72, VSG,    "Bless Your Breath" },
     { 83, VSG,    "Gimme×Gimme" },
-    { 84, VSG,    "Junky Night Town Orchestra" },
-    { 85, VSG,    "Leia - Remind" },
+    { 84, VSG,    "Junky Night Town Orchestra" }, // miss
+    { 85, VSG,    "Leia - Remind" }, // miss
     { 86, VSG,    "on the rocks" },
-    { 10001, VSG, "Jangsanbeom" },
-    { 10002, VSG, "Alone" },
-    { 10003, VSG, "Gakgaejeontu" },
-    { 10004, VSG, "Beotkkotbi" },
-    { 10005, VSG, "Byeolbit Serenade" },
-    { 10006, VSG, "Bimil Inhyeonggeuk II" },
-    { 10007, VSG, "Carpe Diem!" },
-    { 10008, VSG, "Dungap" },
-    { 10009, VSG, "Usan" },
-    { 10010, VSG, "Shimiyuku" },
-    { 104, VSG,   "Cendrillon 10th Anniversary" },
+    { 10001, VSG, "Jangsanbeom" }, // miss
+    { 10002, VSG, "Alone" }, // miss
+    { 10003, VSG, "Gakgaejeontu" }, // miss
+    { 10004, VSG, "Beotkkotbi" }, // miss
+    { 10005, VSG, "Byeolbit Serenade" }, // miss
+    { 10006, VSG, "Bimil Inhyeonggeuk II" }, // miss
+    { 10007, VSG, "Carpe Diem!" }, // miss
+    { 10008, VSG, "Dungap" }, // miss
+    { 10009, VSG, "Usan" }, // miss
+    { 10010, VSG, "Shimiyuku" }, // miss
+    { 104, VSG,   "Cendrillon 10th Anniversary" }, // miss
     { 108, VSG,   "Because You're Here" },
     { 109, VSG,   "Resonate" },
     { 110, VSG,   "Thousand Cherry Blossoms" },
@@ -62,48 +62,48 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 11002, VSG, "My Stage With You" },
     { 11003, VSG, "Step Forward" },
     { 11004, VSG, "First Storm" },
-    { 11005, VSG, "We Leave The World Together" },
-    { 11006, VSG, "Jìng Zhōng Shàonǚ" },
+    { 11005, VSG, "We Leave The World Together" }, // miss
+    { 11006, VSG, "Jìng Zhōng Shàonǚ" }, // miss
     { 11007, VSG, "Dream Color Planet" },
     { 11010, VSG, "Crossing Over the Coastline" },
-    { 11012, VSG, "Lái Dōu Lái le" },
-    { 11013, VSG, "HIMAN=HIDAI Syousoukyoku" },
-    { 11014, VSG, "Yuè Xī Jiāng · Chūnléi" },
-    { 11015, VSG, "Mǎi Mǎi Mǎi" },
+    { 11012, VSG, "Lái Dōu Lái le" }, // miss
+    { 11013, VSG, "HIMAN=HIDAI Syousoukyoku" }, // miss
+    { 11014, VSG, "Yuè Xī Jiāng · Chūnléi" }, // miss
+    { 11015, VSG, "Mǎi Mǎi Mǎi" }, // miss
     { 11016, VSG, "Mag1c" },
     { 113, VSG,   "Rolling Girl" },
-    { 114, VSG,   "Ura Omote Lovers" },
-    { 115, VSG,   "Unknown Mother Goose" },
+    { 114, VSG,   "Ura Omote Lovers" }, // miss
+    { 115, VSG,   "Unknown Mother Goose" }, // miss
     { 117, VSG,   "ODDS&ENDS" },
     { 118, VSG,   "*Hello, Planet." },
     { 119, VSG,   "World's End Dancehall" },
-    { 124, VSG,   "Miku Miku ni Shite Ageru♪ (Shite Yan Yo)" },
+    { 124, VSG,   "Miku Miku ni Shite Ageru♪ (Shite Yan Yo)" }, // miss
     { 131, VSG,   "The Intense Voice of Hatsune Miku" },
-    { 150, VSG,   "TOKIO FUNKA" },
-    { 152, VSG,   "Dareka no Shinzou ni Nareta Nara" },
+    { 150, VSG,   "TOKIO FUNKA" }, // miss
+    { 152, VSG,   "Dareka no Shinzou ni Nareta Nara" }, // miss
     { 153, VSG,   "Miku" },
-    { 175, VSG,   "Haikei Doppelganger" },
+    { 175, VSG,   "Haikei Doppelganger" }, // miss
     { 177, VSG,   "Butterfly on Your Right Shoulder" },
     { 179, VSG,   "Meltdown" },
     { 186, VSG,   "Hatsune Creation Myth" },
     { 190, VSG,   "Daughter of Evil (The Princess of Lucifer)" },
     { 191, VSG,   "Servant of Evil (His Significance of Existence)" },
-    { 202, VSG,   "Q" },
-    { 206, VSG,   "Kimiiro Marine Snow" },
-    { 214, VSG,   "Palette ni wa Kimi ga Ippai" },
-    { 216, VSG,   "Luka Luka ★ Night Fever" },
+    { 202, VSG,   "Q" }, // miss
+    { 206, VSG,   "Kimiiro Marine Snow" }, // miss
+    { 214, VSG,   "Palette ni wa Kimi ga Ippai" }, // miss
+    { 216, VSG,   "Luka Luka ★ Night Fever" }, // miss
     { 219, VSG,   "DUNE" },
-    { 220, VSG,   "Donut Hole 2024" },
-    { 220, VSG,   "Donut Hole" },
+    { 220, VSG,   "Donut Hole 2024" }, // miss
+    { 220, VSG,   "Donut Hole" }, // miss
     { 221, VSG,   "Matryoshka" },
-    { 222, VSG,   "Piano×Forte×Scandal" },
-    { 223, VSG,   "Sennen no Dokusouka" },
-    { 228, VSG,   "Goodbye" },
-    { 229, VSG,   "Noushou Sakuretsu Girl" },
-    { 238, VSG,   "Black ★ Rock Shooter" },
-    { 247, VSG,   "Copycat" },
-    { 249, VSG,   "Bokura no 16bit Sensou" },
-    { 250, VSG,   "Kusaregedou to Chocolate" },
+    { 222, VSG,   "Piano×Forte×Scandal" }, // miss
+    { 223, VSG,   "Sennen no Dokusouka" }, // miss
+    { 228, VSG,   "Goodbye" }, // miss
+    { 229, VSG,   "Noushou Sakuretsu Girl" }, // miss
+    { 238, VSG,   "Black ★ Rock Shooter" }, // miss
+    { 247, VSG,   "Copycat" }, // miss
+    { 249, VSG,   "Bokura no 16bit Sensou" }, // miss
+    { 250, VSG,   "Kusaregedou to Chocolate" }, // miss
     { 251, VSG,   "Fräulein=Biblioteca" },
     { 256, VSG,   "Double Lariat" },
     { 261, VSG,   "Stardust Utopia" },
@@ -112,77 +112,77 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 271, VSG,   "Warm Kaito" },
     { 273, VSG,   "FUTURE EVE" },
     { 275, VSG,   "Paradichlorobenzene" },
-    { 278, VSG,   "Bad ∞ End ∞ Night" },
+    { 278, VSG,   "Bad ∞ End ∞ Night" }, // miss
     { 279, VSG,   "This is, the Happiness and Peace of Mind Committee." },
     { 283, VSG,   "Rainy Snowdrop" },
     { 284, VSG,   "Invisible" },
     { 288, VSG,   "Unhappy Refrain" },
     { 296, VSG,   "Cantarella" },
-    { 297, VSG,   "p.h." },
+    { 297, VSG,   "p.h." }, // miss
     { 301, VSG,   "My Love is Hellfire" },
     { 303, VSG,   "Rin-chan Now!" },
-    { 305, VSG,   "Strobe Last" },
-    { 309, VSG,   "Afterglow" },
-    { 311, VSG,   "Yoake to Hotaru" },
+    { 305, VSG,   "Strobe Last" }, // miss
+    { 309, VSG,   "Afterglow" }, // miss
+    { 311, VSG,   "Yoake to Hotaru" }, // miss
     { 312, VSG,   "Heart" },
     { 313, VSG,   "FREELY TOMORROW" },
-    { 317, VSG,   "Mahou Mitai na Music!" },
+    { 317, VSG,   "Mahou Mitai na Music!" }, // miss
     { 318, VSG,   "Sharing The World" },
     { 319, VSG,   "Decade" },
-    { 325, VSG,   "Buta ni Natte yeah yeah" },
-    { 326, VSG,   "Tenshi no Tsubasa." },
+    { 325, VSG,   "Buta ni Natte yeah yeah" }, // miss
+    { 326, VSG,   "Tenshi no Tsubasa." }, // miss
     { 327, VSG,   "Snowmix♪" },
-    { 328, VSG,   "SEKAI-chan to KAFU-chan no Otsukai Gassoukyoku" },
+    { 328, VSG,   "SEKAI-chan to KAFU-chan no Otsukai Gassoukyoku" }, // miss
     { 330, VSG,   "Interviewer" },
     { 331, VSG,   "39 (Thank You)" },
-    { 334, VSG,   "Vampire's ∞ pathoS" },
-    { 335, VSG,   "TRASH and TRASH!" },
+    { 334, VSG,   "Vampire's ∞ pathoS" }, // miss
+    { 335, VSG,   "TRASH and TRASH!" }, // miss
     { 337, VSG,   "METEOR" },
-    { 341, VSG,   "Nanchoukei Danshi ga Taosenai" },
+    { 341, VSG,   "Nanchoukei Danshi ga Taosenai" }, // miss
     { 342, VSG,   "Blue Star" },
     { 343, VSG,   "Snowman" },
-    { 347, VSG,   "Enbizaka no Shitateya" },
-    { 348, VSG,   "Akutoku no Judgement" },
-    { 349, VSG,   "Akujiki Musume Conchita" },
-    { 350, VSG,   "Nemurase Hime kara no gift" },
+    { 347, VSG,   "Enbizaka no Shitateya" }, // miss
+    { 348, VSG,   "Akutoku no Judgement" }, // miss
+    { 349, VSG,   "Akujiki Musume Conchita" }, // miss
+    { 350, VSG,   "Nemurase Hime kara no gift" }, // miss
     { 357, VSG,   "Blue Planet" },
-    { 362, VSG,   "Wonder Style" },
-    { 363, VSG,   "UNDERWATER" },
-    { 371, VSG,   "Sweety glitch" },
-    { 379, VSG,   "Zunda Party Night" },
+    { 362, VSG,   "Wonder Style" }, // miss
+    { 363, VSG,   "UNDERWATER" }, // miss
+    { 371, VSG,   "Sweety glitch" }, // miss
+    { 379, VSG,   "Zunda Party Night" }, // miss
     { 381, VSG,   "New Human Race" },
-    { 387, VSG,   "Hello Builder" },
+    { 387, VSG,   "Hello Builder" }, // miss
     { 388, VSG,   "The Intense Voice of Hatsune Miku" },
     { 390, VSG,   "Dear" },
-    { 401, VSG,   "Manimani" },
+    { 401, VSG,   "Manimani" }, // miss
     { 403, VSG,   "Wintry Winds" },
-    { 412, VSG,   "Devil Janai Mon" },
+    { 412, VSG,   "Devil Janai Mon" }, // miss
     { 414, VSG,   "HERO" },
     { 415, VSG,   "Lucky☆Orb" },
-    { 419, VSG,   "Unsung Melodies" },
+    { 419, VSG,   "Unsung Melodies" }, // miss
     { 420, VSG,   "imaginary love story" },
     { 430, VSG,   "\"Nh-Uh-Uh.\"" },
     { 433, VSG,   "Play With Fire" },
-    { 435, VSG,   "Relay Outer" },
-    { 439, VSG,   "Issen Kounen" },
+    { 435, VSG,   "Relay Outer" }, // miss
+    { 439, VSG,   "Issen Kounen" }, // miss
     { 453, VSG,   "Ten Thousand Stars" },
     { 454, VSG,   "Electric Angel" },
     { 459, VSG,   "Can't Make a Song!!" },
-    { 461, VSG,   "Odorobo" },
+    { 461, VSG,   "Odorobo" }, // miss
     { 462, VSG,   "Red Land Marker" },
-    { 463, VSG,   "Happy Cheat Day" },
+    { 463, VSG,   "Happy Cheat Day" }, // miss
     { 464, VSG,   "Intergalactic Bound" },
-    { 466, VSG,   "Garnet no Namida" },
+    { 466, VSG,   "Garnet no Namida" }, // miss
     { 467, VSG,   "Love Song" },
     { 470, VSG,   "The First Sound" },
     { 479, VSG,   "MikuFiesta" },
-    { 483, VSG,   "A Kotoba" },
-    { 485, VSG,   "Dandan Hayaku Naru" },
-    { 502, VSG,   "Help me, ERINNNNNN!!" },
-    { 515, VSG,   "Igaku" },
-    { 516, VSG,   "Achikochi Date-san" },
+    { 483, VSG,   "A Kotoba" }, // miss
+    { 485, VSG,   "Dandan Hayaku Naru" }, // miss
+    { 502, VSG,   "Help me, ERINNNNNN!!" }, // miss
+    { 515, VSG,   "Igaku" }, // miss
+    { 516, VSG,   "Achikochi Date-san" }, // miss
     { 518, VSG,   "Star of Heaven" },
-    { 523, VSG,   "Kimi to Boku no Resonance" },
+    { 523, VSG,   "Kimi to Boku no Resonance" }, // miss
     { 525, VSG,   "Antenna 39" },
     { 528, VSG,   "Thousand Little Voices" },
     { 529, VSG,   "Culture" },
@@ -191,24 +191,24 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 541, VSG,   "Main Character" },
     { 542, VSG,   "Blackjack" },
     { 552, VSG,   "M@GICAL☆CURE! LOVE ♥ SHOT!" },
-    { 558, VSG,   "No da" },
-    { 561, VSG,   "Proto Disco" },
-    { 562, VSG,   "Ángel" },
-    { 563, VSG,   "NAKAKAPAGPABAGABAG" },
-    { 566, VSG,   "Panda Hero" },
+    { 558, VSG,   "No da" }, // miss
+    { 561, VSG,   "Proto Disco" }, // miss
+    { 562, VSG,   "Ángel" }, // miss
+    { 563, VSG,   "NAKAKAPAGPABAGABAG" }, // miss
+    { 566, VSG,   "Panda Hero" }, // miss
     { 567, VSG,   "Close and Open, Demons and The Dead" },
-    { 568, VSG,   "Just 1dB Louder" },
-    { 584, VSG,   "IMAWANOKIWA" },
-    { 589, VSG,   "Barerii Ko" },
-    { 590, VSG,   "MANHATTAN" },
-    { 591, VSG,   "Yoshiwara Lament Sairaiban" },
-    { 592, VSG,   "Queen of Hearts" },
-    { 593, VSG,   "Crystal Snow" },
+    { 568, VSG,   "Just 1dB Louder" }, // miss
+    { 584, VSG,   "IMAWANOKIWA" }, // miss
+    { 589, VSG,   "Barerii Ko" }, // miss
+    { 590, VSG,   "MANHATTAN" }, // miss
+    { 591, VSG,   "Yoshiwara Lament Sairaiban" }, // miss
+    { 592, VSG,   "Queen of Hearts" }, // miss
+    { 593, VSG,   "Crystal Snow" }, // miss
     { 594, VSG,   "Call!!" },
-    { 598, VSG,   "Last of Me" },
+    { 598, VSG,   "Last of Me" }, // miss
     { 599, VSG,   "Karma" },
     { 604, VSG,   "Packaged" },
-    { 609, VSG,   "Sad Machine" },
+    { 609, VSG,   "Sad Machine" }, // miss
     { 611, VSG,   "Love! Snow! Really Magic" },
     { 612, VSG,   "Snow Fairy Story" },
     { 613, VSG,   "Before the Snow Melts" },
@@ -216,547 +216,547 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 615, VSG,   "Round Off the Square Earth" },
     { 616, VSG,   "Love" },
     { 617, VSG,   "Poka Poka Planet" },
-    { 618, VSG,   "Fondant Step" },
-    { 619, VSG,   "Connecting" },
-    { 624, VSG,   "Cirno no Perfect Sansuu Gakuen" },
-    { 627, VSG,   "TETORIS" },
+    { 618, VSG,   "Fondant Step" }, // miss
+    { 619, VSG,   "Connecting" }, // miss
+    { 624, VSG,   "Cirno no Perfect Sansuu Gakuen" }, // miss
+    { 627, VSG,   "TETORIS" }, // miss
     { 628, VSG,   "Monitoring" },
-    { 638, VSG,   "Kaben, Sore ni Matsuwaru Onsei" },
-    { 639, VSG,   "Marionette Dancer" },
-    { 640, VSG,   "MONSTER" },
-    { 648, VSG,   "Life Will Change" },
-    { 651, VSG,   "White Happy" },
-    { 652, VSG,   "Kareshi no Jude" },
-    { 653, VSG,   "Pamela" },
+    { 638, VSG,   "Kaben, Sore ni Matsuwaru Onsei" }, // miss
+    { 639, VSG,   "Marionette Dancer" }, // miss
+    { 640, VSG,   "MONSTER" }, // miss
+    { 648, VSG,   "Life Will Change" }, // miss
+    { 651, VSG,   "White Happy" }, // miss
+    { 652, VSG,   "Kareshi no Jude" }, // miss
+    { 653, VSG,   "Pamela" }, // miss
     { 654, VSG,   "Lustrous" },
-    { 657, VSG,   "i DO what i WANT" },
-    { 658, VSG,   "Jougen no Tsuki" },
-    { 663, VSG,   "Venus" },
+    { 657, VSG,   "i DO what i WANT" }, // miss
+    { 658, VSG,   "Jougen no Tsuki" }, // miss
+    { 663, VSG,   "Venus" }, // miss
     { 666, VSG,   "Young Girl A" },
-    { 667, VSG,   "Musekinin Shuugoutai" },
+    { 667, VSG,   "Musekinin Shuugoutai" }, // miss
     { 669, VSG,   "origin" },
-    { 685, VSG,   "DENKOH SEKKA" },
-    { 686, VSG,   "TREASURE GARDEN" },
-    { 687, VSG,   "JET BLACK" },
-    { 688, VSG,   "WE ARE PICO PICO HAMMERS!!!!" },
-    { 689, VSG,   "SAI'AI JINSEI RUNNER" },
+    { 685, VSG,   "DENKOH SEKKA" }, // miss
+    { 686, VSG,   "TREASURE GARDEN" }, // miss
+    { 687, VSG,   "JET BLACK" }, // miss
+    { 688, VSG,   "WE ARE PICO PICO HAMMERS!!!!" }, // miss
+    { 689, VSG,   "SAI'AI JINSEI RUNNER" }, // miss
     { 692, VSG,   "Vocalo-Colosseum" },
     { 694, VSG,   "Artifact" },
     { 699, VSG,   "Catch the Wave" },
-    { 704, VSG,   "Kuronuri Sekai ate Shokan" },
-    { 709, VSG,   "Hatsune Miku no Shoushitsu-Gekijouban-" },
+    { 704, VSG,   "Kuronuri Sekai ate Shokan" }, // miss
+    { 709, VSG,   "Hatsune Miku no Shoushitsu-Gekijouban-" }, // miss
     { 711, VSG,   "Wanderlast" },
     { 713, VSG,   "Nyanyanyanyanyanyanya!" },
-    { 714, VSG,   "Fräulein=Ojousama" },
-    { 717, VSG,   "Ribbon" },
-    { 718, VSG,   "Maku wo Orosou, Parade e" },
-    { 719, VSG,   "SHIAWASE FOR YOU!" },
-    { 721, VSG,   "Aishiteitanoni" },
-    { 722, VSG,   "Daidaidaidaidaikirai" },
+    { 714, VSG,   "Fräulein=Ojousama" }, // miss
+    { 717, VSG,   "Ribbon" }, // miss
+    { 718, VSG,   "Maku wo Orosou, Parade e" }, // miss
+    { 719, VSG,   "SHIAWASE FOR YOU!" }, // miss
+    { 721, VSG,   "Aishiteitanoni" }, // miss
+    { 722, VSG,   "Daidaidaidaidaikirai" }, // miss
     { 724, VSG,   "HAO" },
-    { 725, VSG,   "shrimp miku" },
-    { 726, VSG,   "Alkali Rettousei" },
-    { 727, VSG,   "T-shi no Hanashi wo Shinjiru na" },
-    { 736, VSG,   "LOVELY CAVITY" },
-    { no, VSG,    "Hikari no Atsumekata" },
-    { no, VSG,    "Lapse" },
-    { no, VSG,    "De Los Santos" },
-    { no, VSG,    "Ichiokunen Koi Shiteru" },
-    { no, VSG,    "Ima Sugu Rinne" },
+    { 725, VSG,   "shrimp miku" }, // miss
+    { 726, VSG,   "Alkali Rettousei" }, // miss
+    { 727, VSG,   "T-shi no Hanashi wo Shinjiru na" }, // miss
+    { 736, VSG,   "LOVELY CAVITY" }, // miss
+    { no, VSG,    "Hikari no Atsumekata" }, // miss
+    { no, VSG,    "Lapse" }, // miss
+    { no, VSG,    "De Los Santos" }, // miss
+    { no, VSG,    "Ichiokunen Koi Shiteru" }, // miss
+    { no, VSG,    "Ima Sugu Rinne" }, // miss
     /* Cover Songs */
     { 2, LEO,     "ROKI" },
     { 3, LEO,     "Teo" },
-    { 6, LEO,     "Hibana -Reloaded-" },
+    { 6, LEO,     "Hibana -Reloaded-" }, // miss
     { 8, LEO,     "Time Machine" },
     { 10, MMJ,    "Happy Synthesizer" },
     { 11, MMJ,    "Viva Happy" },
-    { 13, MMJ,    "Nostalogic" },
+    { 13, MMJ,    "Nostalogic" }, // miss
     { 15, VBS,    "drop pop candy" },
-    { 18, LEO,    "Asu no Yozora Shoukaihan" },
-    { 19, N25,    "Charles" },
-    { 21, WxS,    "Dappou Rock" },
-    { 22, N25,    "Inochi ni Kirawarete Iru" },
+    { 18, LEO,    "Asu no Yozora Shoukaihan" }, // miss
+    { 19, N25,    "Charles" }, // miss
+    { 21, WxS,    "Dappou Rock" }, // miss
+    { 22, N25,    "Inochi ni Kirawarete Iru" }, // miss
     { 26, VBS,    "BRING IT ON!" },
     { 27, VBS,    "Just Be Friends" },
     { 28, VBS,    "Doctor=Funk Beat" },
     { 36, WxS,    "Miracle Paint" },
-    { 38, WxS,    "Buriki no Dance" },
+    { 38, WxS,    "Buriki no Dance" }, // miss
     { 41, WxS,    "Sweet Magic" },
-    { 66, N25,    "Hello／How Are You" },
-    { 67, N25,    "Jishou Mushoku" },
-    { 68, WxS,    "Dance Robot Dance" },
-    { 69, VBS,    "Fragile" },
-    { 70, MMJ,    "Melty Land Nightmare" },
+    { 66, N25,    "Hello／How Are You" }, // miss
+    { 67, N25,    "Jishou Mushoku" }, // miss
+    { 68, WxS,    "Dance Robot Dance" }, // miss
+    { 69, VBS,    "Fragile" }, // miss
+    { 70, MMJ,    "Melty Land Nightmare" }, // miss
     { 71, MMJ,    "Patchwork Staccato" },
-    { 73, MMJ,    "Near" },
+    { 73, MMJ,    "Near" }, // miss
     { 74, N25,    "Solitary Envy" },
     { 75, LEO,    "Tale of the Deep-sea Lily" },
-    { 78, WxS,    "Bouken no Sho ga Kiemashita!" },
-    { 81, VBS,    "Yobanashi Deceive" },
+    { 78, WxS,    "Bouken no Sho ga Kiemashita!" }, // miss
+    { 81, VBS,    "Yobanashi Deceive" }, // miss
     { 87, MMJ,    "Love Trial" },
-    { 88, WxS,    "Chururira Chururira Daddadda!" },
+    { 88, WxS,    "Chururira Chururira Daddadda!" }, // miss
     { 91, LEO,    "Dramaturgy" },
     { 92, N25,    "Otome Dissection" },
-    { 93, LEO,    "Aoku Kakero!" },
-    { 94, N25,    "Totemo Itai Itagaritai" },
-    { 95, VBS,    "Ifuudoudou" },
+    { 93, LEO,    "Aoku Kakero!" }, // miss
+    { 94, N25,    "Totemo Itai Itagaritai" }, // miss
+    { 95, VBS,    "Ifuudoudou" }, // miss
     { 96, LEO,    "from Y to Y" },
-    { 98, LEO,    "Lost One no Goukoku" },
-    { 100, VBS,   "ECHO" },
+    { 98, LEO,    "Lost One no Goukoku" }, // miss
+    { 100, VBS,   "ECHO" }, // miss
     { 102, VBS,   "Ghost City Tokyo" },
-    { 106, WxS,   "Oki ni Mesu mama" },
-    { 107, MMJ,   "Milk Crown on Sonechka" },
-    { 111, N25,   "Cutlery" },
-    { 120, LEO,   "Ikanaide" },
+    { 106, WxS,   "Oki ni Mesu mama" }, // miss
+    { 107, MMJ,   "Milk Crown on Sonechka" }, // miss
+    { 111, N25,   "Cutlery" }, // miss
+    { 120, LEO,   "Ikanaide" }, // miss
     { 121, MMJ,   "Romeo and Cinderella" },
-    { 122, WxS,   "Positive☆Dance Time" },
+    { 122, WxS,   "Positive☆Dance Time" }, // miss
     { 123, MMJ,   "Dreamin Chuchu" },
-    { 125, N25,   "Bocca della Verità" },
+    { 125, N25,   "Bocca della Verità" }, // miss
     { 129, N25,   "Bitter Chocolate Decoration" },
-    { 133, VBS,   "Akuma no Odorikata" },
-    { 134, WxS,   "Telecaster B-Boy" },
-    { 135, LEO,   "Roku-chou Nen to Ichiya Monogatari" },
-    { 136, VBS,   "Children Record" },
-    { 138, WxS,   "KING" },
-    { 139, N25,   "Yoru ni Kakeru" },
-    { 143, VBS,   "Traffic Jam" },
-    { 145, N25,   "Venom" },
+    { 133, VBS,   "Akuma no Odorikata" }, // miss
+    { 134, WxS,   "Telecaster B-Boy" }, // miss
+    { 135, LEO,   "Roku-chou Nen to Ichiya Monogatari" }, // miss
+    { 136, VBS,   "Children Record" }, // miss
+    { 138, WxS,   "KING" }, // miss
+    { 139, N25,   "Yoru ni Kakeru" }, // miss
+    { 143, VBS,   "Traffic Jam" }, // miss
+    { 145, N25,   "Venom" }, // miss
     { 146, WxS,   "Remote Controller" },
     { 147, MMJ,   "Karakuri Pierrot" },
     { 148, LEO,   "ray" },
-    { 154, MMJ,   "Chikyuu Saigo no Kokuhaku wo" },
-    { 155, LEO,   "Shinpakusuu♯0822" },
-    { 157, MMJ,   "Marshmary" },
-    { 158, WxS,   "Nonsense Bungaku" },
-    { 167, VBS,   "Alter Ego" },
+    { 154, MMJ,   "Chikyuu Saigo no Kokuhaku wo" }, // miss
+    { 155, LEO,   "Shinpakusuu♯0822" }, // miss
+    { 157, MMJ,   "Marshmary" }, // miss
+    { 158, WxS,   "Nonsense Bungaku" }, // miss
+    { 167, VBS,   "Alter Ego" }, // miss
     { 168, MMJ,   "Darling Dance" },
-    { 169, MMJ,   "Shoujorei" },
-    { 170, N25,   "villain" },
+    { 169, MMJ,   "Shoujorei" }, // miss
+    { 170, N25,   "villain" }, // miss
     { 171, LEO,   "Kagerou Daze" },
-    { 172, MMJ,   "Happy Halloween" },
-    { 174, WxS,   "Yī Èr Fanclub" },
-    { 181, N25,   "Aishite Aishite Aishite" },
-    { 183, WxS,   "fixer" },
-    { 184, LEO,   "Hello,world!" },
-    { 188, MMJ,   "Kokoroyohou" },
+    { 172, MMJ,   "Happy Halloween" }, // miss
+    { 174, WxS,   "Yī Èr Fanclub" }, // miss
+    { 181, N25,   "Aishite Aishite Aishite" }, // miss
+    { 183, WxS,   "fixer" }, // miss
+    { 184, LEO,   "Hello,world!" }, // miss
+    { 188, MMJ,   "Kokoroyohou" }, // miss
     { 194, N25,   "Delusional Sentimental Compensation Federation" },
-    { 195, VBS,   "PaⅢ.SENSATION" },
-    { 198, WxS,   "Goodbye Sengen" },
+    { 195, VBS,   "PaⅢ.SENSATION" }, // miss
+    { 198, WxS,   "Goodbye Sengen" }, // miss
     { 199, LEO,   "Ghost Rule" },
-    { 200, VBS,   "Garando" },
-    { 201, WxS,   "Kami no Manimani" },
-    { 204, N25,   "Usseewa" },
+    { 200, VBS,   "Garando" }, // miss
+    { 201, WxS,   "Kami no Manimani" }, // miss
+    { 204, N25,   "Usseewa" }, // miss
     { 205, VBS,   "Odo" },
-    { 208, LEO,   "Bokura Mada Underground" },
-    { 210, VBS,   "Ame to Petra" },
+    { 208, LEO,   "Bokura Mada Underground" }, // miss
+    { 210, VBS,   "Ame to Petra" }, // miss
     { 213, MMJ,   "Vampire" },
-    { 218, N25,   "Meru" },
+    { 218, N25,   "Meru" }, // miss
     { 225, WxS,   "Ego Rock" },
     { 226, LEO,   "lost and found" },
-    { 240, WxS,   "Odore Orchestra" },
-    { 241, LEO,   "Asagao no Chiru Koro ni" },
+    { 240, WxS,   "Odore Orchestra" }, // miss
+    { 241, LEO,   "Asagao no Chiru Koro ni" }, // miss
     { 242, MMJ,   "Left-Behind City (Urbandonment)" },
     { 243, LEO,   "Calc." },
-    { 245, VBS,   "Aun no Beats" },
+    { 245, VBS,   "Aun no Beats" }, // miss
     { 246, WxS,   "Alien Alien" },
-    { 253, VBS,   "DAYBREAK FRONTLINE" },
-    { 255, LEO,   "Yomosugara Kimi Omou" },
+    { 253, VBS,   "DAYBREAK FRONTLINE" }, // miss
+    { 255, LEO,   "Yomosugara Kimi Omou" }, // miss
     { 258, MMJ,   "Deep-Sea Girl" },
-    { 260, WxS,   "Love ka?" },
-    { 262, VBS,   "Teikoku Shoujo" },
+    { 260, WxS,   "Love ka?" }, // miss
+    { 262, VBS,   "Teikoku Shoujo" }, // miss
     { 266, VBS,   "YY" },
-    { 268, N25,   "Non-breath oblige" },
+    { 268, N25,   "Non-breath oblige" }, // miss
     { 269, MMJ,   "Lonely Universe" },
     { 270, N25,   "Blooming in the Mud" },
     { 272, N25,   "Gehenna" },
-    { 276, VBS,   "SHANTI" },
-    { 277, N25,   "phony" },
+    { 276, VBS,   "SHANTI" }, // miss
+    { 277, N25,   "phony" }, // miss
     { 281, MMJ,   "Kimagure Mercy" },
     { 286, LEO,   "Hello, Worker" },
-    { 289, LEO,   "Amanojaku" },
+    { 289, LEO,   "Amanojaku" }, // miss
     { 291, VBS,   "Pheles" },
-    { 293, N25,   "Irony" },
+    { 293, N25,   "Irony" }, // miss
     { 294, N25,   "Even If It's Your Happiness" },
-    { 298, WxS,   "Netoge Haijin Sprechchor" },
-    { 299, VBS,   "Egoist" },
+    { 298, WxS,   "Netoge Haijin Sprechchor" }, // miss
+    { 299, VBS,   "Egoist" }, // miss
     { 306, WxS,   "1925" },
-    { 307, WxS,   "Okochama Sensou" },
-    { 320, MMJ,   "Booo!" },
-    { 321, LEO,   "Attract Light" },
-    { 322, VBS,   "Taemanaku Aiiro" },
+    { 307, WxS,   "Okochama Sensou" }, // miss
+    { 320, MMJ,   "Booo!" }, // miss
+    { 321, LEO,   "Attract Light" }, // miss
+    { 322, VBS,   "Taemanaku Aiiro" }, // miss
     { 323, LEO,   "Kaisei" },
     { 339, LEO,   "glow" },
-    { 340, N25,   "Totemo Suteki na Rokugatsu Deshita" },
+    { 340, N25,   "Totemo Suteki na Rokugatsu Deshita" }, // miss
     { 344, VBS,   "Brain Revolution Girl" },
-    { 346, WxS,   "Aa, Subarashiki Nyansei" },
-    { 352, N25,   "Inochi Bakkari" },
-    { 354, MMJ,   "Setsuna Trip" },
+    { 346, WxS,   "Aa, Subarashiki Nyansei" }, // miss
+    { 352, N25,   "Inochi Bakkari" }, // miss
+    { 354, MMJ,   "Setsuna Trip" }, // miss
     { 355, MMJ,   "The Snow White Princess is" },
-    { 358, N25,   "kokoronashi" },
-    { 360, WxS,   "Taiyoukei Disco" },
-    { 361, MMJ,   "Kyuukurarin" },
+    { 358, N25,   "kokoronashi" }, // miss
+    { 360, WxS,   "Taiyoukei Disco" }, // miss
+    { 361, MMJ,   "Kyuukurarin" }, // miss
     { 365, VBS,   "Love is War" },
     { 367, WxS,   "All I Need Are Things I Like" },
     { 369, MMJ,   "Melancholic" },
     { 372, LEO,   "Music of Heaven" },
-    { 376, WxS,   "Wagamama Hime" },
-    { 377, MMJ,   "Akuyaku ni Kiss Scene wo" },
-    { 378, N25,   "Slow Downer" },
+    { 376, WxS,   "Wagamama Hime" }, // miss
+    { 377, MMJ,   "Akuyaku ni Kiss Scene wo" }, // miss
+    { 378, N25,   "Slow Downer" }, // miss
     { 385, N25,   "God-ish" },
-    { 391, N25,   "Cute na Kanojo" },
-    { 392, VBS,   "Shunran" },
-    { 395, LEO,   "Summertime Record" },
+    { 391, N25,   "Cute na Kanojo" }, // miss
+    { 392, VBS,   "Shunran" }, // miss
+    { 395, LEO,   "Summertime Record" }, // miss
     { 396, LEO,   "Tokyo Teddy Bear" },
-    { 402, N25,   "Envy Baby" },
+    { 402, N25,   "Envy Baby" }, // miss
     { 407, LEO,   "When First Love Ends" },
-    { 410, VBS,   "Marshall Maximizer" },
-    { 413, MMJ,   "Sayonara Princess" },
-    { 417, MMJ,   "Kuu ni Naru" },
-    { 418, VBS,   "Kinmokusei" },
-    { 431, MMJ,   "flos" },
-    { 432, WxS,   "Kyoufuu All Back" },
-    { 434, WxS,   "1000-nen Ikiteru" },
-    { 436, WxS,   "Kosho Yashiki Satsujin Jiken" },
+    { 410, VBS,   "Marshall Maximizer" }, // miss
+    { 413, MMJ,   "Sayonara Princess" }, // miss
+    { 417, MMJ,   "Kuu ni Naru" }, // miss
+    { 418, VBS,   "Kinmokusei" }, // miss
+    { 431, MMJ,   "flos" }, // miss
+    { 432, WxS,   "Kyoufuu All Back" }, // miss
+    { 434, WxS,   "1000-nen Ikiteru" }, // miss
+    { 436, WxS,   "Kosho Yashiki Satsujin Jiken" }, // miss
     { 437, VBS,   "Hm? Ah, Yes." },
-    { 438, LEO,   "Hide and Seek" },
-    { 441, VBS,   "Yoidore Shirazu" },
-    { 443, LEO,   "Ringo Uri no Utakata Shoujo" },
-    { 451, N25,   "Netsu Ijou" },
-    { 455, N25,   "Dokuzu" },
-    { 456, LEO,   "Kibou no Tsuki" },
+    { 438, LEO,   "Hide and Seek" }, // miss
+    { 441, VBS,   "Yoidore Shirazu" }, // miss
+    { 443, LEO,   "Ringo Uri no Utakata Shoujo" }, // miss
+    { 451, N25,   "Netsu Ijou" }, // miss
+    { 455, N25,   "Dokuzu" }, // miss
+    { 456, LEO,   "Kibou no Tsuki" }, // miss
     { 458, LEO,   "Weigh Anchor" },
-    { 469, N25,   "Lag Train" },
-    { 473, N25,   "Mind Brand" },
-    { 475, WxS,   "Chigau!!!" },
-    { 476, N25,   "Shadow Shadow" },
+    { 469, N25,   "Lag Train" }, // miss
+    { 473, N25,   "Mind Brand" }, // miss
+    { 475, WxS,   "Chigau!!!" }, // miss
+    { 476, N25,   "Shadow Shadow" }, // miss
     { 477, LEO,   "Mozaik Role (Reloaded)" },
-    { 480, WxS,   "Ochame Kinou" },
-    { 482, MMJ,   "Dame Ningen da!" },
-    { 484, LEO,   "Henceforth" },
-    { 490, VBS,   "Rumor" },
-    { 491, N25,   "Cat Loving" },
-    { 493, WxS,   "Kyou mo Harebare" },
-    { 494, MMJ,   "Poppin' Candy☆Fever!" },
+    { 480, WxS,   "Ochame Kinou" }, // miss
+    { 482, MMJ,   "Dame Ningen da!" }, // miss
+    { 484, LEO,   "Henceforth" }, // miss
+    { 490, VBS,   "Rumor" }, // miss
+    { 491, N25,   "Cat Loving" }, // miss
+    { 493, WxS,   "Kyou mo Harebare" }, // miss
+    { 494, MMJ,   "Poppin' Candy☆Fever!" }, // miss
     { 495, MMJ,   "SUPERHERO" },
     { 499, WxS,   "Konton Boogie" },
-    { 501, N25,   "Bad Apple!! feat.SEKAI" },
-    { 505, VBS,   "Call Boy" },
-    { 506, WxS,   "QUEEN" },
-    { 509, WxS,   "Liar Dancer" },
-    { 510, N25,   "Shippaisaku Shoujo" },
-    { 511, MMJ,   "Kisaragi Attention" },
-    { 513, VBS,   "CH4NGE" },
-    { 520, LEO,   "Toumei Elegy" },
-    { 521, MMJ,   "Override" },
-    { 522, VBS,   "WAVE" },
+    { 501, N25,   "Bad Apple!! feat.SEKAI" }, // miss
+    { 505, VBS,   "Call Boy" }, // miss
+    { 506, WxS,   "QUEEN" }, // miss
+    { 509, WxS,   "Liar Dancer" }, // miss
+    { 510, N25,   "Shippaisaku Shoujo" }, // miss
+    { 511, MMJ,   "Kisaragi Attention" }, // miss
+    { 513, VBS,   "CH4NGE" }, // miss
+    { 520, LEO,   "Toumei Elegy" }, // miss
+    { 521, MMJ,   "Override" }, // miss
+    { 522, VBS,   "WAVE" }, // miss
     { 530, MMJ,   "Cat Food" },
-    { 533, WxS,   "Tensei Ringo" },
-    { 534, LEO,   "World Lampshade [reunion]" },
-    { 536, OTHER, "Fire◎Flower (Rerec)" },
-    { 537, VBS,   "Hana ni Kaze" },
-    { 544, MMJ,   "Mousou Aspartame" },
-    { 547, LEO,   "Shuuen Touhikou" },
-    { 551, N25,   "Lost Umbrella" },
-    { 554, MMJ,   "snooze" },
+    { 533, WxS,   "Tensei Ringo" }, // miss
+    { 534, LEO,   "World Lampshade [reunion]" }, // miss
+    { 536, OTHER, "Fire◎Flower (Rerec)" }, // miss
+    { 537, VBS,   "Hana ni Kaze" }, // miss
+    { 544, MMJ,   "Mousou Aspartame" }, // miss
+    { 547, LEO,   "Shuuen Touhikou" }, // miss
+    { 551, N25,   "Lost Umbrella" }, // miss
+    { 554, MMJ,   "snooze" }, // miss
     { 556, N25,   "The Farthest Ends" },
-    { 557, VBS,   "Hana Obore" },
-    { 559, LEO,   "Odoryanse" },
-    { 571, VBS,   "Nisemono Ningen 40-gou" },
-    { 580, VBS,   "Mikazuki Step" },
-    { 581, WxS,   "Chuubyou Gekihatsu Boy" },
-    { 586, VBS,   "Yankee Boy・Yankee Girl" },
+    { 557, VBS,   "Hana Obore" }, // miss
+    { 559, LEO,   "Odoryanse" }, // miss
+    { 571, VBS,   "Nisemono Ningen 40-gou" }, // miss
+    { 580, VBS,   "Mikazuki Step" }, // miss
+    { 581, WxS,   "Chuubyou Gekihatsu Boy" }, // miss
+    { 586, VBS,   "Yankee Boy・Yankee Girl" }, // miss
     { 595, LEO,   "Envy Cat Walk" },
-    { 601, MMJ,   "Ruma" },
-    { 603, WxS,   "Do Re Mi Fa Rondo" },
-    { 606, N25,   "Suicide Parade" },
-    { 607, MMJ,   "Mawaru Sora Usagi" },
-    { 620, VBS,   "Shama" },
-    { 621, MMJ,   "Tokyo Summer Session" },
-    { 623, WxS,   "Touhou☆Wonderland" },
-    { 625, WxS,   "Kono Fuzaketa Subarashiki Sekai wa, Boku no Tame ni Aru" },
-    { 629, MMJ,   "8.32" },
-    { 632, VBS,   "Surges" },
-    { 641, LEO,   "Kimi ga Tobioriru no Naraba" },
-    { 643, VBS,   "About me" },
-    { 644, N25,   "Ikiru" },
+    { 601, MMJ,   "Ruma" }, // miss
+    { 603, WxS,   "Do Re Mi Fa Rondo" }, // miss
+    { 606, N25,   "Suicide Parade" }, // miss
+    { 607, MMJ,   "Mawaru Sora Usagi" }, // miss
+    { 620, VBS,   "Shama" }, // miss
+    { 621, MMJ,   "Tokyo Summer Session" }, // miss
+    { 623, WxS,   "Touhou☆Wonderland" }, // miss
+    { 625, WxS,   "Kono Fuzaketa Subarashiki Sekai wa, Boku no Tame ni Aru" }, // miss
+    { 629, MMJ,   "8.32" }, // miss
+    { 632, VBS,   "Surges" }, // miss
+    { 641, LEO,   "Kimi ga Tobioriru no Naraba" }, // miss
+    { 643, VBS,   "About me" }, // miss
+    { 644, N25,   "Ikiru" }, // miss
     { 645, LEO,   "Deep Sea City Underground" },
-    { 650, N25,   "Ano Natsu ga Houwa Suru." },
+    { 650, N25,   "Ano Natsu ga Houwa Suru." }, // miss
     { 661, WxS,   "Coward Fighters Urotander" },
-    { 664, WxS,   "Hito Mania" },
-    { 665, LEO,   "Rocket Cider" },
-    { 670, WxS,   "I~ya I~ya I~ya" },
-    { 672, VBS,   "How-To Sekai Seifuku" },
-    { 680, N25,   "Who?" },
-    { 682, MMJ,   "Anata Shika Mienai no" },
-    { 690, WxS,   "Wakusei Loop" },
+    { 664, WxS,   "Hito Mania" }, // miss
+    { 665, LEO,   "Rocket Cider" }, // miss
+    { 670, WxS,   "I~ya I~ya I~ya" }, // miss
+    { 672, VBS,   "How-To Sekai Seifuku" }, // miss
+    { 680, N25,   "Who?" }, // miss
+    { 682, MMJ,   "Anata Shika Mienai no" }, // miss
+    { 690, WxS,   "Wakusei Loop" }, // miss
     { 693, MMJ,   "erase or zero" },
-    { 698, N25,   "Kusari no Shoujo-Re Alive-" },
-    { 700, MMJ,   "Mahou Shoujo to Chocolate" },
-    { 702, LEO,   "Ramune" },
+    { 698, N25,   "Kusari no Shoujo-Re Alive-" }, // miss
+    { 700, MMJ,   "Mahou Shoujo to Chocolate" }, // miss
+    { 702, LEO,   "Ramune" }, // miss
     { 703, VBS,   "Violence Trigger" },
     { 710, LEO,   "Hedgehog" },
-    { 712, N25,   "Hikaku Shoukougun" },
-    { 715, WxS,   "Mahou Shoujo Koufukuron" },
+    { 712, N25,   "Hikaku Shoukougun" }, // miss
+    { 715, WxS,   "Mahou Shoujo Koufukuron" }, // miss
     { 723, N25,   "Lavie" },
-    { no, N25,    "Propose" },
+    { no, N25,    "Propose" }, // miss
     { no, LEO,    "Raspberry＊Monster" },
-    { no, VBS,    "Eien Hanahadashii" },
+    { no, VBS,    "Eien Hanahadashii" }, // miss
     /* Commissioned Songs */
-    { 51, WxS,    "Sekai wa Mada Hajimatte sura Inai" },
-    { 52, WxS,    "potato ni Natte iku" },
-    { 54, VBS,    "Ready Steady" },
-    { 55, VBS,    "Forward" },
-    { 57, MMJ,    "Idol Shin'eitai" },
-    { 60, N25,    "Kuyamu to Kaite Mirai" },
-    { 61, N25,    "Keitai Renwa" },
-    { 62, N25,    "Jackpot Sad Girl" },
-    { 63, LEO,    "needLe" },
+    { 51, WxS,    "Sekai wa Mada Hajimatte sura Inai" }, // miss
+    { 52, WxS,    "potato ni Natte iku" }, // miss
+    { 54, VBS,    "Ready Steady" }, // miss
+    { 55, VBS,    "Forward" }, // miss
+    { 57, MMJ,    "Idol Shin'eitai" }, // miss
+    { 60, N25,    "Kuyamu to Kaite Mirai" }, // miss
+    { 61, N25,    "Keitai Renwa" }, // miss
+    { 62, N25,    "Jackpot Sad Girl" }, // miss
+    { 63, LEO,    "needLe" }, // miss
     { 64, LEO,    "Stella" },
     { 76, OTHER,  "Sekai" },
-    { 77, OTHER,  "Wah Wah World" },
-    { 89, MMJ,    "Color of Drops" },
-    { 90, N25,    "Kagirinaku Haiiro e" },
-    { 97, LEO,    "Hare wo Matsu" },
-    { 99, MMJ,    "More! Jump! More!" },
-    { 101, VBS,   "RAD DOGS" },
-    { 103, WxS,   "NIJIIRO STORIES" },
-    { 105, WxS,   "Once Upon a Dream" },
-    { 11008, VSG, "Yīyàng" },
-    { 11017, VSG, "Hype Dive" },
-    { 112, MMJ,   "Tenshi no Clover" },
-    { 116, N25,   "IDSMILE" },
-    { 126, VBS,   "Cinema" },
-    { 127, WxS,   "Tondemo-Wonderz" },
-    { 130, LEO,   "From Tokyo" },
-    { 132, LEO,   "「１」" },
-    { 140, MMJ,   "Ice Drop" },
-    { 141, OTHER, "Gunjou Sanka" },
-    { 142, N25,   "Saisei" },
-    { 144, MMJ,   "Ai no Material" },
-    { 149, N25,   "Kanadetomosusora" },
-    { 156, VBS,   "Beat Eater" },
-    { 159, LEO,   "STAGE OF SEKAI" },
-    { 160, WxS,   "Showtime Ruler" },
-    { 161, VSG,   "magic number" },
-    { 166, WxS,   "Glory Steady Go!" },
-    { 173, LEO,   "Ryuusei no Pulse" },
-    { 176, VSG,   "MACHINEGUN POEM DOLL" },
-    { 178, WxS,   "Niccori^^Chousa-tai no Theme" },
-    { 180, VBS,   "Mirai" },
-    { 182, VBS,   "Flyer!" },
-    { 187, N25,   "Lower" },
-    { 189, N25,   "Nomad" },
-    { 192, VSG,   "Saribitotachi no Waltz" },
-    { 193, MMJ,   "Worldwide Wander" },
-    { 196, LEO,   "Order Made" },
-    { 203, N25,   "Tricologe" },
-    { 207, LEO,   "Peaky Peaky" },
-    { 209, MMJ,   "Metamo Re:born" },
-    { 211, MMJ,   "IF" },
-    { 212, WxS,   "Hoshizora no Melody" },
-    { 217, VBS,   "Machi" },
-    { 224, WxS,   "88☆彡" },
+    { 77, OTHER,  "Wah Wah World" }, // miss
+    { 89, MMJ,    "Color of Drops" }, // miss
+    { 90, N25,    "Kagirinaku Haiiro e" }, // miss
+    { 97, LEO,    "Hare wo Matsu" }, // miss
+    { 99, MMJ,    "More! Jump! More!" }, // miss
+    { 101, VBS,   "RAD DOGS" }, // miss
+    { 103, WxS,   "NIJIIRO STORIES" }, // miss
+    { 105, WxS,   "Once Upon a Dream" }, // miss
+    { 11008, VSG, "Yīyàng" }, // miss
+    { 11017, VSG, "Hype Dive" }, // miss
+    { 112, MMJ,   "Tenshi no Clover" }, // miss
+    { 116, N25,   "IDSMILE" }, // miss
+    { 126, VBS,   "Cinema" }, // miss
+    { 127, WxS,   "Tondemo-Wonderz" }, // miss
+    { 130, LEO,   "From Tokyo" }, // miss
+    { 132, LEO,   "「１」" }, // miss
+    { 140, MMJ,   "Ice Drop" }, // miss
+    { 141, OTHER, "Gunjou Sanka" }, // miss
+    { 142, N25,   "Saisei" }, // miss
+    { 144, MMJ,   "Ai no Material" }, // miss
+    { 149, N25,   "Kanadetomosusora" }, // miss
+    { 156, VBS,   "Beat Eater" }, // miss
+    { 159, LEO,   "STAGE OF SEKAI" }, // miss
+    { 160, WxS,   "Showtime Ruler" }, // miss
+    { 161, VSG,   "magic number" }, // miss
+    { 166, WxS,   "Glory Steady Go!" }, // miss
+    { 173, LEO,   "Ryuusei no Pulse" }, // miss
+    { 176, VSG,   "MACHINEGUN POEM DOLL" }, // miss
+    { 178, WxS,   "Niccori^^Chousa-tai no Theme" }, // miss
+    { 180, VBS,   "Mirai" }, // miss
+    { 182, VBS,   "Flyer!" }, // miss
+    { 187, N25,   "Lower" }, // miss
+    { 189, N25,   "Nomad" }, // miss
+    { 192, VSG,   "Saribitotachi no Waltz" }, // miss
+    { 193, MMJ,   "Worldwide Wander" }, // miss
+    { 196, LEO,   "Order Made" }, // miss
+    { 203, N25,   "Tricologe" }, // miss
+    { 207, LEO,   "Peaky Peaky" }, // miss
+    { 209, MMJ,   "Metamo Re:born" }, // miss
+    { 211, MMJ,   "IF" }, // miss
+    { 212, WxS,   "Hoshizora no Melody" }, // miss
+    { 217, VBS,   "Machi" }, // miss
+    { 224, WxS,   "88☆彡" }, // miss
     { 230, OTHER, "Salamander" },
-    { 231, OTHER, "Identity" },
-    { 232, OTHER, "Aoiro Enogu" },
-    { 233, OTHER, "Cosmospice" },
-    { 234, OTHER, "Tokugawa Cup Noodle Kinshirei" },
-    { 235, OTHER, "Journey" },
-    { 236, LEO,   "Voices" },
-    { 237, N25,   "Kimi no Yoru wo Kure" },
-    { 239, VBS,   "Gekkou" },
-    { 244, VBS,   "Awake Now" },
-    { 248, N25,   "bug" },
-    { 252, MMJ,   "DREAM PLACE" },
-    { 257, LEO,   "Teratera" },
-    { 259, LEO,   "the WALL" },
-    { 264, MMJ,   "Parasol Cider" },
-    { 267, VBS,   "Kashika" },
-    { 280, VBS,   "Utsuro wo Aogu" },
-    { 282, WxS,   "Hoshizora Orchestra" },
-    { 285, VSG,   "ÅMARA" },
-    { 287, MMJ,   "Watashi wa, Watashitachi wa" },
-    { 290, WxS,   "Donna Ketsumatsu ga Onozomi dai?" },
-    { 295, MMJ,   "Float Planner" },
-    { 300, N25,   "Samsa" },
-    { 302, LEO,   "Hurray" },
-    { 304, N25,   "I Nandesu" },
-    { 308, MMJ,   "Momoiro no Kagi" },
+    { 231, OTHER, "Identity" }, // miss
+    { 232, OTHER, "Aoiro Enogu" }, // miss
+    { 233, OTHER, "Cosmospice" }, // miss
+    { 234, OTHER, "Tokugawa Cup Noodle Kinshirei" }, // miss
+    { 235, OTHER, "Journey" }, // miss
+    { 236, LEO,   "Voices" }, // miss
+    { 237, N25,   "Kimi no Yoru wo Kure" }, // miss
+    { 239, VBS,   "Gekkou" }, // miss
+    { 244, VBS,   "Awake Now" }, // miss
+    { 248, N25,   "bug" }, // miss
+    { 252, MMJ,   "DREAM PLACE" }, // miss
+    { 257, LEO,   "Teratera" }, // miss
+    { 259, LEO,   "the WALL" }, // miss
+    { 264, MMJ,   "Parasol Cider" }, // miss
+    { 267, VBS,   "Kashika" }, // miss
+    { 280, VBS,   "Utsuro wo Aogu" }, // miss
+    { 282, WxS,   "Hoshizora Orchestra" }, // miss
+    { 285, VSG,   "ÅMARA" }, // miss
+    { 287, MMJ,   "Watashi wa, Watashitachi wa" }, // miss
+    { 290, WxS,   "Donna Ketsumatsu ga Onozomi dai?" }, // miss
+    { 295, MMJ,   "Float Planner" }, // miss
+    { 300, N25,   "Samsa" }, // miss
+    { 302, LEO,   "Hurray" }, // miss
+    { 304, N25,   "I Nandesu" }, // miss
+    { 308, MMJ,   "Momoiro no Kagi" }, // miss
     { 310, LEO,   "Flyway" },
-    { 316, VBS,   "Hitsuji ga Ippiki" },
-    { 324, WxS,   "Hakoniwa no Coral" },
-    { 333, WxS,   "Mr. Showtime" },
-    { 336, OTHER, "Be The MUSIC!" },
-    { 345, N25,   "Engeki" },
-    { 351, LEO,   "Aioi" },
-    { 353, N25,   "kitty" },
-    { 356, VBS,   "Realize" },
-    { 366, OTHER, "NEO" },
-    { 368, VSG,   "I'm Mine" },
-    { 373, VBS,   "Gekokujou" },
-    { 374, MMJ,   "Teammate" },
-    { 375, LEO,   "Hoshi wo Tsunagu" },
-    { 383, LEO,   "purpose" },
-    { 384, N25,   "Twilight Light" },
-    { 386, WxS,   "Kirapipi★Kirapika" },
-    { 393, VSG,   "Un-Lock" },
-    { 394, VSG,   "Bottle Cake" },
-    { 397, WxS,   "filament fever" },
-    { 398, VBS,   "Beyond the way" },
-    { 400, MMJ,   "Warera Stain Busters!" },
-    { 404, VBS,   "blender" },
-    { 405, MMJ,   "MOTTO!!!" },
-    { 406, VSG,   "ARQETYPE" },
-    { 409, N25,   "25-ji no Jounetsu" },
-    { 411, WxS,   "Sekai wo Terasu Tetrad" },
-    { 416, VSG,   "limbo" },
-    { 421, VBS,   "CRAZY" },
-    { 422, MMJ,   "JUMPIN’ OVER !" },
-    { 423, LEO,   "Regulus" },
-    { 424, LEO,   "Integral" },
-    { 427, VSG,   "Yuukou, 1/f no Yurameki" },
-    { 428, VSG,   "Tokimeki Jet Coaster" },
-    { 429, MMJ,   "Hug" },
-    { 440, VSG,   "Showtime×Audience" },
-    { 442, LEO,   "Suresure" },
-    { 445, VSG,   "Twilight Melody" },
-    { 450, WxS,   "Opera! Space Opera!" },
-    { 452, WxS,   "CYBERPUNK DEAD BOY" },
-    { 457, MMJ,   "Supernova" },
-    { 460, VSG,   "LEADER" },
-    { 465, VSG,   "Jouou" },
-    { 471, VBS,   "ULTRA C" },
-    { 472, WxS,   "Seibai ItaAAAAAsu!" },
-    { 474, MMJ,   "Killer" },
-    { 478, VBS,   "Fuel" },
-    { 489, OTHER, "Neppuu" },
-    { 492, N25,   "Watashi wa Ame" },
-    { 497, VBS,   "Rekka" },
-    { 498, MMJ,   "Hashiru! Tooku! Todoku!" },
-    { 500, N25,   "Yoka ni Mitorete" },
-    { 507, N25,   "Empurple" },
-    { 508, VBS,   "Haven" },
-    { 514, VSG,   "FAKE HEART" },
-    { 519, VSG,   "Natsuyo no Uta" },
-    { 524, LEO,   "Soredemo Bokura wa Utau Koto wo Yamenai" },
-    { 527, VSG,   "Unpoison" },
-    { 538, WxS,   "All-Save Challenge" },
-    { 539, MMJ,   "Eleventh" },
-    { 540, N25,   "Nihil-san" },
-    { 543, VSG,   "Seimeisei Syndrome" },
-    { 546, LEO,   "Sono Oto ga Naru Nara" },
-    { 548, WxS,   "Boku no Kami-sama" },
-    { 549, N25,   "Bake no Hana" },
-    { 555, OTHER, "Fusion" },
-    { 560, WxS,   "EYELID" },
-    { 564, N25,   "Soko ni Aru, Hikari." },
-    { 570, LEO,   "Star" },
-    { 572, N25,   "Kazatte" },
-    { 573, VSG,   "Hajimari no Mirai" },
-    { 574, LEO,   "SToRY" },
-    { 575, MMJ,   "FUN!!" },
-    { 576, VBS,   "Fire Dance" },
-    { 577, WxS,   "Smile*Symphony" },
-    { 578, VSG,   "Hello, SEKAI" },
-    { 579, OTHER, "Worlders" },
-    { 582, MMJ,   "ANTI YOU" },
-    { 583, VBS,   "Accelerate" },
-    { 585, OTHER, "pentatonic" },
-    { 596, N25,   "D/N/A" },
-    { 597, N25,   "Sono E no Namae wa" },
-    { 600, WxS,   "Yuke" },
-    { 602, VSG,   "ELECTRIC WEEKEND ZONE" },
-    { 605, LEO,   "Sympathy" },
-    { 610, MMJ,   "Polar Star" },
-    { 630, N25,   "Koufuku Kei" },
-    { 634, VBS,   "Kousenka" },
-    { 635, MMJ,   "Ari no Mama no Story wo" },
-    { 642, LEO,   "Kono Manma de Ikou" },
-    { 646, LEO,   "Toumei na Palette" },
-    { 649, WxS,   "Sayonara Tengoku Mata Kite Jigoku" },
-    { 659, MMJ,   "Anata no Sora ga Naku no Nara" },
-    { 660, WxS,   "Tobidase! Wonder-Pyoi" },
-    { 662, N25,   "Kokuhaku" },
-    { 668, VSG,   "Nekuratune Circus" },
-    { 671, VSG,   "Kaijuu ni Naritai" },
-    { 673, VSG,   "New Worlds" },
-    { 674, VSG,   "MASTER Kounan'ido Gakkyoku Medley" },
-    { 675, VSG,   "ProSEKA ULTIMATE Gakkyoku Medley" },
-    { 676, VSG,   "Shuunen Kinen Kounan'ido Kakioroshi Gakkyoku Medley" },
-    { 679, VBS,   "CRASH THE PARTY" },
-    { 681, LEO,   "Hoshi ni Ichiban Chikai Basho" },
-    { 683, MMJ,   "Colorful Foundation" },
-    { 684, VBS,   "Fighter" },
-    { 695, LEO,   "Hanamusubi" },
-    { 701, VSG,   "Chu! Future☆Express!" },
-    { 716, VBS,   "Touka Suru Ondo" },
-    { 735, WxS,   "Kugutsu no Utsutsu" },
-    { 740, VBS,   "Uka" },
+    { 316, VBS,   "Hitsuji ga Ippiki" }, // miss
+    { 324, WxS,   "Hakoniwa no Coral" }, // miss
+    { 333, WxS,   "Mr. Showtime" }, // miss
+    { 336, OTHER, "Be The MUSIC!" }, // miss
+    { 345, N25,   "Engeki" }, // miss
+    { 351, LEO,   "Aioi" }, // miss
+    { 353, N25,   "kitty" }, // miss
+    { 356, VBS,   "Realize" }, // miss
+    { 366, OTHER, "NEO" }, // miss
+    { 368, VSG,   "I'm Mine" }, // miss
+    { 373, VBS,   "Gekokujou" }, // miss
+    { 374, MMJ,   "Teammate" }, // miss
+    { 375, LEO,   "Hoshi wo Tsunagu" }, // miss
+    { 383, LEO,   "purpose" }, // miss
+    { 384, N25,   "Twilight Light" }, // miss
+    { 386, WxS,   "Kirapipi★Kirapika" }, // miss
+    { 393, VSG,   "Un-Lock" }, // miss
+    { 394, VSG,   "Bottle Cake" }, // miss
+    { 397, WxS,   "filament fever" }, // miss
+    { 398, VBS,   "Beyond the way" }, // miss
+    { 400, MMJ,   "Warera Stain Busters!" }, // miss
+    { 404, VBS,   "blender" }, // miss
+    { 405, MMJ,   "MOTTO!!!" }, // miss
+    { 406, VSG,   "ARQETYPE" }, // miss
+    { 409, N25,   "25-ji no Jounetsu" }, // miss
+    { 411, WxS,   "Sekai wo Terasu Tetrad" }, // miss
+    { 416, VSG,   "limbo" }, // miss
+    { 421, VBS,   "CRAZY" }, // miss
+    { 422, MMJ,   "JUMPIN’ OVER !" }, // miss
+    { 423, LEO,   "Regulus" }, // miss
+    { 424, LEO,   "Integral" }, // miss
+    { 427, VSG,   "Yuukou, 1/f no Yurameki" }, // miss
+    { 428, VSG,   "Tokimeki Jet Coaster" }, // miss
+    { 429, MMJ,   "Hug" }, // miss
+    { 440, VSG,   "Showtime×Audience" }, // miss
+    { 442, LEO,   "Suresure" }, // miss
+    { 445, VSG,   "Twilight Melody" }, // miss
+    { 450, WxS,   "Opera! Space Opera!" }, // miss
+    { 452, WxS,   "CYBERPUNK DEAD BOY" }, // miss
+    { 457, MMJ,   "Supernova" }, // miss
+    { 460, VSG,   "LEADER" }, // miss
+    { 465, VSG,   "Jouou" }, // miss
+    { 471, VBS,   "ULTRA C" }, // miss
+    { 472, WxS,   "Seibai ItaAAAAAsu!" }, // miss
+    { 474, MMJ,   "Killer" }, // miss
+    { 478, VBS,   "Fuel" }, // miss
+    { 489, OTHER, "Neppuu" }, // miss
+    { 492, N25,   "Watashi wa Ame" }, // miss
+    { 497, VBS,   "Rekka" }, // miss
+    { 498, MMJ,   "Hashiru! Tooku! Todoku!" }, // miss
+    { 500, N25,   "Yoka ni Mitorete" }, // miss
+    { 507, N25,   "Empurple" }, // miss
+    { 508, VBS,   "Haven" }, // miss
+    { 514, VSG,   "FAKE HEART" }, // miss
+    { 519, VSG,   "Natsuyo no Uta" }, // miss
+    { 524, LEO,   "Soredemo Bokura wa Utau Koto wo Yamenai" }, // miss
+    { 527, VSG,   "Unpoison" }, // miss
+    { 538, WxS,   "All-Save Challenge" }, // miss
+    { 539, MMJ,   "Eleventh" }, // miss
+    { 540, N25,   "Nihil-san" }, // miss
+    { 543, VSG,   "Seimeisei Syndrome" }, // miss
+    { 546, LEO,   "Sono Oto ga Naru Nara" }, // miss
+    { 548, WxS,   "Boku no Kami-sama" }, // miss
+    { 549, N25,   "Bake no Hana" }, // miss
+    { 555, OTHER, "Fusion" }, // miss
+    { 560, WxS,   "EYELID" }, // miss
+    { 564, N25,   "Soko ni Aru, Hikari." }, // miss
+    { 570, LEO,   "Star" }, // miss
+    { 572, N25,   "Kazatte" }, // miss
+    { 573, VSG,   "Hajimari no Mirai" }, // miss
+    { 574, LEO,   "SToRY" }, // miss
+    { 575, MMJ,   "FUN!!" }, // miss
+    { 576, VBS,   "Fire Dance" }, // miss
+    { 577, WxS,   "Smile*Symphony" }, // miss
+    { 578, VSG,   "Hello, SEKAI" }, // miss
+    { 579, OTHER, "Worlders" }, // miss
+    { 582, MMJ,   "ANTI YOU" }, // miss
+    { 583, VBS,   "Accelerate" }, // miss
+    { 585, OTHER, "pentatonic" }, // miss
+    { 596, N25,   "D/N/A" }, // miss
+    { 597, N25,   "Sono E no Namae wa" }, // miss
+    { 600, WxS,   "Yuke" }, // miss
+    { 602, VSG,   "ELECTRIC WEEKEND ZONE" }, // miss
+    { 605, LEO,   "Sympathy" }, // miss
+    { 610, MMJ,   "Polar Star" }, // miss
+    { 630, N25,   "Koufuku Kei" }, // miss
+    { 634, VBS,   "Kousenka" }, // miss
+    { 635, MMJ,   "Ari no Mama no Story wo" }, // miss
+    { 642, LEO,   "Kono Manma de Ikou" }, // miss
+    { 646, LEO,   "Toumei na Palette" }, // miss
+    { 649, WxS,   "Sayonara Tengoku Mata Kite Jigoku" }, // miss
+    { 659, MMJ,   "Anata no Sora ga Naku no Nara" }, // miss
+    { 660, WxS,   "Tobidase! Wonder-Pyoi" }, // miss
+    { 662, N25,   "Kokuhaku" }, // miss
+    { 668, VSG,   "Nekuratune Circus" }, // miss
+    { 671, VSG,   "Kaijuu ni Naritai" }, // miss
+    { 673, VSG,   "New Worlds" }, // miss
+    { 674, VSG,   "MASTER Kounan'ido Gakkyoku Medley" }, // miss
+    { 675, VSG,   "ProSEKA ULTIMATE Gakkyoku Medley" }, // miss
+    { 676, VSG,   "Shuunen Kinen Kounan'ido Kakioroshi Gakkyoku Medley" }, // miss
+    { 679, VBS,   "CRASH THE PARTY" }, // miss
+    { 681, LEO,   "Hoshi ni Ichiban Chikai Basho" }, // miss
+    { 683, MMJ,   "Colorful Foundation" }, // miss
+    { 684, VBS,   "Fighter" }, // miss
+    { 695, LEO,   "Hanamusubi" }, // miss
+    { 701, VSG,   "Chu! Future☆Express!" }, // miss
+    { 716, VBS,   "Touka Suru Ondo" }, // miss
+    { 735, WxS,   "Kugutsu no Utsutsu" }, // miss
+    { 740, VBS,   "Uka" }, // miss
     /* Contest Songs */
     { no, VSG,    "Hatsune Kyousoukyoku Dai 01-ban \"Suisei\"" },
-    { no, VSG,    "Kowarechatta!!" },
-    { no, VSG,    "Marude Nijuu Furiko no Sekai!" },
-    { 82, VSG,    "alive" },
-    { 11009, VSG, "Dīcǎidù Jìshì" },
-    { 128, VSG,   "Brand New Day" },
-    { 137, VSG,   "Hana wo Utau" },
-    { 151, VSG,   "Utakata Mirai" },
-    { 165, VSG,   "Sou Datta!!" },
-    { 185, VSG,   "Sick of House!" },
-    { 197, VSG,   "Last Score" },
-    { 215, VSG,   "Judas" },
-    { 227, VSG,   "ONESELF" },
-    { 254, VSG,   "Mikansei Sanka" },
-    { 274, VSG,   "Soredemo Ii nda yo" },
-    { 292, VSG,   "Ichi Ni no San de" },
+    { no, VSG,    "Kowarechatta!!" }, // miss
+    { no, VSG,    "Marude Nijuu Furiko no Sekai!" }, // miss
+    { 82, VSG,    "alive" }, // miss
+    { 11009, VSG, "Dīcǎidù Jìshì" }, // miss
+    { 128, VSG,   "Brand New Day" }, // miss
+    { 137, VSG,   "Hana wo Utau" }, // miss
+    { 151, VSG,   "Utakata Mirai" }, // miss
+    { 165, VSG,   "Sou Datta!!" }, // miss
+    { 185, VSG,   "Sick of House!" }, // miss
+    { 197, VSG,   "Last Score" }, // miss
+    { 215, VSG,   "Judas" }, // miss
+    { 227, VSG,   "ONESELF" }, // miss
+    { 254, VSG,   "Mikansei Sanka" }, // miss
+    { 274, VSG,   "Soredemo Ii nda yo" }, // miss
+    { 292, VSG,   "Ichi Ni no San de" }, // miss
     { 314, VSG,   "A moment in the sun" },
-    { 315, VSG,   "What's up? Pop!" },
-    { 329, VSG,   "YAMINABE!!!!" },
-    { 332, VSG,   "Epilogue ni Kimi wa Inai" },
-    { 338, VSG,   "Where shall we go?" },
-    { 359, VSG,   "Namonaki Kakumei" },
-    { 364, VSG,   "Eternal Aria" },
-    { 370, VSG,   "Jinsei" },
-    { 380, VSG,   "Stardust Medley" },
-    { 382, VSG,   "Shinpaku Pairing" },
-    { 399, VSG,   "Disco No.39" },
-    { 408, VSG,   "CIRCUS PANIC!!!" },
-    { 425, VSG,   "Cool Me Down" },
-    { 426, VSG,   "On&On" },
-    { 444, VSG,   "Syndrome" },
-    { 446, VSG,   "Overcode" },
-    { 468, VSG,   "Juurokusai no Shinzou" },
-    { 481, VSG,   "Meikyoushisui" },
-    { 486, VSG,   "OGYARINIZER" },
-    { 487, VSG,   "Daijobu Desu ka?" },
-    { 488, VSG,   "Memoria" },
-    { 496, VSG,   "Silver Collector" },
-    { 504, VSG,   "I know Ai Nou." },
-    { 512, VSG,   "Gousei Suru Mirai" },
-    { 517, VSG,   "Merry-Go-Round" },
-    { 526, VSG,   "Suisei no Kuni" },
-    { 532, VSG,   "Layer Note" },
-    { 545, VSG,   "Nouten" },
-    { 553, VSG,   "Parry" },
-    { 565, VSG,   "Natsu ni Toumei" },
-    { 569, VSG,   "Secret Seeker" },
-    { 587, VSG,   "Rule Book" },
-    { 588, VSG,   "Planet Hero" },
-    { 608, VSG,   "Hoshizora Melancholia" },
-    { 626, VSG,   "Fish and Tips" },
-    { 633, VSG,   "Niwashi no Ohanashi ni Yoru to" },
-    { 636, VSG,   "Explore" },
-    { 637, VSG,   "Waraetara Ee Yan!" },
-    { 647, VSG,   "SANchi Chokusou" },
-    { 655, VSG,   "lily-lala" },
-    { 656, VSG,   "Blood Doll" },
-    { 677, VSG,   "Abelia" },
-    { 678, VSG,   "Kindokei" },
-    { 691, VSG,   "0.0000034" },
-    { 696, VSG,   "Dream Kiss" },
-    { 697, VSG,   "Internet Junk Junkie" },
+    { 315, VSG,   "What's up? Pop!" }, // miss
+    { 329, VSG,   "YAMINABE!!!!" }, // miss
+    { 332, VSG,   "Epilogue ni Kimi wa Inai" }, // miss
+    { 338, VSG,   "Where shall we go?" }, // miss
+    { 359, VSG,   "Namonaki Kakumei" }, // miss
+    { 364, VSG,   "Eternal Aria" }, // miss
+    { 370, VSG,   "Jinsei" }, // miss
+    { 380, VSG,   "Stardust Medley" }, // miss
+    { 382, VSG,   "Shinpaku Pairing" }, // miss
+    { 399, VSG,   "Disco No.39" }, // miss
+    { 408, VSG,   "CIRCUS PANIC!!!" }, // miss
+    { 425, VSG,   "Cool Me Down" }, // miss
+    { 426, VSG,   "On&On" }, // miss
+    { 444, VSG,   "Syndrome" }, // miss
+    { 446, VSG,   "Overcode" }, // miss
+    { 468, VSG,   "Juurokusai no Shinzou" }, // miss
+    { 481, VSG,   "Meikyoushisui" }, // miss
+    { 486, VSG,   "OGYARINIZER" }, // miss
+    { 487, VSG,   "Daijobu Desu ka?" }, // miss
+    { 488, VSG,   "Memoria" }, // miss
+    { 496, VSG,   "Silver Collector" }, // miss
+    { 504, VSG,   "I know Ai Nou." }, // miss
+    { 512, VSG,   "Gousei Suru Mirai" }, // miss
+    { 517, VSG,   "Merry-Go-Round" }, // miss
+    { 526, VSG,   "Suisei no Kuni" }, // miss
+    { 532, VSG,   "Layer Note" }, // miss
+    { 545, VSG,   "Nouten" }, // miss
+    { 553, VSG,   "Parry" }, // miss
+    { 565, VSG,   "Natsu ni Toumei" }, // miss
+    { 569, VSG,   "Secret Seeker" }, // miss
+    { 587, VSG,   "Rule Book" }, // miss
+    { 588, VSG,   "Planet Hero" }, // miss
+    { 608, VSG,   "Hoshizora Melancholia" }, // miss
+    { 626, VSG,   "Fish and Tips" }, // miss
+    { 633, VSG,   "Niwashi no Ohanashi ni Yoru to" }, // miss
+    { 636, VSG,   "Explore" }, // miss
+    { 637, VSG,   "Waraetara Ee Yan!" }, // miss
+    { 647, VSG,   "SANchi Chokusou" }, // miss
+    { 655, VSG,   "lily-lala" }, // miss
+    { 656, VSG,   "Blood Doll" }, // miss
+    { 677, VSG,   "Abelia" }, // miss
+    { 678, VSG,   "Kindokei" }, // miss
+    { 691, VSG,   "0.0000034" }, // miss
+    { 696, VSG,   "Dream Kiss" }, // miss
+    { 697, VSG,   "Internet Junk Junkie" }, // miss
     { 720, VSG,   "ARiA" },
-    { 732, VSG,   "Tenran no Ice Heaven" },
-    { 737, VSG,   "Doukaai" },
-    { 738, VSG,   "Strata de Machiawase" },
+    { 732, VSG,   "Tenran no Ice Heaven" }, // miss
+    { 737, VSG,   "Doukaai" }, // miss
+    { 738, VSG,   "Strata de Machiawase" }, // miss
   });

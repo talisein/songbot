@@ -24,31 +24,13 @@ int main(int argc, char* argv[])
 {
     const std::string filepath = argc > 1 ? argv[1] : "../src/project_sekai_tracks.cppm";
 
-    std::vector<std::pair<std::string, std::string>> accepted;
-    std::set<std::string> seen;
-
+    /* Build set of song names with no exact English match in the songs DB */
+    std::set<std::string> misses;
     for (const auto& track : sekai_tracks) {
-        std::string wiki_name{track.song};
-        if (!seen.insert(wiki_name).second) continue;
-
-        auto match = lookup_song(track.song);
-        if (!match || match->name == track.song) continue;
-
-        std::print(std::cerr, "Sekai:  \"{}\"\n", track.song);
-        std::print(std::cerr, "VocaDB: \"{}\" ({})\n", match->name, match->producer);
-        std::print(std::cerr, "Accept? [y/n]: ");
-
-        std::string answer;
-        if (!std::getline(std::cin, answer)) break;
-        std::print(std::cerr, "\n");
-
-        char ch = answer.empty() ? '\0' : std::tolower((unsigned char)answer[0]);
-        if (ch == 'q') break;
-        if (ch == 'y')
-            accepted.emplace_back(wiki_name, std::string(match->name));
+        std::string_view wiki = track.song;
+        if (!std::ranges::any_of(songs, [wiki](const Song& s) { return s.name == wiki; }))
+            misses.insert(std::string(wiki));
     }
-
-    if (accepted.empty()) return 0;
 
     /* Read source file */
     std::ifstream f(filepath);
@@ -60,15 +42,13 @@ int main(int argc, char* argv[])
     for (std::string line; std::getline(f, line); )
         orig.push_back(std::move(line));
 
-    /* Apply replacements */
+    /* Annotate each miss line */
     auto patched = orig;
-    for (const auto& [old_name, new_name] : accepted) {
-        std::string pat = std::format("\"{}\"", old_name);
-        std::string rep = std::format("\"{}\"", new_name);
-        for (auto& line : patched) {
-            if (auto pos = line.find(pat); pos != std::string::npos)
-                line.replace(pos, pat.size(), rep);
-        }
+    for (const auto& miss : misses) {
+        std::string pat = std::format("\"{}\"", miss);
+        for (auto& line : patched)
+            if (line.find(pat) != std::string::npos)
+                line += " // miss";
     }
 
     /* Emit unified diff to stdout */
