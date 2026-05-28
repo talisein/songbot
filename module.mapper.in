@@ -8,6 +8,9 @@ concerts  @BUILD_DIR@/src/concerts.gcm
 project_diva:types @BUILD_DIR@/src/project_diva_types.gcm
 project_diva:tracks @BUILD_DIR@/src/project_diva_tracks.gcm
 project_diva @BUILD_DIR@/src/project_diva.gcm
+project_sekai:types @BUILD_DIR@/src/project_sekai_types.gcm
+project_sekai:tracks @BUILD_DIR@/src/project_sekai_tracks.gcm
+project_sekai @BUILD_DIR@/src/project_sekai.gcm
 songbot.errors  @BUILD_DIR@/src/errors.gcm
 vocadb.api  @BUILD_DIR@/src/vocadb/vocadb-api.gcm
 vocadb.events  @BUILD_DIR@/src/vocadb/release_events.gcm
