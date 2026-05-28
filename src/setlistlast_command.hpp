@@ -18,38 +18,12 @@
 
 #pragma once
 
-import std;
-import prometheus;
-import dpp;
-import util;
-import concerts;
+#include "setlist_shared.hpp"
 
-#include "iface_command.hpp"
-
-class setlistlast_command : public iface_command
-{
+class setlistlast_command : public setlist_base_command {
 public:
-    setlistlast_command(context &ctx) noexcept;
+    setlistlast_command(context& ctx) noexcept;
 
-    dpp::slashcommand get_command() override;
-
-    dpp::task<std::expected<void, std::error_code>> on_slashcommand(const dpp::slashcommand_t event) override;
-
-    std::expected<dpp::interaction_response, std::error_code> on_autocomplete(const dpp::autocomplete_t& event) override;
-
-private:
-    std::expected<dpp::interaction_response, std::error_code> on_autocomplete_impl(const dpp::autocomplete_t& event);
-
-    dpp::task<std::expected<void, std::error_code>>
-    reply_multimessage(const dpp::slashcommand_t& event, const Concert& concert);
-
-private:
-    prometheus::Counter* setlistlast_success_counter;
-    prometheus::Counter* setlistlast_failure_counter;
-    prometheus::Counter* setlistlast_reveal_success_counter;
-    prometheus::Counter* setlistlast_reveal_failure_counter;
-
-    prometheus::Counter* ac_setlistlast_success_counter;
-    prometheus::Counter* ac_setlistlast_no_match_counter;
-    prometheus::Counter* ac_setlistlast_failure_counter;
+protected:
+    std::vector<std::string> get_body_lines(const Concert& concert) override;
 };

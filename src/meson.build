@@ -367,7 +367,7 @@ project_version = custom_target('version.hpp',
 
 subdir('vocadb')
 
-src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_message.cpp', 'setlist_command.cpp', 'last_shared.cpp', 'last_command.cpp', 'lastp_command.cpp', 'setlistlast_command.cpp', 'freq_command.cpp', 'freqtour_command.cpp', 'nextlive_command.cpp', 'lvchart_command.cpp', 'producer_command.cpp']
+src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_message.cpp', 'setlist_shared.cpp', 'setlist_command.cpp', 'setlistlast_command.cpp', 'last_shared.cpp', 'last_command.cpp', 'lastp_command.cpp', 'freq_command.cpp', 'freqtour_command.cpp', 'nextlive_command.cpp', 'lvchart_command.cpp', 'producer_command.cpp']
 
 exe = executable('songbot', src, misc_modules_gcm, vocadb_gcm,
                  dependencies: [magic_enum_dep, dpp_dep, systemd_dep, prometheus_dep],
