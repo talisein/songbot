@@ -243,10 +243,6 @@ song_card_component& song_card_component::set_bottom(std::string content)
 
 void song_card_component::apply_to(dpp::message& msg)
 {
-    if (!title.empty()) {
-        add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(title));
-    }
-
     constexpr auto PRIORS_THRESHOLD = 65UZ;
     bool bottom_inline = !bottom.empty() && bottom.size() <= PRIORS_THRESHOLD;
 
@@ -257,16 +253,21 @@ void song_card_component::apply_to(dpp::message& msg)
         left_content += bottom;
     }
 
-    if (!left_content.empty()) {
-        add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(left_content));
-    }
-
     if (!filename.empty()) {
+        /* Section requires an accessory — only use it when we have an image */
+        if (!title.empty())
+            add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(title));
+        if (!left_content.empty())
+            add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(left_content));
         msg.add_file(filename, image_data, mime_type);
         set_accessory(dpp::component().set_type(dpp::cot_thumbnail).set_thumbnail(std::format("attachment://{}", filename)));
+        msg.add_component_v2(*this);
+    } else {
+        if (!title.empty())
+            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(title));
+        if (!left_content.empty())
+            msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(left_content));
     }
-
-    msg.add_component_v2(*this);
 
     if (!bottom.empty() && !bottom_inline) {
         msg.add_component_v2(dpp::component().set_type(dpp::cot_text_display).set_content(bottom));
