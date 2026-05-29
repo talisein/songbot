@@ -54,7 +54,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 10008, VSG, "Dungap" }, // miss
     { 10009, VSG, "Usan" }, // miss
     { 10010, VSG, "Shimiyuku" }, // miss
-    { 104, VSG,   "Cendrillon 10th Anniversary" }, // miss
+    { 104, VSG,   "Cendrillon" },
     { 108, VSG,   "Because You're Here" },
     { 109, VSG,   "Resonate" },
     { 110, VSG,   "Thousand Cherry Blossoms" },
@@ -72,12 +72,12 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 11015, VSG, "Mǎi Mǎi Mǎi" }, // miss
     { 11016, VSG, "Mag1c" },
     { 113, VSG,   "Rolling Girl" },
-    { 114, VSG,   "Ura Omote Lovers" }, // miss
-    { 115, VSG,   "Unknown Mother Goose" }, // miss
+    { 114, VSG,   "Two-Sided Lovers" },
+    { 115, VSG,   "Unknown Mother-Goose" },
     { 117, VSG,   "ODDS&ENDS" },
     { 118, VSG,   "*Hello, Planet." },
     { 119, VSG,   "World's End Dancehall" },
-    { 124, VSG,   "Miku Miku ni Shite Ageru♪ (Shite Yan Yo)" }, // miss
+    { 124, VSG,   "I'll Miku-Miku You♪ (For Reals)" },
     { 131, VSG,   "The Intense Voice of Hatsune Miku" },
     { 150, VSG,   "TOKIO FUNKA" }, // miss
     { 152, VSG,   "Dareka no Shinzou ni Nareta Nara" }, // miss
@@ -91,16 +91,16 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 202, VSG,   "Q" }, // miss
     { 206, VSG,   "Kimiiro Marine Snow" }, // miss
     { 214, VSG,   "Palette ni wa Kimi ga Ippai" }, // miss
-    { 216, VSG,   "Luka Luka ★ Night Fever" }, // miss
+    { 216, VSG,   "Luka Luka★Night Fever" },
     { 219, VSG,   "DUNE" },
     { 220, VSG,   "Donut Hole 2024" }, // miss
     { 220, VSG,   "Donut Hole" }, // miss
     { 221, VSG,   "Matryoshka" },
-    { 222, VSG,   "Piano×Forte×Scandal" }, // miss
+    { 222, VSG,   "Piano × Forte × Scandal" },
     { 223, VSG,   "Sennen no Dokusouka" }, // miss
     { 228, VSG,   "Goodbye" }, // miss
     { 229, VSG,   "Noushou Sakuretsu Girl" }, // miss
-    { 238, VSG,   "Black ★ Rock Shooter" }, // miss
+    { 238, VSG,   "Black★Rock Shooter" },
     { 247, VSG,   "Copycat" }, // miss
     { 249, VSG,   "Bokura no 16bit Sensou" }, // miss
     { 250, VSG,   "Kusaregedou to Chocolate" }, // miss
@@ -126,7 +126,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 311, VSG,   "Yoake to Hotaru" }, // miss
     { 312, VSG,   "Heart" },
     { 313, VSG,   "FREELY TOMORROW" },
-    { 317, VSG,   "Mahou Mitai na Music!" }, // miss
+    { 317, VSG,   "Music Like Magic!" },
     { 318, VSG,   "Sharing The World" },
     { 319, VSG,   "Decade" },
     { 325, VSG,   "Buta ni Natte yeah yeah" }, // miss
@@ -182,7 +182,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 515, VSG,   "Igaku" }, // miss
     { 516, VSG,   "Achikochi Date-san" }, // miss
     { 518, VSG,   "Star of Heaven" },
-    { 523, VSG,   "Kimi to Boku no Resonance" }, // miss
+    { 523, VSG,   "Resonance Between You and Me" },
     { 525, VSG,   "Antenna 39" },
     { 528, VSG,   "Thousand Little Voices" },
     { 529, VSG,   "Culture" },
@@ -244,7 +244,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 694, VSG,   "Artifact" },
     { 699, VSG,   "Catch the Wave" },
     { 704, VSG,   "Kuronuri Sekai ate Shokan" }, // miss
-    { 709, VSG,   "Hatsune Miku no Shoushitsu-Gekijouban-" }, // miss
+    { 709, VSG,   "The Disappearance of Hatsune Miku -DEAD END-" },
     { 711, VSG,   "Wanderlast" },
     { 713, VSG,   "Nyanyanyanyanyanyanya!" },
     { 714, VSG,   "Fräulein=Ojousama" }, // miss
@@ -266,23 +266,23 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     /* Cover Songs */
     { 2, LEO,     "ROKI" },
     { 3, LEO,     "Teo" },
-    { 6, LEO,     "Hibana -Reloaded-" }, // miss
+    { 6, LEO,     "HIBANA" },
     { 8, LEO,     "Time Machine" },
     { 10, MMJ,    "Happy Synthesizer" },
     { 11, MMJ,    "Viva Happy" },
-    { 13, MMJ,    "Nostalogic" }, // miss
+    { 13, MMJ,    "Nostalogic (MEIKO-SAN mix)" },
     { 15, VBS,    "drop pop candy" },
     { 18, LEO,    "Asu no Yozora Shoukaihan" }, // miss
     { 19, N25,    "Charles" }, // miss
-    { 21, WxS,    "Dappou Rock" }, // miss
+    { 21, WxS,    "Law-evading Rock" },
     { 22, N25,    "Inochi ni Kirawarete Iru" }, // miss
     { 26, VBS,    "BRING IT ON!" },
     { 27, VBS,    "Just Be Friends" },
     { 28, VBS,    "Doctor=Funk Beat" },
     { 36, WxS,    "Miracle Paint" },
-    { 38, WxS,    "Buriki no Dance" }, // miss
+    { 38, WxS,    "Tinplate's Dance" },
     { 41, WxS,    "Sweet Magic" },
-    { 66, N25,    "Hello／How Are You" }, // miss
+    { 66, N25,    "Hello/How are you?" },
     { 67, N25,    "Jishou Mushoku" }, // miss
     { 68, WxS,    "Dance Robot Dance" }, // miss
     { 69, VBS,    "Fragile" }, // miss
@@ -301,7 +301,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 94, N25,    "Totemo Itai Itagaritai" }, // miss
     { 95, VBS,    "Ifuudoudou" }, // miss
     { 96, LEO,    "from Y to Y" },
-    { 98, LEO,    "Lost One no Goukoku" }, // miss
+    { 98, LEO,    "Lost One's Weeping" },
     { 100, VBS,   "ECHO" }, // miss
     { 102, VBS,   "Ghost City Tokyo" },
     { 106, WxS,   "Oki ni Mesu mama" }, // miss
@@ -314,7 +314,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 125, N25,   "Bocca della Verità" }, // miss
     { 129, N25,   "Bitter Chocolate Decoration" },
     { 133, VBS,   "Akuma no Odorikata" }, // miss
-    { 134, WxS,   "Telecaster B-Boy" }, // miss
+    { 134, WxS,   "Telecaster B Boy" },
     { 135, LEO,   "Roku-chou Nen to Ichiya Monogatari" }, // miss
     { 136, VBS,   "Children Record" }, // miss
     { 138, WxS,   "KING" }, // miss
@@ -334,7 +334,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 170, N25,   "villain" }, // miss
     { 171, LEO,   "Kagerou Daze" },
     { 172, MMJ,   "Happy Halloween" }, // miss
-    { 174, WxS,   "Yī Èr Fanclub" }, // miss
+    { 174, WxS,   "1 2 FanClub" },
     { 181, N25,   "Aishite Aishite Aishite" }, // miss
     { 183, WxS,   "fixer" }, // miss
     { 184, LEO,   "Hello,world!" }, // miss
@@ -377,7 +377,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 291, VBS,   "Pheles" },
     { 293, N25,   "Irony" }, // miss
     { 294, N25,   "Even If It's Your Happiness" },
-    { 298, WxS,   "Netoge Haijin Sprechchor" }, // miss
+    { 298, WxS,   "Online Game Addicts Sprechchor" },
     { 299, VBS,   "Egoist" }, // miss
     { 306, WxS,   "1925" },
     { 307, WxS,   "Okochama Sensou" }, // miss
@@ -452,7 +452,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 530, MMJ,   "Cat Food" },
     { 533, WxS,   "Tensei Ringo" }, // miss
     { 534, LEO,   "World Lampshade [reunion]" }, // miss
-    { 536, OTHER, "Fire◎Flower (Rerec)" }, // miss
+    { 536, OTHER, "Fire◎Flower" },
     { 537, VBS,   "Hana ni Kaze" }, // miss
     { 544, MMJ,   "Mousou Aspartame" }, // miss
     { 547, LEO,   "Shuuen Touhikou" }, // miss
@@ -467,7 +467,7 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 586, VBS,   "Yankee Boy・Yankee Girl" }, // miss
     { 595, LEO,   "Envy Cat Walk" },
     { 601, MMJ,   "Ruma" }, // miss
-    { 603, WxS,   "Do Re Mi Fa Rondo" }, // miss
+    { 603, WxS,   "DoReMiFa Rondo" },
     { 606, N25,   "Suicide Parade" }, // miss
     { 607, MMJ,   "Mawaru Sora Usagi" }, // miss
     { 620, VBS,   "Shama" }, // miss
