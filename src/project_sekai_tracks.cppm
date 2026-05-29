@@ -37,12 +37,12 @@ export constexpr std::array sekai_tracks = std::to_array<SekaiTrack>({
     { 46, VSG,    "Greenlights Serenade" },
     { 47, VSG,    "Melt" },
     { 48, VSG,    "World is Mine" },
-    { 49, VSG,    "Hatsune Miku no Shoushitsu" }, // miss
+    { 49, VSG,    "The Disappearance of Hatsune Miku -DEAD END-" },
     { 50, VSG,    "Blessing" },
     { 72, VSG,    "Bless Your Breath" },
     { 83, VSG,    "Gimme×Gimme" },
     { 84, VSG,    "Junky Night Town Orchestra" }, // miss
-    { 85, VSG,    "Leia - Remind" }, // miss
+    { 85, VSG,    "Leia" },
     { 86, VSG,    "on the rocks" },
     { 10001, VSG, "Jangsanbeom" }, // miss
     { 10002, VSG, "Alone" }, // miss
