@@ -565,7 +565,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"クロスロード", "Crossroad", "Crossroad", Miku, "kz × TAKU INOUE", 929916},
   {nullopt, nullopt, "CONNECT:COMMUNE", Miku, "FLAVOR FOLEY", 907752},
   {nullopt, nullopt, "Room for a Fantasy", Miku, "nostraightanswer", 878942},
-  {"空に免じて", "Sora ni Menjite", "Sora ni Menjite", Miku, "Kasamura Toota", 61041},
+  {"空に免じて", "Sora ni Menjite", "For the Skies’ Sake", Miku, "Kasamura Tota, Shimada Masanori", 954657 },
   {nullopt, nullopt, "HELLO, NEW WORLD!", Luka, "Nanao", 742688},
   {"死にたくない。", "Shinitaku Nai.", "I Don't Want to Die.", Len, "Usagi3", 400280},
   {"ジェヘナ", "Gehenna", "Gehenna", Miku, "wotaku", 248865},
@@ -576,6 +576,8 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"こたえて", "Kotaete", "Answer Me", duet(Miku, KAITO, MEIKO, Luka, Rin, Len), "imie", 884096},
   {"青炎", "Sei-ei", "Blue Fire", KAITO, "Sekikomi Gohan", 913761},
   {"泥中に咲く", "Deichuu ni Saku", "Blooming in the Mud", Miku, "HarryP", 220728},
+  /* Mirai 2026 */
+  {"天樂 -双響-", "Tengaku -Soukyou-", "Tengaku -Soukyou-", duet(Rin,Len), "Yuuyu", 495802 },
   /* Diva songs */
   {"ひねくれ者", "Hinekuremono", "Jaded", Miku, "ryo", 1330},
   {"その一秒スローモーション", "Sono Ichibyou Slow Motion", "That One Second in Slow Motion", Miku, "ryo", 1329},
