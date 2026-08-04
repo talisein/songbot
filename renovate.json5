@@ -38,24 +38,24 @@
     },
   ],
 
-  // MAJOR UPDATES OFF for fedora, same rule as fedora-emacs and ppgen, and
-  // here it applies to both the job containers and the two heredoc FROMs
-  // above. A fedora:45 base is a deliberate decision about what songbot-sdk
-  // and songbot-runtime are built against -- and songbot-runtime is deployed
-  // on 39music, so the blast radius of an automatic major bump is a running
-  // service on another host, not a CI job.
+  // THERE IS DELIBERATELY NO packageRules BLOCK, and that absence is the
+  // decision rather than an oversight. Major fedora updates are not
+  // suppressed, so renovate opens `renovate/fedora-45` covering both FROM
+  // lines above -- 2 updates. Two and not three is itself the check that the
+  // custom manager is doing the finding, since this repo declares no
+  // `container:` image anywhere.
   //
-  // fedora:45 is already published, so this is load-bearing now. Measured
-  // 2026-08-04 against this repo: without the rule, 2 flattened updates on
-  // `renovate/fedora-45`; with it, 0. Two and not three -- this repo has no
-  // `container:` image anywhere, so both come from the custom manager above,
-  // which is also the check that it is finding them.
-  packageRules: [
-    {
-      matchDatasources: ['docker'],
-      matchPackageNames: ['fedora'],
-      matchUpdateTypes: ['major'],
-      enabled: false,
-    },
-  ],
+  // LEAVE THAT PR SITTING. fedora:45 is currently rawhide with a number on it:
+  // measured 2026-08-04, the fedora:45 and fedora:rawhide manifests are
+  // byte-identical, and fedora:latest is byte-identical to fedora:44. The PR
+  // means the tag exists, not that Fedora 45 is released. To check whether the
+  // day has come:
+  //   skopeo inspect --raw docker://docker.io/library/fedora:latest | sha256sum
+  //   skopeo inspect --raw docker://docker.io/library/fedora:45     | sha256sum
+  // Equal means `latest` has moved and 45 is the stable release.
+  //
+  // It matters more here than in fedora-emacs or ppgen: songbot-runtime is
+  // deployed on 39music, so merging this changes a running service on another
+  // host rather than a CI job. songbot-sdk is only a build environment and is
+  // the cheaper half of the same PR.
 }
