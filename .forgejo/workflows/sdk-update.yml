@@ -12,6 +12,20 @@ jobs:
         run: |
           git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .
 
+      # --pull=newer ON BOTH BUILDS, ADDED 2026-08-04. meiko's runner now mounts
+      # ONE persistent /var/lib/containers/storage across every job, and
+      # buildah's default pull policy is `missing` -- so a cached fedora:44
+      # would be reused for ever and this workflow, whose entire purpose is to
+      # refresh the SDK and runtime bases, would refresh nothing while
+      # reporting success. `dnf -y upgrade` inside hides half of it, which is
+      # what makes it worth stating: the packages would move and the base layer
+      # would not.
+      #
+      # The store's weekly prune does not rescue this. `buildah rmi --prune`
+      # takes untagged images only, so a tagged fedora:44 survives every sweep.
+      #
+      # `newer` and not `always`: against an unchanged base, always re-copies
+      # the base blob and newer does not.
       - name: Build and Push SDK and Runtime
         run: |
           # --- 1. Build the SDK (Build-time deps) ---
@@ -26,7 +40,7 @@ jobs:
               update-ca-trust extract && \
               rm /tmp/talinet_root.crt
           EOF
-          buildah bud -f Containerfile.sdk \
+          buildah bud --pull=newer -f Containerfile.sdk \
             --build-arg TALINET_CA="${{ secrets.TALINET_ROOT_CA }}" \
             -t git.miku/talisein/songbot-sdk:latest .
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
@@ -39,7 +53,7 @@ jobs:
               dnf -y install libcurl zlib-ng openssl glibc-all-langpacks && \
               dnf clean all
           EOF
-          buildah bud -f Containerfile.runtime -t git.miku/talisein/songbot-runtime:latest .
+          buildah bud --pull=newer -f Containerfile.runtime -t git.miku/talisein/songbot-runtime:latest .
           buildah push git.miku/talisein/songbot-runtime:latest
 
   trigger-songbot-build:

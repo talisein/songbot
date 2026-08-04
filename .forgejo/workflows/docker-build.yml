@@ -17,9 +17,15 @@ jobs:
         run: |
           git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .
 
+      # --pull=newer because the runner's image store is now shared and
+      # persistent, and buildah's default is `missing`. When sdk-update calls
+      # this workflow the SDK images were just built into that same store and
+      # are current either way -- but a plain push to main runs this on its own,
+      # and there the bases it names must come from the registry rather than
+      # from whatever the store happens to be holding.
       - name: Build
         run: |
-          buildah bud --build-arg RUN_BENCHMARKS=1 -t git.miku/${{ github.repository }}:main .
+          buildah bud --pull=newer --build-arg RUN_BENCHMARKS=1 -t git.miku/${{ github.repository }}:main .
       - name: Push
         run: |
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
