@@ -3,59 +3,87 @@
 
   // Replaces the onboarding renovate.json, which was the bare schema line and
   // nothing else. Both files must never exist at once: renovate refuses a repo
-  // with two config files, so the old one is deleted in the same commit.
+  // carrying two config files.
   //
-  // THE CUSTOM MANAGER EXISTS BECAUSE THE BASE IMAGES ARE INSIDE A HEREDOC.
+  // A CUSTOM MANAGER IS NEEDED AT ALL BECAUSE THE BASE IMAGES ARE IN A HEREDOC.
   // sdk-update.yml writes Containerfile.sdk and Containerfile.runtime from a
-  // `run:` block, so their `FROM fedora:44` lines are shell string content,
-  // not a Containerfile. No stock manager parses them: the dockerfile manager
-  // never sees a file, and the github-actions manager reads `container:` and
-  // `uses:`, not the body of a script. Without this block those two images
-  // would be the only unmonitored things in the repo while everything around
-  // them was tracked -- which reads like coverage.
+  // `run:` block, so their `FROM fedora:44` lines are shell string content
+  // rather than a Containerfile. No stock manager parses them: the dockerfile
+  // manager never sees a file, and the github-actions manager reads
+  // `container:` and `uses:`, not the body of a script. Without the first
+  // manager below, those two images would be the only unmonitored things in a
+  // repo where everything else is tracked -- which reads like coverage.
   //
-  // Verified by extraction on 2026-08-04, not by validating the syntax:
-  // `renovate --platform=local --dry-run=full` reports depName `fedora`,
-  // currentValue `44`, from .forgejo/workflows/sdk-update.yml, twice -- once
-  // per FROM. A regex manager that matches nothing validates exactly like one
-  // that works, so the count is the check.
+  // Verified by extraction rather than by validating the syntax, because a
+  // regex manager that matches nothing validates exactly like one that works:
+  // renovate --platform=local --dry-run=full reports currentValue 44 from
+  // sdk-update.yml, twice, once per FROM. Two and not three is itself the
+  // check -- this repo declares no `container:` image anywhere, so both
+  // findings come from these managers.
   //
-  // The pattern covers ALL workflow files rather than sdk-update.yml alone.
-  // Narrower would be tighter today and would silently stop monitoring the
-  // day the file is renamed. The cost is that a stray `FROM` in any workflow
-  // becomes a dependency; there is none today, and one appearing is visible
-  // as a new PR rather than as silence.
+  // `managerFilePatterns`, not `fileMatch`. Both are accepted by renovate
+  // 44.11.4 (the version mithos runs) but fileMatch emits `WARN: Config
+  // migration necessary` and is rewritten to this, /.../ wrapper included. The
+  // patterns cover all workflow files rather than sdk-update.yml alone:
+  // narrower is tighter today and silently stops monitoring the day the file
+  // is renamed.
   customManagers: [
+    // Anchored to end of line. Unanchored, these also match PROSE -- a
+    // comment mentioning `image: fedora:44` in a sibling repo captured the
+    // trailing backtick as part of the version and produced a phantom
+    // dependency renovate then offered to "update". Caught by checking at the
+    // CURRENT pin, where the right answer is zero, not just at an old one.
+    //
+    // Every FROM, by docker tag. This is the general case and stays -- a
+    // future `FROM alpine:3.x` here should be tracked normally. fedora is
+    // carved out of it by the packageRule below and handled by the manager
+    // after this one.
     {
       customType: 'regex',
-      // `managerFilePatterns`, not `fileMatch`. Both are accepted by renovate
-      // 44.11.4 (the version the mithos container runs), but fileMatch emits
-      // `WARN: Config migration necessary` and is rewritten to this anyway.
-      // Note the /.../ wrapper -- that is part of the newer syntax.
       managerFilePatterns: ['/^\\.forgejo/workflows/.+\\.ya?ml$/'],
-      matchStrings: ['FROM (?<depName>[^:\\s]+):(?<currentValue>[^\\s]+)'],
+      matchStrings: ['FROM (?<depName>[^:\\s]+):(?<currentValue>[^\\s]+)\\s*\\n'],
       datasourceTemplate: 'docker',
+    },
+    // FEDORA, BY RELEASE RATHER THAN BY TAG. `fedora:45` exists on Docker Hub
+    // today and is not Fedora 45: measured 2026-08-04, its manifest is
+    // byte-identical to fedora:rawhide, while fedora:latest is byte-identical
+    // to fedora:44. endoflife.date lists only RELEASED cycles -- newest fedora
+    // entry is 44, releaseDate 2026-04-28, eol 2027-06-02, and 45 is absent --
+    // so "is it listed" is "has it shipped". No date arithmetic, no manual pin
+    // to lift, and the PR arrives on release day by itself.
+    //
+    // This matches the same lines as the manager above, so fedora is extracted
+    // twice, once per datasource. That is why the packageRule is not optional:
+    // without it the docker half still proposes 45.
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^\\.forgejo/workflows/.+\\.ya?ml$/'],
+      matchStrings: ['FROM fedora:(?<currentValue>[0-9]+)\\s*\\n'],
+      depNameTemplate: 'fedora',
+      datasourceTemplate: 'endoflife-date',
     },
   ],
 
-  // THERE IS DELIBERATELY NO packageRules BLOCK, and that absence is the
-  // decision rather than an oversight. Major fedora updates are not
-  // suppressed, so renovate opens `renovate/fedora-45` covering both FROM
-  // lines above -- 2 updates. Two and not three is itself the check that the
-  // custom manager is doing the finding, since this repo declares no
-  // `container:` image anywhere.
+  // Verified in both directions, because "everything disabled" and "working
+  // correctly" both report zero updates at fedora:44:
+  //   fedora:44 -> 0 updates
+  //   fedora:41 -> proposes 44, never 45
   //
-  // LEAVE THAT PR SITTING. fedora:45 is currently rawhide with a number on it:
-  // measured 2026-08-04, the fedora:45 and fedora:rawhide manifests are
-  // byte-identical, and fedora:latest is byte-identical to fedora:44. The PR
-  // means the tag exists, not that Fedora 45 is released. To check whether the
-  // day has come:
-  //   skopeo inspect --raw docker://docker.io/library/fedora:latest | sha256sum
-  //   skopeo inspect --raw docker://docker.io/library/fedora:45     | sha256sum
-  // Equal means `latest` has moved and 45 is the stable release.
+  // Cost: nothing about the fedora IMAGE is tracked any more, digest
+  // refreshes included -- only its cycle number -- and this leans on
+  // endoflife.date being current. The failure mode is a late PR, never an
+  // early one. Non-fedora images are unaffected and still tracked by digest
+  // and tag.
   //
-  // It matters more here than in fedora-emacs or ppgen: songbot-runtime is
-  // deployed on 39music, so merging this changes a running service on another
-  // host rather than a CI job. songbot-sdk is only a build environment and is
-  // the cheaper half of the same PR.
+  // WHEN THE PR ARRIVES it is heavier here than in fedora-emacs or ppgen:
+  // songbot-runtime is deployed on 39music, so merging changes a running
+  // service on another host rather than a CI job. songbot-sdk is only a build
+  // environment and is the cheap half of the same PR.
+  packageRules: [
+    {
+      matchDatasources: ['docker'],
+      matchPackageNames: ['fedora'],
+      enabled: false,
+    },
+  ],
 }
