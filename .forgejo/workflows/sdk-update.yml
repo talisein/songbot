@@ -30,12 +30,18 @@ jobs:
         run: |
           # --- 1. Build the SDK (Build-time deps) ---
           #
-          # The talinet CA arrives as a build-time VOLUME, not a --build-arg.
-          # meiko's runner mounts the host trust bundle into this job container,
-          # and `buildah bud -v` passes it through to the build without baking
-          # it into the image or recording it in the build history. The image no
-          # longer carries the CA, and does not need to: it is only ever used as
-          # a job container or as a FROM, and both get trust from the runner.
+          # The talinet CA arrives as a build-time VOLUME, not a --build-arg, so
+          # it is no longer in the image's BUILD HISTORY -- `podman history`
+          # greps 0 for it now. meiko's runner mounts the host trust bundle into
+          # this job container and `buildah bud -v` passes it through.
+          #
+          # The image DOES still carry the CA, and it is worth being exact about
+          # why: -v removes the INPUT, so source/anchors/ is empty in the built
+          # image, but `RUN update-ca-trust` writes the extracted bundle into the
+          # layer and that is committed. Measured -- stock fedora:44 has 146
+          # certificates, this image has 147. Harmless (the root CA is public),
+          # and it is what the --build-arg version did too, but do not describe
+          # the mount as persisting nothing.
           #
           # It is mounted into source/anchors/ and extracted, NOT over the
           # extracted bundle: mounting the extracted path read-only is what the
