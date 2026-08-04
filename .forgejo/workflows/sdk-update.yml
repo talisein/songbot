@@ -29,19 +29,28 @@ jobs:
       - name: Build and Push SDK and Runtime
         run: |
           # --- 1. Build the SDK (Build-time deps) ---
+          #
+          # The talinet CA arrives as a build-time VOLUME, not a --build-arg.
+          # meiko's runner mounts the host trust bundle into this job container,
+          # and `buildah bud -v` passes it through to the build without baking
+          # it into the image or recording it in the build history. The image no
+          # longer carries the CA, and does not need to: it is only ever used as
+          # a job container or as a FROM, and both get trust from the runner.
+          #
+          # It is mounted into source/anchors/ and extracted, NOT over the
+          # extracted bundle: mounting the extracted path read-only is what the
+          # job containers do, and it would make the `dnf -y upgrade` below fail
+          # the whole transaction the day it touches ca-certificates.
+          # See mksystem/meiko/notes/ci-trust.md.
           cat <<EOF > Containerfile.sdk
           FROM fedora:44
+          RUN update-ca-trust
           RUN dnf -y upgrade && \
               dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel && \
               dnf clean all
-          ARG TALINET_CA
-          RUN echo "\$TALINET_CA" > /tmp/talinet_root.crt && \
-              trust anchor --store /tmp/talinet_root.crt && \
-              update-ca-trust extract && \
-              rm /tmp/talinet_root.crt
           EOF
           buildah bud --pull=newer -f Containerfile.sdk \
-            --build-arg TALINET_CA="${{ secrets.TALINET_ROOT_CA }}" \
+            -v /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/pki/ca-trust/source/anchors/talinet_root_ca.crt:ro \
             -t git.miku/talisein/songbot-sdk:latest .
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
           buildah push git.miku/talisein/songbot-sdk:latest
