@@ -1,8 +1,8 @@
 [wrap-file]
-source_url = https://github.com/brainboxdotcc/DPP/releases/download/v10.1.5/DPP-10.1.5.tar.gz
-source_filename = DPP-10.1.5.tar.gz
-source_hash = 0446993c2bca5fc40882386804598b33652fc7ee466fa237f7846f2be0cb8a1e
-directory = DPP-10.1.5
+source_url = https://github.com/brainboxdotcc/DPP/releases/download/v10.1.6/DPP-10.1.6.tar.gz
+source_filename = DPP-10.1.6.tar.gz
+source_hash = 65cf9e5fbc7b40e3fadaf742fa87da9cdede46651e35007c7b45cb765bfc17ba
+directory = DPP-10.1.6
 patch_directory = dpp
 
 [provide]

@@ -1,8 +1,7 @@
 project('dpp', ['cpp'],
         license: 'Apache-2.0',
-        version: '10.1.5',
-        meson_version: '>=1.4.0',
-        default_options: ['cpp_std=c++17'])
+        version: '10.1.6',
+        meson_version: '>=1.4.0')
 
 cc = meson.get_compiler('cpp')
 
@@ -188,10 +187,11 @@ dpp_src = files(
 )
 
 dpp_inc = include_directories('include')
+dpp_inc_private = include_directories('include', 'include/dpp')
 
 dpp_lib = static_library('dpp',
   dpp_src,
-  include_directories: dpp_inc,
+  include_directories: dpp_inc_private,
   cpp_args: private_defs,
   dependencies: [openssl_dep, zlib_dep, threads_dep, nlohmann_json_dep],
   pic: true,
