@@ -62,6 +62,15 @@
       depNameTemplate: 'fedora',
       datasourceTemplate: 'endoflife-date',
     },
+    // Notification only: renovate cannot recompute source_hash, so finish the wrap by hand.
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^subprojects/dpp\\.wrap$/'],
+      matchStrings: ['/releases/download/v(?<currentValue>[0-9.]+)/'],
+      depNameTemplate: 'brainboxdotcc/DPP',
+      datasourceTemplate: 'github-releases',
+      extractVersionTemplate: '^v(?<version>.*)$',
+    },
   ],
 
   // Verified in both directions, because "everything disabled" and "working
