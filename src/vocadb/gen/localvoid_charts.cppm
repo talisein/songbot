@@ -1014,6 +1014,11 @@ constexpr std::array lv_data_2026_8_2 = std::to_array<char8_t>({
 });
 
 
+constexpr std::array lv_data_2026_8_3 = std::to_array<char8_t>({
+    #embed "localvoid/2026_08_3.json"
+});
+
+
 export constexpr std::array charts = std::to_array<std::u8string_view>({
 
   std::u8string_view{lv_data_2022_12_1},
@@ -1210,6 +1215,7 @@ export constexpr std::array charts = std::to_array<std::u8string_view>({
   std::u8string_view{lv_data_2026_7_5},
   std::u8string_view{lv_data_2026_8_1},
   std::u8string_view{lv_data_2026_8_2},
+  std::u8string_view{lv_data_2026_8_3},
 });
 
 export constexpr std::array<localvoid_data, 67> localvoid_ranks {{
