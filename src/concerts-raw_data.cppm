@@ -2091,6 +2091,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { MM2026, 8, "Vampire", nullopt, "Night"},
         { MM2026, 9, "Tale of the Deep-sea Lily", nullopt, "Hamamatsu"},
         { MM2026, 9, "Kagerou Daze", nullopt, "Osaka" },
+        { MM2026, 9, "Kaisei", nullopt, "Tokyo" },
         { MM2026, 10, "HELLO, NEW WORLD!"},
         { MM2026, 11, "vivid", nullopt, "Day"},
         { MM2026, 11, "A moment in the sun", nullopt, "Night"},
