@@ -62,16 +62,111 @@
       depNameTemplate: 'fedora',
       datasourceTemplate: 'endoflife-date',
     },
-    // Notification only: renovate cannot recompute source_hash, so finish the wrap by hand.
+    // MESON WRAPS. Renovate ships no meson manager -- checked against the
+    // supported-manager list, which has gradle-wrapper and maven-wrapper and
+    // nothing for meson -- so the wraps would otherwise be invisible. Until
+    // now only dpp was covered, by a manager whose own comment conceded it was
+    // notification-only because renovate cannot compute a sha256.
+    //
+    // Six wraps, not seven: subprojects/peel.wrap went with this change. It
+    // was `revision = HEAD, depth=1` and nothing in the build referenced it --
+    // src/vocadb/meson.build's build_anidb_sourcegen branch uses cpr, libmagic
+    // and nlohmann_json, never peel -- so there was no version to track and
+    // nothing consuming it.
+    //
+    // It still cannot. What changed is postUpgradeTasks below: the managers
+    // here bump the version inside source_url and nothing else, and
+    // tools/wrap-rehash.sh finishes the file -- source_filename, directory,
+    // source_hash, and the version inside the source_url FILENAME. That
+    // division is forced, not chosen: renovate's autoReplace rewrites only the
+    // span a matchString matched, so the rest is unreachable from here no
+    // matter how the regex is written.
+    //
+    // The source_url filename is the non-obvious one and the reason a
+    // "notification only" manager was never enough on its own. These managers
+    // match the `/v<ver>/` PATH COMPONENT, so on dpp -- whose asset name also
+    // carries the version -- renovate produces
+    // `.../download/v10.1.7/DPP-10.1.6.tar.gz`, which 404s. Measured, not
+    // reasoned about: the script's own download step is what surfaced it.
+    //
+    // depName comes out of the URL rather than a depNameTemplate, which is
+    // what lets one manager cover three wraps. Safe here and NOT safe in the
+    // FROM managers above: managerFilePatterns confines these to
+    // subprojects/*.wrap, where there is no prose for an unanchored pattern to
+    // match. currentValue deliberately excludes the leading `v` so that it
+    // lines up with what extractVersionTemplate produces.
+    //
+    // Verified by extraction and not by validating the syntax, for the same
+    // reason as the managers above -- renovate --platform=local --dry-run=full
+    // at LOG_LEVEL=debug reports exactly six wrap deps and the version each
+    // wrap is actually pinned to:
+    //   brainboxdotcc/DPP      10.1.6  github-releases
+    //   nlohmann/json          3.12.0  github-releases
+    //   jupp0r/prometheus-cpp   1.3.0  github-releases
+    //   Neargye/magic_enum      0.9.8  github-tags
+    //   uni-algo/uni-algo       1.2.0  github-tags
+    //   boost-ext/ut            2.3.1  github-tags
+    // and, rolled back to uni-algo 1.1.0, proposes 1.2.0 rather than nothing.
+    //
+    // RELEASE TARBALLS: dpp, json, prometheus-cpp.
     {
       customType: 'regex',
-      managerFilePatterns: ['/^subprojects/dpp\\.wrap$/'],
-      matchStrings: ['/releases/download/v(?<currentValue>[0-9.]+)/'],
-      depNameTemplate: 'brainboxdotcc/DPP',
+      managerFilePatterns: ['/^subprojects/.+\\.wrap$/'],
+      matchStrings: ['source_url\\s*=\\s*https://github\\.com/(?<depName>[^/\\s]+/[^/\\s]+)/releases/download/v(?<currentValue>[0-9][^/\\s]*)/'],
       datasourceTemplate: 'github-releases',
       extractVersionTemplate: '^v(?<version>.*)$',
     },
+    // TAG TARBALLS: magic_enum, uni-algo. github-tags and not github-releases:
+    // archive/refs/tags resolves for every tag whether or not a release was
+    // ever cut, so keying these to releases would make coverage depend on an
+    // upstream habit rather than on the thing the URL actually names.
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^subprojects/.+\\.wrap$/'],
+      matchStrings: ['source_url\\s*=\\s*https://github\\.com/(?<depName>[^/\\s]+/[^/\\s]+)/archive/refs/tags/v(?<currentValue>[0-9][^/\\s]*)\\.tar\\.'],
+      datasourceTemplate: 'github-tags',
+      extractVersionTemplate: '^v(?<version>.*)$',
+    },
+    // WRAP-GIT PINNED TO A TAG: boostut. No tarball and so no hash, which
+    // makes this the one wrap renovate can finish by itself -- wrap-rehash.sh
+    // skips it.
+    {
+      customType: 'regex',
+      managerFilePatterns: ['/^subprojects/.+\\.wrap$/'],
+      matchStrings: ['url\\s*=\\s*https://github\\.com/(?<depName>[^/\\s]+/[^/\\s]+?)(?:\\.git)?\\s*\\nrevision\\s*=\\s*v(?<currentValue>[0-9][^\\s]*)'],
+      datasourceTemplate: 'github-tags',
+      extractVersionTemplate: '^v(?<version>.*)$',
+    },
   ],
+
+  // THE HALF THE REGEX MANAGERS CANNOT DO. Without this a wrap PR carries a
+  // source_hash for the PREVIOUS tarball, and meson refuses at `setup` before
+  // a line compiles -- which is worse than no coverage, because it arrives
+  // looking like a normal PR.
+  //
+  // AND IT STILL ARRIVES IF THE SCRIPT FAILS. Read renovate's
+  // execute-post-upgrade-commands.js rather than assuming: a command that
+  // throws is caught into artifactErrors and the PR is opened anyway, with a
+  // warning in its body and the old hash still in the wrap. Nothing here
+  // abandons a branch. pr-build.yml is what turns that into a red check
+  // instead of a merge.
+  //
+  // The command is a single argv with no shell metacharacters, so mithos needs
+  // only `allowedCommands: ['^tools/wrap-rehash\\.sh$']`;
+  // allowShellExecutorForPostUpgradeCommands stays false and
+  // allowPostUpgradeCommandTemplating is not needed. The script needs outbound
+  // github.com from the renovate host -- it re-downloads each tarball to hash
+  // it -- and exits non-zero on any failure so the branch is abandoned rather
+  // than published wrong.
+  //
+  // executionMode 'branch' and not 'update': the script reconciles the whole
+  // subprojects/ directory in one pass and is idempotent, so running it once
+  // per branch is both sufficient and cheaper than once per dependency.
+  postUpgradeTasks: {
+    commands: ['tools/wrap-rehash.sh'],
+    fileFilters: ['subprojects/*.wrap'],
+    executionMode: 'branch',
+  },
 
   // Verified in both directions, because "everything disabled" and "working
   // correctly" both report zero updates at fedora:44:

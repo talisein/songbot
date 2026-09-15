@@ -1,0 +1,47 @@
+# Build and test pull requests.
+#
+# ADDED FOR THE RENOVATE WRAP MANAGERS. docker-build.yml triggers on push to
+# main, workflow_call and workflow_dispatch -- so until this file existed a
+# pull request got NO ci at all, and the first thing to actually compile a
+# renovate wrap bump was the post-merge build that also pushes the image and
+# deploys it to 39music.
+#
+# That is exactly the wrong order for these PRs. Five of the six tracked wraps
+# carry a hand-written meson overlay in subprojects/packagefiles/ written
+# against a specific upstream layout, and an upstream that moves a header or
+# renames a target breaks the overlay rather than the wrap. Nothing about the
+# wrap file looks wrong when that happens; only a compile says so.
+#
+# Build and test ONLY. No buildah login, no push, no deploy -- a PR must not be
+# able to move a published image or touch the running service.
+name: PR Build
+
+on:
+  pull_request:
+
+jobs:
+  build:
+    runs-on: meiko
+    container:
+      image: git.miku/talisein/songbot-sdk:latest
+    steps:
+      # Fetch the PR head by sha rather than cloning a branch: `github.ref` for
+      # a pull_request event is refs/pull/N/merge, which `git clone --branch`
+      # cannot take. Renovate's branches live in this repository, so a plain
+      # depth-1 fetch of the head commit is enough.
+      - name: Checkout PR head
+        run: |
+          git init -q .
+          git remote add origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git
+          git fetch -q --depth 1 origin ${{ github.event.pull_request.head.sha }}
+          git checkout -q FETCH_HEAD
+
+      # Mirrors the builder stage of Containerfile, minus `meson install`.
+      - name: Setup
+        run: meson setup build -Dcpp_std=c++26 --buildtype=release -Dinstall_tests=true
+
+      - name: Compile
+        run: meson compile -C build
+
+      - name: Test
+        run: meson test -C build --suite songbot --print-errorlogs

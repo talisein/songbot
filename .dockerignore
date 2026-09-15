@@ -1,8 +1,19 @@
-build/
-secret/
-subprojects/DPP-10.1.3
-subprojects/magic_enum-0.9.7
-subprojects/packagecache
-subprojects/prometheus-cpp-with-submodules
-subprojects/uni-algo-1.2.0
-subprojects/ut-v2.3.1
+build*
+secret
+
+# Everything under subprojects/ EXCEPT the two things meson genuinely needs in
+# the image: the wrap files and the packagefiles overlays. The extracted trees
+# and the tarball cache are re-materialised inside the build from the wraps, so
+# shipping the host's copies only inflates the context.
+#
+# `subprojects/*` matches the children individually rather than the directory,
+# which is what makes the `!` re-inclusions below take effect.
+#
+# DE-VERSIONED DELIBERATELY. This file used to name subprojects/DPP-10.1.3 and
+# subprojects/magic_enum-0.9.7. Both had been superseded, so the trees actually
+# on disk were not excluded at all and the list was decorative. Renovate now
+# bumps these versions by itself, which would have re-broken any pinned
+# spelling on every PR it opens.
+subprojects/*
+!subprojects/*.wrap
+!subprojects/packagefiles
