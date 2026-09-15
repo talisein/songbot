@@ -1,6 +1,27 @@
 {
   $schema: 'https://docs.renovatebot.com/renovate-schema.json',
 
+  // THE INSTRUMENT FOR A REPO WHERE ZERO PRs IS THE NORMAL STATE.
+  //
+  // All six wraps and both container bases sit at their newest upstream
+  // version most of the time, so the expected output of a renovate run here is
+  // nothing at all. That is the same output a run produces when every manager
+  // has silently stopped matching -- a regex that matches nothing, a datasource
+  // that rate-limits, a postUpgradeTasks command the host stopped allowing.
+  // luka/notes/deferred.md in mksystem names this shape twice over: no PR
+  // because nothing is due reads exactly like no PR because it broke.
+  //
+  // The dashboard is the third state. It renders, in an issue, every dependency
+  // renovate is actually tracking and the version it believes each is pinned
+  // at, whether or not anything is due -- so "still working" and "stopped
+  // looking" stop producing identical evidence. Six wrap rows on that issue is
+  // the daily proof that the custom managers below still match; their absence
+  // is the alarm.
+  //
+  // It does NOT prove the wrap-rehash command runs. Nothing short of a real
+  // upstream release does -- see the postUpgradeTasks comment below.
+  dependencyDashboard: true,
+
   // Replaces the onboarding renovate.json, which was the bare schema line and
   // nothing else. Both files must never exist at once: renovate refuses a repo
   // carrying two config files.

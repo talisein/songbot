@@ -3,8 +3,18 @@ name: Docker Image CI
 on:
   push:
     branches: [ "main" ]
+    # renovate.json5 joins .forgejo here because it is read by renovate on
+    # luka and by nothing in the image -- so a config-only change used to
+    # rebuild songbot and redeploy it on 39music to produce the same binary.
+    # paths-ignore skips a push only when EVERY changed file matches, so a
+    # commit touching this and a source file still builds.
+    #
+    # Kept narrow on purpose. tools/ is NOT listed: it holds one renovate
+    # helper today, and an ignore rule over a whole directory is the kind that
+    # silently stops building the day somebody puts a real build tool there.
     paths-ignore:
       - '.forgejo/**'
+      - 'renovate.json5'
 
   workflow_call:
   workflow_dispatch:
