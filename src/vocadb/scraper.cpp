@@ -1135,7 +1135,12 @@ scraper::download(const cpr::Url& url, std::ofstream &os, const cpr::Parameters&
         }
         if (res.status_code >= 400) {
             std::println(std::cerr, "Error: {}", res.status_code);
-            std::println(std::cerr, "Body: {}", res.text);
+            /* The body was streamed into os, so res.text is empty */
+            std::println(std::cerr, "Content-Type: {}", res.header["content-type"]);
+            /* Vercel bot protection serves a JS challenge that we can't pass */
+            if (res.header.contains("x-vercel-mitigated")) {
+                return std::unexpected(std::make_error_code(std::errc::operation_not_permitted));
+            }
             return std::unexpected(std::make_error_code(std::errc::invalid_argument));
         }
         return res;
@@ -1216,9 +1221,12 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
 
   using namespace std::chrono;
 
+  /* Once lvchart blocks us, stop fetching but keep embedding cached weeks */
+  bool blocked = false;
   for (const auto ymd : localvoid_week_generator()) {
     const std::filesystem::path file = localvoid_dir / std::format("{}_{:02}_{}.json", ymd.y, ymd.m, ymd.w);
     if (!std::filesystem::exists(file)) {
+      if (blocked) continue;
       cpr::Url url{std::format(localvoid_url, ymd.y, ymd.m, ymd.w)};
       cpr::Parameters params{{"year",  std::to_string(ymd.y)},
                              {"month", std::to_string(ymd.m)},
@@ -1234,7 +1242,12 @@ scraper::scrape_localvoid(const std::filesystem::path& generated_src)
           std::println(std::cerr, "Error: Failed to download {}: status code {}", url.str(), res->status_code);
         ofs.close();
         std::filesystem::remove(tmppath);
-        std::println(std::cerr, "Skipping...");
+        if (!res && res.error() == std::errc::operation_not_permitted) {
+          std::println(std::cerr, "lvchart.com is behind a Vercel challenge; skipping remaining localvoid fetches");
+          blocked = true;
+        } else {
+          std::println(std::cerr, "Skipping...");
+        }
         continue;
       } else {
         ofs.flush();
