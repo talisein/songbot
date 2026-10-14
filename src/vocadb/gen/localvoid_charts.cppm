@@ -1024,6 +1024,31 @@ constexpr std::array lv_data_2026_8_4 = std::to_array<char8_t>({
 });
 
 
+constexpr std::array lv_data_2026_9_1 = std::to_array<char8_t>({
+    #embed "localvoid/2026_09_1.json"
+});
+
+
+constexpr std::array lv_data_2026_9_2 = std::to_array<char8_t>({
+    #embed "localvoid/2026_09_2.json"
+});
+
+
+constexpr std::array lv_data_2026_9_3 = std::to_array<char8_t>({
+    #embed "localvoid/2026_09_3.json"
+});
+
+
+constexpr std::array lv_data_2026_9_4 = std::to_array<char8_t>({
+    #embed "localvoid/2026_09_4.json"
+});
+
+
+constexpr std::array lv_data_2026_10_1 = std::to_array<char8_t>({
+    #embed "localvoid/2026_10_1.json"
+});
+
+
 export constexpr std::array charts = std::to_array<std::u8string_view>({
 
   std::u8string_view{lv_data_2022_12_1},
@@ -1222,6 +1247,11 @@ export constexpr std::array charts = std::to_array<std::u8string_view>({
   std::u8string_view{lv_data_2026_8_2},
   std::u8string_view{lv_data_2026_8_3},
   std::u8string_view{lv_data_2026_8_4},
+  std::u8string_view{lv_data_2026_9_1},
+  std::u8string_view{lv_data_2026_9_2},
+  std::u8string_view{lv_data_2026_9_3},
+  std::u8string_view{lv_data_2026_9_4},
+  std::u8string_view{lv_data_2026_10_1},
 });
 
 export constexpr std::array<localvoid_data, 67> localvoid_ranks {{
