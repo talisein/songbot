@@ -153,6 +153,7 @@ namespace {
   std::chrono::time_zone const * KUALALUMPUR_TZ;
   std::chrono::time_zone const * TAIPEI_TZ;
   std::chrono::time_zone const * SEOUL_TZ;
+  std::chrono::time_zone const * SHANGHAI_TZ;
   std::chrono::time_zone const * CHICAGO_TZ;
   std::chrono::time_zone const * LONDON_TZ;
   std::chrono::time_zone const * BRUSSELS_TZ;
@@ -192,6 +193,7 @@ namespace {
       KUALALUMPUR_TZ = std::chrono::locate_zone("Asia/Kuala_Lumpur");
       TAIPEI_TZ      = std::chrono::locate_zone("Asia/Taipei");
       SEOUL_TZ       = std::chrono::locate_zone("Asia/Seoul");
+      SHANGHAI_TZ    = std::chrono::locate_zone("Asia/Shanghai");
       CHICAGO_TZ     = std::chrono::locate_zone("America/Chicago");
       LONDON_TZ      = std::chrono::locate_zone("Europe/London");
       BRUSSELS_TZ    = std::chrono::locate_zone("Europe/Brussels");
@@ -250,6 +252,10 @@ namespace {
       { MM2026,   12251, { JST,            local_days{2026y/8/29}  + 16h + 30min }, "Makuhari Messe International Exhibition Hall 9", "https://maps.app.goo.gl/GYaL5bzGHLwL2xLt6" },
       { MM2026,   12251, { JST,            local_days{2026y/8/30}  + 12h }, "Makuhari Messe International Exhibition Hall 9",         "https://maps.app.goo.gl/GYaL5bzGHLwL2xLt6" },
       { MM2026,   12251, { JST,            local_days{2026y/8/30}  + 16h + 30min }, "Makuhari Messe International Exhibition Hall 9", "https://maps.app.goo.gl/GYaL5bzGHLwL2xLt6" },
+      { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/10/31}  + 14h }, "Shanghai Jing'an Sports Center",          "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
+      { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/10/31}  + 19h }, "Shanghai Jing'an Sports Center",          "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
+      { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/11/1 }  + 14h }, "Shanghai Jing'an Sports Center",          "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
+      { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/11/1 }  + 19h }, "Shanghai Jing'an Sports Center",          "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
       { ME2026EU, 12222, { LONDON_TZ,      local_days{2026y/11/12} + 20h }, "The O2",                                  "https://maps.app.goo.gl/wc6fh8pVJogAUaWcA" },
       { ME2026EU, 12223, { BRUSSELS_TZ,    local_days{2026y/11/14} + 20h }, "ING Arena",                               "https://maps.app.goo.gl/qXoKyoWRaDYGWhJ4A" },
       { ME2026EU, 12224, { AMSTERDAM_TZ,   local_days{2026y/11/15} + 20h }, "AFAS Live",                               "https://maps.app.goo.gl/qNVDzeBM5vsT2rvj7" },

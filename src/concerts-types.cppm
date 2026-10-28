@@ -115,6 +115,7 @@ export enum ConcertTour
     VOLTAGE,
     ME2026NA,
     MM2026,
+    MWY2026,
     ME2026EU,
     SM2027
 };
