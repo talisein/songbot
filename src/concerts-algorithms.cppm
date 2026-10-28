@@ -257,6 +257,12 @@ namespace {
       { ME2026EU, 12226, { DUSSELDORF_TZ,  local_days{2026y/11/20} + 20h }, "PSD Bank Dome",                           "https://maps.app.goo.gl/goJ2uA8sYsw8HPas9" },
       { ME2026EU, 12227, { PARIS_TZ,       local_days{2026y/11/22} + 20h }, "Accor Arena",                             "https://maps.app.goo.gl/WnapRimvbmGaGFc57" },
       { ME2026EU, 12228, { MADRID_TZ,      local_days{2026y/11/25} + 20h }, "Palacio Vistalegre",                      "https://maps.app.goo.gl/jBdeiWfbBmNx78R37" },
+      { SM2027,   13226, { JST,            local_days{2027y/2/5}   + 13h }, "Zepp Sapporo",                            "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
+      { SM2027,   13226, { JST,            local_days{2027y/2/5}   + 17h }, "Zepp Sapporo",                            "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
+      { SM2027,   13226, { JST,            local_days{2027y/2/6}   + 13h }, "Zepp Sapporo",                            "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
+      { SM2027,   13226, { JST,            local_days{2027y/2/6}   + 17h }, "Zepp Sapporo",                            "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
+      { SM2027,   13226, { JST,            local_days{2027y/2/7}   + 13h }, "Zepp Sapporo",                            "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
+      { SM2027,   13226, { JST,            local_days{2027y/2/7}   + 17h }, "Zepp Sapporo",                            "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
     };
   }
 } // namespace

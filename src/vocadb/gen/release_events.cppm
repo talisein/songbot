@@ -4746,7 +4746,60 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_12222;
 
 constexpr picture picture_release_event_12222 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/12222.jpg?v=7)XYX"sv, release_event_pic_orig_12222, release_event_mime_type_orig_12222, release_event_file_ext_orig_12222, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/12222.jpg?v=7)XYX"sv, release_event_pic_small_thumb_12222, release_event_mime_type_small_thumb_12222, release_event_file_ext_small_thumb_12222, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/12222.jpg?v=7)XYX"sv, release_event_pic_thumb_12222, release_event_mime_type_thumb_12222, release_event_file_ext_thumb_12222, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/12222.jpg?v=7)XYX"sv, release_event_pic_tiny_thumb_12222, release_event_mime_type_tiny_thumb_12222, release_event_file_ext_tiny_thumb_12222  };
 
-export constexpr std::array<release_event, 72> events {{
+constexpr std::array<additional_name, 1> names_release_event_13226 {{
+  {"English"sv, R"XYX(SNOW MIKU LIVE! 2027)XYX"sv},
+}};
+
+constexpr std::array<web_link, 1> web_links_release_event_13226 {{
+  {"Other"sv, R"XYX(Website)XYX"sv, R"XYX(https://snowmiku.com/2027/event-live.html)XYX"sv, 15118 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_13226") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_13226 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_13226"
+});
+constexpr std::string_view release_event_mime_type_orig_13226 = "image/webp";
+constexpr std::string_view release_event_file_ext_orig_13226 = "webp";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_13226;
+constexpr std::string_view release_event_mime_type_orig_13226 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_13226;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_13226") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_13226 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_13226"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_13226 = "image/webp";
+constexpr std::string_view release_event_file_ext_small_thumb_13226 = "webp";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_13226;
+constexpr std::string_view release_event_mime_type_small_thumb_13226 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_13226;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_13226;
+constexpr std::string_view release_event_mime_type_thumb_13226 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_13226;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_13226") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_13226 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_13226"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_13226 = "image/webp";
+constexpr std::string_view release_event_file_ext_tiny_thumb_13226 = "webp";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_13226;
+constexpr std::string_view release_event_mime_type_tiny_thumb_13226 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_13226;
+#endif
+
+constexpr picture picture_release_event_13226 = { R"XYX(image/webp)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/13226.webp?v=1)XYX"sv, release_event_pic_orig_13226, release_event_mime_type_orig_13226, release_event_file_ext_orig_13226, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/13226.webp?v=1)XYX"sv, release_event_pic_small_thumb_13226, release_event_mime_type_small_thumb_13226, release_event_file_ext_small_thumb_13226, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/13226.webp?v=1)XYX"sv, release_event_pic_thumb_13226, release_event_mime_type_thumb_13226, release_event_file_ext_thumb_13226, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/13226.webp?v=1)XYX"sv, release_event_pic_tiny_thumb_13226, release_event_mime_type_tiny_thumb_13226, release_event_file_ext_tiny_thumb_13226  };
+
+export constexpr std::array<release_event, 73> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
 
 **Concert Schedule**:
@@ -5231,6 +5284,7 @@ August 28th(Fri.) - August 30th(Sun.)
 
 Art by [緜](https://vocadb.net/Ar/186084).)XYX"sv, 2026y/8/30, 12251, picture_release_event_12251, R"XYX(Hatsune Miku "Magical Mirai 2026" in TOKYO)XYX"sv, names_release_event_12251, 81, 2026, R"XYX(TOKYO)XYX"sv, std::nullopt, std::nullopt, "Draft"sv, R"XYX(hatsune-miku-magical-mirai-202)XYX"sv, std::nullopt, web_links_release_event_12251 },
   {R"XYX(HATSUNE MIKU EXPO 2026 London)XYX"sv, "Unspecified"sv, 2026y/11/12, R"XYX(Illustration by [鈴ノ助](https://vocadb.net/Ar/2123))XYX"sv, std::nullopt, 12222, picture_release_event_12222, R"XYX(MIKU EXPO 2026 London)XYX"sv, names_release_event_12222, 82, 2026, R"XYX(London)XYX"sv, std::nullopt, std::nullopt, "Finished"sv, R"XYX(miku-expo-2026-london)XYX"sv, R"XYX(The O2)XYX"sv, web_links_release_event_12222 },
+  {std::nullopt, "Unspecified"sv, 2027y/2/5, std::nullopt, 2027y/2/7, 13226, picture_release_event_13226, R"XYX(SNOW MIKU LIVE! 2027)XYX"sv, names_release_event_13226, 204, 2027, std::nullopt, std::nullopt, std::nullopt, "Draft"sv, R"XYX(snow-miku-live-2027)XYX"sv, std::nullopt, web_links_release_event_13226 },
 }};
 
 

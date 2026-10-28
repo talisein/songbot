@@ -115,7 +115,8 @@ export enum ConcertTour
     VOLTAGE,
     ME2026NA,
     MM2026,
-    ME2026EU
+    ME2026EU,
+    SM2027
 };
 
 export constexpr std::string_view
