@@ -1,0 +1,18 @@
+// Cloudflare Workers static assets: an assets-only Worker (no script), so
+// requests are served from Cloudflare's asset store and never invoke code.
+// Used only by script/deploy's cloudflare-workers target. The custom domain
+// (concert-data.39music.dance) is attached in the dashboard, not here, so the
+// deploy token needs no zone permissions.
+//
+// public/ is assembled by .forgejo/workflows/publish-data.yml from static/
+// plus the output of songbot-export-json.
+{
+  "name": "concert-data",
+  "compatibility_date": "2026-10-30",
+  // workers.dev stays on: branch previews (script/deploy) live there.
+  "workers_dev": true,
+  "preview_urls": true,
+  "assets": {
+    "directory": "./public"
+  }
+}

@@ -183,7 +183,11 @@ export struct live_event
     std::chrono::zoned_seconds start_time;
     std::string_view location_name;
     std::string_view location_link;
+    /* nullopt means default_show_duration */
+    std::optional<std::chrono::minutes> duration;
 };
+
+export constexpr std::chrono::minutes default_show_duration = std::chrono::hours{2};
 
 export struct SetlistTrack
 {

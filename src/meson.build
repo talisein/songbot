@@ -422,6 +422,13 @@ project_version = custom_target('version.hpp',
 
 subdir('vocadb')
 
+export_json_exe = executable('songbot-export-json', ['export_json_main.cpp', 'export_json.cpp'],
+    misc_modules_gcm,
+    dependencies: [magic_enum_dep, dpp_dep, prometheus_dep],
+    link_with: [misc_modules_lib],
+    link_args: ['-lstdc++exp'],
+)
+
 src = ['main.cpp', 'context.cpp', 'sd_notify.cpp', 'config_file.cpp', 'iface_command.cpp', 'setlist_message.cpp', 'setlist_shared.cpp', 'setlist_command.cpp', 'setlistlast_command.cpp', 'last_shared.cpp', 'last_command.cpp', 'lastp_command.cpp', 'song_command.cpp', 'freq_command.cpp', 'freqtour_command.cpp', 'nextlive_command.cpp', 'lvchart_command.cpp', 'producer_command.cpp']
 
 exe = executable('songbot', src, misc_modules_gcm, vocadb_gcm,

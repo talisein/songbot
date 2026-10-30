@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Concert Data</title>
+<meta name="description" content="Static reference data for Hatsune Miku concerts, setlists and songs.">
+<style>
+  :root {
+    --bg: #fbfcfc; --fg: #1d2326; --muted: #5b676d; --rule: #dde3e5;
+    --code-bg: #eef3f4; --accent: #137a7f;
+    color-scheme: light dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #12171a; --fg: #e3e8ea; --muted: #9aa7ad; --rule: #2a3236;
+      --code-bg: #1b2226; --accent: #5fd0d3;
+    }
+  }
+  body {
+    margin: 0 auto; max-width: 46rem; padding: 2rem 1rem 4rem;
+    background: var(--bg); color: var(--fg);
+    font: 16px/1.55 system-ui, -apple-system, "Segoe UI", sans-serif;
+  }
+  h1 { font-size: 1.6rem; margin-bottom: .25rem; }
+  h2 { font-size: 1.15rem; margin-top: 2.5rem; padding-top: 1rem; border-top: 1px solid var(--rule); }
+  a { color: var(--accent); }
+  .lede { color: var(--muted); margin-top: 0; }
+  code, pre { font: .9em/1.45 ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+  code { background: var(--code-bg); padding: .1em .3em; border-radius: 3px; }
+  pre { background: var(--code-bg); padding: .75rem 1rem; border-radius: 6px; overflow-x: auto; }
+  pre code { background: none; padding: 0; }
+  table { border-collapse: collapse; width: 100%; font-size: .95em; }
+  th, td { text-align: left; padding: .35rem .5rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  th { font-weight: 600; }
+  td:first-child { white-space: nowrap; }
+  .opt { color: var(--muted); }
+</style>
+</head>
+<body>
+<h1>Concert Data</h1>
+<p class="lede">This site stores static reference data about Hatsune Miku live concerts: songs, setlists, upcoming shows and rhythm-game track lists. It has no API, only the JSON files below, regenerated from <a href="https://github.com/talisein/songbot">songbot</a> whenever its data changes.</p>
+
+<p>Every file has the same envelope:</p>
+<pre><code>{ "schema_version": 1, "data": [ ... ] }</code></pre>
+<p>Within a schema version, fields are only ever added. A removed or renamed field bumps <code>schema_version</code>. Fields marked <span class="opt">optional</span> are omitted when absent, never <code>null</code>. Enum values are uppercase identifiers such as <code>MIKU_EXPO</code>; dates are ISO 8601. Files are served with <code>Access-Control-Allow-Origin: *</code> and cached for five minutes. <code>vocadb_*</code> ids refer to <a href="https://vocadb.net">VocaDB</a> entries.</p>
+
+<h2 id="songs"><a href="songs.json">/songs.json</a></h2>
+<p>Every song that has been performed at a covered concert or appears in a covered game.</p>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td><code>name</code></td><td>string</td><td>English title. With <code>producer</code>, this is how setlists and game tracks refer to a song.</td></tr>
+  <tr><td><code>jp_name</code></td><td>string <span class="opt">optional</span></td><td>Original title</td></tr>
+  <tr><td><code>romaji_name</code></td><td>string <span class="opt">optional</span></td><td></td></tr>
+  <tr><td><code>producer</code></td><td>string</td><td></td></tr>
+  <tr><td><code>singers</code></td><td>string[]</td><td>Main virtual singers: <code>Miku Rin Len Luka MEIKO KAITO Teto Gumi</code>. Empty for non-vocaloid pieces.</td></tr>
+  <tr><td><code>minor_roles</code></td><td>string[] <span class="opt">optional</span></td><td>Singers in supporting parts</td></tr>
+  <tr><td><code>vocadb_id</code></td><td>integer <span class="opt">optional</span></td><td>VocaDB song id</td></tr>
+  <tr><td><code>disambiguation</code></td><td>string <span class="opt">optional</span></td><td>Distinguishes songs that share a name</td></tr>
+</table>
+<pre><code>{
+  "jp_name": "千本桜",
+  "name": "Thousand Cherry Blossoms",
+  "producer": "Kurousa-P",
+  "romaji_name": "Senbonzakura",
+  "singers": ["Miku"],
+  "vocadb_id": 8394
+}</code></pre>
+
+<h2 id="concerts"><a href="concerts.json">/concerts.json</a></h2>
+<p>One entry per concert or tour, with its setlist.</p>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td><code>tour</code></td><td>string</td><td>Unique key, e.g. <code>ME2026NA</code>. Used by <a href="#events">events</a>.</td></tr>
+  <tr><td><code>tour_display</code></td><td>string</td><td>Short display name, e.g. <code>MM10th</code></td></tr>
+  <tr><td><code>series</code></td><td>string</td><td><code>MIKU_EXPO</code>, <code>MAGICAL_MIRAI</code>, <code>SNOW_MIKU</code>, <code>MIKU_WITH_YOU</code>, <code>MIKUPA</code>, ...</td></tr>
+  <tr><td><code>name</code></td><td>string</td><td>Full official name</td></tr>
+  <tr><td><code>date</code></td><td>date</td><td>First show</td></tr>
+  <tr><td><code>last_date</code></td><td>date <span class="opt">optional</span></td><td>Last show, for multi-day runs and tours</td></tr>
+  <tr><td><code>vocadb_event_id</code></td><td>integer <span class="opt">optional</span></td><td>VocaDB release event id</td></tr>
+  <tr><td><code>setlist[].pos</code></td><td>integer</td><td>1-based. Repeats when shows rotate songs in the same slot.</td></tr>
+  <tr><td><code>setlist[].song</code></td><td>string</td><td>Matches <code>songs[].name</code></td></tr>
+  <tr><td><code>setlist[].producer</code></td><td>string <span class="opt">optional</span></td><td>Present only when the name alone is ambiguous</td></tr>
+  <tr><td><code>setlist[].variant</code></td><td>string <span class="opt">optional</span></td><td>Which rotation, e.g. <code>Set A</code></td></tr>
+  <tr><td><code>setlist[].remix</code></td><td>string <span class="opt">optional</span></td><td>e.g. <code>-Reloaded-</code></td></tr>
+  <tr><td><code>setlist[].remix_id</code></td><td>integer <span class="opt">optional</span></td><td>VocaDB id of the remix</td></tr>
+  <tr><td><code>setlist[].song_vocadb_id</code></td><td>integer <span class="opt">optional</span></td><td>The matched song's <code>vocadb_id</code>, for joining</td></tr>
+</table>
+<pre><code>{
+  "date": "2026-04-12",
+  "last_date": "2026-05-19",
+  "name": "HATSUNE MIKU EXPO 2026 NORTH AMERICA",
+  "series": "MIKU_EXPO",
+  "tour": "ME2026NA",
+  "tour_display": "ME2026NA",
+  "vocadb_event_id": 9811,
+  "setlist": [
+    { "pos": 1, "song": "Teo", "song_vocadb_id": 161199 },
+    { "pos": 2, "song": "Kimagure Mercy", "song_vocadb_id": 121935, "variant": "Set A" },
+    { "pos": 2, "song": "2D Dream Fever", "song_vocadb_id": 9376, "variant": "Set B" }
+  ]
+}</code></pre>
+
+<h2 id="events"><a href="events.json">/events.json</a></h2>
+<p>Individual scheduled shows with exact start times.</p>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td><code>tour</code></td><td>string</td><td>Matches <code>concerts[].tour</code></td></tr>
+  <tr><td><code>vocadb_event_id</code></td><td>integer</td><td>VocaDB event; per city for tours</td></tr>
+  <tr><td><code>start_local</code></td><td>string</td><td>Wall-clock time at the venue, no offset</td></tr>
+  <tr><td><code>start_utc</code></td><td>string</td><td>ISO 8601 in UTC</td></tr>
+  <tr><td><code>start_unix</code></td><td>integer</td><td>Seconds since the Unix epoch</td></tr>
+  <tr><td><code>tz</code></td><td>string</td><td>IANA time zone of the venue</td></tr>
+  <tr><td><code>duration_minutes</code></td><td>integer</td><td>Expected show length; 120 unless known otherwise</td></tr>
+  <tr><td><code>location_name</code></td><td>string</td><td>Venue</td></tr>
+  <tr><td><code>location_link</code></td><td>string</td><td>Map link</td></tr>
+</table>
+<pre><code>{
+  "duration_minutes": 120,
+  "location_link": "https://maps.app.goo.gl/wc6fh8pVJogAUaWcA",
+  "location_name": "The O2",
+  "start_local": "2026-11-12T20:00:00",
+  "start_unix": 1794513600,
+  "start_utc": "2026-11-12T20:00:00Z",
+  "tour": "ME2026EU",
+  "tz": "Europe/London",
+  "vocadb_event_id": 12222
+}</code></pre>
+
+<h2 id="diva"><a href="diva.json">/diva.json</a></h2>
+<p>Track lists of the Project DIVA and Project mirai games.</p>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td><code>game</code></td><td>string</td><td><code>DIVA DIVA_ARCADE DIVA_2ND DIVA_EXTEND DIVA_F DIVA_FT DIVA_MEGA39 DIVA_F2 DIVA_X MIRAI MIRAI_2 MIRAI_DX</code></td></tr>
+  <tr><td><code>song</code></td><td>string</td><td>Matches <code>songs[].name</code></td></tr>
+  <tr><td><code>producer</code>, <code>variant</code>, <code>remix</code>, <code>remix_id</code></td><td><span class="opt">optional</span></td><td>As in setlists</td></tr>
+</table>
+<pre><code>{ "game": "DIVA", "song": "World is Mine" }</code></pre>
+
+<h2 id="sekai"><a href="sekai.json">/sekai.json</a></h2>
+<p>Track list of Project SEKAI.</p>
+<table>
+  <tr><th>Field</th><th>Type</th><th>Notes</th></tr>
+  <tr><td><code>id</code></td><td>integer <span class="opt">optional</span></td><td>In-game music id</td></tr>
+  <tr><td><code>unit</code></td><td>string</td><td><code>VSG LEO MMJ VBS WxS N25 OTHER</code></td></tr>
+  <tr><td><code>song</code></td><td>string</td><td>Matches <code>songs[].name</code></td></tr>
+  <tr><td><code>producer</code>, <code>remix</code>, <code>remix_id</code></td><td><span class="opt">optional</span></td><td>As in setlists</td></tr>
+</table>
+<pre><code>{ "id": 1, "song": "Tell Your World", "unit": "VSG" }</code></pre>
+</body>
+</html>

@@ -12,9 +12,13 @@ on:
     # Kept narrow on purpose. tools/ is NOT listed: it holds one renovate
     # helper today, and an ignore rule over a whole directory is the kind that
     # silently stops building the day somebody puts a real build tool there.
+    #
+    # site/ is the concert-data website, published by publish-data.yml; no
+    # part of it goes into the image.
     paths-ignore:
       - '.forgejo/**'
       - 'renovate.json5'
+      - 'site/**'
 
   workflow_call:
   workflow_dispatch:

@@ -1,0 +1,3 @@
+# Assembled by .forgejo/workflows/publish-data.yml
+/site/public/
+/site/.wrangler/

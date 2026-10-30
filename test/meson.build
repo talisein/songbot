@@ -33,6 +33,13 @@ project_diva_test = executable('project_diva_test', 'project_diva.cpp', ut_modul
                                install: get_option('install_tests'))
 test('project_diva', project_diva_test, args: [ut_args])
 
+export_json_test = executable('export_json_test', ['export_json.cpp', '../src/export_json.cpp'], ut_module, misc_modules_gcm, vocadb_gcm,
+                              link_whole: [misc_modules_lib, vocadb_lib],
+                              dependencies: [boostut_dep, dpp_dep],
+                              include_directories: include_directories('../src'),
+                              install: get_option('install_tests'))
+test('export_json', export_json_test, args: [ut_args])
+
 benchmark_exe = executable('lookup_benchmark', 'benchmark.cpp', misc_modules_gcm, vocadb_gcm,
                            link_whole: [misc_modules_lib, vocadb_lib],
                            dependencies: [dpp_dep],

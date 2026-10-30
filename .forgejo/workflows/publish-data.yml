@@ -1,0 +1,85 @@
+# Export songbot's song/concert/event data as JSON and publish it to
+# concert-data.39music.dance, an assets-only Cloudflare Worker (site/).
+# Pushes to main go to production; other branches get a preview deployment
+# at <branch>-concert-data.<subdomain>.workers.dev.
+#
+# The paths list is everything that can change the exported files or break
+# building the exporter. The scraper bot's "Auto Scraper Update" commits only
+# touch src/vocadb/ and res/localvoid/, which nothing here exports, so they
+# do not republish.
+#
+# Secrets: CLOUDFLARE_API_TOKEN (Workers > Individual Workers > concert-data >
+# Editor) and CLOUDFLARE_ACCOUNT_ID. The Worker must already exist before the
+# first branch push: `wrangler versions upload` cannot create it.
+name: Publish concert data
+
+on:
+  push:
+    paths:
+      - 'src/songs.cppm'
+      - 'src/concerts*.cppm'
+      - 'src/project_*'
+      - 'src/util.cppm'
+      - 'src/export_json*'
+      - 'src/meson.build'
+      - 'meson.build'
+      - 'module.mapper.in'
+      - 'site/**'
+      - '.forgejo/workflows/publish-data.yml'
+  workflow_dispatch:
+
+concurrency:
+  group: publish-data-${{ github.ref_name }}
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: meiko
+    container:
+      image: git.miku/talisein/songbot-sdk:latest
+    steps:
+      - name: Install tools
+        run: |
+          set -euo pipefail
+          # ca-certificates' %posttrans fails on the runner's read-only trust
+          # mount and takes the transaction with it (mksystem
+          # meiko/notes/ci-trust.md).
+          printf 'excludepkgs=ca-certificates\n' >> /etc/dnf/dnf.conf
+          dnf -y install --setopt=install_weak_deps=0 nodejs-npm
+
+      - name: Checkout
+        run: |
+          git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .
+
+      - name: Build
+        run: |
+          meson setup build -Dcpp_std=c++26 --buildtype=release
+          meson compile -C build songbot-export-json
+
+      - name: Export
+        run: |
+          set -euo pipefail
+          build/src/songbot-export-json site/public
+          cp -r site/static/. site/public/
+
+      - name: Deploy
+        working-directory: site
+        env:
+          DEPLOY_TARGET: cloudflare-workers
+          WRANGLER_SEND_METRICS: "false"
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          BRANCH: ${{ github.ref_name }}
+          COMMIT: ${{ github.sha }}
+        run: script/deploy
+
+      - name: Summary
+        if: success()
+        run: |
+          {
+            echo "### Published concert data from ${{ github.ref_name }}"
+            echo
+            for f in site/public/*.json; do
+              echo "- $(basename "$f"): $(python3 -c 'import json,sys; print(len(json.load(open(sys.argv[1]))["data"]))' "$f") records"
+            done
+          } >> "$GITHUB_STEP_SUMMARY"
