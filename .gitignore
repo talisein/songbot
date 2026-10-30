@@ -1,3 +1,17 @@
 # Assembled by .forgejo/workflows/publish-data.yml
 /site/public/
 /site/.wrangler/
+
+# Local config and credentials
+/config.ini
+/secret/
+
+# Unpacked Meson subprojects (sources come from the .wrap files)
+/subprojects/.wraplock
+/subprojects/packagecache/
+/subprojects/DPP-*/
+/subprojects/json/
+/subprojects/magic_enum-*/
+/subprojects/prometheus-cpp-with-submodules/
+/subprojects/uni-algo-*/
+/subprojects/ut-v*/
