@@ -76,6 +76,16 @@ int main()
         expect(eq(1794513600LL, london->at("start_unix").get<long long>()));
         expect(eq("Europe/London"s, london->at("tz").get<std::string>()));
         expect(eq(120, london->at("duration_minutes").get<int>()));
+        expect(eq("London"s, london->at("city").get<std::string>()));
+    };
+
+    "Event time zones keep their linked names"_test = [&] {
+        /* Europe/Amsterdam is a tzdb link to Europe/Brussels */
+        const auto& events = parsed["events.json"]["data"];
+        auto amsterdam = std::ranges::find_if(events, [](const json& e) { return e.at("vocadb_event_id") == 12224; });
+        expect(fatal(amsterdam != events.end()));
+        expect(eq("Europe/Amsterdam"s, amsterdam->at("tz").get<std::string>()));
+        expect(eq("Amsterdam"s, amsterdam->at("city").get<std::string>()));
     };
 
     "Setlist tracks resolve to VocaDB ids"_test = [&] {

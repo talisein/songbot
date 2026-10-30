@@ -126,9 +126,10 @@ json export_events()
         j["start_local"] = std::format("{:%FT%T}", local);
         j["start_utc"] = std::format("{:%FT%TZ}", sys);
         j["start_unix"] = sys.time_since_epoch().count();
-        j["tz"] = e.start_time.get_time_zone()->name();
+        j["tz"] = e.start_time.get_time_zone().name;
         j["duration_minutes"] = e.duration.value_or(default_show_duration).count();
         j["location_name"] = e.location_name;
+        j["city"] = e.city;
         j["location_link"] = e.location_link;
         arr.push_back(std::move(j));
     }

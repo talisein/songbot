@@ -176,12 +176,23 @@ export struct Concert
     std::optional<std::uint64_t> vocadb_event_id; // "ReleaseEvent"
 };
 
+/* A time zone that remembers the IANA name it was looked up by.
+   locate_zone() follows tzdb links, so Europe/Amsterdam would
+   otherwise report itself as Europe/Brussels. */
+export struct named_zone
+{
+    std::chrono::time_zone const * zone;
+    std::string_view name;
+    std::chrono::time_zone const * operator->() const { return zone; }
+};
+
 export struct live_event
 {
     ConcertTour tour;
     std::uint64_t vocadb_id;
-    std::chrono::zoned_seconds start_time;
+    std::chrono::zoned_time<std::chrono::seconds, named_zone> start_time;
     std::string_view location_name;
+    std::string_view city;
     std::string_view location_link;
     /* nullopt means default_show_duration */
     std::optional<std::chrono::minutes> duration;
