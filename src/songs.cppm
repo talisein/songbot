@@ -748,6 +748,9 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"インビジブル", "Invisible", "Invisible", duet(Gumi,Rin), "kemu, Ore BananaP", 8251 },
   {"ドレミファロンド", "DoReMiFa Rondo", "DoReMiFa Rondo", Miku, "40mP", 8601 },
   {"子猫のパヤパヤ", "Koneko no Payapaya", "Payapaya Kitten", duet(Miku,MEIKO), "OnecupP", 5635 },
+  /* MWY2026 */
+  {"让我们拥抱哭泣", "Ràng Wǒmen Yōngbào Kūqì", "Let Us Hug And Cry", Miku, "福音莱, 徐肖@Alnova, iPaulWong", 1054502 },
+  {"彩虹游乐园", "Cǎihóng yóu lèyuán", "Rainbow Amusement Park", Miku, "烧烤年糕, Xyanide, 动点P", 1037976 },
     };
 
     return res;
