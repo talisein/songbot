@@ -107,6 +107,8 @@ namespace
     {"HELLO, NEW WORLD! feat. 巡音ルカ", 742688},
     {"サロメ feat. MEIKO", 753184},
     {"こたえて (feat. 初音ミク&鏡音リン&鏡音レン&巡音ルカ&MEIKO&KAITO)", 884096}, //uncharted
+    {"レインボー遊園地 feat. 初音ミク", 1037976}, //uncharted
+    {"让我们拥抱哭泣 feat. 初音ミク", 1054502}, //uncharted
   };
 
     constexpr std::string_view preamble { R"###(/*
