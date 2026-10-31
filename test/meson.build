@@ -15,33 +15,32 @@ ut_module = custom_target('ut_module',
 )
 
 ut_args = ['-r', 'junit', '-o']
-songs_test =  executable('songs_test', 'songs.cpp', ut_module, misc_modules_gcm, vocadb_gcm,
-                         link_whole: [misc_modules_lib, vocadb_lib],
-                         dependencies: [boostut_dep, dpp_dep],
+songs_test =  executable('songs_test', 'songs.cpp', ut_module, data_modules_gcm, vocadb_gcm,
+                         link_whole: [data_modules_lib, vocadb_lib],
+                         dependencies: [boostut_dep],
                          install: get_option('install_tests'))
 test('songs', songs_test, args: [ut_args])
 
-concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, misc_modules_gcm, vocadb_gcm,
-                            link_whole: [misc_modules_lib, vocadb_lib],
-                            dependencies: [boostut_dep, dpp_dep],
+concerts_test =  executable('concerts_test', 'concerts.cpp', ut_module, data_modules_gcm, vocadb_gcm,
+                            link_whole: [data_modules_lib, vocadb_lib],
+                            dependencies: [boostut_dep],
                             install: get_option('install_tests'))
 test('concerts', concerts_test, args: [ut_args])
 
-project_diva_test = executable('project_diva_test', 'project_diva.cpp', ut_module, misc_modules_gcm, vocadb_gcm,
-                               link_whole: [misc_modules_lib, vocadb_lib],
-                               dependencies: [boostut_dep, dpp_dep],
+project_diva_test = executable('project_diva_test', 'project_diva.cpp', ut_module, data_modules_gcm, vocadb_gcm,
+                               link_whole: [data_modules_lib, vocadb_lib],
+                               dependencies: [boostut_dep],
                                install: get_option('install_tests'))
 test('project_diva', project_diva_test, args: [ut_args])
 
-export_json_test = executable('export_json_test', ['export_json.cpp', '../src/export_json.cpp'], ut_module, misc_modules_gcm, vocadb_gcm,
-                              link_whole: [misc_modules_lib, vocadb_lib],
-                              dependencies: [boostut_dep, dpp_dep],
+export_json_test = executable('export_json_test', ['export_json.cpp', '../src/export_json.cpp'], ut_module, data_modules_gcm, json_module, vocadb_gcm,
+                              link_whole: [data_modules_lib, vocadb_lib],
+                              dependencies: [boostut_dep],
                               include_directories: include_directories('../src'),
                               install: get_option('install_tests'))
 test('export_json', export_json_test, args: [ut_args])
 
-benchmark_exe = executable('lookup_benchmark', 'benchmark.cpp', misc_modules_gcm, vocadb_gcm,
-                           link_whole: [misc_modules_lib, vocadb_lib],
-                           dependencies: [dpp_dep],
+benchmark_exe = executable('lookup_benchmark', 'benchmark.cpp', data_modules_gcm, vocadb_gcm,
+                           link_whole: [data_modules_lib, vocadb_lib],
                            install: get_option('install_tests'))
 benchmark('lookup_performance', benchmark_exe)

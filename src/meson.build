@@ -203,7 +203,22 @@ util_module = custom_target('util_module',
         '-o', '@OUTPUT0@',
         '-fconstexpr-ops-limit=3355443200',
     ],
-    depends: [std_module, dpp_module, uni_algo_module, magic_enum_module, errors_module, prometheus_module]
+    depends: [std_module, uni_algo_module, magic_enum_module, errors_module]
+)
+
+reply_handler_module = custom_target('reply_handler_module',
+    input: 'reply_handler.cppm',
+    output: ['reply_handler.o', 'reply_handler.gcm'],
+    command: [
+        cxx_compiler.cmd_array(),
+        '-std=c++26',
+        opt_flag,
+        '-fmodules',
+        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+        '-c', '@INPUT@',
+        '-o', '@OUTPUT0@',
+    ],
+    depends: [std_module, dpp_module, errors_module, prometheus_module]
 )
 
 songs_module = custom_target('songs_module',
@@ -399,10 +414,16 @@ project_sekai_module = custom_target('project_sekai_module',
 )
 
 
-misc_modules_lib = static_library('misc',
-                                  objects: [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_types_module[0], concerts_raw_data_module[0], concerts_data_module[0], concerts_algorithms_module[0], concerts_module[0], dpp_module[0], prometheus_module[0], util_module[0], errors_module[0], project_diva_types_module[0], project_diva_tracks_module[0], project_diva_module[0], project_sekai_types_module[0], project_sekai_tracks_module[0], project_sekai_module[0]])
+# The song/concert data, with nothing from dpp or prometheus, so the JSON
+# exporter and tests don't have to build them
+data_modules_objs = [songs_module[0], uni_algo_module[0], magic_enum_module[0], concerts_types_module[0], concerts_raw_data_module[0], concerts_data_module[0], concerts_algorithms_module[0], concerts_module[0], util_module[0], errors_module[0], project_diva_types_module[0], project_diva_tracks_module[0], project_diva_module[0], project_sekai_types_module[0], project_sekai_tracks_module[0], project_sekai_module[0]]
+data_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_types_module[1], concerts_raw_data_module[1], concerts_data_module[1], concerts_algorithms_module[1], concerts_module[1], util_module[1], errors_module[1], project_diva_types_module[1], project_diva_tracks_module[1], project_diva_module[1], project_sekai_types_module[1], project_sekai_tracks_module[1], project_sekai_module[1], std_module]
+data_modules_lib = static_library('data', objects: data_modules_objs)
 
-misc_modules_gcm = [songs_module[1], uni_algo_module[1], magic_enum_module[1], concerts_types_module[1], concerts_raw_data_module[1], concerts_data_module[1], concerts_algorithms_module[1], concerts_module[1], dpp_module[1], prometheus_module[1], util_module[1], errors_module[1], project_diva_types_module[1], project_diva_tracks_module[1], project_diva_module[1], project_sekai_types_module[1], project_sekai_tracks_module[1], project_sekai_module[1], std_module]
+misc_modules_lib = static_library('misc',
+                                  objects: data_modules_objs + [dpp_module[0], prometheus_module[0], reply_handler_module[0]])
+
+misc_modules_gcm = data_modules_gcm + [dpp_module[1], prometheus_module[1], reply_handler_module[1]]
 
 reconcile_sekai = executable('reconcile_sekai', 'reconcile_sekai.cpp',
     misc_modules_gcm,
@@ -423,9 +444,9 @@ project_version = custom_target('version.hpp',
 subdir('vocadb')
 
 export_json_exe = executable('songbot-export-json', ['export_json_main.cpp', 'export_json.cpp'],
-    misc_modules_gcm,
-    dependencies: [magic_enum_dep, dpp_dep, prometheus_dep],
-    link_with: [misc_modules_lib],
+    data_modules_gcm, json_module,
+    dependencies: [magic_enum_dep],
+    link_with: [data_modules_lib],
     link_args: ['-lstdc++exp'],
 )
 

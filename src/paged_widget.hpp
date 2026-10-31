@@ -20,6 +20,7 @@
 import std;
 import dpp;
 import util;
+import reply_handler;
 import prometheus;
 
 #include "context.hpp"

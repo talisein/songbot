@@ -18,6 +18,7 @@
 
 import songs;
 import util;
+import reply_handler;
 import concerts;
 import vocadb.events;
 import songbot.errors;

@@ -14,6 +14,24 @@ vocadb_api_module = custom_target('vocadb_api_module',
                                   depends: [std_module]
                                  )
 
+# Also used by songbot-export-json, so built without the scraper
+json_module = custom_target('json_module',
+  input: 'json.cppm',
+  output: ['json.o', 'json.gcm'],
+  command: [
+      cxx_compiler.cmd_array(),
+      '-std=c++26',
+      opt_flag,
+      '-fmodules',
+      '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
+      '-c', '@INPUT@',
+      '-o', '@OUTPUT0@',
+      '-DNLOHMANN_JSON_BUILD_MODULES',
+      '-I', nlohmann_json_dep.get_variable('includedir'),
+  ],
+  depends: [std_module]
+)
+
 if get_option('build_anidb_sourcegen')
 
   curl_cpr_dep = dependency('cpr')
@@ -49,23 +67,6 @@ if get_option('build_anidb_sourcegen')
 #        '-I', cpr_inc,
     ],
     depends: [cpr_h_module, std_module]
-  )
-
-  json_module = custom_target('json_module',
-    input: 'json.cppm',
-    output: ['json.o', 'json.gcm'],
-    command: [
-        cxx_compiler.cmd_array(),
-        '-std=c++26',
-        opt_flag,
-        '-fmodules',
-        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
-        '-c', '@INPUT@',
-        '-o', '@OUTPUT0@',
-        '-DNLOHMANN_JSON_BUILD_MODULES',
-        '-I', nlohmann_json_dep.get_variable('includedir'),
-    ],
-    depends: [std_module]
   )
 
   magic_dep = dependency('libmagic')

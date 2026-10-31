@@ -29,6 +29,7 @@ boost.ut @BUILD_DIR@/test/ut.gcm
 dpp @BUILD_DIR@/src/dpp.gcm
 prometheus @BUILD_DIR@/src/prometheus.gcm
 util @BUILD_DIR@/src/util.gcm
+reply_handler @BUILD_DIR@/src/reply_handler.gcm
 cpr @BUILD_DIR@/src/vocadb/cpr.gcm
 nlohmann.json @BUILD_DIR@/src/vocadb/json.gcm
 magic @BUILD_DIR@/src/vocadb/magic.gcm

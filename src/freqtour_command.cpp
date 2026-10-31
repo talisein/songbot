@@ -17,6 +17,7 @@
 */
 
 import util;
+import reply_handler;
 import concerts;
 import songs;
 import songbot.errors;

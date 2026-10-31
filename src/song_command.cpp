@@ -17,6 +17,7 @@
 */
 
 import util;
+import reply_handler;
 import songs;
 import songbot.errors;
 import uni_algo;
