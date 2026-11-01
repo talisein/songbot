@@ -339,7 +339,7 @@ constexpr std::vector<Song> generate_songs_incomplete()
   {"愛Dee", nullopt, "Ai Dee", duet(Miku,Luka), "Mitchie M", 13086},
   {nullopt, nullopt, "Packaged", Miku, "kz", 100671},
   {nullopt, nullopt, "Hand in Hand", Miku, "kz", 89726},
-  {"39みゅーじっく！", "39みゅーじっく", "39 Music!", Miku, "Mikito-P", 127519, nullopt, nullopt , "<:makuharichan:630043704501075968>"},
+  {"39みゅーじっく！", nullopt, "39 Music!", Miku, "Mikito-P", 127519, nullopt, nullopt , "<:makuharichan:630043704501075968>"},
   {nullopt, nullopt, "Strangers", Miku, "Heavenz", 12322},
   {"すろぉもぉしょん", nullopt, "SLoWMoTIoN", Miku, "Pinocchio-P", 56903},
   {"タイムマシン", nullopt, "Time Machine", Miku, "40mP", 1354},

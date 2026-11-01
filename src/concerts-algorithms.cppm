@@ -261,6 +261,7 @@ namespace {
       { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/10/31}  + 19h }, "Shanghai Jing'an Sports Center",          "Shanghai",     "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
       { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/11/1 }  + 14h }, "Shanghai Jing'an Sports Center",          "Shanghai",     "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
       { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/11/1 }  + 19h }, "Shanghai Jing'an Sports Center",          "Shanghai",     "https://maps.app.goo.gl/okQjZ99233fdEa8U8" },
+      { MWY2026,  13120, { SHANGHAI_TZ,    local_days{2026y/12/26 } + 19h }, "Wuliangye Chengdu Performing Center",          "Chengdu",     "https://maps.app.goo.gl/PbcM16yjosfqfYZz8" },
       { ME2026EU, 12222, { LONDON_TZ,      local_days{2026y/11/12} + 20h }, "The O2",                                  "London",       "https://maps.app.goo.gl/wc6fh8pVJogAUaWcA" },
       { ME2026EU, 12223, { BRUSSELS_TZ,    local_days{2026y/11/14} + 20h }, "ING Arena",                               "Brussels",     "https://maps.app.goo.gl/qXoKyoWRaDYGWhJ4A" },
       { ME2026EU, 12224, { AMSTERDAM_TZ,   local_days{2026y/11/15} + 20h }, "AFAS Live",                               "Amsterdam",    "https://maps.app.goo.gl/qNVDzeBM5vsT2rvj7" },
