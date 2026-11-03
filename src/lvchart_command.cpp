@@ -76,6 +76,13 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
     const auto is_not_out = [](const auto& song) -> bool { return !song["isOut"].template get<bool>(); };
     const auto passes_new_filter = [only_new](const auto& song) -> bool { return (!only_new) || song["isNew"].template get<bool>(); };
     const size_t total_in_songs = std::ranges::distance(std::views::filter(songs, is_not_out));
+    /* No charting songs means begin() below would be end() */
+    if (total_in_songs == 0) {
+        auto msg = dpp::message("I'm sorry, the latest Localvoid chart has no songs in it.").set_flags(dpp::message_flags::m_ephemeral);
+        lvchart_failure_counter->Increment();
+        co_await util::reply_handler_new(event.co_reply(msg), ctx, nullptr, nullptr);
+        co_return std::unexpected(songbot_error::lvchart_no_songs);
+    }
     const ssize_t max_view_width = std::format(l, "{:+Ld}", std::views::filter(songs, is_not_out).begin()->at("viewIncrease").template get<ssize_t>()).size();
 
     const auto ymd_result = util::parse_lvchart_sheetname(chart["sheetName"].template get<std::string>());

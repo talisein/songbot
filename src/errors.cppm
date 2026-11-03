@@ -36,6 +36,7 @@ export enum class songbot_error : int
     http_error_404,
     lvchart_week_parse_error,
     setlist_not_populated,
+    lvchart_no_songs,
 };
 
 export class songbot_error_category : public std::error_category {
@@ -73,6 +74,8 @@ public:
                 return "Failed to parse lvchart week date from sheetName"s;
             case songbot_error::setlist_not_populated:
                 return "Setlist has not been populated yet"s;
+            case songbot_error::lvchart_no_songs:
+                return "Latest lvchart has no charting songs"s;
         }
         return std::format("Unknown songbot error code {}", ev);
     }
