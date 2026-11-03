@@ -22,6 +22,7 @@ import dpp;
 import util;
 import reply_handler;
 import concerts;
+import songbot.errors;
 
 class context;
 
@@ -69,6 +70,10 @@ dpp::task<std::expected<void, std::error_code>>
 reply_and_followup(const Event& event, std::ranges::forward_range auto&& rng, context* ctx)
     requires std::same_as<std::ranges::range_value_t<decltype(rng)>, dpp::message>
 {
+    /* Nothing to send; an empty setlist yields no messages */
+    if (std::ranges::empty(rng)) {
+        co_return std::unexpected(make_error_code(songbot_error::setlist_not_populated));
+    }
     if (auto e = co_await util::reply_handler_new(event.co_reply(*std::ranges::begin(rng)), ctx, nullptr, nullptr);
         !e.has_value())
     {

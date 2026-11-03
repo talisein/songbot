@@ -67,6 +67,12 @@ setlist_base_command::reply_multimessage(const dpp::slashcommand_t& event,
 
     auto first_msgs = setlist_message::build_messages(concert, headers, body_lines, true, reveal_click_key, no_spoiler_click_key);
     if (auto res = co_await reply_and_followup(event, first_msgs, ctx); !res) {
+        /* Nothing was sent yet, so tell the user why */
+        if (res.error() == make_error_code(songbot_error::setlist_not_populated)) {
+            dpp::message m{std::format("I don't have the setlist for {} yet. Check back after the show!", concert.name)};
+            m.set_flags(dpp::message_flags::m_ephemeral);
+            co_await util::reply_handler_new(event.co_reply(m), ctx, nullptr, nullptr);
+        }
         co_return res;
     }
 
@@ -101,6 +107,9 @@ setlist_base_command::reply_multimessage(const dpp::slashcommand_t& event,
         co_return co_await util::reply_handler_new(event.co_edit_original_response(success_msg), ctx, reveal_success_counter, reveal_failure_counter);
     } else { // Buttons expiring. Replace the first message without buttons.
         auto expired_msgs = setlist_message::build_messages(concert, headers, body_lines, true, std::nullopt);
+        if (std::ranges::empty(expired_msgs)) {
+            co_return std::unexpected(make_error_code(songbot_error::setlist_not_populated));
+        }
         co_return co_await util::reply_handler_new(event.co_edit_original_response(*std::ranges::begin(expired_msgs)), ctx, reveal_success_counter, reveal_failure_counter);
     }
 
