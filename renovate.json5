@@ -210,5 +210,13 @@
       matchPackageNames: ['fedora'],
       enabled: false,
     },
+    {
+      // A convenience, as in every Fedora build repo: let a new release
+      // settle before the runtime on 39music moves onto it.
+      description: 'Let a new Fedora settle before migrating onto it.',
+      matchDatasources: ['endoflife-date'],
+      matchDepNames: ['fedora'],
+      minimumReleaseAge: '14 days',
+    },
   ],
 }
