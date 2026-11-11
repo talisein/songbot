@@ -297,6 +297,19 @@ std::optional<std::chrono::sys_seconds> latest_show_start(ConcertTour tour)
     return std::ranges::max(times);
 }
 
+/* The earliest show strictly after `now`, optionally restricted to one tour.
+   live_events is grouped by tour, not sorted by time, so take the minimum. */
+export [[nodiscard]]
+std::optional<live_event> next_live_event(std::chrono::sys_seconds now, std::optional<ConcertTour> tour = std::nullopt)
+{
+    auto rng = get_live_events()
+        | std::views::filter([now](const auto& e) { return now < e.start_time.get_sys_time(); })
+        | std::views::filter([tour](const auto& e) { return !tour || *tour == e.tour; });
+    auto it = std::ranges::min_element(rng, {}, [](const auto& e) { return e.start_time.get_sys_time(); });
+    if (it == std::ranges::end(rng)) return std::nullopt;
+    return *it;
+}
+
 export [[nodiscard]] bool
 is_past_spoiler_window(const SetlistTrack& track)
 {

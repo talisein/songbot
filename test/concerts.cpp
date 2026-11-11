@@ -45,6 +45,20 @@ int main()
         };
     };
 
+    "next live uses per-city dates"_test = [] {
+        using namespace std::chrono;
+        const sys_seconds now = sys_days{2026y/11/11};
+
+        const auto next = next_live_event(now);
+        expect(fatal(next.has_value()));
+        expect(next->tour == ConcertTour::ME2026EU) << magic_enum::enum_name(next->tour);
+        expect(eq("London"sv, next->city));
+
+        const auto next_mwy = next_live_event(now, ConcertTour::MWY2026);
+        expect(fatal(next_mwy.has_value()));
+        expect(eq("Chengdu"sv, next_mwy->city));
+    };
+
     "concert"_test = [] {
         auto c = get_setlists()[0];
         expect(eq(1, c.pos));

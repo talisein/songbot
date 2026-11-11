@@ -79,15 +79,13 @@ nextlive_command::on_slashcommand(const dpp::slashcommand_t event)
   std::optional<ConcertTour> requested_tour = std::holds_alternative<std::string>(v) ? magic_enum::enum_cast<ConcertTour>(std::get<std::string>(v)) : std::nullopt;
 
   const auto now = std::chrono::system_clock::now();
-  const auto in_future = [now](const live_event& e) { return now < e.start_time.get_sys_time(); };
-  const auto match_tour = [requested_tour](const live_event& e) { if (!requested_tour) return true; return *requested_tour == e.tour; };
-  auto rng = std::views::all(get_live_events()) | std::views::filter(in_future) | std::views::filter(match_tour) | std::views::take(1);
-  if (std::ranges::empty(rng)) {
+  const auto next = next_live_event(std::chrono::floor<std::chrono::seconds>(now), requested_tour);
+  if (!next) {
     auto msg = dpp::message("I'm not yet aware of the next event.").set_flags(dpp::message_flags::m_ephemeral);
     co_return co_await util::reply_handler_new(event.co_reply(msg), ctx, nextlive_success_counter, nextlive_failure_counter);
   }
 
-  const auto e = *std::ranges::begin(rng);
+  const auto e = *next;
   const auto c = lookup_concert(e.tour);
   auto msg = dpp::message().set_flags(dpp::message_flags::m_using_components_v2).suppress_embeds(true);
   std::ostringstream ss;
