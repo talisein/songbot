@@ -51,7 +51,22 @@ jobs:
         run: |
           git add -u
           git add res/localvoid/*.json
-          git commit -m 'Auto Scraper Update'
+          charts=$(git diff --cached --name-only --diff-filter=A -- 'res/localvoid/*.json' \
+            | sed -nE 's|.*/([0-9]{4})_([0-9]{2})_([0-9]+)\.json$|\1-\2 Week \3|p' | sort)
+          n=$(printf '%s\n' "$charts" | grep -c . || true)
+          first=$(printf '%s\n' "$charts" | head -n1)
+          last=$(printf '%s\n' "$charts" | tail -n1)
+          if [ "$n" -eq 0 ]; then
+            msg="Auto Scraper Update"
+          elif [ "$n" -eq 1 ]; then
+            msg="Localvoid Update: $first"
+          else
+            msg="Localvoid Update: $first to $last
+
+          Charts added:
+          $(printf '%s\n' "$charts" | sed 's/^/- /')"
+          fi
+          git commit -m "$msg"
           git push
 
   trigger-songbot-build:
