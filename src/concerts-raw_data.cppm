@@ -2146,6 +2146,7 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2026EU, 2,  "Play With Fire"},
         { ME2026EU, 3,  "Psi"},
         { ME2026EU, 4,  "Darling Dance", nullopt, "Set A"},
+        { ME2026EU, 4,  "Solar System Disco", nullopt, "Set B"},
         { ME2026EU, 5,  "World's End Dancehall"},
         { ME2026EU, 6,  "TYQOON"},
         { ME2026EU, 7,  "Call!!"},
@@ -2168,9 +2169,4 @@ export constexpr std::array setlists = std::to_array<const SetlistTrack>({
         { ME2026EU, 24, "Artifact"},
         { ME2026EU, 25, "Blue Planet"},
         { ME2026EU, 26, "DECORATOR"},
-/*        { ME2026EU, 27, ""},
-        { ME2026EU, 28, ""},
-        { ME2026EU, 29, ""},
-        { ME2026EU, 30, ""},*/
-
     });
