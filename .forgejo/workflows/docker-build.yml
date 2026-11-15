@@ -37,9 +37,16 @@ jobs:
       # are current either way -- but a plain push to main runs this on its own,
       # and there the bases it names must come from the registry rather than
       # from whatever the store happens to be holding.
+      #
+      # --layers because `buildah bud` defaults to NO layer cache, unlike
+      # podman build. The Containerfile is split so that a raw_data-only commit
+      # reuses the cached build of everything else and the vocadb .so layer.
+      # The cache lives in the same persistent store, and it is bounded: the
+      # Monday prune drops the untagged intermediate images, and the Monday SDK
+      # rebuild invalidates them anyway.
       - name: Build
         run: |
-          buildah bud --pull=newer --build-arg RUN_BENCHMARKS=1 -t git.miku/${{ github.repository }}:main .
+          buildah bud --layers --pull=newer --build-arg RUN_BENCHMARKS=1 -t git.miku/${{ github.repository }}:main .
       - name: Push
         run: |
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku

@@ -10,6 +10,7 @@ vocadb_api_module = custom_target('vocadb_api_module',
                                     '-c', '@INPUT@',
                                     '-o', '@OUTPUT0@',
                                     '-fconstexpr-ops-limit=3355443200',
+                                    '-fPIC',
                                   ],
                                   depends: [std_module]
                                  )
@@ -113,6 +114,7 @@ vocadb_events_module = custom_target('events_module',
                                 '-c', '@INPUT@',
                                 '-o', '@OUTPUT0@',
                                 '-fconstexpr-ops-limit=3355443200',
+                                '-fPIC',
                                 '-fconstexpr-loop-limit=2000000',
                                 '-I', meson.current_source_dir(),
                                 '--embed-dir=@0@'.format(meson.project_source_root() / 'res')
@@ -132,6 +134,7 @@ vocadb_songs_module = custom_target('songs_module',
                                 '-c', '@INPUT@',
                                 '-o', '@OUTPUT0@',
                                 '-fconstexpr-ops-limit=3355443200',
+                                '-fPIC',
                                 '-fconstexpr-loop-limit=2000000',
                                 '-I', meson.current_source_dir(),
                                 '--embed-dir=@0@'.format(meson.project_source_root() / 'res')
@@ -151,6 +154,7 @@ localvoid_module = custom_target('localvoid_module',
                                 '-c', '@INPUT@',
                                 '-o', '@OUTPUT0@',
                                 '-fconstexpr-ops-limit=3355443200',
+                                '-fPIC',
                                 '-fconstexpr-loop-limit=2000000',
                                 '-I', meson.current_source_dir(),
                                 '--embed-dir=@0@'.format(meson.project_source_root() / 'res')
@@ -158,6 +162,11 @@ localvoid_module = custom_target('localvoid_module',
                               depends: [std_module]
                              )
 
-vocadb_lib = static_library('vocadb',
-                            objects: [vocadb_api_module[0], vocadb_events_module[0], vocadb_songs_module[0], localvoid_module[0]])
+# Shared, not static: these four objects carry ~88 MB of the binary's
+# .rodata and none of them depends on the concerts data. As its own .so the
+# container image can ship it in its own layer, which a concerts-only change
+# leaves byte-identical. Hence -fPIC on the four targets above.
+vocadb_lib = shared_library('songbot-vocadb',
+                            objects: [vocadb_api_module[0], vocadb_events_module[0], vocadb_songs_module[0], localvoid_module[0]],
+                            install: true)
 vocadb_gcm = [vocadb_api_module[1], vocadb_events_module[1], vocadb_songs_module[1], localvoid_module[1]]
