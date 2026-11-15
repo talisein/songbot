@@ -56,6 +56,7 @@ export enum ConcertTour
     MP2013Sapporo,
     MP2013Kansai,
     MM2013,
+    GAGA,
     ME2014IN,
     MM2014,
     ME2014LANY,

@@ -841,6 +841,59 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_2519;
 
 constexpr picture picture_release_event_2519 = { R"XYX(image/jpeg)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/2519.jpg?v=4)XYX"sv, release_event_pic_orig_2519, release_event_mime_type_orig_2519, release_event_file_ext_orig_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/2519.jpg?v=4)XYX"sv, release_event_pic_small_thumb_2519, release_event_mime_type_small_thumb_2519, release_event_file_ext_small_thumb_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/2519.jpg?v=4)XYX"sv, release_event_pic_thumb_2519, release_event_mime_type_thumb_2519, release_event_file_ext_thumb_2519, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/2519.jpg?v=4)XYX"sv, release_event_pic_tiny_thumb_2519, release_event_mime_type_tiny_thumb_2519, release_event_file_ext_tiny_thumb_2519  };
 
+constexpr std::array<additional_name, 1> names_release_event_7124 {{
+  {"English"sv, R"XYX(ArtRave: The Artpop Ball)XYX"sv},
+}};
+
+constexpr std::array<web_link, 1> web_links_release_event_7124 {{
+  {"Reference"sv, R"XYX(Wikipedia (EN))XYX"sv, R"XYX(https://en.wikipedia.org/wiki/ArtRave:_The_Artpop_Ball)XYX"sv, 8778 },
+}};
+
+
+#if __has_embed("release_event_pic_orig_7124") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_orig_7124 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_orig_7124"
+});
+constexpr std::string_view release_event_mime_type_orig_7124 = "image/png";
+constexpr std::string_view release_event_file_ext_orig_7124 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_orig_7124;
+constexpr std::string_view release_event_mime_type_orig_7124 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_orig_7124;
+#endif
+
+
+#if __has_embed("release_event_pic_small_thumb_7124") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_small_thumb_7124 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_small_thumb_7124"
+});
+constexpr std::string_view release_event_mime_type_small_thumb_7124 = "image/png";
+constexpr std::string_view release_event_file_ext_small_thumb_7124 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_small_thumb_7124;
+constexpr std::string_view release_event_mime_type_small_thumb_7124 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_small_thumb_7124;
+#endif
+
+constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_7124;
+constexpr std::string_view release_event_mime_type_thumb_7124 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_7124;
+
+
+#if __has_embed("release_event_pic_tiny_thumb_7124") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_tiny_thumb_7124 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_tiny_thumb_7124"
+});
+constexpr std::string_view release_event_mime_type_tiny_thumb_7124 = "image/png";
+constexpr std::string_view release_event_file_ext_tiny_thumb_7124 = "png";
+#else
+constexpr std::array<std::uint8_t, 0> release_event_pic_tiny_thumb_7124;
+constexpr std::string_view release_event_mime_type_tiny_thumb_7124 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_tiny_thumb_7124;
+#endif
+
+constexpr picture picture_release_event_7124 = { R"XYX(image/png)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/7124.png?v=5)XYX"sv, release_event_pic_orig_7124, release_event_mime_type_orig_7124, release_event_file_ext_orig_7124, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/7124.png?v=5)XYX"sv, release_event_pic_small_thumb_7124, release_event_mime_type_small_thumb_7124, release_event_file_ext_small_thumb_7124, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/7124.png?v=5)XYX"sv, release_event_pic_thumb_7124, release_event_mime_type_thumb_7124, release_event_file_ext_thumb_7124, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/7124.png?v=5)XYX"sv, release_event_pic_tiny_thumb_7124, release_event_mime_type_tiny_thumb_7124, release_event_file_ext_tiny_thumb_7124  };
+
 constexpr std::array<additional_name, 2> names_release_event_1939 {{
   {"English"sv, R"XYX(MIKU EXPO 2014 Jakarta)XYX"sv},
   {"Unspecified"sv, R"XYX(HATSUNE MIKU EXPO 2014 Jakarta)XYX"sv},
@@ -4872,7 +4925,7 @@ constexpr std::string_view release_event_file_ext_tiny_thumb_13226;
 
 constexpr picture picture_release_event_13226 = { R"XYX(image/webp)XYX"sv, std::nullopt, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainOrig/13226.webp?v=1)XYX"sv, release_event_pic_orig_13226, release_event_mime_type_orig_13226, release_event_file_ext_orig_13226, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainSmall/13226.webp?v=1)XYX"sv, release_event_pic_small_thumb_13226, release_event_mime_type_small_thumb_13226, release_event_file_ext_small_thumb_13226, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainThumb/13226.webp?v=1)XYX"sv, release_event_pic_thumb_13226, release_event_mime_type_thumb_13226, release_event_file_ext_thumb_13226, R"XYX(https://static.vocadb.net/img/ReleaseEvent/mainTiny/13226.webp?v=1)XYX"sv, release_event_pic_tiny_thumb_13226, release_event_mime_type_tiny_thumb_13226, release_event_file_ext_tiny_thumb_13226  };
 
-export constexpr std::array<release_event, 74> events {{
+export constexpr std::array<release_event, 75> events {{
   {R"XYX(ミクFES'09（夏）, Miku FES'09 (Natsu))XYX"sv, "Concert"sv, 2009y/8/31, R"XYX(Hatsune Miku's 2nd anniversary festival.
 
 **Concert Schedule**:
@@ -4945,6 +4998,10 @@ Concert dates:
 - March 9, 2013 (Kansai))XYX"sv, std::nullopt, 2511, picture_release_event_2511, R"XYX(Hatsune Miku Live Party 2013 Kansai)XYX"sv, names_release_event_2511, 219, 2013, R"XYX(Kansai)XYX"sv, 3954, R"(Hatsune Miku Live Party 2013 Mikupa♪ Kansai)", "Finished"sv, R"XYX(hatsune-miku-live-party-2013-k)XYX"sv, R"XYX(和歌山ビッグホエール)XYX"sv, web_links_release_event_2511 },
   {R"XYX(初音ミク「マジカルミライ 2013」, マジカルミライ 2013, Magical Mirai 2013)XYX"sv, "Unspecified"sv, 2013y/8/30, R"XYX(Daytime : OPEN 12:30 / Showtime 13:30 / Curtain 15:00
 Night : OPEN 17:30 / Showtime 19:30)XYX"sv, std::nullopt, 2519, picture_release_event_2519, R"XYX(Hatsune Miku Magical Mirai 2013)XYX"sv, names_release_event_2519, 81, 2013, std::nullopt, 114, R"(Hatsune Miku Magical Mirai 2013)", "Finished"sv, R"XYX(hatsune-miku-magical-mirai-201)XYX"sv, R"XYX(横浜アリーナ)XYX"sv, web_links_release_event_2519 },
+  {std::nullopt, "Concert"sv, 2014y/5/4, R"XYX(> ArtRave: The Artpop Ball (stylized as artRAVE: the ARTPOP ball) was the fourth headlining concert tour by American singer Lady Gaga. Supporting her third studio album Artpop (2013), the tour ran from May 4, 2014, to November 24, 2014.
+\- [Wikipedia](https://en.wikipedia.org/wiki/ArtRave:_The_Artpop_Ball)
+
+Hatsune Miku performed as the opening act on shows between May 6th ands June 3rd, 14 shows out of the 79 total.)XYX"sv, 2014y/11/24, 7124, picture_release_event_7124, R"XYX(ArtRave: The Artpop Ball)XYX"sv, names_release_event_7124, std::nullopt, 0, std::nullopt, 216, R"(artRAVE: The ARTPOP Ball (Miku Opening Setlist))", "Draft"sv, R"XYX(artrave-the-artpop-ball)XYX"sv, std::nullopt, web_links_release_event_7124 },
   {R"XYX(HATSUNE MIKU EXPO 2014 Jakarta)XYX"sv, "Unspecified"sv, 2014y/5/28, R"XYX(May 28th
 The 1st show :Open : 18:30 -Start : 19:30 -
 May 29th
