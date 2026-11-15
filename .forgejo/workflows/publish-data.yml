@@ -38,9 +38,13 @@ jobs:
     container:
       image: git.miku/talisein/songbot-sdk:latest
     steps:
+      # npm is in songbot-sdk now (sdk-update.yml). This step is only a
+      # fallback for an SDK image older than that, and once the image has
+      # been rebuilt it does nothing.
       - name: Install tools
         run: |
           set -euo pipefail
+          command -v npm >/dev/null && exit 0
           # ca-certificates' %posttrans fails on the runner's read-only trust
           # mount and takes the transaction with it (mksystem
           # meiko/notes/ci-trust.md).

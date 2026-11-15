@@ -52,7 +52,7 @@ jobs:
           FROM fedora:44
           RUN update-ca-trust
           RUN dnf -y upgrade && \
-              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel && \
+              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel nodejs-npm && \
               dnf clean all
           EOF
           buildah bud --pull=newer -f Containerfile.sdk \
