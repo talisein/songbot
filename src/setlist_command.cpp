@@ -68,7 +68,7 @@ namespace {
             }
 
             if (song->singer != NO_VIRTUAL_SINGER) {
-                ss << " feat. ";
+                ss << " ";
                 track_singer_emoji(ss, track, *song);
             }
             ss << " by " << util::escape_markdown(song->producer);
