@@ -129,6 +129,28 @@
   "vocadb_event_id": 12222
 }</code></pre>
 
+<h2 id="shows"><a href="shows.inc">/shows.inc</a></h2>
+<p>The same shows as <code>events.json</code>, as C++ designated initializers for
+programs that compile the schedule in. Declare a struct with exactly these
+members, in this order, and include the file inside a braced array
+initializer with <code>std::chrono</code> and <code>std::chrono_literals</code> in
+scope. Strings are ASCII; other bytes are octal escapes of UTF-8. A change to
+the members bumps <code>schema_version</code>.</p>
+<pre><code>struct show {
+    std::string_view tour;
+    std::uint64_t vocadb_id;
+    std::string_view city, venue, tz;
+    std::chrono::local_seconds start;
+    std::chrono::minutes duration;
+};
+constexpr show shows[] = {
+#include "shows.inc"
+};
+
+// one line of shows.inc:
+{.tour = "ME2026EU", .vocadb_id = 12222, .city = "London", .venue = "The O2", .tz = "Europe/London",
+ .start = local_days{2026y/11/12} + 20h, .duration = 120min},</code></pre>
+
 <h2 id="diva"><a href="diva.json">/diva.json</a></h2>
 <p>Track lists of the Project DIVA and Project mirai games.</p>
 <table>

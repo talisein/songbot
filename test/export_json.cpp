@@ -16,11 +16,17 @@ int main()
 
     const auto files = export_json::export_all();
     std::map<std::string, json> parsed;
-    for (const auto& f : files)
-        parsed[f.name] = json::parse(f.contents);
+    std::string shows_inc;
+    for (const auto& f : files) {
+        if (f.name.ends_with(".json"))
+            parsed[f.name] = json::parse(f.contents);
+        else if (f.name == "shows.inc")
+            shows_inc = f.contents;
+    }
 
     "Every file parses and carries the schema version"_test = [&] {
-        expect(eq(5UZ, files.size()));
+        expect(eq(6UZ, files.size()));
+        expect(eq(5UZ, parsed.size()));
         for (const auto& [name, j] : parsed) {
             expect(eq(export_json::schema_version, j.at("schema_version").get<int>())) << name;
             expect(j.at("data").is_array()) << name;
@@ -102,5 +108,23 @@ int main()
         auto senbon = std::ranges::find_if(s, [](const json& j) { return j.value("romaji_name", "") == "Senbonzakura"; });
         expect(fatal(senbon != s.end()));
         expect(eq(json::array({"Miku"}), senbon->at("singers")));
+    };
+
+    "shows.inc has one initializer per live event"_test = [&] {
+        std::size_t initializers = 0;
+        for (auto pos = shows_inc.find("{.tour = "); pos != std::string::npos;
+             pos = shows_inc.find("{.tour = ", pos + 1))
+            ++initializers;
+        expect(eq(get_live_events().size(), initializers));
+        expect(shows_inc.contains(
+            "{.tour = \"ME2026EU\", .vocadb_id = 12222, .city = \"London\", .venue = \"The O2\", .tz = \"Europe/London\",\n"
+            " .start = local_days{2026y/11/12} + 20h, .duration = 120min},\n"sv));
+        expect(shows_inc.contains("+ 16h + 30min"sv)) << "Magical Mirai's 16:30 show";
+    };
+
+    "shows.inc is ASCII"_test = [&] {
+        expect(std::ranges::all_of(shows_inc, [](unsigned char c) { return c < 0x80; }));
+        /* Düsseldorf */
+        expect(shows_inc.contains("\"D\\303\\274sseldorf\""sv));
     };
 }

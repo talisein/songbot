@@ -9,7 +9,9 @@
 # do not republish.
 #
 # Secrets: CLOUDFLARE_API_TOKEN (Workers > Individual Workers > concert-data >
-# Editor) and CLOUDFLARE_ACCOUNT_ID. The Worker must already exist before the
+# Editor), CLOUDFLARE_ACCOUNT_ID, and MIKUEXPO_DISPATCH_TOKEN (a git.miku
+# token with write:repository on talisein/mikuexpocountdown, used to start
+# its sync-shows workflow after a production publish). The Worker must already exist before the
 # first branch push: `wrangler versions upload` cannot create it.
 name: Publish concert data
 
@@ -76,6 +78,19 @@ jobs:
           BRANCH: ${{ github.ref_name }}
           COMMIT: ${{ github.sha }}
         run: script/deploy
+
+      # mikuexpocountdown compiles shows.inc in. Its sync-shows workflow
+      # fetches the file just deployed and opens a PR when it changed.
+      - name: Notify mikuexpocountdown
+        if: github.ref_name == 'main'
+        env:
+          TOKEN: ${{ secrets.MIKUEXPO_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+          curl -fsS -X POST \
+            -H "Authorization: token $TOKEN" -H 'Content-Type: application/json' \
+            -d '{"ref":"main"}' \
+            "${{ github.server_url }}/api/v1/repos/talisein/mikuexpocountdown/actions/workflows/sync-shows.yml/dispatches"
 
       - name: Summary
         if: success()
