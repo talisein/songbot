@@ -23,6 +23,8 @@ import songs;
 import concerts;
 import project_diva;
 import project_sekai;
+import vocadb.api;
+import vocadb.songs;
 
 #include "export_json.hpp"
 
@@ -72,6 +74,11 @@ json export_songs()
             j["minor_roles"] = singers_array(*s.minor_roles);
         set_opt(j, "vocadb_id", s.vocadb_id);
         set_opt(j, "disambiguation", s.disambiguation);
+        if (s.vocadb_id) {
+            auto v = std::ranges::find(vocadb::songs, *s.vocadb_id, &vocadb::song::id);
+            if (v != std::ranges::end(vocadb::songs) && v->publish_date)
+                j["publish_date"] = iso_date(*v->publish_date);
+        }
         arr.push_back(std::move(j));
     }
     return wrap(std::move(arr));

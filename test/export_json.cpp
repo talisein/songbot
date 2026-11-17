@@ -110,6 +110,26 @@ int main()
         expect(eq(json::array({"Miku"}), senbon->at("singers")));
     };
 
+    "Songs carry their VocaDB publish date"_test = [&] {
+        const auto& s = parsed["songs.json"]["data"];
+        auto dancehall = std::ranges::find_if(s, [](const json& j) { return j.value("vocadb_id", 0) == 20; });
+        expect(fatal(dancehall != s.end()));
+        expect(eq("2010-05-18"s, dancehall->value("publish_date", ""s)));
+
+        std::size_t dated = 0;
+        for (const auto& j : s) {
+            if (!j.contains("publish_date"))
+                continue;
+            ++dated;
+            const auto d = j.at("publish_date").get<std::string>();
+            std::chrono::year_month_day ymd;
+            std::istringstream in{d};
+            in >> std::chrono::parse("%F", ymd);
+            expect(!in.fail() && ymd.ok() && d.size() == 10) << d;
+        }
+        expect(gt(dated, s.size() / 2)) << "most songs have a VocaDB date";
+    };
+
     "shows.inc has one initializer per live event"_test = [&] {
         std::size_t initializers = 0;
         for (auto pos = shows_inc.find("{.tour = "); pos != std::string::npos;

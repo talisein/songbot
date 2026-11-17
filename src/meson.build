@@ -443,8 +443,12 @@ project_version = custom_target('version.hpp',
 
 subdir('vocadb')
 
+# Only the two vocadb modules songs.json needs (publish_date), not all of
+# vocadb_lib: publish-data CI then skips the release_events and localvoid
+# compiles.
 export_json_exe = executable('songbot-export-json', ['export_json_main.cpp', 'export_json.cpp'],
-    data_modules_gcm, json_module,
+    data_modules_gcm, json_module, vocadb_api_module[1], vocadb_songs_module[1],
+    objects: [vocadb_api_module[0], vocadb_songs_module[0]],
     dependencies: [magic_enum_dep],
     link_with: [data_modules_lib],
     link_args: ['-lstdc++exp'],
