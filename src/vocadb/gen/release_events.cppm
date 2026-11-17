@@ -875,9 +875,18 @@ constexpr std::string_view release_event_mime_type_small_thumb_7124 = "inode/x-e
 constexpr std::string_view release_event_file_ext_small_thumb_7124;
 #endif
 
+
+#if __has_embed("release_event_pic_thumb_7124") == __STDC_EMBED_FOUND__
+constexpr std::array release_event_pic_thumb_7124 = std::to_array<std::uint8_t>({
+    #embed "release_event_pic_thumb_7124"
+});
+constexpr std::string_view release_event_mime_type_thumb_7124 = "inode/x-empty";
+constexpr std::string_view release_event_file_ext_thumb_7124 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> release_event_pic_thumb_7124;
 constexpr std::string_view release_event_mime_type_thumb_7124 = "inode/x-empty";
 constexpr std::string_view release_event_file_ext_thumb_7124;
+#endif
 
 
 #if __has_embed("release_event_pic_tiny_thumb_7124") == __STDC_EMBED_FOUND__

@@ -34788,9 +34788,18 @@ constexpr std::array<web_link, 4> web_links_song_32009 {{
   {"Reference"sv, R"XYX(Vocaloid Wiki)XYX"sv, R"XYX(https://vocaloid.fandom.com/wiki/Story_Rider)XYX"sv, 158112 },
 }};
 
+
+#if __has_embed("song_pic_orig_32009") == __STDC_EMBED_FOUND__
+constexpr std::array song_pic_orig_32009 = std::to_array<std::uint8_t>({
+    #embed "song_pic_orig_32009"
+});
+constexpr std::string_view song_mime_type_orig_32009 = "inode/x-empty";
+constexpr std::string_view song_file_ext_orig_32009 = "???";
+#else
 constexpr std::array<std::uint8_t, 0> song_pic_orig_32009;
 constexpr std::string_view song_mime_type_orig_32009 = "inode/x-empty";
 constexpr std::string_view song_file_ext_orig_32009;
+#endif
 
 constexpr std::array<std::uint8_t, 0> song_pic_small_thumb_32009;
 constexpr std::string_view song_mime_type_small_thumb_32009 = "inode/x-empty";
