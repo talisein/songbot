@@ -70,7 +70,7 @@ lvchart_command::on_slashcommand(const dpp::slashcommand_t event)
       ss.imbue(l);
     }
 
-    using json = nlohmann::json;
+    using json = dpp::json;
     const auto chart = json::parse(localvoid::charts.back());
     const auto songs = chart["songs"];
     const auto is_not_out = [](const auto& song) -> bool { return !song["isOut"].template get<bool>(); };

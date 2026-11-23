@@ -86,26 +86,7 @@ prometheus_module = custom_target('prometheus_module',
     depends: [prometheus_registry_h_module, prometheus_exposer_h_module, prometheus_histogram_h_module],
 )
 
-dpp_h_module = custom_target('dpp_h_module',
-    input: 'dpp.cppm', # Fake input. The input is dpp.h from the subproject.
-    output: ['dpp_h.gcm'],
-    command: [
-        cxx_compiler.cmd_array(),
-        '-std=c++26',
-        opt_flag,
-        '-fmodules',
-        '-fmodule-only',
-        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
-        '-x', 'c++-user-header',
-        '-DDPP_USE_EXTERNAL_JSON',
-        '-I', dpp_includedir,
-        '-I', nlohmann_json_dep.get_variable('includedir'),
-        '-c', 'dpp/dpp.h',
-    ],
-                            )
-
 dpp_module = custom_target('dpp_module',
-    input: 'dpp.cppm',
     output: ['dpp.o', 'dpp.gcm'],
     command: [
         cxx_compiler.cmd_array(),
@@ -116,10 +97,9 @@ dpp_module = custom_target('dpp_module',
         '-DDPP_USE_EXTERNAL_JSON',
         '-I', dpp_includedir,
         '-I', nlohmann_json_dep.get_variable('includedir'),
-        '-c', '@INPUT@',
+        '-c', dpp_includedir / 'dpp' / 'dpp.cppm',
         '-o', '@OUTPUT0@',
     ],
-    depends: [dpp_h_module],
 )
 
 

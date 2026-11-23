@@ -46,7 +46,6 @@ module_conf_data.set('PROMETHEUS_CORE_INCLUDEDIR', prometheus_core_inc)
 module_conf_data.set('PROMETHEUS_PULL_INCLUDEDIR', prometheus_pull_inc)
 
 dpp_includedir = dpp_dep.get_variable('includedir')
-module_conf_data.set('DPP_INCLUDEDIR', dpp_includedir)
 
 module_mapper_file = configure_file(input: 'module.mapper.in',
                                     output: 'module.mapper',
