@@ -38,7 +38,7 @@ public:
     explicit setlist_message(const Concert& concert, bool suppress_spoiler = false);
     void set_header(const std::vector<std::string>& header_lines, const Concert& concert);
     void set_body(std::string_view body_text);
-    size_t char_count() const { return header_char_count + body_char_count; }
+    std::size_t char_count() const { return header_char_count + body_char_count; }
     [[nodiscard]] dpp::message to_message(bool use_ephemeral,
                                           std::optional<std::string> reveal_button_id,
                                           std::optional<std::string> no_spoiler_button_id = std::nullopt) const;
@@ -52,8 +52,8 @@ public:
         bool suppress_spoiler = false);
 
 private:
-    size_t header_char_count = 0;
-    size_t body_char_count = 0;
+    std::size_t header_char_count = 0;
+    std::size_t body_char_count = 0;
     bool is_spoiler;
     std::optional<dpp::component> header_section;
 

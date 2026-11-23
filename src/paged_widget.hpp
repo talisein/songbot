@@ -25,21 +25,21 @@ import prometheus;
 
 #include "context.hpp"
 
-template<std::invocable<size_t> MakePageFn>
-    requires std::convertible_to<std::invoke_result_t<MakePageFn, size_t>, std::string>
+template<std::invocable<std::size_t> MakePageFn>
+    requires std::convertible_to<std::invoke_result_t<MakePageFn, std::size_t>, std::string>
 dpp::task<std::expected<void, std::error_code>>
 run_paged_widget(
     const dpp::slashcommand_t& event,
     context* ctx,
-    size_t total_count,
-    size_t step,
+    std::size_t total_count,
+    std::size_t step,
     MakePageFn&& make_page,
     prometheus::Counter* success_counter,
     prometheus::Counter* failure_counter)
 {
     const auto next_key = ctx->keygen();
     const auto prev_key = ctx->keygen();
-    size_t start_idx = 0;
+    std::size_t start_idx = 0;
 
     auto make_msg = [&](bool include_buttons) {
         auto msg = dpp::message()

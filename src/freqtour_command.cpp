@@ -101,8 +101,8 @@ freqtour_command::on_slashcommand(const dpp::slashcommand_t event)
       co_return std::unexpected(songbot_error::no_match);
     }
 
-    constexpr size_t step = 25;
-    auto make_page = [&](size_t start_idx) -> std::string {
+    constexpr std::size_t step = 25;
+    auto make_page = [&](std::size_t start_idx) -> std::string {
         std::ostringstream ss;
         std::println(ss, "# Song Frequency for Tour Series {}", magic_enum::enum_name(series));
         for (auto const [idx, song_freq] : std::views::enumerate(queried_frequencies)

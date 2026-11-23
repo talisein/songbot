@@ -48,8 +48,8 @@ freq_command::get_command()
 dpp::task<std::expected<void, std::error_code>>
 freq_command::on_slashcommand(const dpp::slashcommand_t event)
 {
-    constexpr size_t step = 25;
-    auto make_page = [&](size_t start_idx) -> std::string {
+    constexpr std::size_t step = 25;
+    auto make_page = [&](std::size_t start_idx) -> std::string {
         std::ostringstream ss;
         for (auto const [idx, song_freq] : std::views::enumerate(song_frequencies)
                                          | std::views::drop(start_idx)

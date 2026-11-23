@@ -21,7 +21,7 @@
 import std;
 import dpp;
 
-constexpr size_t AUTOCOMPLETE_MAX_CHOICES = 25UZ;
+constexpr std::size_t AUTOCOMPLETE_MAX_CHOICES = 25UZ;
 
 class context;
 

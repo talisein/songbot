@@ -18,6 +18,7 @@
 
 #pragma once
 
+import std;
 import dpp;
 
 namespace systemd {

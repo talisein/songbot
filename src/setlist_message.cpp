@@ -25,7 +25,7 @@ import uni_algo;
 #include "context.hpp"
 
 namespace {
-    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
+    constexpr std::size_t DISCORD_REPLY_LIMIT = 4000UZ;
 }
 
 bool
@@ -210,13 +210,13 @@ setlist_message::build_messages(
     std::optional<std::string> no_spoiler_button_id,
     bool suppress_spoiler)
 {
-    const size_t header_size = std::ranges::fold_left(
+    const std::size_t header_size = std::ranges::fold_left(
         std::views::transform(header_lines, &std::string::size),
-        0UZ, std::plus<size_t>());
+        0UZ, std::plus<std::size_t>());
 
     std::vector<std::string> chunks;
     std::ostringstream current;
-    size_t current_header_size = header_size;
+    std::size_t current_header_size = header_size;
 
     for (const auto& line : body_lines) {
         if ((current.view().size() + line.size() + current_header_size) >= DISCORD_REPLY_LIMIT) {
@@ -234,7 +234,7 @@ setlist_message::build_messages(
 
     std::vector<dpp::message> result;
     result.reserve(chunks.size());
-    for (size_t i = 0; i < chunks.size(); ++i) {
+    for (std::size_t i = 0; i < chunks.size(); ++i) {
         setlist_message msg(concert, suppress_spoiler);
         if (i == 0) {
             msg.set_header(header_lines, concert);

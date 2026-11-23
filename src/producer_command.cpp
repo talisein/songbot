@@ -259,12 +259,12 @@ producer_command::on_slashcommand(const dpp::slashcommand_t event)
         }
     }
 
-    constexpr size_t DISCORD_REPLY_LIMIT = 4000UZ;
+    constexpr std::size_t DISCORD_REPLY_LIMIT = 4000UZ;
 
     auto build_msgs = [&](bool ephemeral, const std::optional<std::string>& button_key) {
         std::vector<std::string> chunks;
         std::ostringstream current;
-        size_t current_header_size = header.size();
+        std::size_t current_header_size = header.size();
         for (const auto& line : body_lines) {
             if (current.view().size() + line.size() + current_header_size >= DISCORD_REPLY_LIMIT) {
                 if (!current.view().empty()) {
@@ -282,7 +282,7 @@ producer_command::on_slashcommand(const dpp::slashcommand_t event)
                            (ephemeral ? dpp::message_flags::m_ephemeral : 0);
         std::vector<dpp::message> result;
         result.reserve(chunks.size());
-        for (size_t i = 0; i < chunks.size(); ++i) {
+        for (std::size_t i = 0; i < chunks.size(); ++i) {
             auto msg = dpp::message().set_flags(flags).suppress_embeds(true);
             if (i == 0 && button_key) {
                 auto action_row = dpp::component().set_type(dpp::cot_action_row);
