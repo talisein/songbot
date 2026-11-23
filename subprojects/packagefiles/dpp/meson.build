@@ -1,6 +1,6 @@
 project('dpp', ['cpp'],
         license: 'Apache-2.0',
-        version: '10.1.6',
+        version: '10.1.7',
         meson_version: '>=1.4.0')
 
 cc = meson.get_compiler('cpp')
@@ -34,7 +34,7 @@ elif have_one_param_setname_np
 endif
 
 dpp_src = files(
-  # Top-level dpp/ (51 files)
+  # Top-level dpp/ (52 files)
   'src/dpp/application.cpp',
   'src/dpp/auditlog.cpp',
   'src/dpp/automod.cpp',
@@ -66,6 +66,7 @@ dpp_src = files(
   'src/dpp/presence.cpp',
   'src/dpp/prune.cpp',
   'src/dpp/queues.cpp',
+  'src/dpp/restresults.cpp',
   'src/dpp/role.cpp',
   'src/dpp/scheduled_event.cpp',
   'src/dpp/signature_verifier.cpp',
