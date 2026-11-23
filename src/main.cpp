@@ -17,7 +17,7 @@
 */
 
 #include <signal.h>
-#include <string.h>
+#include <cstring>
 #include <sys/signalfd.h>
 #include <cerrno>
 #include <execinfo.h>
