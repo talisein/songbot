@@ -12,7 +12,7 @@ project('songbot', ['c', 'cpp'],
 # upstream's module/magic_enum.cppm, which header-only packages don't install.
 magic_enum_proj = subproject('magic_enum', version: '>=0.10.0')
 magic_enum_dep = magic_enum_proj.get_variable('magic_enum_dep')
-magic_enum_root = meson.project_source_root() / 'subprojects' / 'magic_enum-@0@'.format(magic_enum_proj.version())
+magic_enum_root = meson.project_source_root() / 'subprojects' / 'magic_enum-@0@'.format(magic_enum_dep.version())
 magic_enum_module_src = magic_enum_root / 'module' / 'magic_enum.cppm'
 assert(import('fs').is_file(magic_enum_module_src),
        'magic_enum module not found at ' + magic_enum_module_src
