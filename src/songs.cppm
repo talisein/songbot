@@ -968,7 +968,8 @@ public:
                 song_singer_emoji(out, song);
             } else {
                 out << magic_enum::enum_flags_name(song.singer);
-                if (song.minor_roles) {
+                /* magic_enum >= 0.10 names a flags enum's zero, so guard it */
+                if (song.minor_roles && *song.minor_roles != NO_VIRTUAL_SINGER) {
                     out << " with " << magic_enum::enum_flags_name(*song.minor_roles);
                 }
             }

@@ -28,7 +28,7 @@ meson compile -C build
 The project uses C++26 modules extensively. There are three categories:
 
 1. **Domain modules** (`src/*.cppm`) — `songs`, `concerts`, `util`, `errors` — define the core data types and logic.
-2. **Wrapper modules** (`src/prometheus.cppm`, `src/magic_enum.cppm`, `src/uni_algo.cppm`) — wrap third-party library headers into modules for clean importing. `dpp` is not one of them: it is D++'s own `include/dpp/dpp.cppm`, compiled from the subproject.
+2. **Wrapper modules** (`src/prometheus.cppm`, `src/uni_algo.cppm`) — wrap third-party library headers into modules for clean importing. `dpp` and `magic_enum` are not among them: they are the libraries' own module files (D++'s `include/dpp/dpp.cppm`, magic_enum's `module/magic_enum.cppm`), compiled from the subprojects.
 3. **Generated data modules** (`src/vocadb/gen/*.cppm`) — `vocadb_songs`, `release_events`, `localvoid_charts` — contain the actual constexpr arrays of song and concert data. These are checked into the repo and should not be hand-edited; regenerate via the scraper.
 
 The build system configures a `module.mapper` to resolve module names to file paths for GCC.

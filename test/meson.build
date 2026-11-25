@@ -3,7 +3,7 @@ ut_module = custom_target('ut_module',
     output: ['ut.o', 'ut.gcm'],
     command: [
         cxx_compiler.cmd_array(),
-        '-std=c++26',
+        cpp26_args,
         '-fmodules',
         '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
         '-c', '@INPUT@',

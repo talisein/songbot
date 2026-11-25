@@ -14,6 +14,13 @@ int main()
     using namespace boost::ut::literals;
     using namespace boost::ut::operators::terse;
 
+    "magic_enum sees every ConcertTour"_test = [] {
+        /* ConcertTour is sequential from 0, so the last value fixes the count */
+        constexpr auto tours = magic_enum::enum_values<ConcertTour>();
+        static_assert(magic_enum::enum_integer(tours.back()) + 1 == magic_enum::enum_count<ConcertTour>());
+        expect(eq(magic_enum::enum_name(tours.front()), "MIKUFES09"sv));
+    };
+
     "Every concert series needs to exist"_test = [] {
         auto concert_series_exists = [](const SetlistTrack& track) -> bool { return std::ranges::contains(get_concerts(), track.concert_short_name, &Concert::short_name); };
         expect(std::ranges::all_of(get_setlists(), concert_series_exists)) << [&] {

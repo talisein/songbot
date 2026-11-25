@@ -8,9 +8,15 @@ project('songbot', ['c', 'cpp'],
                            'optimization=g'])
 
 
-magic_enum_dep = dependency('magic_enum',
-                            version: '>=0.9.8',
-                            fallback: ['magic_enum'])
+# Always the wrap, never a system package: the module is compiled from
+# upstream's module/magic_enum.cppm, which header-only packages don't install.
+magic_enum_proj = subproject('magic_enum', version: '>=0.10.0')
+magic_enum_dep = magic_enum_proj.get_variable('magic_enum_dep')
+magic_enum_root = meson.project_source_root() / 'subprojects' / 'magic_enum-@0@'.format(magic_enum_proj.version())
+magic_enum_module_src = magic_enum_root / 'module' / 'magic_enum.cppm'
+assert(import('fs').is_file(magic_enum_module_src),
+       'magic_enum module not found at ' + magic_enum_module_src
+       + ' (does the wrap directory match the project version?)')
 
 uni_algo_dep = dependency('uni-algo',
                           fallback: ['uni-algo'])
@@ -52,6 +58,10 @@ module_mapper_file = configure_file(input: 'module.mapper.in',
                                     configuration: module_conf_data)
 
 opt_flag = '-O' + get_option('optimization')
+
+# Language flags for the hand-written module compile commands. Each CMI and
+# every importer must agree on these.
+cpp26_args = ['-std=c++26']
 
 add_project_arguments( '-fmodules',
                        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),

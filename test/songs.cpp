@@ -2,6 +2,7 @@ import std;
 import boost.ut;
 import songs;
 import uni_algo;
+import magic_enum;
 
 int main()
 {
@@ -80,6 +81,21 @@ int main()
 
         auto str2 = std::format("{}", *lookup_song("llnf"));
         expect(eq(str2, "[ルカルカ★ナイトフィーバー / Luka Luka★Night Fever](https://vocadb.net/S/1435) feat. <:luka:235216119403773952> by samfree"sv));
+    };
+
+    "no-emoji format names singers via enum_flags_name"_test = [] {
+        expect(eq(std::format("{:e}", *lookup_song("Fire◎Flower")),
+                  "[Fire◎Flower](https://vocadb.net/S/6387) feat. Len by halyosy"sv));
+        expect(eq(std::format("{:e}", *lookup_song("8HIT")),
+                  "[8HIT](https://vocadb.net/S/9210) feat. Rin|Len by Wonderful☆Opportunity"sv));
+    };
+
+    "Singer is a magic_enum flags enum"_test = [] {
+        static_assert(magic_enum::is_flags_enum_v<Singer>);
+        expect(eq(magic_enum::enum_flags_name(static_cast<Singer>(Miku | Rin)), "Miku|Rin"sv));
+        /* magic_enum >= 0.10 names the zero of a flags enum */
+        expect(eq(magic_enum::enum_flags_name(NO_VIRTUAL_SINGER), "NO_VIRTUAL_SINGER"sv));
+        expect(std::ranges::contains(magic_enum::enum_values<Singer>(), NO_VIRTUAL_SINGER));
     };
 
     "Every AltName::name must exist in songs"_test = [] {
