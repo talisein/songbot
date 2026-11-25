@@ -60,10 +60,18 @@ module_mapper_file = configure_file(input: 'module.mapper.in',
 opt_flag = '-O' + get_option('optimization')
 
 # Language flags for the hand-written module compile commands. Each CMI and
-# every importer must agree on these.
-cpp26_args = ['-std=c++26']
+# every importer must agree on these. -freflection turns on C++26 static
+# reflection, which magic_enum >= 0.10 uses in place of its
+# __PRETTY_FUNCTION__ parsing; std_module needs it too, so that `import std`
+# provides <meta>. MAGIC_ENUM_REQUIRE_STD_REFLECTION makes any TU that
+# preprocesses magic_enum (today only the module) fail rather than fall back
+# to the old backend. reflection_args goes into both cpp26_args and the
+# project arguments, which don't reach the custom_target commands.
+reflection_args = ['-freflection', '-DMAGIC_ENUM_REQUIRE_STD_REFLECTION']
+cpp26_args = ['-std=c++26'] + reflection_args
 
-add_project_arguments( '-fmodules',
+add_project_arguments( reflection_args,
+                       '-fmodules',
                        '-fmodule-mapper=@0@'.format(module_mapper_file.full_path()),
                        '-Mno-modules',
                        '-fcoroutines',
