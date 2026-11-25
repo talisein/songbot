@@ -3,8 +3,9 @@ on:
   schedule:
     - cron: '0 2 * * 1' # Runs every Monday at 2:00 AM
   workflow_dispatch:
-  # The SDK carries a prebuilt D++ (see the SDK build below), which songbot's
-  # meson.build uses only while its srchash matches the wrap and overlay. So
+  # The SDK carries a prebuilt D++ and prometheus-cpp (see the SDK build
+  # below), which songbot's meson.build uses only while their srchash matches
+  # the wrap and overlay. So
   # rebuild as soon as either changes on main, rather than letting every build
   # compile D++ from the wrap until Monday.
   push:
@@ -12,6 +13,10 @@ on:
     paths:
       - 'subprojects/dpp.wrap'
       - 'subprojects/packagefiles/dpp/**'
+      - 'subprojects/prometheus-cpp.wrap'
+      - 'subprojects/packagefiles/prometheus-cpp/**'
+      - 'tools/srchash.sh'
+      - 'tools/sdk-install-subproject.sh'
       - '.forgejo/workflows/sdk-update.yml'
 
 jobs:
@@ -65,36 +70,38 @@ jobs:
               dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel nodejs-npm && \
               dnf clean all
 
-          # PREBUILT D++, so CI does not compile it on every run. The build
-          # context is the checkout, and .dockerignore narrows subprojects/ to
-          # the wraps and packagefiles. 'meson subprojects download' refuses
-          # without a root meson.build, hence the stub; it applies the overlay.
-          # --prefix=/usr because /usr/local/lib64/pkgconfig is not on Fedora's
-          # pkg-config path. srchash must be the string songbot's meson.build
-          # computes: the three files' sha256 hex digests, concatenated.
-          #
-          # The heredoc is unquoted: escape every dollar sign meant for the
-          # RUN, and use no backticks, even here in a comment.
-          COPY subprojects /dppsrc/subprojects
-          RUN cd /dppsrc && echo "project('stub')" > meson.build && \
-              meson subprojects download dpp && \
-              h=\$(for f in subprojects/dpp.wrap subprojects/packagefiles/dpp/meson.build subprojects/packagefiles/dpp/meson_options.txt; do sha256sum "\$f" | cut -d' ' -f1; done | tr -d '\\n') && \
-              meson setup /tmp/dppbuild subprojects/DPP-* --prefix=/usr -Dsrchash="\$h" && \
-              meson install -C /tmp/dppbuild && \
-              cd / && rm -rf /dppsrc /tmp/dppbuild
+          # PREBUILT D++ AND prometheus-cpp, so CI does not compile them on
+          # every run. tools/sdk-install-subproject.sh builds each overlay
+          # standalone and installs it into /usr with a srchash in its .pc
+          # files; meson.build uses those copies only while the srchash matches
+          # its checkout (see there). The build context is the checkout, and
+          # .dockerignore narrows subprojects/ to the wraps and packagefiles.
+          # One RUN per library so a failure names which one.
+          COPY subprojects /sdksrc/subprojects
+          COPY tools/srchash.sh tools/sdk-install-subproject.sh /sdksrc/tools/
+          RUN /sdksrc/tools/sdk-install-subproject.sh dpp
+          RUN /sdksrc/tools/sdk-install-subproject.sh prometheus-cpp && rm -rf /sdksrc
           EOF
           buildah bud --pull=newer -f Containerfile.sdk \
             -v /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/pki/ca-trust/source/anchors/talinet_root_ca.crt:ro \
             -t git.miku/talisein/songbot-sdk:latest .
 
-          # Smoke-test the D++ install before pushing: a broken SDK on :latest
-          # would break every CI job until the next rebuild. Each check fails
-          # the step on its own; the build is not run, a missing file is enough.
+          # Smoke-test the prebuilt installs before pushing: a broken SDK on
+          # :latest would break every CI job until the next rebuild. Each check
+          # fails the step on its own; nothing is compiled, a missing file is
+          # enough.
           ctr=$(buildah from git.miku/talisein/songbot-sdk:latest)
-          buildah run "$ctr" -- pkg-config --modversion dpp
-          buildah run "$ctr" -- sh -c 'test -n "$(pkg-config --variable=srchash dpp)"'
-          buildah run "$ctr" -- test -f /usr/include/dpp/dpp.cppm
-          buildah run "$ctr" -- test -f /usr/lib64/libdpp.a
+          for pc in dpp prometheus-cpp-core prometheus-cpp-pull; do
+            buildah run "$ctr" -- pkg-config --modversion "$pc"
+            buildah run "$ctr" -- sh -c "test -n \"\$(pkg-config --variable=srchash $pc)\""
+          done
+          for f in /usr/include/dpp/dpp.cppm /usr/lib64/libdpp.a \
+                   /usr/include/prometheus/registry.h /usr/include/prometheus/exposer.h \
+                   /usr/include/prometheus/detail/core_export.h \
+                   /usr/lib64/libprometheus-cpp-core.a /usr/lib64/libprometheus-cpp-pull.a \
+                   /usr/lib64/libcivetweb.a; do
+            buildah run "$ctr" -- test -f "$f"
+          done
           buildah rm "$ctr"
 
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku

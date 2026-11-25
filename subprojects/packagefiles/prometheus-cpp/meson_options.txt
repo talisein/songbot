@@ -1,0 +1,4 @@
+option('srchash', type: 'string', value: '',
+       description: '''Content hash of songbot's prometheus-cpp.wrap and this
+overlay (tools/srchash.sh), recorded in the .pc files. Set by
+tools/sdk-install-subproject.sh; see songbot's root meson.build.''')

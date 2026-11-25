@@ -1,3 +1,4 @@
 option('srchash', type: 'string', value: '',
-       description: '''Content hash of songbot's dpp.wrap and this overlay,
-recorded in dpp.pc. Set by sdk-update.yml; see songbot's root meson.build.''')
+       description: '''Content hash of songbot's dpp.wrap and this overlay
+(tools/srchash.sh), recorded in dpp.pc. Set by
+tools/sdk-install-subproject.sh; see songbot's root meson.build.''')

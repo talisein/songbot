@@ -45,12 +45,14 @@ The scraper tool (`src/vocadb/`) queries the VocaDB API and generates `.cppm` fi
 
 ### Dependencies
 
-- **D++ (dpp)** — Discord bot framework; async ops use `dpp::task<void>` coroutines. Built from the wrap and `subprojects/packagefiles/dpp/`. The `songbot-sdk` image also has it prebuilt (`sdk-update.yml`), and `meson.build` uses that copy only when its `dpp.pc` `srchash` matches the wrap and overlay files. Otherwise it builds from the wrap.
+- **D++ (dpp)** — Discord bot framework; async ops use `dpp::task<void>` coroutines. See "Prebuilt in the SDK" below.
 - **magic_enum** — Enum reflection for virtual singer enums
 - **uni-algo** — Unicode normalization for song name matching
-- **prometheus-cpp** — Metrics/monitoring
+- **prometheus-cpp** — Metrics/monitoring. See "Prebuilt in the SDK" below.
 - **libsystemd** — `sd_notify` readiness notification
 - **boost::ut** — Unit test framework (compiled as a module in `test/ut.cppm`)
+
+**Prebuilt in the SDK:** D++ and prometheus-cpp are built from their wraps and the overlays in `subprojects/packagefiles/`. The `songbot-sdk` image also has them prebuilt in `/usr`, installed by `tools/sdk-install-subproject.sh` from `sdk-update.yml`. `meson.build` uses an SDK copy only when its `.pc` `srchash` matches `tools/srchash.sh` for the checkout; otherwise it builds from the wrap. An overlay that is to be prebuilt must take a `srchash` option and install itself only when it is not a subproject.
 
 ## Testing
 

@@ -1,7 +1,18 @@
 project('prometheus-cpp', ['c', 'cpp'],
         version: '1.3.0',
         meson_version: '>=1.4.0',
-        default_options: ['cpp_std=c++11'])
+        # buildtype, optimization and c_std are what the subproject inherits
+        # from songbot's root today, so the standalone build songbot-sdk
+        # installs (sdk-update.yml) produces the same libraries.
+        default_options: ['cpp_std=c++11',
+                          'c_std=c23',
+                          'buildtype=release',
+                          'optimization=g'])
+
+# Built standalone (songbot-sdk) it installs the static libraries, headers and
+# prometheus-cpp-{core,pull}.pc; as songbot's fallback subproject it installs
+# nothing, so `meson install` never puts it into /app.
+is_top = not meson.is_subproject()
 
 cc = meson.get_compiler('c')
 threads_dep = dependency('threads')
@@ -35,7 +46,7 @@ core_lib = static_library('prometheus-cpp-core',
   ),
   include_directories: [core_inc, generated_inc],
   dependencies: [threads_dep, rt_dep],
-  install: false,
+  install: is_top,
 )
 
 core_dep = declare_dependency(
@@ -58,7 +69,7 @@ civetweb_lib = static_library('civetweb',
   include_directories: civetweb_inc,
   c_args: ['-DCIVETWEB_API=', '-DUSE_IPV6', '-DSOCKET_TIMEOUT_QUANTUM=200', '-DNO_SSL'],
   dependencies: [threads_dep],
-  install: false,
+  install: is_top,
 )
 
 # --- pull ---
@@ -75,7 +86,7 @@ pull_lib = static_library('prometheus-cpp-pull',
   cpp_args: ['-DHAVE_ZLIB'],
   dependencies: [threads_dep, zlib_dep, rt_dep],
   link_with: [core_lib, civetweb_lib],
-  install: false,
+  install: is_top,
 )
 
 pull_dep = declare_dependency(
@@ -87,6 +98,38 @@ pull_dep = declare_dependency(
     'generated_includedir': meson.current_source_dir() / 'generated-include',
   },
 )
+
+if is_top
+  # Everything lands in one includedir/prometheus/, so the .pc files' includedir
+  # and generated_includedir (which songbot's meson.build reads for its header
+  # units and module mapper) are the same directory. util/ and civetweb's
+  # headers are private to pull's sources.
+  foreach d : ['core/include/prometheus', 'pull/include/prometheus',
+               'generated-include/prometheus']
+    install_subdir(d, install_dir: get_option('includedir'))
+  endforeach
+
+  pkg = import('pkgconfig')
+  pc_vars = ['generated_includedir=${includedir}',
+             'srchash=' + get_option('srchash')]
+  # core first: generate() then turns pull's link_with on core_lib into a
+  # Requires on prometheus-cpp-core instead of a bare -l.
+  pkg.generate(core_lib,
+    name: 'prometheus-cpp-core',
+    description: 'prometheus-cpp core (songbot build)',
+    version: meson.project_version(),
+    libraries: [threads_dep],
+    variables: pc_vars,
+  )
+  pkg.generate(pull_lib,
+    name: 'prometheus-cpp-pull',
+    description: 'prometheus-cpp pull (songbot build)',
+    version: meson.project_version(),
+    requires: ['zlib'],
+    libraries: [civetweb_lib, threads_dep],
+    variables: pc_vars,
+  )
+endif
 
 meson.override_dependency('prometheus-cpp-core', core_dep)
 meson.override_dependency('prometheus-cpp-pull', pull_dep)

@@ -32,44 +32,52 @@ systemd_dep = dependency('libsystemd')
 zlib_dep = dependency('zlib')
 ssl_dep = dependency('openssl')
 
-# DPP discord library — native Meson build via subprojects/packagefiles/dpp/meson.build
+# PREBUILT IN songbot-sdk: D++ and prometheus-cpp. sdk-update.yml builds each
+# overlay standalone (tools/sdk-install-subproject.sh) and installs it with
+# .pc files, so CI does not compile them on every run. An SDK copy is used
+# only when it was built from exactly this checkout's wrap and overlay: its .pc
+# carries `srchash`, from tools/srchash.sh, and it is compared here with the
+# same script's output. A version check would not do -- renovate bumps a wrap
+# without the overlay's hand-written project() version, and an overlay-only
+# change (a new .cpp) keeps the version -- and either way the PR must compile
+# the overlay, which is what pr-build.yml is for. Any mismatch, or no SDK copy
+# at all, builds the wrap as before.
 #
-# songbot-sdk ships a prebuilt D++ (sdk-update.yml builds the same overlay
-# standalone and installs it, with dpp.pc), so CI does not compile ~150 D++
-# sources on every run. It is used only when it was built from exactly this
-# wrap and overlay: its dpp.pc carries a srchash of those files, compared here.
-# A version check would not do -- renovate bumps the wrap without the overlay's
-# hand-written project() version, and an overlay-only change (a new .cpp)
-# keeps the version -- and either way the PR must compile the overlay, which
-# is what pr-build.yml is for. Any mismatch builds the wrap, as before.
-#
-# The hash is three sha256 hex digests concatenated; sdk-update.yml computes
-# the same string with sha256sum, so keep the file list in step with it.
-dpp_srchash = ''
-foreach f : ['subprojects/dpp.wrap',
-             'subprojects/packagefiles/dpp/meson.build',
-             'subprojects/packagefiles/dpp/meson_options.txt']
-  dpp_srchash += fs.hash(f, 'sha256')
-endforeach
+# Probed with pkg-config directly rather than dependency(required: false), so
+# the fallback path never resolves the system copy before the subproject's own
+# meson.override_dependency().
 pkgconf_prog = find_program('pkg-config', 'pkgconf', required: false)
-sdk_dpp_srchash = ''
-if pkgconf_prog.found()
-  sdk_dpp_srchash = run_command(pkgconf_prog, '--variable=srchash', 'dpp',
-                                check: false).stdout().strip()
-endif
-if sdk_dpp_srchash == dpp_srchash
+sdk_prebuilt = {}
+foreach wrap, pc : {'dpp': 'dpp', 'prometheus-cpp': 'prometheus-cpp-core'}
+  want = run_command('tools/srchash.sh', wrap, check: true).stdout().strip()
+  have = ''
+  if pkgconf_prog.found()
+    have = run_command(pkgconf_prog, '--variable=srchash', pc,
+                       check: false).stdout().strip()
+  endif
+  if have != '' and have != want
+    warning('The installed @0@ (@1@.pc) was built from a different @0@.wrap or overlay; building it from the wrap instead'.format(wrap, pc))
+  endif
+  sdk_prebuilt += {wrap: have == want}
+endforeach
+
+# DPP discord library — native Meson build via subprojects/packagefiles/dpp/meson.build
+if sdk_prebuilt['dpp']
   dpp_dep = dependency('dpp')
 else
-  if sdk_dpp_srchash != ''
-    warning('The installed D++ (dpp.pc) was built from a different dpp.wrap or overlay; building D++ from the wrap instead')
-  endif
   dpp_dep = subproject('dpp').get_variable('dpp_dep')
 endif
 nlohmann_json_dep = dependency('nlohmann_json', fallback: ['json', 'nlohmann_json_multiple_headers'])
 
 # prometheus-cpp — native Meson build via subprojects/packagefiles/prometheus-cpp/meson.build
-prometheus_core_dep = dependency('prometheus-cpp-core', fallback: ['prometheus-cpp', 'core_dep'])
-prometheus_pull_dep = dependency('prometheus-cpp-pull', fallback: ['prometheus-cpp', 'pull_dep'])
+if sdk_prebuilt['prometheus-cpp']
+  prometheus_core_dep = dependency('prometheus-cpp-core')
+  prometheus_pull_dep = dependency('prometheus-cpp-pull')
+else
+  prometheus_proj = subproject('prometheus-cpp')
+  prometheus_core_dep = prometheus_proj.get_variable('core_dep')
+  prometheus_pull_dep = prometheus_proj.get_variable('pull_dep')
+endif
 prometheus_dep = declare_dependency(dependencies: [prometheus_pull_dep, prometheus_core_dep, zlib_dep])
 
 # C++ Module Mapper
