@@ -18,9 +18,6 @@ jobs:
     container:
       image: git.miku/talisein/songbot-sdk:latest
     steps:
-      - name: Install build deps
-        run: dnf -y install cpr-devel file-devel
-
       - name: Checkout
         run: |
           git clone --depth 1 --branch ${{ github.ref_name }} https://x-access-token:${{ secrets.GITHUB_TOKEN }}@git.miku/${{ github.repository }}.git .

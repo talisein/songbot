@@ -58,9 +58,6 @@ jobs:
       # reuses the std/dpp/data CMIs already built above. It has to be
       # `setup --reconfigure`: `meson configure` only records the option, and
       # `meson compile <target>` looks the target up before ninja regenerates.
-      - name: Install scraper build deps
-        run: dnf -y install cpr-devel file-devel
-
       - name: Compile scraper
         run: |
           meson setup --reconfigure build -Dbuild_anidb_sourcegen=true

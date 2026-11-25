@@ -67,7 +67,7 @@ jobs:
           FROM fedora:45
           RUN update-ca-trust
           RUN dnf -y upgrade && \
-              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel nodejs-npm && \
+              dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel nodejs-npm cpr-devel file-devel && \
               dnf clean all
 
           # PREBUILT D++ AND prometheus-cpp, so CI does not compile them on
