@@ -49,11 +49,13 @@ jobs:
       # Compile (never run) the VocaDB scraper, which only lvchart_update.yml
       # builds otherwise -- so a change that breaks it would first surface in
       # the scheduled Autoscrape after merge. Reconfiguring the same build dir
-      # reuses the std/dpp/data CMIs already built above.
+      # reuses the std/dpp/data CMIs already built above. It has to be
+      # `setup --reconfigure`: `meson configure` only records the option, and
+      # `meson compile <target>` looks the target up before ninja regenerates.
       - name: Install scraper build deps
         run: dnf -y install cpr-devel file-devel
 
       - name: Compile scraper
         run: |
-          meson configure build -Dbuild_anidb_sourcegen=true
+          meson setup --reconfigure build -Dbuild_anidb_sourcegen=true
           meson compile -C build vocadb-scraper
