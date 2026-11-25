@@ -1,7 +1,10 @@
 # Export songbot's song/concert/event data as JSON and publish it to
 # concert-data.39music.dance, an assets-only Cloudflare Worker (site/).
-# Pushes to main go to production; other branches get a preview deployment
-# at <branch>-concert-data.<subdomain>.workers.dev.
+# Pushes to main go to production. Other branches get a preview deployment
+# at <branch>-concert-data.<subdomain>.workers.dev, but only on request:
+# put [publish-pr-ci] in the message of the push's head commit (or run the
+# workflow by hand). Without it a branch push still triggers this workflow
+# and the job shows up as skipped.
 #
 # The paths list is everything that can change the exported files or break
 # building the exporter. The scraper bot's "Auto Scraper Update" commits only
@@ -36,6 +39,12 @@ concurrency:
 
 jobs:
   publish:
+    # Branch previews are opt-in (see the header). Only the head commit's
+    # message counts, so tag the last commit of the push.
+    if: >-
+      github.ref_name == 'main'
+      || github.event_name == 'workflow_dispatch'
+      || contains(github.event.head_commit.message, '[publish-pr-ci]')
     runs-on: meiko
     container:
       image: git.miku/talisein/songbot-sdk:latest
