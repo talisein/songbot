@@ -1,7 +1,18 @@
 project('dpp', ['cpp'],
         license: 'Apache-2.0',
         version: '10.1.7',
-        meson_version: '>=1.4.0')
+        meson_version: '>=1.4.0',
+        # What the subproject inherits from songbot's root today, so that the
+        # standalone build songbot-sdk installs (sdk-update.yml) produces the
+        # same library. Ignored when built as a subproject.
+        default_options: ['buildtype=release',
+                          'optimization=g',
+                          'cpp_std=c++26'])
+
+# Built standalone (songbot-sdk) it installs a static libdpp.a, its headers and
+# dpp.pc; as songbot's fallback subproject it installs nothing, so `meson
+# install` never puts D++ into /app.
+is_top = not meson.is_subproject()
 
 cc = meson.get_compiler('cpp')
 
@@ -196,8 +207,29 @@ dpp_lib = static_library('dpp',
   cpp_args: private_defs,
   dependencies: [openssl_dep, zlib_dep, threads_dep, nlohmann_json_dep],
   pic: true,
-  install: false,
+  install: is_top,
 )
+
+if is_top
+  # dpp.cppm comes along: songbot compiles dpp.gcm from it with its own flags.
+  # The bundled nlohmann is only used without DPP_USE_EXTERNAL_JSON.
+  install_subdir('include/dpp',
+                 install_dir: get_option('includedir'),
+                 exclude_directories: ['nlohmann'])
+
+  # srchash is what songbot's root meson.build compares against its own wrap
+  # and overlay, to decide whether this install is current (see there).
+  # requires are strings so the .pc does not depend on how json resolved.
+  import('pkgconfig').generate(dpp_lib,
+    name: 'dpp',
+    description: 'D++ Discord API library (songbot build)',
+    version: meson.project_version(),
+    extra_cflags: ['-DDPP_USE_EXTERNAL_JSON'],
+    requires: ['nlohmann_json', 'openssl', 'zlib'],
+    libraries: [threads_dep],
+    variables: ['srchash=' + get_option('srchash')],
+  )
+endif
 
 dpp_dep = declare_dependency(
   link_with: dpp_lib,

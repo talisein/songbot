@@ -8,13 +8,15 @@ project('songbot', ['c', 'cpp'],
                            'optimization=g'])
 
 
+fs = import('fs')
+
 # Always the wrap, never a system package: the module is compiled from
 # upstream's module/magic_enum.cppm, which header-only packages don't install.
 magic_enum_proj = subproject('magic_enum', version: '>=0.10.0')
 magic_enum_dep = magic_enum_proj.get_variable('magic_enum_dep')
 magic_enum_root = meson.project_source_root() / 'subprojects' / 'magic_enum-@0@'.format(magic_enum_dep.version())
 magic_enum_module_src = magic_enum_root / 'module' / 'magic_enum.cppm'
-assert(import('fs').is_file(magic_enum_module_src),
+assert(fs.is_file(magic_enum_module_src),
        'magic_enum module not found at ' + magic_enum_module_src
        + ' (does the wrap directory match the project version?)')
 
@@ -31,7 +33,38 @@ zlib_dep = dependency('zlib')
 ssl_dep = dependency('openssl')
 
 # DPP discord library — native Meson build via subprojects/packagefiles/dpp/meson.build
-dpp_dep = dependency('dpp', fallback: ['dpp', 'dpp_dep'])
+#
+# songbot-sdk ships a prebuilt D++ (sdk-update.yml builds the same overlay
+# standalone and installs it, with dpp.pc), so CI does not compile ~150 D++
+# sources on every run. It is used only when it was built from exactly this
+# wrap and overlay: its dpp.pc carries a srchash of those files, compared here.
+# A version check would not do -- renovate bumps the wrap without the overlay's
+# hand-written project() version, and an overlay-only change (a new .cpp)
+# keeps the version -- and either way the PR must compile the overlay, which
+# is what pr-build.yml is for. Any mismatch builds the wrap, as before.
+#
+# The hash is three sha256 hex digests concatenated; sdk-update.yml computes
+# the same string with sha256sum, so keep the file list in step with it.
+dpp_srchash = ''
+foreach f : ['subprojects/dpp.wrap',
+             'subprojects/packagefiles/dpp/meson.build',
+             'subprojects/packagefiles/dpp/meson_options.txt']
+  dpp_srchash += fs.hash(f, 'sha256')
+endforeach
+pkgconf_prog = find_program('pkg-config', 'pkgconf', required: false)
+sdk_dpp_srchash = ''
+if pkgconf_prog.found()
+  sdk_dpp_srchash = run_command(pkgconf_prog, '--variable=srchash', 'dpp',
+                                check: false).stdout().strip()
+endif
+if sdk_dpp_srchash == dpp_srchash
+  dpp_dep = dependency('dpp')
+else
+  if sdk_dpp_srchash != ''
+    warning('The installed D++ (dpp.pc) was built from a different dpp.wrap or overlay; building D++ from the wrap instead')
+  endif
+  dpp_dep = subproject('dpp').get_variable('dpp_dep')
+endif
 nlohmann_json_dep = dependency('nlohmann_json', fallback: ['json', 'nlohmann_json_multiple_headers'])
 
 # prometheus-cpp — native Meson build via subprojects/packagefiles/prometheus-cpp/meson.build

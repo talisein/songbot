@@ -3,6 +3,16 @@ on:
   schedule:
     - cron: '0 2 * * 1' # Runs every Monday at 2:00 AM
   workflow_dispatch:
+  # The SDK carries a prebuilt D++ (see the SDK build below), which songbot's
+  # meson.build uses only while its srchash matches the wrap and overlay. So
+  # rebuild as soon as either changes on main, rather than letting every build
+  # compile D++ from the wrap until Monday.
+  push:
+    branches: [ "main" ]
+    paths:
+      - 'subprojects/dpp.wrap'
+      - 'subprojects/packagefiles/dpp/**'
+      - '.forgejo/workflows/sdk-update.yml'
 
 jobs:
   update-images:
@@ -54,10 +64,39 @@ jobs:
           RUN dnf -y upgrade && \
               dnf -y install meson g++ libcurl-devel zlib-ng-devel openssl-devel systemd-devel git cmake json-devel nodejs-npm && \
               dnf clean all
+
+          # PREBUILT D++, so CI does not compile it on every run. The build
+          # context is the checkout, and .dockerignore narrows subprojects/ to
+          # the wraps and packagefiles. 'meson subprojects download' refuses
+          # without a root meson.build, hence the stub; it applies the overlay.
+          # --prefix=/usr because /usr/local/lib64/pkgconfig is not on Fedora's
+          # pkg-config path. srchash must be the string songbot's meson.build
+          # computes: the three files' sha256 hex digests, concatenated.
+          #
+          # The heredoc is unquoted: escape every dollar sign meant for the
+          # RUN, and use no backticks, even here in a comment.
+          COPY subprojects /dppsrc/subprojects
+          RUN cd /dppsrc && echo "project('stub')" > meson.build && \
+              meson subprojects download dpp && \
+              h=\$(for f in subprojects/dpp.wrap subprojects/packagefiles/dpp/meson.build subprojects/packagefiles/dpp/meson_options.txt; do sha256sum "\$f" | cut -d' ' -f1; done | tr -d '\\n') && \
+              meson setup /tmp/dppbuild subprojects/DPP-* --prefix=/usr -Dsrchash="\$h" && \
+              meson install -C /tmp/dppbuild && \
+              cd / && rm -rf /dppsrc /tmp/dppbuild
           EOF
           buildah bud --pull=newer -f Containerfile.sdk \
             -v /etc/pki/ca-trust/extracted/pem/tls-ca-bundle.pem:/etc/pki/ca-trust/source/anchors/talinet_root_ca.crt:ro \
             -t git.miku/talisein/songbot-sdk:latest .
+
+          # Smoke-test the D++ install before pushing: a broken SDK on :latest
+          # would break every CI job until the next rebuild. Each check fails
+          # the step on its own; the build is not run, a missing file is enough.
+          ctr=$(buildah from git.miku/talisein/songbot-sdk:latest)
+          buildah run "$ctr" -- pkg-config --modversion dpp
+          buildah run "$ctr" -- sh -c 'test -n "$(pkg-config --variable=srchash dpp)"'
+          buildah run "$ctr" -- test -f /usr/include/dpp/dpp.cppm
+          buildah run "$ctr" -- test -f /usr/lib64/libdpp.a
+          buildah rm "$ctr"
+
           buildah login -u ${{ github.actor }} -p ${{ secrets.PACKAGEPUSH }} git.miku
           buildah push git.miku/talisein/songbot-sdk:latest
 

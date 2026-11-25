@@ -23,6 +23,16 @@ on:
   workflow_call:
   workflow_dispatch:
 
+# One image build at a time. A push that touches D++ starts this workflow and
+# sdk-update.yml, which then calls this workflow again once the new SDK is
+# pushed. Both produce a correct binary (meson.build falls back to the wrap
+# when the SDK's D++ is stale), but without this they would build into the
+# same store and race to push :main and deploy. Queued, never cancelled: the
+# later run is the one built on the fresh SDK.
+concurrency:
+  group: songbot-image
+  cancel-in-progress: false
+
 jobs:
   build_and_publish:
     runs-on: meiko

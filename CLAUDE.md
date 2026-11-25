@@ -45,7 +45,7 @@ The scraper tool (`src/vocadb/`) queries the VocaDB API and generates `.cppm` fi
 
 ### Dependencies
 
-- **D++ (dpp)** — Discord bot framework; async ops use `dpp::task<void>` coroutines
+- **D++ (dpp)** — Discord bot framework; async ops use `dpp::task<void>` coroutines. Built from the wrap and `subprojects/packagefiles/dpp/`. The `songbot-sdk` image also has it prebuilt (`sdk-update.yml`), and `meson.build` uses that copy only when its `dpp.pc` `srchash` matches the wrap and overlay files. Otherwise it builds from the wrap.
 - **magic_enum** — Enum reflection for virtual singer enums
 - **uni-algo** — Unicode normalization for song name matching
 - **prometheus-cpp** — Metrics/monitoring

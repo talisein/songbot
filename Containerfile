@@ -30,7 +30,9 @@ COPY src/concerts-raw_data.cppm src/
 RUN touch src/concerts-raw_data.cppm
 
 ARG RUN_BENCHMARKS
-RUN meson compile -C build && meson test -C build --suite songbot && meson install -C build
+# --skip-subprojects: only songbot's own targets belong in /app. Without it
+# magic_enum's headers and .pc file were installed there too.
+RUN meson compile -C build && meson test -C build --suite songbot && meson install -C build --skip-subprojects
 RUN if [ -n "$RUN_BENCHMARKS" ]; then meson test -C build --benchmark -v; fi
 
 # The vocadb data library goes in its own image layer (see below), so move it

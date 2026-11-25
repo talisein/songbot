@@ -37,6 +37,12 @@ jobs:
           git checkout -q FETCH_HEAD
 
       # Mirrors the builder stage of Containerfile, minus `meson install`.
+      #
+      # D++ comes prebuilt from songbot-sdk when the SDK's dpp.pc srchash
+      # matches this checkout's dpp.wrap and overlay (see meson.build). A PR
+      # that changes either, renovate D++ bumps included, does not match, so
+      # it still compiles D++ from the wrap here, which is what this workflow
+      # is for.
       - name: Setup
         run: meson setup build -Dcpp_std=c++26 --buildtype=release -Dinstall_tests=true
 
