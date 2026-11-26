@@ -162,6 +162,7 @@ namespace {
   named_zone DUSSELDORF_TZ;
   named_zone PARIS_TZ;
   named_zone MADRID_TZ;
+  named_zone LISBON_TZ;
 
   std::once_flag live_events_init_flag;
   std::vector<live_event> live_events_storage;
@@ -207,6 +208,7 @@ namespace {
       DUSSELDORF_TZ  = locate("Europe/Berlin");
       PARIS_TZ       = locate("Europe/Paris");
       MADRID_TZ      = locate("Europe/Madrid");
+      LISBON_TZ      = locate("Europe/Lisbon");
     } catch (std::runtime_error &e) {
       std::println(std::cerr, "Failed to load required timezones. This is likely due to an incompatibility between the latest tzdb 20204b and GCC 14s stdlib, see bug 116657.\nSpecific error: {}\nTerminating", e.what());
       exit(1);
@@ -268,7 +270,9 @@ namespace {
       { ME2026EU, 12225, { BERLIN_TZ,      local_days{2026y/11/17} + 20h }, "Velodrom",                                "Berlin",       "https://maps.app.goo.gl/JxVfuKYQ11xtSfec7" },
       { ME2026EU, 12226, { DUSSELDORF_TZ,  local_days{2026y/11/20} + 20h }, "PSD Bank Dome",                           "Düsseldorf",   "https://maps.app.goo.gl/goJ2uA8sYsw8HPas9" },
       { ME2026EU, 12227, { PARIS_TZ,       local_days{2026y/11/22} + 20h }, "Accor Arena",                             "Paris",        "https://maps.app.goo.gl/WnapRimvbmGaGFc57" },
+      { ME2026EU, 12228, { MADRID_TZ,      local_days{2026y/11/24} + 20h }, "Palacio Vistalegre",                      "Madrid",       "https://maps.app.goo.gl/jBdeiWfbBmNx78R37" },
       { ME2026EU, 12228, { MADRID_TZ,      local_days{2026y/11/25} + 20h }, "Palacio Vistalegre",                      "Madrid",       "https://maps.app.goo.gl/jBdeiWfbBmNx78R37" },
+      { ME2026EU, 12449, { LISBON_TZ,      local_days{2026y/11/27} + 20h }, "Sagres Campo Pequeno",                    "Lisbon",       "https://maps.app.goo.gl/geboSEGDRTy5TyrcA" },
       { SM2027,   13226, { JST,            local_days{2027y/2/5}   + 13h }, "Zepp Sapporo",                            "Sapporo",      "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
       { SM2027,   13226, { JST,            local_days{2027y/2/5}   + 17h }, "Zepp Sapporo",                            "Sapporo",      "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },
       { SM2027,   13226, { JST,            local_days{2027y/2/6}   + 13h }, "Zepp Sapporo",                            "Sapporo",      "https://maps.app.goo.gl/TFLmo89RNEkPkCeU8" },

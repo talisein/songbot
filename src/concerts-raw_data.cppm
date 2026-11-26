@@ -152,7 +152,7 @@ export constexpr std::array concerts = std::to_array<Concert>({
         { MIKU_WITH_YOU,    "MIKU WITH YOU 2026",
           MWY2026, 2026y/10/31, 2026y/12/26, 13120 },
         { MIKU_EXPO,    "HATSUNE MIKU EXPO 2026 EUROPE",
-          ME2026EU, 2026y/11/12, 2026y/11/25, 12222 },
+          ME2026EU, 2026y/11/12, 2026y/11/27, 12222 },
         { SNOW_MIKU,    "SNOW MIKU LIVE! 2027",
           SM2027, 2027y/2/5, 2027y/2/7, 13226 },
     });
